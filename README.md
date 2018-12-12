@@ -80,11 +80,13 @@ You can [download](https://github.com/particle4dev/atomicdex/releases) the lates
 
 ## Documentation
 
+- [Release Process](/docs/release-process.md)
+
 ## Credits
 
 - **Nam Hoang** - _Initial work and maintainer_ - [particle4dev](https://github.com/particle4dev)
 
-See also the list of [contributors](https://github.com/particle4dev/atomicdex/blob/master/AUTHORS.md) who participated in this project.
+See also the list of [contributors](/AUTHORS.md) who participated in this project.
 
 ## License
 
