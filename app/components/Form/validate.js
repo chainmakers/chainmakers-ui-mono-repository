@@ -4,6 +4,16 @@ import React, { type Node } from 'react';
 
 const debug = require('debug')('atomicapp:components:Form:validate');
 
+type Props = {
+  // eslint-disable-next-line flowtype/no-weak-types
+  onChange?: Function
+};
+
+type State = {
+  error: string,
+  value: string
+};
+
 export default function validate(
   WrappedComponent: Node,
   // eslint-disable-next-line flowtype/no-weak-types
@@ -13,15 +23,6 @@ export default function validate(
     onChange: false
   }
 ) {
-  type Props = {
-    // eslint-disable-next-line flowtype/no-weak-types
-    onChange?: Function
-  };
-  type State = {
-    error: string,
-    value: string
-  };
-
   return class extends React.PureComponent<Props, State> {
     constructor(props) {
       super(props);

@@ -660,3 +660,7 @@ export const LOAD_SWAP_SUCCESS = [
     value: 9.12346433
   }
 ];
+
+it('containers/fake-data', () => {
+  expect(1).toEqual(1);
+});

@@ -2,7 +2,7 @@
   "name": "atomicdex",
   "productName": "AtomicDex App",
   "version": "0.12.0",
-  "description": "Lightweight GUI wallet with barterDEX swap capabilities",
+  "description": "An instant exchange built on top of BarterDEX swap",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
     "build-dll": "cross-env NODE_ENV=development webpack --config ./configs/webpack.config.renderer.dev.dll.babel.js --colors",
@@ -167,6 +167,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
     "chalk": "^2.4.1",
     "concurrently": "^4.0.1",
+    "coveralls": "^3.0.2",
     "cross-env": "^5.2.0",
     "cross-spawn": "^6.0.5",
     "css-loader": "^1.0.1",

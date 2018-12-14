@@ -12,32 +12,32 @@ matrix:
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 
-    - os: linux
-      language: node_js
-      node_js:
-        - node
-        - 10
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - gcc-multilib
-            - g++-8
-            - g++-multilib
-            - icnsutils
-            - graphicsmagick
-            - xz-utils
-            - xorriso
-            - rpm
+    # - os: linux
+    #   language: node_js
+    #   node_js:
+    #     - node
+    #     - 10
+    #   addons:
+    #     apt:
+    #       sources:
+    #         - ubuntu-toolchain-r-test
+    #       packages:
+    #         - gcc-multilib
+    #         - g++-8
+    #         - g++-multilib
+    #         - icnsutils
+    #         - graphicsmagick
+    #         - xz-utils
+    #         - xorriso
+    #         - rpm
 
-    - os: windows
-      language: node_js
-      node_js:
-        - node
-      env:
-        - ELECTRON_CACHE=$HOME/.cache/electron
-        - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+    # - os: windows
+    #   language: node_js
+    #   node_js:
+    #     - node
+    #   env:
+    #     - ELECTRON_CACHE=$HOME/.cache/electron
+    #     - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 
 before_cache:
   - rm -rf $HOME/.cache/electron-builder/wine
@@ -78,10 +78,12 @@ before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sleep 3; fi
 
 script:
-  - yarn package-ci
+  # - yarn package-ci
   - yarn lint
-  - yarn flow
+  # - yarn flow
+  # ADDED THIS LINE FOR UNIT TEST
+  - yarn run build
   # HACK: Temporarily ignore `yarn test` on linux
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn test; fi
-  - yarn build-e2e
-  - yarn test-e2e
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn test | ./node_modules/.bin/coveralls; fi
+  # - yarn build-e2e
+  # - yarn test-e2e

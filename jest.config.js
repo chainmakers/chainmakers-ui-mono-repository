@@ -17,5 +17,5 @@ module.exports = {
   setupFiles: ['./internals/scripts/CheckBuiltsExist.js'],
   testRegex: '(/__tests__/.*)\\.jsx?$',
   collectCoverage: true,
-  coverageReporters: ['json', 'html']
+  coverageReporters: ['json', 'html', 'text-lcov']
 };
