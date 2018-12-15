@@ -80,6 +80,8 @@ You can [download](https://github.com/particle4dev/atomicdex/releases) the lates
 
 ## Documentation
 
+- [How to contribute this project](/docs/how-to-contribute.md)
+
 - [Release Process](/docs/release-process.md)
 
 ## Credits
