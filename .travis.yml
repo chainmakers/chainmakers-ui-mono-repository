@@ -87,3 +87,10 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn test | ./node_modules/.bin/coveralls; fi
   # - yarn build-e2e
   # - yarn test-e2e
+
+notifications:
+  email:
+    recipients:
+      - particle4dev@gmail.com
+    on_success: never
+    on_failure: always
