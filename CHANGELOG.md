@@ -1,5 +1,31 @@
 # Change Log
 
+# 0.13.0 (2018.12.16)
+
+- 4d087db authors
+- 01299fb add-travis-badge (#22)
+- d04f509 20-how-to-contribute-docs (#21)
+- 7b62a17 fix-travis-ci (#19)
+- 037b8ba picture: update screenshot
+- ec87c71 added-links-to-release-and-whitelabel-instructions (#18)
+- e26876b update-document-and-instruction (#17)
+- c8fdd2b dexpage: revert the buying process code mmapp: update to latest version
+- 8ac43a9 setup-elk-logging (#16)
+- d7f5364 improve-buying-process (#15)
+- 205de35 coins-should-be-sorted-by-market-cap (#13)
+- d3296b0 rename-dicoapp-e-to-atomicdex (#12)
+- 448b17e add-fee-info-to-amount-section (#11)
+- 3e93f86 restructure-data-state-in-dexpage (#10)
+- b6a4b2c improve-buying-process (#7)
+- 61bbc62 add-more-info-to-dex-page (#9)
+- b0eed1c selection-still-remain-in-payment-section (#8)
+- adaf67b mmapp: update to latest version
+- 208b1a2 price-should-be-load-automatically (#6)
+- 26adf6c optimize-dex-page (#5)
+- 90414de integrated-js-search-library (#4)
+- 2440f56 a-dropdown-to-select-coin-in-buy-page (#2)
+- a4897e9 add-dex-page (#3)
+
 # 0.12.0 (2018.11.11)
 
 - 2b94d17 implement-transactions-tab (#86)
