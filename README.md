@@ -57,7 +57,7 @@ Following are the minimum tested versions for the tools and libraries you need f
 First, clone the repo via git:
 
 ```bash
-git clone -b master https://github.com/particle4dev/atomicdex.git
+git clone --depth 1 -b master https://github.com/particle4dev/atomicdex.git
 ```
 
 And install dependencies with yarn.

@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib",
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "strictNullChecks": true,
+    "noUnusedParameters": true,
+    "lib": ["es2015", "dom"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/__tests__/**/*", "src/**/__mocks__/**/*"]
+}

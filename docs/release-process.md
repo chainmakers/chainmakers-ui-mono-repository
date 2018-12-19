@@ -45,14 +45,14 @@
 - On a Mac:
 
   ```
-  npm run package:mac
-  npm run package:linux
+  npm run package-mac
+  npm run package-linux
   ```
 
 - On Windows, or in a Windows VM:
 
   ```
-  npm run package:win
+  npm run package-win
   ```
 
 - Then, upload the release binaries to Github.

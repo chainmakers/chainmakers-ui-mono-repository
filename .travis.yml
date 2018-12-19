@@ -6,7 +6,8 @@ matrix:
     - os: osx
       language: node_js
       node_js:
-        - node
+        # - node
+        - 11
         - 10
       env:
         - ELECTRON_CACHE=$HOME/.cache/electron
@@ -53,9 +54,14 @@ cache:
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CXX="g++-8"; fi
+  - npm install -g typescript tslint ts-jest lerna
 
 install:
   - yarn --ignore-engines
+  - cd packages/barterdex-api
+  - yarn link
+  - cd ../..
+  - yarn link barterdex-api
   # On Linux, initialize "virtual display". See before_script
   - |
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
@@ -84,9 +90,12 @@ script:
   # ADDED THIS LINE FOR UNIT TEST
   - yarn run build
   # HACK: Temporarily ignore `yarn test` on linux
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn test | ./node_modules/.bin/coveralls; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn test; fi
   # - yarn build-e2e
   # - yarn test-e2e
+
+after_success:
+  - 'cat ./coverage/lcov.info | ./node_modules/.bin/coveralls'
 
 notifications:
   email:
@@ -94,3 +103,6 @@ notifications:
       - particle4dev@gmail.com
     on_success: never
     on_failure: always
+
+git:
+  depth: 1

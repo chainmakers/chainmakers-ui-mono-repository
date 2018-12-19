@@ -1,5 +1,5 @@
 module.exports = {
-  verbose: true,
+  // verbose: true,
   testURL: 'http://localhost/',
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
@@ -10,7 +10,7 @@ module.exports = {
     'utils/config$': '<rootDir>/__mocks__/config.js'
   },
   moduleFileExtensions: ['js'],
-  moduleDirectories: ['node_modules', 'app/node_modules'],
+  moduleDirectories: ['packages', 'node_modules', 'app/node_modules'],
   transform: {
     '^.+\\.js$': 'babel-jest'
   },
