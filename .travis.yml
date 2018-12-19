@@ -46,7 +46,7 @@ before_cache:
 cache:
   yarn: true
   directories:
-    - node_modules
+    # - node_modules
     - $(npm config get prefix)/lib/node_modules
     - flow-typed
     - $HOME/.cache/electron
@@ -90,12 +90,13 @@ script:
   # ADDED THIS LINE FOR UNIT TEST
   - yarn run build
   # HACK: Temporarily ignore `yarn test` on linux
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn test; fi
+  # - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn test; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn test | ./node_modules/.bin/coveralls; fi
   # - yarn build-e2e
   # - yarn test-e2e
 
 after_success:
-  - 'cat ./coverage/lcov.info | ./node_modules/.bin/coveralls'
+  - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
 
 notifications:
   email:
