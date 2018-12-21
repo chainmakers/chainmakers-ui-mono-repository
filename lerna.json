@@ -1,4 +1,15 @@
 {
   "packages": ["packages/*"],
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "*.md",
+        "*.txt",
+        "test/**",
+        "codemods/**",
+        "@(!(built-in-modules|built-ins|plugins)).json"
+      ]
+    }
+  }
 }

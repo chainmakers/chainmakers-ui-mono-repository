@@ -1,6 +1,6 @@
 {
   "name": "barterdex-api",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "Barterdex API for Node",
   "author": "Hoang Nam <particle4dev@gmail.com> (particle4dev)",
   "homepage": "https://github.com/particle4dev/atomicdex/tree/master/packages/barterdex-api#readme",
@@ -23,9 +23,9 @@
   },
   "scripts": {
     "prepare": "npm run lint && npm run build",
-    "build": "./node_modules/.bin/tsc",
-    "lint": "./node_modules/.bin/tslint -c \"../../config/tslint.json\" -p tsconfig.json src/*.ts",
-    "test": "./node_modules/.bin/tsc -p tsconfig.test.json --noEmit && jest"
+    "build": "tsc",
+    "lint": "tslint -c \"../../config/tslint.json\" -p tsconfig.json src/*.ts",
+    "test": "tsc -p tsconfig.test.json --noEmit && jest"
   },
   "bugs": {
     "url": "https://github.com/particle4dev/atomicdex/issues"
@@ -33,14 +33,7 @@
   "dependencies": {
     "axios": "^0.18.0"
   },
-  "devDependencies": {
-    "@types/jest": "^23.3.10",
-    "istanbul-api": "^2.0.6",
-    "istanbul-reports": "^2.0.1",
-    "jest": "^23.6.0",
-    "nock": "^10.0.4",
-    "ts-jest": "^23.10.5"
-  },
+  "devDependencies": {},
   "jest": {
     "transform": {
       ".(ts|tsx)": "ts-jest"

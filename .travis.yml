@@ -1,109 +1,60 @@
 matrix:
   allow_failures:
-    - os: windows
-    - node_js: node
+    -
+      os: windows
+    -
+      node_js: node
   include:
-    - os: osx
+    -
+      os: osx
       language: node_js
       node_js:
-        # - node
         - 11
         - 10
       env:
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-
-    # - os: linux
-    #   language: node_js
-    #   node_js:
-    #     - node
-    #     - 10
-    #   addons:
-    #     apt:
-    #       sources:
-    #         - ubuntu-toolchain-r-test
-    #       packages:
-    #         - gcc-multilib
-    #         - g++-8
-    #         - g++-multilib
-    #         - icnsutils
-    #         - graphicsmagick
-    #         - xz-utils
-    #         - xorriso
-    #         - rpm
-
-    # - os: windows
-    #   language: node_js
-    #   node_js:
-    #     - node
-    #   env:
-    #     - ELECTRON_CACHE=$HOME/.cache/electron
-    #     - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-
 before_cache:
-  - rm -rf $HOME/.cache/electron-builder/wine
-
+  - 'rm -rf $HOME/.cache/electron-builder/wine'
 cache:
   yarn: true
   directories:
-    # - node_modules
-    - $(npm config get prefix)/lib/node_modules
+    - '$(npm config get prefix)/lib/node_modules'
     - flow-typed
     - $HOME/.cache/electron
     - $HOME/.cache/electron-builder
-
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CXX="g++-8"; fi
-  - npm install -g typescript tslint ts-jest lerna
-
+  - 'if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CXX="g++-8"; fi'
 install:
-  - yarn --ignore-engines
-  - cd packages/barterdex-api
-  - yarn link
-  - cd ../..
-  - yarn link barterdex-api
-  # On Linux, initialize "virtual display". See before_script
-  - |
-    if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-      /sbin/start-stop-daemon \
-      --start \
-      --quiet \
-      --pidfile /tmp/custom_xvfb_99.pid \
-      --make-pidfile \
-      --background \
-      --exec /usr/bin/Xvfb \
-      -- :99 -ac -screen 0 1280x1024x16
-    else
-      :
-    fi
-
+  - 'yarn --ignore-engines'
+  - "if [ \"$TRAVIS_OS_NAME\" == \"linux\" ]; then\n  /sbin/start-stop-daemon \\\n  --start \\\n  --quiet \\\n  --pidfile /tmp/custom_xvfb_99.pid \\\n  --make-pidfile \\\n  --background \\\n  --exec /usr/bin/Xvfb \\\n  -- :99 -ac -screen 0 1280x1024x16\nelse\n  :\nfi\n"
 before_script:
-  # On Linux, create a "virtual display". This allows browsers to work properly
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sleep 3; fi
-
+  - 'if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi'
+  - 'if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi'
+  - 'if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sleep 3; fi'
 script:
-  # - yarn package-ci
-  - yarn lint
-  # - yarn flow
-  # ADDED THIS LINE FOR UNIT TEST
-  - yarn run build
-  # HACK: Temporarily ignore `yarn test` on linux
-  # - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn test; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn test | ./node_modules/.bin/coveralls; fi
-  # - yarn build-e2e
-  # - yarn test-e2e
-
+  - 'yarn lint'
+  - 'yarn run build'
+  - 'if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn test; fi'
 after_success:
-  - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
-
+  - 'cat ./coverage/lcov.info | ./node_modules/.bin/coveralls'
+  - 'echo "email=particle4dev@gmail.com" >> $HOME/.npmrc 2> /dev/null'
+  - 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null'
+  - 'git status'
+  - 'lerna publish --yes from-package'
 notifications:
   email:
     recipients:
       - particle4dev@gmail.com
     on_success: never
     on_failure: always
-
 git:
   depth: 1
+deploy:
+  provider: npm
+  email: particle4dev@gmail.com
+  api_key:
+    secure: gr3TWHre2WlkR6keiDacHjWdAQzZd8e8CAMa0XptKRm7Ay3d5UOFh81TkbZWe9hw9oOp4wFBthvlVhb3LiUVdMqX8O4Tr1N9lU9Po+2b5+mh8Djd7OLlwhsT2+oCUo3k0rzbW6Aol5j39DJLwFceLOJ+JfbnqvB6+6VOKXwLQr1hCzwPZlCg9/kq4fjqdkitvqh/C6Iowa7foR9/a2AOBCCLZL8JW9cAmkjXTrfHv6tqEmCceDr+2hx6RUDUy0O8BYvAdTaj/xh1FGUE8rXdJ2iiAFX0jmsysRhQD3LWpVHNkYpHYYeiHdG+0PnIjUVaX5QMt5WvZaAJbToTfBUEAva9vS+AsBSy3n7Ei1yI8SRrbwDzfXhl8Z+rKABCGrzrNC+Iwu8XD6pkTG2nLfi2YSpQ8VeMdJeDvpBFCBJ0vnuFD5kOjWhmATy71ABShEUQx+zfRlDbNAgIs9TKOnPCtHXv9VMHKa0pNpJ7rIQLAtcRL4eGzaMqL3x7L2GNoMtiihaN3AonKi5c9cZe/r5pVhx65A6ATfVzTkoGc4pJL/8f2TG9M3ps8YrGnVcqXhJjLxfm5bG8rJvGz1GvWaAIEXskY2trzTT23DxqqnVF4tTm4jZl+a75tXAvfd7B5py1a0hKSuTPS/XWibk4RHVLTYURGoMtFjFnF0kLq/c0dzs=
+  on:
+    repo: particle4dev/atomicdex
+    all_branches: true

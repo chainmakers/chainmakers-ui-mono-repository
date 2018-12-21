@@ -18,6 +18,5 @@ module.exports = {
   // collectCoverageFrom: ['app/**/*.{js,jsx}',  '!**/node_modules/**', '!**/packages/**'],
   setupFiles: ['./internals/scripts/CheckBuiltsExist.js'],
   testRegex: '(/__tests__/.*)\\.jsx?$',
-  collectCoverage: true,
-  coverageReporters: ['json', 'html', 'text-lcov']
+  collectCoverage: true
 };
