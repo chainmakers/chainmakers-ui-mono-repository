@@ -40,9 +40,13 @@ export default merge.smart(baseConfig, {
 
   plugins: [
     new BundleAnalyzerPlugin({
+      // analyzerMode:
+      //   process.env.OPEN_ANALYZER === 'true' ? 'server' : 'disabled',
+      // openAnalyzer: process.env.OPEN_ANALYZER === 'true',
+      openAnalyzer: false,
       analyzerMode:
-        process.env.OPEN_ANALYZER === 'true' ? 'server' : 'disabled',
-      openAnalyzer: process.env.OPEN_ANALYZER === 'true'
+        process.env.OPEN_ANALYZER === 'true' ? 'static' : 'disabled',
+      reportFilename: 'main-report.html'
     }),
 
     /**

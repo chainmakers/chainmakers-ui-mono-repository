@@ -56,3 +56,6 @@ myipaddr
 account-test.md
 build-renderer.json
 __mocks__/tw-data.json
+report.html
+main-report.html
+renderer-report.html
