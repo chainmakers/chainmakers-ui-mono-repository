@@ -8,7 +8,7 @@ USECASE TIMEOUT BACKGROUND TASK
 */
 import { select, put, call, cancelled } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
-import takeFirst from '../../../utils/sagas/take-first';
+import { takeFirst } from 'barterdex-rssm';
 import { CHECK_TIMEOUT_EVENT, TIME_LOOP } from '../constants';
 import { timeoutSwap } from '../actions';
 import { makeSelectCurrentSwaps } from '../selectors';

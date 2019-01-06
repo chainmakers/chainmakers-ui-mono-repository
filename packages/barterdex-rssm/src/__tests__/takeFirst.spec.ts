@@ -2,15 +2,15 @@
 import { createStore, applyMiddleware } from 'redux';
 import sagaMiddleware, { delay } from 'redux-saga';
 import { call, cancel, take } from 'redux-saga/effects';
-import takeFirst from '../take-first';
+import takeFirst from '../takeFirst';
 
 const middleware = sagaMiddleware();
 const type = 'TESTS_TAKE_FIRST';
 const TIMEOUT = 15000;
 const DELAY = 2000;
-const actual = [];
+const actual : any[] = [];
 
-function* testSagaFunc(payload) {
+function* testSagaFunc(payload: any) {
   yield call(delay, DELAY);
   actual.push(payload);
 }
@@ -27,7 +27,7 @@ function wait(timeout) {
   });
 }
 
-describe('utils/take-first', () => {
+describe('packages/barterdex-rssm/src/takeFirst', () => {
   it(
     'should handle the takeFirst function correctly',
     async done => {

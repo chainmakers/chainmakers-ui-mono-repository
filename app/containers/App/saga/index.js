@@ -1,6 +1,6 @@
 import { fork, take, put, takeLatest } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import takeFirst from '../../../utils/sagas/take-first';
+import { takeFirst } from 'barterdex-rssm';
 import routes from '../../../constants/routes.json';
 import { LOGOUT, LOAD_BALANCE, LOAD_WITHDRAW } from '../constants';
 import loadBalanceProcess from './load-balance-process';

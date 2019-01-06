@@ -4,7 +4,7 @@ const barterdexRpc = 'http://localhost:7083';
 const homeDir = '/var/user/home';
 const BarterDexAPI = setup(barterdexRpc, homeDir);
 
-describe('lib/barter-dex-api/index', () => {
+describe('packages/barterdex-api/src/index', () => {
   it('should create the BarterDexAPI correctly', () => {
     expect(typeof BarterDexAPI.addServer).toEqual('function');
     expect(typeof BarterDexAPI.balance).toEqual('function');

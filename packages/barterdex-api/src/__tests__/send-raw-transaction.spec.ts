@@ -1,6 +1,6 @@
 import sendRawTransaction from '../send-raw-transaction';
 
-describe('src/send-raw-transaction', () => {
+describe('packages/barterdex-api/src/send-raw-transaction', () => {
   it('should handle the sendRawTransaction correctly', () => {
     const coin = 'coin';
     const signedtx = 'signedtx';

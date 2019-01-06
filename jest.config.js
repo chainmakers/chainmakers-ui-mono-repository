@@ -9,14 +9,16 @@ module.exports = {
     'electron-better-ipc': '<rootDir>/__mocks__/electron-better-ipc.js',
     'utils/config$': '<rootDir>/__mocks__/config.js'
   },
-  moduleFileExtensions: ['js'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
   moduleDirectories: ['packages', 'node_modules', 'app/node_modules'],
   transform: {
-    '^.+\\.js$': 'babel-jest'
+    '^.+\\.js$': 'babel-jest',
+    '.(ts|tsx)': 'ts-jest'
   },
-  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/packages/'],
+  testPathIgnorePatterns: ['<rootDir>/node_modules/'],
   // collectCoverageFrom: ['app/**/*.{js,jsx}',  '!**/node_modules/**', '!**/packages/**'],
   setupFiles: ['./internals/scripts/CheckBuiltsExist.js'],
-  testRegex: '(/__tests__/.*)\\.jsx?$',
+  // testRegex: '(/__tests__/.*)\\.jsx?$',
+  testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js|jsx)$',
   collectCoverage: true
 };

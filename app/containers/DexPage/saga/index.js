@@ -1,5 +1,5 @@
 import { takeEvery, takeLatest } from 'redux-saga/effects';
-// import takeFirst from '../../../utils/sagas/take-first';
+// import { takeFirst } from 'barterdex-rssm';
 import {
   LOAD_PRICES,
   LOAD_PRICE,

@@ -1,6 +1,6 @@
 {
   "name": "barterdex-api",
-  "version": "0.2.0",
+  "version": "0.13.0",
   "description": "Barterdex API for Node",
   "author": "Hoang Nam <particle4dev@gmail.com> (particle4dev)",
   "homepage": "https://github.com/particle4dev/atomicdex/tree/master/packages/barterdex-api#readme",
@@ -24,8 +24,9 @@
   "scripts": {
     "prepare": "npm run lint && npm run build",
     "build": "tsc",
-    "lint": "tslint -c \"../../config/tslint.json\" -p tsconfig.json src/*.ts",
-    "test": "tsc -p tsconfig.test.json --noEmit && jest"
+    "lint": "tslint -c \"../../configs/tslint.json\" -p tsconfig.json src/*.ts",
+    "test": "tsc -p tsconfig.test.json --noEmit && jest",
+    "coverage": "tsc -p tsconfig.test.json --noEmit && jest --verbose --coverage"
   },
   "bugs": {
     "url": "https://github.com/particle4dev/atomicdex/issues"
@@ -33,25 +34,5 @@
   "dependencies": {
     "axios": "^0.18.0"
   },
-  "devDependencies": {},
-  "jest": {
-    "transform": {
-      ".(ts|tsx)": "ts-jest"
-    },
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json"
-    ],
-    "testURL": "http://localhost",
-    "coverageReporters": [
-      "json",
-      "html",
-      "text-lcov"
-    ],
-    "verbose": true,
-    "collectCoverage": true
-  }
+  "devDependencies": {}
 }

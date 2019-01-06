@@ -1,7 +1,7 @@
 import { all, call, put, select, cancelled } from 'redux-saga/effects';
 // import { CANCEL, delay } from 'redux-saga';
 import { CANCEL } from 'redux-saga';
-import takeFirst from '../../utils/sagas/take-first';
+import { takeFirst } from 'barterdex-rssm';
 import {
   TRANSACTIONS_LOAD,
   TRANSACTIONS_LOAD_LOOP

@@ -1,6 +1,6 @@
 import balance from '../balance';
 
-describe('src/balance', () => {
+describe('packages/barterdex-api/src/balance', () => {
   it('should handle the balance correctly', () => {
     const coin = 'coin';
     const address = 'address';

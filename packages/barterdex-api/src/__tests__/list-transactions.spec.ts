@@ -1,6 +1,6 @@
 import listTransactions from '../list-transactions';
 
-describe('src/list-transactions', () => {
+describe('packages/barterdex-api/src/list-transactions', () => {
   it('should handle the listTransactions correctly', () => {
     const coin = 'KMD';
     const address = '0dxaddress';

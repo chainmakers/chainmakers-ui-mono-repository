@@ -1,6 +1,6 @@
 import getendpoint from '../get-endpoint';
 
-describe('src/getendpoint', () => {
+describe('packages/barterdex-api/src/getendpoint', () => {
   it('should handle the getendpoint correctly', () => {
     const fakeHttpProvider = {
       privateCall(params) {

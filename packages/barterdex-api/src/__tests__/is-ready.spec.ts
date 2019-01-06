@@ -1,6 +1,6 @@
 import isReadyFactory from '../is-ready';
 
-describe('src/is-ready', () => {
+describe('packages/barterdex-api/src/is-ready', () => {
   it('should handle the isReadyFactory correctly', async () => {
     const fakeHttpProvider = {
       get() {

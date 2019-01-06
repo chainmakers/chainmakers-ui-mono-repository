@@ -1,6 +1,6 @@
 import recentswaps from '../recentswaps';
 
-describe('src/recentswaps', () => {
+describe('packages/barterdex-api/src/recentswaps', () => {
   it('should handle the recentswaps correctly', () => {
     const fakeHttpProvider = {
       privateCall(params) {

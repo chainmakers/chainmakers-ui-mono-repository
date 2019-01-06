@@ -3,7 +3,7 @@ import httpProvider from '../http-provider';
 
 const TEST_URL = 'http://127.0.0.1:7783';
 
-describe('utils/barter-dex-api/http-provider', () => {
+describe('packages/barterdex-api/src/http-provider', () => {
   it('should handle the get correctly', async () => {
     nock(TEST_URL)
       .defaultReplyHeaders({ 'access-control-allow-origin': '*' })

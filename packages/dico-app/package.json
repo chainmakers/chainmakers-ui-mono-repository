@@ -1,0 +1,28 @@
+{
+  "name": "dico-app",
+  "version": "0.13.0",
+  "description": "> TODO: description",
+  "author": "Hoang Nam <particle4dev@gmail.com> (particle4dev)",
+  "homepage": "https://github.com/particle4dev/atomicdex/tree/master/packages/dico-app#readme",
+  "license": "ISC",
+  "main": "lib/dico.js",
+  "private": true,
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/particle4dev/atomicdex.git"
+  },
+  "bugs": {
+    "url": "https://github.com/particle4dev/atomicdex/issues"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from dico app\" && exit 0",
+    "coverage": "echo \"Error: run tests from dico app\" && exit 0"
+  }
+}

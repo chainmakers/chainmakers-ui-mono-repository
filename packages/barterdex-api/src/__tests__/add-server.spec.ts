@@ -1,6 +1,6 @@
 import addServerFactory from '../add-server';
 
-describe('src/add-server', () => {
+describe('packages/barterdex-api/src/add-server', () => {
   it('should handle the addServer correctly', () => {
     const coin = 'coin';
     const ipaddr = '127.0.0.1';

@@ -1,6 +1,6 @@
 import orderbook from '../orderbook';
 
-describe('src/orderbook', () => {
+describe('packages/barterdex-api/src/orderbook', () => {
   it('should handle the orderbook correctly', () => {
     const base = 'base';
     const rel = 'rel';

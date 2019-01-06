@@ -1,6 +1,6 @@
 import listunspentFactory from '../listunspent';
 
-describe('src/listunspent', () => {
+describe('packages/barterdex-api/src/listunspent', () => {
   it('should handle the listunspent correctly', () => {
     const coin = 'BEER';
     const address = 'address';

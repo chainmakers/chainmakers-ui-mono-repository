@@ -1,6 +1,6 @@
 import login from '../login';
 
-describe('src/login', () => {
+describe('packages/barterdex-api/src/login', () => {
   it('should handle the login correctly', () => {
     const userpass = 'userpass';
     const passphrase = 'passphrase';

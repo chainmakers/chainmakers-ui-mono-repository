@@ -1,6 +1,6 @@
 import getfeeFactory from '../getfee';
 
-describe('src/getfee', () => {
+describe('packages/barterdex-api/src/getfee', () => {
   it('should handle the getfee correctly', () => {
     const coin = 'BEER';
     const fakeHttpProvider = {

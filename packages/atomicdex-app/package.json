@@ -1,0 +1,29 @@
+{
+  "name": "atomicdex-app",
+  "version": "0.13.0",
+  "description": "> TODO: description",
+  "author": "Hoang Nam <particle4dev@gmail.com> (particle4dev)",
+  "homepage": "https://github.com/particle4dev/atomicdex/tree/master/packages/atomicdex-app#readme",
+  "license": "ISC",
+  "main": "lib/atomicdex.js",
+  "private": true,
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/particle4dev/atomicdex.git"
+  },
+  "scripts": {
+    "dev": "echo \"Error: not implement yet\" && exit 1",
+    "test": "echo \"Error: run tests from atomicdex app\" && exit 0",
+    "coverage": "echo \"Error: run tests from atomicdex app\" && exit 0"
+  },
+  "bugs": {
+    "url": "https://github.com/particle4dev/atomicdex/issues"
+  }
+}

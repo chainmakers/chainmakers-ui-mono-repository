@@ -1,6 +1,6 @@
 import withdraw from '../withdraw';
 
-describe('src/withdraw', () => {
+describe('packages/barterdex-api/src/withdraw', () => {
   it('should handle the withdraw correctly', () => {
     const state = {
       userpass: null

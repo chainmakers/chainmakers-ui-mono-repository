@@ -14,42 +14,53 @@ matrix:
       env:
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+
 before_cache:
   - 'rm -rf $HOME/.cache/electron-builder/wine'
+
 cache:
   yarn: true
   directories:
+    - node_modules
     - '$(npm config get prefix)/lib/node_modules'
     - flow-typed
     - $HOME/.cache/electron
     - $HOME/.cache/electron-builder
+
 before_install:
   - 'if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CXX="g++-8"; fi'
+
 install:
   - 'yarn --ignore-engines'
   - "if [ \"$TRAVIS_OS_NAME\" == \"linux\" ]; then\n  /sbin/start-stop-daemon \\\n  --start \\\n  --quiet \\\n  --pidfile /tmp/custom_xvfb_99.pid \\\n  --make-pidfile \\\n  --background \\\n  --exec /usr/bin/Xvfb \\\n  -- :99 -ac -screen 0 1280x1024x16\nelse\n  :\nfi\n"
+
 before_script:
   - 'if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi'
   - 'if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi'
   - 'if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sleep 3; fi'
+
 script:
   - 'yarn lint'
   - 'yarn run build'
   - 'if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn test; fi'
+
 after_success:
   - 'cat ./coverage/lcov.info | ./node_modules/.bin/coveralls'
   - 'echo "email=particle4dev@gmail.com" >> $HOME/.npmrc 2> /dev/null'
   - 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null'
   - 'git status'
   - 'lerna publish --yes from-package'
+
 notifications:
   email:
     recipients:
       - particle4dev@gmail.com
     on_success: never
     on_failure: always
+
 git:
   depth: 1
+
 deploy:
   provider: npm
   email: particle4dev@gmail.com
