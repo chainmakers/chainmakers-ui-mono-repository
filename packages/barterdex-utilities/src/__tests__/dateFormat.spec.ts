@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import {
   validateDate,
   getYear,
@@ -13,9 +12,9 @@ import {
   getAM_PM_Hours,
   formatDate,
   TIME_FORMAT
-} from '../date-format';
+} from '../dateFormat';
 
-describe('lib/date-format', () => {
+describe('packages/barterdex-utilities/src/dateFormat', () => {
   const d = 1539375819825;
   const date = new Date(d);
   const str1 = 'December 17, 1995 03:24:00';
@@ -172,10 +171,10 @@ describe('lib/date-format', () => {
     expect(getMinutes(str1)).toEqual('24');
     expect(getMinutes(str2)).toEqual('24');
 
-    expect(getMinutes(d, { option: 'utc' })).toEqual('23');
-    expect(getMinutes(date, { option: 'utc' })).toEqual('23');
-    expect(getMinutes(str1, { option: 'utc' })).toEqual('24');
-    expect(getMinutes(str2, { option: 'utc' })).toEqual('24');
+    expect(getMinutes(d, 'utc')).toEqual('23');
+    expect(getMinutes(date, 'utc')).toEqual('23');
+    expect(getMinutes(str1,'utc')).toEqual('24');
+    expect(getMinutes(str2, 'utc' )).toEqual('24');
 
     expect(getMinutes(str3)).toEqual(null);
   });
@@ -188,10 +187,10 @@ describe('lib/date-format', () => {
     expect(getSeconds(str1)).toEqual('00');
     expect(getSeconds(str2)).toEqual('00');
 
-    expect(getSeconds(d, { option: 'utc' })).toEqual('39');
-    expect(getSeconds(date, { option: 'utc' })).toEqual('39');
-    expect(getSeconds(str1, { option: 'utc' })).toEqual('00');
-    expect(getSeconds(str2, { option: 'utc' })).toEqual('00');
+    expect(getSeconds(d, 'utc')).toEqual('39');
+    expect(getSeconds(date, 'utc')).toEqual('39');
+    expect(getSeconds(str1, 'utc')).toEqual('00');
+    expect(getSeconds(str2, 'utc')).toEqual('00');
 
     expect(getSeconds(str3)).toEqual(null);
   });
@@ -204,10 +203,10 @@ describe('lib/date-format', () => {
     expect(getMilliseconds(str1)).toEqual('000');
     expect(getMilliseconds(str2)).toEqual('000');
 
-    expect(getMilliseconds(d, { option: 'utc' })).toEqual('825');
-    expect(getMilliseconds(date, { option: 'utc' })).toEqual('825');
-    expect(getMilliseconds(str1, { option: 'utc' })).toEqual('000');
-    expect(getMilliseconds(str2, { option: 'utc' })).toEqual('000');
+    expect(getMilliseconds(d, 'utc')).toEqual('825');
+    expect(getMilliseconds(date, 'utc')).toEqual('825');
+    expect(getMilliseconds(str1, 'utc')).toEqual('000');
+    expect(getMilliseconds(str2, 'utc')).toEqual('000');
 
     expect(getMilliseconds(str3)).toEqual(null);
   });
@@ -304,4 +303,3 @@ describe('lib/date-format', () => {
     expect(formatDate(str2, TIME_FORMAT)).toEqual('03:24:00 AM');
   });
 });
-/* eslint-enable camelcase */

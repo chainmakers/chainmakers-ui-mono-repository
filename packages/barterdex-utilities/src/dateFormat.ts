@@ -1,6 +1,3 @@
-/* eslint-disable no-param-reassign, camelcase, no-restricted-globals */
-// @flow
-
 const numRegex = /^\d+$/;
 const MONTH_ARRAY_LIST = [
   'January',
@@ -49,9 +46,10 @@ export function validateDate(d) {
 }
 
 const yearOption = { option: 'utc', format: 'yy' };
-type YearOption = {
-  option: string,
-  format: string
+
+interface YearOption {
+  option?: string,
+  format?: string
 };
 
 export function getYear(d, { option, format }: YearOption = yearOption) {
@@ -70,18 +68,22 @@ export function getYear(d, { option, format }: YearOption = yearOption) {
   }
 }
 
-type AppendZeroOption = {
-  width: number,
-  lastPosition: boolean
-};
 const appendZeroOption = { width: 2, lastPosition: false };
 
+interface AppendZeroOption {
+  width?: number,
+  lastPosition?: boolean
+};
+
 export function appendZero(
-  number,
+  num,
   { width, lastPosition }: AppendZeroOption = appendZeroOption
 ) {
-  let numString =
-    number !== null && number !== undefined ? number.toString() : '0';
+  let numString = '0';
+  if(num !== null && num !== undefined) {
+    numString = num.toString();
+  }
+  /* tslint:disable-next-line */
   while (numString.length < width) {
     if (lastPosition === true) numString += '0';
     else numString = `0${numString}`;
@@ -90,9 +92,10 @@ export function appendZero(
 }
 
 const monthOption = { option: 'utc', format: 'MM' };
-type MonthOption = {
-  option: string,
-  format: string
+
+interface MonthOption {
+  option?: string,
+  format?: string
 };
 
 export function getMonth(d, { option, format }: MonthOption = monthOption) {
@@ -130,9 +133,10 @@ function get12HoursFormat(hour, option) {
 }
 
 const hourOption = { option: '', format: '12' };
-type HourOption = {
-  option: string,
-  format: string
+
+interface HourOption {
+  option?: string,
+  format?: string
 };
 
 export function getHours(d, { option, format }: HourOption = hourOption) {
@@ -197,9 +201,9 @@ export function getMilliseconds(d, option: string = '') {
 }
 
 const dayOfWeek = { option: '', format: 'dddd' };
-type DayOfWeek = {
-  option: string,
-  format: string
+interface DayOfWeek {
+  option?: string,
+  format?: string
 };
 
 export function getDayOfWeek(d, { option, format }: DayOfWeek = dayOfWeek) {
@@ -244,9 +248,9 @@ export function timeOffset(timezoneOffset) {
   return timezoneOffset < 0 ? `+${hour}${minute}` : `-${hour}${minute}`;
 }
 
-export function formatDate(dateString, formatStyle, timezoneOffset) {
+export function formatDate(dateString: Date | string | number, formatStyle?: string, timezoneOffset?: number) {
   try {
-    const dateObj = validateDate(dateString);
+    const dateObj: Date | undefined = validateDate(dateString);
     if (!dateObj) throw new Error('Invalid Date');
     if (!timezoneOffset) {
       timezoneOffset = dateObj.getTimezoneOffset();
@@ -256,6 +260,7 @@ export function formatDate(dateString, formatStyle, timezoneOffset) {
     if (typeof formatStyle !== 'string') {
       formatStyle = DATETIME_FORMAT;
     }
+    // tslint:disable-next-line: no-empty
     dateObj.setUTCMinutes(dateObj.getUTCMinutes() - timezoneOffset);
 
     const day = getDate(dateObj, 'utc'); // dd
@@ -281,11 +286,11 @@ export function formatDate(dateString, formatStyle, timezoneOffset) {
     const second = getSeconds(dateObj, 'utc'); // ss
     const millisecond = getMilliseconds(dateObj, 'utc'); // SSS
     const timeZone = timeOffset(timezoneOffset); // O
-    const DOWFullName = getDayOfWeek(dateObj, {
+    const dOWFullName = getDayOfWeek(dateObj, {
       option: 'utc',
       format: 'dddd'
     });
-    const DOWShortName = getDayOfWeek(dateObj, {
+    const dOWShortName = getDayOfWeek(dateObj, {
       option: 'utc',
       format: 'ddd'
     });
@@ -293,8 +298,8 @@ export function formatDate(dateString, formatStyle, timezoneOffset) {
     dateObj.setUTCMinutes(dateObj.getUTCMinutes() + timezoneOffset);
 
     const formattedString = formatStyle
-      .replace(/dddd/g, DOWFullName)
-      .replace(/ddd/g, DOWShortName)
+      .replace(/dddd/g, dOWFullName)
+      .replace(/ddd/g, dOWShortName)
       .replace(/dd/g, day)
       .replace(/MMMM/g, monthFullName)
       .replace(/MMM/g, monthShortName)
@@ -313,5 +318,3 @@ export function formatDate(dateString, formatStyle, timezoneOffset) {
     throw new Error('Invalid Date Operation');
   }
 }
-
-/* eslint-enable no-param-reassign, camelcase */

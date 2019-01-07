@@ -5,7 +5,11 @@
   "author": "Hoang Nam <particle4dev@gmail.com> (particle4dev)",
   "homepage": "https://github.com/particle4dev/atomicdex/tree/master/packages/barterdex-utilities#readme",
   "license": "ISC",
-  "main": "lib/utilities.js",
+  "main": "lib/index.js",
+  "module": "./lib/index.js",
+  "jsnext:main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
+  "sideEffects": false,
   "private": true,
   "directories": {
     "lib": "lib",
@@ -19,8 +23,11 @@
     "url": "git+https://github.com/particle4dev/atomicdex.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from barterdex-utilities\" && exit 0",
-    "coverage": "echo \"Error: run tests from barterdex-utilities\" && exit 0"
+    "prepare": "npm run lint && npm run build",
+    "build": "tsc",
+    "lint": "tslint -c \"../../configs/tslint.json\" -p tsconfig.json src/*.ts",
+    "test": "tsc -p tsconfig.test.json --noEmit && jest --verbose",
+    "coverage": "tsc -p tsconfig.test.json --noEmit && jest --verbose --coverage"
   },
   "bugs": {
     "url": "https://github.com/particle4dev/atomicdex/issues"

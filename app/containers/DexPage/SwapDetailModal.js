@@ -22,9 +22,8 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Divider from '@material-ui/core/Divider';
 import CloudOff from '@material-ui/icons/CloudOff';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
+import { formatDate } from 'barterdex-utilities';
 import explorer from '../../lib/explorer';
-// eslint-disable-next-line import/named
-import { formatDate } from '../../lib/date-format';
 import { getCoinIcon } from '../../components/CryptoIcons';
 import { STATE_SWAPS, SWAP_TX_DEFAULT } from './constants';
 import { closeDetailModal } from './actions';
