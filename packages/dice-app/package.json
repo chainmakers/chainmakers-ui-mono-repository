@@ -6,6 +6,7 @@
   "homepage": "https://github.com/particle4dev/atomicdex/tree/master/packages/dice-app#readme",
   "license": "ISC",
   "main": "lib/dice-app.js",
+  "private": true,
   "directories": {
     "lib": "lib",
     "test": "__tests__"

@@ -23,10 +23,10 @@
   },
   "scripts": {
     "prepare": "npm run lint && npm run build",
-    "build": "tsc",
-    "lint": "tslint -c \"../../configs/tslint.json\" -p tsconfig.json src/*.ts",
-    "test": "tsc -p tsconfig.test.json --noEmit && jest",
-    "coverage": "tsc -p tsconfig.test.json --noEmit && jest --verbose --coverage"
+    "build": "../../node_modules/.bin/tsc",
+    "lint": "../../node_modules/.bin/tslint -c \"../../configs/tslint.json\" -p tsconfig.json src/*.ts",
+    "test": "../../node_modules/.bin/tsc -p tsconfig.test.json --noEmit && ../../node_modules/.bin/jest",
+    "coverage": "../../node_modules/.bin/tsc -p tsconfig.test.json --noEmit && ../../node_modules/.bin/jest --verbose --coverage"
   },
   "bugs": {
     "url": "https://github.com/particle4dev/atomicdex/issues"
@@ -34,5 +34,7 @@
   "dependencies": {
     "axios": "^0.18.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nock": "^10.0.6"
+  }
 }
