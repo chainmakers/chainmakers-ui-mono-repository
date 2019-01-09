@@ -11,7 +11,9 @@ import {
   getDayOfWeek,
   getAM_PM_Hours,
   formatDate,
-  TIME_FORMAT
+  TIME_FORMAT,
+  dotProp,
+  configManager
 } from '../index';
 
 it('packages/barterdex-utilities/src/dateFormat', () => {
@@ -27,4 +29,6 @@ it('packages/barterdex-utilities/src/dateFormat', () => {
   expect(typeof getDayOfWeek).toEqual('function');
   expect(typeof getAM_PM_Hours).toEqual('function');
   expect(typeof formatDate).toEqual('function');
+  expect(typeof dotProp).toEqual('object');
+  expect(typeof configManager).toEqual('function');
 });

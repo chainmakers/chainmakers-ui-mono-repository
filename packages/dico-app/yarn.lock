@@ -2449,19 +2449,17 @@ balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
 
-"barterdex-api@file:../barterdex-api":
-  version "0.13.0"
-  dependencies:
-    axios "^0.18.0"
+"barterdex-api@link:../barterdex-api":
+  version "0.0.0"
+  uid ""
 
-"barterdex-rssm@file:../barterdex-rssm":
-  version "0.13.0"
-  dependencies:
-    redux "^4.0.1"
-    redux-saga "^0.16.2"
+"barterdex-rssm@link:../barterdex-rssm":
+  version "0.0.0"
+  uid ""
 
-"barterdex-utilities@file:../barterdex-utilities":
-  version "0.13.0"
+"barterdex-utilities@link:../barterdex-utilities":
+  version "0.0.0"
+  uid ""
 
 base-x@^3.0.2:
   version "3.0.5"

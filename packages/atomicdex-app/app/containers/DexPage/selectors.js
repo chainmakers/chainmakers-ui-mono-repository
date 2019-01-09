@@ -4,17 +4,27 @@ import { APP_STATE_NAME } from './constants';
 const selectBuy = state => state.get(APP_STATE_NAME);
 
 const makeSelectPrices = () =>
-  createSelector(selectBuy, buyState => buyState.get('prices'));
+  createSelector(
+    selectBuy,
+    buyState => buyState.get('prices')
+  );
 
 const makeSelectPricesLoading = () =>
-  createSelector(makeSelectPrices(), pricesState => pricesState.get('loading'));
+  createSelector(
+    makeSelectPrices(),
+    pricesState => pricesState.get('loading')
+  );
 
 const makeSelectPricesError = () =>
-  createSelector(makeSelectPrices(), pricesState => pricesState.get('error'));
+  createSelector(
+    makeSelectPrices(),
+    pricesState => pricesState.get('error')
+  );
 
 const makeSelectPricesEntities = () =>
-  createSelector(makeSelectPrices(), pricesState =>
-    pricesState.get('entities')
+  createSelector(
+    makeSelectPrices(),
+    pricesState => pricesState.get('entities')
   );
 
 const makeSelectPriceEntities = () =>
@@ -25,23 +35,39 @@ const makeSelectPriceEntities = () =>
   );
 
 const makeSelectBuying = () =>
-  createSelector(selectBuy, buyState => buyState.get('buying'));
+  createSelector(
+    selectBuy,
+    buyState => buyState.get('buying')
+  );
 
 const makeSelectBuyingLoading = () =>
-  createSelector(makeSelectBuying(), buyingState => buyingState.get('loading'));
+  createSelector(
+    makeSelectBuying(),
+    buyingState => buyingState.get('loading')
+  );
 
 const makeSelectBuyingError = () =>
-  createSelector(makeSelectBuying(), buyingState => buyingState.get('error'));
+  createSelector(
+    makeSelectBuying(),
+    buyingState => buyingState.get('error')
+  );
 
 const makeSelectSwaps = () =>
-  createSelector(selectBuy, buyState => buyState.get('swaps'));
+  createSelector(
+    selectBuy,
+    buyState => buyState.get('swaps')
+  );
 
 const makeSelectSwapsEntities = () =>
-  createSelector(makeSelectSwaps(), swapsState => swapsState.get('entities'));
+  createSelector(
+    makeSelectSwaps(),
+    swapsState => swapsState.get('entities')
+  );
 
 const makeSelectCurrentSwapsList = () =>
-  createSelector(makeSelectSwaps(), swapsState =>
-    swapsState.get('processingList')
+  createSelector(
+    makeSelectSwaps(),
+    swapsState => swapsState.get('processingList')
   );
 
 const makeSelectCurrentSwaps = () =>
@@ -72,7 +98,10 @@ const makeSelectCurrentSwap = () =>
   );
 
 const makeSelectSwapDetailModal = () =>
-  createSelector(selectBuy, buyState => buyState.get('swapDetailModal'));
+  createSelector(
+    selectBuy,
+    buyState => buyState.get('swapDetailModal')
+  );
 
 const makeSelectSwapInDetailModal = () =>
   createSelector(
@@ -86,13 +115,22 @@ const makeSelectSwapInDetailModal = () =>
   );
 
 const makeSelectCoinModal = () =>
-  createSelector(selectBuy, buyState => buyState.get('selectCoinModal'));
+  createSelector(
+    selectBuy,
+    buyState => buyState.get('selectCoinModal')
+  );
 
 const makeSelectCurrency = () =>
-  createSelector(selectBuy, buyState => buyState.get('currency'));
+  createSelector(
+    selectBuy,
+    buyState => buyState.get('currency')
+  );
 
 const makeSelectPayment = () =>
-  createSelector(selectBuy, buyState => buyState.get('payment'));
+  createSelector(
+    selectBuy,
+    buyState => buyState.get('payment')
+  );
 
 export {
   selectBuy,

@@ -36,7 +36,12 @@ export default {
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
     alias: {
-      'barterdex-components': path.resolve(__dirname, '..', '..','barterdex-components')
+      'barterdex-components': path.resolve(
+        __dirname,
+        '..',
+        '..',
+        'barterdex-components'
+      )
     }
   },
 

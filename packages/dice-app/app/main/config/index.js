@@ -1,5 +1,5 @@
 import ipc from 'electron-better-ipc';
-import Config from '../../lib/config-manager';
+import { configManager } from 'barterdex-utilities';
 import loadPaths from './paths';
 import loadDefault from './config-default';
 import loadCoinsData from './coins-data';
@@ -10,7 +10,7 @@ let config = null;
 export default function setup() {
   if (config) return config;
 
-  config = Config();
+  config = configManager();
 
   loadDefault(config);
   loadPaths(config);

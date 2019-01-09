@@ -1,6 +1,6 @@
 // @flow
 import ipc from 'electron-better-ipc';
-import Config from '../lib/config-manager';
+import { configManager } from 'barterdex-utilities';
 
 let config = null;
 
@@ -20,7 +20,7 @@ export function getFromIPCFactory() {
 export async function setup() {
   if (config) return config;
 
-  config = Object.assign(Config(), getFromIPCFactory());
+  config = Object.assign(configManager(), getFromIPCFactory());
   const c = await ipc.callMain('config:get');
   config.set(c);
 
