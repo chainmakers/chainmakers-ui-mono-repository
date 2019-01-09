@@ -1,6 +1,6 @@
 // https://github.com/sotojuan/saga-login-flow/blob/master/app/sagas/index.js
 import { all, take, race, call, put } from 'redux-saga/effects';
-import takeFirst from '../../utils/sagas/take-first';
+import { takeFirst } from 'barterdex-rssm';
 import { LOGIN, LOGOUT } from '../App/constants';
 import { loginSuccess, loginError } from '../App/actions';
 import api from '../../lib/barter-dex-api';

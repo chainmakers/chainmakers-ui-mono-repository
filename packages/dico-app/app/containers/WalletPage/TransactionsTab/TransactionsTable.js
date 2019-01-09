@@ -9,8 +9,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
+import { formatDate } from 'barterdex-utilities';
 import { Line } from '../../../components/placeholder';
-import { formatDate } from '../../../lib/date-format';
 import explorer from '../../../lib/explorer';
 
 const debug = require('debug')(

@@ -235,8 +235,9 @@
   "dependencies": {
     "@material-ui/core": "^3.4.0",
     "@material-ui/icons": "^3.0.1",
-    "axios": "^0.18.0",
     "barterdex-api": "file:../barterdex-api",
+    "barterdex-rssm": "file:../barterdex-rssm",
+    "barterdex-utilities": "file:../barterdex-utilities",
     "bs58": "^4.0.1",
     "classnames": "^2.2.6",
     "connected-react-router": "4.5.0",

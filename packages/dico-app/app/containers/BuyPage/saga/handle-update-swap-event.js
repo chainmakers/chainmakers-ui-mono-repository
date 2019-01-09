@@ -1,6 +1,6 @@
 import { put, all, call, cancelled, select } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
-import takeFirst from '../../../utils/sagas/take-first';
+import { takeFirst } from 'barterdex-rssm';
 import api from '../../../lib/barter-dex-api';
 // import { loadSwapSuccess } from '../../App/actions';
 import {
