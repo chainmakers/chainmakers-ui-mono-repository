@@ -12,6 +12,7 @@ lib-cov
 
 # Coverage directory used by tools like istanbul
 coverage
+**/coverage
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
@@ -25,34 +26,32 @@ build/Release
 
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
-node_modules
+**/node_modules
 
 # OSX
 .DS_Store
 
 # flow-typed
-flow-typed/npm/*
-!flow-typed/npm/module_vx.x.x.js
-
-# Mono repo
-packages
-
-# App packaged
-release
-app/main.prod.js
-app/main.prod.js.map
-app/renderer.prod.js
-app/renderer.prod.js.map
-app/style.css
-app/style.css.map
-dist
-dll
-main.js
-main.js.map
+**/flow-typed/npm/*
+**/!flow-typed/npm/module_vx.x.x.js
 
 .idea
 npm-debug.log.*
 __snapshots__
+
+# App packaged
+**/release
+**/app/main.prod.js
+**/app/main.prod.js.map
+**/app/renderer.prod.js
+**/app/renderer.prod.js.map
+**/app/style.css
+**/app/style.css.map
+# **/dist
+packages/**/*/dist
+**/dll
+**/main.js
+**/main.js.map
 
 # Package.json
 package.json

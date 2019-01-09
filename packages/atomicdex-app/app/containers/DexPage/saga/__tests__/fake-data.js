@@ -119,6 +119,6 @@ export const buyAppropriateError = {
     'cant find a deposit that is close enough in size. make another deposit that is just a bit larger than what you want to trade'
 };
 
-it('containers/BuyPage/saga/fake-data', () => {
+it('containers/DexPage/saga/fake-data', () => {
   expect(1).toEqual(1);
 });

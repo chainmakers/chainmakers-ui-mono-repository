@@ -13,7 +13,7 @@ const styles = () => ({
   }
 });
 
-const debug = require('debug')('atomicapp:containers:BuyPage:TabContainer');
+const debug = require('debug')('atomicapp:components:Tabs:TabContainer');
 
 type Props = {
   // eslint-disable-next-line flowtype/no-weak-types

@@ -6,7 +6,6 @@ import { makeSelectAuthenticated, makeSelectLoading } from './App/selectors';
 import connectedRouterRedirect from '../utils/auth-wrapper/connected-router-redirect';
 import routes from '../constants/routes.json';
 import App from './App';
-// import BuyPage from './BuyPage';
 import DexPage from './DexPage';
 import WalletPage from './WalletPage';
 import HelpPage from './HelpPage';
@@ -33,9 +32,6 @@ const HomeFallback = userIsNotAuthenticatedRedir(WalletPage, () => (
 const WalletFallback = userIsNotAuthenticatedRedir(WalletPage, () => (
   <Redirect to={routes.LOGIN} />
 ));
-// const BuyFallback = userIsNotAuthenticatedRedir(BuyPage, () => (
-//   <Redirect to={routes.LOGIN} />
-// ));
 const DexFallback = userIsNotAuthenticatedRedir(DexPage, () => (
   <Redirect to={routes.LOGIN} />
 ));
