@@ -1,11 +1,5 @@
-# `dice-app`
-
-> TODO: description
-
-## Usage
-
-```
-const diceApp = require('dice-app');
-
-// TODO: DEMONSTRATE API
-```
+<h1 align="center">
+  <br>
+  Dice Application
+  <br>
+</h1>

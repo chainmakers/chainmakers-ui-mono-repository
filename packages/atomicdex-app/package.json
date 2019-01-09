@@ -251,7 +251,6 @@
     "@material-ui/icons": "^3.0.1",
     "axios": "^0.18.0",
     "barterdex-api": "file:../barterdex-api",
-    "barterdex-components": "file:../barterdex-components",
     "barterdex-rssm": "file:../barterdex-rssm",
     "barterdex-utilities": "file:../barterdex-utilities",
     "bs58": "^4.0.1",

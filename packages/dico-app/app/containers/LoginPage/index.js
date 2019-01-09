@@ -13,7 +13,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
-// import Avatar from '@material-ui/core/Avatar';
 import swal from 'sweetalert';
 import getConfig from '../../utils/config';
 import injectReducer from '../../utils/inject-reducer';
@@ -33,7 +32,6 @@ import {
 } from '../App/selectors';
 import { APP_STATE_NAME } from './constants';
 
-// import image from './components/logo.png';
 const config = getConfig();
 const COIN_BASE = config.get('marketmaker.tokenconfig');
 

@@ -34,7 +34,10 @@ export default {
    * Determine the array of extensions that should be used to resolve modules.
    */
   resolve: {
-    extensions: ['.js', '.jsx', '.json']
+    extensions: ['.js', '.jsx', '.json'],
+    alias: {
+      'barterdex-components': path.resolve(__dirname, '..', '..','barterdex-components')
+    }
   },
 
   plugins: [
