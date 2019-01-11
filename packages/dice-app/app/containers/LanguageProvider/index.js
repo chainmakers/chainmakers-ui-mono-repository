@@ -27,9 +27,12 @@ export class Provider extends React.PureComponent<Props> {
   }
 }
 
-const mapStateToProps = createSelector(makeSelectLocale(), locale => ({
-  locale
-}));
+const mapStateToProps = createSelector(
+  makeSelectLocale(),
+  locale => ({
+    locale
+  })
+);
 
 const Index = connect(mapStateToProps)(Provider);
 

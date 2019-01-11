@@ -6,40 +6,52 @@ import { makeSelectBalanceEntities } from '../App/selectors';
 const selectWallet = state => state.get(APP_STATE_NAME);
 
 const makeSelectTransactions = () =>
-  createSelector(selectWallet, walletState => walletState.get('transactions'));
+  createSelector(
+    selectWallet,
+    walletState => walletState.get('transactions')
+  );
 
 const makeSelectTransactionsLoading = () =>
-  createSelector(makeSelectTransactions(), transactionsState =>
-    transactionsState.get('loading')
+  createSelector(
+    makeSelectTransactions(),
+    transactionsState => transactionsState.get('loading')
   );
 
 const makeSelectTransactionsError = () =>
-  createSelector(makeSelectTransactions(), transactionsState =>
-    transactionsState.get('error')
+  createSelector(
+    makeSelectTransactions(),
+    transactionsState => transactionsState.get('error')
   );
 
 const makeSelectTransactionsQueueids = () =>
-  createSelector(makeSelectTransactions(), transactionsState =>
-    transactionsState.get('queueids')
+  createSelector(
+    makeSelectTransactions(),
+    transactionsState => transactionsState.get('queueids')
   );
 
 const makeSelectTransactionsCoins = () =>
-  createSelector(makeSelectTransactions(), transactionsState =>
-    transactionsState.get('coins')
+  createSelector(
+    makeSelectTransactions(),
+    transactionsState => transactionsState.get('coins')
   );
 
 const makeSelectLatestTransactions = () =>
-  createSelector(makeSelectTransactionsCoins(), coins =>
-    coins.reduce((accum, data) => {
-      let ll = data.get('list').take(LIMIT_TRANSACTIONS_RETURN);
-      const en = data.get('entities');
-      ll = ll.map(v => en.get(v));
-      return accum.concat(ll);
-    }, List())
+  createSelector(
+    makeSelectTransactionsCoins(),
+    coins =>
+      coins.reduce((accum, data) => {
+        let ll = data.get('list').take(LIMIT_TRANSACTIONS_RETURN);
+        const en = data.get('entities');
+        ll = ll.map(v => en.get(v));
+        return accum.concat(ll);
+      }, List())
   );
 
 const makeSelectWithdrawModal = () =>
-  createSelector(selectWallet, walletState => walletState.get('withdrawModal'));
+  createSelector(
+    selectWallet,
+    walletState => walletState.get('withdrawModal')
+  );
 
 const makeSelectCoinWithdrawModal = () =>
   createSelector(
@@ -49,7 +61,10 @@ const makeSelectCoinWithdrawModal = () =>
   );
 
 const makeSelectDepositModal = () =>
-  createSelector(selectWallet, walletState => walletState.get('depositModal'));
+  createSelector(
+    selectWallet,
+    walletState => walletState.get('depositModal')
+  );
 
 const makeSelectCoinDepositModal = () =>
   createSelector(

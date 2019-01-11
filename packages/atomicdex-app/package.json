@@ -5,13 +5,6 @@
   "private": true,
   "description": "An instant exchange built on top of BarterDEX swap",
   "homepage": "https://github.com/particle4dev/atomicdex/tree/master/packages/atomicdex-app#readme",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
-  "files": [
-    "lib"
-  ],
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
     "build-dll": "cross-env NODE_ENV=development webpack --config ./configs/webpack.config.renderer.dev.dll.babel.js --colors",
@@ -44,6 +37,7 @@
     "test-e2e": "node -r @babel/register ./internals/scripts/CheckBuiltsExist.js && cross-env NODE_ENV=test testcafe electron:./ ./test/e2e/HomePage.e2e.js",
     "test-e2e-live": "node -r @babel/register ./internals/scripts/CheckBuiltsExist.js && cross-env NODE_ENV=test testcafe-live electron:./ ./test/e2e/HomePage.e2e.js",
     "test-watch": "yarn test --watch --verbose false",
+    "yarn": "../../node_modules/.bin/yarn",
     "coverage": "echo \"Error: run tests from atomicdex app\" && exit 0"
   },
   "bugs": {
@@ -166,7 +160,6 @@
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
-    "@types/jest": "^23.3.10",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^8.2.6",
     "babel-jest": "^23.6.0",
@@ -181,7 +174,7 @@
     "cross-spawn": "^6.0.5",
     "css-loader": "^1.0.1",
     "detect-port": "^1.2.3",
-    "electron": "^3.0.8",
+    "electron": "^4.0.1",
     "electron-builder": "^20.33.2",
     "electron-devtools-installer": "^2.2.4",
     "electron-rebuild": "^1.8.2",
@@ -234,9 +227,6 @@
     "testcafe-browser-provider-electron": "^0.0.6",
     "testcafe-live": "^0.1.3",
     "testcafe-react-selectors": "^3.0.0",
-    "ts-jest": "^23.10.5",
-    "tslint": "^5.12.0",
-    "typescript": "^3.2.2",
     "uglifyjs-webpack-plugin": "^1.3.0",
     "url-loader": "^1.1.2",
     "webpack": "^4.25.1",
@@ -249,10 +239,9 @@
   "dependencies": {
     "@material-ui/core": "^3.8.2",
     "@material-ui/icons": "^3.0.1",
-    "axios": "^0.18.0",
-    "barterdex-api": "link:../barterdex-api",
-    "barterdex-rssm": "link:../barterdex-rssm",
-    "barterdex-utilities": "link:../barterdex-utilities",
+    "barterdex-api": "file:../barterdex-api",
+    "barterdex-rssm": "file:../barterdex-rssm",
+    "barterdex-utilities": "file:../barterdex-utilities",
     "bs58": "^4.0.1",
     "classnames": "^2.2.6",
     "connected-react-router": "4.5.0",
@@ -261,7 +250,7 @@
     "devtron": "^1.4.0",
     "electron-better-ipc": "^0.1.1",
     "electron-debug": "^2.0.0",
-    "electron-updater": "^3.2.2",
+    "electron-updater": "^4.0.6",
     "electron-util": "^0.10.1",
     "eventemitter3": "^3.1.0",
     "faye-websocket": "^0.11.1",

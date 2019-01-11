@@ -53,7 +53,6 @@ npm-debug.log.*
 myipaddr
 **/DB/*
 
-account-test.md
 build-renderer.json
 __mocks__/tw-data.json
 report.html
