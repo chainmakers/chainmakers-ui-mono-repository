@@ -1,6 +1,6 @@
 {
   "name": "barterdex-utilities",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "> TODO: description",
   "author": "Hoang Nam <particle4dev@gmail.com> (particle4dev)",
   "homepage": "https://github.com/particle4dev/atomicdex/tree/master/packages/barterdex-utilities#readme",
@@ -30,5 +30,9 @@
   },
   "bugs": {
     "url": "https://github.com/particle4dev/atomicdex/issues"
+  },
+  "dependencies": {
+    "bs58": "^4.0.1",
+    "sha.js": "^2.4.11"
   }
 }

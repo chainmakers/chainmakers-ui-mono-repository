@@ -1,6 +1,6 @@
 import explorer from '../explorer';
 
-describe('lib/explorer', () => {
+describe('app/lib/explorer', () => {
   it('tx', () => {
     const uuid =
       'c44eddd651e21616cabc9220afa74717706b92472b639aaf9479b81dd3bf8f3e';

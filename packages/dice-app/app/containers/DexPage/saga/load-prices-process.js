@@ -1,6 +1,6 @@
 import { call, put, select, all, cancelled } from 'redux-saga/effects';
 import { CANCEL } from 'redux-saga';
-import api from '../../../lib/barter-dex-api';
+import api from 'app/lib/barter-dex-api';
 import { makeSelectBalanceList } from '../../App/selectors';
 import { loadBestPrice, loadPricesSuccess, loadPricesError } from '../actions';
 import { makeSelectCurrency } from '../selectors';

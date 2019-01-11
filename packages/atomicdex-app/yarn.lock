@@ -2424,7 +2424,10 @@ balanced-match@^1.0.0:
     redux-saga "^0.16.2"
 
 "barterdex-utilities@file:../barterdex-utilities":
-  version "0.13.0"
+  version "0.14.0"
+  dependencies:
+    bs58 "^4.0.1"
+    sha.js "^2.4.11"
 
 base-x@^3.0.2:
   version "3.0.5"
@@ -3675,10 +3678,6 @@ crypto-md5@^1.0.0:
 crypto-random-string@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-1.0.0.tgz#a230f64f568310e1498009940790ec99545bca7e"
-
-crypto@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/crypto/-/crypto-1.0.1.tgz#2af1b7cad8175d24c8a1b0778255794a21803037"
 
 css-color-list@^0.0.1:
   version "0.0.1"

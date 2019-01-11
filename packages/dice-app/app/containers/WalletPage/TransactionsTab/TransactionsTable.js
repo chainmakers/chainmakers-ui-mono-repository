@@ -11,8 +11,8 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import { formatDate } from 'barterdex-utilities';
+import explorer from 'app/lib/explorer';
 import { Line } from '../../../components/placeholder';
-import explorer from '../../../lib/explorer';
 
 const debug = require('debug')(
   'atomicapp:containers:WalletPage:TransactionsTable'

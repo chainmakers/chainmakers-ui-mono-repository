@@ -41,7 +41,8 @@ export default {
         '..',
         '..',
         'barterdex-components'
-      )
+      ),
+      'app/lib': path.resolve(__dirname, '..', 'app', 'lib')
     }
   },
 

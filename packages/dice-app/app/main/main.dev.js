@@ -6,7 +6,7 @@
  * through IPC.
  *
  * When running `yarn build` or `yarn build-main`, this file is compiled to
- * `./app/main.prod.js` using webpack. This gives us some performance wins.
+ * `./app/main/main.prod.js` using webpack. This gives us some performance wins.
  *
  * @flow
  */
@@ -20,7 +20,8 @@ const debug = require('debug')('atomicapp:main');
 
 export default class AppUpdater {
   constructor() {
-    autoUpdater.logger = debug;
+    // (node:6511) UnhandledPromiseRejectionWarning: TypeError: this._logger.info is not a function
+    // autoUpdater.logger = debug;
     autoUpdater.checkForUpdatesAndNotify();
   }
 }

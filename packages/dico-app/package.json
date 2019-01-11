@@ -238,10 +238,8 @@
     "barterdex-api": "file:../barterdex-api",
     "barterdex-rssm": "file:../barterdex-rssm",
     "barterdex-utilities": "file:../barterdex-utilities",
-    "bs58": "^4.0.1",
     "classnames": "^2.2.6",
     "connected-react-router": "4.5.0",
-    "crypto": "^1.0.1",
     "debug": "^4.1.0",
     "devtron": "^1.4.0",
     "electron-better-ipc": "^0.1.1",
@@ -270,7 +268,6 @@
     "redux-immutable": "^4.0.0",
     "redux-saga": "^0.16.2",
     "reselect": "^4.0.0",
-    "sha.js": "^2.4.11",
     "source-map-support": "^0.5.9",
     "split2": "^3.0.0",
     "sweetalert": "^2.1.2"

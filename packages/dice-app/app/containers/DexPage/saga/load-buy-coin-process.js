@@ -2,7 +2,7 @@ import swal from 'sweetalert';
 // import { put, call, select, cancel, cancelled } from 'redux-saga/effects';
 import { put, call, select, cancelled } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
-import api from '../../../lib/barter-dex-api';
+import api from 'app/lib/barter-dex-api';
 import {
   makeSelectCurrentUser,
   makeSelectBalanceEntities

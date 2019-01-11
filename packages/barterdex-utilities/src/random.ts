@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import { randomBytes, pseudoRandomBytes } from 'crypto';
 
 export function hexString(digits = 8) {
   const numBytes = Math.ceil(digits / 2);
@@ -6,10 +6,10 @@ export function hexString(digits = 8) {
   // Try to get cryptographically strong randomness. Fall back to
   // non-cryptographically strong if not available.
   try {
-    bytes = crypto.randomBytes(numBytes);
+    bytes = randomBytes(numBytes);
   } catch (e) {
     // XXX should re-throw any error except insufficient entropy
-    bytes = crypto.pseudoRandomBytes(numBytes);
+    bytes = pseudoRandomBytes(numBytes);
   }
   const result = bytes.toString('hex');
   // If the number of digits is odd, we'll have generated an extra 4 bits

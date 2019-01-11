@@ -1,7 +1,7 @@
 import { put, select, takeLatest } from 'redux-saga/effects';
+import { generateWif } from 'barterdex-utilities';
 import { GENERATE_PASSPHRASE, OPEN_WIF_EXPANSION } from './constants';
 import { makeSelectWifExpansion, makeSelectPassphrase } from './selectors';
-import { generateWif } from './utils';
 import { generateWif as generateWifAction } from './actions';
 
 const debug = require('debug')('dicoapp:containers:SeedPage:saga');

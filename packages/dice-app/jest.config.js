@@ -7,7 +7,8 @@ module.exports = {
     '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
     'electron-util': '<rootDir>/__mocks__/electron-util.js',
     'electron-better-ipc': '<rootDir>/__mocks__/electron-better-ipc.js',
-    'utils/config$': '<rootDir>/__mocks__/config.js'
+    'utils/config$': '<rootDir>/__mocks__/config.js',
+    'app/lib/(.*)$': '<rootDir>/app/lib/$1'
   },
   moduleFileExtensions: ['js', 'json'],
   moduleDirectories: ['node_modules', 'app/node_modules'],

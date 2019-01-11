@@ -13,10 +13,15 @@ import {
   formatDate,
   TIME_FORMAT,
   dotProp,
-  configManager
+  configManager,
+  choice,
+  fraction,
+  hexString,
+  generateSeed,
+  generateWif
 } from '../index';
 
-it('packages/barterdex-utilities/src/dateFormat', () => {
+it('packages/barterdex-utilities/src/index', () => {
   expect(typeof validateDate).toEqual('function');
   expect(typeof getYear).toEqual('function');
   expect(typeof appendZero).toEqual('function');
@@ -31,4 +36,9 @@ it('packages/barterdex-utilities/src/dateFormat', () => {
   expect(typeof formatDate).toEqual('function');
   expect(typeof dotProp).toEqual('object');
   expect(typeof configManager).toEqual('function');
+  expect(typeof choice).toEqual('function');
+  expect(typeof fraction).toEqual('function');
+  expect(typeof hexString).toEqual('function');
+  expect(typeof generateSeed).toEqual('function');
+  expect(typeof generateWif).toEqual('function');
 });

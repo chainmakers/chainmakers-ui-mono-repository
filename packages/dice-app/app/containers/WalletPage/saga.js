@@ -2,13 +2,13 @@ import { all, call, put, select, cancelled } from 'redux-saga/effects';
 // import { CANCEL, delay } from 'redux-saga';
 import { CANCEL } from 'redux-saga';
 import { takeFirst } from 'barterdex-rssm';
+import api from 'app/lib/barter-dex-api';
 import {
   TRANSACTIONS_LOAD,
   TRANSACTIONS_LOAD_LOOP
   // TIME_LOOP
 } from './constants';
 import { makeSelectCurrentUser } from '../App/selectors';
-import api from '../../lib/barter-dex-api';
 import {
   loadTransactions,
   loadTransactionsSuccess,

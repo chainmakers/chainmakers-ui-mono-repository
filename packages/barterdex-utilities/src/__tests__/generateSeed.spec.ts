@@ -1,6 +1,6 @@
-import { generateSeed, generateWif } from '../utils';
+import { generateSeed, generateWif } from '../generateSeed';
 
-describe('containers/SeedPage/utils/generateSeed', () => {
+describe('packages/barterdex-utilities/src/generateSeed', () => {
   it('should generateSeed should create seed correctly', () => {
     const s = generateSeed();
     expect(s.split(' ').length - 1).toEqual(13);

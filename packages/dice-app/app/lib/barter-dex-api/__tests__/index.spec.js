@@ -1,6 +1,6 @@
 import BarterDexAPI from '../index';
 
-describe('lib/barter-dex-api/index', () => {
+describe('app/lib/barter-dex-api/index', () => {
   it('should create the BarterDexAPI correctly', () => {
     expect(typeof BarterDexAPI.addServer).toEqual('function');
     expect(typeof BarterDexAPI.balance).toEqual('function');

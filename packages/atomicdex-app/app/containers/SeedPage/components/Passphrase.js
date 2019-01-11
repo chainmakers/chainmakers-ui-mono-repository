@@ -10,9 +10,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
+import { generateSeed } from 'barterdex-utilities';
 import { makeSelectPassphrase } from '../selectors';
 import { generatePassphrase } from '../actions';
-import { generateSeed } from '../utils';
 import clipboardCopy from '../../../utils/clipboard-copy';
 
 const styles = () => ({

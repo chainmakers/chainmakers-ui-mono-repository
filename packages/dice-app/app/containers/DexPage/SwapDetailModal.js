@@ -23,7 +23,7 @@ import Divider from '@material-ui/core/Divider';
 import CloudOff from '@material-ui/icons/CloudOff';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import { formatDate } from 'barterdex-utilities';
-import explorer from '../../lib/explorer';
+import explorer from 'app/lib/explorer';
 import { getCoinIcon } from '../../components/CryptoIcons';
 import { STATE_SWAPS, SWAP_TX_DEFAULT } from './constants';
 import { closeDetailModal } from './actions';

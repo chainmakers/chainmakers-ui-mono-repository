@@ -1,13 +1,12 @@
-/* eslint-disable */
-import bs58 from 'bs58';
-import shajs from 'sha.js';
-import { choice } from '../../utils/random';
+import { encode } from 'bs58';
+import { sha256 } from 'sha.js';
 import wordlist from './wordlist';
+import { choice } from './random';
 
-const debug = require('debug')('dicoapp:containers:SeedPage:utils');
+const sha256Obj = new sha256();
 
 function toHexString(byteArray) {
-  return Array.from(byteArray, byte =>
+  return Array.from(byteArray, (byte: any) =>
     `0${(byte & 0xff).toString(16)}`.slice(-2)
   ).join('');
 }
@@ -29,12 +28,11 @@ export function generateSeed() {
     seed += seed.search(buf) < 0 ? `${buf} ` : '';
   }
 
-  debug(`generateSeed: ${seed}`);
   return seed.trim();
 }
 
 export function generateWif(seed) {
-  let seedhash = shajs('sha256')
+  let seedhash = sha256Obj
     .update(seed.trim())
     .digest('hex');
   const result = [];
@@ -59,17 +57,16 @@ export function generateWif(seed) {
       i === 0 ? 0xff & 188 : i === result.length + 1 ? 0xff & 1 : result[i - 1];
   }
 
-  const doublesha = shajs('sha256')
+  const doublesha = sha256Obj
     .update(
       toByteArray(
-        shajs('sha256')
+        sha256Obj
           .update(hash)
           .digest('hex')
       )
     )
     .digest('hex');
   const priv = toHexString(hash) + doublesha.substr(0, 8);
-  const wif = bs58.encode(Buffer.from(toByteArray(priv)));
-  debug(`generateWif: ${wif}`);
+  const wif = encode(Buffer.from(toByteArray(priv)));
   return wif;
 }

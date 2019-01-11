@@ -32,11 +32,11 @@ export default function loadPaths(config) {
   const userDataDir = resolve(app.getPath('userData'), config.get('APPNAME'));
 
   const binDir = is.development
-    ? resolve(__dirname, '../../bin')
-    : resolve(__dirname, 'bin');
+    ? resolve(__dirname, '../../../bin')
+    : resolve(__dirname, '../bin');
   const appDir = is.development
-    ? resolve(__dirname, '../..')
-    : resolve(__dirname);
+    ? resolve(__dirname, '../../..')
+    : resolve(__dirname, '../');
   return config.set('paths', {
     homeDir: homedir(),
     binDir,
