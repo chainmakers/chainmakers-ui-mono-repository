@@ -10,13 +10,16 @@
  *
  * @flow
  */
-import { app, BrowserWindow } from 'electron';
+import { app } from 'electron';
 import { autoUpdater } from 'electron-updater';
-import MenuBuilder from './main/menu';
-import marketmaker from './main/plugins/marketmaker';
-import getConfig from './main/config';
+import MenuBuilder from './menu';
+import getApplication from './application';
+import getSplashScreen from './splash-screen';
+import komodod from './plugins/komodod';
 
-const debug = require('debug')('atomicapp:main');
+const debug = require('debug')('kmdice:main');
+// const log = require('electron-log');
+// log.transports.file.file = __dirname + '/log.txt';
 
 export default class AppUpdater {
   constructor() {
@@ -25,10 +28,6 @@ export default class AppUpdater {
     autoUpdater.checkForUpdatesAndNotify();
   }
 }
-
-const config = getConfig();
-
-let mainWindow = null;
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -75,37 +74,17 @@ app.on('ready', async () => {
     await installExtensions();
   }
 
-  const loginWindowSize = config.get('loginWindowSize');
-
-  mainWindow = new BrowserWindow({
-    show: false,
-    width: loginWindowSize.width,
-    height: loginWindowSize.height
+  const win = getApplication();
+  win.on('application:did-finish-load', () => {
+    debug('start komodod app');
+    komodod();
   });
+  win.init();
 
-  mainWindow.loadURL(`file://${__dirname}/app.html`);
+  const ss = getSplashScreen();
+  ss.init();
 
-  // @TODO: Use 'ready-to-show' event
-  //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
-
-  mainWindow.webContents.on('did-finish-load', () => {
-    if (!mainWindow) {
-      throw new Error('"mainWindow" is not defined');
-    }
-
-    // marketmaker
-    debug('start marketmaker app');
-    marketmaker.start();
-
-    mainWindow.show();
-    mainWindow.focus();
-  });
-
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
-
-  const menuBuilder = new MenuBuilder(mainWindow);
+  const menuBuilder = new MenuBuilder();
   menuBuilder.buildMenu();
 
   // Remove this if your app does not use auto updates

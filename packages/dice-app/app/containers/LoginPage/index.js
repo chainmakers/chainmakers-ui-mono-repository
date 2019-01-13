@@ -8,12 +8,13 @@ import { createStructuredSelector } from 'reselect';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import type { IntlShape } from 'react-intl';
 import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
+// import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
 import swal from 'sweetalert';
+import { ipcRenderer as ipc } from 'electron';
 import getConfig from '../../utils/config';
 import injectReducer from '../../utils/inject-reducer';
 import injectSaga from '../../utils/inject-saga';
@@ -48,7 +49,9 @@ const styles = () => ({
   },
 
   loginContainer__center: {
-    minHeight: 350,
+    // minHeight: 350,
+    minHeight: '50%',
+    width: '50%',
     left: '50%',
     position: 'absolute',
     transform: 'translateX(-50%) translateY(25%)'
@@ -150,6 +153,24 @@ class LoginPage extends Component<Props, State> {
     dispatchLogin(passphrase);
   };
 
+  onStopKMDICEClick = async (evt: SyntheticInputEvent<>) => {
+    evt.preventDefault();
+    const rs = await ipc.callMain('komodod:stop');
+    debug('onStopKMDICEClick', rs);
+  };
+
+  onStartKMDICEClick = async (evt: SyntheticInputEvent<>) => {
+    evt.preventDefault();
+    const rs = await ipc.callMain('komodod:start');
+    debug('onStartKMDICEClick', rs);
+  };
+
+  onRpcKMDICEClick = async (evt: SyntheticInputEvent<>) => {
+    evt.preventDefault();
+    const rs = await ipc.callMain('komodod:rpc');
+    debug('onRpcKMDICEClick', rs);
+  };
+
   onChange = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
     const { value } = evt.target;
@@ -177,62 +198,107 @@ class LoginPage extends Component<Props, State> {
     return (
       <div className={classes.loginContainer}>
         <div className={classes.loginContainer__center}>
-          <Card className={classes.loginContainer__card}>
-            {loading && <LinearProgress />}
-            <Icon className={classes.loginContainer__logo} alt="logo" />
+          {/* <Card className={classes.loginContainer__card}> */}
+          {loading && <LinearProgress />}
 
-            <CardContent className={classes.loginContainer__content}>
-              <Typography
-                variant="h5"
-                className={classes.loginContainer__item}
-                gutterBottom
-              >
-                <FormattedMessage id="atomicapp.containers.LoginPage.headline">
-                  {(...content) => content}
-                </FormattedMessage>
-              </Typography>
+          <Icon className={classes.loginContainer__logo} alt="logo" />
 
-              <Typography variant="subtitle1" gutterBottom>
+          <CardContent className={classes.loginContainer__content}>
+            <Typography
+              variant="h5"
+              className={classes.loginContainer__item}
+              gutterBottom
+            >
+              <FormattedMessage id="atomicapp.containers.LoginPage.headline">
+                {(...content) => content}
+              </FormattedMessage>
+            </Typography>
+
+            {/* <Typography variant="subtitle1" gutterBottom>
                 <FormattedMessage id="atomicapp.containers.LoginPage.subheading">
                   {(...content) => content}
                 </FormattedMessage>
-              </Typography>
+              </Typography> */}
 
-              <Passphrase
-                loading={loading}
-                passphrase={passphrase}
-                className={classes.loginContainer__item}
-                onChange={this.onChange}
-              />
-
-              <Button
-                fullWidth
-                variant="contained"
-                disabled={loading}
-                color="primary"
-                type="submit"
-                onClick={this.onLoginButtonClick}
-                className={classNames(
-                  classes.loginContainer__item,
-                  classes.loginContainer__loginButton
-                )}
-              >
-                <FormattedMessage id="atomicapp.containers.LoginPage.submit">
-                  {(...content) => content}
-                </FormattedMessage>
-              </Button>
-            </CardContent>
+            <Passphrase
+              loading={loading}
+              passphrase={passphrase}
+              className={classes.loginContainer__item}
+              onChange={this.onChange}
+            />
+            <Button
+              fullWidth
+              variant="contained"
+              disabled={loading}
+              color="primary"
+              type="submit"
+              onClick={this.onStartKMDICEClick}
+              className={classNames(
+                classes.loginContainer__item,
+                classes.loginContainer__loginButton
+              )}
+            >
+              Start KMDICE
+            </Button>
+            <Button
+              fullWidth
+              variant="contained"
+              disabled={loading}
+              color="primary"
+              type="submit"
+              onClick={this.onStopKMDICEClick}
+              className={classNames(
+                classes.loginContainer__item,
+                classes.loginContainer__loginButton
+              )}
+            >
+              Stop KMDICE
+            </Button>
+            <Button
+              fullWidth
+              variant="contained"
+              disabled={loading}
+              color="primary"
+              type="submit"
+              onClick={this.onRpcKMDICEClick}
+              className={classNames(
+                classes.loginContainer__item,
+                classes.loginContainer__loginButton
+              )}
+            >
+              RPC KMDICE
+            </Button>
 
             <Button
               fullWidth
-              className={classes.loginContainer__bottomButton}
-              onClick={this.gotoSeedPage}
+              variant="contained"
+              disabled={loading}
+              color="primary"
+              type="submit"
+              onClick={this.onLoginButtonClick}
+              className={classNames(
+                classes.loginContainer__item,
+                classes.loginContainer__loginButton
+              )}
             >
-              <FormattedMessage id="atomicapp.containers.LoginPage.new_account">
+              <FormattedMessage id="atomicapp.containers.LoginPage.submit">
                 {(...content) => content}
               </FormattedMessage>
             </Button>
-          </Card>
+          </CardContent>
+
+          <Button
+            fullWidth
+            className={classes.loginContainer__bottomButton}
+            onClick={this.gotoSeedPage}
+          >
+            <FormattedMessage id="atomicapp.containers.LoginPage.new_account">
+              {(...content) => content}
+            </FormattedMessage>
+          </Button>
+          {/* </Card> */}
+
+          <LinearProgress color="secondary" />
         </div>
       </div>
     );

@@ -1,6 +1,6 @@
 {
   "name": "dice-app",
-  "productName": "Dice Application",
+  "productName": "Dice Game Application",
   "version": "0.13.0",
   "private": true,
   "description": "> TODO: description",
@@ -29,8 +29,8 @@
     "precommit": "lint-staged",
     "prestart": "yarn build",
     "dev": "cross-env START_HOT=1 node -r @babel/register ./internals/scripts/CheckPortInUse.js && cross-env START_HOT=1 yarn start-renderer-dev",
-    "start": "cross-env NODE_ENV=production electron ./app/",
-    "start-main-dev": "cross-env DEBUG=atomicapp:* HOT=1 NODE_ENV=development electron -r @babel/register ./app/main/main.dev.js",
+    "start": "cross-env DEBUG=kmdice:*,atomicapp:*,kmdrpc:* NODE_ENV=production electron ./app/main/main.prod.js",
+    "start-main-dev": "cross-env DEBUG=kmdice:*,atomicapp:*,kmdrpc:* HOT=1 NODE_ENV=development electron -r @babel/register ./app/main/main.dev.js",
     "start-renderer-dev": "cross-env DEBUG=atomicapp:* NODE_ENV=development webpack-dev-server --config configs/webpack.config.renderer.dev.babel.js",
     "test": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest -i",
     "test-all": "yarn lint && yarn flow && yarn build && yarn test && yarn build-e2e && yarn test-e2e",
@@ -64,17 +64,18 @@
   },
   "main": "./app/main/main.prod.js",
   "build": {
-    "productName": "AtomicDex",
+    "productName": "Dicegame",
     "compression": "maximum",
-    "appId": "com.komodoplatform.AtomicDex",
+    "appId": "com.komodoplatform.Dicegame",
     "asarUnpack": [
-      "app/bin/marketmaker"
+      "app/bin"
     ],
     "files": [
-      "!app/bin/marketmaker/*",
-      "app/bin/marketmaker/${os}",
+      "!app/bin/*",
+      "app/bin/${os}",
       "app/dist/",
-      "app/main/app.html",
+      "app/main/application/index.html",
+      "app/main/splash-screen/index.html",
       "app/main/main.prod.js",
       "app/main/main.prod.js.map",
       "package.json"
@@ -249,6 +250,7 @@
     "devtron": "^1.4.0",
     "electron-better-ipc": "^0.1.1",
     "electron-debug": "^2.0.0",
+    "electron-log": "^2.2.17",
     "electron-updater": "^4.0.6",
     "electron-util": "^0.10.1",
     "eventemitter3": "^3.1.0",
