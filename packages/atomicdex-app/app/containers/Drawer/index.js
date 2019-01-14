@@ -11,7 +11,6 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
@@ -72,6 +71,10 @@ const styles = theme => ({
     width: 72,
     height: 72,
     paddingTop: 0
+  },
+
+  drawer__iconCenter: {
+    margin: '0 auto'
   },
 
   drawer__iconSelected: {
@@ -185,7 +188,7 @@ class DICDrawer extends Component<Props, State> {
             })}
             onClick={this.gotoWalletPage}
           >
-            <ListItemIcon>
+            <ListItemIcon className={classes.drawer__iconCenter}>
               <AccountBalanceWalletIcon />
             </ListItemIcon>
             <span className={classes.drawer__text}>
@@ -201,7 +204,7 @@ class DICDrawer extends Component<Props, State> {
             })}
             onClick={this.gotoBuyPage}
           >
-            <ListItemIcon>
+            <ListItemIcon className={classes.drawer__iconCenter}>
               <AddShoppingCartIcon />
             </ListItemIcon>
             <span className={classes.drawer__text}>
@@ -217,7 +220,7 @@ class DICDrawer extends Component<Props, State> {
             })}
             onClick={this.gotoHelpPage}
           >
-            <ListItemIcon>
+            <ListItemIcon className={classes.drawer__iconCenter}>
               <LiveHelpIcon />
             </ListItemIcon>
             <span className={classes.drawer__text}>
@@ -231,10 +234,9 @@ class DICDrawer extends Component<Props, State> {
             className={classes.drawer__icon}
             onClick={dispatchShowLogoutDialog}
           >
-            <ListItemIcon>
+            <ListItemIcon className={classes.drawer__iconCenter}>
               <PowerSettingsNewIcon />
             </ListItemIcon>
-            <ListItemText primary="Exit" />
           </ListItem>
         </List>
       </Drawer>

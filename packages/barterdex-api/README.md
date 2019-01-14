@@ -20,7 +20,31 @@ Following are the minimum tested versions for the tools and libraries you need f
 ## Usage
 
 ```
-const barterdexApi = require('barterdex-api');
+const { Server, Client } = require('barterdex-api');
 
-// TODO: DEMONSTRATE API
+const server = Server({
+  client: 1,
+  gui: 'AtomicDex',
+  userhome: config.get('paths.homeDir')
+}, {
+  version: 2 // or 1
+});
+
+server.start({
+  // NOTE: for testing
+  netid: 9999,
+  // canbind: 0,
+  passphrase: "passphrase",
+  coins
+});
+
+const client = Client({
+  entrypoint: config.get('barterdex'),
+  home: paths.homeDir
+}, {
+  version: 2 // or 1
+});
+
 ```
+
+  

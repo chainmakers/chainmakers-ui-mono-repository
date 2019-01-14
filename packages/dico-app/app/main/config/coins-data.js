@@ -73,6 +73,7 @@ const data = [
     coin: 'PIZZA',
     name: 'Pizza',
     asset: 'PIZZA',
+    txversion: 4, // to activate Sapling tx format
     rpcport: 11116,
     electrumServers: [
       {
@@ -90,6 +91,7 @@ const data = [
     coin: 'BEER',
     name: 'Beer',
     asset: 'BEER',
+    txversion: 4, // to activate Sapling tx format
     rpcport: 8923,
     electrumServers: [
       {

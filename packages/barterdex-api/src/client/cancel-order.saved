@@ -1,0 +1,6 @@
+cancel(params: CancelRequest) {
+  const endpointParams = Object.assign({}, params, {
+    method: 'cancel'
+  });
+  return this.create(endpointParams);
+}

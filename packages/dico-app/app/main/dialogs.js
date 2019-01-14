@@ -1,8 +1,9 @@
 import { dialog, app } from 'electron';
-import { APPNAME } from './config/config-default';
+import { def } from './config/config-default';
 
-exports.marketmakerCrashedDialog = () => {
-  dialog.showErrorBox('Marketmaker Crashed', `${APPNAME} will be started.`);
-  app.relaunch();
+// eslint-disable-next-line import/prefer-default-export
+export function marketmakerCrashedDialog() {
+  dialog.showErrorBox('Marketmaker Crashed', `${def.APPNAME} will be quit.`);
+  // app.relaunch();
   app.quit();
-};
+}

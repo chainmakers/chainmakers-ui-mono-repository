@@ -2450,9 +2450,11 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
 
 "barterdex-api@file:../barterdex-api":
-  version "0.13.0"
+  version "0.14.0"
   dependencies:
     axios "^0.18.0"
+    debug "^4.1.1"
+    split2 "^3.1.0"
 
 "barterdex-rssm@file:../barterdex-rssm":
   version "0.13.0"
@@ -3961,6 +3963,12 @@ debug@^3.0.0, debug@^3.1.0, debug@^3.2.5:
 debug@^4.0.0, debug@^4.0.1, debug@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.0.tgz#373687bffa678b38b1cd91f861b63850035ddc87"
+  dependencies:
+    ms "^2.1.1"
+
+debug@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
   dependencies:
     ms "^2.1.1"
 
@@ -11124,9 +11132,9 @@ split2@^0.2.1:
   dependencies:
     through2 "~0.6.1"
 
-split2@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/split2/-/split2-3.0.0.tgz#55057cd560687a7ef6464471597404577ff1735d"
+split2@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/split2/-/split2-3.1.0.tgz#064bbfac70cdb66f77827870d42f159a8b442201"
   dependencies:
     readable-stream "^3.0.0"
 

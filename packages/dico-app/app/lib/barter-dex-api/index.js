@@ -1,5 +1,5 @@
 // @flow
-import barterdexApi from 'barterdex-api';
+import { Client } from 'barterdex-api';
 import getConfig from '../config';
 
 const config = getConfig();
@@ -10,8 +10,10 @@ function setup() {
   if (api) return api;
 
   const paths = config.get('paths');
-  api = barterdexApi(config.get('barterdex'), paths.homeDir);
-
+  api = Client({
+    entrypoint: config.get('barterdex'),
+    home: paths.homeDir
+  });
   return api;
 }
 

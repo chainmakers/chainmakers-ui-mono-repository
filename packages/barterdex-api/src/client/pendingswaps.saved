@@ -1,0 +1,12 @@
+// @flow
+
+// https://docs.komodoplatform.com/barterDEX/barterDEX-API.html?highlight=listunspent#pendingswaps
+// eslint-disable-next-line flowtype/no-weak-types
+pendingswaps(params: Object) {
+  // FIXME: verify params
+  const serverparams = Object.assign({}, params, {
+    method: 'swapstatus',
+    pending: 1
+  });
+  return this.create(serverparams);
+}

@@ -15,6 +15,7 @@ import { autoUpdater } from 'electron-updater';
 import MenuBuilder from './main/menu';
 import marketmaker from './main/plugins/marketmaker';
 import getConfig from './main/config';
+import { marketmakerCrashedDialog } from './main/dialogs';
 
 const debug = require('debug')('dicoapp:main');
 
@@ -87,17 +88,24 @@ app.on('ready', async () => {
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
 
-  mainWindow.webContents.on('did-finish-load', () => {
-    if (!mainWindow) {
-      throw new Error('"mainWindow" is not defined');
+  mainWindow.webContents.on('did-finish-load', async () => {
+    try {
+      if (!mainWindow) {
+        throw new Error('"mainWindow" is not defined');
+      }
+
+      // marketmaker
+      await marketmaker.start({
+        userData: config.get('paths.userDataDir'),
+        coins: config.get('marketmaker.data')
+      });
+      // await marketmaker.waitUntilReady();
+
+      mainWindow.show();
+      mainWindow.focus();
+    } catch (err) {
+      marketmakerCrashedDialog();
     }
-
-    // marketmaker
-    debug('start marketmaker app');
-    marketmaker.start();
-
-    mainWindow.show();
-    mainWindow.focus();
   });
 
   mainWindow.on('closed', () => {

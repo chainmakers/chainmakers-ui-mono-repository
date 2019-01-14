@@ -27,8 +27,8 @@
     "precommit": "lint-staged",
     "prestart": "yarn build",
     "dev": "cross-env START_HOT=1 node -r @babel/register ./internals/scripts/CheckPortInUse.js && cross-env START_HOT=1 yarn start-renderer-dev",
-    "start": "cross-env NODE_ENV=production electron ./app/",
-    "start-main-dev": "cross-env DEBUG=dicoapp:* HOT=1 NODE_ENV=development electron -r @babel/register ./app/main.dev.js",
+    "start": "cross-env NODE_ENV=production electron ./app/main.prod.js",
+    "start-main-dev": "cross-env DEBUG=dicoapp:*,barterdex-api:* HOT=1 NODE_ENV=development electron -r @babel/register ./app/main.dev.js",
     "start-renderer-dev": "cross-env DEBUG=dicoapp:* NODE_ENV=development webpack-dev-server --config configs/webpack.config.renderer.dev.babel.js",
     "test": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest -i",
     "test-all": "yarn lint && yarn flow && yarn build && yarn test && yarn build-e2e && yarn test-e2e",
@@ -269,7 +269,6 @@
     "redux-saga": "^0.16.2",
     "reselect": "^4.0.0",
     "source-map-support": "^0.5.9",
-    "split2": "^3.0.0",
     "sweetalert": "^2.1.2"
   },
   "engines": {

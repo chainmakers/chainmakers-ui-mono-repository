@@ -1,6 +1,6 @@
 {
   "name": "barterdex-api",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "Barterdex API for Node",
   "author": "Hoang Nam <particle4dev@gmail.com> (particle4dev)",
   "homepage": "https://github.com/particle4dev/atomicdex/tree/master/packages/barterdex-api#readme",
@@ -25,13 +25,16 @@
     "build": "../../node_modules/.bin/tsc",
     "lint": "../../node_modules/.bin/tslint -c \"../../configs/tslint.json\" -p tsconfig.json src/*.ts",
     "test": "../../node_modules/.bin/tsc -p tsconfig.test.json --noEmit && ../../node_modules/.bin/jest",
-    "coverage": "../../node_modules/.bin/tsc -p tsconfig.test.json --noEmit && ../../node_modules/.bin/jest --verbose --coverage"
+    "coverage": "../../node_modules/.bin/tsc -p tsconfig.test.json --noEmit && ../../node_modules/.bin/jest --verbose --coverage",
+    "clean": "rm -rf coverage/* && rm -rf dist/*"
   },
   "bugs": {
     "url": "https://github.com/particle4dev/atomicdex/issues"
   },
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "debug": "^4.1.1",
+    "split2": "^3.1.0"
   },
   "devDependencies": {
     "nock": "^10.0.6"
