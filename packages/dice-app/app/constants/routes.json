@@ -1,8 +1,6 @@
 {
   "HOME": "/",
   "SEED": "/seed",
-  "BUY": "/buy",
-  "WALLET": "/wallet",
   "HELP": "/help",
   "LOGIN": "/login",
   "DASHBOARD": "/dashboard"

@@ -6,8 +6,6 @@ import { makeSelectAuthenticated, makeSelectLoading } from './App/selectors';
 import connectedRouterRedirect from '../utils/auth-wrapper/connected-router-redirect';
 import routes from '../constants/routes.json';
 import App from './App';
-import DexPage from './DexPage';
-import WalletPage from './WalletPage';
 import HelpPage from './HelpPage';
 import SeedPage from './SeedPage';
 import LoginPage from './LoginPage';
@@ -26,13 +24,7 @@ const userIsNotAuthenticatedRedir = connectedRouterRedirect({
 // const HomeFallback = userIsNotAuthenticatedRedir(WalletPage, (props, ...) => {
 //   return (<Redirect to={routes.LOGIN} />);
 // });
-const HomeFallback = userIsNotAuthenticatedRedir(WalletPage, () => (
-  <Redirect to={routes.LOGIN} />
-));
-const WalletFallback = userIsNotAuthenticatedRedir(WalletPage, () => (
-  <Redirect to={routes.LOGIN} />
-));
-const DexFallback = userIsNotAuthenticatedRedir(DexPage, () => (
+const HomeFallback = userIsNotAuthenticatedRedir(HelpPage, () => (
   <Redirect to={routes.LOGIN} />
 ));
 const HelpFallback = userIsNotAuthenticatedRedir(HelpPage, () => (
@@ -50,8 +42,6 @@ export default () => (
     <Route component={WebSocketComponent} />
     <Route component={Snackbars} />
     <Switch>
-      <Route path={routes.BUY} component={DexFallback} />
-      <Route path={routes.WALLET} component={WalletFallback} />
       <Route path={routes.HELP} component={HelpFallback} />
       <Route path={routes.LOGIN} component={LoginFallback} />
       <Route path={routes.SEED} component={SeedPage} />
