@@ -19,6 +19,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import CloseIcon from '@material-ui/icons/Close';
+import { BuyButton } from 'barterdex-components';
 import { Circle, Line } from '../../../components/placeholder';
 import { getCoinIcon } from '../../../components/CryptoIcons';
 import { requiredNumber } from '../../../components/Form/helper';
@@ -49,7 +50,6 @@ import {
   makeSelectCurrency,
   makeSelectPayment
 } from '../selectors';
-import BuyButton from '../../../components/BuyButton';
 import { floor } from '../utils';
 import CoinSelectable from './CoinSelectable';
 

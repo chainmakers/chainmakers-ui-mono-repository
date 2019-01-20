@@ -180,7 +180,6 @@ class LoginPage extends Component<Props, State> {
           <Card className={classes.loginContainer__card}>
             {loading && <LinearProgress />}
             <Icon className={classes.loginContainer__logo} alt="logo" />
-
             <CardContent className={classes.loginContainer__content}>
               <Typography
                 variant="h5"

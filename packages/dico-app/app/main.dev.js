@@ -104,7 +104,7 @@ app.on('ready', async () => {
       mainWindow.show();
       mainWindow.focus();
     } catch (err) {
-      marketmakerCrashedDialog();
+      marketmakerCrashedDialog(err);
     }
   });
 

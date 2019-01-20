@@ -2,7 +2,7 @@
 // https://github.com/jl777/coins/tree/master/electrums
 // https://github.com/jl777/coins/blob/master/coins
 
-const tokenconfig = require('./tokenconfig');
+import tokenconfig from './tokenconfig';
 
 const data = [
   {

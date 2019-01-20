@@ -2456,6 +2456,9 @@ balanced-match@^1.0.0:
     debug "^4.1.1"
     split2 "^3.1.0"
 
+"barterdex-components@file:../barterdex-components":
+  version "0.1.0"
+
 "barterdex-rssm@file:../barterdex-rssm":
   version "0.13.0"
   dependencies:

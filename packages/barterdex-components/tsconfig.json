@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": false,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "allowJs": false,
+    "composite": true,
+    "declaration": true,
+    "jsx": "react",
+    "noEmit": false,
+    "rootDir": "src",
+    "outDir": "dist",
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "strictNullChecks": false,
+    "noUnusedParameters": true,
+    "lib": ["es2015", "dom", "dom.iterable"],
+    "typeRoots": [
+      "../../@types",
+      "../../node_modules/@types",
+      "./node_modules/@types"
+    ]
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.tsx"],
+  "exclude": ["src/**/__tests__/**/*", "src/**/__mocks__/**/*"]
+}

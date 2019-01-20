@@ -1,19 +1,18 @@
-const util = require('electron-util');
-const { app } = require('electron');
-const { homedir } = require('os');
-const { resolve } = require('path');
+import util from 'electron-util';
+import { app } from 'electron';
+import { homedir } from 'os';
+import { resolve } from 'path';
 
-const { is } = util;
 // const debug = require('debug')('atomicapp:config:paths');
 
 export default function loadPaths(config) {
   // create user data path
   const userDataDir = resolve(app.getPath('userData'), config.get('APPNAME'));
 
-  const binDir = is.development
+  const binDir = process.env.NODE_ENV !== 'production'
     ? util.fixPathForAsarUnpack(resolve(__dirname, '../../bin'))
     : util.fixPathForAsarUnpack(resolve(__dirname, 'bin'));
-  const appDir = is.development
+  const appDir = process.env.NODE_ENV !== 'production'
     ? resolve(__dirname, '../..')
     : resolve(__dirname);
   return config.set('paths', {

@@ -1,5 +1,5 @@
 // https://www.atomicexplorer.com/#/faucet/coqui
-const tokenconfig = require('./tokenconfig');
+import tokenconfig from './tokenconfig';
 
 const data = [
   {

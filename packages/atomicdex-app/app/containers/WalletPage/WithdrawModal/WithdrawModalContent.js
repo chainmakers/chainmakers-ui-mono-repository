@@ -13,9 +13,9 @@ import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
+import { BuyButton } from 'barterdex-components';
 import { getCoinIcon } from '../../../components/CryptoIcons';
 import { required, requiredNumber } from '../../../components/Form/helper';
-import BuyButton from '../../../components/BuyButton';
 import validate from '../../../components/Form/validate';
 
 const debug = require('debug')(

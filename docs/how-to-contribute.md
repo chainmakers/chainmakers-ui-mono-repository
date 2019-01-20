@@ -249,3 +249,7 @@ It will clutter up your list of branches with dead branches. It ensures you only
 You are about to add your code to a stable branch. If your feature-branch tests fail, there is a high chance that your destination branch build will fail too. Additionally, you need to apply code style check before making a Pull Request. It aids readability and reduces the chance of formatting fixes being mingled in with actual changes.
 
 [This proposal is still under review, it should/will be more simpler in future. This proposal is also open so we alway welcome if you want to contribute.]
+
+--
+
+"Perfection is Achieved Not When There Is Nothing More to Add, But When There Is Nothing Left to Take Away"
