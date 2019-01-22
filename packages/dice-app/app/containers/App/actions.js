@@ -29,9 +29,15 @@ import {
   LOAD_WITHDRAW,
   LOAD_WITHDRAW_SUCCESS,
   LOAD_WITHDRAW_ERROR,
-  LOAD_SWAP_SUCCESS
+  LOAD_SWAP_SUCCESS,
+  KMDICE_CHAIN_START,
+  // KMDICE_CHAIN_START_SUCCESS,
+  // KMDICE_CHAIN_START_ERROR,
+  KMDICE_CHAIN_GET_INFO,
+  KMDICE_CHAIN_GET_INFO_SUCCESS,
+  KMDICE_CHAIN_STOP
 } from './constants';
-import type { BalancePayload } from './schema';
+import type { BalancePayload, BlockchainInfoPayload } from './schema';
 
 export function login(passphrase: string) {
   return {
@@ -140,3 +146,33 @@ export function loadSwapSuccess(payload: Object) {
 }
 
 // -- //
+
+export function startKMDiceChain(pubkey?: string) {
+  const payload = {};
+  if (pubkey) {
+    payload.pubkey = pubkey;
+  }
+  return {
+    type: KMDICE_CHAIN_START,
+    payload
+  };
+}
+
+export function getInfoKMDiceChain() {
+  return {
+    type: KMDICE_CHAIN_GET_INFO
+  };
+}
+
+export function getInfoKMDiceChainSuccess(payload: BlockchainInfoPayload) {
+  return {
+    type: KMDICE_CHAIN_GET_INFO_SUCCESS,
+    payload
+  };
+}
+
+export function stopKMDiceChain() {
+  return {
+    type: KMDICE_CHAIN_STOP
+  };
+}

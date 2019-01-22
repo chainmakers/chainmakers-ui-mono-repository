@@ -3,9 +3,21 @@ import {
   logout,
   loadBalanceSuccess,
   loadCoinBalanceSuccess,
-  loadBalance
+  loadBalance,
+  startKMDiceChain,
+  getInfoKMDiceChain,
+  getInfoKMDiceChainSuccess,
+  stopKMDiceChain
 } from '../actions';
-import { LOGIN, LOAD_BALANCE, LOAD_BALANCE_SUCCESS } from '../constants';
+import {
+  LOGIN,
+  LOAD_BALANCE,
+  LOAD_BALANCE_SUCCESS,
+  KMDICE_CHAIN_START,
+  KMDICE_CHAIN_GET_INFO,
+  KMDICE_CHAIN_GET_INFO_SUCCESS,
+  KMDICE_CHAIN_STOP
+} from '../constants';
 
 describe('containers/App/actions/login', () => {
   const passphrase = 'passphrase';
@@ -169,5 +181,78 @@ describe('containers/App/actions/loadBalanceSuccess', () => {
     };
 
     expect(loadBalanceSuccess()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/App/actions/startKMDiceChain', () => {
+  const pubkey = 'pubkey';
+  it('should startKMDiceChain should create startKMDiceChain action', () => {
+    expect(startKMDiceChain()).toMatchSnapshot();
+  });
+
+  it('should startKMDiceChain should create startKMDiceChain action with pubkey', () => {
+    expect(startKMDiceChain(pubkey)).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: KMDICE_CHAIN_START,
+      payload: {}
+    };
+
+    expect(startKMDiceChain()).toEqual(expectedResult);
+
+    expectedResult.payload = {
+      pubkey
+    };
+
+    expect(startKMDiceChain(pubkey)).toEqual(expectedResult);
+  });
+});
+
+describe('containers/App/actions/getInfoKMDiceChain', () => {
+  it('should getInfoKMDiceChain should create getInfoKMDiceChain action', () => {
+    expect(getInfoKMDiceChain()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: KMDICE_CHAIN_GET_INFO
+    };
+
+    expect(getInfoKMDiceChain()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/App/actions/getInfoKMDiceChainSuccess', () => {
+  const payload = {
+    blocks: 100,
+    longestchain: 100
+  };
+  it('should getInfoKMDiceChainSuccess should create getInfoKMDiceChainSuccess action', () => {
+    expect(getInfoKMDiceChainSuccess(payload)).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: KMDICE_CHAIN_GET_INFO_SUCCESS,
+      payload
+    };
+
+    expect(getInfoKMDiceChainSuccess(payload)).toEqual(expectedResult);
+  });
+});
+
+describe('containers/App/actions/stopKMDiceChain', () => {
+  it('should stopKMDiceChain should create stopKMDiceChain action', () => {
+    expect(stopKMDiceChain()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: KMDICE_CHAIN_STOP
+    };
+
+    expect(stopKMDiceChain()).toEqual(expectedResult);
   });
 });

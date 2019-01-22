@@ -14,7 +14,6 @@ import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
 import swal from 'sweetalert';
-import { ipcRenderer as ipc } from 'electron';
 import getConfig from '../../utils/config';
 import injectReducer from '../../utils/inject-reducer';
 import injectSaga from '../../utils/inject-saga';
@@ -25,7 +24,7 @@ import { EmptyLayout } from '../Layout';
 import Passphrase from './components/Passphrase';
 import reducer from './reducer';
 import saga from './saga';
-import { login } from '../App/actions';
+import { login, startKMDiceChain, stopKMDiceChain } from '../App/actions';
 import {
   makeSelectLoading,
   makeSelectAuthenticated,
@@ -96,7 +95,7 @@ const styles = () => ({
 
 const debug = require('debug')('atomicapp:containers:LoginPage');
 
-type Props = {
+type ILoginPageProps = {
   loading: boolean,
   authenticated: boolean,
   // eslint-disable-next-line flowtype/no-weak-types
@@ -107,14 +106,18 @@ type Props = {
   error: Object | boolean,
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchLogin: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchStartKMDiceChain: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchStopKMDiceChain: Function,
   intl: IntlShape
 };
 
-type State = {
+type IILoginPagePropsState = {
   passphrase: string
 };
 
-class LoginPage extends Component<Props, State> {
+class LoginPage extends Component<ILoginPageProps, IILoginPagePropsState> {
   props: Props;
 
   state = {
@@ -155,20 +158,15 @@ class LoginPage extends Component<Props, State> {
 
   onStopKMDICEClick = async (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
-    const rs = await ipc.callMain('komodod:stop');
-    debug('onStopKMDICEClick', rs);
+    const { dispatchStopKMDiceChain } = this.props;
+    dispatchStopKMDiceChain();
   };
 
   onStartKMDICEClick = async (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
-    const rs = await ipc.callMain('komodod:start');
-    debug('onStartKMDICEClick', rs);
-  };
-
-  onRpcKMDICEClick = async (evt: SyntheticInputEvent<>) => {
-    evt.preventDefault();
-    const rs = await ipc.callMain('komodod:rpc');
-    debug('onRpcKMDICEClick', rs);
+    const { passphrase } = this.state;
+    const { dispatchStartKMDiceChain } = this.props;
+    dispatchStartKMDiceChain(passphrase);
   };
 
   onChange = (evt: SyntheticInputEvent<>) => {
@@ -254,20 +252,6 @@ class LoginPage extends Component<Props, State> {
             >
               Stop KMDICE
             </Button>
-            <Button
-              fullWidth
-              variant="contained"
-              disabled={loading}
-              color="primary"
-              type="submit"
-              onClick={this.onRpcKMDICEClick}
-              className={classNames(
-                classes.loginContainer__item,
-                classes.loginContainer__loginButton
-              )}
-            >
-              RPC KMDICE
-            </Button>
 
             <Button
               fullWidth
@@ -307,7 +291,10 @@ class LoginPage extends Component<Props, State> {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    dispatchLogin: (passphrase?: string) => dispatch(login(passphrase))
+    dispatchLogin: (passphrase?: string) => dispatch(login(passphrase)),
+    dispatchStartKMDiceChain: (pubkey?: string) =>
+      dispatch(startKMDiceChain(pubkey)),
+    dispatchStopKMDiceChain: () => dispatch(stopKMDiceChain())
   };
 }
 

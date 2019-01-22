@@ -11,7 +11,15 @@ module.exports = {
           });
         return resolve(data);
       }
-      return reject(new Error('unknow path'));
+      if (['komodod:start', 'komodod:stop'].indexOf(method) !== -1) {
+        return resolve({
+          ok: 'done'
+        });
+      }
+      if (['komodod:rpc'].indexOf(method) !== -1) {
+        return resolve(path);
+      }
+      return reject(new Error(`cant handle: method=${method} path=${path}`));
     });
   },
   answerRenderer(method, path) {

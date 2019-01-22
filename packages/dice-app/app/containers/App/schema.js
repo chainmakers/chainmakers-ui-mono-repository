@@ -32,7 +32,23 @@ type CoinConfigType = {
   active: number
 };
 
-export type { UTXOType, BalancePayload, CoinConfigType };
+type BlockchainInfoPayload = {
+  blocks: number,
+  longestchain: number
+};
+
+type BlockchainInfoType = {
+  blocks: number,
+  longestchain: number
+};
+
+export type {
+  UTXOType,
+  BalancePayload,
+  CoinConfigType,
+  BlockchainInfoPayload,
+  BlockchainInfoType
+};
 
 // {
 //   coin: 'KMD',
@@ -49,4 +65,27 @@ export type { UTXOType, BalancePayload, CoinConfigType };
 //   ],
 //   active: 1,
 //   market_cap: 107340275.0
+// }
+
+// type ErrorPayload = {
+//   context: {
+//     action: string, // eg: COIN_TRANSACTIONS_LOAD
+//     params: Array<*>
+//   },
+//   type: string, // eg: ApiError
+//   url: string, // eg: https://127.0.0.1/kmd/transactions.json
+//   message: string
+// };
+
+// {
+//   entities: {
+
+//   },
+//   errors: {
+
+//   },
+//   fetchStatus: {
+//     1085439006433669120: "loaded"
+//   },
+//   // other value
 // }

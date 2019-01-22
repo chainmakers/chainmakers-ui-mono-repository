@@ -1,7 +1,7 @@
 {
   "name": "dice-app",
   "productName": "Dice Game Application",
-  "version": "0.13.0",
+  "version": "0.2.0",
   "private": true,
   "description": "> TODO: description",
   "homepage": "https://github.com/particle4dev/atomicdex/tree/master/packages/dice-app#readme",
@@ -31,12 +31,13 @@
     "dev": "cross-env START_HOT=1 node -r @babel/register ./internals/scripts/CheckPortInUse.js && cross-env START_HOT=1 yarn start-renderer-dev",
     "start": "cross-env DEBUG=kmdice:*,atomicapp:*,kmdrpc:* NODE_ENV=production electron ./app/main/main.prod.js",
     "start-main-dev": "cross-env DEBUG=kmdice:*,atomicapp:*,kmdrpc:* HOT=1 NODE_ENV=development electron -r @babel/register ./app/main/main.dev.js",
-    "start-renderer-dev": "cross-env DEBUG=atomicapp:* NODE_ENV=development webpack-dev-server --config configs/webpack.config.renderer.dev.babel.js",
+    "start-renderer-dev": "cross-env DEBUG=kmdice:*,atomicapp:*,kmdrpc:* NODE_ENV=development webpack-dev-server --config configs/webpack.config.renderer.dev.babel.js",
     "test": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest -i",
     "test-all": "yarn lint && yarn flow && yarn build && yarn test && yarn build-e2e && yarn test-e2e",
     "test-e2e": "node -r @babel/register ./internals/scripts/CheckBuiltsExist.js && cross-env NODE_ENV=test testcafe electron:./ ./test/e2e/HomePage.e2e.js",
     "test-e2e-live": "node -r @babel/register ./internals/scripts/CheckBuiltsExist.js && cross-env NODE_ENV=test testcafe-live electron:./ ./test/e2e/HomePage.e2e.js",
     "test-watch": "yarn test --watch --verbose false",
+    "clean": "rm -rf dll/* && rm -rf release/* && rm -rf coverage/* && rm -rf app/dist/* && rm -rf app/main.prod.js && rm -rf app/main.prod.js.map",
     "coverage": "echo \"Error: run tests from atomicdex app\" && exit 0"
   },
   "bugs": {
@@ -261,7 +262,7 @@
     "intl": "^1.2.5",
     "invariant": "^2.2.4",
     "js-search": "^1.4.2",
-    "kmd-rpc": "^0.4.5",
+    "kmd-rpc": "file:../komodo-rpc-lib",
     "lodash": "^4.17.11",
     "prop-types": "^15.6.2",
     "qrcode.react": "^0.8.0",

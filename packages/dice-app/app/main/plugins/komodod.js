@@ -18,23 +18,25 @@ export default async function setup() {
     });
     const { coin, args } = config.get('chains');
     const komodod = await api.startDaemon(coin);
-    await komodod.start({
-      args
-    });
 
-    // ipc.answerRenderer('komodod:start', async (pubkey?: string) => {
-    ipc.answerRenderer('komodod:start', async () => {
+    ipc.answerRenderer('komodod:start', async (pubkey?: string) => {
       try {
-        debug(`start ${coin} chain`);
-        if (komodod.isRunning() !== true) {
-          const rs = await komodod.start({
-            args
-          });
-          return rs;
+        if (komodod.isRunning() === true) {
+          debug(`${coin} is running. Let stop it first`);
+          await komodod.stop();
         }
-        return {
-          ok: 'failed'
-        };
+        debug(`start ${coin} chain`);
+        if (pubkey) {
+          args.pubkey = pubkey;
+        }
+        const rs = await komodod.start({
+          args
+        });
+        // wait until ready
+        const waitUntilReady = await komodod.waitUntilReady();
+        debug(`waitUntilReady = ${JSON.stringify(waitUntilReady)}`);
+
+        return rs;
       } catch (err) {
         log.error(err);
         log.error(err.message);
@@ -48,8 +50,10 @@ export default async function setup() {
       try {
         debug(`stop ${coin} chain`);
         if (komodod.isRunning() === true) {
-          const rs = await komodod.stop();
-          return rs;
+          await komodod.stop();
+          const waitUntilStopped = await komodod.waitUntilStopped();
+          debug(`waitUntilStopped = ${JSON.stringify(waitUntilStopped)}`);
+          return waitUntilStopped;
         }
         return {
           ok: 'failed'
@@ -63,16 +67,15 @@ export default async function setup() {
       }
     });
 
-    ipc.answerRenderer(`${NAMESPACE}:restart`, async () => {
-      debug('not implement yet');
-    });
-
-    ipc.answerRenderer(`${NAMESPACE}:rpc`, async () => {
+    ipc.answerRenderer(`${NAMESPACE}:rpc`, async ({ action = 'getinfo' }) => {
       try {
         debug(`rpc ${coin} chain`, komodod.isRunning());
         if (komodod.isRunning() === true) {
-          const rs = await komodod.getInfo();
-          return rs;
+          const rs = await komodod.rpc({
+            coin,
+            action
+          });
+          return JSON.parse(rs);
         }
         return {
           ok: 'failed'
@@ -86,9 +89,6 @@ export default async function setup() {
       }
     });
 
-    // wait until ready
-    const waitUntilReady = await komodod.waitUntilReady();
-    debug(`waitUntilReady = ${JSON.stringify(waitUntilReady)}`);
     emitters.emit(`${NAMESPACE}:${APPLICATION}:initialized`);
   } catch (err) {
     log.error(err);

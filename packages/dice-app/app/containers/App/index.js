@@ -1,12 +1,23 @@
 // @flow
 import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import injectSaga from '../../utils/inject-saga';
 import { APP_STATE_NAME } from './constants';
+import { startKMDiceChain } from './actions';
 import saga from './saga';
 
-type Props = {};
+type IAppProps = {
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchStartKMDiceChain: Function
+};
 
-class App extends React.PureComponent<Props> {
+class App extends React.PureComponent<IAppProps> {
+  componentDidMount = () => {
+    const { dispatchStartKMDiceChain } = this.props;
+    dispatchStartKMDiceChain();
+  };
+
   render() {
     return null;
   }
@@ -14,4 +25,19 @@ class App extends React.PureComponent<Props> {
 
 const withSaga = injectSaga({ key: APP_STATE_NAME, saga });
 
-export default withSaga(App);
+export function mapDispatchToProps(dispatch) {
+  return {
+    dispatchStartKMDiceChain: (pubkey?: string) =>
+      dispatch(startKMDiceChain(pubkey))
+  };
+}
+
+const withConnect = connect(
+  null,
+  mapDispatchToProps
+);
+
+export default compose(
+  withSaga,
+  withConnect
+)(App);

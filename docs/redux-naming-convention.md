@@ -155,4 +155,25 @@ export const getTodos = (state) => state
 - [Neos CMS Goes for a Full UI Rewrite with React and Redux](http://dimaip.github.io/2016/03/13/neos-react-redux-rewrite/)
 - [Redux reducers.. Am I missing something? : javascript](https://www.reddit.com/r/javascript/comments/40n5u3/redux_reducers_am_i_missing_something/) — Discussion on what gets its own reducer
 
+### More Examples of DS
+
+- Error structure
+
+```
+error: {
+	context: {
+		action: "FETCH_DM_USER_UPDATES",
+		id: "BADGE_TIMERS"
+	},
+	displayName: "ApiError",
+	errors: [{
+		code: 1004
+	}],
+	status: 0,
+	url: "https://api.twitter.com/1.1/dm/user_updates.json",
+	message: "ApiError: https://api.twitter.com/1.1/dm/user_updates.json HTTP-0 codes:[1003] traceId:undefined",
+	stack
+}
+```
+
 #### Follow the [React Playbook](https://github.com/kylpo/react-playbook/blob/master/best-practices/redux.md) for future updates on this topic!

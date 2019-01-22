@@ -6,7 +6,7 @@ const debug = require('debug')('atomicapp:components:Form:validate');
 
 type Props = {
   // eslint-disable-next-line flowtype/no-weak-types
-  onChange?: Function
+  onChange: Function | undefiend
 };
 
 type State = {

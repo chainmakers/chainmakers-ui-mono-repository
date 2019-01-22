@@ -28,7 +28,8 @@ import {
   LOAD_WITHDRAW,
   LOAD_WITHDRAW_SUCCESS,
   LOAD_WITHDRAW_ERROR,
-  LOAD_SWAP_SUCCESS
+  LOAD_SWAP_SUCCESS,
+  KMDICE_CHAIN_GET_INFO_SUCCESS
 } from './constants';
 
 const config = getConfig();
@@ -61,7 +62,11 @@ export const initialState = fromJS({
     coins: [],
     entities: {}
   },
-  marketcap: getDataMarketcap()
+  marketcap: getDataMarketcap(),
+  blockchainInfo: {
+    blocks: null,
+    longestchain: null
+  }
 });
 
 function initialWalletState(coin) {
@@ -171,6 +176,16 @@ const appReducer = handleActions(
         );
       }
       return state.setIn(['balance', 'entities'], entities);
+    },
+
+    [KMDICE_CHAIN_GET_INFO_SUCCESS]: (state, { payload }) => {
+      // step one: get blockchain info
+      let blockchainInfo = state.get('blockchainInfo');
+      // step two: update blockchain info
+      blockchainInfo = blockchainInfo.set('blocks', payload.blocks);
+      blockchainInfo = blockchainInfo.set('longestchain', payload.longestchain);
+
+      return state.set('blockchainInfo', blockchainInfo);
     },
 
     [LOGOUT]: () => initialState

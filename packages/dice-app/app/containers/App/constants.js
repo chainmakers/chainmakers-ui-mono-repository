@@ -27,3 +27,16 @@ export const LOAD_WITHDRAW_SUCCESS = 'atomicapp/App/LOAD_WITHDRAW_SUCCESS';
 export const LOAD_WITHDRAW_ERROR = 'atomicapp/App/LOAD_WITHDRAW_ERROR';
 
 export const LOAD_SWAP_SUCCESS = 'atomicapp/App/LOAD_SWAP_SUCCESS';
+
+export const KMDICE_CHAIN_START = 'kmdice/App/KMDICE_CHAIN_START';
+export const KMDICE_CHAIN_START_SUCCESS =
+  'kmdice/App/KMDICE_CHAIN_START_SUCCESS';
+export const KMDICE_CHAIN_START_ERROR = 'kmdice/App/KMDICE_CHAIN_START_ERROR';
+
+export const KMDICE_CHAIN_GET_INFO = 'kmdice/App/KMDICE_CHAIN_GET_INFO';
+export const KMDICE_CHAIN_GET_INFO_SUCCESS =
+  'kmdice/App/KMDICE_CHAIN_GET_INFO_SUCCESS';
+export const KMDICE_CHAIN_GET_INFO_ERROR =
+  'kmdice/App/KMDICE_CHAIN_GET_INFO_ERROR';
+
+export const KMDICE_CHAIN_STOP = 'kmdice/App/KMDICE_CHAIN_STOP';
