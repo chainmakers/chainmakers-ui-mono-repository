@@ -29,9 +29,7 @@ type IBetTableProps = {
 };
 
 class BetTable extends React.PureComponent<IBetTableProps> {
-
   render() {
-
     return (
       <Table>
         <TableHead>

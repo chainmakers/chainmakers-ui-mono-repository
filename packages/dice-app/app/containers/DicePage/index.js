@@ -22,13 +22,12 @@ const styles = {
   container: {
     marginTop: 65,
     padding: '40px 0px 0px 0px',
-    backgroundColor: '#e8eaed',
+    backgroundColor: '#e8eaed'
   },
 
   borderRed: {
     // border: '1px solid red'
-  },
-
+  }
 };
 
 type Props = {
@@ -37,7 +36,6 @@ type Props = {
 };
 
 class DicePage extends React.PureComponent<Props> {
-
   state = {
     value: 0
   };

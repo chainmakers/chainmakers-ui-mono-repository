@@ -7,12 +7,54 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
+import { requiredNumber } from '../../../components/Form/helper';
+import validate from '../../../components/Form/validate';
+import { MAXODDS, MINODDS } from '../constants';
+
+// eslint-disable-next-line react/prop-types
+const TextInput = ({ onChange, value, error, isError, ...props }) => (
+  <TextField
+    {...props}
+    variant="outlined"
+    margin="none"
+    error={isError}
+    helperText={error}
+    value={value}
+    onChange={onChange}
+  />
+);
+
+const smallerThanZero = (value: mixed) =>
+  new Promise((resolve, reject) => {
+    const n = Number(value);
+    if (n < MINODDS) {
+      return reject(new Error(`Value must be bigger ${MINODDS}`));
+    }
+    return resolve(true);
+  });
+
+const biggerThanThousand = (value: mixed) =>
+  new Promise((resolve, reject) => {
+    const n = Number(value);
+    if (n > MAXODDS) {
+      return reject(new Error(`Value must be smaller ${MAXODDS}`));
+    }
+    return resolve(true);
+  });
+
+const ValidationPlaceNumberToBetInput = validate(
+  TextInput,
+  [requiredNumber, smallerThanZero, biggerThanThousand],
+  {
+    onChange: true
+  }
+);
 
 const styles = {
   betbox__container: {
     borderRadius: 8,
     padding: 25,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
 
   betbox__debugline: {
@@ -24,18 +66,23 @@ const styles = {
     marginBottom: 10
   },
 
-  betbox__input: {
-    padding: '15px 14px'
-  },
-
   betbox__betAmountInput: {
     width: '90%'
+  },
+
+  betbox__rowHead: {
+    paddingTop: 12,
   },
 
   betbox__rowCenter: {
     margin: '30px 0',
     borderRadius: 8,
     padding: '10px 0'
+    // backgroundColor: '#e8eaed'
+  },
+
+  betbox__rowBottom: {
+    minHeight: 93
   },
 
   betbox__number: {
@@ -57,8 +104,19 @@ const styles = {
 
   betbox__betButton: {
     boxShadow: 'none',
-    padding: '12px 24px'
+    padding: '12px 24px',
+    marginTop: 23
   },
+
+  betbox__input: {
+    position: 'relative',
+    padding: '15px 14px'
+  },
+
+  betbox__balance: {
+    lineHeight: 2,
+    width: '100%'
+  }
 };
 
 type IBetboxProps = {
@@ -67,14 +125,13 @@ type IBetboxProps = {
 };
 
 class Betbox extends React.PureComponent<IBetboxProps> {
-
   render() {
     const { classes } = this.props;
 
     return (
       <Grid item lg={7} md={8} sm={12} className={classes.betbox__container}>
         <Grid container spacing={0}>
-          <Grid item xs={7} className={classes.betbox__debugline}>
+          <Grid item xs={7} className={classNames(classes.betbox__rowHead, classes.betbox__debugline)}>
             <Typography variant="overline" className={classes.betbox__label}>
               BET AMOUNT
             </Typography>
@@ -100,7 +157,7 @@ class Betbox extends React.PureComponent<IBetboxProps> {
               }}
             />
           </Grid>
-          <Grid item xs={5} className={classes.betbox__debugline}>
+          <Grid item xs={5} className={classNames(classes.betbox__rowHead, classes.betbox__debugline)}>
             <Typography variant="overline" className={classes.betbox__label}>
               PAYOUT ON WIN
             </Typography>
@@ -109,7 +166,7 @@ class Betbox extends React.PureComponent<IBetboxProps> {
               variant="outlined"
               margin="none"
               fullWidth
-              value={"1000.00"}
+              value="1000.00"
               inputProps={{
                 className: classes.betbox__input
               }}
@@ -118,9 +175,7 @@ class Betbox extends React.PureComponent<IBetboxProps> {
               }}
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position="end">
-                    KMDICE
-                  </InputAdornment>
+                  <InputAdornment position="end">KMDICE</InputAdornment>
                 )
               }}
             />
@@ -128,13 +183,12 @@ class Betbox extends React.PureComponent<IBetboxProps> {
           <Grid
             container
             spacing={0}
-            className={classNames(classes.betbox__textCenter, classes.betbox__rowCenter)}
+            className={classNames(
+              classes.betbox__textCenter,
+              classes.betbox__rowCenter
+            )}
           >
-            <Grid
-              item
-              xs={4}
-              className={classes.betbox__debugline}
-            >
+            <Grid item xs={4} className={classes.betbox__debugline}>
               <Typography variant="overline">ROLL NUMBER TO WIN</Typography>
               <Typography variant="h5" className={classes.betbox__number}>
                 1000
@@ -169,21 +223,23 @@ class Betbox extends React.PureComponent<IBetboxProps> {
               </Typography>
             </Grid>
           </Grid>
-          <Grid container spacing={0} className={classes.betbox__textCenter}>
+          <Grid
+            container
+            spacing={0}
+            className={classNames(
+              classes.betbox__textCenter,
+              classes.betbox__rowBottom
+            )}
+          >
             <Grid
               item
               xs={4}
-              container
-              alignItems="center"
-              justify="center"
               className={classes.betbox__debugline}
             >
               <Typography variant="overline" className={classes.betbox__label}>
                 PLACE NUMBER TO BET
               </Typography>
-              <TextField
-                margin="none"
-                variant="outlined"
+              <ValidationPlaceNumberToBetInput
                 value={1000}
                 fullWidth
                 inputProps={{
@@ -198,9 +254,6 @@ class Betbox extends React.PureComponent<IBetboxProps> {
             <Grid
               item
               xs={4}
-              container
-              alignItems="flex-end"
-              justify="center"
               className={classes.betbox__debugline}
             >
               <Button
@@ -225,10 +278,10 @@ class Betbox extends React.PureComponent<IBetboxProps> {
               </Typography>
               <Typography
                 variant="h5"
-                className={classes.betbox__number}
-                style={{
-                  lineHeight: 2
-                }}
+                className={classNames(
+                  classes.betbox__balance,
+                  classes.betbox__number
+                )}
               >
                 50.12345678
               </Typography>

@@ -31,6 +31,9 @@ const userIsNotAuthenticatedRedir = connectedRouterRedirect({
 const HelpFallback = userIsNotAuthenticatedRedir(HelpPage, () => (
   <Redirect to={routes.LOGIN} />
 ));
+const DiceFallback = userIsNotAuthenticatedRedir(DicePage, () => (
+  <Redirect to={routes.LOGIN} />
+));
 const LoginFallback = userIsNotAuthenticatedRedir(
   () => <Redirect to={routes.LOGIN} />,
   LoginPage
@@ -47,6 +50,7 @@ export default () => (
       <Route path={routes.LOGIN} component={LoginFallback} />
       <Route path={routes.SEED} component={SeedPage} />
       <Route exact path={routes.HOME} component={DicePage} />
+      {/* <Route exact path={routes.HOME} component={DiceFallback} /> */}
       <Route component={NotFoundPage} />
     </Switch>
   </React.Fragment>
