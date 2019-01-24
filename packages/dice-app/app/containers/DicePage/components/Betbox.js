@@ -9,7 +9,9 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
 import { requiredNumber } from '../../../components/Form/helper';
 import validate from '../../../components/Form/validate';
-import { MAXODDS, MINODDS } from '../constants';
+import { MAXODDS, MINODDS, MINBET, MAXBET } from '../constants';
+
+const debug = require('debug')('kmdice:containers:DicePage:Betbox');
 
 // eslint-disable-next-line react/prop-types
 const TextInput = ({ onChange, value, error, isError, ...props }) => (
@@ -42,9 +44,35 @@ const biggerThanThousand = (value: mixed) =>
     return resolve(true);
   });
 
+const smallerThanMinBet = (value: mixed) =>
+  new Promise((resolve, reject) => {
+    const n = Number(value);
+    if (n < MINBET) {
+      return reject(new Error(`Value must be bigger ${MINBET}`));
+    }
+    return resolve(true);
+  });
+
+const biggerThanMaxBet = (value: mixed) =>
+  new Promise((resolve, reject) => {
+    const n = Number(value);
+    if (n > MAXBET) {
+      return reject(new Error(`Value must be smaller ${MAXBET}`));
+    }
+    return resolve(true);
+  });
+
 const ValidationPlaceNumberToBetInput = validate(
   TextInput,
   [requiredNumber, smallerThanZero, biggerThanThousand],
+  {
+    onChange: true
+  }
+);
+
+const ValidationBetAmountInput = validate(
+  TextInput,
+  [requiredNumber, smallerThanMinBet, biggerThanMaxBet],
   {
     onChange: true
   }
@@ -72,12 +100,13 @@ const styles = {
 
   betbox__rowHead: {
     paddingTop: 12,
+    minHeight: 105
   },
 
   betbox__rowCenter: {
-    margin: '30px 0',
+    margin: '20px 0 25px',
     borderRadius: 8,
-    padding: '10px 0'
+    padding: '15px 0',
     // backgroundColor: '#e8eaed'
   },
 
@@ -125,7 +154,39 @@ type IBetboxProps = {
 };
 
 class Betbox extends React.PureComponent<IBetboxProps> {
+  
+  constructor(props) {
+    super(props);
+
+    this.betAmountInput = React.createRef();
+  }
+
+  onClickAHaftButton = async (evt: SyntheticInputEvent<>) => {
+    evt.preventDefault();
+
+    const betAmountInput = this.betAmountInput.current;
+    const amount = await betAmountInput.value();
+
+    await betAmountInput.setValue(amount / 2);
+  };
+
+  onClickADoubleButton = async (evt: SyntheticInputEvent<>) => {
+    evt.preventDefault();
+
+    const betAmountInput = this.betAmountInput.current;
+    const amount = await betAmountInput.value();
+
+    await betAmountInput.setValue(amount * 2);
+  };
+
+  onClickAMaxButton = async (evt: SyntheticInputEvent<>) => {
+    evt.preventDefault();
+    debug('not implement yet');
+  };
+
   render() {
+    debug('render');
+
     const { classes } = this.props;
 
     return (
@@ -135,10 +196,11 @@ class Betbox extends React.PureComponent<IBetboxProps> {
             <Typography variant="overline" className={classes.betbox__label}>
               BET AMOUNT
             </Typography>
-            <TextField
+            <ValidationBetAmountInput
               variant="outlined"
               margin="none"
-              value={0}
+              value={1}
+              ref={this.betAmountInput}
               className={classes.betbox__betAmountInput}
               inputProps={{
                 className: classes.betbox__input
@@ -149,9 +211,9 @@ class Betbox extends React.PureComponent<IBetboxProps> {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <Button>1/2</Button>
-                    <Button>2X</Button>
-                    <Button>MAX</Button>
+                    <Button onClick={this.onClickAHaftButton}>1/2</Button>
+                    <Button onClick={this.onClickADoubleButton}>2X</Button>
+                    <Button onClick={this.onClickAMaxButton}>MAX</Button>
                   </InputAdornment>
                 )
               }}

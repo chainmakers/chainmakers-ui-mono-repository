@@ -16,7 +16,7 @@ function createData(time, amount, calories, fat, carbs, protein) {
 }
 
 const rows = [
-  createData(5, '2013-02-04 23:44:30', '4.0', 'win', '+ 1.0', 4.0),
+  createData(5, '2013-02-04 23:44:30', '4.0', 'pending', '+ 1.0', 4.0),
   createData(4, '2013-02-04 23:44:30', '4.0', 'win', '+ 0.6', 4.3),
   createData(3, '2013-02-04 23:44:30', '4.0', 'win', '+ 0.7', 6.0),
   createData(2, '2013-02-04 23:44:30', '4.0', 'lose', '- 2.0', 4.3),

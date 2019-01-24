@@ -31,7 +31,7 @@ export default function validate(
 
       this.state = {
         error: '',
-        value: ''
+        value: props.value || ''
       };
     }
 
