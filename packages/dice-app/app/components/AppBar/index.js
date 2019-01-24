@@ -8,8 +8,8 @@ import Divider from '@material-ui/core/Divider';
 const styles = theme => ({
   appBar: {
     boxShadow: 'none',
-    backgroundColor: theme.appbar.background,
-    left: 72
+    backgroundColor: theme.appbar.background
+    // left: 72
   },
 
   appBar__divider: {

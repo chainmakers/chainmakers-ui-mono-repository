@@ -6,6 +6,7 @@ import { makeSelectAuthenticated, makeSelectLoading } from './App/selectors';
 import connectedRouterRedirect from '../utils/auth-wrapper/connected-router-redirect';
 import routes from '../constants/routes.json';
 import App from './App';
+import DicePage from './DicePage';
 import HelpPage from './HelpPage';
 import SeedPage from './SeedPage';
 import LoginPage from './LoginPage';
@@ -24,9 +25,9 @@ const userIsNotAuthenticatedRedir = connectedRouterRedirect({
 // const HomeFallback = userIsNotAuthenticatedRedir(WalletPage, (props, ...) => {
 //   return (<Redirect to={routes.LOGIN} />);
 // });
-const HomeFallback = userIsNotAuthenticatedRedir(HelpPage, () => (
-  <Redirect to={routes.LOGIN} />
-));
+// const HomeFallback = userIsNotAuthenticatedRedir(HelpPage, () => (
+//   <Redirect to={routes.LOGIN} />
+// ));
 const HelpFallback = userIsNotAuthenticatedRedir(HelpPage, () => (
   <Redirect to={routes.LOGIN} />
 ));
@@ -45,7 +46,7 @@ export default () => (
       <Route path={routes.HELP} component={HelpFallback} />
       <Route path={routes.LOGIN} component={LoginFallback} />
       <Route path={routes.SEED} component={SeedPage} />
-      <Route exact path={routes.HOME} component={HomeFallback} />
+      <Route exact path={routes.HOME} component={DicePage} />
       <Route component={NotFoundPage} />
     </Switch>
   </React.Fragment>

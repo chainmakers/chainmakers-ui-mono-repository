@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { FormattedMessage } from 'react-intl';
 import Typography from '@material-ui/core/Typography';
@@ -25,7 +25,7 @@ type Props = {
   classes: Object
 };
 
-class HelpPage extends Component<Props> {
+class HelpPage extends React.PureComponent<Props> {
   props: Props;
 
   render() {

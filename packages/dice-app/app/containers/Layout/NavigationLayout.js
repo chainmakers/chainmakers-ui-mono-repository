@@ -23,11 +23,8 @@ const debug = require('debug')('atomicapp:containers:layout:NavigationLayout');
 const styles = theme => ({
   content: {
     flexGrow: 1,
-    // backgroundColor: theme.palette.background.default,
     backgroundColor: '#fff',
-    // padding: theme.spacing.unit * 3,
-    marginLeft: 72,
-    // marginTop: 64,
+    // marginLeft: 72,
     minHeight: '100%'
   },
 
@@ -69,9 +66,9 @@ class NavigationLayout extends PureComponent<Props> {
 
     return (
       <React.Fragment>
-        <aside className={classes.dicoDrawer}>
+        {/* <aside className={classes.dicoDrawer}>
           <DICDrawer />
-        </aside>
+        </aside> */}
         <main className={classes.content}>{children}</main>
         {/* <div className={classes.root}> */}
         {/* <DICTypography> */}

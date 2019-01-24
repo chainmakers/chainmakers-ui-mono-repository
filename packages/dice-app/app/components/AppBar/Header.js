@@ -10,13 +10,14 @@ type Props = {
 
 class Header extends React.PureComponent<Props> {
   render() {
-    const { title } = this.props;
+    const { title, children } = this.props;
 
     return (
       <Toolbar>
         <Typography variant="h6" color="inherit">
           {title}
         </Typography>
+        {children}
       </Toolbar>
     );
   }
