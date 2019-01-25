@@ -93,9 +93,9 @@ const Index = () => (
   <NavigationLayout>
     <ErrorBoundary>
       <MDCAppBar>
-        {/* <MDCHeader title="Dice Game">
+        <MDCHeader title="KMDice Game">
           <Button color="inherit">Logout</Button>
-        </MDCHeader> */}
+        </MDCHeader>
       </MDCAppBar>
       <DicePageWapper />
     </ErrorBoundary>

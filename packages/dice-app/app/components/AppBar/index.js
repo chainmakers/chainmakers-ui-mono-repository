@@ -9,7 +9,6 @@ const styles = theme => ({
   appBar: {
     boxShadow: 'none',
     backgroundColor: theme.appbar.background
-    // left: 72
   },
 
   appBar__divider: {
@@ -25,15 +24,14 @@ const styles = theme => ({
   }
 });
 
-type Props = {
+type IMDCAppBarProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   classes: Object,
   // eslint-disable-next-line flowtype/no-weak-types
   children: Element<any>
 };
 
-class MDCAppBar extends React.PureComponent<Props> {
-  props: Props;
+class MDCAppBar extends React.PureComponent<IMDCAppBarProps> {
 
   static propTypes = {};
 
