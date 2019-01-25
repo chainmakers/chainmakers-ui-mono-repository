@@ -1,12 +1,12 @@
 import { take, put } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import routes from '../../../constants/routes.json';
-import { logoutFlow } from '../saga';
-import { logout } from '../actions';
-import { LOGOUT } from '../constants';
+import routes from '../../../../constants/routes.json';
+import { logoutFlow } from '../index';
+import { logout } from '../../actions';
+import { LOGOUT } from '../../constants';
 
 describe('containers/App/saga/logoutFlow', () => {
-  it('should handle loadBuyCoinProcess correctly', done => {
+  it('should handle logoutFlow correctly', done => {
     const gen = logoutFlow();
 
     expect(gen.next().value).toEqual(take(LOGOUT));

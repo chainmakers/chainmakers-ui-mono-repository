@@ -1,4 +1,3 @@
-/* eslint-disable import/no-named-as-default */
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
@@ -39,7 +38,4 @@ const withConnect = connect(
   null
 );
 
-const ProgressBarWapper = compose(withConnect)(ProgressBar);
-
-export default ProgressBarWapper;
-/* eslint-enable import/no-named-as-default */
+export default compose(withConnect)(ProgressBar);

@@ -6,7 +6,6 @@ import type { ChildrenArray } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 // import Typography from '@material-ui/core/Typography';
 // import { minWindowSize } from '../../config/config-default';
-import DICDrawer from '../Drawer';
 
 const debug = require('debug')('atomicapp:containers:layout:NavigationLayout');
 
@@ -26,21 +25,6 @@ const styles = theme => ({
     backgroundColor: '#fff',
     // marginLeft: 72,
     minHeight: '100%'
-  },
-
-  dicoDrawer: {
-    color: theme.drawer.color,
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    '-webkit-box-sizing': 'border-box',
-    boxSizing: 'border-box',
-    width: 72,
-    maxWidth: 72,
-    height: '100%',
-    overflow: 'hidden',
-    contain: 'strict',
-    backgroundColor: theme.drawer.background
   }
 });
 
@@ -66,9 +50,6 @@ class NavigationLayout extends PureComponent<Props> {
 
     return (
       <React.Fragment>
-        {/* <aside className={classes.dicoDrawer}>
-          <DICDrawer />
-        </aside> */}
         <main className={classes.content}>{children}</main>
         {/* <div className={classes.root}> */}
         {/* <DICTypography> */}

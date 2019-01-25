@@ -18,7 +18,8 @@ import {
   fraction,
   hexString,
   generateSeed,
-  generateWif
+  generateWif,
+  floor
 } from '../index';
 
 it('packages/barterdex-utilities/src/index', () => {
@@ -41,4 +42,5 @@ it('packages/barterdex-utilities/src/index', () => {
   expect(typeof hexString).toEqual('function');
   expect(typeof generateSeed).toEqual('function');
   expect(typeof generateWif).toEqual('function');
+  expect(typeof floor).toEqual('function');
 });

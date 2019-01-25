@@ -45,48 +45,28 @@ const makeSelectUserpass = () =>
     user => user.get('userpass')
   );
 
-const makeSelectBalance = () =>
+const makeSelectBlockchainInfo = () =>
   createSelector(
     selectGlobal,
-    globalState => globalState.get('balance')
+    globalState => globalState.get('blockchainInfo')
   );
 
-const makeSelectBalanceLoading = () =>
+const makeSelectBalance = () =>
   createSelector(
-    makeSelectBalance(),
-    balanceState => balanceState.get('loading')
+    makeSelectBlockchainInfo(),
+    blockchainInfo => blockchainInfo.get('balance')
   );
 
-const makeSelectBalanceInit = () =>
+const makeSelectKomodod = () =>
   createSelector(
-    makeSelectBalance(),
-    balanceState => balanceState.get('init')
+    selectGlobal,
+    globalState => globalState.get('komodod')
   );
 
-const makeSelectBalanceError = () =>
+const makeSelectKomododState = () =>
   createSelector(
-    makeSelectBalance(),
-    balanceState => balanceState.get('error')
-  );
-
-const makeSelectBalanceList = () =>
-  createSelector(
-    makeSelectBalance(),
-    balanceState => balanceState.get('coins').map(e => e.get('symbol'))
-  );
-
-const makeSelectBalanceEntities = () =>
-  createSelector(
-    makeSelectBalance(),
-    balanceState => balanceState.get('entities')
-  );
-
-const makeSelectBalanceAvailable = () =>
-  createSelector(
-    makeSelectBalanceList(),
-    makeSelectBalanceEntities(),
-    (list, entities) =>
-      list.map(key => entities.get(key)).filter(value => value.get('balance'))
+    makeSelectKomodod(),
+    komodod => komodod.get('state')
   );
 
 export {
@@ -97,11 +77,8 @@ export {
   makeSelectError,
   makeSelectLocation,
   makeSelectUserpass,
+  makeSelectBlockchainInfo,
   makeSelectBalance,
-  makeSelectBalanceLoading,
-  makeSelectBalanceInit,
-  makeSelectBalanceError,
-  makeSelectBalanceList,
-  makeSelectBalanceEntities,
-  makeSelectBalanceAvailable
+  makeSelectKomodod,
+  makeSelectKomododState
 };

@@ -10,14 +10,6 @@ type UTXOType = {
   value: number
 };
 
-type BalancePayload = {
-  address: string,
-  balance: number,
-  coin: string,
-  fee: number
-  // utxo: Array<UTXOType>
-};
-
 type EelectrumServerType = {
   host: string,
   port: number
@@ -34,17 +26,18 @@ type CoinConfigType = {
 
 type BlockchainInfoPayload = {
   blocks: number,
-  longestchain: number
+  longestchain: number,
+  balance: number
 };
 
 type BlockchainInfoType = {
   blocks: number,
-  longestchain: number
+  longestchain: number,
+  balance: number
 };
 
 export type {
   UTXOType,
-  BalancePayload,
   CoinConfigType,
   BlockchainInfoPayload,
   BlockchainInfoType

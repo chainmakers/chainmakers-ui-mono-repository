@@ -17,6 +17,9 @@ import MDCHeader from '../../components/AppBar/Header';
 import { NavigationLayout } from '../Layout';
 import Betbox from './components/Betbox';
 import BetTable from './components/BetTable';
+import ProgressBar from './ProgressBar';
+
+const debug = require('debug')('kmdice:containers:DicePage');
 
 const styles = {
   container: {
@@ -30,12 +33,12 @@ const styles = {
   }
 };
 
-type Props = {
+type IDicePageProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   classes: Object
 };
 
-class DicePage extends React.PureComponent<Props> {
+class DicePage extends React.PureComponent<IDicePageProps> {
   state = {
     value: 0
   };
@@ -45,6 +48,7 @@ class DicePage extends React.PureComponent<Props> {
   };
 
   render() {
+    debug('render');
     const { classes } = this.props;
 
     return (
@@ -54,6 +58,7 @@ class DicePage extends React.PureComponent<Props> {
         justify="center"
         className={classes.container}
       >
+        <ProgressBar />
         <Betbox />
 
         <Grid

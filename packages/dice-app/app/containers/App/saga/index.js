@@ -1,15 +1,13 @@
-import { all, fork, take, put, takeLatest } from 'redux-saga/effects';
+import { all, fork, take, put } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import { takeFirst } from 'barterdex-rssm';
 import routes from '../../../constants/routes.json';
 import {
   LOGOUT,
-  LOAD_BALANCE,
   LOAD_WITHDRAW,
   KMDICE_CHAIN_START,
   KMDICE_CHAIN_STOP
 } from '../constants';
-import loadBalanceProcess from './load-balance-process';
 import loadWithdrawProcess from './load-withdraw-process';
 import startKMDiceChainSaga from './startKMDiceChainSaga';
 import stopKMDiceChainSaga from './stopKMDiceChainSaga';
@@ -28,7 +26,6 @@ export function* logoutFlow() {
 
 export default function* root() {
   yield all([
-    yield takeLatest(LOAD_BALANCE, loadBalanceProcess),
     yield takeFirst(LOAD_WITHDRAW, loadWithdrawProcess),
     yield takeFirst(KMDICE_CHAIN_START, startKMDiceChainSaga),
     yield takeFirst(KMDICE_CHAIN_STOP, stopKMDiceChainSaga),

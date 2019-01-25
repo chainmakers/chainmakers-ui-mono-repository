@@ -15,21 +15,19 @@ import { handleActions } from 'redux-actions';
 import each from 'lodash/each';
 import isNumber from 'lodash/isNumber';
 import getConfig from '../../utils/config';
-
 import {
   LOGIN,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   LOGOUT,
-  LOAD_BALANCE,
-  LOAD_BALANCE_SUCCESS,
-  LOAD_BALANCE_ERROR,
-  LOAD_COIN_BALANCE_SUCCESS,
   LOAD_WITHDRAW,
   LOAD_WITHDRAW_SUCCESS,
   LOAD_WITHDRAW_ERROR,
   LOAD_SWAP_SUCCESS,
-  KMDICE_CHAIN_GET_INFO_SUCCESS
+  KMDICE_CHAIN_START_SUCCESS,
+  KMDICE_CHAIN_GET_INFO_SUCCESS,
+  KOMODOD_STATE_STARTED,
+  KOMODOD_STATE_RUNNING
 } from './constants';
 
 const config = getConfig();
@@ -55,25 +53,16 @@ export const initialState = fromJS({
   loading: false,
   error: false,
   currentUser: null,
-  balance: {
-    init: false,
-    loading: false,
-    error: false,
-    coins: [],
-    entities: {}
-  },
   marketcap: getDataMarketcap(),
+  komodod: {
+    state: KOMODOD_STATE_STARTED
+  },
   blockchainInfo: {
     blocks: null,
-    longestchain: null
+    longestchain: null,
+    balance: 0
   }
 });
-
-function initialWalletState(coin) {
-  coin.loading = false;
-  coin.error = false;
-  return coin;
-}
 
 const appReducer = handleActions(
   {
@@ -84,47 +73,6 @@ const appReducer = handleActions(
 
     [LOGIN_ERROR]: (state, { error }) =>
       state.set('error', error).set('loading', false),
-
-    [LOAD_BALANCE]: state =>
-      state
-        .setIn(['balance', 'loading'], true)
-        .setIn(['balance', 'error'], false),
-
-    [LOAD_COIN_BALANCE_SUCCESS]: (state, { payload }) => {
-      // step one: update entities
-      const entities = state.getIn(['balance', 'entities']);
-      state = state.setIn(
-        ['balance', 'entities'],
-        entities.set(payload.coin, fromJS(initialWalletState(payload)))
-      );
-      // step two: add key in coins list
-      const coins = state.getIn(['balance', 'coins']);
-      if (!coins.find(obj => obj.get('symbol') === payload.coin)) {
-        state = state.setIn(
-          ['balance', 'coins'],
-          coins
-            .push(
-              fromJS({
-                symbol: payload.coin,
-                marketcap:
-                  state.getIn(['marketcap', payload.coin, 'marketcap']) || 0
-              })
-            )
-            .sort((a, b) => b.get('marketcap') - a.get('marketcap'))
-        );
-      }
-      return state;
-    },
-
-    [LOAD_BALANCE_SUCCESS]: state =>
-      state
-        .setIn(['balance', 'loading'], false)
-        .setIn(['balance', 'init'], true),
-
-    [LOAD_BALANCE_ERROR]: (state, { error }) =>
-      state
-        .setIn(['balance', 'error'], error)
-        .setIn(['balance', 'loading'], false),
 
     [LOAD_WITHDRAW]: (state, { payload }) => {
       // step one: get coin
@@ -177,14 +125,26 @@ const appReducer = handleActions(
       }
       return state.setIn(['balance', 'entities'], entities);
     },
-
+    [KMDICE_CHAIN_START_SUCCESS]: state =>
+      state.setIn(['komodod', 'state'], KOMODOD_STATE_RUNNING),
     [KMDICE_CHAIN_GET_INFO_SUCCESS]: (state, { payload }) => {
       // step one: get blockchain info
       let blockchainInfo = state.get('blockchainInfo');
       // step two: update blockchain info
-      blockchainInfo = blockchainInfo.set('blocks', payload.blocks);
-      blockchainInfo = blockchainInfo.set('longestchain', payload.longestchain);
+      if (isNumber(payload.blocks)) {
+        blockchainInfo = blockchainInfo.set('blocks', payload.blocks);
+      }
 
+      if (isNumber(payload.blocks)) {
+        blockchainInfo = blockchainInfo.set(
+          'longestchain',
+          payload.longestchain
+        );
+      }
+
+      if (isNumber(payload.blocks)) {
+        blockchainInfo = blockchainInfo.set('balance', payload.balance);
+      }
       return state.set('blockchainInfo', blockchainInfo);
     },
 

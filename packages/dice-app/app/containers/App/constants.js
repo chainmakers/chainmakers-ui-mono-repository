@@ -16,12 +16,6 @@ export const LOGIN_ERROR = 'atomicapp/App/LOGIN_ERROR';
 
 export const LOGOUT = 'atomicapp/App/LOGOUT';
 
-export const LOAD_BALANCE = 'atomicapp/App/LOAD_BALANCE';
-export const LOAD_BALANCE_SUCCESS = 'atomicapp/App/LOAD_BALANCE_SUCCESS';
-export const LOAD_COIN_BALANCE_SUCCESS =
-  'atomicapp/App/LOAD_COIN_BALANCE_SUCCESS';
-export const LOAD_BALANCE_ERROR = 'atomicapp/App/LOAD_BALANCE_ERROR';
-
 export const LOAD_WITHDRAW = 'atomicapp/App/LOAD_WITHDRAW';
 export const LOAD_WITHDRAW_SUCCESS = 'atomicapp/App/LOAD_WITHDRAW_SUCCESS';
 export const LOAD_WITHDRAW_ERROR = 'atomicapp/App/LOAD_WITHDRAW_ERROR';
@@ -40,3 +34,9 @@ export const KMDICE_CHAIN_GET_INFO_ERROR =
   'kmdice/App/KMDICE_CHAIN_GET_INFO_ERROR';
 
 export const KMDICE_CHAIN_STOP = 'kmdice/App/KMDICE_CHAIN_STOP';
+
+// https://www.tutorialspoint.com/operating_system/os_processes.htm
+// Operating System - Processes
+export const KOMODOD_STATE_STARTED = 'kmdice/App/KOMODOD_STATE_STARTED';
+export const KOMODOD_STATE_RUNNING = 'kmdice/App/KOMODOD_STATE_RUNNING';
+export const KOMODOD_STATE_TERMINATED = 'kmdice/App/KOMODOD_STATE_TERMINATED';

@@ -1,7 +1,7 @@
 {
   "name": "dice-app",
   "productName": "Dice Game Application",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "description": "> TODO: description",
   "homepage": "https://github.com/particle4dev/atomicdex/tree/master/packages/dice-app#readme",

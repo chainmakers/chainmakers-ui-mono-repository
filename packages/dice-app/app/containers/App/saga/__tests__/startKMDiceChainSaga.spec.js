@@ -1,7 +1,11 @@
 import { fromJS } from 'immutable';
 import { runSaga } from 'redux-saga';
 import startKMDiceChainSaga from '../startKMDiceChainSaga';
-import { KMDICE_CHAIN_START, KMDICE_CHAIN_GET_INFO } from '../../constants';
+import {
+  KMDICE_CHAIN_START,
+  KMDICE_CHAIN_GET_INFO,
+  KMDICE_CHAIN_START_SUCCESS
+} from '../../constants';
 import data from '../../../__tests__/app-state.json';
 
 const TIMEOUT = 10 * 100;
@@ -27,7 +31,10 @@ describe('containers/App/saga/startKMDiceChainSaga', () => {
       ).done;
 
       expect(saga).toEqual(undefined);
-      expect(dispatched).toEqual([{ type: KMDICE_CHAIN_GET_INFO }]);
+      expect(dispatched).toEqual([
+        { type: KMDICE_CHAIN_GET_INFO },
+        { type: KMDICE_CHAIN_START_SUCCESS }
+      ]);
 
       done();
     },

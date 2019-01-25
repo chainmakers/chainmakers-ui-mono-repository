@@ -1,14 +1,19 @@
 // @flow
 import React from 'react';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
+import { floor } from 'barterdex-utilities';
 import { requiredNumber } from '../../../components/Form/helper';
 import validate from '../../../components/Form/validate';
+import { makeSelectBalance } from '../../App/selectors';
 import { MAXODDS, MINODDS, MINBET, MAXBET } from '../constants';
 
 const debug = require('debug')('kmdice:containers:DicePage:Betbox');
@@ -53,6 +58,18 @@ const smallerThanMinBet = (value: mixed) =>
     return resolve(true);
   });
 
+const biggerThanBalance = (value: mixed, props: mixed) =>
+  new Promise((resolve, reject) => {
+    const { balance } = props;
+    const n = Number(value);
+    const b = Number(balance);
+
+    if (n > b) {
+      return reject(new Error(`${n} is bigger balance`));
+    }
+    return resolve(true);
+  });
+
 const biggerThanMaxBet = (value: mixed) =>
   new Promise((resolve, reject) => {
     const n = Number(value);
@@ -72,7 +89,7 @@ const ValidationPlaceNumberToBetInput = validate(
 
 const ValidationBetAmountInput = validate(
   TextInput,
-  [requiredNumber, smallerThanMinBet, biggerThanMaxBet],
+  [requiredNumber, smallerThanMinBet, biggerThanBalance, biggerThanMaxBet],
   {
     onChange: true
   }
@@ -150,7 +167,9 @@ const styles = {
 
 type IBetboxProps = {
   // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object
+  classes: Object,
+
+  balance: number
 };
 
 class Betbox extends React.PureComponent<IBetboxProps> {
@@ -180,13 +199,16 @@ class Betbox extends React.PureComponent<IBetboxProps> {
 
   onClickAMaxButton = async (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
-    debug('not implement yet');
+    const { balance } = this.props;
+    const betAmountInput = this.betAmountInput.current;
+
+    await betAmountInput.setValue(balance);
   };
 
   render() {
     debug('render');
 
-    const { classes } = this.props;
+    const { classes, balance } = this.props;
 
     return (
       <Grid item lg={7} md={8} sm={12} className={classes.betbox__container}>
@@ -203,8 +225,7 @@ class Betbox extends React.PureComponent<IBetboxProps> {
               BET AMOUNT
             </Typography>
             <ValidationBetAmountInput
-              variant="outlined"
-              margin="none"
+              balance={balance}
               value={1}
               ref={this.betAmountInput}
               className={classes.betbox__betAmountInput}
@@ -237,9 +258,9 @@ class Betbox extends React.PureComponent<IBetboxProps> {
               PAYOUT ON WIN
             </Typography>
             <TextField
-              disabled
               variant="outlined"
               margin="none"
+              disabled
               fullWidth
               value="1000.00"
               inputProps={{
@@ -346,7 +367,7 @@ class Betbox extends React.PureComponent<IBetboxProps> {
                   classes.betbox__number
                 )}
               >
-                50.12345678
+                {floor(balance, 8)}
               </Typography>
             </Grid>
           </Grid>
@@ -356,4 +377,21 @@ class Betbox extends React.PureComponent<IBetboxProps> {
   }
 }
 
-export default withStyles(styles)(Betbox);
+// eslint-disable-next-line flowtype/no-weak-types
+// export function mapDispatchToProps(dispatch: Dispatch<Object>) {
+//   return {};
+// }
+
+const mapStateToProps = createStructuredSelector({
+  balance: makeSelectBalance()
+});
+
+const withConnect = connect(
+  mapStateToProps,
+  null
+);
+
+export default compose(
+  withConnect,
+  withStyles(styles)
+)(Betbox);

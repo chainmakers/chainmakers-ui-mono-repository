@@ -22,22 +22,18 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   LOGOUT,
-  LOAD_BALANCE,
-  LOAD_BALANCE_SUCCESS,
-  LOAD_BALANCE_ERROR,
-  LOAD_COIN_BALANCE_SUCCESS,
   LOAD_WITHDRAW,
   LOAD_WITHDRAW_SUCCESS,
   LOAD_WITHDRAW_ERROR,
   LOAD_SWAP_SUCCESS,
   KMDICE_CHAIN_START,
-  // KMDICE_CHAIN_START_SUCCESS,
+  KMDICE_CHAIN_START_SUCCESS,
   // KMDICE_CHAIN_START_ERROR,
   KMDICE_CHAIN_GET_INFO,
   KMDICE_CHAIN_GET_INFO_SUCCESS,
   KMDICE_CHAIN_STOP
 } from './constants';
-import type { BalancePayload, BlockchainInfoPayload } from './schema';
+import type { BlockchainInfoPayload } from './schema';
 
 export function login(passphrase: string) {
   return {
@@ -67,34 +63,6 @@ export function loginError(error) {
 export function logout() {
   return {
     type: LOGOUT
-  };
-}
-
-export function loadBalance() {
-  return {
-    type: LOAD_BALANCE
-  };
-}
-
-export function loadBalanceSuccess() {
-  return {
-    type: LOAD_BALANCE_SUCCESS
-  };
-}
-
-export function loadCoinBalanceSuccess(payload: BalancePayload) {
-  return {
-    type: LOAD_COIN_BALANCE_SUCCESS,
-    payload
-  };
-}
-
-export function loadBalanceError(message: string) {
-  return {
-    type: LOAD_BALANCE_ERROR,
-    error: {
-      message
-    }
   };
 }
 
@@ -155,6 +123,12 @@ export function startKMDiceChain(pubkey?: string) {
   return {
     type: KMDICE_CHAIN_START,
     payload
+  };
+}
+
+export function startKMDiceChainSuccess() {
+  return {
+    type: KMDICE_CHAIN_START_SUCCESS
   };
 }
 

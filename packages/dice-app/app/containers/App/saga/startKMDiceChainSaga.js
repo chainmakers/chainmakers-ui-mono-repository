@@ -1,7 +1,7 @@
 // @flow
 import ipc from 'electron-better-ipc';
 import { put, call, cancelled } from 'redux-saga/effects';
-import { getInfoKMDiceChain } from '../actions';
+import { getInfoKMDiceChain, startKMDiceChainSuccess } from '../actions';
 
 const debug = require('debug')(
   'kmdice:containers:App:saga:startKMDiceChainSaga'
@@ -14,6 +14,7 @@ export default function* startKMDiceChainSaga({ payload }) {
     if (rs && rs.ok === 'done') {
       yield put(getInfoKMDiceChain());
     }
+    yield put(startKMDiceChainSuccess());
   } catch (err) {
     console.log(err);
   } finally {
