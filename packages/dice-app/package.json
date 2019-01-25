@@ -37,7 +37,7 @@
     "test-e2e": "node -r @babel/register ./internals/scripts/CheckBuiltsExist.js && cross-env NODE_ENV=test testcafe electron:./ ./test/e2e/HomePage.e2e.js",
     "test-e2e-live": "node -r @babel/register ./internals/scripts/CheckBuiltsExist.js && cross-env NODE_ENV=test testcafe-live electron:./ ./test/e2e/HomePage.e2e.js",
     "test-watch": "yarn test --watch --verbose false",
-    "clean": "rm -rf dll/* && rm -rf release/* && rm -rf coverage/* && rm -rf app/dist/* && rm -rf app/main.prod.js && rm -rf app/main.prod.js.map",
+    "clean": "rm -rf dll/* && rm -rf release/* && rm -rf coverage/* && rm -rf app/dist/* && rm -rf app/main.prod.js && rm -rf app/main.prod.js.map && rm -rf app/main/main.prod.js && rm -rf app/main/main.prod.js.map",
     "coverage": "echo \"Error: run tests from atomicdex app\" && exit 0"
   },
   "bugs": {

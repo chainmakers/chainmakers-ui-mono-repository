@@ -73,7 +73,7 @@ class DicePage extends React.PureComponent<Props> {
             centered
             className={classNames(classes.borderRed)}
             style={{
-              marginBottom: 24
+              marginBottom: 19
             }}
           >
             <Tab label="All Bets" />

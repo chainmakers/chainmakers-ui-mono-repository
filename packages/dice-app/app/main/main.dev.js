@@ -14,7 +14,6 @@ import { app } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import MenuBuilder from './menu';
 import getApplication from './application';
-import getSplashScreen from './splash-screen';
 import komodod from './plugins/komodod';
 
 const debug = require('debug')('kmdice:main');
@@ -80,9 +79,6 @@ app.on('ready', async () => {
     komodod();
   });
   win.init();
-
-  const ss = getSplashScreen();
-  ss.init();
 
   const menuBuilder = new MenuBuilder();
   menuBuilder.buildMenu();

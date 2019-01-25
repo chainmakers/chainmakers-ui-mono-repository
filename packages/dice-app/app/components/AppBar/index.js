@@ -32,7 +32,6 @@ type IMDCAppBarProps = {
 };
 
 class MDCAppBar extends React.PureComponent<IMDCAppBarProps> {
-
   static propTypes = {};
 
   render() {

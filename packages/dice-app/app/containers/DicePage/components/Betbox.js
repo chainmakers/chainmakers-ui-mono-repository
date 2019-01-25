@@ -104,9 +104,9 @@ const styles = {
   },
 
   betbox__rowCenter: {
-    margin: '20px 0 25px',
+    margin: '15px 0 20px',
     borderRadius: 8,
-    padding: '15px 0',
+    padding: '15px 0'
     // backgroundColor: '#e8eaed'
   },
 
@@ -154,7 +154,6 @@ type IBetboxProps = {
 };
 
 class Betbox extends React.PureComponent<IBetboxProps> {
-  
   constructor(props) {
     super(props);
 
@@ -192,7 +191,14 @@ class Betbox extends React.PureComponent<IBetboxProps> {
     return (
       <Grid item lg={7} md={8} sm={12} className={classes.betbox__container}>
         <Grid container spacing={0}>
-          <Grid item xs={7} className={classNames(classes.betbox__rowHead, classes.betbox__debugline)}>
+          <Grid
+            item
+            xs={7}
+            className={classNames(
+              classes.betbox__rowHead,
+              classes.betbox__debugline
+            )}
+          >
             <Typography variant="overline" className={classes.betbox__label}>
               BET AMOUNT
             </Typography>
@@ -219,7 +225,14 @@ class Betbox extends React.PureComponent<IBetboxProps> {
               }}
             />
           </Grid>
-          <Grid item xs={5} className={classNames(classes.betbox__rowHead, classes.betbox__debugline)}>
+          <Grid
+            item
+            xs={5}
+            className={classNames(
+              classes.betbox__rowHead,
+              classes.betbox__debugline
+            )}
+          >
             <Typography variant="overline" className={classes.betbox__label}>
               PAYOUT ON WIN
             </Typography>
@@ -293,11 +306,7 @@ class Betbox extends React.PureComponent<IBetboxProps> {
               classes.betbox__rowBottom
             )}
           >
-            <Grid
-              item
-              xs={4}
-              className={classes.betbox__debugline}
-            >
+            <Grid item xs={4} className={classes.betbox__debugline}>
               <Typography variant="overline" className={classes.betbox__label}>
                 PLACE NUMBER TO BET
               </Typography>
@@ -313,11 +322,7 @@ class Betbox extends React.PureComponent<IBetboxProps> {
               />
             </Grid>
 
-            <Grid
-              item
-              xs={4}
-              className={classes.betbox__debugline}
-            >
+            <Grid item xs={4} className={classes.betbox__debugline}>
               <Button
                 variant="contained"
                 color="primary"
@@ -330,11 +335,7 @@ class Betbox extends React.PureComponent<IBetboxProps> {
               </Button>
             </Grid>
 
-            <Grid
-              item
-              xs={4}
-              className={classes.betbox__debugline}
-            >
+            <Grid item xs={4} className={classes.betbox__debugline}>
               <Typography variant="overline" className={classes.betbox__label}>
                 Balance
               </Typography>

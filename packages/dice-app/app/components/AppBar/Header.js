@@ -36,12 +36,15 @@ class Header extends React.PureComponent<IHeaderProps> {
     return (
       <Toolbar>
         {/* <section className={classes.appBar__start}></section> */}
-        <Typography variant="h6" color="inherit" noWrap className={classes.appBar__center}>
+        <Typography
+          variant="h6"
+          color="inherit"
+          noWrap
+          className={classes.appBar__center}
+        >
           {title}
         </Typography>
-        <section className={classes.appBar__right}>
-          {children}
-        </section>
+        <section className={classes.appBar__right}>{children}</section>
       </Toolbar>
     );
   }
