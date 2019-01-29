@@ -1,4 +1,5 @@
 // @flow
+
 import ipc from 'electron-better-ipc';
 import { call, cancelled } from 'redux-saga/effects';
 

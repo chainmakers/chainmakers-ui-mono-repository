@@ -72,7 +72,6 @@ type Props = {
 };
 
 class MyOrders extends React.PureComponent<Props> {
-  props: Props;
 
   openRight = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();

@@ -1,7 +1,6 @@
 /* eslint flowtype-errors/show-errors: 0 */
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router';
-// import ScrollManager from '../components/ScrollManager';
 import { makeSelectAuthenticated, makeSelectLoading } from './App/selectors';
 import connectedRouterRedirect from '../utils/auth-wrapper/connected-router-redirect';
 import routes from '../constants/routes.json';

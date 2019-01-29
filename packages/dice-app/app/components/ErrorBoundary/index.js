@@ -61,11 +61,11 @@ class ErrorBoundary extends React.Component<Props, State> {
       return (
         <React.Fragment>
           <div className={classes.errorBoundaryBg}>
-            <Typography variant="title" gutterBottom>
+            <Typography variant="h6" gutterBottom>
               There are something wrong
             </Typography>
             <a href="/" onClick={this.reload}>
-              <Typography variant="subheading" gutterBottom>
+              <Typography variant="subtitle1" gutterBottom>
                 Please try to reload
               </Typography>
             </a>

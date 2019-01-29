@@ -36,8 +36,8 @@ export default function validate(
     }
 
     handleChange = (evt: SyntheticInputEvent<>) => {
-      evt.preventDefault();
       const { value } = evt.target;
+      const { onChange } = this.props;
       if (options.onChange) {
         this.setState(
           {
@@ -45,6 +45,9 @@ export default function validate(
           },
           this.setErrors
         );
+        if (onChange) {
+          onChange(evt, value);
+        }
       } else {
         this.setState({
           value
@@ -60,7 +63,6 @@ export default function validate(
     };
 
     setErrors = async () => {
-      const { onChange } = this.props;
       const { value } = this.state;
       try {
         // eslint-disable-next-line no-restricted-syntax, no-await-in-loop
@@ -74,10 +76,6 @@ export default function validate(
         this.setState({
           error: err.message
         });
-      } finally {
-        if (onChange) {
-          onChange(value);
-        }
       }
     };
 

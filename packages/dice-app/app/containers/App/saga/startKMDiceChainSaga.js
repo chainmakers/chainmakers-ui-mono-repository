@@ -1,4 +1,5 @@
 // @flow
+
 import ipc from 'electron-better-ipc';
 import { put, call, cancelled } from 'redux-saga/effects';
 import { getInfoKMDiceChain, startKMDiceChainSuccess } from '../actions';

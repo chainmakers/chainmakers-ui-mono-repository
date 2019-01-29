@@ -1,3 +1,5 @@
+// @flow
+
 import { fromJS } from 'immutable';
 import { runSaga } from 'redux-saga';
 import { syncKMDiceChainInfoFunc } from '../syncKMDiceChainInfo';

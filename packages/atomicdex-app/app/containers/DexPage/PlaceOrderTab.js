@@ -67,7 +67,6 @@ type Props = {
 type State = {};
 
 class PlaceOrder extends Component<Props, State> {
-  props: Props;
 
   componentDidMount = () => {
     const { dispatchLoadBalance } = this.props;

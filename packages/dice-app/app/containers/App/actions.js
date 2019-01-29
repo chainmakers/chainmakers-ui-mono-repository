@@ -22,9 +22,6 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   LOGOUT,
-  LOAD_WITHDRAW,
-  LOAD_WITHDRAW_SUCCESS,
-  LOAD_WITHDRAW_ERROR,
   LOAD_SWAP_SUCCESS,
   KMDICE_CHAIN_START,
   KMDICE_CHAIN_START_SUCCESS,
@@ -63,45 +60,6 @@ export function loginError(error) {
 export function logout() {
   return {
     type: LOGOUT
-  };
-}
-
-export function loadWithdraw(payload: {
-  amount: number,
-  address: string,
-  coin: string
-}) {
-  return {
-    type: LOAD_WITHDRAW,
-    payload
-  };
-}
-
-export function loadWithdrawSuccess(payload: {
-  amount: number,
-  address: string,
-  coin: string
-}) {
-  return {
-    type: LOAD_WITHDRAW_SUCCESS,
-    payload
-  };
-}
-
-export function loadWithdrawError(
-  payload: {
-    amount: number,
-    address: string,
-    coin: string
-  },
-  message: string
-) {
-  return {
-    type: LOAD_WITHDRAW_ERROR,
-    payload,
-    error: {
-      message
-    }
   };
 }
 

@@ -1,3 +1,5 @@
+// @flow
+
 import { take, put } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import routes from '../../../../constants/routes.json';

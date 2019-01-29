@@ -14,16 +14,16 @@ import { selectSnackbars } from './selectors';
 import { closeSnackbars } from './actions';
 import reducer from './reducer';
 
-const debug = require('debug')('atomicapp:containers:Snackbars');
+const debug = require('debug')('kmdice:containers:Snackbars');
 
-type Props = {
+type ISnackbarsProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   snackbars: Map<*, *>,
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchCloseSnackbars: Function
 };
 
-class Snackbars extends React.PureComponent<Props> {
+class Snackbars extends React.PureComponent<ISnackbarsProps> {
   render() {
     debug('render');
     const { snackbars, dispatchCloseSnackbars } = this.props;

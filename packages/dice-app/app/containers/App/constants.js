@@ -16,10 +16,6 @@ export const LOGIN_ERROR = 'atomicapp/App/LOGIN_ERROR';
 
 export const LOGOUT = 'atomicapp/App/LOGOUT';
 
-export const LOAD_WITHDRAW = 'atomicapp/App/LOAD_WITHDRAW';
-export const LOAD_WITHDRAW_SUCCESS = 'atomicapp/App/LOAD_WITHDRAW_SUCCESS';
-export const LOAD_WITHDRAW_ERROR = 'atomicapp/App/LOAD_WITHDRAW_ERROR';
-
 export const LOAD_SWAP_SUCCESS = 'atomicapp/App/LOAD_SWAP_SUCCESS';
 
 export const KMDICE_CHAIN_START = 'kmdice/App/KMDICE_CHAIN_START';

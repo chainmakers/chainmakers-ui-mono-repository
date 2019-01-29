@@ -20,9 +20,6 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   LOGOUT,
-  LOAD_WITHDRAW,
-  LOAD_WITHDRAW_SUCCESS,
-  LOAD_WITHDRAW_ERROR,
   LOAD_SWAP_SUCCESS,
   KMDICE_CHAIN_START_SUCCESS,
   KMDICE_CHAIN_GET_INFO_SUCCESS,
@@ -73,43 +70,6 @@ const appReducer = handleActions(
 
     [LOGIN_ERROR]: (state, { error }) =>
       state.set('error', error).set('loading', false),
-
-    [LOAD_WITHDRAW]: (state, { payload }) => {
-      // step one: get coin
-      let entities = state.getIn(['balance', 'entities']);
-      const coin = entities.get(payload.coin);
-      // step two: update loading
-      entities = entities.set(
-        payload.coin,
-        coin.set('loading', true).set('error', false)
-      );
-      return state.setIn(['balance', 'entities'], entities);
-    },
-
-    [LOAD_WITHDRAW_SUCCESS]: (state, { payload }) => {
-      // step one: get coin
-      let entities = state.getIn(['balance', 'entities']);
-      const coin = entities.get(payload.coin);
-      // step two: update balance
-      const balance = coin.get('balance');
-      entities = entities.set(
-        payload.coin,
-        coin.set('loading', false).set('balance', balance - payload.amount)
-      );
-      return state.setIn(['balance', 'entities'], entities);
-    },
-
-    [LOAD_WITHDRAW_ERROR]: (state, { payload, error }) => {
-      // step one: get coin
-      let entities = state.getIn(['balance', 'entities']);
-      const coin = entities.get(payload.coin);
-      // step two: update loading
-      entities = entities.set(
-        payload.coin,
-        coin.set('loading', false).set('error', error)
-      );
-      return state.setIn(['balance', 'entities'], entities);
-    },
 
     [LOAD_SWAP_SUCCESS]: (state, { payload }) => {
       // step one: get coin

@@ -15,7 +15,6 @@ type Props = {
 };
 
 export class ProgressBar extends React.PureComponent<Props> {
-  props: Props;
 
   render() {
     debug('render');

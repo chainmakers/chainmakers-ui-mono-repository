@@ -1,4 +1,5 @@
 // @flow
+
 import ipc from 'electron-better-ipc';
 import { put, take, call, cancel, cancelled } from 'redux-saga/effects';
 import { delay } from 'redux-saga';

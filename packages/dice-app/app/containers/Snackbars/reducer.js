@@ -1,10 +1,9 @@
-/* eslint-disable no-case-declarations, no-param-reassign */
+// @flow
 import { fromJS } from 'immutable';
 import { handleActions } from 'redux-actions';
 import { LOGOUT } from '../App/constants';
 import { SNACKBARS_OPEN, SNACKBARS_CLOSE } from './constants';
 
-// The initial state of the App
 const TIME_OUT = 6000;
 
 export const initialState = fromJS({
@@ -13,7 +12,7 @@ export const initialState = fromJS({
   timeout: TIME_OUT
 });
 
-const snackbars = handleActions(
+export default handleActions(
   {
     [SNACKBARS_OPEN]: (state, { payload }) =>
       state.set('open', true).set('message', payload.message),
@@ -22,6 +21,3 @@ const snackbars = handleActions(
   },
   initialState
 );
-
-export default snackbars;
-/* eslint-enable no-case-declarations, no-param-reassign */

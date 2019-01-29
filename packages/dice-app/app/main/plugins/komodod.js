@@ -1,14 +1,21 @@
 // @flow
-// docs: https://github.com/particle4dev/komodo-rpc-lib
+// docs
+// - https://github.com/particle4dev/komodo-rpc-lib
+
 import ipc from 'electron-better-ipc';
 import KomodoRPC from 'kmd-rpc';
 import getDebug from '../../lib/debug';
 import emitters from '../emitters';
 import config from '../config';
+import dicebetFactory from './dicebetFactory';
+import dicestatusFactory from './dicestatusFactory';
+import sendrawtransactionFactory from './sendrawtransactionFactory';
+import { NAMESPACE } from './constants';
+import type { ErrorRPCType } from './schema';
 
 const debug = getDebug('main:plugins:komodod');
-const NAMESPACE = 'komodod';
 const APPLICATION = 'kmdice';
+const TIMEOUT = 90 * 1000;
 const log = require('electron-log');
 
 export default async function setup() {
@@ -33,7 +40,7 @@ export default async function setup() {
           args
         });
         // wait until ready
-        const waitUntilReady = await komodod.waitUntilReady();
+        const waitUntilReady = await komodod.waitUntilReady(TIMEOUT);
         debug(`waitUntilReady = ${JSON.stringify(waitUntilReady)}`);
 
         return rs;
@@ -67,27 +74,48 @@ export default async function setup() {
       }
     });
 
-    ipc.answerRenderer(`${NAMESPACE}:rpc`, async ({ action = 'getinfo' }) => {
-      try {
-        debug(`rpc ${coin} chain`, komodod.isRunning());
-        if (komodod.isRunning() === true) {
+    ipc.answerRenderer(
+      `${NAMESPACE}:rpc`,
+      async ({ action = 'getinfo', args }: { action: string, args: any }) => {
+        try {
+          debug(`rpc ${coin} chain`, komodod.isRunning());
+          if (komodod.isRunning() !== true) {
+            throw new Error('komodod has not started yet');
+          }
           const rs = await komodod.rpc({
             coin,
-            action
+            action,
+            args
           });
           return JSON.parse(rs);
+        } catch (err) {
+          log.error(err.message);
+          const error: ErrorRPCType = {
+            context: {
+              action: `${NAMESPACE}:rpc`,
+              params: {
+                coin,
+                action,
+                args
+              }
+            },
+            type: NAMESPACE,
+            message: err.message,
+            ok: 'failed'
+          };
+          return error;
         }
-        return {
-          ok: 'failed'
-        };
-      } catch (err) {
-        log.error(err);
-        log.error(err.message);
-        return {
-          ok: 'failed'
-        };
       }
-    });
+    );
+
+    ipc.answerRenderer(`${NAMESPACE}:dicebet`, dicebetFactory(komodod));
+
+    ipc.answerRenderer(`${NAMESPACE}:dicestatus`, dicestatusFactory(komodod));
+
+    ipc.answerRenderer(
+      `${NAMESPACE}:sendrawtransaction`,
+      sendrawtransactionFactory(komodod)
+    );
 
     emitters.emit(`${NAMESPACE}:${APPLICATION}:initialized`);
   } catch (err) {

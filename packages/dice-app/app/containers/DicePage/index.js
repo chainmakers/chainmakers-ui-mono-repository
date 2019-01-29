@@ -1,23 +1,21 @@
 // @flow
 import React from 'react';
-import classNames from 'classnames';
+import { compose } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
-import { FormattedMessage } from 'react-intl';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-
 import ErrorBoundary from '../../components/ErrorBoundary';
 import MDCAppBar from '../../components/AppBar';
 import MDCHeader from '../../components/AppBar/Header';
+import injectReducer from '../../utils/inject-reducer';
+import injectSaga from '../../utils/inject-saga';
 import { NavigationLayout } from '../Layout';
-import Betbox from './components/Betbox';
-import BetTable from './components/BetTable';
+import { APP_STATE_NAME } from './constants';
+import reducer from './reducer';
+import Betbox from './Betbox';
+import BetHistory from './BetHistory';
 import ProgressBar from './ProgressBar';
+import saga from './saga';
 
 const debug = require('debug')('kmdice:containers:DicePage');
 
@@ -60,39 +58,19 @@ class DicePage extends React.PureComponent<IDicePageProps> {
       >
         <ProgressBar />
         <Betbox />
-
-        <Grid
-          item
-          xs={12}
-          style={{
-            // backgroundColor: '#e8eaed',
-            backgroundColor: '#fafafa',
-            marginTop: 40
-          }}
-        >
-          <Tabs
-            value={this.state.value}
-            onChange={this.handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            centered
-            className={classNames(classes.borderRed)}
-            style={{
-              marginBottom: 19
-            }}
-          >
-            <Tab label="All Bets" />
-            <Tab label="Win" />
-            <Tab label="Lose" />
-          </Tabs>
-          <BetTable />
-        </Grid>
+        <BetHistory />
       </Grid>
     );
   }
 }
+const withReducer = injectReducer({ key: APP_STATE_NAME, reducer });
+const withSaga = injectSaga({ key: APP_STATE_NAME, saga });
 
-const DicePageWapper = withStyles(styles)(DicePage);
+const DicePageWapper = compose(
+  withReducer,
+  withSaga,
+  withStyles(styles)
+)(DicePage);
 
 const Index = () => (
   <NavigationLayout>
