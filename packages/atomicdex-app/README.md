@@ -8,11 +8,11 @@
 
 <div align="center">
 
-[![Dependency Status](https://david-dm.org/particle4dev/atomicdex.svg)](https://david-dm.org/particle4dev/atomicdex)
-[![devDependency Status](https://david-dm.org/particle4dev/atomicdex/dev-status.svg)](https://david-dm.org/particle4dev/atomicdex#info=devDependencies)
-[![Coverage Status](https://coveralls.io/repos/github/particle4dev/atomicdex/badge.svg)](https://coveralls.io/github/particle4dev/atomicdex)
-[![GitHub Issues](https://img.shields.io/github/issues/particle4dev/atomicdex.svg)](https://github.com/particle4dev/atomicdex/issues)
-[![Build Status](https://travis-ci.com/particle4dev/atomicdex.svg?branch=master)](https://travis-ci.com/particle4dev/atomicdex)
+[![Dependency Status](https://david-dm.org/particle4dev/komodo-ui-mono-repository.svg)](https://david-dm.org/particle4dev/komodo-ui-mono-repository)
+[![devDependency Status](https://david-dm.org/particle4dev/komodo-ui-mono-repository/dev-status.svg)](https://david-dm.org/particle4dev/komodo-ui-mono-repository#info=devDependencies)
+[![Coverage Status](https://coveralls.io/repos/github/particle4dev/komodo-ui-mono-repository/badge.svg)](https://coveralls.io/github/particle4dev/komodo-ui-mono-repository)
+[![GitHub Issues](https://img.shields.io/github/issues/particle4dev/komodo-ui-mono-repository.svg)](https://github.com/particle4dev/komodo-ui-mono-repository/issues)
+[![Build Status](https://travis-ci.com/particle4dev/komodo-ui-mono-repository.svg?branch=master)](https://travis-ci.com/particle4dev/komodo-ui-mono-repository)
 
 </div>
 
@@ -57,7 +57,7 @@ Following are the minimum tested versions for the tools and libraries you need f
 First, clone the repo via git:
 
 ```bash
-git clone --depth 1 -b master https://github.com/particle4dev/atomicdex.git
+git clone --depth 1 -b master https://github.com/particle4dev/komodo-ui-mono-repository.git
 ```
 
 And install dependencies with yarn.
@@ -77,7 +77,7 @@ $ yarn dev
 
 ## Download
 
-You can [download](https://github.com/particle4dev/atomicdex/releases) the latest installable version of AtomicDex app for Windows, macOS and Linux.
+You can [download](https://github.com/particle4dev/komodo-ui-mono-repository/releases) the latest installable version of AtomicDex app for Windows, macOS and Linux.
 
 ## Documentation
 

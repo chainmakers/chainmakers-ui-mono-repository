@@ -20,14 +20,12 @@ const styles = {
   }
 };
 
-type Props = {
+type IHelpPageProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   classes: Object
 };
 
-class HelpPage extends React.PureComponent<Props> {
-  props: Props;
-
+class HelpPage extends React.PureComponent<IHelpPageProps> {
   render() {
     const { classes } = this.props;
 

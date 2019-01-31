@@ -48,6 +48,7 @@ export default () => (
       <Route path={routes.HELP} component={HelpFallback} />
       <Route path={routes.LOGIN} component={LoginFallback} />
       <Route path={routes.SEED} component={SeedPage} />
+      <Route exact path={routes.DICE} component={DicePage} />
       <Route exact path={routes.HOME} component={DicePage} />
       {/* <Route exact path={routes.HOME} component={DiceFallback} /> */}
       <Route component={NotFoundPage} />

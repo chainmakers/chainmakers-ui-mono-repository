@@ -4,7 +4,7 @@
   "version": "0.3.0",
   "private": true,
   "description": "> TODO: description",
-  "homepage": "https://github.com/particle4dev/atomicdex/tree/master/packages/dice-app#readme",
+  "homepage": "https://github.com/particle4dev/komodo-ui-mono-repository/tree/master/packages/dice-app#readme",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
     "build-dll": "cross-env NODE_ENV=development webpack --config ./configs/webpack.config.renderer.dev.dll.babel.js --colors",
@@ -41,7 +41,7 @@
     "coverage": "echo \"Error: run tests from atomicdex app\" && exit 0"
   },
   "bugs": {
-    "url": "https://github.com/particle4dev/atomicdex/issues"
+    "url": "https://github.com/particle4dev/komodo-ui-mono-repository/issues"
   },
   "lint-staged": {
     "*.{js,jsx}": [
@@ -118,7 +118,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/particle4dev/atomicdex.git"
+    "url": "git+https://github.com/particle4dev/komodo-ui-mono-repository.git"
   },
   "author": {
     "name": "Hoang Nam",

@@ -6,6 +6,7 @@ import type { ChildrenArray } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 // import Typography from '@material-ui/core/Typography';
 // import { minWindowSize } from '../../config/config-default';
+import NavigationBar from './NavigationBar';
 
 const debug = require('debug')('atomicapp:containers:layout:NavigationLayout');
 
@@ -23,19 +24,18 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     backgroundColor: '#fff',
-    // marginLeft: 72,
     minHeight: '100%'
   }
 });
 
-type Props = {
+type INavigationLayoutProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   classes: Object,
   // eslint-disable-next-line flowtype/no-weak-types
   children: ChildrenArray<any>
 };
 
-class NavigationLayout extends PureComponent<Props> {
+class NavigationLayout extends PureComponent<INavigationLayoutProps> {
   // constructor(props) {
   //   super(props);
   //   setAppWindowBounds();
@@ -50,6 +50,7 @@ class NavigationLayout extends PureComponent<Props> {
 
     return (
       <React.Fragment>
+        <NavigationBar />
         <main className={classes.content}>{children}</main>
         {/* <div className={classes.root}> */}
         {/* <DICTypography> */}

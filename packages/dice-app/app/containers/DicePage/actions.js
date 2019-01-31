@@ -8,6 +8,7 @@ import {
   KMDICE_BETTING_SYNC,
   KMDICE_BETTING_SYNC_SUCCESS
 } from './constants';
+
 import type {
   ErrorRPCType,
   StartKmdiceBettingPayload,

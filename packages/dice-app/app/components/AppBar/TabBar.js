@@ -11,14 +11,13 @@ const styles = () => ({
   }
 });
 
-type Props = {
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object,
+type ITabBarProps = {
+  classes: Styles,
   // eslint-disable-next-line flowtype/no-weak-types
   children: Element<any>
 };
 
-class TabBar extends React.PureComponent<Props> {
+class TabBar extends React.PureComponent<ITabBarProps> {
   render() {
     const { classes, children } = this.props;
 

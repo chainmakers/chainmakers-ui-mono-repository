@@ -1,7 +1,10 @@
 {
   "HOME": "/",
+  "DICE": "/dice",
+  "CARD": "/card",
+  "WALLET": "/wallet",
+  "ABOUT": "/about",
   "SEED": "/seed",
   "HELP": "/help",
-  "LOGIN": "/login",
-  "DASHBOARD": "/dashboard"
+  "LOGIN": "/login"
 }

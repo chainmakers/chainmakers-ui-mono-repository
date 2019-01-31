@@ -111,7 +111,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/particle4dev/atomicdex.git"
+    "url": "git+https://github.com/particle4dev/komodo-ui-mono-repository.git"
   },
   "author": {
     "name": "Hoang Nam",
@@ -120,7 +120,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/particle4dev/atomicdex/issues"
+    "url": "https://github.com/particle4dev/komodo-ui-mono-repository/issues"
   },
   "keywords": [
     "electron",
@@ -133,7 +133,7 @@
     "hot",
     "reload"
   ],
-  "homepage": "https://github.com/particle4dev/atomicdex/tree/master/packages/dico-app#readme",
+  "homepage": "https://github.com/particle4dev/komodo-ui-mono-repository/tree/master/packages/dico-app#readme",
   "devDependencies": {
     "@babel/core": "^7.1.5",
     "@babel/plugin-proposal-class-properties": "^7.1.0",

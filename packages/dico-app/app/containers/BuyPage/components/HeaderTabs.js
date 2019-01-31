@@ -64,7 +64,6 @@ class HeaderTabs extends React.PureComponent<Props> {
           label={
             size > 0 ? (
               <Badge
-                className={classes.padding}
                 color="secondary"
                 badgeContent={size}
                 classes={{ badge: classes.buyTabs__badge }}
