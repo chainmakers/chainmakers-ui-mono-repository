@@ -3,7 +3,6 @@ import React from 'react';
 import { compose } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import injectReducer from '../../utils/inject-reducer';
 import injectSaga from '../../utils/inject-saga';

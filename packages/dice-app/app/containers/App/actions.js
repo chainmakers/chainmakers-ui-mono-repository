@@ -74,7 +74,9 @@ export function loadSwapSuccess(payload: Object) {
 // -- //
 
 export function startKMDiceChain(pubkey?: string) {
-  const payload = {};
+  const payload = {
+    pubkey: null
+  };
   if (pubkey) {
     payload.pubkey = pubkey;
   }
@@ -84,9 +86,16 @@ export function startKMDiceChain(pubkey?: string) {
   };
 }
 
-export function startKMDiceChainSuccess() {
+export function startKMDiceChainSuccess(pubkey?: string) {
+  const payload = {
+    pubkey: null
+  };
+  if (pubkey) {
+    payload.pubkey = pubkey;
+  }
   return {
-    type: KMDICE_CHAIN_START_SUCCESS
+    type: KMDICE_CHAIN_START_SUCCESS,
+    payload
   };
 }
 

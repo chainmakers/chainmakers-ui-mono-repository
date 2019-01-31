@@ -10,6 +10,7 @@ import HelpPage from './HelpPage';
 import SeedPage from './SeedPage';
 import LoginPage from './LoginPage';
 import NotFoundPage from './NotFoundPage';
+import LoginDialog from './LoginDialog';
 import LogoutDialog from './LogoutDialog';
 import Snackbars from './Snackbars';
 import WebSocketComponent from './WebSocketComponent';
@@ -41,6 +42,7 @@ const LoginFallback = userIsNotAuthenticatedRedir(
 export default () => (
   <React.Fragment>
     <Route component={App} />
+    <Route component={LoginDialog} />
     <Route component={LogoutDialog} />
     <Route component={WebSocketComponent} />
     <Route component={Snackbars} />

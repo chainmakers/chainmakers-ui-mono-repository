@@ -1,3 +1,5 @@
+// @flow
+
 import {
   login,
   logout,
@@ -62,7 +64,9 @@ describe('containers/App/actions/startKMDiceChain', () => {
   it('should return the correct type and the passed name', () => {
     const expectedResult = {
       type: KMDICE_CHAIN_START,
-      payload: {}
+      payload: {
+        pubkey: null
+      }
     };
 
     expect(startKMDiceChain()).toEqual(expectedResult);
@@ -76,16 +80,30 @@ describe('containers/App/actions/startKMDiceChain', () => {
 });
 
 describe('containers/App/actions/startKMDiceChainSuccess', () => {
+  const pubkey = 'pubkey';
   it('should startKMDiceChainSuccess should create startKMDiceChainSuccess action', () => {
     expect(startKMDiceChainSuccess()).toMatchSnapshot();
   });
 
+  it('should startKMDiceChainSuccess should create startKMDiceChainSuccess action with pubkey', () => {
+    expect(startKMDiceChainSuccess(pubkey)).toMatchSnapshot();
+  });
+
   it('should return the correct type and the passed name', () => {
     const expectedResult = {
-      type: KMDICE_CHAIN_START_SUCCESS
+      type: KMDICE_CHAIN_START_SUCCESS,
+      payload: {
+        pubkey: null
+      }
     };
 
     expect(startKMDiceChainSuccess()).toEqual(expectedResult);
+
+    expectedResult.payload = {
+      pubkey
+    };
+
+    expect(startKMDiceChainSuccess(pubkey)).toEqual(expectedResult);
   });
 });
 

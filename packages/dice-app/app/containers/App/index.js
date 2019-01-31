@@ -25,7 +25,8 @@ class App extends React.PureComponent<IAppProps> {
 
 const withSaga = injectSaga({ key: APP_STATE_NAME, saga });
 
-export function mapDispatchToProps(dispatch) {
+// eslint-disable-next-line flowtype/no-weak-types
+export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   return {
     dispatchStartKMDiceChain: (pubkey?: string) =>
       dispatch(startKMDiceChain(pubkey))

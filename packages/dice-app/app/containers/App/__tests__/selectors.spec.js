@@ -1,3 +1,5 @@
+// @flow
+
 import { fromJS } from 'immutable';
 import data from '../../__tests__/app-state.json';
 import {
@@ -6,7 +8,8 @@ import {
   makeSelectBlockchainInfo,
   makeSelectBalance,
   makeSelectKomodod,
-  makeSelectKomododState
+  makeSelectKomododState,
+  makeSelectKomododPubkey
 } from '../selectors';
 import { initialState } from '../reducer';
 import { APP_STATE_NAME, KOMODOD_STATE_STARTED } from '../constants';
@@ -60,7 +63,8 @@ describe('containers/App/selectors/makeSelectKomodod', () => {
     const selectKomodod = makeSelectKomodod();
     expect(selectKomodod(mockedState)).toEqual(
       fromJS({
-        state: KOMODOD_STATE_STARTED
+        state: KOMODOD_STATE_STARTED,
+        pubkey: null
       })
     );
   });
@@ -71,5 +75,13 @@ describe('containers/App/selectors/makeSelectBalance', () => {
     const mockedState = fromJS(data);
     const selectKomododState = makeSelectKomododState();
     expect(selectKomododState(mockedState)).toEqual(KOMODOD_STATE_STARTED);
+  });
+});
+
+describe('containers/App/selectors/makeSelectKomododPubkey', () => {
+  it('should select the komodo state', () => {
+    const mockedState = fromJS(data);
+    const selectKomododPubkey = makeSelectKomododPubkey();
+    expect(selectKomododPubkey(mockedState)).toEqual(null);
   });
 });

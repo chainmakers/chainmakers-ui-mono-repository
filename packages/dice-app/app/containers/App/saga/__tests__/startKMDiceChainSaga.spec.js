@@ -26,8 +26,44 @@ describe('containers/App/saga/startKMDiceChainSaga', () => {
         },
         startKMDiceChainSaga,
         {
+          type: KMDICE_CHAIN_START,
+          payload: {}
+        }
+      ).done;
+
+      expect(saga).toEqual(undefined);
+      expect(dispatched).toEqual([
+        { type: KMDICE_CHAIN_GET_INFO },
+        {
+          type: KMDICE_CHAIN_START_SUCCESS,
           payload: {
-            type: KMDICE_CHAIN_START
+            pubkey: null
+          }
+        }
+      ]);
+
+      done();
+    },
+    TIMEOUT
+  );
+
+  it(
+    'should handle startKMDiceChainSaga correctly with pubkey option',
+    async done => {
+      const pubkey = 'pubkey';
+      const dispatched = [];
+      const store = fromJS(data);
+
+      const saga = await runSaga(
+        {
+          dispatch: action => dispatched.push(action),
+          getState: () => store
+        },
+        startKMDiceChainSaga,
+        {
+          type: KMDICE_CHAIN_START,
+          payload: {
+            pubkey
           }
         }
       ).done;
@@ -35,7 +71,12 @@ describe('containers/App/saga/startKMDiceChainSaga', () => {
       expect(saga).toEqual(undefined);
       expect(dispatched).toEqual([
         { type: KMDICE_CHAIN_GET_INFO },
-        { type: KMDICE_CHAIN_START_SUCCESS }
+        {
+          type: KMDICE_CHAIN_START_SUCCESS,
+          payload: {
+            pubkey
+          }
+        }
       ]);
 
       done();

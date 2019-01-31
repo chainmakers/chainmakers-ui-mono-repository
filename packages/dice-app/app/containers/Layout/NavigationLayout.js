@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 // import Typography from '@material-ui/core/Typography';
 // import { minWindowSize } from '../../config/config-default';
 import NavigationBar from './NavigationBar';
+import ProgressBar from './ProgressBar';
 
 const debug = require('debug')('atomicapp:containers:layout:NavigationLayout');
 
@@ -50,6 +51,7 @@ class NavigationLayout extends PureComponent<INavigationLayoutProps> {
 
     return (
       <React.Fragment>
+        <ProgressBar />
         <NavigationBar />
         <main className={classes.content}>{children}</main>
         {/* <div className={classes.root}> */}

@@ -33,7 +33,9 @@ Object {
 
 exports[`containers/App/actions/startKMDiceChain should startKMDiceChain should create startKMDiceChain action 1`] = `
 Object {
-  "payload": Object {},
+  "payload": Object {
+    "pubkey": null,
+  },
   "type": "kmdice/App/KMDICE_CHAIN_START",
 }
 `;
@@ -49,6 +51,18 @@ Object {
 
 exports[`containers/App/actions/startKMDiceChainSuccess should startKMDiceChainSuccess should create startKMDiceChainSuccess action 1`] = `
 Object {
+  "payload": Object {
+    "pubkey": null,
+  },
+  "type": "kmdice/App/KMDICE_CHAIN_START_SUCCESS",
+}
+`;
+
+exports[`containers/App/actions/startKMDiceChainSuccess should startKMDiceChainSuccess should create startKMDiceChainSuccess action with pubkey 1`] = `
+Object {
+  "payload": Object {
+    "pubkey": "pubkey",
+  },
   "type": "kmdice/App/KMDICE_CHAIN_START_SUCCESS",
 }
 `;

@@ -98,8 +98,7 @@ const debug = require('debug')('atomicapp:containers:LoginPage');
 type ILoginPageProps = {
   loading: boolean,
   authenticated: boolean,
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object,
+  classes: Styles,
   // eslint-disable-next-line flowtype/no-weak-types
   history: Object,
   // eslint-disable-next-line flowtype/no-weak-types

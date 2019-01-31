@@ -15,7 +15,7 @@ export default function* startKMDiceChainSaga({ payload }) {
     if (rs && rs.ok === 'done') {
       yield put(getInfoKMDiceChain());
     }
-    yield put(startKMDiceChainSuccess());
+    yield put(startKMDiceChainSuccess(payload.pubkey));
   } catch (err) {
     console.log(err);
   } finally {

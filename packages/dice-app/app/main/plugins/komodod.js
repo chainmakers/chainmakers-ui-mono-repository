@@ -31,6 +31,7 @@ export default async function setup() {
         if (komodod.isRunning() === true) {
           debug(`${coin} is running. Let stop it first`);
           await komodod.stop();
+          await komodod.waitUntilStopped();
         }
         debug(`start ${coin} chain`);
         if (pubkey) {

@@ -1,3 +1,4 @@
+// @flow
 /* eslint-disable no-case-declarations, no-param-reassign */
 /*
  * AppReducer
@@ -21,6 +22,7 @@ import {
   LOGIN_ERROR,
   LOGOUT,
   LOAD_SWAP_SUCCESS,
+  KMDICE_CHAIN_START,
   KMDICE_CHAIN_START_SUCCESS,
   KMDICE_CHAIN_GET_INFO_SUCCESS,
   KOMODOD_STATE_STARTED,
@@ -52,7 +54,8 @@ export const initialState = fromJS({
   currentUser: null,
   marketcap: getDataMarketcap(),
   komodod: {
-    state: KOMODOD_STATE_STARTED
+    state: KOMODOD_STATE_STARTED,
+    pubkey: null
   },
   blockchainInfo: {
     blocks: null,
@@ -85,8 +88,17 @@ const appReducer = handleActions(
       }
       return state.setIn(['balance', 'entities'], entities);
     },
-    [KMDICE_CHAIN_START_SUCCESS]: state =>
-      state.setIn(['komodod', 'state'], KOMODOD_STATE_RUNNING),
+
+    [KMDICE_CHAIN_START]: state =>
+      state
+        .setIn(['komodod', 'state'], KOMODOD_STATE_STARTED)
+        .setIn(['komodod', 'pubkey'], null),
+
+    [KMDICE_CHAIN_START_SUCCESS]: (state, { payload }) =>
+      state
+        .setIn(['komodod', 'state'], KOMODOD_STATE_RUNNING)
+        .setIn(['komodod', 'pubkey'], payload.pubkey),
+
     [KMDICE_CHAIN_GET_INFO_SUCCESS]: (state, { payload }) => {
       // step one: get blockchain info
       let blockchainInfo = state.get('blockchainInfo');

@@ -1,6 +1,9 @@
+// @flow
+
 import appReducer, { initialState } from '../reducer';
 import {
   getInfoKMDiceChainSuccess,
+  startKMDiceChain,
   startKMDiceChainSuccess,
   logout
 } from '../actions';
@@ -9,6 +12,17 @@ import { KOMODOD_STATE_RUNNING } from '../constants';
 describe('containers/App/reducers/initial', () => {
   it('should return the initial state', () => {
     expect(appReducer(undefined, {})).toEqual(initialState);
+  });
+});
+
+describe('containers/App/reducers/logout', () => {
+  it('should handle the logout action correctly', () => {
+    const state = initialState
+      .setIn(['blockchainInfo', 'blocks'], 123)
+      .setIn(['blockchainInfo', 'longestchain'], 123)
+      .setIn(['blockchainInfo', 'balance'], 10.123);
+
+    expect(appReducer(state, logout())).toEqual(initialState);
   });
 });
 
@@ -32,24 +46,25 @@ describe('containers/App/reducers/getInfoKMDiceChainSuccess', () => {
   });
 });
 
-describe('containers/App/reducers/logout', () => {
-  it('should handle the logout action correctly', () => {
+describe('containers/App/reducers/startKMDiceChain', () => {
+  it('should handle the startKMDiceChain action correctly', () => {
     const state = initialState
-      .setIn(['blockchainInfo', 'blocks'], 123)
-      .setIn(['blockchainInfo', 'longestchain'], 123)
-      .setIn(['blockchainInfo', 'balance'], 10.123);
+      .setIn(['komodod', 'state'], KOMODOD_STATE_RUNNING)
+      .setIn(['komodod', 'pubkey'], 'pubkey');
 
-    expect(appReducer(state, logout())).toEqual(initialState);
+    expect(appReducer(state, startKMDiceChain())).toEqual(initialState);
   });
 });
 
 describe('containers/App/reducers/startKMDiceChainSuccess', () => {
+  const pubkey = 'pubkey';
   it('should handle the startKMDiceChainSuccess action correctly', () => {
-    const state = initialState.setIn(
-      ['komodod', 'state'],
-      KOMODOD_STATE_RUNNING
-    );
+    const state = initialState
+      .setIn(['komodod', 'state'], KOMODOD_STATE_RUNNING)
+      .setIn(['komodod', 'pubkey'], pubkey);
 
-    expect(appReducer(initialState, startKMDiceChainSuccess())).toEqual(state);
+    expect(appReducer(initialState, startKMDiceChainSuccess(pubkey))).toEqual(
+      state
+    );
   });
 });

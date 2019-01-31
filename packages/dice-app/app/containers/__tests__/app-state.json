@@ -180,13 +180,17 @@
       }
     },
     "komodod": {
-      "state": "kmdice/App/KOMODOD_STATE_STARTED"
+      "state": "kmdice/App/KOMODOD_STATE_STARTED",
+      "pubkey": null
     },
     "blockchainInfo": {
       "blocks": 123,
       "longestchain": 123,
       "balance": 10.123
     }
+  },
+  "loginDialog": {
+    "show": false
   },
   "logoutDialog": {
     "show": false

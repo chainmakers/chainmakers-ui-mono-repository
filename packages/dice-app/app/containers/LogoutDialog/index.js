@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
@@ -18,9 +18,9 @@ import { cancelLogoutDialog, agreeLogoutDialog } from './actions';
 import { makeSelectLogoutState } from './selectors';
 import { APP_STATE_NAME } from './constants';
 
-const debug = require('debug')('atomicapp:containers:LogoutDialog');
+const debug = require('debug')('kmdice:containers:LogoutDialog');
 
-type Props = {
+type ILogoutDialogProps = {
   show: boolean,
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchCancelLogoutDialog: Function,
@@ -28,9 +28,7 @@ type Props = {
   dispatchAgreeLogoutDialog: Function
 };
 
-class LogoutDialog extends Component<Props> {
-  props: Props;
-
+class LogoutDialog extends React.PureComponent<ILogoutDialogProps> {
   onCancelLogoutDialog = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
     const { dispatchCancelLogoutDialog } = this.props;

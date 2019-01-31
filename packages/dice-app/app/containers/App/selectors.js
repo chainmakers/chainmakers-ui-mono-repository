@@ -69,6 +69,12 @@ const makeSelectKomododState = () =>
     komodod => komodod.get('state')
   );
 
+const makeSelectKomododPubkey = () =>
+  createSelector(
+    makeSelectKomodod(),
+    komodod => komodod.get('pubkey')
+  );
+
 export {
   selectGlobal,
   makeSelectCurrentUser,
@@ -80,5 +86,6 @@ export {
   makeSelectBlockchainInfo,
   makeSelectBalance,
   makeSelectKomodod,
-  makeSelectKomododState
+  makeSelectKomododState,
+  makeSelectKomododPubkey
 };

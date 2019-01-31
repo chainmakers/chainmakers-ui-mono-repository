@@ -6,8 +6,7 @@ export const def = {
     ac_halving: 210000,
     ac_cc: 2,
     addressindex: 1,
-    spentindex: 1,
-    pubkey: process.env.PUBKEY
+    spentindex: 1
     // addnode: '144.76.217.232'
   }
 };

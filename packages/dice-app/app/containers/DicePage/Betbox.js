@@ -14,7 +14,13 @@ import Button from '@material-ui/core/Button';
 import { floor } from 'barterdex-utilities';
 import { requiredNumber } from '../../components/Form/helper';
 import validate from '../../components/Form/validate';
-import { makeSelectBalance } from '../App/selectors';
+import {
+  makeSelectBalance,
+  makeSelectKomododState,
+  makeSelectKomododPubkey
+} from '../App/selectors';
+import { KOMODOD_STATE_STARTED } from '../App/constants';
+import { showLoginDialog } from '../LoginDialog/actions';
 import { makeSelectBetHistoryLoading } from './selectors';
 import { startKmdiceBetting } from './actions';
 import { MAXODDS, MINODDS, MINBET, MAXBET } from './constants';
@@ -170,10 +176,13 @@ const styles = {
 };
 
 type IBetboxProps = {
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object,
+  classes: Styles,
+  komododState: string,
+  komododPubkey: null | string,
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchStartKmdiceBetting: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchShowLoginDialog: Function,
   balance: number,
   betHistoryLoading: boolean
 };
@@ -229,22 +238,32 @@ class Betbox extends React.PureComponent<IBetboxProps, IBetboxState> {
 
   onCLickRollDice = async (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
-    const { dispatchStartKmdiceBetting } = this.props;
-    const { numberToBet } = this.state;
-    const betAmountInput = this.betAmountInput.current;
-    const amount = await betAmountInput.value();
-    dispatchStartKmdiceBetting({
-      numberToBet,
-      amount
-    });
+
+    const {
+      komododPubkey,
+      dispatchStartKmdiceBetting,
+      dispatchShowLoginDialog
+    } = this.props;
+    if (komododPubkey) {
+      const { numberToBet } = this.state;
+      const betAmountInput = this.betAmountInput.current;
+      const amount = await betAmountInput.value();
+      dispatchStartKmdiceBetting({
+        numberToBet,
+        amount
+      });
+    } else {
+      dispatchShowLoginDialog();
+    }
   };
 
   render() {
     debug('render');
 
-    const { classes, balance, betHistoryLoading } = this.props;
+    const { classes, balance, komododState, betHistoryLoading } = this.props;
     const { numberToBet } = this.state;
-
+    const disabled =
+      komododState === KOMODOD_STATE_STARTED || betHistoryLoading;
     return (
       <Grid item lg={7} md={8} sm={12} className={classes.betbox__container}>
         <Grid container spacing={0}>
@@ -260,7 +279,7 @@ class Betbox extends React.PureComponent<IBetboxProps, IBetboxState> {
               BET AMOUNT
             </Typography>
             <ValidationBetAmountInput
-              disabled={betHistoryLoading}
+              disabled={disabled}
               balance={balance}
               value={MINBET}
               ref={this.betAmountInput}
@@ -275,19 +294,19 @@ class Betbox extends React.PureComponent<IBetboxProps, IBetboxState> {
                 endAdornment: (
                   <InputAdornment position="end">
                     <Button
-                      disabled={betHistoryLoading}
+                      disabled={disabled}
                       onClick={this.onClickAHaftButton}
                     >
                       1/2
                     </Button>
                     <Button
-                      disabled={betHistoryLoading}
+                      disabled={disabled}
                       onClick={this.onClickADoubleButton}
                     >
                       2X
                     </Button>
                     <Button
-                      disabled={betHistoryLoading}
+                      disabled={disabled}
                       onClick={this.onClickAMaxButton}
                     >
                       MAX
@@ -383,7 +402,7 @@ class Betbox extends React.PureComponent<IBetboxProps, IBetboxState> {
                 PLACE NUMBER TO BET
               </Typography>
               <ValidationPlaceNumberToBetInput
-                disabled={betHistoryLoading}
+                disabled={disabled}
                 value={1000}
                 fullWidth
                 inputProps={{
@@ -398,7 +417,7 @@ class Betbox extends React.PureComponent<IBetboxProps, IBetboxState> {
 
             <Grid item xs={4} className={classes.betbox__debugline}>
               <Button
-                disabled={betHistoryLoading}
+                disabled={disabled}
                 variant="contained"
                 color="primary"
                 size="large"
@@ -436,12 +455,16 @@ class Betbox extends React.PureComponent<IBetboxProps, IBetboxState> {
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   return {
     dispatchStartKmdiceBetting: (payload: StartKmdiceBettingPayload) =>
-      dispatch(startKmdiceBetting(payload))
+      dispatch(startKmdiceBetting(payload)),
+
+    dispatchShowLoginDialog: () => dispatch(showLoginDialog())
   };
 }
 
 const mapStateToProps = createStructuredSelector({
   balance: makeSelectBalance(),
+  komododState: makeSelectKomododState(),
+  komododPubkey: makeSelectKomododPubkey(),
   betHistoryLoading: makeSelectBetHistoryLoading()
 });
 
