@@ -12,7 +12,7 @@ export interface OptionsType {
 };
 
 export interface BarterdexApi {
-  addServer: Function,
+  electrum: Function,
   balance: Function,
   buy: Function,
   getendpoint: Function,
@@ -20,17 +20,17 @@ export interface BarterdexApi {
   isready: Function,
   listTransactions: Function,
   orderbook: Function,
-  login: Function,
-  publicCall: Function,
   privateCall: Function,
-  get: Function,
   swapstatus: Function,
   setUserpass: Function,
   getUserpass: Function,
   listunspent: Function,
+  myBalance: Function,
   sendrawtransaction: Function,
   recentswaps: Function,
   resetUserpass: Function,
+  version: Function,
+  waitUntilReady: Function,
   withdraw: Function
 };
 

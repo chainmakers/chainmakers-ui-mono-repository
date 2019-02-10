@@ -4,6 +4,7 @@ import React from 'react';
 import type { Node } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import UndrawBugFixing from './undraw_bug_fixing.svg';
 
 const styles = () => ({
   errorBoundaryBg: {
@@ -22,8 +23,7 @@ const styles = () => ({
 });
 
 type Props = {
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object,
+  classes: Styles,
   children: Node
 };
 
@@ -59,18 +59,17 @@ class ErrorBoundary extends React.Component<Props, State> {
     if (hasError) {
       // You can render any custom fallback UI
       return (
-        <React.Fragment>
-          <div className={classes.errorBoundaryBg}>
-            <Typography variant="title" gutterBottom>
-              There are something wrong
+        <div className={classes.errorBoundaryBg}>
+          <UndrawBugFixing width="560" height="430" />
+          <Typography variant="title" gutterBottom>
+            There are something wrong
+          </Typography>
+          <a href="/" onClick={this.reload}>
+            <Typography variant="subheading" gutterBottom>
+              Please try to reload
             </Typography>
-            <a href="/" onClick={this.reload}>
-              <Typography variant="subheading" gutterBottom>
-                Please try to reload
-              </Typography>
-            </a>
-          </div>
-        </React.Fragment>
+          </a>
+        </div>
       );
     }
 

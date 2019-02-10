@@ -1,23 +1,13 @@
-import {
-  SHOW_LOGOUT_DIALOG,
-  CANCEL_LOGOUT_DIALOG,
-  AGREE_LOGOUT_DIALOG
-} from './constants';
+import { LOGOUT_DIALOG_SHOW, LOGOUT_DIALOG_HIDE } from './constants';
 
 export function showLogoutDialog() {
   return {
-    type: SHOW_LOGOUT_DIALOG
+    type: LOGOUT_DIALOG_SHOW
   };
 }
 
-export function cancelLogoutDialog() {
+export function hideLogoutDialog() {
   return {
-    type: CANCEL_LOGOUT_DIALOG
-  };
-}
-
-export function agreeLogoutDialog() {
-  return {
-    type: AGREE_LOGOUT_DIALOG
+    type: LOGOUT_DIALOG_HIDE
   };
 }

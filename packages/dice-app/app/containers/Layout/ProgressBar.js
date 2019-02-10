@@ -7,7 +7,7 @@ import LinearProgress from '../../components/ProgressBar';
 import { makeSelectKomododState } from '../App/selectors';
 import { KOMODOD_STATE_STARTED } from '../App/constants';
 
-const debug = require('debug')('kmdice:containers:DicePage:ProgressBar');
+const debug = require('debug')('kmdice:containers:layout:ProgressBar');
 
 type IProgressBarProps = {
   komododState: string

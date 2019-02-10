@@ -1,5 +1,5 @@
 import httpprovider from './http-provider';
-import addServerFactory from './add-server';
+import electrumFactory from './electrum';
 import balanceFactory from './balance';
 import buyFactory from './buy';
 import getendpointFactory from './get-endpoint';
@@ -7,22 +7,22 @@ import getfeeFactory from './getfee';
 import isReadyFactory from './is-ready';
 import listTransactionsFactory from './list-transactions';
 import listunspentFactory from './listunspent';
+import myBalanceFactory from './my-balance';
 import orderbookFactory from './orderbook';
-import loginFactory from './login';
 import recentswapsFactory from './recentswaps';
 import sendRawTransactionFactory from './send-raw-transaction';
 import swapstatusFactory from './swapstatus';
+import versionFactory from './version';
+import waitUntilReadyFactory from './waitUntilReady';
 import withdrawFactory from './withdraw';
 import { BarterdexApi } from './schema';
 
 interface ClientOption {
-  entrypoint: string,
-  home: string
+  entrypoint: string
 };
 
 export default function setupClient({
-  entrypoint,
-  home
+  entrypoint
 }: ClientOption): BarterdexApi {
   const state = {
     userpass: null
@@ -30,7 +30,7 @@ export default function setupClient({
 
   return Object.assign(
     httpprovider(state, entrypoint),
-    addServerFactory(),
+    electrumFactory(),
     balanceFactory(),
     buyFactory(),
     getendpointFactory(),
@@ -38,11 +38,13 @@ export default function setupClient({
     isReadyFactory(),
     listTransactionsFactory(),
     listunspentFactory(),
+    myBalanceFactory(),
     orderbookFactory(),
-    loginFactory(home),
     recentswapsFactory(),
     sendRawTransactionFactory(),
     swapstatusFactory(),
+    versionFactory(),
+    waitUntilReadyFactory(),
     withdrawFactory()
   );
 }

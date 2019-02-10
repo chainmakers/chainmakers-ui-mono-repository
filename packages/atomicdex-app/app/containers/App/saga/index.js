@@ -1,24 +1,35 @@
-import { fork, take, put, takeLatest } from 'redux-saga/effects';
-import { push } from 'connected-react-router';
+import { all, takeEvery } from 'redux-saga/effects';
 import { takeFirst } from 'barterdex-rssm';
-import routes from '../../../constants/routes.json';
-import { LOGOUT, LOAD_BALANCE, LOAD_WITHDRAW } from '../constants';
-import loadBalanceProcess from './load-balance-process';
-import loadWithdrawProcess from './load-withdraw-process';
-
-const debug = require('debug')('atomicapp:containers:App:saga');
-
-export function* logoutFlow() {
-  debug(`logout flow`);
-  while (true) {
-    const request = yield take(LOGOUT);
-    debug(`go to login ${request.type}`);
-    yield put(push(routes.LOGIN));
-  }
-}
+import {
+  LOAD_WITHDRAW,
+  ELECTRUM_LOAD,
+  ELECTRUM_ADD,
+  LOGOUT,
+  LOGIN_ERROR,
+  LOGIN_SUCCESS,
+  BALANCE_LOAD_ALL,
+  BALANCE_LOAD,
+  BALANCE_LOAD_ERROR
+} from '../constants';
+import listenForLoadingBalance, {
+  handlingLoadBalance,
+  handlingLoadBalanceError
+} from './balance';
+import { loadWithdrawProcess } from './withdraw';
+import { handlingLoginError, handlingLoginSuccess } from './login';
+import electrums, { loadElectrum } from './electrums';
+import logoutFlow from './logout';
 
 export default function* root() {
-  yield takeLatest(LOAD_BALANCE, loadBalanceProcess);
-  yield takeFirst(LOAD_WITHDRAW, loadWithdrawProcess);
-  yield fork(logoutFlow);
+  yield all([
+    yield takeFirst(LOAD_WITHDRAW, loadWithdrawProcess),
+    yield takeFirst(ELECTRUM_LOAD, electrums),
+    yield takeEvery(ELECTRUM_ADD, loadElectrum),
+    yield takeFirst(LOGOUT, logoutFlow),
+    yield takeFirst(LOGIN_ERROR, handlingLoginError),
+    yield takeFirst(LOGIN_SUCCESS, handlingLoginSuccess),
+    yield takeFirst(BALANCE_LOAD_ALL, listenForLoadingBalance),
+    yield takeEvery(BALANCE_LOAD, handlingLoadBalance),
+    yield takeEvery(BALANCE_LOAD_ERROR, handlingLoadBalanceError)
+  ]);
 }

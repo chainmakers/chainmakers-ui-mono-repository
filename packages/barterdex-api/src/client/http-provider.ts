@@ -1,4 +1,5 @@
 import axios from 'axios';
+import userpass from './userpass';
 import { DEFAULT_OPTION, StateType, OptionsType } from './schema';
 
 function toError(error: Error): Error {
@@ -22,9 +23,9 @@ export default function httpProvider(
   url: string
 ) {
   return {
-    setUserpass(userpass: string) {
+    setUserpass(up: string) {
       // eslint-disable-next-line no-param-reassign
-      state.userpass = userpass;
+      state.userpass = userpass(up);
     },
     getUserpass() {
       return state.userpass;
@@ -39,35 +40,6 @@ export default function httpProvider(
     },
     getQueueId() {
       return queueId;
-    },
-    // eslint-disable-next-line flowtype/no-weak-types
-    publicCall(params: Object, options: OptionsType = DEFAULT_OPTION) {
-      const source = axios.CancelToken.source();
-      let id = 0;
-      if (options.useQueue) {
-        id = queueId;
-        queueId += 1;
-      }
-      const data = Object.assign(
-        {
-          queueid: id
-        },
-        params
-      );
-      const serverparams = {
-        timeout: TIMEOUT,
-        headers,
-        data,
-        url,
-        method: 'post',
-        cancelToken: source.token
-      };
-
-      const request = axios(serverparams)
-        .then(json)
-        .catch(toError);
-      request[CANCEL] = () => source.cancel();
-      return request;
     },
     // eslint-disable-next-line flowtype/no-weak-types
     privateCall(params: Object, options: OptionsType = DEFAULT_OPTION) {
@@ -103,14 +75,14 @@ export default function httpProvider(
       return request;
     },
     // eslint-disable-next-line flowtype/no-weak-types
-    get(params: Object = {}) {
+    post(params: Object = {}) {
       const source = axios.CancelToken.source();
       const serverparams = {
         timeout: TIMEOUT,
         headers,
         params,
         url,
-        method: 'get',
+        method: 'post',
         cancelToken: source.token
       };
       const request = axios(serverparams)

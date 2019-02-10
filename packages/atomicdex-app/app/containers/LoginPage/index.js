@@ -1,6 +1,5 @@
 // @flow
-import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import React from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -14,10 +13,8 @@ import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
 import swal from 'sweetalert';
-import getConfig from '../../utils/config';
 import injectReducer from '../../utils/inject-reducer';
 import injectSaga from '../../utils/inject-saga';
-import CryptoIcons, { UNKNOW } from '../../components/CryptoIcons';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import routes from '../../constants/routes.json';
 import { EmptyLayout } from '../Layout';
@@ -31,9 +28,7 @@ import {
   makeSelectError
 } from '../App/selectors';
 import { APP_STATE_NAME } from './constants';
-
-const config = getConfig();
-const COIN_BASE = config.get('marketmaker.tokenconfig');
+import LOGO from './logo.svg';
 
 // const styles = theme => ({
 const styles = () => ({
@@ -57,6 +52,8 @@ const styles = () => ({
   loginContainer__card: {
     width: 430,
     borderRadius: 8,
+    // border: '1px solid #dadce0',
+    // boxShadow: 'none'
     boxShadow:
       '0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2)'
   },
@@ -93,11 +90,10 @@ const styles = () => ({
 
 const debug = require('debug')('atomicapp:containers:LoginPage');
 
-type Props = {
+type ILoginPageProps = {
   loading: boolean,
   authenticated: boolean,
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object,
+  classes: Styles,
   // eslint-disable-next-line flowtype/no-weak-types
   history: Object,
   // eslint-disable-next-line flowtype/no-weak-types
@@ -107,19 +103,17 @@ type Props = {
   intl: IntlShape
 };
 
-type State = {
+type ILoginPageState = {
   passphrase: string
 };
 
-class LoginPage extends Component<Props, State> {
-  props: Props;
-
+class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
   state = {
     passphrase: ''
   };
 
   componentDidUpdate = prevProps => {
-    const { authenticated, error, history, intl } = this.props;
+    const { authenticated, error, intl } = this.props;
     if (authenticated && !prevProps.authenticated) {
       swal(
         'Success',
@@ -129,7 +123,6 @@ class LoginPage extends Component<Props, State> {
         }),
         'success'
       );
-      history.push('/buy');
     }
     if (!authenticated && error) {
       swal('Something went wrong:', error.message, 'error');
@@ -168,18 +161,19 @@ class LoginPage extends Component<Props, State> {
     debug('render');
     const { loading, classes } = this.props;
     const { passphrase } = this.state;
-    const symbol = COIN_BASE.coin;
-    let Icon = CryptoIcons[symbol];
-    if (!Icon) {
-      Icon = UNKNOW;
-    }
 
     return (
       <div className={classes.loginContainer}>
         <div className={classes.loginContainer__center}>
           <Card className={classes.loginContainer__card}>
             {loading && <LinearProgress />}
-            <Icon className={classes.loginContainer__logo} alt="logo" />
+            <LOGO
+              className={classes.loginContainer__logo}
+              width="85"
+              height="85"
+              viewBox="0 0 32 32"
+              alt="logo"
+            />
             <CardContent className={classes.loginContainer__content}>
               <Typography
                 variant="h5"

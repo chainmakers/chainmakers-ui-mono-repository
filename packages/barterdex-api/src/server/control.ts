@@ -1,4 +1,3 @@
-import axios from 'axios';
 import * as fs from "fs";
 import * as path from "path";
 import * as split2 from "split2";
@@ -10,12 +9,6 @@ import killProcess from './killprocess';
 import { StateType } from "./schema";
 
 const debug = require("debug")("barterdex-api:server:control");
-
-const TIMEOUT = 60 * 1000;
-
-const headers = {
-  Accept: 'application/json'
-};
 
 type StartConfigType = {
   marketmakerPath?: string,
@@ -37,6 +30,12 @@ export default function controlFactory(state: StateType) {
   debug(`setup control for ${state.gui}`);
   let childProcess = null;
   return {
+    getLogFile(userData) {
+      return path.join(userData, `mm2_info.log`);
+    },
+    getErrorLogFile(userData) {
+      return path.join(userData, `mm2_error.log`);
+    },
     start(config: StartConfigType, options: StartOptionsType = {}): Promise<any> {
       debug(`start marketmaker app for ${state.gui}`);
 
@@ -69,15 +68,14 @@ export default function controlFactory(state: StateType) {
             });
           }
 
-          const startparams = Object.assign({}, config, {
+          const startparams = Object.assign({
             netid: state.netid,
             client: state.client,
             gui: state.gui,
-            passphrase: config.passphrase || 'default',
+            passphrase: 'default',
             userhome: state.userhome,
-            rpcport: state.rpcport,
-            coins: config.coins
-          });
+            rpcport: state.rpcport
+          }, config);
 
           childProcess = spawn(marketmakerFile,
             [JSON.stringify(startparams)],
@@ -102,7 +100,7 @@ export default function controlFactory(state: StateType) {
             });
 
           if (options.logs) {
-            const logStream = fs.createWriteStream(this.getLogFile(), {
+            const logStream = fs.createWriteStream(this.getLogFile(config.userData), {
               flags: "w"
             });
             childProcess.stdout.pipe(logStream);
@@ -117,7 +115,7 @@ export default function controlFactory(state: StateType) {
 
           if (options.logs) {
             const errorLogStream = fs.createWriteStream(
-              this.getErrorLogFile(),
+              this.getErrorLogFile(config.userData),
               {
                 flags: "w"
               }
@@ -166,54 +164,10 @@ export default function controlFactory(state: StateType) {
     isRunning(): boolean {
       return !!childProcess;
     },
-    isReady(): Promise<any> {
-      return new Promise(async resolve => {
-        try {
-          await this.getInfo();
-          resolve({
-            ok: "done"
-          });
-        } catch (err) {
-          debug(err.message);
-          resolve({
-            ok: "failed"
-          });
-        }
-      });
-    },
-    waitUntilReady(time: number = TIMEOUT): Promise<any> {
-      return new Promise((resolve, reject) => {
-        const interval = setInterval(async () => {
-          try {
-            await this.getInfo();
-            clearInterval(interval);
-            resolve({
-              ok: "done"
-            });
-            // eslint-disable-next-line no-empty
-          } catch (_) {}
-        }, 100);
-
-        setTimeout(() => {
-          clearInterval(interval);
-          reject(new Error("Giving up trying to connect to marketmaker"));
-        }, time);
-      });
-    },
     on(event: string, callback: Function): void {
       if (childProcess) {
         childProcess.on(event, callback);
       }
-    },
-    getInfo(): Promise<any> {
-      return axios({
-        url: `http://127.0.0.1:${state.rpcport}`,
-        method: 'post',
-        data: {
-          method: 'version'
-        },
-        headers
-      });
     }
   };
 }

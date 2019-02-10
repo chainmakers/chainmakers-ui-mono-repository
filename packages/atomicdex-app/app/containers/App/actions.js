@@ -22,16 +22,27 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   LOGOUT,
-  LOAD_BALANCE,
-  LOAD_BALANCE_SUCCESS,
-  LOAD_BALANCE_ERROR,
-  LOAD_COIN_BALANCE_SUCCESS,
   LOAD_WITHDRAW,
   LOAD_WITHDRAW_SUCCESS,
   LOAD_WITHDRAW_ERROR,
-  LOAD_SWAP_SUCCESS
+  LOAD_SWAP_SUCCESS,
+  ELECTRUM_LOAD,
+  ELECTRUM_ADD,
+  ELECTRUM_ADD_SUCCESS,
+  ELECTRUM_ADD_ERROR,
+  BALANCE_LOAD_ALL,
+  BALANCE_LOAD,
+  BALANCE_LOAD_SUCCESS,
+  BALANCE_LOAD_ERROR
 } from './constants';
-import type { BalancePayload } from './schema';
+import type {
+  LoginError,
+  AddElectrumPayload,
+  AddElectrumSuccessPayload,
+  LoadbalacePayload,
+  LoadBalanceSuccessPayload
+} from './schema';
+import type { ErrorType } from '../schema';
 
 export function login(passphrase: string) {
   return {
@@ -51,7 +62,7 @@ export function loginSuccess(user) {
   };
 }
 
-export function loginError(error) {
+export function loginError(error: LoginError) {
   return {
     type: LOGIN_ERROR,
     error
@@ -61,34 +72,6 @@ export function loginError(error) {
 export function logout() {
   return {
     type: LOGOUT
-  };
-}
-
-export function loadBalance() {
-  return {
-    type: LOAD_BALANCE
-  };
-}
-
-export function loadBalanceSuccess() {
-  return {
-    type: LOAD_BALANCE_SUCCESS
-  };
-}
-
-export function loadCoinBalanceSuccess(payload: BalancePayload) {
-  return {
-    type: LOAD_COIN_BALANCE_SUCCESS,
-    payload
-  };
-}
-
-export function loadBalanceError(message: string) {
-  return {
-    type: LOAD_BALANCE_ERROR,
-    error: {
-      message
-    }
   };
 }
 
@@ -140,3 +123,57 @@ export function loadSwapSuccess(payload: Object) {
 }
 
 // -- //
+
+export function loadElectrums() {
+  return {
+    type: ELECTRUM_LOAD
+  };
+}
+
+export function addElectrum(payload: AddElectrumPayload) {
+  return {
+    type: ELECTRUM_ADD,
+    payload
+  };
+}
+
+export function addElectrumSuccess(payload: AddElectrumSuccessPayload) {
+  return {
+    type: ELECTRUM_ADD_SUCCESS,
+    payload
+  };
+}
+
+export function addElectrumError(error: ErrorType) {
+  return {
+    type: ELECTRUM_ADD_ERROR,
+    error
+  };
+}
+
+export function loadAllBalance() {
+  return {
+    type: BALANCE_LOAD_ALL
+  };
+}
+
+export function loadBalance(payload: LoadbalacePayload) {
+  return {
+    type: BALANCE_LOAD,
+    payload
+  };
+}
+
+export function loadBalanceSuccess(payload: LoadBalanceSuccessPayload) {
+  return {
+    type: BALANCE_LOAD_SUCCESS,
+    payload
+  };
+}
+
+export function loadBalanceError(error: ErrorType) {
+  return {
+    type: BALANCE_LOAD_ERROR,
+    error
+  };
+}

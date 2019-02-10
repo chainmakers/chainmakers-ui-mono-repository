@@ -23,26 +23,23 @@ const debug = require('debug')('atomicapp:containers:layout:EmptyLayout');
 //   });
 // };
 
-type Props = {
+type IEmptyLayoutProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   children: Node
 };
 
-class EmptyLayout extends React.PureComponent<Props> {
+export default class EmptyLayout extends React.PureComponent<IEmptyLayoutProps> {
   // constructor(props) {
   //   super(props);
   //   setLoginWindowBounds();
   // }
+  static displayName = 'EmptyLayout';
 
   render() {
     debug(`render`);
 
     const { children } = this.props;
 
-    return <React.Fragment>{children}</React.Fragment>;
+    return children;
   }
 }
-
-EmptyLayout.displayName = 'EmptyLayout';
-
-export default EmptyLayout;

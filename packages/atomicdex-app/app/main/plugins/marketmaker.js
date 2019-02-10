@@ -1,15 +1,15 @@
 import ipc from 'electron-better-ipc';
 import { Server } from 'barterdex-api';
 import { app } from 'electron';
-import getConfig from '../config';
+import config from '../config';
+import startFactory from './startFactory';
+import stopFactory from './stopFactory';
 
 const debug = require('debug')('atomicapp:plugins:marketmaker');
 
-const config = getConfig();
-
 let marketmaker = null;
 
-function setup() {
+export default function setup() {
   debug('setup marketmaker app');
   if (marketmaker) return marketmaker;
 
@@ -23,13 +23,9 @@ function setup() {
     marketmaker.stop();
   });
 
-  ipc.answerRenderer('marketmaker:start', () => marketmaker.start());
+  ipc.answerRenderer('marketmaker:start', startFactory(marketmaker));
 
-  ipc.answerRenderer('marketmaker:stop', () => marketmaker.stop());
-
-  ipc.answerRenderer('marketmaker:restart', async () => marketmaker.start());
+  ipc.answerRenderer('marketmaker:stop', stopFactory(marketmaker));
 
   return marketmaker;
 }
-
-export default setup();

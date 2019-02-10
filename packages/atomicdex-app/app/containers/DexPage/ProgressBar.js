@@ -4,23 +4,20 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import LinearProgress from '../../components/ProgressBar';
-import { makeSelectBalanceLoading } from '../App/selectors';
 import { makeSelectPricesLoading } from './selectors';
 
 const debug = require('debug')('atomicapp:containers:DexPage:ProgressBar');
 
-type Props = {
-  balanceLoading: boolean,
+type IProgressBarProps = {
   priceLoading: boolean
 };
 
-export class ProgressBar extends React.PureComponent<Props> {
-
+export class ProgressBarUI extends React.PureComponent<IProgressBarProps> {
   render() {
     debug('render');
 
-    const { balanceLoading, priceLoading } = this.props;
-    if (balanceLoading || priceLoading) {
+    const { priceLoading } = this.props;
+    if (priceLoading) {
       return <LinearProgress />;
     }
     return null;
@@ -28,8 +25,7 @@ export class ProgressBar extends React.PureComponent<Props> {
 }
 
 const mapStateToProps = createStructuredSelector({
-  priceLoading: makeSelectPricesLoading(),
-  balanceLoading: makeSelectBalanceLoading()
+  priceLoading: makeSelectPricesLoading()
 });
 
 const withConnect = connect(
@@ -37,4 +33,4 @@ const withConnect = connect(
   null
 );
 
-export default compose(withConnect)(ProgressBar);
+export default compose(withConnect)(ProgressBarUI);

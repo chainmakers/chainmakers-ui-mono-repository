@@ -1,11 +1,33 @@
+// @flow
 import {
   login,
   logout,
+  loadBalance,
+  loadElectrums,
+  addElectrum,
+  addElectrumSuccess,
+  addElectrumError,
+  loadAllBalance,
   loadBalanceSuccess,
-  loadCoinBalanceSuccess,
-  loadBalance
+  loadBalanceError
 } from '../actions';
-import { LOGIN, LOAD_BALANCE, LOAD_BALANCE_SUCCESS } from '../constants';
+import {
+  LOGIN,
+  ELECTRUM_LOAD,
+  ELECTRUM_ADD,
+  ELECTRUM_ADD_SUCCESS,
+  ELECTRUM_ADD_ERROR,
+  BALANCE_LOAD_ALL,
+  BALANCE_LOAD,
+  BALANCE_LOAD_SUCCESS,
+  BALANCE_LOAD_ERROR
+} from '../constants';
+import type { ErrorType } from '../../schema';
+import type {
+  AddElectrumPayload,
+  AddElectrumSuccessPayload,
+  LoadBalanceSuccessPayload
+} from '../schema';
 
 describe('containers/App/actions/login', () => {
   const passphrase = 'passphrase';
@@ -31,143 +53,172 @@ describe('containers/App/actions/logout', () => {
   });
 });
 
-describe('containers/App/actions/loadCoinBalanceSuccess', () => {
-  it('should logout should create loadCoinBalanceSuccess action', () => {
-    const payload = {
-      coin: 'KMD',
-      address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
-      balance: 3.5524436,
-      utxo: [
-        {
-          tx_hash:
-            '55591c94dc07fb2c58716216bb8c4de3ed604cf6b5fca09c70641b2535fc51cc',
-          tx_pos: 1,
-          height: 847460,
-          value: 49963
-        },
-        {
-          tx_hash:
-            '76193ba88387d3c2fb60ae4bc4533f6c4da8cc3301147415741a2ca1094ceb51',
-          tx_pos: 1,
-          height: 876076,
-          value: 2150564
-        },
-        {
-          tx_hash:
-            '1e6fb726d4a8643a03dc2d69b35ea9235af4308333b9a5f657b1a0b28da9dccf',
-          tx_pos: 1,
-          height: 877612,
-          value: 1030601
-        },
-        {
-          tx_hash:
-            '78bb259267a6a48a22705b3ab6e27cb40ff92a149c102d53a43004545687d7f6',
-          tx_pos: 1,
-          height: 889625,
-          value: 351390
-        },
-        {
-          tx_hash:
-            '9de0927a517b3a064748d89bba55325622aa99ed034eb5eb00a3f841ef40243d',
-          tx_pos: 0,
-          height: 925421,
-          value: 3107496
-        },
-        {
-          tx_hash:
-            '9d39c0b94374ebb8a9d6c546692c10afdca386c18d8993305ff05508b29fe687',
-          tx_pos: 1,
-          height: 925428,
-          value: 101992
-        },
-        {
-          tx_hash:
-            '211c8310831a7a73ffeaaae20e8543d0f772140df4dfc49d009214c822df0f54',
-          tx_pos: 1,
-          height: 925437,
-          value: 115246
-        },
-        {
-          tx_hash:
-            '22a06182fe82d260b93d44b1050ee07a7d88766fa5ebf281e9e693952a7af824',
-          tx_pos: 1,
-          height: 929434,
-          value: 300050
-        },
-        {
-          tx_hash:
-            '159258e303fe03fee8751aa6dbd239648186e31e902a1341ad806c4dfe1fccf3',
-          tx_pos: 1,
-          height: 929439,
-          value: 322218961
-        },
-        {
-          tx_hash:
-            '7c886095c78a671d15e4cca972ac20f4be8c00d83ce9de3e6a147f7b24324a7f',
-          tx_pos: 1,
-          height: 960844,
-          value: 245785
-        },
-        {
-          tx_hash:
-            'f8e0ff61d2406c92ed68491275852b61bd16640f9cc40dbc3eda7a527ed30e93',
-          tx_pos: 1,
-          height: 960850,
-          value: 4062532
-        },
-        {
-          tx_hash:
-            '5f4cd2b1aef137dbd409e431f401ec7fc7c25020f76f38d87d83db53a1b3b1bf',
-          tx_pos: 1,
-          height: 1003705,
-          value: 51544
-        },
-        {
-          tx_hash:
-            'b5a19a3f40d8292d8a3e4d5af3f7e95deb6a87ba66097941108f852d68378322',
-          tx_pos: 1,
-          height: 1010494,
-          value: 223173
-        },
-        {
-          tx_hash:
-            'd709c0c9f5742d6e335b433df128097921fdf10f1ed37d49c6fc628232580bcc',
-          tx_pos: 1,
-          height: 1010499,
-          value: 21235063
-        }
-      ],
-      loading: false,
-      error: false
+// -- //
+
+describe('containers/App/actions/loadElectrums', () => {
+  it('should loadElectrums should create loadElectrums action', () => {
+    expect(loadElectrums()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: ELECTRUM_LOAD
     };
-    expect(loadCoinBalanceSuccess(payload)).toMatchSnapshot();
+
+    expect(loadElectrums()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/App/actions/addElectrum', () => {
+  const payload: AddElectrumPayload = {
+    txversion: 4,
+    urls: ['electrum1.cipig.net:10024', 'electrum2.cipig.net:10024'],
+    coin: 'BEER'
+  };
+  it('should addElectrum should create addElectrum action', () => {
+    expect(addElectrum(payload)).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: ELECTRUM_ADD,
+      payload
+    };
+
+    expect(addElectrum(payload)).toEqual(expectedResult);
+  });
+});
+
+describe('containers/App/actions/addElectrumSuccess', () => {
+  const payload: AddElectrumSuccessPayload = {
+    address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
+    balance: 6502.66989074,
+    coin: 'BEER',
+    fee: 0.00001
+  };
+
+  it('should addElectrumSuccess should create addElectrumSuccess action', () => {
+    expect(addElectrumSuccess(payload)).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: ELECTRUM_ADD_SUCCESS,
+      payload
+    };
+
+    expect(addElectrumSuccess(payload)).toEqual(expectedResult);
+  });
+});
+
+describe('containers/App/actions/addElectrumError', () => {
+  const error: ErrorType = {
+    context: {
+      action: ELECTRUM_ADD,
+      params: {
+        active: 1,
+        asset: 'PIZZA',
+        coin: 'PIZZA',
+        market_cap: -2,
+        name: 'Pizza',
+        rpcport: 11608,
+        txversion: 4,
+        urls: ['electrum1.cipig.net:10024', 'electrum2.cipig.net:10024']
+      }
+    },
+    type: 'RPC',
+    message: "can't connect to electrum server"
+  };
+
+  it('should addElectrumError should create addElectrumError action', () => {
+    expect(addElectrumError(error)).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: ELECTRUM_ADD_ERROR,
+      error
+    };
+
+    expect(addElectrumError(error)).toEqual(expectedResult);
+  });
+});
+
+describe('containers/App/actions/loadAllBalance', () => {
+  it('should loadAllBalance should create loadAllBalance action', () => {
+    expect(loadAllBalance()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: BALANCE_LOAD_ALL
+    };
+
+    expect(loadAllBalance()).toEqual(expectedResult);
   });
 });
 
 describe('containers/App/actions/loadBalance', () => {
+  const payload: LoadbalacePayload = {
+    coin: 'KMD'
+  };
   it('should loadBalance should create loadBalance action', () => {
-    expect(loadBalance()).toMatchSnapshot();
+    expect(loadBalance(payload)).toMatchSnapshot();
   });
 
   it('should return the correct type and the passed name', () => {
     const expectedResult = {
-      type: LOAD_BALANCE
+      type: BALANCE_LOAD,
+      payload
     };
 
-    expect(loadBalance()).toEqual(expectedResult);
+    expect(loadBalance(payload)).toEqual(expectedResult);
   });
 });
 
 describe('containers/App/actions/loadBalanceSuccess', () => {
+  const payload: LoadBalanceSuccessPayload = {
+    address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
+    balance: 6502.66989074,
+    coin: 'BEER',
+    fee: 0.00001
+  };
   it('should loadBalanceSuccess should create loadBalanceSuccess action', () => {
-    expect(loadBalanceSuccess()).toMatchSnapshot();
+    expect(loadBalanceSuccess(payload)).toMatchSnapshot();
   });
 
   it('should return the correct type and the passed name', () => {
     const expectedResult = {
-      type: LOAD_BALANCE_SUCCESS
+      type: BALANCE_LOAD_SUCCESS,
+      payload
     };
 
-    expect(loadBalanceSuccess()).toEqual(expectedResult);
+    expect(loadBalanceSuccess(payload)).toEqual(expectedResult);
+  });
+});
+
+describe('containers/App/actions/loadBalanceError', () => {
+  const error: ErrorType = {
+    context: {
+      action: BALANCE_LOAD,
+      params: {
+        coin: 'PIZZA'
+      }
+    },
+    type: 'RPC',
+    message: "can't connect to electrum server"
+  };
+
+  it('should loadBalanceError should create loadBalanceError action', () => {
+    expect(loadBalanceError(error)).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: BALANCE_LOAD_ERROR,
+      error
+    };
+
+    expect(loadBalanceError(error)).toEqual(expectedResult);
   });
 });

@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
@@ -11,36 +11,34 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import injectReducer from '../../utils/inject-reducer';
-import injectSaga from '../../utils/inject-saga';
+import { logout } from '../App/actions';
 import reducer from './reducer';
-import saga from './saga';
-import { cancelLogoutDialog, agreeLogoutDialog } from './actions';
+import { hideLogoutDialog } from './actions';
 import { makeSelectLogoutState } from './selectors';
 import { APP_STATE_NAME } from './constants';
 
 const debug = require('debug')('atomicapp:containers:LogoutDialog');
 
-type Props = {
+type ILogoutDialogProps = {
   show: boolean,
   // eslint-disable-next-line flowtype/no-weak-types
-  dispatchCancelLogoutDialog: Function,
+  dispatchLogout: Function,
   // eslint-disable-next-line flowtype/no-weak-types
-  dispatchAgreeLogoutDialog: Function
+  dispatchHideLogoutDialog: Function
 };
 
-class LogoutDialog extends Component<Props> {
-  props: Props;
-
+class LogoutDialog extends React.Component<ILogoutDialogProps> {
   onCancelLogoutDialog = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
-    const { dispatchCancelLogoutDialog } = this.props;
-    dispatchCancelLogoutDialog();
+    const { dispatchHideLogoutDialog } = this.props;
+    dispatchHideLogoutDialog();
   };
 
   onAgreeLogoutDialog = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
-    const { dispatchAgreeLogoutDialog } = this.props;
-    dispatchAgreeLogoutDialog();
+    const { dispatchHideLogoutDialog, dispatchLogout } = this.props;
+    dispatchHideLogoutDialog();
+    dispatchLogout();
   };
 
   render() {
@@ -83,10 +81,11 @@ class LogoutDialog extends Component<Props> {
   }
 }
 
-export function mapDispatchToProps(dispatch) {
+// eslint-disable-next-line flowtype/no-weak-types
+export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   return {
-    dispatchCancelLogoutDialog: () => dispatch(cancelLogoutDialog()),
-    dispatchAgreeLogoutDialog: () => dispatch(agreeLogoutDialog())
+    dispatchLogout: () => dispatch(logout()),
+    dispatchHideLogoutDialog: () => dispatch(hideLogoutDialog())
   };
 }
 
@@ -95,7 +94,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const withReducer = injectReducer({ key: APP_STATE_NAME, reducer });
-const withSaga = injectSaga({ key: APP_STATE_NAME, saga });
 const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps
@@ -103,6 +101,5 @@ const withConnect = connect(
 
 export default compose(
   withReducer,
-  withSaga,
   withConnect
 )(LogoutDialog);

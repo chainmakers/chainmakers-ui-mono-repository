@@ -31,7 +31,8 @@ describe('containers/WalletPage/saga/loadCoinTransactionsProcess', () => {
           .reply(200, (uri, body, cb) => {
             const b = JSON.parse(body);
             expect(b).toEqual({
-              userpass,
+              userpass:
+                '05d49692b755f99c4504b510418efeeeebfd466892540f27acf9a31a326d6504',
               coin,
               address,
               queueid: queueId,
@@ -87,7 +88,8 @@ describe('containers/WalletPage/saga/loadCoinTransactionsProcess', () => {
           .reply(200, (uri, body, cb) => {
             const b = JSON.parse(body);
             expect(b).toEqual({
-              userpass,
+              userpass:
+                '05d49692b755f99c4504b510418efeeeebfd466892540f27acf9a31a326d6504',
               coin,
               address,
               queueid: queueId,

@@ -1,113 +1,103 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`containers/App/actions/addElectrum should addElectrum should create addElectrum action 1`] = `
+Object {
+  "payload": Object {
+    "coin": "BEER",
+    "txversion": 4,
+    "urls": Array [
+      "electrum1.cipig.net:10024",
+      "electrum2.cipig.net:10024",
+    ],
+  },
+  "type": "atomicapp/App/ELECTRUM_ADD",
+}
+`;
+
+exports[`containers/App/actions/addElectrumError should addElectrumError should create addElectrumError action 1`] = `
+Object {
+  "error": Object {
+    "context": Object {
+      "action": "atomicapp/App/ELECTRUM_ADD",
+      "params": Object {
+        "active": 1,
+        "asset": "PIZZA",
+        "coin": "PIZZA",
+        "market_cap": -2,
+        "name": "Pizza",
+        "rpcport": 11608,
+        "txversion": 4,
+        "urls": Array [
+          "electrum1.cipig.net:10024",
+          "electrum2.cipig.net:10024",
+        ],
+      },
+    },
+    "message": "can't connect to electrum server",
+    "type": "RPC",
+  },
+  "type": "atomicapp/App/ELECTRUM_ADD_ERROR",
+}
+`;
+
+exports[`containers/App/actions/addElectrumSuccess should addElectrumSuccess should create addElectrumSuccess action 1`] = `
+Object {
+  "payload": Object {
+    "address": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
+    "balance": 6502.66989074,
+    "coin": "BEER",
+    "fee": 0.00001,
+  },
+  "type": "atomicapp/App/ELECTRUM_ADD_SUCCESS",
+}
+`;
+
+exports[`containers/App/actions/loadAllBalance should loadAllBalance should create loadAllBalance action 1`] = `
+Object {
+  "type": "atomicapp/App/BALANCE_LOAD_ALL",
+}
+`;
+
 exports[`containers/App/actions/loadBalance should loadBalance should create loadBalance action 1`] = `
 Object {
-  "type": "atomicapp/App/LOAD_BALANCE",
+  "payload": Object {
+    "coin": "KMD",
+  },
+  "type": "atomicapp/App/BALANCE_LOAD",
+}
+`;
+
+exports[`containers/App/actions/loadBalanceError should loadBalanceError should create loadBalanceError action 1`] = `
+Object {
+  "error": Object {
+    "context": Object {
+      "action": "atomicapp/App/BALANCE_LOAD",
+      "params": Object {
+        "coin": "PIZZA",
+      },
+    },
+    "message": "can't connect to electrum server",
+    "type": "RPC",
+  },
+  "type": "atomicapp/App/BALANCE_LOAD_ERROR",
 }
 `;
 
 exports[`containers/App/actions/loadBalanceSuccess should loadBalanceSuccess should create loadBalanceSuccess action 1`] = `
 Object {
-  "type": "atomicapp/App/LOAD_BALANCE_SUCCESS",
+  "payload": Object {
+    "address": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
+    "balance": 6502.66989074,
+    "coin": "BEER",
+    "fee": 0.00001,
+  },
+  "type": "atomicapp/App/BALANCE_LOAD_SUCCESS",
 }
 `;
 
-exports[`containers/App/actions/loadCoinBalanceSuccess should logout should create loadCoinBalanceSuccess action 1`] = `
+exports[`containers/App/actions/loadElectrums should loadElectrums should create loadElectrums action 1`] = `
 Object {
-  "payload": Object {
-    "address": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
-    "balance": 3.5524436,
-    "coin": "KMD",
-    "error": false,
-    "loading": false,
-    "utxo": Array [
-      Object {
-        "height": 847460,
-        "tx_hash": "55591c94dc07fb2c58716216bb8c4de3ed604cf6b5fca09c70641b2535fc51cc",
-        "tx_pos": 1,
-        "value": 49963,
-      },
-      Object {
-        "height": 876076,
-        "tx_hash": "76193ba88387d3c2fb60ae4bc4533f6c4da8cc3301147415741a2ca1094ceb51",
-        "tx_pos": 1,
-        "value": 2150564,
-      },
-      Object {
-        "height": 877612,
-        "tx_hash": "1e6fb726d4a8643a03dc2d69b35ea9235af4308333b9a5f657b1a0b28da9dccf",
-        "tx_pos": 1,
-        "value": 1030601,
-      },
-      Object {
-        "height": 889625,
-        "tx_hash": "78bb259267a6a48a22705b3ab6e27cb40ff92a149c102d53a43004545687d7f6",
-        "tx_pos": 1,
-        "value": 351390,
-      },
-      Object {
-        "height": 925421,
-        "tx_hash": "9de0927a517b3a064748d89bba55325622aa99ed034eb5eb00a3f841ef40243d",
-        "tx_pos": 0,
-        "value": 3107496,
-      },
-      Object {
-        "height": 925428,
-        "tx_hash": "9d39c0b94374ebb8a9d6c546692c10afdca386c18d8993305ff05508b29fe687",
-        "tx_pos": 1,
-        "value": 101992,
-      },
-      Object {
-        "height": 925437,
-        "tx_hash": "211c8310831a7a73ffeaaae20e8543d0f772140df4dfc49d009214c822df0f54",
-        "tx_pos": 1,
-        "value": 115246,
-      },
-      Object {
-        "height": 929434,
-        "tx_hash": "22a06182fe82d260b93d44b1050ee07a7d88766fa5ebf281e9e693952a7af824",
-        "tx_pos": 1,
-        "value": 300050,
-      },
-      Object {
-        "height": 929439,
-        "tx_hash": "159258e303fe03fee8751aa6dbd239648186e31e902a1341ad806c4dfe1fccf3",
-        "tx_pos": 1,
-        "value": 322218961,
-      },
-      Object {
-        "height": 960844,
-        "tx_hash": "7c886095c78a671d15e4cca972ac20f4be8c00d83ce9de3e6a147f7b24324a7f",
-        "tx_pos": 1,
-        "value": 245785,
-      },
-      Object {
-        "height": 960850,
-        "tx_hash": "f8e0ff61d2406c92ed68491275852b61bd16640f9cc40dbc3eda7a527ed30e93",
-        "tx_pos": 1,
-        "value": 4062532,
-      },
-      Object {
-        "height": 1003705,
-        "tx_hash": "5f4cd2b1aef137dbd409e431f401ec7fc7c25020f76f38d87d83db53a1b3b1bf",
-        "tx_pos": 1,
-        "value": 51544,
-      },
-      Object {
-        "height": 1010494,
-        "tx_hash": "b5a19a3f40d8292d8a3e4d5af3f7e95deb6a87ba66097941108f852d68378322",
-        "tx_pos": 1,
-        "value": 223173,
-      },
-      Object {
-        "height": 1010499,
-        "tx_hash": "d709c0c9f5742d6e335b433df128097921fdf10f1ed37d49c6fc628232580bcc",
-        "tx_pos": 1,
-        "value": 21235063,
-      },
-    ],
-  },
-  "type": "atomicapp/App/LOAD_COIN_BALANCE_SUCCESS",
+  "type": "atomicapp/App/ELECTRUM_LOAD",
 }
 `;
 

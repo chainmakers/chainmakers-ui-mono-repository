@@ -61,8 +61,7 @@ const styles = () => ({
 });
 
 type Props = {
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object,
+  classes: Styles,
   currentSwaps: List<*>,
   finishedSwaps: List<*>,
   // eslint-disable-next-line flowtype/no-weak-types
@@ -72,7 +71,6 @@ type Props = {
 };
 
 class MyOrders extends React.PureComponent<Props> {
-
   openRight = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
     const { target } = evt;

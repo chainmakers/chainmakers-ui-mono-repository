@@ -1,6 +1,11 @@
 // @flow
-import React, { PureComponent } from 'react';
+import React from 'react';
 import ClassNames from 'classnames';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import type { Dispatch } from 'redux';
+import type { List, Map } from 'immutable';
+import { createSelector } from 'reselect';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -8,10 +13,36 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
+import IconButton from '@material-ui/core/IconButton';
+import ErrorIcon from '@material-ui/icons/ErrorOutlined';
+import ReplayIcon from '@material-ui/icons/ReplayOutlined';
+import { LOADING } from '../../../constants';
 import { getCoinIcon } from '../../../components/CryptoIcons';
 import { covertSymbolToName } from '../../../utils/coin';
+import { openWithdrawModal, openDepositModal } from '../actions';
+import {
+  makeSelectBalanceFetchStatus,
+  makeSelectBalanceEntities,
+  makeSelectBalanceErrors
+} from '../../App/selectors';
 
 const debug = require('debug')('atomicapp:containers:WalletPage:Asset');
+
+const ErrorIconInstance = (
+  <ErrorIcon
+    style={{
+      color: '#fff'
+    }}
+  />
+);
+
+const ReplayIconInstance = (
+  <ReplayIcon
+    style={{
+      color: '#fff'
+    }}
+  />
+);
 
 const styles = theme => ({
   leftIcon: {
@@ -66,11 +97,6 @@ const styles = theme => ({
   wallet__card: {
     border: '1px solid #dadce0',
     boxShadow: 'none'
-    // '&:hover': {
-    //   boxShadow:
-    //     '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)',
-    //   cursor: 'pointer'
-    // }
   },
 
   wallet__buttonBorder: {
@@ -82,56 +108,93 @@ const styles = theme => ({
 
   wallet__firstButton: {
     marginLeft: 4
+  },
+
+  wallet__error: {
+    backgroundColor: '#ED6A4E'
+  },
+
+  wallet__textWhite: {
+    color: '#fff'
   }
 });
 
-type Props = {
+type IAssetProps = {
+  classes: Styles,
+  symbol: string,
   // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object,
+  fetchStatus: List<*>,
   // eslint-disable-next-line flowtype/no-weak-types
-  data: Object,
+  entity: Map<*, *>,
+  // eslint-disable-next-line flowtype/no-weak-types
+  error: Map<*, *>,
   // eslint-disable-next-line flowtype/no-weak-types
   openWithdraw: Function,
   // eslint-disable-next-line flowtype/no-weak-types
   openDeposit: Function
 };
 
-class Asset extends PureComponent<Props> {
+class Asset extends React.PureComponent<IAssetProps> {
+  static displayName = 'Asset';
+
   openWithdraw = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
-    const { openWithdraw, data } = this.props;
-    const coin = data.get('coin');
-    openWithdraw(coin);
+    const { openWithdraw, symbol } = this.props;
+    openWithdraw(symbol);
   };
 
   openDeposit = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
-    const { openDeposit, data } = this.props;
-    const coin = data.get('coin');
-    openDeposit(coin);
+    const { openDeposit, symbol } = this.props;
+    openDeposit(symbol);
+  };
+
+  renderIcon = () => {
+    const { symbol, error } = this.props;
+    return error ? (
+      <IconButton>{ReplayIconInstance}</IconButton>
+    ) : (
+      getCoinIcon(symbol)
+    );
   };
 
   render() {
     debug(`render`);
 
-    const { classes, data } = this.props;
-    const CIcon = getCoinIcon(data.get('coin'));
+    const { classes, symbol, fetchStatus, entity, error } = this.props;
+    const isError = !!error;
+    const loading = fetchStatus === LOADING;
 
     return (
-      <Card className={classes.wallet__card}>
+      <Card
+        className={ClassNames(classes.wallet__card, {
+          [classes.wallet__error]: isError
+        })}
+      >
         <CardHeader
           classes={{
             action: classes.wallet__headerAction,
-            title: classes.wallet__title,
-            subheader: classes.wallet__subheader
+            title: ClassNames(classes.wallet__title, {
+              [classes.wallet__textWhite]: isError
+            }),
+            subheader: ClassNames(classes.wallet__subheader, {
+              [classes.wallet__textWhite]: isError
+            })
           }}
-          action={CIcon}
-          title={covertSymbolToName(data.get('coin'))}
-          subheader={data.get('coin')}
+          action={this.renderIcon()}
+          title={covertSymbolToName(symbol)}
+          subheader={symbol}
         />
         <CardContent className={classes.wallet__content}>
-          <Typography variant="h1" className={classes.wallet__balance}>
-            {data.get('balance')} {data.get('coin')}
+          <Typography
+            variant="h1"
+            className={ClassNames(classes.wallet__balance, {
+              [classes.wallet__textWhite]: isError
+            })}
+          >
+            {isError
+              ? error.get('message')
+              : `${entity.get('balance')} ${symbol}`}
           </Typography>
           {/* <Button
             className={ClassNames(classes.wallet__button)}
@@ -146,6 +209,7 @@ class Asset extends PureComponent<Props> {
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
           <Button
+            disabled={isError || loading}
             className={ClassNames(
               classes.wallet__button,
               classes.wallet__firstButton
@@ -158,6 +222,7 @@ class Asset extends PureComponent<Props> {
           </Button>
           <div className={classes.wallet__buttonBorder} />
           <Button
+            disabled={isError || loading}
             className={classes.wallet__button}
             size="small"
             color="primary"
@@ -182,6 +247,32 @@ class Asset extends PureComponent<Props> {
   }
 }
 
-Asset.displayName = 'Asset';
+// eslint-disable-next-line flowtype/no-weak-types
+export function mapDispatchToProps(dispatch: Dispatch<Object>) {
+  return {
+    openWithdraw: (coin: string) => dispatch(openWithdrawModal(coin)),
+    openDeposit: (coin: string) => dispatch(openDepositModal(coin))
+  };
+}
 
-export default withStyles(styles)(Asset);
+const mapStateToProps = createSelector(
+  (_, props) => props.symbol,
+  makeSelectBalanceFetchStatus(),
+  makeSelectBalanceEntities(),
+  makeSelectBalanceErrors(),
+  (symbol, fetchStatus, entities, errors) => ({
+    fetchStatus: fetchStatus.get(symbol),
+    entity: entities.get(symbol),
+    error: errors.get(symbol)
+  })
+);
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
+
+export default compose(
+  withConnect,
+  withStyles(styles)
+)(Asset);

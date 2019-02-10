@@ -8,13 +8,10 @@ import type { Dispatch } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
 import { createStructuredSelector } from 'reselect';
 import Grid from '@material-ui/core/Grid';
-import {
-  makeSelectBalanceList,
-  makeSelectBalanceEntities
-} from '../App/selectors';
-import { loadBalance } from '../App/actions';
+import { makeSelectBalanceList } from '../App/selectors';
+import { loadAllBalance } from '../App/actions';
+import AddElectrumPlaceholer from './components/AddElectrumPlaceholer';
 import Asset from './components/Asset';
-import { openWithdrawModal, openDepositModal } from './actions';
 
 const debug = require('debug')('atomicapp:containers:WalletPage:PortfolioTab');
 
@@ -33,34 +30,27 @@ const styles = theme => ({
   }
 });
 
-type Props = {
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object,
+type IPortfolioTabProps = {
+  classes: Styles,
   // eslint-disable-next-line flowtype/no-weak-types
   list: Object,
   // eslint-disable-next-line flowtype/no-weak-types
-  entities: Object,
-  // eslint-disable-next-line flowtype/no-weak-types
-  dispatchLoadBalance: Function,
-  // eslint-disable-next-line flowtype/no-weak-types
-  openWithdraw: Function,
-  // eslint-disable-next-line flowtype/no-weak-types
-  openDeposit: Function
+  dispatchLoadAllBalance: Function
 };
 
-class PortfolioTab extends React.PureComponent<Props> {
+class PortfolioTab extends React.PureComponent<IPortfolioTabProps> {
+  static displayName = 'Overview';
+
   componentDidMount = () => {
-    debug('watch transactions');
-    const { dispatchLoadBalance } = this.props;
-    dispatchLoadBalance();
+    const { dispatchLoadAllBalance } = this.props;
+    dispatchLoadAllBalance();
   };
 
-  renderWallet = (t, k) => {
-    const { classes, entities, openWithdraw, openDeposit } = this.props;
-    const data = entities.get(t);
+  renderWallet = (data, k) => {
+    const { classes } = this.props;
     return (
       <Grid
-        key={`wallet_page_overview${data.get('coin')}`}
+        key={`wallet_page_overview${data.get('symbol')}`}
         item
         xs={6}
         className={ClassNames(classes.containerSection, {
@@ -68,11 +58,7 @@ class PortfolioTab extends React.PureComponent<Props> {
           [classes.portfolioTab__tabRight]: k % 2 === 0
         })}
       >
-        <Asset
-          data={data}
-          openWithdraw={openWithdraw}
-          openDeposit={openDeposit}
-        />
+        <Asset symbol={data.get('symbol')} />
       </Grid>
     );
   };
@@ -80,30 +66,35 @@ class PortfolioTab extends React.PureComponent<Props> {
   render() {
     debug(`render`);
 
-    const { list } = this.props;
-
+    const { list, classes } = this.props;
     return (
       <Grid container spacing={16}>
         {list.map(this.renderWallet)}
+        <Grid
+          key="wallet_page_overview-electrum"
+          item
+          xs={6}
+          className={ClassNames(classes.containerSection, {
+            [classes.portfolioTab__tabLeft]: list.size % 2 === 1,
+            [classes.portfolioTab__tabRight]: list.size % 2 === 0
+          })}
+        >
+          <AddElectrumPlaceholer />
+        </Grid>
       </Grid>
     );
   }
 }
 
-PortfolioTab.displayName = 'Overview';
-
 // eslint-disable-next-line flowtype/no-weak-types
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   return {
-    openWithdraw: (coin: string) => dispatch(openWithdrawModal(coin)),
-    openDeposit: (coin: string) => dispatch(openDepositModal(coin)),
-    dispatchLoadBalance: () => dispatch(loadBalance())
+    dispatchLoadAllBalance: () => dispatch(loadAllBalance())
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  list: makeSelectBalanceList(),
-  entities: makeSelectBalanceEntities()
+  list: makeSelectBalanceList()
 });
 
 const withConnect = connect(

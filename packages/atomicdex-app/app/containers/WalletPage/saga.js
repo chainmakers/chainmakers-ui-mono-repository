@@ -2,12 +2,13 @@ import { all, call, put, select, cancelled } from 'redux-saga/effects';
 // import { CANCEL, delay } from 'redux-saga';
 import { CANCEL } from 'redux-saga';
 import { takeFirst } from 'barterdex-rssm';
+import { ENABLE } from '../../constants';
 import {
   TRANSACTIONS_LOAD,
   TRANSACTIONS_LOAD_LOOP
   // TIME_LOOP
 } from './constants';
-import { makeSelectCurrentUser } from '../App/selectors';
+import { makeSelectBalance } from '../App/selectors';
 import api from '../../lib/barter-dex-api';
 import {
   loadTransactions,
@@ -57,11 +58,15 @@ export function* loadTransactionsProcess() {
   try {
     // load user data
     debug('load transactions process start');
-    const user = yield select(makeSelectCurrentUser());
-    if (!user) {
-      throw new Error('not found user');
-    }
-    const coins = user.get('coins');
+    const balanceState = yield select(makeSelectBalance());
+
+    const list = balanceState
+      .get('list')
+      .filter(item => item.get('status') === ENABLE)
+      .map(e => e.get('symbol'));
+    const entities = balanceState.get('entities');
+
+    const coins = list.map(key => entities.get(key));
 
     const requests = [];
     for (let i = 0; i < coins.size; i += 1) {

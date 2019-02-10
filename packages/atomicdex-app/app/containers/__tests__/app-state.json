@@ -124,167 +124,218 @@
       ]
     },
     "balance": {
-      "init": true,
-      "loading": false,
-      "error": false,
-      "coins": [
-        {
-          "symbol": "BTC",
-          "marketcap": 97822306639
+      "fetchStatus": {
+        "EQL": "LOADED",
+        "CHAIN": "LOADED",
+        "KMD": "LOADED",
+        "BCH": "LOADED",
+        "CHIPS": "LOADED",
+        "PIZZA": "LOADED",
+        "KMDICE": "LOADED",
+        "VRSC": "LOADED",
+        "BEER": "LOADED",
+        "BTC": "LOADED",
+        "ZEC": "LOADED",
+        "COQUI": "LOADED",
+        "LTC": "FAILED",
+        "QTUM": "LOADING"
+      },
+      "errors": {
+        "EQL": null,
+        "CHAIN": null,
+        "KMD": null,
+        "BCH": null,
+        "CHIPS": null,
+        "PIZZA": null,
+        "KMDICE": null,
+        "VRSC": null,
+        "BEER": null,
+        "BTC": null,
+        "ZEC": null,
+        "COQUI": null,
+        "LTC": {
+          "context": {
+            "action": "atomicapp/App/ELECTRUM_ADD",
+            "params": {
+              "txfee": 100000,
+              "urls": [
+                "electrum1.cipig.net:10065",
+                "electrum2.cipig.net:10065"
+              ],
+              "active": 1,
+              "rpcport": 9332,
+              "name": "Litecoin",
+              "wiftype": 176,
+              "market_cap": 2578993869,
+              "asset": "LTC",
+              "coin": "LTC",
+              "p2shtype": 5,
+              "txversion": 4,
+              "pubtype": 48
+            }
+          },
+          "type": "RPC",
+          "message": "Request failed with status code 500"
         },
-        {
-          "symbol": "LTC",
-          "marketcap": 2578993869
-        },
-        {
-          "symbol": "KMD",
-          "marketcap": 107340275
-        },
-        {
-          "symbol": "VRSC",
-          "marketcap": 1609044
-        },
-        {
-          "symbol": "CHIPS",
-          "marketcap": 1609044
-        },
-        {
-          "symbol": "EQL",
-          "marketcap": 0
-        },
-        {
-          "symbol": "PIZZA",
-          "marketcap": 0
-        },
-        {
-          "symbol": "BEER",
-          "marketcap": 0
-        },
-        {
-          "symbol": "COQUI",
-          "marketcap": 0
-        }
+        "QTUM": null
+      },
+      "list": [
+        { "symbol": "BTC", "status": "ENABLE", "marketcap": 97822306639 },
+        { "symbol": "LTC", "status": "DISABLE", "marketcap": 2578993869 },
+        { "symbol": "BCH", "status": "ENABLE", "marketcap": 2197468013 },
+        { "symbol": "ZEC", "status": "ENABLE", "marketcap": 289458275 },
+        { "symbol": "QTUM", "status": "ENABLE", "marketcap": 167615207 },
+        { "symbol": "KMD", "status": "ENABLE", "marketcap": 107340275 },
+        { "symbol": "CHIPS", "status": "ENABLE", "marketcap": 1609044 },
+        { "symbol": "VRSC", "status": "ENABLE", "marketcap": 1609044 },
+        { "symbol": "EQL", "status": "ENABLE", "marketcap": 0 },
+        { "symbol": "COQUI", "status": "ENABLE", "marketcap": 0 },
+        { "symbol": "KMDICE", "status": "ENABLE", "marketcap": 0 },
+        { "symbol": "CHAIN", "status": "ENABLE", "marketcap": 0 },
+        { "symbol": "BEER", "status": "ENABLE", "marketcap": -1 },
+        { "symbol": "PIZZA", "status": "ENABLE", "marketcap": -2 }
       ],
       "entities": {
         "EQL": {
           "coin": "EQL",
           "address": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
           "balance": 2.11114249,
-          "fee": 0.00001,
-          "loading": false,
-          "error": false
+          "fee": 0.00001
+        },
+        "CHAIN": {
+          "coin": "CHAIN",
+          "address": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
+          "balance": 0,
+          "fee": 0.00001
         },
         "KMD": {
           "coin": "KMD",
           "address": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
           "balance": 0.5046568,
-          "fee": 0.00001,
-          "loading": false,
-          "error": false
+          "fee": 0.00001
+        },
+        "BCH": {
+          "coin": "BCH",
+          "address": "1HD77JGnkyqtj3ESgqjG18aJkb41aknPyv",
+          "balance": 0,
+          "fee": 0.00001
         },
         "CHIPS": {
           "coin": "CHIPS",
           "address": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
           "balance": 8.48405383,
-          "fee": 0.0001,
-          "loading": false,
-          "error": false
+          "fee": 0.0001
         },
         "PIZZA": {
           "coin": "PIZZA",
           "address": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
-          "balance": 0.67694,
-          "fee": 0.00001,
-          "loading": false,
-          "error": false
+          "balance": 10.4758253,
+          "fee": 0.00001
+        },
+        "KMDICE": {
+          "coin": "KMDICE",
+          "address": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
+          "balance": 0,
+          "fee": 0.00001
         },
         "VRSC": {
           "coin": "VRSC",
-          "address": "1HD77JGnkyqtj3ESgqjG18aJkb41aknPyv",
+          "address": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
           "balance": 0,
-          "fee": 0.00001,
-          "loading": false,
-          "error": false
+          "fee": 0.00001
         },
         "BEER": {
           "coin": "BEER",
           "address": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
-          "balance": 6523.80032824,
-          "fee": 0.00001,
-          "loading": false,
-          "error": false
+          "balance": 6502.66989074,
+          "fee": 0.00001
         },
         "BTC": {
           "coin": "BTC",
           "address": "1HD77JGnkyqtj3ESgqjG18aJkb41aknPyv",
           "balance": 0,
-          "fee": 0.0002,
-          "loading": false,
-          "error": false
+          "fee": 0.0002
+        },
+        "ZEC": {
+          "coin": "ZEC",
+          "address": "t1a5i7dgvjJdVKgHLdGYP8wgE1FF6ShTR2G",
+          "balance": 0,
+          "fee": 0.0001
         },
         "COQUI": {
           "coin": "COQUI",
           "address": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
-          "balance": 724.69719507,
-          "fee": 0.00001,
-          "loading": false,
-          "error": false
+          "balance": 777.45382428,
+          "fee": 0.00001
         },
-        "LTC": {
-          "coin": "LTC",
-          "address": "LbS4NWacqe5wyqvbryiZH9e4xoRHk9WNUJ",
+        "LTC": { "coin": "LTC", "address": "", "balance": 0, "fee": 0 },
+        "QTUM": {
+          "coin": "QTUM",
+          "address": "Qcp6DbZVwSiiABKU7B3k8QMwFqzir5gWz5",
           "balance": 0,
-          "fee": 0.001,
-          "loading": false,
-          "error": false
+          "fee": 0.004
         }
       }
     },
     "marketcap": {
-      "EQL": {
-        "id": 2,
-        "name": "Equaliser",
-        "symbol": "EQL",
+      "EQL": { "id": 2, "name": "Equaliser", "symbol": "EQL", "marketcap": 0 },
+      "CHAIN": {
+        "id": 8,
+        "name": "Chainmakers",
+        "symbol": "CHAIN",
         "marketcap": 0
       },
       "KMD": {
-        "id": 0,
+        "id": 1,
         "name": "Komodo",
         "symbol": "KMD",
         "marketcap": 107340275
       },
+      "BCH": {
+        "id": 9,
+        "name": "Bitcoin Cash",
+        "symbol": "BCH",
+        "marketcap": 2197468013
+      },
       "CHIPS": {
-        "id": 7,
+        "id": 5,
         "name": "Chips",
         "symbol": "CHIPS",
         "marketcap": 1609044
       },
       "PIZZA": {
-        "id": 4,
+        "id": 12,
         "name": "Pizza",
         "symbol": "PIZZA",
+        "marketcap": -2
+      },
+      "KMDICE": {
+        "id": 7,
+        "name": "KMDICE",
+        "symbol": "KMDICE",
         "marketcap": 0
       },
       "VRSC": {
-        "id": 8,
+        "id": 6,
         "name": "VerusCoin",
         "symbol": "VRSC",
         "marketcap": 1609044
       },
-      "BEER": {
-        "id": 5,
-        "name": "Beer",
-        "symbol": "BEER",
-        "marketcap": 0
-      },
+      "BEER": { "id": 13, "name": "Beer", "symbol": "BEER", "marketcap": -1 },
       "BTC": {
-        "id": 1,
+        "id": 0,
         "name": "Bitcoin",
         "symbol": "BTC",
         "marketcap": 97822306639
       },
+      "ZEC": {
+        "id": 11,
+        "name": "Zcash",
+        "symbol": "ZEC",
+        "marketcap": 289458275
+      },
       "COQUI": {
-        "id": 6,
+        "id": 4,
         "name": "Coqui Cash",
         "symbol": "COQUI",
         "marketcap": 0
@@ -294,6 +345,12 @@
         "name": "Litecoin",
         "symbol": "LTC",
         "marketcap": 2578993869
+      },
+      "QTUM": {
+        "id": 10,
+        "name": "Qtum",
+        "symbol": "QTUM",
+        "marketcap": 167615207
       }
     }
   },

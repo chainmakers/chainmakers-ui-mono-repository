@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import FormControl from '@material-ui/core/FormControl';
@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 
 const debug = require('debug')('atomicapp:containers:LoginPage:Passphrase');
 
-type Props = {
+type IPassphraseProps = {
   loading: boolean,
   className: string,
   passphrase: string,
@@ -18,13 +18,11 @@ type Props = {
   onChange: Function
 };
 
-type State = {
+type IPassphraseState = {
   showPassword: boolean
 };
 
-class Passphrase extends Component<Props, State> {
-  props: Props;
-
+class Passphrase extends React.Component<IPassphraseProps, IPassphraseState> {
   state = {
     showPassword: false
   };

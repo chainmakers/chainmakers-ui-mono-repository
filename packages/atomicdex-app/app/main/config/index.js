@@ -7,7 +7,7 @@ import loadSymbol from './symbol';
 
 let config = null;
 
-export default function setup() {
+export function setup() {
   if (config) return config;
 
   config = configManager();
@@ -22,3 +22,5 @@ export default function setup() {
 
   return config;
 }
+
+export default setup();

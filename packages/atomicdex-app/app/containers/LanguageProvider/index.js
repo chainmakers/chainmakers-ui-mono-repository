@@ -5,17 +5,16 @@ import type { Node } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { IntlProvider } from 'react-intl';
-
 import { makeSelectLocale } from './selectors';
 
-type Props = {
+type IProviderProps = {
   locale: string,
   // eslint-disable-next-line flowtype/no-weak-types
   messages: Object,
   children: Node
 };
 
-export class Provider extends React.PureComponent<Props> {
+export class Provider extends React.PureComponent<IProviderProps> {
   render() {
     const { locale, messages, children } = this.props;
 
@@ -34,6 +33,4 @@ const mapStateToProps = createSelector(
   })
 );
 
-const Index = connect(mapStateToProps)(Provider);
-
-export default Index;
+export default connect(mapStateToProps)(Provider);

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-named-as-default */
 // @flow
 import React from 'react';
 import { compose } from 'redux';
@@ -32,15 +31,13 @@ const debug = require('debug')('atomicapp:containers:DexPage');
 
 const styles = () => ({});
 
-type Props = {};
+type IDexPageProps = {};
 
-type State = {
+type IDexPageState = {
   value: number
 };
 
-class DexPage extends React.Component<Props, State> {
-  props: Props;
-
+class DexPage extends React.Component<IDexPageProps, IDexPageState> {
   state = {
     value: 0
   };
@@ -105,7 +102,7 @@ const withWebsocket = injectWebsocket({
   subscribe
 });
 
-const DexPageWapper = compose(
+export default compose(
   withReducer,
   withSaga,
   withSagaTimeout,
@@ -113,6 +110,3 @@ const DexPageWapper = compose(
   withWebsocket,
   withStyles(styles)
 )(DexPage);
-
-export default DexPageWapper;
-/* eslint-enable import/no-named-as-default */

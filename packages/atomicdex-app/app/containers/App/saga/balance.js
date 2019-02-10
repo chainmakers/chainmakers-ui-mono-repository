@@ -1,0 +1,95 @@
+// @flow
+// @docs
+// https://github.com/react-boilerplate/react-boilerplate/issues/1277#issuecomment-263267639
+import { put, select, cancelled } from 'redux-saga/effects';
+import { CANCEL } from 'redux-saga';
+import { ENABLE } from '../../../constants';
+import { BALANCE_LOAD } from '../constants';
+import api from '../../../lib/barter-dex-api';
+import { openSnackbars } from '../../Snackbars/actions';
+import { makeSelectBalance } from '../selectors';
+import { loadBalance, loadBalanceSuccess, loadBalanceError } from '../actions';
+import type { LoadbalacePayload } from '../schema';
+
+const debug = require('debug')('atomicapp:containers:App:saga:balance');
+
+export default function* listenForLoadingBalance() {
+  debug(`listen for loading balance`);
+  // load balance data
+  const balance = yield select(makeSelectBalance());
+
+  const list = balance
+    .get('list')
+    .filter(item => item.get('status') === ENABLE)
+    .map(e => e.get('symbol'));
+
+  for (let i = 0; i < list.size; i += 1) {
+    // dispatch actions
+    yield put(
+      loadBalance({
+        coin: list.get(i)
+      })
+    );
+  }
+}
+
+export function* handlingLoadBalance({
+  payload
+}: {
+  payload: LoadbalacePayload
+}) {
+  debug(`load ${payload.coin} balance`);
+  let balanceRequest;
+  let feeRequest;
+  try {
+    // if (payload.coin === 'BEER') {
+    //   throw new Error('test some error');
+    // }
+
+    balanceRequest = api.myBalance(payload);
+    feeRequest = api.getfee({
+      coin: payload.coin
+    });
+    const balanceReponse = yield balanceRequest;
+    const feeResponse = yield feeRequest;
+    yield put(
+      loadBalanceSuccess({
+        coin: payload.coin,
+        address: balanceReponse.address,
+        balance: balanceReponse.balance,
+        fee: feeResponse.txfee
+      })
+    );
+  } catch (err) {
+    debug(`loading ${payload.coin} balance error: ${err.message}`);
+    yield put(
+      loadBalanceError({
+        context: {
+          action: BALANCE_LOAD,
+          params: payload
+        },
+        type: 'RPC',
+        message: err.message
+      })
+    );
+  } finally {
+    if (yield cancelled()) {
+      debug(`loading ${payload.coin} balance cancelled`);
+      if (balanceRequest && balanceRequest[CANCEL]) {
+        balanceRequest[CANCEL]();
+      }
+      if (feeRequest && feeRequest[CANCEL]) {
+        feeRequest[CANCEL]();
+      }
+    }
+  }
+}
+
+// export function* handlingLoadBalanceSuccess(a1, a2, a3, a4) {
+//   console.log(a1, a2, a3, a4);
+// }
+
+export function* handlingLoadBalanceError({ error }) {
+  debug(`handling load balance error: ${error.message}`);
+  yield put(openSnackbars(error.message));
+}

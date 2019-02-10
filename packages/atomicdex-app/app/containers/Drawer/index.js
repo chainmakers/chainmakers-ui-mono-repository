@@ -97,8 +97,7 @@ const styles = theme => ({
 });
 
 type Props = {
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object,
+  classes: Styles,
   // eslint-disable-next-line flowtype/no-weak-types
   history: Object,
   location: Location,
@@ -175,16 +174,11 @@ class DICDrawer extends Component<Props, State> {
           </IconButton>
         </div>
         <List>
-          {/* <ListItem button selected onClick={this.gotoDashboardPage}>
-            <ListItemIcon selected>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-          </ListItem> */}
           <ListItem
             button
             className={classNames(classes.drawer__icon, {
-              [classes.drawer__iconSelected]: pathname === routes.WALLET
+              [classes.drawer__iconSelected]:
+                pathname === routes.WALLET || pathname === routes.HOME
             })}
             onClick={this.gotoWalletPage}
           >

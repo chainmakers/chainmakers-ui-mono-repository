@@ -4,28 +4,6 @@ import httpProvider from '../http-provider';
 const TEST_URL = 'http://127.0.0.1:7783';
 
 describe('packages/barterdex-api/src/client/http-provider', () => {
-  it('should handle the get correctly', async () => {
-    nock(TEST_URL)
-      .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-      .persist()
-      .get(() => true)
-      .reply(200, (uri, body, cb) => {
-        cb(null, {
-          uri,
-          body
-        });
-      });
-    const state = {
-      userpass: null
-    };
-    const api = Object.assign({}, httpProvider(state, TEST_URL));
-    let res = await api.get({
-      song: 'perfect'
-    });
-    expect(res).toEqual({ uri: '/?song=perfect', body: '' });
-    res = await api.get();
-    expect(res).toEqual({ uri: '/', body: '' });
-  });
 
   it('should handle the privateCall correctly', async () => {
     nock(TEST_URL)
@@ -67,37 +45,15 @@ describe('packages/barterdex-api/src/client/http-provider', () => {
     expect(api.getQueueId()).toEqual(2);
   });
 
-  it('should handle the publicCall correctly', async () => {
-    nock(TEST_URL)
-      .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-      .persist()
-      .post(() => true)
-      .reply(200, (uri, body, cb) => {
-        cb(null, {
-          uri,
-          body
-        });
-      });
+  it('should handle the userpass correctly', async () => {
     const state = {
-      userpass: 'userpass'
+      userpass: null
     };
     const api = Object.assign({}, httpProvider(state, TEST_URL));
-    let res = await api.publicCall({
-      song: 'perfect'
-    });
-
-    expect(res).toEqual({ uri: '/', body: '{"queueid":0,"song":"perfect"}' });
-
-    api.setQueueId(1);
-    res = await api.publicCall(
-      {
-        song: 'perfect'
-      },
-      {
-        useQueue: true
-      }
-    );
-    expect(res).toEqual({ uri: '/', body: '{"queueid":1,"song":"perfect"}' });
-    expect(api.getQueueId()).toEqual(2);
+    expect(api.getUserpass()).toEqual(null);
+    api.setUserpass('a');
+    expect(api.getUserpass()).toEqual('ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb');
+    api.resetUserpass();
+    expect(api.getUserpass()).toEqual(null);
   });
 });

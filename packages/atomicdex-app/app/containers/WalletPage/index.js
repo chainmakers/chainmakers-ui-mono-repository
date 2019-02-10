@@ -20,7 +20,6 @@ import HeaderTabs from './components/HeaderTabs';
 import TransactionsTab from './TransactionsTab';
 import WithdrawModal from './WithdrawModal';
 import DepositModal from './DepositModal';
-// import UtxosModal from './UtxosModal';
 import PortfolioTab from './PortfolioTab';
 import ProgressBar from './ProgressBar';
 import reducer from './reducer';
@@ -54,8 +53,6 @@ const styles = () => ({
 const debug = require('debug')('atomicapp:containers:WalletPage');
 
 class WalletPage extends Component<Props, State> {
-  props: Props;
-
   state = {
     value: 0
   };
@@ -121,7 +118,6 @@ class WalletPage extends Component<Props, State> {
         </NavigationLayout>
         <WithdrawModal />
         <DepositModal />
-        {/* <UtxosModal /> */}
       </React.Fragment>
     );
   }

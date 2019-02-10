@@ -10,7 +10,6 @@ describe('packages/barterdex-api/src/server/index', () => {
     expect(typeof d.start).toBe("function");
     expect(typeof d.stop).toBe("function");
     expect(typeof d.isRunning).toBe("function");
-    expect(typeof d.isReady).toBe("function");
     expect(typeof d.on).toBe("function");
     expect(typeof d.getState).toBe("function");
     expect(d.getState()).toEqual({

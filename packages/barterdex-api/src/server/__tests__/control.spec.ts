@@ -23,8 +23,6 @@ describe("packages/barterdex-api/src/server/control", () => {
     expect(typeof control.start).toBe("function");
     expect(typeof control.stop).toBe("function");
     expect(typeof control.isRunning).toBe("function");
-    expect(typeof control.isReady).toBe("function");
-    expect(typeof control.waitUntilReady).toBe("function");
     expect(typeof control.on).toBe("function");
   });
 
@@ -34,7 +32,6 @@ describe("packages/barterdex-api/src/server/control", () => {
     if (fs.existsSync(userData)) {
       execSync(`rm -rf ${userData}`);
     }
-    control.getInfo = () => Promise.reject(new Error("not ready"));
 
     let resultStart = await control.start({
       marketmakerPath: path.join(__dirname, "app"),
@@ -54,12 +51,7 @@ describe("packages/barterdex-api/src/server/control", () => {
 
     expect(resultStart).toEqual({ ok: "done" });
     expect(control.isRunning()).toEqual(true);
-    expect(await control.isReady()).toEqual({ ok: "failed" });
     expect(fs.existsSync(userData)).toEqual(true);
-
-    control.getInfo = () => Promise.resolve({});
-    expect(await control.isReady()).toEqual({ ok: "done" });
-    expect(await control.waitUntilReady()).toEqual({ ok: "done" });
 
     control.on("exit", (code, signal) => {
       expect(code).toEqual(null);
@@ -70,7 +62,6 @@ describe("packages/barterdex-api/src/server/control", () => {
     const resultStop = await control.stop();
     expect(resultStop).toEqual({ ok: "done" });
 
-    control.getInfo = undefined;
   });
 
 });

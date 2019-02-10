@@ -15,7 +15,7 @@ import {
   makeSelectBalanceEntities,
   makeSelectBalanceLoading
 } from '../App/selectors';
-import { loadBalance } from '../App/actions';
+import { loadAllBalance } from '../App/actions';
 import AmountSection from './components/AmountSection';
 import CurrencySection from './components/CurrencySection';
 import PaymentSection from './components/PaymentSection';
@@ -54,12 +54,11 @@ const styles = () => ({
 
 type Props = {
   balanceLoading: boolean,
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object,
+  classes: Styles,
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchLoadPrices: Function,
   // eslint-disable-next-line flowtype/no-weak-types
-  dispatchLoadBalance: Function,
+  dispatchLoadAllBalance: Function,
   // eslint-disable-next-line flowtype/no-weak-types
   balance: Object
 };
@@ -67,11 +66,10 @@ type Props = {
 type State = {};
 
 class PlaceOrder extends Component<Props, State> {
-
   componentDidMount = () => {
-    const { dispatchLoadBalance } = this.props;
+    const { dispatchLoadAllBalance } = this.props;
 
-    dispatchLoadBalance();
+    dispatchLoadAllBalance();
   };
 
   onReloadPrices = (evt: SyntheticInputEvent<>) => {
@@ -143,7 +141,7 @@ class PlaceOrder extends Component<Props, State> {
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   return {
     dispatchLoadPrices: () => dispatch(loadPrices()),
-    dispatchLoadBalance: () => dispatch(loadBalance())
+    dispatchLoadAllBalance: () => dispatch(loadAllBalance())
   };
 }
 

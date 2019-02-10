@@ -1,9 +1,5 @@
 import logoutDialogReducer, { initialState } from '../reducer';
-import {
-  showLogoutDialog,
-  cancelLogoutDialog,
-  agreeLogoutDialog
-} from '../actions';
+import { showLogoutDialog, hideLogoutDialog } from '../actions';
 
 describe('containers/LogoutDialog/reducers/initial', () => {
   it('should return the initial state', () => {
@@ -21,21 +17,11 @@ describe('containers/LogoutDialog/reducers/showLogoutDialog', () => {
   });
 });
 
-describe('containers/LogoutDialog/reducers/cancelLogoutDialog', () => {
-  it('should handle the cancelLogoutDialog action correctly', () => {
+describe('containers/LogoutDialog/reducers/hideLogoutDialog', () => {
+  it('should handle the hideLogoutDialog action correctly', () => {
     const expectedResult = initialState.set('show', false);
 
-    expect(logoutDialogReducer(initialState, cancelLogoutDialog())).toEqual(
-      expectedResult
-    );
-  });
-});
-
-describe('containers/LogoutDialog/reducers/agreeLogoutDialog', () => {
-  it('should handle the agreeLogoutDialog action correctly', () => {
-    const expectedResult = initialState.set('show', false);
-
-    expect(logoutDialogReducer(initialState, agreeLogoutDialog())).toEqual(
+    expect(logoutDialogReducer(initialState, hideLogoutDialog())).toEqual(
       expectedResult
     );
   });

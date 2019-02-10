@@ -13,20 +13,22 @@
 import { app, BrowserWindow } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import MenuBuilder from './main/menu';
-import marketmaker from './main/plugins/marketmaker';
-import getConfig from './main/config';
-import { marketmakerCrashedDialog } from './main/dialogs';
+import config from './main/config';
+import setupMarketmaker from './main/plugins/marketmaker';
+import { applicationCrashedDialog } from './main/dialogs';
 
 const debug = require('debug')('atomicapp:main');
 
+// const log = require('electron-log');
+// log.transports.file.file = __dirname + '/log.txt';
+
 export default class AppUpdater {
   constructor() {
-    autoUpdater.logger = debug;
+    // (node:6511) UnhandledPromiseRejectionWarning: TypeError: this._logger.info is not a function
+    // autoUpdater.logger = debug;
     autoUpdater.checkForUpdatesAndNotify();
   }
 }
-
-const config = getConfig();
 
 let mainWindow = null;
 
@@ -94,17 +96,13 @@ app.on('ready', async () => {
         throw new Error('"mainWindow" is not defined');
       }
 
-      // marketmaker
-      await marketmaker.start({
-        userData: config.get('paths.userDataDir'),
-        coins: config.get('marketmaker.data')
-      });
-      // await marketmaker.waitUntilReady();
+      debug('setup mm2 app');
+      setupMarketmaker();
 
       mainWindow.show();
       mainWindow.focus();
     } catch (err) {
-      marketmakerCrashedDialog(err);
+      applicationCrashedDialog(err);
     }
   });
 

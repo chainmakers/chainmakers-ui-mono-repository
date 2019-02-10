@@ -1,28 +1,22 @@
-/* eslint-disable import/no-named-as-default */
 // @flow
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import LinearProgress from '../../components/ProgressBar';
-import { makeSelectBalanceLoading } from '../App/selectors';
 import { makeSelectTransactionsLoading } from './selectors';
 
-const debug = require('debug')('atomicapp:containers:BuyPage:ProgressBar');
+const debug = require('debug')('atomicapp:containers:WalletPage:ProgressBar');
 
-type Props = {
-  balanceLoading: boolean,
+type IProgressBarProps = {
   transactionsLoading: boolean
 };
 
-export class ProgressBar extends PureComponent<Props> {
-  props: Props;
-
+export class ProgressBarUI extends React.PureComponent<IProgressBarProps> {
   render() {
     debug('render');
-
-    const { balanceLoading, transactionsLoading } = this.props;
-    if (balanceLoading || transactionsLoading) {
+    const { transactionsLoading } = this.props;
+    if (transactionsLoading) {
       return <LinearProgress />;
     }
     return null;
@@ -30,8 +24,7 @@ export class ProgressBar extends PureComponent<Props> {
 }
 
 const mapStateToProps = createStructuredSelector({
-  transactionsLoading: makeSelectTransactionsLoading(),
-  balanceLoading: makeSelectBalanceLoading()
+  transactionsLoading: makeSelectTransactionsLoading()
 });
 
 const withConnect = connect(
@@ -39,7 +32,4 @@ const withConnect = connect(
   null
 );
 
-const ProgressBarWapper = compose(withConnect)(ProgressBar);
-
-export default ProgressBarWapper;
-/* eslint-enable import/no-named-as-default */
+export default compose(withConnect)(ProgressBarUI);

@@ -94,17 +94,15 @@ export function* loadPriceProcess({ payload }) {
 
 export default function* loadPricesProcess() {
   try {
-    const balance = yield select(makeSelectBalanceList());
-
+    let list = yield select(makeSelectBalanceList());
+    list = list.map(e => e.get('symbol'));
     const requests = [];
-    for (let i = 0; i < balance.size; i += 1) {
-      const coin = balance.get(i);
+    for (let i = 0; i < list.size; i += 1) {
+      const coin = list.get(i);
       requests.push(call(loadPrice, coin));
     }
-
     const data = yield all(requests);
     debug('load prices process', data);
-
     return yield put(loadPricesSuccess());
   } catch (err) {
     return yield put(loadPricesError(err.message));

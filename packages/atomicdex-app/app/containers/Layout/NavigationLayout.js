@@ -1,11 +1,12 @@
 // @flow
-import React, { PureComponent } from 'react';
+import React from 'react';
 import type { ChildrenArray } from 'react';
 // import { remote } from 'electron';
 // import { setWindowBounds } from 'electron-util';
 import { withStyles } from '@material-ui/core/styles';
 // import Typography from '@material-ui/core/Typography';
 // import { minWindowSize } from '../../config/config-default';
+import ProgressBar from './ProgressBar';
 import DICDrawer from '../Drawer';
 
 const debug = require('debug')('atomicapp:containers:layout:NavigationLayout');
@@ -47,18 +48,18 @@ const styles = theme => ({
   }
 });
 
-type Props = {
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object,
+type INavigationLayoutProps = {
+  classes: Styles,
   // eslint-disable-next-line flowtype/no-weak-types
   children: ChildrenArray<any>
 };
 
-class NavigationLayout extends PureComponent<Props> {
+class NavigationLayout extends React.PureComponent<INavigationLayoutProps> {
   // constructor(props) {
   //   super(props);
   //   setAppWindowBounds();
   // }
+  static displayName = 'NavigationLayout';
 
   static defaultProps = {};
 
@@ -69,6 +70,7 @@ class NavigationLayout extends PureComponent<Props> {
 
     return (
       <React.Fragment>
+        <ProgressBar />
         <aside className={classes.dicoDrawer}>
           <DICDrawer />
         </aside>
@@ -88,7 +90,5 @@ class NavigationLayout extends PureComponent<Props> {
     );
   }
 }
-
-NavigationLayout.displayName = 'NavigationLayout';
 
 export default withStyles(styles)(NavigationLayout);

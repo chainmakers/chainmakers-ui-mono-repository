@@ -1,35 +1,27 @@
+// @flow
 // https://github.com/sotojuan/saga-login-flow/blob/master/app/sagas/index.js
-import { all, take, race, call, put } from 'redux-saga/effects';
+import ipc from 'electron-better-ipc';
+import { take, race, call, put } from 'redux-saga/effects';
 import { takeFirst } from 'barterdex-rssm';
 import { LOGIN, LOGOUT } from '../App/constants';
-import { loginSuccess, loginError } from '../App/actions';
+import { loginSuccess, loginError, loadElectrums } from '../App/actions';
 import api from '../../lib/barter-dex-api';
-import getConfig from '../../utils/config';
 
 const debug = require('debug')('atomicapp:containers:LoginPage:saga');
-
-const config = getConfig();
 
 export function* authorize(passphrase) {
   try {
     debug(`authorize is running`);
-    const data = yield call([api, 'login'], passphrase);
-    const servers = config.get('marketmaker.electrums');
+    const data = yield call([ipc, 'callMain'], 'marketmaker:start', passphrase);
 
-    const requests = [];
-    for (let i = 0; i < servers.length; i += 1) {
-      requests.push(call([api, 'addServer'], servers[i]));
+    if (data.ok === 'failed') {
+      throw new Error(data.message);
     }
 
-    const result = yield all(requests);
-    result.forEach(element => {
-      if (element.result === 'success') {
-        debug(`adding ${element.ipaddr}:${element.port} is successfully`);
-      }
-      if (element.error) {
-        debug(`${element.ipaddr}:${element.port} ${element.error}`);
-      }
-    });
+    api.setUserpass(passphrase);
+    yield call([api, 'waitUntilReady']);
+    yield put(loadElectrums());
+
     return data;
   } catch (err) {
     yield put(
@@ -72,3 +64,6 @@ export function* loginFlow({ payload }) {
 export default function* root() {
   yield takeFirst(LOGIN, loginFlow);
 }
+
+// NOTE: For testing only
+window.api = api;

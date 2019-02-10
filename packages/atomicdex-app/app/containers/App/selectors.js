@@ -1,8 +1,7 @@
-/**
- * The global state selectors
- */
-
+// @flow
+// The global state selectors
 import { createSelector } from 'reselect';
+import { LOADING, ENABLE } from '../../constants';
 import { APP_STATE_NAME } from './constants';
 
 const selectGlobal = state => state.get(APP_STATE_NAME);
@@ -39,11 +38,7 @@ const makeSelectLocation = () =>
     routeState => routeState.get('location').toJS()
   );
 
-const makeSelectUserpass = () =>
-  createSelector(
-    makeSelectCurrentUser(),
-    user => user.get('userpass')
-  );
+// -- //
 
 const makeSelectBalance = () =>
   createSelector(
@@ -51,28 +46,23 @@ const makeSelectBalance = () =>
     globalState => globalState.get('balance')
   );
 
+const makeSelectBalanceFetchStatus = () =>
+  createSelector(
+    makeSelectBalance(),
+    balanceState => balanceState.get('fetchStatus')
+  );
+
 const makeSelectBalanceLoading = () =>
   createSelector(
     makeSelectBalance(),
-    balanceState => balanceState.get('loading')
-  );
-
-const makeSelectBalanceInit = () =>
-  createSelector(
-    makeSelectBalance(),
-    balanceState => balanceState.get('init')
-  );
-
-const makeSelectBalanceError = () =>
-  createSelector(
-    makeSelectBalance(),
-    balanceState => balanceState.get('error')
+    balanceState =>
+      !!balanceState.get('fetchStatus').find(val => val === LOADING)
   );
 
 const makeSelectBalanceList = () =>
   createSelector(
     makeSelectBalance(),
-    balanceState => balanceState.get('coins').map(e => e.get('symbol'))
+    balanceState => balanceState.get('list')
   );
 
 const makeSelectBalanceEntities = () =>
@@ -81,13 +71,29 @@ const makeSelectBalanceEntities = () =>
     balanceState => balanceState.get('entities')
   );
 
+const makeSelectBalanceErrors = () =>
+  createSelector(
+    makeSelectBalance(),
+    balanceState => balanceState.get('errors')
+  );
+
 const makeSelectBalanceAvailable = () =>
   createSelector(
-    makeSelectBalanceList(),
-    makeSelectBalanceEntities(),
-    (list, entities) =>
-      list.map(key => entities.get(key)).filter(value => value.get('balance'))
+    makeSelectBalance(),
+    balanceState => {
+      const list = balanceState
+        .get('list')
+        .filter(item => item.get('status') === ENABLE)
+        .map(e => e.get('symbol'));
+      const entities = balanceState.get('entities');
+
+      return list
+        .map(key => entities.get(key))
+        .filter(value => value.get('balance'));
+    }
   );
+
+// -- //
 
 export {
   selectGlobal,
@@ -96,11 +102,10 @@ export {
   makeSelectLoading,
   makeSelectError,
   makeSelectLocation,
-  makeSelectUserpass,
   makeSelectBalance,
+  makeSelectBalanceFetchStatus,
   makeSelectBalanceLoading,
-  makeSelectBalanceInit,
-  makeSelectBalanceError,
+  makeSelectBalanceErrors,
   makeSelectBalanceList,
   makeSelectBalanceEntities,
   makeSelectBalanceAvailable

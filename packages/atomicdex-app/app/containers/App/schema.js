@@ -10,12 +10,8 @@ type UTXOType = {
   value: number
 };
 
-type BalancePayload = {
-  address: string,
-  balance: number,
-  coin: string,
-  fee: number
-  // utxo: Array<UTXOType>
+type LoginError = {
+  message: string
 };
 
 type EelectrumServerType = {
@@ -32,21 +28,36 @@ type CoinConfigType = {
   active: number
 };
 
-export type { UTXOType, BalancePayload, CoinConfigType };
+type AddElectrumPayload = {
+  txversion: number,
+  urls: Array<string>,
+  coin: string
+};
 
-// {
-//   coin: 'KMD',
-//   name: 'Komodo',
-//   electrumServers: [
-//     {
-//       host: 'electrum1.cipig.net',
-//       port: 10001
-//     },
-//     {
-//       host: 'electrum2.cipig.net',
-//       port: 10001
-//     }
-//   ],
-//   active: 1,
-//   market_cap: 107340275.0
-// }
+type AddElectrumSuccessPayload = {
+  address: string,
+  balance: number,
+  coin: string,
+  fee: number
+};
+
+type LoadbalacePayload = {
+  coin: string
+};
+
+type LoadBalanceSuccessPayload = {
+  address: string,
+  balance: number,
+  coin: string,
+  fee: number
+};
+
+export type {
+  UTXOType,
+  LoginError,
+  CoinConfigType,
+  AddElectrumPayload,
+  AddElectrumSuccessPayload,
+  LoadbalacePayload,
+  LoadBalanceSuccessPayload
+};
