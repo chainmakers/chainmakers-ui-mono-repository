@@ -1,6 +1,7 @@
 // @flow
 import {
   login,
+  loginSuccess,
   logout,
   loadBalance,
   loadElectrums,
@@ -13,6 +14,7 @@ import {
 } from '../actions';
 import {
   LOGIN,
+  LOGIN_SUCCESS,
   ELECTRUM_LOAD,
   ELECTRUM_ADD,
   ELECTRUM_ADD_SUCCESS,
@@ -24,28 +26,11 @@ import {
 } from '../constants';
 import type { ErrorType } from '../../schema';
 import type {
+  LoginPayload,
   AddElectrumPayload,
   AddElectrumSuccessPayload,
   LoadBalanceSuccessPayload
 } from '../schema';
-
-describe('containers/App/actions/login', () => {
-  const passphrase = 'passphrase';
-  it('should login should create login action', () => {
-    expect(login(passphrase)).toMatchSnapshot();
-  });
-
-  it('should return the correct type and the passed name', () => {
-    const expectedResult = {
-      type: LOGIN,
-      payload: {
-        passphrase
-      }
-    };
-
-    expect(login(passphrase)).toEqual(expectedResult);
-  });
-});
 
 describe('containers/App/actions/logout', () => {
   it('should logout should create logout action', () => {
@@ -220,5 +205,37 @@ describe('containers/App/actions/loadBalanceError', () => {
     };
 
     expect(loadBalanceError(error)).toEqual(expectedResult);
+  });
+});
+
+describe('containers/App/actions/login', () => {
+  const payload: LoginPayload = {
+    passphrase: 'passphrase'
+  };
+  it('should login should create login action', () => {
+    expect(login(payload)).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: LOGIN,
+      payload
+    };
+
+    expect(login(payload)).toEqual(expectedResult);
+  });
+});
+
+describe('containers/App/actions/loginSuccess', () => {
+  it('should loginSuccess should create loginSuccess action', () => {
+    expect(loginSuccess()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: LOGIN_SUCCESS
+    };
+
+    expect(loginSuccess()).toEqual(expectedResult);
   });
 });

@@ -3,13 +3,13 @@
 import ipc from 'electron-better-ipc';
 import { take, race, call, put } from 'redux-saga/effects';
 import { takeFirst } from 'barterdex-rssm';
+import api from '../../lib/barter-dex-api';
 import { LOGIN, LOGOUT } from '../App/constants';
 import { loginSuccess, loginError, loadElectrums } from '../App/actions';
-import api from '../../lib/barter-dex-api';
 
 const debug = require('debug')('atomicapp:containers:LoginPage:saga');
 
-export function* authorize(passphrase) {
+export function* authorize(passphrase: string) {
   try {
     debug(`authorize is running`);
     const data = yield call([ipc, 'callMain'], 'marketmaker:start', passphrase);
@@ -26,23 +26,17 @@ export function* authorize(passphrase) {
   } catch (err) {
     yield put(
       loginError({
+        context: {
+          action: LOGIN,
+          params: { passphrase }
+        },
+        type: 'RPC',
         message: err.message
       })
     );
     return false;
   }
 }
-
-/**
- * Root saga manages watcher lifecycle
- */
-// export default function* userData() {
-//   // Watches for LOAD_REPOS actions and calls getRepos when one comes in.
-//   // By using `takeLatest` only the result of the latest API call is applied.
-//   // It returns task descriptor (just like fork) so we can continue execution
-//   // It will be cancelled automatically on component unmount
-//   yield takeLatest(LOGIN, loginProcess);
-// }
 
 export function* loginFlow({ payload }) {
   debug(`login flow`);
@@ -56,14 +50,10 @@ export function* loginFlow({ payload }) {
   });
 
   if (winner.auth) {
-    yield put(loginSuccess(winner.auth));
-    // forwardTo('/dashboard') // Go to dashboard page
+    yield put(loginSuccess());
   }
 }
 
 export default function* root() {
   yield takeFirst(LOGIN, loginFlow);
 }
-
-// NOTE: For testing only
-window.api = api;

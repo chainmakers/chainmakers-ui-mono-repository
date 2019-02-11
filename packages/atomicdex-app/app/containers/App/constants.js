@@ -10,12 +10,6 @@
  */
 export const APP_STATE_NAME = 'global';
 
-export const LOGIN = 'atomicapp/App/LOGIN';
-export const LOGIN_SUCCESS = 'atomicapp/App/LOGIN_SUCCESS';
-export const LOGIN_ERROR = 'atomicapp/App/LOGIN_ERROR';
-
-export const LOGOUT = 'atomicapp/App/LOGOUT';
-
 export const LOAD_WITHDRAW = 'atomicapp/App/LOAD_WITHDRAW';
 export const LOAD_WITHDRAW_SUCCESS = 'atomicapp/App/LOAD_WITHDRAW_SUCCESS';
 export const LOAD_WITHDRAW_ERROR = 'atomicapp/App/LOAD_WITHDRAW_ERROR';
@@ -33,3 +27,9 @@ export const BALANCE_LOAD_ALL = 'atomicapp/App/BALANCE_LOAD_ALL';
 export const BALANCE_LOAD = 'atomicapp/App/BALANCE_LOAD';
 export const BALANCE_LOAD_SUCCESS = 'atomicapp/App/BALANCE_LOAD_SUCCESS';
 export const BALANCE_LOAD_ERROR = 'atomicapp/App/BALANCE_LOAD_ERROR';
+
+// auth
+export const LOGIN = 'atomicapp/App/LOGIN';
+export const LOGIN_SUCCESS = 'atomicapp/App/LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'atomicapp/App/LOGIN_ERROR';
+export const LOGOUT = 'atomicapp/App/LOGOUT';

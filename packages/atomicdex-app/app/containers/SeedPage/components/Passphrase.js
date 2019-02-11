@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -45,9 +45,8 @@ const styles = () => ({
 
 const debug = require('debug')('atomicapp:containers:SeedPage:Passphrase');
 
-type Props = {
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object,
+type IPassphraseProps = {
+  classes: Styles,
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchGeneratePassphrase: Function,
   // eslint-disable-next-line flowtype/no-weak-types
@@ -57,20 +56,18 @@ type Props = {
   passphrase: string
 };
 
-type State = {
+type IPassphraseState = {
   supportedCopyCommandSupported: boolean
 };
 
-class Passphrase extends Component<Props, State> {
-  props: Props;
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      supportedCopyCommandSupported:
-        document && document.queryCommandSupported('copy')
-    };
-  }
+class Passphrase extends React.PureComponent<
+  IPassphraseProps,
+  IPassphraseState
+> {
+  state = {
+    supportedCopyCommandSupported:
+      document && document.queryCommandSupported('copy')
+  };
 
   copySeedToClipboard = async (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
@@ -88,7 +85,9 @@ class Passphrase extends Component<Props, State> {
     evt.preventDefault();
     const passphrase = generateSeed();
     const { dispatchGeneratePassphrase } = this.props;
-    dispatchGeneratePassphrase(passphrase);
+    dispatchGeneratePassphrase({
+      passphrase
+    });
   };
 
   render() {

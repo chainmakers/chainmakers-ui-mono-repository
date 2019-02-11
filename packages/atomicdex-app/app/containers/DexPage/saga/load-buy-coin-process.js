@@ -3,9 +3,7 @@ import swal from 'sweetalert';
 import { put, call, select, cancelled } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import api from '../../../lib/barter-dex-api';
-import {
-  makeSelectBalanceEntities
-} from '../../App/selectors';
+import { makeSelectBalanceEntities } from '../../App/selectors';
 import { loadBuyCoinError, loadBuyCoinSuccess } from '../actions';
 import { makeSelectPricesEntities } from '../selectors';
 import { NUMCOIN, APPROPRIATE_ERROR_UTXOS } from '../constants';

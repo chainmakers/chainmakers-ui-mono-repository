@@ -110,6 +110,12 @@ Object {
 }
 `;
 
+exports[`containers/App/actions/loginSuccess should loginSuccess should create loginSuccess action 1`] = `
+Object {
+  "type": "atomicapp/App/LOGIN_SUCCESS",
+}
+`;
+
 exports[`containers/App/actions/logout should logout should create logout action 1`] = `
 Object {
   "type": "atomicapp/App/LOGOUT",

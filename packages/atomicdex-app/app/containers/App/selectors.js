@@ -1,35 +1,17 @@
 // @flow
 // The global state selectors
 import { createSelector } from 'reselect';
-import { LOADING, ENABLE } from '../../constants';
+import { LOADING, ENABLE, STATE_STARTED, STATE_RUNNING } from '../../constants';
 import { APP_STATE_NAME } from './constants';
 
 const selectGlobal = state => state.get(APP_STATE_NAME);
 
 const selectRoute = state => state.get('route');
 
-const makeSelectCurrentUser = () =>
-  createSelector(
-    selectGlobal,
-    globalState => globalState.get('currentUser')
-  );
-
 const makeSelectAuthenticated = () =>
   createSelector(
     selectGlobal,
-    globalState => !!globalState.get('currentUser')
-  );
-
-const makeSelectLoading = () =>
-  createSelector(
-    selectGlobal,
-    globalState => globalState.get('loading')
-  );
-
-const makeSelectError = () =>
-  createSelector(
-    selectGlobal,
-    globalState => globalState.get('error')
+    globalState => globalState.getIn(['marketmaker', 'state']) === STATE_RUNNING
   );
 
 const makeSelectLocation = () =>
@@ -39,6 +21,18 @@ const makeSelectLocation = () =>
   );
 
 // -- //
+
+const makeSelectError = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.getIn(['marketmaker', 'errors'])
+  );
+
+const makeSelectLoading = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.getIn(['marketmaker', 'state']) === STATE_STARTED
+  );
 
 const makeSelectBalance = () =>
   createSelector(
@@ -97,7 +91,6 @@ const makeSelectBalanceAvailable = () =>
 
 export {
   selectGlobal,
-  makeSelectCurrentUser,
   makeSelectAuthenticated,
   makeSelectLoading,
   makeSelectError,

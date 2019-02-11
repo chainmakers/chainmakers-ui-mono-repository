@@ -36,33 +36,27 @@ import {
   BALANCE_LOAD_ERROR
 } from './constants';
 import type {
-  LoginError,
   AddElectrumPayload,
   AddElectrumSuccessPayload,
   LoadbalacePayload,
   LoadBalanceSuccessPayload
 } from './schema';
-import type { ErrorType } from '../schema';
+import type { ErrorType, LoginPayload } from '../schema';
 
-export function login(passphrase: string) {
+export function login(payload: LoginPayload) {
   return {
     type: LOGIN,
-    payload: {
-      passphrase
-    }
+    payload
   };
 }
 
-export function loginSuccess(user) {
+export function loginSuccess() {
   return {
-    type: LOGIN_SUCCESS,
-    payload: {
-      user
-    }
+    type: LOGIN_SUCCESS
   };
 }
 
-export function loginError(error: LoginError) {
+export function loginError(error: ErrorType) {
   return {
     type: LOGIN_ERROR,
     error

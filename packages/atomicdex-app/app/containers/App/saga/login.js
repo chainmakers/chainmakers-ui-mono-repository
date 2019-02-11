@@ -1,7 +1,7 @@
 // @flow
 import { put } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import routes from '../../../constants/routes.json';
+import { routes } from '../../../constants';
 
 const debug = require('debug')('atomicapp:containers:App:saga:login');
 

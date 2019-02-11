@@ -1,15 +1,13 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import { NavigationLayout } from '../Layout';
-import routes from '../../constants/routes.json';
+import { routes } from '../../constants';
 
-type Props = {};
+type INotFoundPageProps = {};
 
-class NotFoundPage extends Component<Props> {
-  props: Props;
-
+class NotFoundPage extends React.Component<INotFoundPageProps> {
   render() {
     return (
       <React.Fragment>

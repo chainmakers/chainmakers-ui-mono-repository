@@ -1,17 +1,17 @@
+// @flow
 import {
   GENERATE_PASSPHRASE,
   GENERATE_WIF,
   OPEN_WIF_EXPANSION,
   CLOSE_WIF_EXPANSION
 } from './constants';
+import type { GeneratePassphrasePayload } from './schema';
 
 // eslint-disable-next-line import/prefer-default-export
-export function generatePassphrase(passphrase) {
+export function generatePassphrase(payload: GeneratePassphrasePayload) {
   return {
     type: GENERATE_PASSPHRASE,
-    payload: {
-      passphrase
-    }
+    payload
   };
 }
 

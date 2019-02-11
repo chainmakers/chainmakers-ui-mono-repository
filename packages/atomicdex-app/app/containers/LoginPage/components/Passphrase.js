@@ -22,7 +22,10 @@ type IPassphraseState = {
   showPassword: boolean
 };
 
-class Passphrase extends React.Component<IPassphraseProps, IPassphraseState> {
+export default class Passphrase extends React.PureComponent<
+  IPassphraseProps,
+  IPassphraseState
+> {
   state = {
     showPassword: false
   };
@@ -65,5 +68,3 @@ class Passphrase extends React.Component<IPassphraseProps, IPassphraseState> {
     );
   }
 }
-
-export default Passphrase;

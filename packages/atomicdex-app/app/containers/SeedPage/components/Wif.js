@@ -35,9 +35,8 @@ const styles = () => ({
 
 const debug = require('debug')('atomicapp:containers:SeedPage:Wif');
 
-type Props = {
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object,
+type IWifProps = {
+  classes: Styles,
   wif: string,
   open: boolean,
   // eslint-disable-next-line flowtype/no-weak-types
@@ -50,20 +49,15 @@ type Props = {
   handleCopySuccessfully: Function
 };
 
-type State = {
+type IWifState = {
   supportedCopyCommandSupported: boolean
 };
 
-class Wif extends Component<Props, State> {
-  props: Props;
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      supportedCopyCommandSupported:
-        document && document.queryCommandSupported('copy')
-    };
-  }
+class Wif extends Component<IWifProps, IWifState> {
+  state = {
+    supportedCopyCommandSupported:
+      document && document.queryCommandSupported('copy')
+  };
 
   copyWifToClipboard = async (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();

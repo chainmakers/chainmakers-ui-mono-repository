@@ -4,7 +4,7 @@ import { Switch, Route, Redirect } from 'react-router';
 // import ScrollManager from '../components/ScrollManager';
 import { makeSelectAuthenticated, makeSelectLoading } from './App/selectors';
 import connectedRouterRedirect from '../utils/auth-wrapper/connected-router-redirect';
-import routes from '../constants/routes.json';
+import { routes } from '../constants';
 import App from './App';
 import DexPage from './DexPage';
 import WalletPage from './WalletPage';

@@ -10,8 +10,8 @@ type UTXOType = {
   value: number
 };
 
-type LoginError = {
-  message: string
+type LoginPayload = {
+  passphrase: string
 };
 
 type EelectrumServerType = {
@@ -54,7 +54,7 @@ type LoadBalanceSuccessPayload = {
 
 export type {
   UTXOType,
-  LoginError,
+  LoginPayload,
   CoinConfigType,
   AddElectrumPayload,
   AddElectrumSuccessPayload,

@@ -19,7 +19,7 @@ import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import MenuIcon from '@material-ui/icons/Menu';
 import { withStyles } from '@material-ui/core/styles';
 import { showLogoutDialog } from '../LogoutDialog/actions';
-import routes from '../../constants/routes.json';
+import { routes } from '../../constants';
 
 const debug = require('debug')('atomicapp:containers:Drawer');
 

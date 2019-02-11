@@ -1,5 +1,6 @@
+// @flow
 import { fromJS } from 'immutable';
-
+import { handleActions } from 'redux-actions';
 import {
   GENERATE_PASSPHRASE,
   GENERATE_WIF,
@@ -7,26 +8,19 @@ import {
   CLOSE_WIF_EXPANSION
 } from './constants';
 
-// The initial state of the App
-const initialState = fromJS({
+export const initialState = fromJS({
   passphrase: '',
   wif: '',
   wifExpansion: false
 });
 
-function walletReducer(state = initialState, { type, payload }) {
-  switch (type) {
-    case GENERATE_PASSPHRASE:
-      return state.set('passphrase', payload.passphrase);
-    case GENERATE_WIF:
-      return state.set('wif', payload.wif);
-    case OPEN_WIF_EXPANSION:
-      return state.set('wifExpansion', true);
-    case CLOSE_WIF_EXPANSION:
-      return state.set('wifExpansion', false);
-    default:
-      return state;
-  }
-}
-
-export default walletReducer;
+export default handleActions(
+  {
+    [GENERATE_PASSPHRASE]: (state, { payload }) =>
+      state.set('passphrase', payload.passphrase),
+    [GENERATE_WIF]: (state, { payload }) => state.set('wif', payload.wif),
+    [OPEN_WIF_EXPANSION]: state => state.set('wifExpansion', true),
+    [CLOSE_WIF_EXPANSION]: state => state.set('wifExpansion', false)
+  },
+  initialState
+);

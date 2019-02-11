@@ -13,13 +13,11 @@ import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
 import swal from 'sweetalert';
-import injectReducer from '../../utils/inject-reducer';
 import injectSaga from '../../utils/inject-saga';
 import ErrorBoundary from '../../components/ErrorBoundary';
-import routes from '../../constants/routes.json';
+import { routes } from '../../constants';
 import { EmptyLayout } from '../Layout';
 import Passphrase from './components/Passphrase';
-import reducer from './reducer';
 import saga from './saga';
 import { login } from '../App/actions';
 import {
@@ -39,21 +37,15 @@ const styles = () => ({
     left: 0,
     right: 0,
     overflow: 'auto',
-    background: '#fff'
-  },
-
-  loginContainer__center: {
-    minHeight: 350,
-    left: '50%',
-    position: 'absolute',
-    transform: 'translateX(-50%) translateY(25%)'
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 
   loginContainer__card: {
+    minHeight: 350,
     width: 430,
     borderRadius: 8,
-    // border: '1px solid #dadce0',
-    // boxShadow: 'none'
     boxShadow:
       '0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2)'
   },
@@ -140,7 +132,9 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
       );
     }
     const { dispatchLogin } = this.props;
-    dispatchLogin(passphrase);
+    dispatchLogin({
+      passphrase
+    });
   };
 
   onChange = (evt: SyntheticInputEvent<>) => {
@@ -161,72 +155,69 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
     debug('render');
     const { loading, classes } = this.props;
     const { passphrase } = this.state;
-
     return (
       <div className={classes.loginContainer}>
-        <div className={classes.loginContainer__center}>
-          <Card className={classes.loginContainer__card}>
-            {loading && <LinearProgress />}
-            <LOGO
-              className={classes.loginContainer__logo}
-              width="85"
-              height="85"
-              viewBox="0 0 32 32"
-              alt="logo"
+        <Card className={classes.loginContainer__card}>
+          {loading && <LinearProgress />}
+          <LOGO
+            className={classes.loginContainer__logo}
+            width="85"
+            height="85"
+            viewBox="0 0 32 32"
+            alt="logo"
+          />
+          <CardContent className={classes.loginContainer__content}>
+            <Typography
+              variant="h5"
+              className={classes.loginContainer__item}
+              gutterBottom
+            >
+              <FormattedMessage id="atomicapp.containers.LoginPage.headline">
+                {(...content) => content}
+              </FormattedMessage>
+            </Typography>
+
+            <Typography variant="subtitle1" gutterBottom>
+              <FormattedMessage id="atomicapp.containers.LoginPage.subheading">
+                {(...content) => content}
+              </FormattedMessage>
+            </Typography>
+
+            <Passphrase
+              loading={loading}
+              passphrase={passphrase}
+              className={classes.loginContainer__item}
+              onChange={this.onChange}
             />
-            <CardContent className={classes.loginContainer__content}>
-              <Typography
-                variant="h5"
-                className={classes.loginContainer__item}
-                gutterBottom
-              >
-                <FormattedMessage id="atomicapp.containers.LoginPage.headline">
-                  {(...content) => content}
-                </FormattedMessage>
-              </Typography>
-
-              <Typography variant="subtitle1" gutterBottom>
-                <FormattedMessage id="atomicapp.containers.LoginPage.subheading">
-                  {(...content) => content}
-                </FormattedMessage>
-              </Typography>
-
-              <Passphrase
-                loading={loading}
-                passphrase={passphrase}
-                className={classes.loginContainer__item}
-                onChange={this.onChange}
-              />
-
-              <Button
-                fullWidth
-                variant="contained"
-                disabled={loading}
-                color="primary"
-                type="submit"
-                onClick={this.onLoginButtonClick}
-                className={classNames(
-                  classes.loginContainer__item,
-                  classes.loginContainer__loginButton
-                )}
-              >
-                <FormattedMessage id="atomicapp.containers.LoginPage.submit">
-                  {(...content) => content}
-                </FormattedMessage>
-              </Button>
-            </CardContent>
 
             <Button
               fullWidth
-              className={classes.loginContainer__bottomButton}
-              onClick={this.gotoSeedPage}
+              variant="contained"
+              disabled={loading}
+              color="primary"
+              type="submit"
+              onClick={this.onLoginButtonClick}
+              className={classNames(
+                classes.loginContainer__item,
+                classes.loginContainer__loginButton
+              )}
             >
-              <FormattedMessage id="atomicapp.containers.LoginPage.new_account">
+              <FormattedMessage id="atomicapp.containers.LoginPage.submit">
                 {(...content) => content}
               </FormattedMessage>
             </Button>
-          </Card>
-        </div>
+          </CardContent>
+
+          <Button
+            fullWidth
+            className={classes.loginContainer__bottomButton}
+            onClick={this.gotoSeedPage}
+          >
+            <FormattedMessage id="atomicapp.containers.LoginPage.new_account">
+              {(...content) => content}
+            </FormattedMessage>
+          </Button>
+        </Card>
       </div>
     );
   }
@@ -244,7 +235,6 @@ const mapStateToProps = createStructuredSelector({
   error: makeSelectError()
 });
 
-const withReducer = injectReducer({ key: APP_STATE_NAME, reducer });
 const withSaga = injectSaga({ key: APP_STATE_NAME, saga });
 const withConnect = connect(
   mapStateToProps,
@@ -252,7 +242,6 @@ const withConnect = connect(
 );
 
 const LoginPageWapper = compose(
-  withReducer,
   withSaga,
   withConnect,
   injectIntl,

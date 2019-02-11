@@ -1,5 +1,12 @@
+// @flow
 import { fromJS } from 'immutable';
-import { FAILED, DISABLE } from '../../../constants';
+import {
+  FAILED,
+  DISABLE,
+  STATE_STARTED,
+  STATE_RUNNING,
+  STATE_TERMINATED
+} from '../../../constants';
 import { initialState } from '../reducer';
 import { APP_STATE_NAME } from '../constants';
 import {
@@ -10,9 +17,12 @@ import {
   makeSelectBalanceList,
   makeSelectBalanceEntities,
   makeSelectBalanceErrors,
-  makeSelectBalanceAvailable
+  makeSelectBalanceAvailable,
+  makeSelectLoading,
+  makeSelectError
 } from '../selectors';
 import data from '../../__tests__/app-state.json';
+import type { ErrorType } from '../../schema';
 
 describe('containers/App/selectors/selectGlobal', () => {
   it('should select the global state', () => {
@@ -318,5 +328,51 @@ describe('containers/App/selectors/makeSelectBalanceAvailable', () => {
         }
       ])
     );
+  });
+});
+
+describe('containers/App/selectors/makeSelectLoading', () => {
+  it('should select the marketmaker loading state', () => {
+    let mockedState = fromJS(data);
+    const selectLoading = makeSelectLoading();
+    expect(selectLoading(mockedState)).toEqual(false);
+    mockedState = mockedState.setIn(
+      [APP_STATE_NAME, 'marketmaker', 'state'],
+      STATE_STARTED
+    );
+    expect(selectLoading(mockedState)).toEqual(true);
+    mockedState = mockedState.setIn(
+      [APP_STATE_NAME, 'marketmaker', 'state'],
+      STATE_RUNNING
+    );
+    expect(selectLoading(mockedState)).toEqual(false);
+    mockedState = mockedState.setIn(
+      [APP_STATE_NAME, 'marketmaker', 'state'],
+      STATE_TERMINATED
+    );
+    expect(selectLoading(mockedState)).toEqual(false);
+  });
+});
+
+describe('containers/App/selectors/makeSelectError', () => {
+  const error: ErrorType = {
+    context: {
+      action: 'ELECTRUM_ADD',
+      params: {
+        active: 1
+      }
+    },
+    type: 'RPC',
+    message: "can't connect to electrum server"
+  };
+  it('should select the marketmaker error state', () => {
+    let mockedState = fromJS(data);
+    const selectError = makeSelectError();
+    expect(selectError(mockedState)).toEqual(null);
+    mockedState = mockedState.setIn(
+      [APP_STATE_NAME, 'marketmaker', 'errors'],
+      error
+    );
+    expect(selectError(mockedState)).toEqual(error);
   });
 });

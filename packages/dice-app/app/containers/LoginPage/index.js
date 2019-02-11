@@ -117,7 +117,6 @@ type IILoginPagePropsState = {
 };
 
 class LoginPage extends Component<ILoginPageProps, IILoginPagePropsState> {
-  props: Props;
 
   state = {
     passphrase: ''

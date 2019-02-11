@@ -1,3 +1,4 @@
+// @flow
 import {
   generatePassphrase,
   generateWif,
@@ -5,22 +6,23 @@ import {
   closeWifExpansion
 } from '../actions';
 import { GENERATE_PASSPHRASE, GENERATE_WIF } from '../constants';
+import type { GeneratePassphrasePayload } from '../schema';
 
 describe('containers/SeedPage/actions/generatePassphrase', () => {
-  const passphrase = 'passphrase';
+  const payload: GeneratePassphrasePayload = {
+    passphrase: 'passphrase'
+  };
   it('should generatePassphrase should generatePassphrase action', () => {
-    expect(generatePassphrase(passphrase)).toMatchSnapshot();
+    expect(generatePassphrase(payload)).toMatchSnapshot();
   });
 
   it('should return the correct payload', () => {
     const expectedResult = {
       type: GENERATE_PASSPHRASE,
-      payload: {
-        passphrase
-      }
+      payload
     };
 
-    expect(generatePassphrase(passphrase)).toEqual(expectedResult);
+    expect(generatePassphrase(payload)).toEqual(expectedResult);
   });
 });
 

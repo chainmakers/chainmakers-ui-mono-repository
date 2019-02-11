@@ -15,7 +15,16 @@ import { fromJS } from 'immutable';
 import { handleActions } from 'redux-actions';
 import each from 'lodash/each';
 import isNumber from 'lodash/isNumber';
-import { LOADING, LOADED, FAILED, ENABLE, DISABLE } from '../../constants';
+import {
+  LOADING,
+  LOADED,
+  FAILED,
+  ENABLE,
+  DISABLE,
+  STATE_STARTED,
+  STATE_RUNNING,
+  STATE_TERMINATED
+} from '../../constants';
 import getConfig from '../../utils/config';
 import {
   LOGIN,
@@ -61,9 +70,10 @@ function getDataMarketcap(data = COIN_DATA) {
 
 // The initial state of the App
 export const initialState = fromJS({
-  loading: false,
-  error: false,
-  currentUser: null,
+  marketmaker: {
+    state: null,
+    errors: null
+  },
   balance: {
     fetchStatus: {},
     errors: {},
@@ -99,13 +109,18 @@ export const initialState = fromJS({
 
 const appReducer = handleActions(
   {
-    [LOGIN]: state => state.set('loading', true).set('error', false),
+    [LOGIN]: state =>
+      state
+        .setIn(['marketmaker', 'errors'], null)
+        .setIn(['marketmaker', 'state'], STATE_STARTED),
 
-    [LOGIN_SUCCESS]: (state, { payload }) =>
-      state.set('loading', false).set('currentUser', fromJS(payload.user)),
+    [LOGIN_SUCCESS]: state =>
+      state.setIn(['marketmaker', 'state'], STATE_RUNNING),
 
     [LOGIN_ERROR]: (state, { error }) =>
-      state.set('error', error).set('loading', false),
+      state
+        .setIn(['marketmaker', 'errors'], error)
+        .setIn(['marketmaker', 'state'], STATE_TERMINATED),
 
     [LOAD_WITHDRAW]: (state, { payload }) =>
       state
