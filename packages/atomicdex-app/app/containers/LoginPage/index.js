@@ -155,6 +155,7 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
     debug('render');
     const { loading, classes } = this.props;
     const { passphrase } = this.state;
+
     return (
       <div className={classes.loginContainer}>
         <Card className={classes.loginContainer__card}>

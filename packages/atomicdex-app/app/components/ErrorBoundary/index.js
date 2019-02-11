@@ -7,10 +7,17 @@ import Typography from '@material-ui/core/Typography';
 import UndrawBugFixing from './undraw_bug_fixing.svg';
 
 const styles = () => ({
-  errorBoundaryBg: {
-    background: '#f5f8fa',
-    borderTop: '1px solid #e6ecf0',
-    padding: '2.625rem 1.3125rem',
+  errorBoundary__container: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    overflow: 'auto',
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
     textAlign: 'center',
 
     '& a': {
@@ -22,18 +29,21 @@ const styles = () => ({
   }
 });
 
-type Props = {
+type IErrorBoundaryProps = {
   classes: Styles,
   children: Node
 };
 
-type State = {
+type IErrorBoundaryState = {
   hasError: boolean
 };
 
 const debug = require('debug')('atomicapp:components:ErrorBoundary');
 
-class ErrorBoundary extends React.Component<Props, State> {
+class ErrorBoundary extends React.Component<
+  IErrorBoundaryProps,
+  IErrorBoundaryState
+> {
   state = {
     hasError: false
   };
@@ -56,24 +66,23 @@ class ErrorBoundary extends React.Component<Props, State> {
   render() {
     const { children, classes } = this.props;
     const { hasError } = this.state;
-    if (hasError) {
-      // You can render any custom fallback UI
-      return (
-        <div className={classes.errorBoundaryBg}>
-          <UndrawBugFixing width="560" height="430" />
-          <Typography variant="title" gutterBottom>
-            There are something wrong
+    // You can render any custom fallback UI
+    return hasError ? (
+      <div className={classes.errorBoundary__container}>
+        <UndrawBugFixing width="560" height="430" />
+        <br />
+        <Typography variant="h5" gutterBottom>
+          There are something wrong
+        </Typography>
+        <a href="/" onClick={this.reload}>
+          <Typography variant="subheading" gutterBottom>
+            Please try to reload
           </Typography>
-          <a href="/" onClick={this.reload}>
-            <Typography variant="subheading" gutterBottom>
-              Please try to reload
-            </Typography>
-          </a>
-        </div>
-      );
-    }
-
-    return children;
+        </a>
+      </div>
+    ) : (
+      children
+    );
   }
 }
 
