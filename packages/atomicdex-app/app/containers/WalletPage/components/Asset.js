@@ -13,13 +13,10 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import IconButton from '@material-ui/core/IconButton';
-import ErrorIcon from '@material-ui/icons/ErrorOutlined';
-import ReplayIcon from '@material-ui/icons/ReplayOutlined';
 import { LOADING } from '../../../constants';
 import { getCoinIcon } from '../../../components/CryptoIcons';
 import { covertSymbolToName } from '../../../utils/coin';
-import { openWithdrawModal, openDepositModal } from '../actions';
+import { openWithdrawModal, openDepositModal, retryAction } from '../actions';
 import {
   makeSelectBalanceFetchStatus,
   makeSelectBalanceEntities,
@@ -27,22 +24,6 @@ import {
 } from '../../App/selectors';
 
 const debug = require('debug')('atomicapp:containers:WalletPage:Asset');
-
-const ErrorIconInstance = (
-  <ErrorIcon
-    style={{
-      color: '#fff'
-    }}
-  />
-);
-
-const ReplayIconInstance = (
-  <ReplayIcon
-    style={{
-      color: '#fff'
-    }}
-  />
-);
 
 const styles = theme => ({
   leftIcon: {
@@ -115,7 +96,10 @@ const styles = theme => ({
   },
 
   wallet__textWhite: {
-    color: '#fff'
+    color: '#fff',
+    '&:hover': {
+      color: '#fff'
+    }
   }
 });
 
@@ -131,7 +115,9 @@ type IAssetProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   openWithdraw: Function,
   // eslint-disable-next-line flowtype/no-weak-types
-  openDeposit: Function
+  openDeposit: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchRetryAction: Function
 };
 
 class Asset extends React.PureComponent<IAssetProps> {
@@ -149,21 +135,65 @@ class Asset extends React.PureComponent<IAssetProps> {
     openDeposit(symbol);
   };
 
-  renderIcon = () => {
-    const { symbol, error } = this.props;
+  onRetryAction = (evt: SyntheticInputEvent<>) => {
+    evt.preventDefault();
+    const { dispatchRetryAction, symbol } = this.props;
+    dispatchRetryAction({
+      coin: symbol
+    });
+  };
+
+  renderActions = () => {
+    const { classes, error, fetchStatus } = this.props;
+    const loading = fetchStatus === LOADING;
+
     return error ? (
-      <IconButton>{ReplayIconInstance}</IconButton>
+      <Button
+        disabled={loading}
+        className={ClassNames(
+          classes.wallet__button,
+          classes.wallet__firstButton,
+          classes.wallet__textWhite
+        )}
+        size="small"
+        color="primary"
+        onClick={this.onRetryAction}
+      >
+        Retry
+      </Button>
     ) : (
-      getCoinIcon(symbol)
+      <React.Fragment>
+        <Button
+          disabled={loading}
+          className={ClassNames(
+            classes.wallet__button,
+            classes.wallet__firstButton
+          )}
+          size="small"
+          color="primary"
+          onClick={this.openDeposit}
+        >
+          Deposit
+        </Button>
+        <div className={classes.wallet__buttonBorder} />
+        <Button
+          disabled={loading}
+          className={classes.wallet__button}
+          size="small"
+          color="primary"
+          onClick={this.openWithdraw}
+        >
+          Withdraw
+        </Button>
+      </React.Fragment>
     );
   };
 
   render() {
     debug(`render`);
 
-    const { classes, symbol, fetchStatus, entity, error } = this.props;
+    const { classes, symbol, entity, error } = this.props;
     const isError = !!error;
-    const loading = fetchStatus === LOADING;
 
     return (
       <Card
@@ -181,7 +211,7 @@ class Asset extends React.PureComponent<IAssetProps> {
               [classes.wallet__textWhite]: isError
             })
           }}
-          action={this.renderIcon()}
+          action={getCoinIcon(symbol)}
           title={covertSymbolToName(symbol)}
           subheader={symbol}
         />
@@ -196,51 +226,9 @@ class Asset extends React.PureComponent<IAssetProps> {
               ? error.get('message')
               : `${entity.get('balance')} ${symbol}`}
           </Typography>
-          {/* <Button
-            className={ClassNames(classes.wallet__button)}
-            size="small"
-            color="primary"
-            style={{
-              marginLeft: -10
-            }}
-          >
-            UTXOs
-          </Button> */}
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
-          <Button
-            disabled={isError || loading}
-            className={ClassNames(
-              classes.wallet__button,
-              classes.wallet__firstButton
-            )}
-            size="small"
-            color="primary"
-            onClick={this.openDeposit}
-          >
-            Deposit
-          </Button>
-          <div className={classes.wallet__buttonBorder} />
-          <Button
-            disabled={isError || loading}
-            className={classes.wallet__button}
-            size="small"
-            color="primary"
-            onClick={this.openWithdraw}
-          >
-            Withdraw
-          </Button>
-          {/* <Button
-            className={classes.wallet__button}
-            size="small"
-            color="primary"
-            style={{
-              flex: 1,
-              textAlign: 'right'
-            }}
-          >
-            UTXOS
-          </Button> */}
+          {this.renderActions()}
         </CardActions>
       </Card>
     );
@@ -251,7 +239,8 @@ class Asset extends React.PureComponent<IAssetProps> {
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   return {
     openWithdraw: (coin: string) => dispatch(openWithdrawModal(coin)),
-    openDeposit: (coin: string) => dispatch(openDepositModal(coin))
+    openDeposit: (coin: string) => dispatch(openDepositModal(coin)),
+    dispatchRetryAction: (coin: string) => dispatch(retryAction(coin))
   };
 }
 

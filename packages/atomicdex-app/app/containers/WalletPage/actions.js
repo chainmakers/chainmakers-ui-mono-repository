@@ -8,13 +8,14 @@ import {
   DEPOSIT_MODAL_OPEN,
   DEPOSIT_MODAL_CLOSE,
   TRANSACTIONS_LOAD,
-  TRANSACTIONS_LOAD_LOOP,
   COIN_TRANSACTIONS_LOAD,
-  COIN_TRANSACTIONS_SUCCESS
+  COIN_TRANSACTIONS_SUCCESS,
+  ACTION_RETRY
 } from './constants';
 import type {
   CoinTransactionsLoadPayload,
-  CoinTransactionsSuccessPayload
+  CoinTransactionsSuccessPayload,
+  RetryActionPayload
 } from './schema';
 
 export function loadTransactionsSuccess() {
@@ -68,12 +69,6 @@ export function loadTransactions() {
   };
 }
 
-export function loadTransactionsLoop() {
-  return {
-    type: TRANSACTIONS_LOAD_LOOP
-  };
-}
-
 export function loadCoinTransactions(payload: CoinTransactionsLoadPayload) {
   return {
     type: COIN_TRANSACTIONS_LOAD,
@@ -86,6 +81,13 @@ export function loadCoinTransactionsSuccess(
 ) {
   return {
     type: COIN_TRANSACTIONS_SUCCESS,
+    payload
+  };
+}
+
+export function retryAction(payload: RetryActionPayload) {
+  return {
+    type: ACTION_RETRY,
     payload
   };
 }

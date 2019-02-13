@@ -17,12 +17,9 @@ import Or from '../components/Or';
 
 const styles = theme => ({
   depositModal__content: {
+    overflowY: 'hidden',
     textAlign: 'center',
     width: 500
-  },
-
-  depositModal__contentTitle: {
-    marginBottom: 20
   },
 
   depositModal__listItem: {
@@ -49,8 +46,7 @@ const styles = theme => ({
 });
 
 type Props = {
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object,
+  classes: Styles,
   // eslint-disable-next-line flowtype/no-weak-types
   coin: Map<*, *>,
   // eslint-disable-next-line flowtype/no-weak-types
@@ -112,13 +108,6 @@ class DepositContent extends React.PureComponent<Props> {
             </Typography>
           </div>
           <Or />
-          <Typography
-            variant="body2"
-            gutterBottom
-            className={classes.depositModal__contentTitle}
-          >
-            Scan QR Code
-          </Typography>
           <QRCode value={coin.get('address')} size={150} />
         </DialogContent>
       </React.Fragment>

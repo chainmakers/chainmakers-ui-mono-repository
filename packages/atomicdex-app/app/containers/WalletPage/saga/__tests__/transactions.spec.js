@@ -1,10 +1,10 @@
 import nock from 'nock';
 import { fromJS } from 'immutable';
 import { runSaga } from 'redux-saga';
-import api from '../../../lib/barter-dex-api';
-import { loadCoinTransactionsProcess } from '../saga';
-import { loadCoinTransactions } from '../actions';
-import data from '../../__tests__/app-state.json';
+import api from '../../../../lib/barter-dex-api';
+import { loadCoinTransactionsProcess } from '../transactions';
+import { loadCoinTransactions } from '../../actions';
+import data from '../../../__tests__/app-state.json';
 
 const TEST_URL = 'http://127.0.0.1:7783';
 const TIME_OUT = 30 * 1000;

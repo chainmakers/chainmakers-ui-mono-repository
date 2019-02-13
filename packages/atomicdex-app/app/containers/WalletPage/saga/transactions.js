@@ -1,23 +1,17 @@
 import { all, call, put, select, cancelled } from 'redux-saga/effects';
-// import { CANCEL, delay } from 'redux-saga';
 import { CANCEL } from 'redux-saga';
-import { takeFirst } from 'barterdex-rssm';
-import { ENABLE } from '../../constants';
+import { ENABLE } from '../../../constants';
+import { makeSelectBalance } from '../../App/selectors';
+import api from '../../../lib/barter-dex-api';
 import {
-  TRANSACTIONS_LOAD,
-  TRANSACTIONS_LOAD_LOOP
-  // TIME_LOOP
-} from './constants';
-import { makeSelectBalance } from '../App/selectors';
-import api from '../../lib/barter-dex-api';
-import {
-  loadTransactions,
   loadTransactionsSuccess,
   loadTransactionsError,
   loadCoinTransactions
-} from './actions';
+} from '../actions';
 
-const debug = require('debug')('atomicapp:containers:WalletPage:saga');
+const debug = require('debug')(
+  'atomicapp:containers:WalletPage:saga:transactions'
+);
 
 export function* loadCoinTransactionsProcess(coin, address) {
   let request = null;
@@ -54,9 +48,8 @@ export function* loadCoinTransactionsProcess(coin, address) {
   }
 }
 
-export function* loadTransactionsProcess() {
+export default function* loadTransactionsProcess() {
   try {
-    // load user data
     debug('load transactions process start');
     const balanceState = yield select(makeSelectBalance());
 
@@ -81,20 +74,4 @@ export function* loadTransactionsProcess() {
   } catch (err) {
     return yield put(loadTransactionsError(err.message));
   }
-}
-
-export function* loadTransactionsLoopProcess() {
-  // while (true) {
-  debug('load transactions loop process start');
-  yield put(loadTransactions());
-  // yield call(delay, TIME_LOOP);
-  // }
-}
-
-/**
- * Root saga manages watcher lifecycle
- */
-export default function* walletData() {
-  yield takeFirst(TRANSACTIONS_LOAD, loadTransactionsProcess);
-  yield takeFirst(TRANSACTIONS_LOAD_LOOP, loadTransactionsLoopProcess);
 }

@@ -16,8 +16,7 @@ const styles = () => ({
 });
 
 type Props = {
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object,
+  classes: Styles,
   // eslint-disable-next-line flowtype/no-weak-types
   handleChange: Function,
   value: number

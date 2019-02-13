@@ -38,8 +38,7 @@ const styles = () => ({
 });
 
 type Props = {
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object
+  classes: Styles
 };
 
 class Or extends React.PureComponent<Props> {

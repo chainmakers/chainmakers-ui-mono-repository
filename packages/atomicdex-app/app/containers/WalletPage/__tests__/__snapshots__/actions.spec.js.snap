@@ -30,12 +30,6 @@ Object {
 }
 `;
 
-exports[`containers/WalletPage/actions/loadTransactionsLoop should loadTransactionsLoop should create loadTransactionsLoop action 1`] = `
-Object {
-  "type": "atomicapp/WalletPage/TRANSACTIONS_LOAD_LOOP",
-}
-`;
-
 exports[`containers/WalletPage/actions/loadTransactionsSuccess should loadTransactionsSuccess should create loadTransactionsSuccess action 1`] = `
 Object {
   "type": "atomicapp/WalletPage/LOAD_TRANSACTIONS_SUCCESS",

@@ -19,7 +19,7 @@ import {
   makeSelectLatestTransactions,
   makeSelectTransactionsQueueids
 } from '../selectors';
-import { loadTransactions, loadTransactionsLoop } from '../actions';
+import { loadTransactions } from '../actions';
 import TransactionsTable from './TransactionsTable';
 
 const debug = require('debug')(
@@ -61,8 +61,6 @@ type Props = {
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchLoadTransactions: Function,
   // eslint-disable-next-line flowtype/no-weak-types
-  dispatchLoadTransactionsLoop: Function,
-  // eslint-disable-next-line flowtype/no-weak-types
   transactions: List<*>,
   // eslint-disable-next-line flowtype/no-weak-types
   switchToPortfolioTab: Function,
@@ -72,8 +70,8 @@ type Props = {
 
 class TransactionsTab extends React.PureComponent<Props> {
   componentDidMount = () => {
-    const { dispatchLoadTransactionsLoop } = this.props;
-    dispatchLoadTransactionsLoop();
+    const { dispatchLoadTransactions } = this.props;
+    dispatchLoadTransactions();
   };
 
   onClickReloadTranstactions = (evt: SyntheticInputEvent<>) => {
@@ -142,8 +140,7 @@ TransactionsTab.displayName = 'Transactions';
 // eslint-disable-next-line flowtype/no-weak-types
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   return {
-    dispatchLoadTransactions: () => dispatch(loadTransactions()),
-    dispatchLoadTransactionsLoop: () => dispatch(loadTransactionsLoop())
+    dispatchLoadTransactions: () => dispatch(loadTransactions())
   };
 }
 

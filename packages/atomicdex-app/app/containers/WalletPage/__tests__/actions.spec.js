@@ -1,6 +1,5 @@
 import {
   loadTransactions,
-  loadTransactionsLoop,
   loadTransactionsSuccess,
   openWithdrawModal,
   closeWithdrawModal,
@@ -10,7 +9,6 @@ import {
 } from '../actions';
 import {
   TRANSACTIONS_LOAD,
-  TRANSACTIONS_LOAD_LOOP,
   LOAD_TRANSACTIONS_SUCCESS,
   WITHDRAW_MODAL_OPEN,
   WITHDRAW_MODAL_CLOSE,
@@ -30,20 +28,6 @@ describe('containers/WalletPage/actions/loadTransactions', () => {
     };
 
     expect(loadTransactions()).toEqual(expectedResult);
-  });
-});
-
-describe('containers/WalletPage/actions/loadTransactionsLoop', () => {
-  it('should loadTransactionsLoop should create loadTransactionsLoop action', () => {
-    expect(loadTransactionsLoop()).toMatchSnapshot();
-  });
-
-  it('should return the correct type and the passed name', () => {
-    const expectedResult = {
-      type: TRANSACTIONS_LOAD_LOOP
-    };
-
-    expect(loadTransactionsLoop()).toEqual(expectedResult);
   });
 });
 
