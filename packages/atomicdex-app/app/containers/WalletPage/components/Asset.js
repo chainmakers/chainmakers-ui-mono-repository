@@ -92,7 +92,8 @@ const styles = theme => ({
   },
 
   wallet__error: {
-    backgroundColor: '#ED6A4E'
+    backgroundColor: '#ED6A4E',
+    border: '1px solid #ED6A4E'
   },
 
   wallet__textWhite: {

@@ -54,7 +54,8 @@ const styles = () => ({
 
   withdrawmodal__content: {
     width: 500,
-    textAlign: 'center'
+    textAlign: 'center',
+    overflowY: 'hidden'
   }
 });
 
