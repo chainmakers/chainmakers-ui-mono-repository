@@ -15,9 +15,10 @@ const ALREADY_INIT_LIST = ['BTC', 'KMD'];
 export default function* listenForLoadingElectrums() {
   debug(`load electrums server`);
   const servers = config.get('marketmaker.data');
-  for (let i = 0; i < servers.length; i += 1) {
-    if (ALREADY_INIT_LIST.indexOf(servers[i].coin) === -1) {
-      yield put(addElectrum(servers[i]));
+  const electrum = servers.filter(e => e.active === 1);
+  for (let i = 0; i < electrum.length; i += 1) {
+    if (ALREADY_INIT_LIST.indexOf(electrum[i].coin) === -1) {
+      yield put(addElectrum(electrum[i]));
     }
   }
 }
@@ -33,7 +34,6 @@ export function* loadElectrum({ payload }: { payload: AddElectrumPayload }) {
       coin: payload.coin
     });
     const fee = yield feeRequest;
-
     yield put(
       addElectrumSuccess({
         coin: payload.coin,

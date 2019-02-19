@@ -103,8 +103,8 @@ describe('containers/App/selectors/makeSelectBalanceList', () => {
         { symbol: 'COQUI', status: 'ENABLE', marketcap: 0 },
         { symbol: 'KMDICE', status: 'ENABLE', marketcap: 0 },
         { symbol: 'CHAIN', status: 'ENABLE', marketcap: 0 },
-        { symbol: 'BEER', status: 'ENABLE', marketcap: -1 },
-        { symbol: 'PIZZA', status: 'ENABLE', marketcap: -2 }
+        { symbol: 'BEER', status: 'ENABLE', marketcap: 0 },
+        { symbol: 'PIZZA', status: 'ENABLE', marketcap: 0 }
       ])
     );
   });

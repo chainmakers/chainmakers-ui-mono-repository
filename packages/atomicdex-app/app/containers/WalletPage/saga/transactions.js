@@ -48,6 +48,10 @@ export function* loadCoinTransactionsProcess(coin, address) {
   }
 }
 
+export function* listenForElectrumSuccess({ payload }) {
+  yield call(loadCoinTransactionsProcess, payload.coin, payload.address);
+}
+
 export default function* loadTransactionsProcess() {
   try {
     debug('load transactions process start');

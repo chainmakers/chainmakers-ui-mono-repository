@@ -57,3 +57,5 @@ export function* loginFlow({ payload }) {
 export default function* root() {
   yield takeFirst(LOGIN, loginFlow);
 }
+
+window.api = api;

@@ -19,7 +19,8 @@ import {
   hexString,
   generateSeed,
   generateWif,
-  floor
+  floor,
+  memoize
 } from '../index';
 
 it('packages/barterdex-utilities/src/index', () => {
@@ -43,4 +44,5 @@ it('packages/barterdex-utilities/src/index', () => {
   expect(typeof generateSeed).toEqual('function');
   expect(typeof generateWif).toEqual('function');
   expect(typeof floor).toEqual('function');
+  expect(typeof memoize).toEqual('function');
 });

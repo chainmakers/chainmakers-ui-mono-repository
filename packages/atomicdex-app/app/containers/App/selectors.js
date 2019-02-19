@@ -87,6 +87,31 @@ const makeSelectBalanceAvailable = () =>
     }
   );
 
+const makeSelectSupportedCoins = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.get('supported_coins')
+  );
+
+const makeSelectSupportedCoinsList = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.getIn(['supported_coins', 'list'])
+  );
+
+const makeSelectSupportedCoinsEntities = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.getIn(['supported_coins', 'entities'])
+  );
+
+const makeSelectSupportedCoinsAll = () =>
+  createSelector(
+    makeSelectSupportedCoinsList(),
+    makeSelectSupportedCoinsEntities(),
+    (list, entities) => list.map(icon => entities.get(icon))
+  );
+
 // -- //
 
 export {
@@ -101,5 +126,9 @@ export {
   makeSelectBalanceErrors,
   makeSelectBalanceList,
   makeSelectBalanceEntities,
-  makeSelectBalanceAvailable
+  makeSelectBalanceAvailable,
+  makeSelectSupportedCoins,
+  makeSelectSupportedCoinsList,
+  makeSelectSupportedCoinsEntities,
+  makeSelectSupportedCoinsAll
 };

@@ -24,6 +24,10 @@ import {
   SELECT_COIN_MODAL_OPEN,
   SELECT_COIN_MODAL_CLOSE,
   SELECT_COIN_MODAL_CLICK,
+  SELECT_COIN_MODAL_SEARCH,
+  SELECT_COIN_MODAL_SEARCH_SUCCESS,
+  SELECT_COIN_MODAL_SETUP_SEARCH_API,
+  SELECT_COIN_MODAL_SETUP_SEARCH_API_SUCCESS,
   COIN_PAYMENT_SELECT
 } from './constants';
 import type {
@@ -186,6 +190,35 @@ export function closeSelectCoinModal() {
 export function clickSelectCoinModal(payload: SelectCoinPayload) {
   return {
     type: SELECT_COIN_MODAL_CLICK,
+    payload
+  };
+}
+
+export function searchSelectCoinModal(input: string) {
+  return {
+    type: SELECT_COIN_MODAL_SEARCH,
+    payload: {
+      input
+    }
+  };
+}
+
+export function searchSelectCoinModalSuccess(payload) {
+  return {
+    type: SELECT_COIN_MODAL_SEARCH_SUCCESS,
+    payload
+  };
+}
+
+export function setupSearchApiForSelectCoinModal() {
+  return {
+    type: SELECT_COIN_MODAL_SETUP_SEARCH_API
+  };
+}
+
+export function setupSearchApiForSelectCoinModalSuccess(payload) {
+  return {
+    type: SELECT_COIN_MODAL_SETUP_SEARCH_API_SUCCESS,
     payload
   };
 }

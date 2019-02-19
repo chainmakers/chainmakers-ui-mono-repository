@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { getMonth } from '../utils';
-import { getCoinIcon } from '../../../components/CryptoIcons';
+import getCoinMemoize from '../../../components/CryptoIcons';
 
 const debug = require('debug')(
   'atomicapp:containers:DexPage:TransactionRecord'
@@ -80,8 +80,8 @@ export class Transaction extends React.PureComponent<Props> {
             secondary={date.getDate()}
             className={classes.transactionRecord__ItemDay}
           />
-          {/* {getCoinIcon(swap.get('alice'))} */}
-          {getCoinIcon(swap.get('bob'))}
+          {/* {getCoinMemoize(swap.get('alice'))} */}
+          {getCoinMemoize(swap.get('bob'))}
           <ListItemText
             primary={swap.get('uuid')}
             secondary={`Step ${swap.get('sentflags').size + 1}/6`}

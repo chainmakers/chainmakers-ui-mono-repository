@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import debounce from 'lodash/debounce';
-// import InputBase from '@material-ui/core/InputBase';
 import TextField from '@material-ui/core/TextField';
 
 const debug = require('debug')(
@@ -50,30 +49,19 @@ export default class InputSearch extends React.PureComponent<Props, State> {
     const { input } = this.state;
 
     return (
-      <React.Fragment>
-        <TextField
-          value={input}
-          fullWidth
-          placeholder="Search by asset name or symbol"
-          margin="normal"
-          InputProps={{
-            className: inputInput
-          }}
-          classes={{
-            root: inputRoot
-          }}
-          onChange={this.onChange}
-        />
-        {/* <InputBase
-          value={input}
-          placeholder="Search by asset name or symbol"
-          classes={{
-            root: inputRoot,
-            input: inputInput
-          }}
-          onChange={this.onChange}
-        /> */}
-      </React.Fragment>
+      <TextField
+        value={input}
+        fullWidth
+        placeholder="Search by asset name or symbol"
+        margin="normal"
+        InputProps={{
+          className: inputInput
+        }}
+        classes={{
+          root: inputRoot
+        }}
+        onChange={this.onChange}
+      />
     );
   }
 }

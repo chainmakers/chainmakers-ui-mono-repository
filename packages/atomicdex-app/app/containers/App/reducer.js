@@ -14,7 +14,6 @@
 import { fromJS } from 'immutable';
 import { handleActions } from 'redux-actions';
 import each from 'lodash/each';
-import isNumber from 'lodash/isNumber';
 import {
   LOADING,
   LOADED,
@@ -53,17 +52,21 @@ import type {
 const config = getConfig();
 const COIN_DATA = config.get('marketmaker.data');
 
-function getDataMarketcap(data = COIN_DATA) {
-  const result = {};
+function getSupportedCoins(data = COIN_DATA) {
+  const result = {
+    list: [],
+    entities: {}
+  };
   each(data, (e, k) => {
-    if (isNumber(e.market_cap)) {
-      result[e.coin] = {
+    result.list.push(e.coin);
+    result.entities[e.coin] = Object.assign(
+      {
         id: k,
-        name: e.name,
-        symbol: e.coin,
-        marketcap: e.market_cap
-      };
-    }
+        marketcap: 0,
+        symbol: e.coin
+      },
+      e
+    );
   });
   return result;
 }
@@ -104,7 +107,7 @@ export const initialState = fromJS({
       }
     }
   },
-  marketcap: getDataMarketcap()
+  supported_coins: getSupportedCoins()
 });
 
 const appReducer = handleActions(
@@ -191,7 +194,7 @@ const appReducer = handleActions(
               symbol: payload.coin,
               status: DISABLE,
               marketcap:
-                state.getIn(['marketcap', payload.coin, 'marketcap']) || 0
+                state.getIn(['supported_coins', payload.coin, 'marketcap']) || 0
             })
           )
           .sort((a, b) => b.get('marketcap') - a.get('marketcap'));

@@ -132,6 +132,30 @@ const makeSelectPayment = () =>
     buyState => buyState.get('payment')
   );
 
+const makeSelectSearch = () =>
+  createSelector(
+    selectBuy,
+    buyState => buyState.get('search')
+  );
+
+const makeSelectSearchState = () =>
+  createSelector(
+    makeSelectSearch(),
+    searchState => searchState.get('state')
+  );
+
+const makeSelectSearchErrors = () =>
+  createSelector(
+    makeSelectSearch(),
+    searchState => searchState.get('errors')
+  );
+
+const makeSelectSearchList = () =>
+  createSelector(
+    makeSelectSearch(),
+    searchState => searchState.get('list')
+  );
+
 export {
   selectBuy,
   makeSelectPrices,
@@ -152,5 +176,9 @@ export {
   makeSelectSwapInDetailModal,
   makeSelectCoinModal,
   makeSelectCurrency,
-  makeSelectPayment
+  makeSelectPayment,
+  makeSelectSearch,
+  makeSelectSearchState,
+  makeSelectSearchErrors,
+  makeSelectSearchList
 };

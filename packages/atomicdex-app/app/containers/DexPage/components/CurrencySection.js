@@ -5,7 +5,7 @@ import type { Dispatch } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import AddIcon from '@material-ui/icons/Add';
 // import getConfig from '../../../utils/config';
-import { getCoinIcon } from '../../../components/CryptoIcons';
+import getCoinMemoize from '../../../components/CryptoIcons';
 import { floor } from '../utils';
 import { openSelectCoinModal } from '../actions';
 import { makeSelectCurrency } from '../selectors';
@@ -57,7 +57,7 @@ class CurrencySection extends React.PureComponent<Props> {
           {...rest}
         />
       );
-    const icon = getCoinIcon(currency.get('symbol'));
+    const icon = getCoinMemoize(currency.get('symbol'));
     const b = balance.get(currency.get('symbol'));
     return (
       <CoinSelectable

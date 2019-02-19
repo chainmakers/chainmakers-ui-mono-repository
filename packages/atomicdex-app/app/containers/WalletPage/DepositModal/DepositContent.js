@@ -12,7 +12,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
-import { getCoinIcon } from '../../../components/CryptoIcons';
+import getCoinMemoize from '../../../components/CryptoIcons';
 import Or from '../components/Or';
 
 const styles = theme => ({
@@ -56,7 +56,7 @@ type Props = {
 class DepositContent extends React.PureComponent<Props> {
   render = () => {
     const { classes, coin, copyAddressToClipboard } = this.props;
-    const CIcon = getCoinIcon(coin.get('coin'));
+    const CIcon = getCoinMemoize(coin.get('coin'));
 
     return (
       <React.Fragment>

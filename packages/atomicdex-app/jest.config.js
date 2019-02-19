@@ -16,7 +16,12 @@ module.exports = {
     '^.+\\.js$': 'babel-jest'
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/'],
-  // collectCoverageFrom: ['app/**/*.{js,jsx}',  '!**/node_modules/**', '!**/packages/**'],
+  // collectCoverageFrom: [
+  //   'app/**/*.{js,jsx}',
+  //   '!app/dist/**',
+  //   '!**/node_modules/**',
+  //   '!**/packages/**'
+  // ],
   setupFiles: ['./internals/scripts/CheckBuiltsExist.js'],
   testRegex: '(/__tests__/.*)\\.jsx?$',
   collectCoverage: true

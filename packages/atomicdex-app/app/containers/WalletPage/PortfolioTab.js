@@ -10,6 +10,7 @@ import { createStructuredSelector } from 'reselect';
 import Grid from '@material-ui/core/Grid';
 import { makeSelectBalanceList } from '../App/selectors';
 import { loadAllBalance } from '../App/actions';
+import { showElectrumDialog } from '../ElectrumDialog/actions';
 import AddElectrumPlaceholer from './components/AddElectrumPlaceholer';
 import Asset from './components/Asset';
 
@@ -35,7 +36,9 @@ type IPortfolioTabProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   list: Object,
   // eslint-disable-next-line flowtype/no-weak-types
-  dispatchLoadAllBalance: Function
+  dispatchLoadAllBalance: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchShowElectrumDialog: Function
 };
 
 class PortfolioTab extends React.PureComponent<IPortfolioTabProps> {
@@ -66,7 +69,8 @@ class PortfolioTab extends React.PureComponent<IPortfolioTabProps> {
   render() {
     debug(`render`);
 
-    const { list, classes } = this.props;
+    const { list, classes, dispatchShowElectrumDialog } = this.props;
+
     return (
       <Grid container spacing={16}>
         {list.map(this.renderWallet)}
@@ -79,7 +83,7 @@ class PortfolioTab extends React.PureComponent<IPortfolioTabProps> {
             [classes.portfolioTab__tabRight]: list.size % 2 === 0
           })}
         >
-          <AddElectrumPlaceholer />
+          <AddElectrumPlaceholer onClick={dispatchShowElectrumDialog} />
         </Grid>
       </Grid>
     );
@@ -89,7 +93,8 @@ class PortfolioTab extends React.PureComponent<IPortfolioTabProps> {
 // eslint-disable-next-line flowtype/no-weak-types
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   return {
-    dispatchLoadAllBalance: () => dispatch(loadAllBalance())
+    dispatchLoadAllBalance: () => dispatch(loadAllBalance()),
+    dispatchShowElectrumDialog: () => dispatch(showElectrumDialog())
   };
 }
 

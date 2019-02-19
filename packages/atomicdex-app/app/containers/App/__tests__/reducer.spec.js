@@ -69,7 +69,7 @@ describe('containers/App/reducers/addElectrum', () => {
           {
             symbol: 'BEER',
             status: DISABLE,
-            marketcap: -1
+            marketcap: 0
           }
         ])
       );
@@ -95,7 +95,7 @@ describe('containers/App/reducers/addElectrum', () => {
         fromJS([
           {
             symbol: 'BEER',
-            marketcap: -1
+            marketcap: 0
           }
         ])
       );

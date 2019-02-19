@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/ElectrumDialog/actions/hideElectrumDialog should hideElectrumDialog should create hideElectrumDialog action 1`] = `
+Object {
+  "type": "atomicapp/ElectrumDialog/ELECTRUM_DIALOG_HIDE",
+}
+`;
+
+exports[`containers/ElectrumDialog/actions/showElectrumDialog should showElectrumDialog should create showElectrumDialog action 1`] = `
+Object {
+  "type": "atomicapp/ElectrumDialog/ELECTRUM_DIALOG_SHOW",
+}
+`;

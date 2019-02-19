@@ -14,7 +14,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import { LOADING } from '../../../constants';
-import { getCoinIcon } from '../../../components/CryptoIcons';
+import getCoinMemoize from '../../../components/CryptoIcons';
 import { covertSymbolToName } from '../../../utils/coin';
 import { openWithdrawModal, openDepositModal, retryAction } from '../actions';
 import {
@@ -212,7 +212,7 @@ class Asset extends React.PureComponent<IAssetProps> {
               [classes.wallet__textWhite]: isError
             })
           }}
-          action={getCoinIcon(symbol)}
+          action={getCoinMemoize(symbol)}
           title={covertSymbolToName(symbol)}
           subheader={symbol}
         />

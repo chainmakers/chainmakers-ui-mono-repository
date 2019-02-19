@@ -19,15 +19,6 @@ type EelectrumServerType = {
   port: number
 };
 
-type CoinConfigType = {
-  id: string,
-  coin: string,
-  name: string,
-  electrumServers: Array<EelectrumServerType>,
-  marketCap: number,
-  active: number
-};
-
 type AddElectrumPayload = {
   txversion: number,
   urls: Array<string>,
@@ -55,7 +46,6 @@ type LoadBalanceSuccessPayload = {
 export type {
   UTXOType,
   LoginPayload,
-  CoinConfigType,
   AddElectrumPayload,
   AddElectrumSuccessPayload,
   LoadbalacePayload,

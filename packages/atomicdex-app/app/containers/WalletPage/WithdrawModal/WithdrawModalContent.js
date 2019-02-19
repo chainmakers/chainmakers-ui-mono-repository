@@ -14,7 +14,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import { BuyButton } from 'barterdex-components';
-import { getCoinIcon } from '../../../components/CryptoIcons';
+import getCoinMemoize from '../../../components/CryptoIcons';
 import { required, requiredNumber } from '../../../components/Form/helper';
 import validate from '../../../components/Form/validate';
 
@@ -272,7 +272,7 @@ class WithdrawModalContent extends React.PureComponent<Props, State> {
     const { classes, coin } = this.props;
     const { invaidAmountInput, invaidAddressInput } = this.state;
     const loading = coin.get('loading');
-    const CIcon = getCoinIcon(coin.get('coin'));
+    const CIcon = getCoinMemoize(coin.get('coin'));
 
     return (
       <React.Fragment>

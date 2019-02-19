@@ -7,12 +7,10 @@ export const initialState = fromJS({
   show: false
 });
 
-const logoutDialogReducer = handleActions(
+export default handleActions(
   {
     [LOGOUT_DIALOG_SHOW]: state => state.set('show', true),
     [LOGOUT_DIALOG_HIDE]: state => state.set('show', false)
   },
   initialState
 );
-
-export default logoutDialogReducer;

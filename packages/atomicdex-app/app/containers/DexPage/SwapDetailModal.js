@@ -25,7 +25,7 @@ import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import { formatDate } from 'barterdex-utilities';
 import { BuyButton } from 'barterdex-components';
 import explorer from '../../lib/explorer';
-import { getCoinIcon } from '../../components/CryptoIcons';
+import getCoinMemoize from '../../components/CryptoIcons';
 import { STATE_SWAPS, SWAP_TX_DEFAULT } from './constants';
 import { closeDetailModal } from './actions';
 import {
@@ -345,7 +345,7 @@ export class SwapDetail extends React.PureComponent<Props> {
             <Grid item xs={6} className={classes.amountform__itemCenter}>
               <CoinSelectable
                 className={classes.swapform_button}
-                icon={getCoinIcon(swap.get('alice'))}
+                icon={getCoinMemoize(swap.get('alice'))}
                 title="Deposit"
                 subTitle={
                   <span className={classes.swapDetail__danger}>
@@ -362,7 +362,7 @@ export class SwapDetail extends React.PureComponent<Props> {
             <Grid item xs={6} className={classes.amountform__itemCenter}>
               <CoinSelectable
                 className={classes.swapform_button}
-                icon={getCoinIcon(swap.get('bob'))}
+                icon={getCoinMemoize(swap.get('bob'))}
                 title="Receive"
                 subTitle={
                   <span className={classes.swapDetail__success}>

@@ -22,7 +22,9 @@ const styles = () => ({
 });
 
 type IAddElectrumPlaceholerProps = {
-  classes: Styles
+  classes: Styles,
+  // eslint-disable-next-line flowtype/no-weak-types
+  onClick: Function
 };
 
 class AddElectrumPlaceholer extends React.PureComponent<IAddElectrumPlaceholerProps> {
@@ -31,11 +33,11 @@ class AddElectrumPlaceholer extends React.PureComponent<IAddElectrumPlaceholerPr
   render() {
     debug(`render`);
 
-    const { classes } = this.props;
+    const { classes, onClick } = this.props;
 
     return (
       <Card className={classes.wallet__card}>
-        <IconButton aria-label="AddElectrum">
+        <IconButton aria-label="AddElectrum" onClick={onClick}>
           <AddIcon color="primary" fontSize="large" />
         </IconButton>
       </Card>

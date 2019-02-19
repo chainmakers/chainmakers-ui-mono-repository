@@ -21,7 +21,7 @@ import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import CloseIcon from '@material-ui/icons/Close';
 import { BuyButton } from 'barterdex-components';
 import { Circle, Line } from '../../../components/placeholder';
-import { getCoinIcon } from '../../../components/CryptoIcons';
+import getCoinMemoize from '../../../components/CryptoIcons';
 import { requiredNumber } from '../../../components/Form/helper';
 import validate from '../../../components/Form/validate';
 import type { BuyCoinPayload } from '../schema';
@@ -609,7 +609,7 @@ class AmountSection extends React.Component<Props, State> {
         <Grid item xs={6} className={classes.amountform__itemCenter}>
           <CoinSelectable
             className={classes.amountform__button}
-            icon={getCoinIcon(entity.get('alice'))}
+            icon={getCoinMemoize(entity.get('alice'))}
             title="Deposit"
             subTitle={
               <span>
@@ -622,7 +622,7 @@ class AmountSection extends React.Component<Props, State> {
         <Grid item xs={6} className={classes.amountform__itemCenter}>
           <CoinSelectable
             className={classes.amountform__button}
-            icon={getCoinIcon(entity.get('bob'))}
+            icon={getCoinMemoize(entity.get('bob'))}
             title="Receive"
             subTitle={
               <span>

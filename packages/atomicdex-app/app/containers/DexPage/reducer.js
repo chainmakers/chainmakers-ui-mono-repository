@@ -23,7 +23,13 @@ import {
   SELECT_COIN_MODAL_OPEN,
   SELECT_COIN_MODAL_CLOSE,
   SELECT_COIN_MODAL_CLICK,
-  COIN_PAYMENT_SELECT
+  COIN_PAYMENT_SELECT,
+  SELECT_COIN_MODAL_SEARCH_SUCCESS,
+  SELECT_COIN_MODAL_SETUP_SEARCH_API,
+  SELECT_COIN_MODAL_SETUP_SEARCH_API_SUCCESS,
+  SEARCH_STATE_NULL,
+  SEARCH_STATE_CREATE,
+  SEARCH_STATE_READY
 } from './constants';
 
 // The initial state of the App
@@ -73,10 +79,16 @@ export const initialState = fromJS({
     name: null,
     symbol: null
     // amount: 0
+  },
+
+  search: {
+    state: SEARCH_STATE_NULL,
+    errors: {},
+    list: []
   }
 });
 
-const buyReducer = handleActions(
+export default handleActions(
   {
     [LOAD_PRICES]: state =>
       state
@@ -615,10 +627,20 @@ const buyReducer = handleActions(
         .setIn(['payment', 'name'], payload.name)
         .setIn(['payment', 'symbol'], payload.symbol),
 
+    [SELECT_COIN_MODAL_SEARCH_SUCCESS]: (state, { payload }) =>
+      state.setIn(['search', 'list'], fromJS(payload)),
+
+    [SELECT_COIN_MODAL_SETUP_SEARCH_API]: state =>
+      state.setIn(['search', 'state'], SEARCH_STATE_CREATE),
+
+    [SELECT_COIN_MODAL_SETUP_SEARCH_API_SUCCESS]: (state, { payload }) =>
+      state
+        .setIn(['search', 'state'], SEARCH_STATE_READY)
+        .setIn(['search', 'list'], fromJS(payload)),
+
     [LOGOUT]: () => initialState
   },
   initialState
 );
 
-export default buyReducer;
 /* eslint-enable no-case-declarations, no-param-reassign */

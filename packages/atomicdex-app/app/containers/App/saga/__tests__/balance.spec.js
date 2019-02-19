@@ -1,17 +1,24 @@
 // @flow
+import nock from 'nock';
 import { fromJS } from 'immutable';
 import { runSaga } from 'redux-saga';
-import data from '../../../__tests__/app-state.json';
 import type { ErrorType } from '../../../schema';
 import { BALANCE_LOAD } from '../../constants';
+import api from '../../../../lib/barter-dex-api';
 import { openSnackbars } from '../../../Snackbars/actions';
-import { loadBalanceError } from '../../actions';
-import listenForLoadingBalance, { handlingLoadBalanceError } from '../balance';
+import { loadBalanceError, loadBalance } from '../../actions';
+import listenForLoadingBalance, {
+  handlingLoadBalanceError,
+  handlingLoadBalance
+} from '../balance';
+import data from '../../../__tests__/app-state.json';
+
+const TIMEOUT = 20 * 1000;
+const store = fromJS(data);
 
 describe('containers/App/saga/balance/listenForLoadingBalance', () => {
   it('should handle listenForLoadingBalance correctly', async done => {
     const dispatched = [];
-    const store = fromJS(data);
     const saga = await runSaga(
       {
         dispatch: action => dispatched.push(action),
@@ -53,7 +60,6 @@ describe('containers/App/saga/balance/handlingLoadBalanceError', () => {
 
   it('should handle handlingLoadBalanceError correctly', async done => {
     const dispatched = [];
-    const store = fromJS(data);
     const saga = await runSaga(
       {
         dispatch: action => dispatched.push(action),
@@ -66,4 +72,110 @@ describe('containers/App/saga/balance/handlingLoadBalanceError', () => {
     expect(dispatched).toEqual([openSnackbars(error.message)]);
     done();
   });
+});
+
+describe('containers/App/saga/balance/handlingLoadBalance', () => {
+  const TEST_URL = 'http://127.0.0.1:7783';
+  api.setUserpass('userpass');
+  it(
+    'should handle handlingLoadBalance correctly',
+    async done => {
+      const dispatched = [];
+
+      nock(TEST_URL)
+        .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
+        .persist()
+        .post('/', () => true)
+        .reply(200, (uri, body, cb) => {
+          const { method } = JSON.parse(body);
+          if (method === 'my_balance') {
+            cb(null, {
+              address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
+              balance: 6502.66989074,
+              coin: 'BEER'
+            });
+          }
+          if (method === 'getfee') {
+            cb(null, {
+              coin: 'BEER',
+              txfee: 0.00001
+            });
+          }
+        });
+
+      const saga = await runSaga(
+        {
+          dispatch: action => dispatched.push(action),
+          getState: () => store
+        },
+        handlingLoadBalance,
+        loadBalance({
+          coin: 'BEER'
+        })
+      ).done;
+
+      expect(dispatched).toEqual([
+        {
+          type: 'atomicapp/App/BALANCE_LOAD_SUCCESS',
+          payload: {
+            coin: 'BEER',
+            address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
+            balance: 6502.66989074,
+            fee: 0.00001
+          }
+        }
+      ]);
+      expect(saga).toEqual(undefined);
+
+      nock.cleanAll();
+      nock.enableNetConnect();
+      done();
+    },
+    TIMEOUT
+  );
+  it(
+    'should handle throw new error',
+    async done => {
+      const dispatched = [];
+
+      nock(TEST_URL)
+        .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
+        .persist()
+        .post('/', () => true)
+        .reply(200, (uri, body, cb) => {
+          cb(new Error('new error message'));
+        });
+
+      const saga = await runSaga(
+        {
+          dispatch: action => dispatched.push(action),
+          getState: () => store
+        },
+        handlingLoadBalance,
+        loadBalance({
+          coin: 'BEER'
+        })
+      ).done;
+
+      expect(dispatched).toEqual([
+        {
+          error: {
+            context: {
+              action: 'atomicapp/App/BALANCE_LOAD',
+              params: { coin: 'BEER' }
+            },
+            message: 'Request failed with status code 500',
+            type: 'RPC'
+          },
+          type: 'atomicapp/App/BALANCE_LOAD_ERROR'
+        }
+      ]);
+      expect(saga).toEqual(undefined);
+
+      nock.cleanAll();
+      nock.enableNetConnect();
+      done();
+    },
+    TIMEOUT
+  );
 });

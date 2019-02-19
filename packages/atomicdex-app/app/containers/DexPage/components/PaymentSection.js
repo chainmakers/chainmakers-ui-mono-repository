@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import type { Dispatch } from 'redux';
 import type { List, Map } from 'immutable';
 import { createStructuredSelector } from 'reselect';
-import { getCoinIcon } from '../../../components/CryptoIcons';
+import getCoinMemoize from '../../../components/CryptoIcons';
 import { Line, Circle } from '../../../components/placeholder';
 import { covertSymbolToName } from '../../../utils/coin';
 import { makeSelectBalanceAvailable } from '../../App/selectors';
@@ -89,7 +89,7 @@ class PaymentSection extends React.PureComponent<Props> {
     const { payment, pricesEntities, dispatchLoadPrice, currency } = this.props;
     const symbol = b.get('coin');
     const c = pricesEntities.get(symbol);
-    const icon = getCoinIcon(symbol);
+    const icon = getCoinMemoize(symbol);
     const name = covertSymbolToName(symbol);
     if (!c) {
       // not found in entities

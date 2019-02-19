@@ -6,6 +6,7 @@ import { makeSelectAuthenticated, makeSelectLoading } from './App/selectors';
 import connectedRouterRedirect from '../utils/auth-wrapper/connected-router-redirect';
 import { routes } from '../constants';
 import App from './App';
+import ElectrumDialog from './ElectrumDialog';
 import DexPage from './DexPage';
 import WalletPage from './WalletPage';
 import HelpPage from './HelpPage';
@@ -47,6 +48,7 @@ export default () => (
   <React.Fragment>
     <Route component={App} />
     <Route component={LogoutDialog} />
+    <Route component={ElectrumDialog} />
     <Route component={WebSocketComponent} />
     <Route component={Snackbars} />
     <Switch>

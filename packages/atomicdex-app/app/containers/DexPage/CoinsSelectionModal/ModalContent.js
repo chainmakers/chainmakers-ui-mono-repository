@@ -3,7 +3,7 @@ import React from 'react';
 import { MemoizedRender } from 'react-memoize';
 import Grid from '@material-ui/core/Grid';
 import CoinSelectable from '../components/CoinSelectable';
-import { getCoin } from '../../../components/CryptoIcons';
+import getCoinMemoize from '../../../components/CryptoIcons';
 import { covertSymbolToName } from '../../../utils/coin';
 
 const debug = require('debug')(
@@ -22,6 +22,8 @@ type Props = {
 type State = {};
 
 class ModalContent extends React.PureComponent<Props, State> {
+  renderEmptyState = () => <div>render empty state</div>;
+
   renderListItem = e => {
     const { className, handleSelectCoin, disabled } = this.props;
     return (
@@ -34,21 +36,18 @@ class ModalContent extends React.PureComponent<Props, State> {
         }}
         key={`coinsSelectionModal${e.symbol}${e.id}`}
       >
-        {state => {
-          const CIcon = getCoin(state.data.symbol);
-          return (
-            <Grid item xs={3}>
-              <CoinSelectable
-                disabled={state.disabled}
-                className={state.className}
-                icon={<CIcon width={56} height={56} viewBox="0 0 32 32" />}
-                title={covertSymbolToName(state.data.symbol)}
-                onClick={state.handleSelectCoin}
-                data={state.data}
-              />
-            </Grid>
-          );
-        }}
+        {state => (
+          <Grid item xs={3}>
+            <CoinSelectable
+              disabled={state.disabled}
+              className={state.className}
+              icon={getCoinMemoize(state.data.symbol, 56, 56)}
+              title={covertSymbolToName(state.data.symbol)}
+              onClick={state.handleSelectCoin}
+              data={state.data}
+            />
+          </Grid>
+        )}
       </MemoizedRender>
     );
   };
@@ -56,6 +55,8 @@ class ModalContent extends React.PureComponent<Props, State> {
   render() {
     debug(`render`);
     const { data } = this.props;
+
+    if (!data) return this.renderEmptyState();
 
     return data.map(this.renderListItem);
   }

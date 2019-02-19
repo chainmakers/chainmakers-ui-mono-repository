@@ -3,6 +3,8 @@ export const LOADED = 'LOADED';
 export const FAILED = 'FAILED';
 export const ENABLE = 'ENABLE';
 export const DISABLE = 'DISABLE';
+export const SELECTED = 'SELECTED';
+export const UNSELECTED = 'UNSELECTED';
 
 // https://www.tutorialspoint.com/operating_system/os_processes.htm
 // Operating System - Processes

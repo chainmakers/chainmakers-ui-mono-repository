@@ -2,7 +2,6 @@
 import React from 'react';
 import { compose } from 'redux';
 import { FormattedMessage } from 'react-intl';
-import { withStyles } from '@material-ui/core/styles';
 import injectReducer from '../../utils/inject-reducer';
 import injectSaga from '../../utils/inject-saga';
 import injectWebsocket from '../../utils/inject-websocket';
@@ -28,8 +27,6 @@ import saga from './saga';
 import subscribe from './subscribe';
 
 const debug = require('debug')('atomicapp:containers:DexPage');
-
-const styles = () => ({});
 
 type IDexPageProps = {};
 
@@ -107,6 +104,5 @@ export default compose(
   withSaga,
   withSagaTimeout,
   withSagaUpdateSwap,
-  withWebsocket,
-  withStyles(styles)
+  withWebsocket
 )(DexPage);

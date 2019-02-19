@@ -86,8 +86,8 @@
         { "symbol": "COQUI", "status": "ENABLE", "marketcap": 0 },
         { "symbol": "KMDICE", "status": "ENABLE", "marketcap": 0 },
         { "symbol": "CHAIN", "status": "ENABLE", "marketcap": 0 },
-        { "symbol": "BEER", "status": "ENABLE", "marketcap": -1 },
-        { "symbol": "PIZZA", "status": "ENABLE", "marketcap": -2 }
+        { "symbol": "BEER", "status": "ENABLE", "marketcap": 0 },
+        { "symbol": "PIZZA", "status": "ENABLE", "marketcap": 0 }
       ],
       "entities": {
         "EQL": {
@@ -171,84 +171,271 @@
         }
       }
     },
-    "marketcap": {
-      "EQL": { "id": 2, "name": "Equaliser", "symbol": "EQL", "marketcap": 0 },
-      "CHAIN": {
-        "id": 8,
-        "name": "Chainmakers",
-        "symbol": "CHAIN",
-        "marketcap": 0
-      },
-      "KMD": {
-        "id": 1,
-        "name": "Komodo",
-        "symbol": "KMD",
-        "marketcap": 107340275
-      },
-      "BCH": {
-        "id": 9,
-        "name": "Bitcoin Cash",
-        "symbol": "BCH",
-        "marketcap": 2197468013
-      },
-      "CHIPS": {
-        "id": 5,
-        "name": "Chips",
-        "symbol": "CHIPS",
-        "marketcap": 1609044
-      },
-      "PIZZA": {
-        "id": 12,
-        "name": "Pizza",
-        "symbol": "PIZZA",
-        "marketcap": -2
-      },
-      "KMDICE": {
-        "id": 7,
-        "name": "KMDICE",
-        "symbol": "KMDICE",
-        "marketcap": 0
-      },
-      "VRSC": {
-        "id": 6,
-        "name": "VerusCoin",
-        "symbol": "VRSC",
-        "marketcap": 1609044
-      },
-      "BEER": { "id": 13, "name": "Beer", "symbol": "BEER", "marketcap": -1 },
-      "BTC": {
-        "id": 0,
-        "name": "Bitcoin",
-        "symbol": "BTC",
-        "marketcap": 97822306639
-      },
-      "ZEC": {
-        "id": 11,
-        "name": "Zcash",
-        "symbol": "ZEC",
-        "marketcap": 289458275
-      },
-      "COQUI": {
-        "id": 4,
-        "name": "Coqui Cash",
-        "symbol": "COQUI",
-        "marketcap": 0
-      },
-      "LTC": {
-        "id": 3,
-        "name": "Litecoin",
-        "symbol": "LTC",
-        "marketcap": 2578993869
-      },
-      "QTUM": {
-        "id": 10,
-        "name": "Qtum",
-        "symbol": "QTUM",
-        "marketcap": 167615207
+    "supported_coins": {
+      "list": [
+        "BTC",
+        "KMD",
+        "EQL",
+        "LTC",
+        "COQUI",
+        "CHIPS",
+        "REVS",
+        "VRSC",
+        "KMDICE",
+        "CHAIN",
+        "BCH",
+        "QTUM",
+        "ZEC",
+        "BEER",
+        "PIZZA"
+      ],
+      "entities": {
+        "EQL": {
+          "urls": ["159.65.91.235:10801", "167.99.204.42:10801"],
+          "active": 0,
+          "rpcport": 10306,
+          "name": "Equaliser",
+          "market_cap": 0,
+          "asset": "EQL",
+          "coin": "EQL",
+          "marketcap": 0,
+          "symbol": "EQL",
+          "id": 2
+        },
+        "CHAIN": {
+          "urls": [
+            "electrum1.cipig.net:10032",
+            "electrum2.cipig.net:10032",
+            "electrum3.cipig.net:10032"
+          ],
+          "active": 0,
+          "rpcport": 15587,
+          "name": "Chainmakers",
+          "market_cap": 0,
+          "asset": "CHAIN",
+          "coin": "CHAIN",
+          "txversion": 4,
+          "marketcap": 0,
+          "symbol": "CHAIN",
+          "id": 9
+        },
+        "KMD": {
+          "urls": ["electrum1.cipig.net:10001", "electrum2.cipig.net:10001"],
+          "active": 1,
+          "name": "Komodo",
+          "market_cap": 107340275,
+          "asset": "KMD",
+          "coin": "KMD",
+          "txversion": 4,
+          "marketcap": 0,
+          "symbol": "KMD",
+          "id": 1
+        },
+        "BCH": {
+          "txfee": 1000,
+          "urls": [
+            "bch.imaginary.cash:50001",
+            "electroncash.dk:50001",
+            "electrum.imaginary.cash:50001",
+            "abc1.hsmiths.com:60001"
+          ],
+          "active": 0,
+          "rpcport": 33333,
+          "name": "Bitcoin Cash",
+          "wiftype": 128,
+          "market_cap": 2197468013,
+          "asset": "bch",
+          "coin": "BCH",
+          "p2shtype": 5,
+          "txversion": 4,
+          "marketcap": 0,
+          "pubtype": 0,
+          "symbol": "BCH",
+          "id": 10
+        },
+        "CHIPS": {
+          "txfee": 10000,
+          "urls": ["electrum1.cipig.net:10053", "electrum2.cipig.net:10053"],
+          "active": 0,
+          "rpcport": 57776,
+          "name": "Chips",
+          "wiftype": 188,
+          "market_cap": 1609044,
+          "asset": "CHIPS",
+          "coin": "CHIPS",
+          "p2shtype": 85,
+          "txversion": 4,
+          "marketcap": 0,
+          "pubtype": 60,
+          "symbol": "CHIPS",
+          "id": 5
+        },
+        "PIZZA": {
+          "urls": ["electrum1.cipig.net:10024", "electrum2.cipig.net:10024"],
+          "active": 1,
+          "rpcport": 11608,
+          "name": "Pizza",
+          "market_cap": -2,
+          "asset": "PIZZA",
+          "coin": "PIZZA",
+          "txversion": 4,
+          "marketcap": 0,
+          "symbol": "PIZZA",
+          "id": 14
+        },
+        "KMDICE": {
+          "urls": [
+            "electrum1.cipig.net:10031",
+            "electrum2.cipig.net:10031",
+            "electrum3.cipig.net:10031"
+          ],
+          "active": 0,
+          "rpcport": 30177,
+          "name": "KMDice",
+          "market_cap": 0,
+          "asset": "KMDice",
+          "coin": "KMDICE",
+          "txversion": 4,
+          "marketcap": 0,
+          "symbol": "KMDICE",
+          "id": 8
+        },
+        "VRSC": {
+          "urls": [
+            "el0.vrsc.0x03.services:10000",
+            "el1.vrsc.0x03.services:10000",
+            "el2.vrsc.0x03.services:10000"
+          ],
+          "active": 0,
+          "rpcport": 27486,
+          "name": "VerusCoin",
+          "market_cap": 1609044,
+          "asset": "VRSC",
+          "coin": "VRSC",
+          "txversion": 4,
+          "marketcap": 0,
+          "symbol": "VRSC",
+          "id": 7
+        },
+        "BEER": {
+          "urls": ["electrum1.cipig.net:10022", "electrum2.cipig.net:10022"],
+          "active": 0,
+          "rpcport": 8923,
+          "name": "Beer",
+          "market_cap": -1,
+          "asset": "BEER",
+          "coin": "BEER",
+          "txversion": 4,
+          "marketcap": 0,
+          "symbol": "BEER",
+          "id": 13
+        },
+        "REVS": {
+          "urls": [
+            "electrum1.cipig.net:10003",
+            "electrum2.cipig.net:10003",
+            "electrum3.cipig.net:10003"
+          ],
+          "active": 0,
+          "rpcport": 10196,
+          "name": "Revs",
+          "market_cap": 0,
+          "asset": "REVS",
+          "coin": "REVS",
+          "marketcap": 0,
+          "symbol": "REVS",
+          "id": 6
+        },
+        "BTC": {
+          "urls": ["electrum1.cipig.net:10000", "electrum2.cipig.net:10000"],
+          "active": 1,
+          "name": "Bitcoin",
+          "market_cap": 97822306639,
+          "asset": "BTC",
+          "coin": "BTC",
+          "marketcap": 0,
+          "symbol": "BTC",
+          "id": 0
+        },
+        "ZEC": {
+          "txfee": 10000,
+          "urls": [
+            "electrum1.cipig.net:10058",
+            "electrum2.cipig.net:10058",
+            "electrum3.cipig.net:10058"
+          ],
+          "taddr": 28,
+          "active": 0,
+          "rpcport": 8232,
+          "name": "Zcash",
+          "wiftype": 128,
+          "market_cap": 289458275,
+          "asset": "zcash",
+          "coin": "ZEC",
+          "p2shtype": 189,
+          "txversion": 4,
+          "marketcap": 0,
+          "pubtype": 184,
+          "symbol": "ZEC",
+          "id": 12
+        },
+        "COQUI": {
+          "urls": ["electrum1.cipig.net:10011", "electrum2.cipig.net:10011"],
+          "active": 0,
+          "rpcport": 14276,
+          "name": "Coqui Cash",
+          "market_cap": 0,
+          "asset": "COQUI",
+          "coin": "COQUI",
+          "txversion": 4,
+          "marketcap": 0,
+          "symbol": "COQUI",
+          "id": 4
+        },
+        "LTC": {
+          "txfee": 100000,
+          "urls": ["electrum1.cipig.net:10065", "electrum2.cipig.net:10065"],
+          "active": 0,
+          "rpcport": 9332,
+          "name": "Litecoin",
+          "wiftype": 176,
+          "market_cap": 2578993869,
+          "asset": "LTC",
+          "coin": "LTC",
+          "p2shtype": 5,
+          "marketcap": 0,
+          "pubtype": 48,
+          "symbol": "LTC",
+          "id": 3
+        },
+        "QTUM": {
+          "txfee": 400000,
+          "urls": [
+            "s4.qtum.info:50001",
+            "s5.qtum.info:50001",
+            "s7.qtum.info:50001",
+            "s8.qtum.info:50001"
+          ],
+          "active": 0,
+          "rpcport": 3889,
+          "name": "Qtum",
+          "wiftype": 128,
+          "market_cap": 167615207,
+          "asset": "qtum",
+          "coin": "QTUM",
+          "p2shtype": 50,
+          "marketcap": 0,
+          "pubtype": 58,
+          "symbol": "QTUM",
+          "id": 11
+        }
       }
     }
   },
   "logoutDialog": {
+    "show": false
+  },
+  "electrumDialog": {
     "show": false
   },
   "language": {
