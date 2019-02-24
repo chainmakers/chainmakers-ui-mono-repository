@@ -1,5 +1,6 @@
 import { all, takeEvery, takeLatest } from 'redux-saga/effects';
 import { takeFirst } from 'barterdex-rssm';
+import { LOGOUT } from '../../App/constants';
 import {
   LOAD_PRICES,
   LOAD_PRICE,
@@ -10,7 +11,10 @@ import {
 } from '../constants';
 import loadBuyCoinProcess from './load-buy-coin-process';
 import loadPricesProcess, { loadPriceProcess } from './load-prices-process';
-import handlingSearch, { setupSearchApiForSelectCoinModal } from './search';
+import handlingSearch, {
+  setupSearchApiForSelectCoinModal,
+  handlingLogout
+} from './search';
 
 /**
  * Root saga manages watcher lifecycle
@@ -24,7 +28,8 @@ export default function* buyData() {
     yield takeFirst(
       SELECT_COIN_MODAL_SETUP_SEARCH_API,
       setupSearchApiForSelectCoinModal
-    )
+    ),
+    yield takeEvery(LOGOUT, handlingLogout)
     // yield takeFirst(LOAD_BUY_COIN, loadBuyCoinProcess);
   ]);
 }

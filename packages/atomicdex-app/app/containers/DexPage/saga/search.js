@@ -1,20 +1,21 @@
 // @flow
 import * as JsSearch from 'js-search';
 import isNumber from 'lodash/isNumber';
-import { call, put, select, all, cancelled } from 'redux-saga/effects';
+import { put, select } from 'redux-saga/effects';
+import { ENABLE } from '../../../constants';
 import {
   makeSelectBalanceList,
   makeSelectSupportedCoinsEntities
 } from '../../App/selectors';
-import { ENABLE } from '../../../constants';
 import {
   setupSearchApiForSelectCoinModalSuccess,
-  searchSelectCoinModalSuccess
+  searchSelectCoinModalSuccess,
+  skipSearchStateCreation
 } from '../actions';
 
 const debug = require('debug')('atomicapp:containers:DexPage:saga:search');
 
-let api = null;
+let searchApi = null;
 let cacheData = null;
 
 export function* setupSearchApiForSelectCoinModal() {
@@ -28,7 +29,8 @@ export function* setupSearchApiForSelectCoinModal() {
   balanceList = balanceList.map(e => supportedCoinsEntities.get(e));
 
   if (balanceList.equals(cacheData)) {
-    return debug('Nothing change. Ignore this time.');
+    debug('Nothing change. Ignore this time.');
+    return yield put(skipSearchStateCreation());
   }
 
   cacheData = balanceList;
@@ -43,20 +45,25 @@ export function* setupSearchApiForSelectCoinModal() {
     .filter(e => isNumber(e.market_cap))
     .sort((a, b) => b.market_cap - a.market_cap);
 
-  api = new JsSearch.Search('id');
+  searchApi = new JsSearch.Search('id');
   // this index strategy is built for all substrings matches.
-  api.indexStrategy = new JsSearch.AllSubstringsIndexStrategy();
-  api.addIndex('name');
-  api.addIndex('symbol');
-  api.addDocuments(balanceList);
+  searchApi.indexStrategy = new JsSearch.AllSubstringsIndexStrategy();
+  searchApi.addIndex('name');
+  searchApi.addIndex('symbol');
+  searchApi.addDocuments(balanceList);
   return yield put(setupSearchApiForSelectCoinModalSuccess(cacheData.toJS()));
+}
+
+export function* handlingLogout() {
+  searchApi = null;
+  cacheData = null;
 }
 
 export default function* handlingSearch({ payload }) {
   const { input } = payload;
   if (input === '')
     return yield put(searchSelectCoinModalSuccess(cacheData.toJS()));
-  const d = api.search(input);
+  const d = searchApi.search(input);
   return yield put(
     searchSelectCoinModalSuccess(d.sort((a, b) => b.market_cap - a.market_cap))
   );

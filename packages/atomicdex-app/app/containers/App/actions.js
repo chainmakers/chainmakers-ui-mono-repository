@@ -33,7 +33,10 @@ import {
   BALANCE_LOAD_ALL,
   BALANCE_LOAD,
   BALANCE_LOAD_SUCCESS,
-  BALANCE_LOAD_ERROR
+  BALANCE_LOAD_ERROR,
+  DATA_FROM_DB_LOAD,
+  DATA_FROM_DB_LOAD_SUCCESS,
+  DATA_FROM_DB_LOAD_ERROR
 } from './constants';
 import type {
   AddElectrumPayload,
@@ -169,5 +172,24 @@ export function loadBalanceError(error: ErrorType) {
   return {
     type: BALANCE_LOAD_ERROR,
     error
+  };
+}
+
+export function loadDataFromDB() {
+  return {
+    type: DATA_FROM_DB_LOAD
+  };
+}
+
+export function loadDataFromDBSuccess(payload: Array<string>) {
+  return {
+    type: DATA_FROM_DB_LOAD_SUCCESS,
+    payload
+  };
+}
+
+export function loadDataFromDBError() {
+  return {
+    type: DATA_FROM_DB_LOAD_ERROR
   };
 }

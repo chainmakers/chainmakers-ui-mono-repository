@@ -1,20 +1,35 @@
 // @flow
 import { fromJS } from 'immutable';
-import { LOADING, LOADED, FAILED, ENABLE, DISABLE } from '../../../constants';
+import {
+  LOADING,
+  LOADED,
+  FAILED,
+  ENABLE,
+  DISABLE,
+  STATE_STARTED,
+  STATE_RUNNING,
+  STATE_TERMINATED
+} from '../../../constants';
 import appReducer, { initialState } from '../reducer';
 import {
   logout,
+  login,
+  loginSuccess,
+  loginError,
   addElectrum,
   addElectrumSuccess,
   addElectrumError,
-  loadBalance
+  loadBalance,
+  loadDataFromDBError,
+  loadDataFromDBSuccess
 } from '../actions';
-import { ELECTRUM_ADD } from '../constants';
+import { ELECTRUM_ADD, LOGIN } from '../constants';
 import type { ErrorType } from '../../schema';
 import type {
   AddElectrumPayload,
   AddElectrumSuccessPayload,
-  LoadbalacePayload
+  LoadbalacePayload,
+  LoginPayload
 } from '../schema';
 
 describe('containers/App/reducers/initial', () => {
@@ -30,6 +45,49 @@ describe('containers/App/reducers/logout', () => {
       .setIn(['balance', 'error'], false);
 
     expect(appReducer(state, logout())).toEqual(initialState);
+  });
+});
+
+describe('containers/App/reducers/login', () => {
+  const payload: LoginPayload = {
+    passphrase: 'passphrase'
+  };
+  it('should handle the login action correctly', () => {
+    const state = initialState
+      .setIn(['marketmaker', 'errors'], null)
+      .setIn(['marketmaker', 'state'], STATE_STARTED);
+
+    expect(appReducer(initialState, login(payload))).toEqual(state);
+  });
+});
+
+describe('containers/App/reducers/loginSuccess', () => {
+  it('should handle the loginSuccess action correctly', () => {
+    const state = initialState
+      .setIn(['marketmaker', 'errors'], null)
+      .setIn(['marketmaker', 'state'], STATE_RUNNING);
+
+    expect(appReducer(initialState, loginSuccess())).toEqual(state);
+  });
+});
+
+describe('containers/App/reducers/loginError', () => {
+  const error: ErrorType = {
+    context: {
+      action: LOGIN,
+      params: {
+        passphrase: 'passphrase'
+      }
+    },
+    type: 'RPC',
+    message: "can't start marketmaker app"
+  };
+  it('should handle the loginError action correctly', () => {
+    const state = initialState
+      .setIn(['marketmaker', 'errors'], error)
+      .setIn(['marketmaker', 'state'], STATE_TERMINATED);
+
+    expect(appReducer(initialState, loginError(error))).toEqual(state);
   });
 });
 
@@ -229,6 +287,37 @@ describe('containers/App/reducers/loadBalance', () => {
       );
 
     expect(appReducer(state, loadBalance(payload))).toEqual(state);
+  });
+});
+
+describe('containers/App/reducers/loadDataFromDBError', () => {
+  it('should handle the loadDataFromDBError action correctly', () => {
+    const state = initialState.set('loadedDataFromDB', true);
+
+    expect(appReducer(initialState, loadDataFromDBError())).toEqual(state);
+  });
+});
+
+describe('containers/App/reducers/loadDataFromDBSuccess', () => {
+  const coin = 'PIZZA';
+  it('should handle the loadDataFromDBSuccess action correctly', () => {
+    const state = initialState
+      .set('loadedDataFromDB', true)
+      .setIn(
+        ['balance', 'entities', coin],
+        fromJS({
+          coin,
+          address: '',
+          balance: 0,
+          fee: 0
+        })
+      )
+      .updateIn(['balance', 'list'], arr =>
+        arr.push(fromJS({ symbol: coin, status: DISABLE, marketcap: 0 }))
+      );
+    expect(
+      appReducer(initialState, loadDataFromDBSuccess(['BTC', 'KMD', coin]))
+    ).toEqual(state);
   });
 });
 

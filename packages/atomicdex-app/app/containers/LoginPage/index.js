@@ -106,6 +106,7 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
 
   componentDidUpdate = prevProps => {
     const { authenticated, error, intl } = this.props;
+    // FIXME: we should remove this to improve UX
     if (authenticated && !prevProps.authenticated) {
       swal(
         'Success',

@@ -4,8 +4,9 @@ import ipc from 'electron-better-ipc';
 import { take, race, call, put } from 'redux-saga/effects';
 import { takeFirst } from 'barterdex-rssm';
 import api from '../../lib/barter-dex-api';
+import { open } from '../../utils/db';
 import { LOGIN, LOGOUT } from '../App/constants';
-import { loginSuccess, loginError, loadElectrums } from '../App/actions';
+import { loginSuccess, loginError } from '../App/actions';
 
 const debug = require('debug')('atomicapp:containers:LoginPage:saga');
 
@@ -20,7 +21,9 @@ export function* authorize(passphrase: string) {
 
     api.setUserpass(passphrase);
     yield call([api, 'waitUntilReady']);
-    yield put(loadElectrums());
+    const userpass = api.getUserpass();
+    // const db = open(userpass);
+    open(userpass);
 
     return data;
   } catch (err) {

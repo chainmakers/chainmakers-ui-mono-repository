@@ -14,11 +14,6 @@ type LoginPayload = {
   passphrase: string
 };
 
-type EelectrumServerType = {
-  host: string,
-  port: number
-};
-
 type AddElectrumPayload = {
   txversion: number,
   urls: Array<string>,

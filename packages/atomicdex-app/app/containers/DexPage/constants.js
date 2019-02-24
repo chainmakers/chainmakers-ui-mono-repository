@@ -78,4 +78,6 @@ export const BUFF_PRICES = 1.05 * NUMCOIN; // 5%
 // SEARCH STATUS
 export const SEARCH_STATE_NULL = 'atomicapp/DexPage/SEARCH_STATE_NULL';
 export const SEARCH_STATE_CREATE = 'atomicapp/DexPage/SEARCH_STATE_CREATE';
+export const SEARCH_STATE_SKIP_CREATION =
+  'atomicapp/DexPage/SEARCH_STATE_SKIP_CREATION';
 export const SEARCH_STATE_READY = 'atomicapp/DexPage/SEARCH_STATE_READY';

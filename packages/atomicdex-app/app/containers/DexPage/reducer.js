@@ -27,6 +27,7 @@ import {
   SELECT_COIN_MODAL_SEARCH_SUCCESS,
   SELECT_COIN_MODAL_SETUP_SEARCH_API,
   SELECT_COIN_MODAL_SETUP_SEARCH_API_SUCCESS,
+  SEARCH_STATE_SKIP_CREATION,
   SEARCH_STATE_NULL,
   SEARCH_STATE_CREATE,
   SEARCH_STATE_READY
@@ -637,6 +638,9 @@ export default handleActions(
       state
         .setIn(['search', 'state'], SEARCH_STATE_READY)
         .setIn(['search', 'list'], fromJS(payload)),
+
+    [SEARCH_STATE_SKIP_CREATION]: state =>
+      state.setIn(['search', 'state'], SEARCH_STATE_READY),
 
     [LOGOUT]: () => initialState
   },

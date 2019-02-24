@@ -848,7 +848,7 @@ const list = {
   ZRX
 };
 
-const getCoinMemoize = function(
+function getCoinMemoize(
   icon: string,
   width: number = 32,
   height: number = 32

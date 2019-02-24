@@ -22,6 +22,7 @@ type Props = {
 type State = {};
 
 class ModalContent extends React.PureComponent<Props, State> {
+  // FIXME
   renderEmptyState = () => <div>render empty state</div>;
 
   renderListItem = e => {

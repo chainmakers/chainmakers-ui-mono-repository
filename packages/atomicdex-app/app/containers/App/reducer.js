@@ -39,7 +39,9 @@ import {
   ELECTRUM_ADD_ERROR,
   BALANCE_LOAD,
   BALANCE_LOAD_SUCCESS,
-  BALANCE_LOAD_ERROR
+  BALANCE_LOAD_ERROR,
+  DATA_FROM_DB_LOAD_SUCCESS,
+  DATA_FROM_DB_LOAD_ERROR
 } from './constants';
 import type { ErrorType } from '../schema';
 import type {
@@ -73,6 +75,7 @@ function getSupportedCoins(data = COIN_DATA) {
 
 // The initial state of the App
 export const initialState = fromJS({
+  loadedDataFromDB: false,
   marketmaker: {
     state: null,
     errors: null
@@ -112,19 +115,6 @@ export const initialState = fromJS({
 
 const appReducer = handleActions(
   {
-    [LOGIN]: state =>
-      state
-        .setIn(['marketmaker', 'errors'], null)
-        .setIn(['marketmaker', 'state'], STATE_STARTED),
-
-    [LOGIN_SUCCESS]: state =>
-      state.setIn(['marketmaker', 'state'], STATE_RUNNING),
-
-    [LOGIN_ERROR]: (state, { error }) =>
-      state
-        .setIn(['marketmaker', 'errors'], error)
-        .setIn(['marketmaker', 'state'], STATE_TERMINATED),
-
     [LOAD_WITHDRAW]: (state, { payload }) =>
       state
         .setIn(['balance', 'fetchStatus', payload.coin], LOADING)
@@ -268,6 +258,55 @@ const appReducer = handleActions(
         .setIn(['balance', 'fetchStatus', params.coin], FAILED)
         .setIn(['balance', 'errors', params.coin], fromJS(error));
     },
+
+    [LOGIN]: state =>
+      state
+        .setIn(['marketmaker', 'errors'], null)
+        .setIn(['marketmaker', 'state'], STATE_STARTED),
+
+    [LOGIN_SUCCESS]: state =>
+      state.setIn(['marketmaker', 'state'], STATE_RUNNING),
+
+    [LOGIN_ERROR]: (state, { error }) =>
+      state
+        .setIn(['marketmaker', 'errors'], error)
+        .setIn(['marketmaker', 'state'], STATE_TERMINATED),
+
+    [DATA_FROM_DB_LOAD_SUCCESS]: (state, { payload }) => {
+      for (let i = 0; i < payload.length; i += 1) {
+        const coin = payload[i];
+        // step one: update entities
+        if (!state.hasIn(['balance', 'entities', coin]))
+          state = state.setIn(
+            ['balance', 'entities', coin],
+            fromJS({
+              coin,
+              address: '',
+              balance: 0,
+              fee: 0
+            })
+          );
+        // step two: add key in list
+        let list = state.getIn(['balance', 'list']);
+        if (!list.find(obj => obj.get('symbol') === coin)) {
+          list = list
+            .push(
+              fromJS({
+                symbol: coin,
+                status: DISABLE,
+                marketcap:
+                  state.getIn(['supported_coins', coin, 'marketcap']) || 0
+              })
+            )
+            .sort((a, b) => b.get('marketcap') - a.get('marketcap'));
+          state = state.setIn(['balance', 'list'], list);
+        }
+      }
+
+      return state.set('loadedDataFromDB', true);
+    },
+
+    [DATA_FROM_DB_LOAD_ERROR]: state => state.set('loadedDataFromDB', true),
 
     [LOGOUT]: () => initialState
   },

@@ -28,7 +28,8 @@ import {
   SELECT_COIN_MODAL_SEARCH_SUCCESS,
   SELECT_COIN_MODAL_SETUP_SEARCH_API,
   SELECT_COIN_MODAL_SETUP_SEARCH_API_SUCCESS,
-  COIN_PAYMENT_SELECT
+  COIN_PAYMENT_SELECT,
+  SEARCH_STATE_SKIP_CREATION
 } from './constants';
 import type {
   BuyCoinPayload,
@@ -227,5 +228,11 @@ export function selectCoinPayment(payload: SelectCoinPayload) {
   return {
     type: COIN_PAYMENT_SELECT,
     payload
+  };
+}
+
+export function skipSearchStateCreation() {
+  return {
+    type: SEARCH_STATE_SKIP_CREATION
   };
 }

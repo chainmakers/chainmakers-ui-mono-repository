@@ -20,7 +20,8 @@ import {
   generateSeed,
   generateWif,
   floor,
-  memoize
+  memoize,
+  clipboardCopy
 } from '../index';
 
 it('packages/barterdex-utilities/src/index', () => {
@@ -45,4 +46,5 @@ it('packages/barterdex-utilities/src/index', () => {
   expect(typeof generateWif).toEqual('function');
   expect(typeof floor).toEqual('function');
   expect(typeof memoize).toEqual('function');
+  expect(typeof clipboardCopy).toEqual('function');
 });

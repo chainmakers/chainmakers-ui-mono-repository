@@ -11,7 +11,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import Typography from '@material-ui/core/Typography';
 import CloudOff from '@material-ui/icons/CloudOff';
-import clipboardCopy from '../../../utils/clipboard-copy';
+import { clipboardCopy } from 'barterdex-utilities';
 import { openSnackbars } from '../../Snackbars/actions';
 import {
   makeSelectDepositModal,

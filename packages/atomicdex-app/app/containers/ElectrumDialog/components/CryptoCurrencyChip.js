@@ -17,13 +17,13 @@ const styles = theme => ({
 });
 
 type ICryptoCurrencyChipProps = {
-  selected: boolean,
+  selected?: boolean,
   // eslint-disable-next-line flowtype/no-weak-types
   classes: Object,
   // eslint-disable-next-line flowtype/no-weak-types
   data: Object,
   // eslint-disable-next-line flowtype/no-weak-types
-  onClick: Function
+  onClick?: Function
 };
 
 class CryptoCurrencyChip extends React.PureComponent<ICryptoCurrencyChipProps> {

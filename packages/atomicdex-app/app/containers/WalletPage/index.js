@@ -1,20 +1,27 @@
 /* eslint-disable import/no-named-as-default */
 // @flow
-import React, { Component } from 'react';
-// import classNames from 'classnames';
+import React from 'react';
+import { connect } from 'react-redux';
 import { compose } from 'redux';
+import type { Dispatch } from 'redux';
+import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 import { withStyles } from '@material-ui/core/styles';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Typography from '@material-ui/core/Typography';
 import injectReducer from '../../utils/inject-reducer';
 import injectSaga from '../../utils/inject-saga';
 import injectWebsocket from '../../utils/inject-websocket';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import { TabContainer } from '../../components/Tabs';
+import Placeholder from '../../components/placeholder';
 import MDCAppBar from '../../components/AppBar';
 import MDCHeader from '../../components/AppBar/Header';
 import MDCTabBar from '../../components/AppBar/TabBar';
 import PageSectionTitle from '../../components/PageSectionTitle';
 import { WEBSOCKET_DAEMON } from '../../utils/constants';
+import { makeSelectGlobalLoadedDataFromDB } from '../App/selectors';
+import { loadDataFromDB, loadElectrums } from '../App/actions';
 import { NavigationLayout } from '../Layout';
 import HeaderTabs from './components/HeaderTabs';
 import TransactionsTab from './TransactionsTab';
@@ -24,17 +31,10 @@ import PortfolioTab from './PortfolioTab';
 import ProgressBar from './ProgressBar';
 import reducer from './reducer';
 import saga from './saga';
-import { APP_STATE_NAME } from './constants';
 import subscribe from './subscribe';
+import { APP_STATE_NAME } from './constants';
 
-type Props = {
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object
-};
-
-type State = {
-  value: number
-};
+const debug = require('debug')('atomicapp:containers:WalletPage');
 
 // const styles = theme => ({
 const styles = () => ({
@@ -47,15 +47,61 @@ const styles = () => ({
 
   containerSection: {
     paddingBottom: 25
+  },
+
+  placeholder: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginLeft: '-100px',
+    width: '200px',
+    textAlign: 'center'
   }
 });
 
-const debug = require('debug')('atomicapp:containers:WalletPage');
+type IWalletPageProps = {
+  globalLoadedDataFromDB: boolean,
+  // eslint-disable-next-line flowtype/no-weak-types
+  classes: Object,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchLoadDataFromDB: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchLoadElectrums: Function
+};
 
-class WalletPage extends Component<Props, State> {
+type IWalletPageState = {
+  value: number
+};
+
+class WalletPage extends React.PureComponent<
+  IWalletPageProps,
+  IWalletPageState
+> {
   state = {
     value: 0
   };
+
+  componentDidMount = () => {
+    const {
+      globalLoadedDataFromDB,
+      dispatchLoadDataFromDB,
+      dispatchLoadElectrums
+    } = this.props;
+    if (!globalLoadedDataFromDB) dispatchLoadDataFromDB();
+    else {
+      dispatchLoadElectrums();
+    }
+  };
+
+  componentDidUpdate(prevProps) {
+    const { dispatchLoadElectrums, globalLoadedDataFromDB } = this.props;
+    if (
+      prevProps.globalLoadedDataFromDB === false &&
+      globalLoadedDataFromDB === true
+    ) {
+      dispatchLoadElectrums();
+    }
+  }
 
   handleChange = (event, value) => {
     this.setState({ value });
@@ -72,7 +118,7 @@ class WalletPage extends Component<Props, State> {
   render() {
     debug(`render`);
 
-    const { classes } = this.props;
+    const { classes, globalLoadedDataFromDB } = this.props;
     const { value } = this.state;
 
     return (
@@ -92,28 +138,46 @@ class WalletPage extends Component<Props, State> {
                 <HeaderTabs handleChange={this.handleChange} value={value} />
               </MDCTabBar>
             </MDCAppBar>
-            <TabContainer selected={value === 0} className={classes.container}>
-              <PageSectionTitle
-                title={
-                  <FormattedMessage id="atomicapp.containers.Wallet.overview">
-                    {(...content) => content}
-                  </FormattedMessage>
-                }
-              />
-              <PortfolioTab />
-            </TabContainer>
-            <TabContainer selected={value === 1} className={classes.container}>
-              <PageSectionTitle
-                title={
-                  <FormattedMessage id="atomicapp.containers.Wallet.last_transactions">
-                    {(...content) => content}
-                  </FormattedMessage>
-                }
-              />
-              <TransactionsTab
-                switchToPortfolioTab={this.switchToPortfolioTab}
-              />
-            </TabContainer>
+            <Placeholder
+              ready={globalLoadedDataFromDB}
+              placeholder={
+                <div className={classes.placeholder}>
+                  <Typography variant="overline" gutterBottom>
+                    LOADING DATA FROM DB
+                  </Typography>
+                  <LinearProgress />
+                </div>
+              }
+            >
+              <TabContainer
+                selected={value === 0}
+                className={classes.container}
+              >
+                <PageSectionTitle
+                  title={
+                    <FormattedMessage id="atomicapp.containers.Wallet.overview">
+                      {(...content) => content}
+                    </FormattedMessage>
+                  }
+                />
+                <PortfolioTab />
+              </TabContainer>
+              <TabContainer
+                selected={value === 1}
+                className={classes.container}
+              >
+                <PageSectionTitle
+                  title={
+                    <FormattedMessage id="atomicapp.containers.Wallet.last_transactions">
+                      {(...content) => content}
+                    </FormattedMessage>
+                  }
+                />
+                <TransactionsTab
+                  switchToPortfolioTab={this.switchToPortfolioTab}
+                />
+              </TabContainer>
+            </Placeholder>
           </ErrorBoundary>
         </NavigationLayout>
         <WithdrawModal />
@@ -132,9 +196,27 @@ const withWebsocket = injectWebsocket({
   subscribe
 });
 
+// eslint-disable-next-line flowtype/no-weak-types
+export function mapDispatchToProps(dispatch: Dispatch<Object>) {
+  return {
+    dispatchLoadDataFromDB: () => dispatch(loadDataFromDB()),
+    dispatchLoadElectrums: () => dispatch(loadElectrums())
+  };
+}
+
+const mapStateToProps = createStructuredSelector({
+  globalLoadedDataFromDB: makeSelectGlobalLoadedDataFromDB()
+});
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
+
 const WalletPageWapper = compose(
   withReducer,
   withSaga,
+  withConnect,
   withWebsocket,
   withStyles(styles)
 )(WalletPage);

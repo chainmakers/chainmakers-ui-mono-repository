@@ -16,6 +16,7 @@ import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
+// import SettingsIcon from '@material-ui/icons/Settings';
 import MenuIcon from '@material-ui/icons/Menu';
 import { withStyles } from '@material-ui/core/styles';
 import { showLogoutDialog } from '../LogoutDialog/actions';
@@ -24,6 +25,16 @@ import { routes } from '../../constants';
 const debug = require('debug')('atomicapp:containers:Drawer');
 
 const drawerWidth = 240;
+
+const accountBalanceWalletIconCache = <AccountBalanceWalletIcon />;
+
+const addShoppingCartIconCache = <AddShoppingCartIcon />;
+
+// const settingsIconCache = <SettingsIcon />;
+
+const liveHelpIconCache = <LiveHelpIcon />;
+
+const powerSettingsNewIconCache = <PowerSettingsNewIcon />;
 
 const styles = theme => ({
   toolbar: {
@@ -183,7 +194,7 @@ class DICDrawer extends Component<Props, State> {
             onClick={this.gotoWalletPage}
           >
             <ListItemIcon className={classes.drawer__iconCenter}>
-              <AccountBalanceWalletIcon />
+              {accountBalanceWalletIconCache}
             </ListItemIcon>
             <span className={classes.drawer__text}>
               <FormattedMessage id="atomicapp.containers.Drawer.wallet">
@@ -191,6 +202,7 @@ class DICDrawer extends Component<Props, State> {
               </FormattedMessage>
             </span>
           </ListItem>
+
           <ListItem
             button
             className={classNames(classes.drawer__icon, {
@@ -199,7 +211,7 @@ class DICDrawer extends Component<Props, State> {
             onClick={this.gotoBuyPage}
           >
             <ListItemIcon className={classes.drawer__iconCenter}>
-              <AddShoppingCartIcon />
+              {addShoppingCartIconCache}
             </ListItemIcon>
             <span className={classes.drawer__text}>
               <FormattedMessage id="atomicapp.containers.Drawer.buy">
@@ -207,6 +219,20 @@ class DICDrawer extends Component<Props, State> {
               </FormattedMessage>
             </span>
           </ListItem>
+
+          {/* <ListItem
+            button
+            className={classNames(classes.drawer__icon, {
+              [classes.drawer__iconSelected]: pathname === routes.HELP
+            })}
+            onClick={this.gotoHelpPage}
+          >
+            <ListItemIcon className={classes.drawer__iconCenter}>
+              {settingsIconCache}
+            </ListItemIcon>
+            <span className={classes.drawer__text}>Settings</span>
+          </ListItem> */}
+
           <ListItem
             button
             className={classNames(classes.drawer__icon, {
@@ -215,7 +241,7 @@ class DICDrawer extends Component<Props, State> {
             onClick={this.gotoHelpPage}
           >
             <ListItemIcon className={classes.drawer__iconCenter}>
-              <LiveHelpIcon />
+              {liveHelpIconCache}
             </ListItemIcon>
             <span className={classes.drawer__text}>
               <FormattedMessage id="atomicapp.containers.Drawer.help">
@@ -223,13 +249,14 @@ class DICDrawer extends Component<Props, State> {
               </FormattedMessage>
             </span>
           </ListItem>
+
           <ListItem
             button
             className={classes.drawer__icon}
             onClick={dispatchShowLogoutDialog}
           >
             <ListItemIcon className={classes.drawer__iconCenter}>
-              <PowerSettingsNewIcon />
+              {powerSettingsNewIconCache}
             </ListItemIcon>
           </ListItem>
         </List>

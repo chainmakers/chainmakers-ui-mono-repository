@@ -232,6 +232,8 @@ describe('containers/DexPage/saga/search', () => {
         ]
       }
     ]);
+    expect(saga).toEqual(1);
+
     dispatched = [];
 
     saga = await runSaga(
@@ -241,7 +243,10 @@ describe('containers/DexPage/saga/search', () => {
       },
       setupSearchApiForSelectCoinModal
     ).done;
-    expect(dispatched).toEqual([]);
+    expect(dispatched).toEqual([
+      { type: 'atomicapp/DexPage/SEARCH_STATE_SKIP_CREATION' }
+    ]);
+    expect(saga).toEqual(1);
     done();
   });
   it('should handle handlingSearch correctly', async done => {
@@ -469,6 +474,8 @@ describe('containers/DexPage/saga/search', () => {
         type: 'atomicapp/DexPage/SELECT_COIN_MODAL_SEARCH_SUCCESS'
       }
     ]);
+    expect(saga).toEqual(1);
+
     dispatched = [];
 
     saga = await runSaga(
@@ -487,6 +494,8 @@ describe('containers/DexPage/saga/search', () => {
         type: 'atomicapp/DexPage/SELECT_COIN_MODAL_SEARCH_SUCCESS'
       }
     ]);
+    expect(saga).toEqual(1);
+
     dispatched = [];
     saga = await runSaga(
       {
@@ -502,6 +511,8 @@ describe('containers/DexPage/saga/search', () => {
         type: 'atomicapp/DexPage/SELECT_COIN_MODAL_SEARCH_SUCCESS'
       }
     ]);
+    expect(saga).toEqual(1);
+
     done();
   });
 });

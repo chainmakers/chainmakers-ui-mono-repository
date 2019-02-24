@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import type { Dispatch } from 'redux';
-import type { Map } from 'immutable';
+import type { List, Map } from 'immutable';
 import { createStructuredSelector } from 'reselect';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -120,17 +120,22 @@ type Props = {
   classes: Object,
   // eslint-disable-next-line flowtype/no-weak-types
   selectCoinModal: Map<*, *>,
+  searchState: string,
+  // eslint-disable-next-line flowtype/no-weak-types
+  searchList: List<*>,
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchCloseSelectCoinModal: Function,
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchClickSelectCoinModal: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchSearchSelectCoinModal: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchSetupSearchApiForSelectCoinModal: Function,
   balanceLoading: boolean,
   priceLoading: boolean
 };
 
 type State = {
-  // eslint-disable-next-line flowtype/no-weak-types
-  input: Object | null,
   show: boolean
 };
 
@@ -139,12 +144,16 @@ class CoinsSelectionModal extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      input: null,
       show: false
     };
 
     this.input = React.createRef();
   }
+
+  componentDidMount = () => {
+    const { dispatchSetupSearchApiForSelectCoinModal } = this.props;
+    dispatchSetupSearchApiForSelectCoinModal();
+  };
 
   handleSelectCoin = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
@@ -168,8 +177,6 @@ class CoinsSelectionModal extends React.Component<Props, State> {
   };
 
   showContent = () => {
-    const searchInput = this.input.current;
-
     this.setState({
       show: true
     });
@@ -179,11 +186,6 @@ class CoinsSelectionModal extends React.Component<Props, State> {
     this.setState({
       show: false
     });
-  };
-
-  componentDidMount = () => {
-    const { dispatchSetupSearchApiForSelectCoinModal } = this.props;
-    dispatchSetupSearchApiForSelectCoinModal();
   };
 
   render() {
@@ -196,7 +198,7 @@ class CoinsSelectionModal extends React.Component<Props, State> {
       searchState,
       searchList
     } = this.props;
-    const { input, show } = this.state;
+    const { show } = this.state;
 
     return (
       <Dialog

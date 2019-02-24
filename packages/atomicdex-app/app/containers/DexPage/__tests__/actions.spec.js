@@ -14,7 +14,8 @@ import {
   openSelectCoinModal,
   closeSelectCoinModal,
   clickSelectCoinModal,
-  selectCoinPayment
+  selectCoinPayment,
+  skipSearchStateCreation
 } from '../actions';
 import {
   LOAD_PRICE,
@@ -32,7 +33,8 @@ import {
   SELECT_COIN_MODAL_OPEN,
   SELECT_COIN_MODAL_CLOSE,
   SELECT_COIN_MODAL_CLICK,
-  COIN_PAYMENT_SELECT
+  COIN_PAYMENT_SELECT,
+  SEARCH_STATE_SKIP_CREATION
 } from '../constants';
 
 describe('containers/DexPage/actions/loadPrice', () => {
@@ -345,5 +347,19 @@ describe('containers/DexPage/actions/selectCoinPayment', () => {
         symbol
       })
     ).toEqual(expectedResult);
+  });
+});
+
+describe('containers/DexPage/actions/skipSearchStateCreation', () => {
+  it('should skipSearchStateCreation should create skipSearchStateCreation action', () => {
+    expect(skipSearchStateCreation()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: SEARCH_STATE_SKIP_CREATION
+    };
+
+    expect(skipSearchStateCreation()).toEqual(expectedResult);
   });
 });

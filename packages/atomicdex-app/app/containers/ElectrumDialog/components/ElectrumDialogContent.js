@@ -10,15 +10,16 @@ import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import Typography from '@material-ui/core/Typography';
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-
+import Chip from '@material-ui/core/Chip';
+import { Circle, Line } from '../../../components/placeholder';
 import injectReducer from '../../../utils/inject-reducer';
 import search from '../../../utils/search';
-import { FAILED, LOADED, SELECTED, UNSELECTED } from '../../../constants';
+import { FAILED, LOADED, SELECTED } from '../../../constants';
+import { makeSelectBalanceFetchStatus } from '../../App/selectors';
 import reducer from '../reducer';
 import { hideElectrumDialog, addElectrum } from '../actions';
 import { APP_STATE_NAME } from '../constants';
@@ -33,7 +34,6 @@ const styles = theme => ({
     backgroundColor: theme.appbar.background,
     position: 'relative'
   },
-
   electrumDialog__search: {
     flex: 1,
     position: 'relative',
@@ -83,6 +83,38 @@ const styles = theme => ({
   }
 });
 
+const circle = (
+  <Circle
+    style={{
+      width: 32,
+      height: 32
+    }}
+  />
+);
+
+const line = (
+  <Line
+    width={60}
+    style={{
+      margin: '10px auto'
+    }}
+  />
+);
+
+const chipPreloader = (
+  <Chip
+    clickable
+    icon={circle}
+    label={line}
+    style={{
+      margin: 8,
+      borderRadius: 32,
+      height: 40
+    }}
+    variant="outlined"
+  />
+);
+
 type ILogoutDialogProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   classes: Object,
@@ -91,12 +123,15 @@ type ILogoutDialogProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchAddElectrum: Function,
   // eslint-disable-next-line flowtype/no-weak-types
-  balanceFetchStatus: Map<*, *>
+  balanceFetchStatus: Map<*, *>,
+  show: boolean
 };
 
 type ILogoutDialogState = {
   // eslint-disable-next-line flowtype/no-weak-types
-  input: Object
+  input: Object,
+  // eslint-disable-next-line flowtype/no-weak-types
+  selected: Map<*, *>
 };
 
 class ElectrumDialogContent extends React.Component<
@@ -161,7 +196,7 @@ class ElectrumDialogContent extends React.Component<
 
   render() {
     debug('render');
-    const { classes, balanceFetchStatus } = this.props;
+    const { classes, show, balanceFetchStatus } = this.props;
     const { input, selected } = this.state;
 
     return (
@@ -196,17 +231,21 @@ class ElectrumDialogContent extends React.Component<
           >
             SUPPORTED COINS
           </Typography>
-          {input.map(value => (
-            <CryptoCurrencyChip
-              key={`crypto_currency_chip_${value.coin}`}
-              onClick={this.onClickCryptoCurrency}
-              selected={
-                selected.get(value.coin) === LOADED ||
-                selected.get(value.coin) === SELECTED
-              }
-              data={value}
-            />
-          ))}
+          {!show && chipPreloader}
+          {!show && chipPreloader}
+          {!show && chipPreloader}
+          {show &&
+            input.map(value => (
+              <CryptoCurrencyChip
+                key={`crypto_currency_chip_${value.coin}`}
+                onClick={this.onClickCryptoCurrency}
+                selected={
+                  selected.get(value.coin) === LOADED ||
+                  selected.get(value.coin) === SELECTED
+                }
+                data={value}
+              />
+            ))}
         </DialogContent>
         <DialogActions>
           <Button onClick={this.onCancelElectrumDialog} color="primary">
@@ -243,7 +282,9 @@ export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   };
 }
 
-const mapStateToProps = createStructuredSelector({});
+const mapStateToProps = createStructuredSelector({
+  balanceFetchStatus: makeSelectBalanceFetchStatus()
+});
 
 const withReducer = injectReducer({ key: APP_STATE_NAME, reducer });
 const withConnect = connect(

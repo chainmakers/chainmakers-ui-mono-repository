@@ -4,6 +4,8 @@ import { createSelector } from 'reselect';
 import { LOADING, ENABLE, STATE_STARTED, STATE_RUNNING } from '../../constants';
 import { APP_STATE_NAME } from './constants';
 
+const selectRoot = state => state;
+
 const selectGlobal = state => state.get(APP_STATE_NAME);
 
 const selectRoute = state => state.get('route');
@@ -18,6 +20,12 @@ const makeSelectLocation = () =>
   createSelector(
     selectRoute,
     routeState => routeState.get('location').toJS()
+  );
+
+const makeSelectGlobalLoadedDataFromDB = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.get('loadedDataFromDB')
   );
 
 // -- //
@@ -115,11 +123,13 @@ const makeSelectSupportedCoinsAll = () =>
 // -- //
 
 export {
+  selectRoot,
   selectGlobal,
   makeSelectAuthenticated,
   makeSelectLoading,
   makeSelectError,
   makeSelectLocation,
+  makeSelectGlobalLoadedDataFromDB,
   makeSelectBalance,
   makeSelectBalanceFetchStatus,
   makeSelectBalanceLoading,

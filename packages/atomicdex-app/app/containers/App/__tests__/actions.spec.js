@@ -10,7 +10,9 @@ import {
   addElectrumError,
   loadAllBalance,
   loadBalanceSuccess,
-  loadBalanceError
+  loadBalanceError,
+  loadDataFromDB,
+  loadDataFromDBError
 } from '../actions';
 import {
   LOGIN,
@@ -22,7 +24,9 @@ import {
   BALANCE_LOAD_ALL,
   BALANCE_LOAD,
   BALANCE_LOAD_SUCCESS,
-  BALANCE_LOAD_ERROR
+  BALANCE_LOAD_ERROR,
+  DATA_FROM_DB_LOAD,
+  DATA_FROM_DB_LOAD_ERROR
 } from '../constants';
 import type { ErrorType } from '../../schema';
 import type {
@@ -237,5 +241,33 @@ describe('containers/App/actions/loginSuccess', () => {
     };
 
     expect(loginSuccess()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/App/actions/loadDataFromDB', () => {
+  it('should loadDataFromDB should create loadDataFromDB action', () => {
+    expect(loadDataFromDB()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: DATA_FROM_DB_LOAD
+    };
+
+    expect(loadDataFromDB()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/App/actions/loadDataFromDBError', () => {
+  it('should loadDataFromDBError should create loadDataFromDBError action', () => {
+    expect(loadDataFromDBError()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: DATA_FROM_DB_LOAD_ERROR
+    };
+
+    expect(loadDataFromDBError()).toEqual(expectedResult);
   });
 });

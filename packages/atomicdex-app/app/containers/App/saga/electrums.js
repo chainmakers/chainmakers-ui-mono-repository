@@ -1,24 +1,35 @@
 // @flow
-import { put, cancelled } from 'redux-saga/effects';
+import { put, select, cancelled } from 'redux-saga/effects';
 import { CANCEL } from 'redux-saga';
 import api from '../../../lib/barter-dex-api';
-import getConfig from '../../../utils/config';
+import { DISABLE } from '../../../constants';
 import { ELECTRUM_ADD } from '../constants';
+import {
+  makeSelectBalance,
+  makeSelectSupportedCoinsEntities
+} from '../selectors';
 import { addElectrum, addElectrumSuccess, addElectrumError } from '../actions';
 import type { AddElectrumPayload } from '../schema';
 
 const debug = require('debug')('atomicapp:containers:App:saga:electrums');
 
-const config = getConfig();
 const ALREADY_INIT_LIST = ['BTC', 'KMD'];
 
 export default function* listenForLoadingElectrums() {
   debug(`load electrums server`);
-  const servers = config.get('marketmaker.data');
-  const electrum = servers.filter(e => e.active === 1);
-  for (let i = 0; i < electrum.length; i += 1) {
-    if (ALREADY_INIT_LIST.indexOf(electrum[i].coin) === -1) {
-      yield put(addElectrum(electrum[i]));
+  const balance = yield select(makeSelectBalance());
+  const supportedCoinsEntities = yield select(
+    makeSelectSupportedCoinsEntities()
+  );
+  const list = balance
+    .get('list')
+    .filter(item => item.get('status') === DISABLE)
+    .map(e => e.get('symbol'));
+
+  for (let i = 0; i < list.size; i += 1) {
+    const coin = list.get(i);
+    if (ALREADY_INIT_LIST.indexOf(coin) === -1) {
+      yield put(addElectrum(supportedCoinsEntities.get(coin).toJS()));
     }
   }
 }

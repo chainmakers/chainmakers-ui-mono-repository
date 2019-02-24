@@ -12,9 +12,10 @@ import {
   openSelectCoinModal,
   closeSelectCoinModal,
   clickSelectCoinModal,
-  selectCoinPayment
+  selectCoinPayment,
+  skipSearchStateCreation
 } from '../actions';
-import { SWAP_TX_DEFAULT } from '../constants';
+import { SWAP_TX_DEFAULT, SEARCH_STATE_READY } from '../constants';
 import {
   WEBSOCKET_STATE_ZERO,
   WEBSOCKET_STATE_ONE,
@@ -838,5 +839,18 @@ describe('containers/DexPage/reducers/selectCoinPayment', () => {
         })
       )
     ).toEqual(expectedResult);
+  });
+});
+
+describe('containers/DexPage/reducers/skipSearchStateCreation', () => {
+  it('should handle the skipSearchStateCreation action correctly', () => {
+    const expectedResult = initialState.setIn(
+      ['search', 'state'],
+      SEARCH_STATE_READY
+    );
+
+    expect(buyReducer(initialState, skipSearchStateCreation())).toEqual(
+      expectedResult
+    );
   });
 });

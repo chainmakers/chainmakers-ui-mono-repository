@@ -33,3 +33,9 @@ export const LOGIN = 'atomicapp/App/LOGIN';
 export const LOGIN_SUCCESS = 'atomicapp/App/LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'atomicapp/App/LOGIN_ERROR';
 export const LOGOUT = 'atomicapp/App/LOGOUT';
+
+// cache
+export const DATA_FROM_DB_LOAD = 'atomicapp/App/DATA_FROM_DB_LOAD';
+export const DATA_FROM_DB_LOAD_SUCCESS =
+  'atomicapp/App/DATA_FROM_DB_LOAD_SUCCESS';
+export const DATA_FROM_DB_LOAD_ERROR = 'atomicapp/App/DATA_FROM_DB_LOAD_ERROR';

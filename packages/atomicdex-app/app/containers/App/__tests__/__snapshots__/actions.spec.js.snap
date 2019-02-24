@@ -95,6 +95,18 @@ Object {
 }
 `;
 
+exports[`containers/App/actions/loadDataFromDB should loadDataFromDB should create loadDataFromDB action 1`] = `
+Object {
+  "type": "atomicapp/App/DATA_FROM_DB_LOAD",
+}
+`;
+
+exports[`containers/App/actions/loadDataFromDBError should loadDataFromDBError should create loadDataFromDBError action 1`] = `
+Object {
+  "type": "atomicapp/App/DATA_FROM_DB_LOAD_ERROR",
+}
+`;
+
 exports[`containers/App/actions/loadElectrums should loadElectrums should create loadElectrums action 1`] = `
 Object {
   "type": "atomicapp/App/ELECTRUM_LOAD",
