@@ -848,17 +848,13 @@ const list = {
   ZRX
 };
 
-function getCoinMemoize(
-  icon: string,
-  width: number = 32,
-  height: number = 32
-) {
+function getCoinMemoize(icon: string, width: number = 32, height: number = 32) {
   const I = list[icon.toUpperCase()];
   if (I) {
     return <I width={width} height={height} viewBox="0 0 32 32" />;
   }
   return <UNKNOW width={width} height={height} viewBox="0 0 32 32" />;
-};
+}
 
 export default memoize(getCoinMemoize, {
   strategy: memoize.strategies.variadic

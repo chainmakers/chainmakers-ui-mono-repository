@@ -11,10 +11,17 @@ import {
   DEPOSIT_MODAL_CLOSE,
   TRANSACTIONS_LOAD,
   COIN_TRANSACTIONS_LOAD,
-  COIN_TRANSACTIONS_SUCCESS
+  COIN_TRANSACTIONS_SUCCESS,
+  JOYRIDE_OPEN,
+  JOYRIDE_CLOSE,
+  WITHDRAW_LOAD,
+  WITHDRAW_LOAD_SUCCESS,
+  WITHDRAW_LOAD_ERROR
 } from './constants';
 
 import { LOGOUT } from '../App/constants';
+
+import type { ErrorType } from '../schema';
 
 // The initial state of the App
 export const initialState = fromJS({
@@ -32,7 +39,9 @@ export const initialState = fromJS({
   },
   withdrawModal: {
     open: false,
-    coin: null
+    coin: null,
+    loading: false,
+    error: false
   },
   depositModal: {
     open: false,
@@ -41,6 +50,9 @@ export const initialState = fromJS({
   utxosModal: {
     open: false,
     coin: null
+  },
+  joyride: {
+    open: false
   }
 });
 
@@ -66,14 +78,6 @@ const walletReducer = handleActions(
       state
         .setIn(['transactions', 'error'], error)
         .setIn(['transactions', 'loading'], false),
-
-    [WITHDRAW_MODAL_OPEN]: (state, { payload }) =>
-      state
-        .setIn(['withdrawModal', 'open'], true)
-        .setIn(['withdrawModal', 'coin'], payload.coin),
-
-    [WITHDRAW_MODAL_CLOSE]: state =>
-      state.setIn(['withdrawModal', 'open'], false),
 
     [DEPOSIT_MODAL_OPEN]: (state, { payload }) =>
       state
@@ -130,6 +134,31 @@ const walletReducer = handleActions(
         .setIn(['transactions', 'queueids'], queueids)
         .setIn(['transactions', 'coins', coin], coins);
     },
+
+    [JOYRIDE_OPEN]: state => state.setIn(['joyride', 'open'], true),
+
+    [JOYRIDE_CLOSE]: state => state.setIn(['joyride', 'open'], false),
+
+    [WITHDRAW_MODAL_OPEN]: (state, { payload }) =>
+      state
+        .setIn(['withdrawModal', 'open'], true)
+        .setIn(['withdrawModal', 'coin'], payload.coin),
+
+    [WITHDRAW_MODAL_CLOSE]: state =>
+      state.setIn(['withdrawModal', 'open'], false),
+
+    [WITHDRAW_LOAD]: state =>
+      state
+        .setIn(['withdrawModal', 'loading'], true)
+        .setIn(['withdrawModal', 'error'], false),
+
+    [WITHDRAW_LOAD_SUCCESS]: state =>
+      state.setIn(['withdrawModal', 'loading'], false),
+
+    [WITHDRAW_LOAD_ERROR]: (state, { error }: { error: ErrorType }) =>
+      state
+        .setIn(['withdrawModal', 'loading'], false)
+        .setIn(['withdrawModal', 'error'], fromJS(error)),
 
     [LOGOUT]: () => initialState
   },

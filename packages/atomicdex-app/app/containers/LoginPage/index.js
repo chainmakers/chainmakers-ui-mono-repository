@@ -105,17 +105,17 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
   };
 
   componentDidUpdate = prevProps => {
-    const { authenticated, error, intl } = this.props;
+    const { authenticated, error /* intl */ } = this.props;
     // FIXME: we should remove this to improve UX
     if (authenticated && !prevProps.authenticated) {
-      swal(
-        'Success',
-        intl.formatMessage({
-          defaultMessage: 'Login Successful Message',
-          id: 'atomicapp.containers.LoginPage.login_successful_message'
-        }),
-        'success'
-      );
+      // swal(
+      //   'Success',
+      //   intl.formatMessage({
+      //     defaultMessage: 'Login Successful Message',
+      //     id: 'atomicapp.containers.LoginPage.login_successful_message'
+      //   }),
+      //   'success'
+      // );
     }
     if (!authenticated && error) {
       swal('Something went wrong:', error.message, 'error');

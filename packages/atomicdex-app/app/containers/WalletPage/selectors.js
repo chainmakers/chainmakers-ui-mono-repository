@@ -56,8 +56,26 @@ const makeSelectWithdrawModal = () =>
 const makeSelectCoinWithdrawModal = () =>
   createSelector(
     makeSelectWithdrawModal(),
+    withdrawModal => withdrawModal.get('coin')
+  );
+
+const makeSelectBalanceWithdrawModal = () =>
+  createSelector(
+    makeSelectWithdrawModal(),
     makeSelectBalanceEntities(),
     (withdrawModal, balance) => balance.get(withdrawModal.get('coin'))
+  );
+
+const makeSelectLoadingWithdrawModal = () =>
+  createSelector(
+    makeSelectWithdrawModal(),
+    withdrawModal => withdrawModal.get('loading')
+  );
+
+const makeSelectErrorWithdrawModal = () =>
+  createSelector(
+    makeSelectWithdrawModal(),
+    withdrawModal => withdrawModal.get('error')
   );
 
 const makeSelectDepositModal = () =>
@@ -73,6 +91,18 @@ const makeSelectCoinDepositModal = () =>
     (depositModal, balance) => balance.get(depositModal.get('coin'))
   );
 
+const makeSelectJoyride = () =>
+  createSelector(
+    selectWallet,
+    walletState => walletState.get('joyride')
+  );
+
+const makeSelectJoyrideOpenState = () =>
+  createSelector(
+    makeSelectJoyride(),
+    joyrideState => joyrideState.get('open')
+  );
+
 export {
   selectWallet,
   makeSelectTransactionsLoading,
@@ -83,6 +113,11 @@ export {
   makeSelectLatestTransactions,
   makeSelectWithdrawModal,
   makeSelectCoinWithdrawModal,
+  makeSelectBalanceWithdrawModal,
+  makeSelectLoadingWithdrawModal,
+  makeSelectErrorWithdrawModal,
   makeSelectDepositModal,
-  makeSelectCoinDepositModal
+  makeSelectCoinDepositModal,
+  makeSelectJoyride,
+  makeSelectJoyrideOpenState
 };

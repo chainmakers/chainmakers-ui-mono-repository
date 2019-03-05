@@ -26,4 +26,5 @@ const logger = winston
   .on('error', (...err) => {
     console.log(err, 'err');
   });
+
 export default logger;

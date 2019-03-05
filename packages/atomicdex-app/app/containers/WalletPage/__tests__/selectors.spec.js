@@ -12,7 +12,12 @@ import {
   makeSelectWithdrawModal,
   makeSelectDepositModal,
   makeSelectCoinWithdrawModal,
-  makeSelectCoinDepositModal
+  makeSelectBalanceWithdrawModal,
+  makeSelectLoadingWithdrawModal,
+  makeSelectErrorWithdrawModal,
+  makeSelectCoinDepositModal,
+  makeSelectJoyride,
+  makeSelectJoyrideOpenState
 } from '../selectors';
 import data from '../../__tests__/app-state.json';
 
@@ -49,6 +54,55 @@ describe('containers/WalletPage/selectors/makeSelectWithdrawModal', () => {
   });
 });
 
+describe('containers/WalletPage/selectors/makeSelectLoadingWithdrawModal', () => {
+  it('should select the withdrawModal state', () => {
+    const mockedState = fromJS({
+      [APP_STATE_NAME]: initialState
+    });
+    const selectLoadingWithdrawModal = makeSelectLoadingWithdrawModal();
+    expect(selectLoadingWithdrawModal(mockedState)).toEqual(false);
+  });
+});
+
+describe('containers/WalletPage/selectors/makeSelectErrorWithdrawModal', () => {
+  it('should select the withdrawModal state', () => {
+    const mockedState = fromJS({
+      [APP_STATE_NAME]: initialState
+    });
+    const selectErrorWithdrawModal = makeSelectErrorWithdrawModal();
+    expect(selectErrorWithdrawModal(mockedState)).toEqual(false);
+  });
+});
+
+describe('containers/WalletPage/selectors/makeSelectCoinWithdrawModal', () => {
+  const coin = 'KMD';
+  it('should select the coin from withdrawModal state', () => {
+    let mockedState = fromJS(data);
+    mockedState = mockedState.setIn(
+      [APP_STATE_NAME, 'withdrawModal', 'coin'],
+      coin
+    );
+
+    const selectCoinWithdrawModal = makeSelectCoinWithdrawModal();
+    expect(selectCoinWithdrawModal(mockedState)).toEqual(coin);
+  });
+});
+
+describe('containers/WalletPage/selectors/makeSelectBalanceWithdrawModal', () => {
+  const coin = 'KMD';
+  it('should select the coin of withdrawModal state', () => {
+    let mockedState = fromJS(data);
+    mockedState = mockedState.setIn(
+      [APP_STATE_NAME, 'withdrawModal', 'coin'],
+      coin
+    );
+
+    const expected = fromJS(data.global.balance.entities[coin]);
+    const selectBalanceWithdrawModal = makeSelectBalanceWithdrawModal();
+    expect(selectBalanceWithdrawModal(mockedState)).toEqual(expected);
+  });
+});
+
 describe('containers/WalletPage/selectors/makeSelectDepositModal', () => {
   it('should select the depositModal state', () => {
     const mockedState = fromJS({
@@ -58,24 +112,6 @@ describe('containers/WalletPage/selectors/makeSelectDepositModal', () => {
     expect(selectDepositModal(mockedState)).toEqual(
       initialState.get('depositModal')
     );
-  });
-});
-
-describe('containers/WalletPage/selectors/makeSelectCoinWithdrawModal', () => {
-  const coin = 'KMD';
-  it('should select the withdrawModal state', () => {
-    let mockedState = fromJS(data);
-    mockedState = mockedState.setIn(
-      [APP_STATE_NAME, 'withdrawModal'],
-      fromJS({
-        open: true,
-        coin
-      })
-    );
-
-    const expected = fromJS(data.global.balance.entities[coin]);
-    const selectCoinWithdrawModal = makeSelectCoinWithdrawModal();
-    expect(selectCoinWithdrawModal(mockedState)).toEqual(expected);
   });
 });
 
@@ -117,5 +153,25 @@ describe('containers/WalletPage/selectors/makeSelectLatestTransactions', () => {
     });
     const selectTransactionsCoins = makeSelectLatestTransactions();
     expect(selectTransactionsCoins(mockedState)).toEqual(fromJS(expected));
+  });
+});
+
+describe('containers/WalletPage/selectors/makeSelectJoyride', () => {
+  it('should select the joyride state', () => {
+    const mockedState = fromJS({
+      [APP_STATE_NAME]: initialState
+    });
+    const selectJoyride = makeSelectJoyride();
+    expect(selectJoyride(mockedState)).toEqual(initialState.get('joyride'));
+  });
+});
+
+describe('containers/WalletPage/selectors/makeSelectJoyrideOpenState', () => {
+  it('should select the joyride state', () => {
+    const mockedState = fromJS({
+      [APP_STATE_NAME]: initialState
+    });
+    const selectJoyrideOpenState = makeSelectJoyrideOpenState();
+    expect(selectJoyrideOpenState(mockedState)).toEqual(false);
   });
 });

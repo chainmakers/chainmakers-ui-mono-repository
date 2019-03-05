@@ -11,15 +11,17 @@ describe('containers/WalletPage/<ProgressBar />', () => {
     linearprogress: 'fakeCssClass'
   };
   it('should render an null', () => {
-    let renderedComponent = shallow(<ProgressBar />);
-    expect(renderedComponent.type()).toEqual(null);
-    renderedComponent = shallow(<ProgressBar priceLoading classes={classes} />);
+    const renderedComponent = shallow(<ProgressBar />);
     expect(renderedComponent.type()).toEqual(null);
   });
 
   it('should render an LinearProgress component', () => {
     let renderedComponent = shallow(
-      <ProgressBar transactionsLoading priceLoading classes={classes} />
+      <ProgressBar transactionsLoading withdrawLoading classes={classes} />
+    );
+    expect(renderedComponent.type()).toEqual(LinearProgress);
+    renderedComponent = shallow(
+      <ProgressBar withdrawLoading classes={classes} />
     );
     expect(renderedComponent.type()).toEqual(LinearProgress);
     renderedComponent = shallow(

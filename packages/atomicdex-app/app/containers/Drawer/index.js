@@ -169,6 +169,7 @@ class DICDrawer extends Component<Props, State> {
 
     return (
       <Drawer
+        id="drawer-navigation-layout"
         variant="permanent"
         classes={{
           docked: classes.docked,
@@ -187,6 +188,7 @@ class DICDrawer extends Component<Props, State> {
         <List>
           <ListItem
             button
+            id="wallet-drawer-navigation-layout"
             className={classNames(classes.drawer__icon, {
               [classes.drawer__iconSelected]:
                 pathname === routes.WALLET || pathname === routes.HOME

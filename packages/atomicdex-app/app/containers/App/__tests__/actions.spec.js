@@ -12,7 +12,8 @@ import {
   loadBalanceSuccess,
   loadBalanceError,
   loadDataFromDB,
-  loadDataFromDBError
+  loadDataFromDBError,
+  loadWithdrawBalanceSuccess
 } from '../actions';
 import {
   LOGIN,
@@ -26,7 +27,8 @@ import {
   BALANCE_LOAD_SUCCESS,
   BALANCE_LOAD_ERROR,
   DATA_FROM_DB_LOAD,
-  DATA_FROM_DB_LOAD_ERROR
+  DATA_FROM_DB_LOAD_ERROR,
+  LOAD_WITHDRAW_SUCCESS
 } from '../constants';
 import type { ErrorType } from '../../schema';
 import type {
@@ -269,5 +271,26 @@ describe('containers/App/actions/loadDataFromDBError', () => {
     };
 
     expect(loadDataFromDBError()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/App/actions/loadWithdrawBalanceSuccess', () => {
+  const payload = {
+    amount: 0.1,
+    address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
+    coin: 'BEER'
+  };
+
+  it('should loadWithdrawBalanceSuccess should create loadWithdrawBalanceSuccess action', () => {
+    expect(loadWithdrawBalanceSuccess(payload)).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: LOAD_WITHDRAW_SUCCESS,
+      payload
+    };
+
+    expect(loadWithdrawBalanceSuccess(payload)).toEqual(expectedResult);
   });
 });

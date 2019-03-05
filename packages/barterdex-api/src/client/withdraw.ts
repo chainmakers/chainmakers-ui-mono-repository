@@ -1,6 +1,7 @@
 interface WithdrawType {
   coin: string,
-  outputs: Object
+  to: string,
+  amount: number
 };
 
 export default function withdrawFactory() {

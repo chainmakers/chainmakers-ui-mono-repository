@@ -9,7 +9,8 @@ const styles = theme => ({
   appBar: {
     boxShadow: 'none',
     backgroundColor: theme.appbar.background,
-    left: 72
+    left: 72,
+    width: 'auto'
   },
 
   appBar__divider: {
@@ -41,7 +42,12 @@ class MDCAppBar extends React.PureComponent<Props> {
     const { classes, children } = this.props;
 
     return (
-      <AppBar position="fixed" color="default" className={classes.appBar}>
+      <AppBar
+        id="app-bar"
+        position="fixed"
+        color="default"
+        className={classes.appBar}
+      >
         {children}
         <Divider className={classes.appBar__divider} />
       </AppBar>

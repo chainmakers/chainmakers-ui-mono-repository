@@ -9,12 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Typography from '@material-ui/core/Typography';
 import CloudOff from '@material-ui/icons/CloudOff';
-import { loadWithdraw } from '../../App/actions';
-import { openSnackbars } from '../../Snackbars/actions';
-import {
-  makeSelectWithdrawModal,
-  makeSelectCoinWithdrawModal
-} from '../selectors';
+import { makeSelectWithdrawModal } from '../selectors';
 import { closeWithdrawModal } from '../actions';
 import WithdrawModalContent from './WithdrawModalContent';
 
@@ -30,13 +25,7 @@ type Props = {
   // eslint-disable-next-line flowtype/no-weak-types
   onClose: Function,
   // eslint-disable-next-line flowtype/no-weak-types
-  withdrawModal: Map<*, *>,
-  // eslint-disable-next-line flowtype/no-weak-types
-  dispatchLoadWithdraw: Function,
-  // eslint-disable-next-line flowtype/no-weak-types
-  coin: Map<*, *> | null,
-  // eslint-disable-next-line flowtype/no-weak-types
-  dispatchOpenSnackbars: Function
+  withdrawModal: Map<*, *>
 };
 
 const styles = () => ({
@@ -74,20 +63,12 @@ export class WithdrawModal extends React.PureComponent<Props> {
     );
   };
 
-  renderCoin = () => {
-    const { coin, dispatchLoadWithdraw, dispatchOpenSnackbars } = this.props;
-    return (
-      <WithdrawModalContent
-        coin={coin}
-        dispatchLoadWithdraw={dispatchLoadWithdraw}
-        dispatchOpenSnackbars={dispatchOpenSnackbars}
-      />
-    );
-  };
+  renderCoin = () => <WithdrawModalContent />;
 
   render() {
     debug('render');
-    const { classes, withdrawModal, coin, onClose } = this.props;
+    const { classes, withdrawModal, onClose } = this.props;
+    const coin = withdrawModal.get('coin');
     return (
       <SwipeableDrawer
         anchor="right"
@@ -111,19 +92,12 @@ export class WithdrawModal extends React.PureComponent<Props> {
 // eslint-disable-next-line flowtype/no-weak-types
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   return {
-    onClose: () => dispatch(closeWithdrawModal()),
-    dispatchLoadWithdraw: (payload: {
-      amount: number,
-      address: string,
-      coin: string
-    }) => dispatch(loadWithdraw(payload)),
-    dispatchOpenSnackbars: (message: string) => dispatch(openSnackbars(message))
+    onClose: () => dispatch(closeWithdrawModal())
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  withdrawModal: makeSelectWithdrawModal(),
-  coin: makeSelectCoinWithdrawModal()
+  withdrawModal: makeSelectWithdrawModal()
 });
 
 const withConnect = connect(
@@ -131,9 +105,7 @@ const withConnect = connect(
   mapDispatchToProps
 );
 
-const WithdrawModalWapper = compose(
+export default compose(
   withConnect,
   withStyles(styles)
 )(WithdrawModal);
-
-export default WithdrawModalWapper;

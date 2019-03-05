@@ -6,6 +6,12 @@ Object {
 }
 `;
 
+exports[`containers/WalletPage/actions/closeJoyride should closeJoyride should create closeJoyride action 1`] = `
+Object {
+  "type": "atomicapp/WalletPage/JOYRIDE_CLOSE",
+}
+`;
+
 exports[`containers/WalletPage/actions/closeWithdrawModal should loadTransactionsSuccess should create closeWithdrawModal action 1`] = `
 Object {
   "type": "atomicapp/WalletPage/WITHDRAW_MODAL_CLOSE",
@@ -36,12 +42,58 @@ Object {
 }
 `;
 
+exports[`containers/WalletPage/actions/loadWithdraw should loadWithdraw should create loadWithdraw action 1`] = `
+Object {
+  "payload": Object {
+    "address": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
+    "amount": 0.1,
+    "coin": "BEER",
+  },
+  "type": "atomicapp/WalletPage/WITHDRAW_LOAD",
+}
+`;
+
+exports[`containers/WalletPage/actions/loadWithdrawError should loadWithdrawError should create loadWithdrawError action 1`] = `
+Object {
+  "error": Object {
+    "context": Object {
+      "action": "atomicapp/WalletPage/WITHDRAW_LOAD",
+      "params": Object {
+        "address": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
+        "amount": 0.1,
+        "coin": "BEER",
+      },
+    },
+    "message": "can't connect to electrum server",
+    "type": "RPC",
+  },
+  "type": "atomicapp/WalletPage/WITHDRAW_LOAD_ERROR",
+}
+`;
+
+exports[`containers/WalletPage/actions/loadWithdrawSuccess should loadWithdrawSuccess should create loadWithdrawSuccess action 1`] = `
+Object {
+  "payload": Object {
+    "address": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
+    "amount": 0.1,
+    "coin": "BEER",
+  },
+  "type": "atomicapp/WalletPage/WITHDRAW_LOAD_SUCCESS",
+}
+`;
+
 exports[`containers/WalletPage/actions/openDepositModal should loadTransactionsSuccess should create openDepositModal action 1`] = `
 Object {
   "payload": Object {
     "coin": "KMD",
   },
   "type": "atomicapp/WalletPage/DEPOSIT_MODAL_OPEN",
+}
+`;
+
+exports[`containers/WalletPage/actions/openJoyride should openJoyride should create openJoyride action 1`] = `
+Object {
+  "type": "atomicapp/WalletPage/JOYRIDE_OPEN",
 }
 `;
 

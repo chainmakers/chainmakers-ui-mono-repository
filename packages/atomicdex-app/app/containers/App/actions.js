@@ -22,9 +22,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   LOGOUT,
-  LOAD_WITHDRAW,
   LOAD_WITHDRAW_SUCCESS,
-  LOAD_WITHDRAW_ERROR,
   LOAD_SWAP_SUCCESS,
   ELECTRUM_LOAD,
   ELECTRUM_ADD,
@@ -72,18 +70,7 @@ export function logout() {
   };
 }
 
-export function loadWithdraw(payload: {
-  amount: number,
-  address: string,
-  coin: string
-}) {
-  return {
-    type: LOAD_WITHDRAW,
-    payload
-  };
-}
-
-export function loadWithdrawSuccess(payload: {
+export function loadWithdrawBalanceSuccess(payload: {
   amount: number,
   address: string,
   coin: string
@@ -91,23 +78,6 @@ export function loadWithdrawSuccess(payload: {
   return {
     type: LOAD_WITHDRAW_SUCCESS,
     payload
-  };
-}
-
-export function loadWithdrawError(
-  payload: {
-    amount: number,
-    address: string,
-    coin: string
-  },
-  message: string
-) {
-  return {
-    type: LOAD_WITHDRAW_ERROR,
-    payload,
-    error: {
-      message
-    }
   };
 }
 

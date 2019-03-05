@@ -9,6 +9,9 @@ import { FormattedMessage } from 'react-intl';
 import { withStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+
 import injectReducer from '../../utils/inject-reducer';
 import injectSaga from '../../utils/inject-saga';
 import injectWebsocket from '../../utils/inject-websocket';
@@ -24,6 +27,8 @@ import { makeSelectGlobalLoadedDataFromDB } from '../App/selectors';
 import { loadDataFromDB, loadElectrums } from '../App/actions';
 import { NavigationLayout } from '../Layout';
 import HeaderTabs from './components/HeaderTabs';
+import JoyrideModal from './components/JoyrideModal';
+import { openJoyride } from './actions';
 import TransactionsTab from './TransactionsTab';
 import WithdrawModal from './WithdrawModal';
 import DepositModal from './DepositModal';
@@ -66,7 +71,9 @@ type IWalletPageProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchLoadDataFromDB: Function,
   // eslint-disable-next-line flowtype/no-weak-types
-  dispatchLoadElectrums: Function
+  dispatchLoadElectrums: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchOpenJoyride: Function
 };
 
 type IWalletPageState = {
@@ -115,6 +122,12 @@ class WalletPage extends React.PureComponent<
     this.setState({ value: 1 });
   };
 
+  openJoyride = (evt: SyntheticInputEvent<>) => {
+    evt.preventDefault();
+    const { dispatchOpenJoyride } = this.props;
+    dispatchOpenJoyride();
+  };
+
   render() {
     debug(`render`);
 
@@ -129,11 +142,29 @@ class WalletPage extends React.PureComponent<
             <MDCAppBar>
               <MDCHeader
                 title={
-                  <FormattedMessage id="atomicapp.containers.Wallet.title">
-                    {(...content) => content}
-                  </FormattedMessage>
+                  <Typography
+                    style={{
+                      flexGrow: 1
+                    }}
+                    variant="h6"
+                    color="inherit"
+                  >
+                    <FormattedMessage id="atomicapp.containers.Wallet.title">
+                      {(...content) => content}
+                    </FormattedMessage>
+                  </Typography>
                 }
-              />
+              >
+                <div>
+                  <IconButton
+                    color="primary"
+                    component="span"
+                    onClick={this.openJoyride}
+                  >
+                    <HelpOutlineIcon />
+                  </IconButton>
+                </div>
+              </MDCHeader>
               <MDCTabBar>
                 <HeaderTabs handleChange={this.handleChange} value={value} />
               </MDCTabBar>
@@ -182,6 +213,7 @@ class WalletPage extends React.PureComponent<
         </NavigationLayout>
         <WithdrawModal />
         <DepositModal />
+        <JoyrideModal />
       </React.Fragment>
     );
   }
@@ -199,6 +231,7 @@ const withWebsocket = injectWebsocket({
 // eslint-disable-next-line flowtype/no-weak-types
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   return {
+    dispatchOpenJoyride: () => dispatch(openJoyride()),
     dispatchLoadDataFromDB: () => dispatch(loadDataFromDB()),
     dispatchLoadElectrums: () => dispatch(loadElectrums())
   };
@@ -213,13 +246,11 @@ const withConnect = connect(
   mapDispatchToProps
 );
 
-const WalletPageWapper = compose(
+export default compose(
   withReducer,
   withSaga,
   withConnect,
   withWebsocket,
   withStyles(styles)
 )(WalletPage);
-
-export default WalletPageWapper;
 /* eslint-enable import/no-named-as-default */

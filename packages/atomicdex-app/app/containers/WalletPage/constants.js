@@ -19,3 +19,13 @@ export const COIN_TRANSACTIONS_ERROR =
   'atomicapp/WalletPage/COIN_TRANSACTIONS_ERROR';
 
 export const ACTION_RETRY = 'atomicapp/WalletPage/ACTION_RETRY';
+
+export const JOYRIDE_OPEN = 'atomicapp/WalletPage/JOYRIDE_OPEN';
+export const JOYRIDE_CLOSE = 'atomicapp/WalletPage/JOYRIDE_CLOSE';
+
+// -- //
+
+export const WITHDRAW_LOAD = 'atomicapp/WalletPage/WITHDRAW_LOAD';
+export const WITHDRAW_LOAD_SUCCESS =
+  'atomicapp/WalletPage/WITHDRAW_LOAD_SUCCESS';
+export const WITHDRAW_LOAD_ERROR = 'atomicapp/WalletPage/WITHDRAW_LOAD_ERROR';

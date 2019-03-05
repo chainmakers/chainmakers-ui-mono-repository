@@ -2,21 +2,21 @@
 import React from 'react';
 import type { Node } from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 
 type Props = {
-  title: Node
+  title: Node,
+  // eslint-disable-next-line flowtype/no-weak-types
+  children: Element<any>
 };
 
 class Header extends React.PureComponent<Props> {
   render() {
-    const { title } = this.props;
+    const { title, children } = this.props;
 
     return (
       <Toolbar>
-        <Typography variant="h6" color="inherit">
-          {title}
-        </Typography>
+        {title}
+        {children}
       </Toolbar>
     );
   }

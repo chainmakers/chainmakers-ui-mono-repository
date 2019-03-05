@@ -8,6 +8,7 @@ module.exports = {
     'electron-util': '<rootDir>/__mocks__/electron-util.js',
     'electron-better-ipc': '<rootDir>/__mocks__/electron-better-ipc.js',
     electron: '<rootDir>/internals/mocks/electron.js',
+    level$: '<rootDir>/internals/mocks/level.js',
     'utils/config$': '<rootDir>/__mocks__/config.js'
   },
   moduleFileExtensions: ['js', 'json'],

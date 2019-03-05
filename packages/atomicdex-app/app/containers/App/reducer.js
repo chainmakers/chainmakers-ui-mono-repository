@@ -30,9 +30,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   LOGOUT,
-  LOAD_WITHDRAW,
   LOAD_WITHDRAW_SUCCESS,
-  LOAD_WITHDRAW_ERROR,
   LOAD_SWAP_SUCCESS,
   ELECTRUM_ADD,
   ELECTRUM_ADD_SUCCESS,
@@ -115,11 +113,6 @@ export const initialState = fromJS({
 
 const appReducer = handleActions(
   {
-    [LOAD_WITHDRAW]: (state, { payload }) =>
-      state
-        .setIn(['balance', 'fetchStatus', payload.coin], LOADING)
-        .setIn(['balance', 'entities', payload.coin, 'error'], null),
-
     [LOAD_WITHDRAW_SUCCESS]: (state, { payload }) => {
       // step one: get coin
       const balance = state.getIn([
@@ -128,22 +121,10 @@ const appReducer = handleActions(
         payload.coin,
         'balance'
       ]);
-      return state
-        .setIn(['balance', 'fetchStatus', payload.coin], LOADED)
-        .setIn(
-          ['balance', 'entities', payload.coin, 'balance'],
-          balance - payload.amount
-        );
-    },
-
-    [LOAD_WITHDRAW_ERROR]: (state, { error }: { error: ErrorType }) => {
-      const {
-        context: { params }
-      } = error;
-
-      return state
-        .setIn(['balance', 'fetchStatus', params.coin], FAILED)
-        .setIn(['balance', 'entities', params.coin, 'error'], fromJS(error));
+      return state.setIn(
+        ['balance', 'entities', payload.coin, 'balance'],
+        balance - payload.amount
+      );
     },
 
     [LOAD_SWAP_SUCCESS]: (state, { payload }) => {

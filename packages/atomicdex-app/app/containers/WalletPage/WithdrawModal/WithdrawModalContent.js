@@ -1,6 +1,10 @@
 // @flow
 import React from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import type { Dispatch } from 'redux';
 import type { Map } from 'immutable';
+import { createStructuredSelector } from 'reselect';
 import { withStyles } from '@material-ui/core/styles';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -17,6 +21,12 @@ import { BuyButton } from 'barterdex-components';
 import getCoinMemoize from '../../../components/CryptoIcons';
 import { required, requiredNumber } from '../../../components/Form/helper';
 import validate from '../../../components/Form/validate';
+import { loadWithdraw } from '../actions';
+import {
+  makeSelectBalanceWithdrawModal,
+  makeSelectLoadingWithdrawModal,
+  makeSelectErrorWithdrawModal
+} from '../selectors';
 
 const debug = require('debug')(
   'atomicapp:containers:WalletPage:WithdrawModalContent'
@@ -41,20 +51,6 @@ export const lessThan = (
     return resolve(true);
   });
 
-export const notSameAddress = (
-  value: string,
-  props: {
-    address: string
-  }
-) =>
-  new Promise((resolve, reject) => {
-    const { address } = props;
-    if (address.trim() === value.trim()) {
-      return reject(new Error('You can not withdraw same address'));
-    }
-    return resolve(true);
-  });
-
 // eslint-disable-next-line react/prop-types
 const TextInput = ({ onChange, value, error, isError, ...props }) => (
   <TextField
@@ -74,7 +70,7 @@ const ValidationAmountInput = validate(TextInput, [requiredNumber, lessThan], {
 });
 
 // eslint-disable-next-line no-unused-vars
-const ValidationAddressInput = validate(TextInput, [required, notSameAddress], {
+const ValidationAddressInput = validate(TextInput, [required], {
   onChange: true
 });
 
@@ -84,9 +80,10 @@ type Props = {
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchLoadWithdraw: Function,
   // eslint-disable-next-line flowtype/no-weak-types
-  coin: Map<*, *>,
+  entity: Map<*, *>,
   // eslint-disable-next-line flowtype/no-weak-types
-  dispatchOpenSnackbars: Function
+  error: Map<*, *>,
+  loading: boolean
 };
 
 const styles = theme => ({
@@ -163,30 +160,30 @@ class WithdrawModalContent extends React.PureComponent<Props, State> {
 
   getSnapshotBeforeUpdate(prevProps) {
     // eslint-disable-next-line react/destructuring-assignment
-    const currData = this.props.coin;
-    const prevData = prevProps.coin;
+    const prevData = prevProps.entity;
     if (!prevData) {
       return {
         done: false
       };
     }
-    const currLoading = currData.get('loading');
-    const prevLoading = prevData.get('loading');
-    const currError = currData.get('error');
+    // eslint-disable-next-line react/destructuring-assignment
+    const currLoading = this.props.loading;
+    // eslint-disable-next-line react/destructuring-assignment
+    const prevLoading = prevProps.loading;
+    // eslint-disable-next-line react/destructuring-assignment
+    const currError = this.props.error;
     return {
       done: currLoading === false && prevLoading === true && currError === false
     };
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const { dispatchOpenSnackbars } = this.props;
     if (snapshot && snapshot.done) {
       // reset input
       const amountInput = this.amountInput.current;
       const addressInput = this.addressInput.current;
       amountInput.reset();
       addressInput.reset();
-      dispatchOpenSnackbars('Successful withdrawal');
     }
   }
 
@@ -237,9 +234,9 @@ class WithdrawModalContent extends React.PureComponent<Props, State> {
   onClickAllButton = async (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
     try {
-      const { coin } = this.props;
+      const { entity } = this.props;
       const amountInput = this.amountInput.current;
-      await amountInput.setValue(coin.get('balance') - coin.get('fee'));
+      await amountInput.setValue(entity.get('balance') - entity.get('fee'));
       this.controlInvaidAmountInput(false);
     } catch (err) {
       this.controlInvaidAmountInput(true);
@@ -249,7 +246,7 @@ class WithdrawModalContent extends React.PureComponent<Props, State> {
 
   handleWithdraw = async (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
-    const { dispatchLoadWithdraw, coin } = this.props;
+    const { dispatchLoadWithdraw, entity } = this.props;
 
     try {
       const addressInput = this.addressInput.current;
@@ -261,7 +258,7 @@ class WithdrawModalContent extends React.PureComponent<Props, State> {
       dispatchLoadWithdraw({
         amount: Number(amount),
         address,
-        coin: coin.get('coin')
+        coin: entity.get('coin')
       });
     } catch (err) {
       debug(`handleWithdraw ${err.message}`);
@@ -269,10 +266,10 @@ class WithdrawModalContent extends React.PureComponent<Props, State> {
   };
 
   render = () => {
-    const { classes, coin } = this.props;
+    debug(`render`);
+    const { classes, entity, loading } = this.props;
     const { invaidAmountInput, invaidAddressInput } = this.state;
-    const loading = coin.get('loading');
-    const CIcon = getCoinMemoize(coin.get('coin'));
+    const CIcon = getCoinMemoize(entity.get('coin'));
 
     return (
       <React.Fragment>
@@ -299,7 +296,7 @@ class WithdrawModalContent extends React.PureComponent<Props, State> {
                 secondaryAction: classes.withdraw__listItem
               }}
             >
-              <ListItemText primary="Asset" secondary={coin.get('coin')} />
+              <ListItemText primary="Asset" secondary={entity.get('coin')} />
               <ListItemSecondaryAction
                 className={classes.withdraw__listItemSecondaryLogo}
               >
@@ -316,7 +313,7 @@ class WithdrawModalContent extends React.PureComponent<Props, State> {
                 className={classes.withdraw__listItemSecondaryAction}
               >
                 <Typography variant="body1" color="textSecondary" gutterBottom>
-                  {coin.get('address')}
+                  {entity.get('address')}
                 </Typography>
               </ListItemSecondaryAction>
             </ListItem>
@@ -330,7 +327,7 @@ class WithdrawModalContent extends React.PureComponent<Props, State> {
                 className={classes.withdraw__listItemSecondaryAction}
               >
                 <Typography variant="body1" color="textSecondary" gutterBottom>
-                  {coin.get('balance')} {coin.get('coin')}
+                  {entity.get('balance')} {entity.get('coin')}
                 </Typography>
               </ListItemSecondaryAction>
             </ListItem>
@@ -342,7 +339,7 @@ class WithdrawModalContent extends React.PureComponent<Props, State> {
               label="Withdraw to address"
               margin="normal"
               className={classes.withdraw__formItem}
-              address={coin.get('address')}
+              address={entity.get('address')}
               ref={this.addressInput}
               disabled={loading}
               onChange={this.onChangeAddressInput}
@@ -352,8 +349,8 @@ class WithdrawModalContent extends React.PureComponent<Props, State> {
               id="amount"
               label="Amount to withdraw"
               margin="normal"
-              balance={coin.get('balance')}
-              fee={coin.get('fee')}
+              balance={entity.get('balance')}
+              fee={entity.get('fee')}
               className={classes.withdraw__formItem}
               ref={this.amountInput}
               disabled={loading}
@@ -376,7 +373,7 @@ class WithdrawModalContent extends React.PureComponent<Props, State> {
                 gutterBottom
                 className={classes.withdraw__transactionFeeValue}
               >
-                {coin.get('fee')} {coin.get('coin')}
+                {entity.get('fee')} {entity.get('coin')}
               </Typography>
             </div>
             <BuyButton
@@ -385,7 +382,7 @@ class WithdrawModalContent extends React.PureComponent<Props, State> {
               className={classes.withdraw__button}
               onClick={this.handleWithdraw}
               disabled={
-                coin.get('balance') <= 0 ||
+                entity.get('balance') <= 0 ||
                 (loading || (invaidAmountInput || invaidAddressInput))
               }
             >
@@ -397,4 +394,37 @@ class WithdrawModalContent extends React.PureComponent<Props, State> {
     );
   };
 }
-export default withStyles(styles)(WithdrawModalContent);
+
+// eslint-disable-next-line flowtype/no-weak-types
+export function mapDispatchToProps(dispatch: Dispatch<Object>) {
+  return {
+    dispatchLoadWithdraw: (payload: {
+      amount: number,
+      address: string,
+      coin: string
+    }) => dispatch(loadWithdraw(payload))
+  };
+}
+
+const mapStateToProps = createStructuredSelector({
+  entity: makeSelectBalanceWithdrawModal(),
+  error: makeSelectErrorWithdrawModal(),
+  loading: makeSelectLoadingWithdrawModal()
+});
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
+
+export default compose(
+  withConnect,
+  withStyles(styles)
+)(WithdrawModalContent);
+
+// coin: "BEER"
+// method: "send_raw_transaction"
+// queueid: 0
+// tx_hex: "0400008085202f890396401873fc1af4f849125c1fdf0f53b75799f644cc01e0e491830711cfd0e6bd000000006a47304402204cfd3ce79ccc98062425b2e71e224357d29c43c08e8287422b0009f60af1a76a02204bba67f671afffa4c23e1178922f413805386bd2e271799dd96858c82b1812820121027932139a858bb9c65eafdc74fa0798617efc18b81c0c5946c798c7a5a6b95d08ffffffffd7dbbb6c7d21cc6a69fe862b32f7c445b65e0204f254d6b17b92a3b56763ffad000000006b4830450221008f98951c106a8a0ea7e9e532897aba963baff2141d924853d72fa974b018e49b022070cd2d6229387d2513afbceabcc6c8de48a65c3c57cf4dd685d2c53359692ef80121027932139a858bb9c65eafdc74fa0798617efc18b81c0c5946c798c7a5a6b95d08ffffffff004e8684090f246b5bee7cc99b824904c36ea3aa9bcb190f1658b1f0e7c5ad3f000000006a473044022032ed534e1864a058247e1072900a66a998f5a8d0d1434b050af5032ae7aaf1280220618a0537d2e19e061d29725a7730a9aa3af695371bc5da5f62aac1d80babe68b0121027932139a858bb9c65eafdc74fa0798617efc18b81c0c5946c798c7a5a6b95d08ffffffff0297bfc901000000001976a914b1cc1a6fe678e98fda7572a76679363dcfad6a8f88ac01000000000000001976a91475b2fb414f5b06d11f5142316911582f98adc1ec88ac00000000000000000000000000000000000000"
+// usserpaaa: "3701eda6d8bc3cdf797b1e2a5c8301b82f35379bcb37397f78d2ac4492fedd40"
+// {"error":"rpc:286] jsonrpc_client:66] Rpc request JsonRpcRequest { jsonrpc: \"2.0\", id: \"5\", method: \"blockchain.transaction.broadcast\", params: [String(\"0400008085202f890396401873fc1af4f849125c1fdf0f53b75799f644cc01e0e491830711cfd0e6bd000000006a47304402204cfd3ce79ccc98062425b2e71e224357d29c43c08e8287422b0009f60af1a76a02204bba67f671afffa4c23e1178922f413805386bd2e271799dd96858c82b1812820121027932139a858bb9c65eafdc74fa0798617efc18b81c0c5946c798c7a5a6b95d08ffffffffd7dbbb6c7d21cc6a69fe862b32f7c445b65e0204f254d6b17b92a3b56763ffad000000006b4830450221008f98951c106a8a0ea7e9e532897aba963baff2141d924853d72fa974b018e49b022070cd2d6229387d2513afbceabcc6c8de48a65c3c57cf4dd685d2c53359692ef80121027932139a858bb9c65eafdc74fa0798617efc18b81c0c5946c798c7a5a6b95d08ffffffff004e8684090f246b5bee7cc99b824904c36ea3aa9bcb190f1658b1f0e7c5ad3f000000006a473044022032ed534e1864a058247e1072900a66a998f5a8d0d1434b050af5032ae7aaf1280220618a0537d2e19e061d29725a7730a9aa3af695371bc5da5f62aac1d80babe68b0121027932139a858bb9c65eafdc74fa0798617efc18b81c0c5946c798c7a5a6b95d08ffffffff0297bfc901000000001976a914b1cc1a6fe678e98fda7572a76679363dcfad6a8f88ac01000000000000001976a91475b2fb414f5b06d11f5142316911582f98adc1ec88ac00000000000000000000000000000000000000\")] } failed with error, response: JsonRpcResponse { jsonrpc: \"2.0\", id: \"5\", result: Null, error: Object({\"code\": Number(1), \"message\": String(\"the transaction was rejected by network rules.\\n\\n64: dust\\n[0400008085202f890396401873fc1af4f849125c1fdf0f53b75799f644cc01e0e491830711cfd0e6bd000000006a47304402204cfd3ce79ccc98062425b2e71e224357d29c43c08e8287422b0009f60af1a76a02204bba67f671afffa4c23e1178922f413805386bd2e271799dd96858c82b1812820121027932139a858bb9c65eafdc74fa0798617efc18b81c0c5946c798c7a5a6b95d08ffffffffd7dbbb6c7d21cc6a69fe862b32f7c445b65e0204f254d6b17b92a3b56763ffad000000006b4830450221008f98951c106a8a0ea7e9e532897aba963baff2141d924853d72fa974b018e49b022070cd2d6229387d2513afbceabcc6c8de48a65c3c57cf4dd685d2c53359692ef80121027932139a858bb9c65eafdc74fa0798617efc18b81c0c5946c798c7a5a6b95d08ffffffff004e8684090f246b5bee7cc99b824904c36ea3aa9bcb190f1658b1f0e7c5ad3f000000006a473044022032ed534e1864a058247e1072900a66a998f5a8d0d1434b050af5032ae7aaf1280220618a0537d2e19e061d29725a7730a9aa3af695371bc5da5f62aac1d80babe68b0121027932139a858bb9c65eafdc74fa0798617efc18b81c0c5946c798c7a5a6b95d08ffffffff0297bfc901000000001976a914b1cc1a6fe678e98fda7572a76679363dcfad6a8f88ac01000000000000001976a91475b2fb414f5b06d11f5142316911582f98adc1ec88ac00000000000000000000000000000000000000]\")}) }"}

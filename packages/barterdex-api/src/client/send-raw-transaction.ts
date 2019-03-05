@@ -1,13 +1,13 @@
 interface SenDrawTransactionType {
   coin: string,
-  signedtx: string
+  tx_hex: string
 };
 
 export default function sendRawTransactionFactory() {
   return {
     sendrawtransaction(params: SenDrawTransactionType) {
       const serverparams = Object.assign({}, params, {
-        method: 'sendrawtransaction'
+        method: 'send_raw_transaction'
       });
       return this.privateCall(serverparams);
     }

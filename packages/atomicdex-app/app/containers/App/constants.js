@@ -10,9 +10,7 @@
  */
 export const APP_STATE_NAME = 'global';
 
-export const LOAD_WITHDRAW = 'atomicapp/App/LOAD_WITHDRAW';
 export const LOAD_WITHDRAW_SUCCESS = 'atomicapp/App/LOAD_WITHDRAW_SUCCESS';
-export const LOAD_WITHDRAW_ERROR = 'atomicapp/App/LOAD_WITHDRAW_ERROR';
 
 export const LOAD_SWAP_SUCCESS = 'atomicapp/App/LOAD_SWAP_SUCCESS';
 

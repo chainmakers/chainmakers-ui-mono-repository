@@ -36,7 +36,7 @@ class AddElectrumPlaceholer extends React.PureComponent<IAddElectrumPlaceholerPr
     const { classes, onClick } = this.props;
 
     return (
-      <Card className={classes.wallet__card}>
+      <Card id="add-electrum-placeholer" className={classes.wallet__card}>
         <IconButton aria-label="AddElectrum" onClick={onClick}>
           <AddIcon color="primary" fontSize="large" />
         </IconButton>

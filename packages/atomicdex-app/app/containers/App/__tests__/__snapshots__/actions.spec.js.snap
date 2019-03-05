@@ -113,6 +113,17 @@ Object {
 }
 `;
 
+exports[`containers/App/actions/loadWithdrawBalanceSuccess should loadWithdrawBalanceSuccess should create loadWithdrawBalanceSuccess action 1`] = `
+Object {
+  "payload": Object {
+    "address": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
+    "amount": 0.1,
+    "coin": "BEER",
+  },
+  "type": "atomicapp/App/LOAD_WITHDRAW_SUCCESS",
+}
+`;
+
 exports[`containers/App/actions/login should login should create login action 1`] = `
 Object {
   "payload": Object {

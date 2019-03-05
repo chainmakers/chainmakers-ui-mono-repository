@@ -145,7 +145,7 @@ class Asset extends React.PureComponent<IAssetProps> {
   };
 
   renderActions = () => {
-    const { classes, error, fetchStatus } = this.props;
+    const { classes, symbol, error, fetchStatus } = this.props;
     const loading = fetchStatus === LOADING;
 
     return error ? (
@@ -165,6 +165,7 @@ class Asset extends React.PureComponent<IAssetProps> {
     ) : (
       <React.Fragment>
         <Button
+          id={`deposit-button-portfolio-tab-${symbol}`}
           disabled={loading}
           className={ClassNames(
             classes.wallet__button,
@@ -178,6 +179,7 @@ class Asset extends React.PureComponent<IAssetProps> {
         </Button>
         <div className={classes.wallet__buttonBorder} />
         <Button
+          id={`withdraw-button-portfolio-tab-${symbol}`}
           disabled={loading}
           className={classes.wallet__button}
           size="small"
@@ -198,6 +200,7 @@ class Asset extends React.PureComponent<IAssetProps> {
 
     return (
       <Card
+        id={`asset-portfolio-tab-${symbol}`}
         className={ClassNames(classes.wallet__card, {
           [classes.wallet__error]: isError
         })}

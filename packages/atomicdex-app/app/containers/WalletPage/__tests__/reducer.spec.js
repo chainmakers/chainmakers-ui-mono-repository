@@ -1,8 +1,10 @@
+// @flow
 import { fromJS } from 'immutable';
 import walletReducer, {
   initialState,
   generateCoinTransactionRecord
 } from '../reducer';
+import { WITHDRAW_LOAD } from '../constants';
 import {
   loadTransactions,
   loadCoinTransactions,
@@ -10,8 +12,14 @@ import {
   closeWithdrawModal,
   openDepositModal,
   closeDepositModal,
-  loadCoinTransactionsSuccess
+  loadCoinTransactionsSuccess,
+  openJoyride,
+  closeJoyride,
+  loadWithdraw,
+  loadWithdrawSuccess,
+  loadWithdrawError
 } from '../actions';
+import type { ErrorType } from '../../schema';
 
 describe('containers/WalletPage/reducers/initial', () => {
   it('should return the initial state', () => {
@@ -50,6 +58,64 @@ describe('containers/WalletPage/reducers/closeWithdrawModal', () => {
     const expectedResult = initialState.setIn(['withdrawModal', 'open'], false);
 
     expect(walletReducer(initialState, closeWithdrawModal())).toEqual(
+      expectedResult
+    );
+  });
+});
+
+describe('containers/WalletPage/reducers/loadWithdraw', () => {
+  const payload = {
+    amount: 0.1,
+    address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
+    coin: 'BEER'
+  };
+  it('should handle the loadWithdraw action correctly', () => {
+    const expectedResult = initialState
+      .setIn(['withdrawModal', 'loading'], true)
+      .setIn(['withdrawModal', 'error'], false);
+
+    expect(walletReducer(initialState, loadWithdraw(payload))).toEqual(
+      expectedResult
+    );
+  });
+});
+
+describe('containers/WalletPage/reducers/loadWithdrawSuccess', () => {
+  const payload = {
+    amount: 0.1,
+    address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
+    coin: 'BEER'
+  };
+  it('should handle the loadWithdrawSuccess action correctly', () => {
+    const store = initialState
+      .setIn(['withdrawModal', 'loading'], true)
+      .setIn(['withdrawModal', 'error'], false);
+
+    expect(walletReducer(store, loadWithdrawSuccess(payload))).toEqual(
+      initialState
+    );
+  });
+});
+
+describe('containers/WalletPage/reducers/loadWithdrawError', () => {
+  const error: ErrorType = {
+    context: {
+      action: WITHDRAW_LOAD,
+      params: {
+        amount: 0.1,
+        address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
+        coin: 'BEER'
+      }
+    },
+    type: 'RPC',
+    message: "can't connect to electrum server"
+  };
+  it('should handle the loadWithdrawError action correctly', () => {
+    const expectedResult = initialState
+      .setIn(['withdrawModal', 'loading'], false)
+      .setIn(['withdrawModal', 'error'], fromJS(error));
+
+    expect(walletReducer(initialState, loadWithdrawError(error))).toEqual(
       expectedResult
     );
   });
@@ -193,5 +259,21 @@ describe('containers/WalletPage/reducers/loadCoinTransactionsSuccess', () => {
     expect(walletReducer(store, loadCoinTransactionsSuccess(data))).toEqual(
       expectedResult
     );
+  });
+});
+
+describe('containers/WalletPage/reducers/openJoyride', () => {
+  it('should handle the openJoyride action correctly', () => {
+    const expectedResult = initialState.setIn(['joyride', 'open'], true);
+
+    expect(walletReducer(initialState, openJoyride())).toEqual(expectedResult);
+  });
+});
+
+describe('containers/WalletPage/reducers/closeJoyride', () => {
+  it('should handle the closeJoyride action correctly', () => {
+    const expectedResult = initialState.setIn(['joyride', 'open'], true);
+
+    expect(walletReducer(expectedResult, closeJoyride())).toEqual(initialState);
   });
 });

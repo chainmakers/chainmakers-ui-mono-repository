@@ -19,7 +19,6 @@ class Placeholder extends React.PureComponent<
   IPlaceholderProps,
   IPlaceholderState
 > {
-
   static defaultProps = {
     delay: 0,
     firstLaunchOnly: true

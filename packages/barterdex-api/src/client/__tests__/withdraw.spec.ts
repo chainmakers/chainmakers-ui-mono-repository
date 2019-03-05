@@ -6,12 +6,14 @@ describe('packages/barterdex-api/src/client/withdraw', () => {
       userpass: null
     };
     const coin = 'BEER';
-    const outputs = [{ RL1XYoxbKaETGSqiS4po3pk1ZjRYqHBqvc: 1 }];
+    const to = 'RL1XYoxbKaETGSqiS4po3pk1ZjRYqHBqvc';
+    const amount = 0.1;
     const fakeHttpProvider = {
       privateCall(params) {
         expect(params).toEqual({
           coin,
-          outputs,
+          to,
+          amount,
           method: 'withdraw'
         });
       }
@@ -19,7 +21,8 @@ describe('packages/barterdex-api/src/client/withdraw', () => {
     const api = Object.assign({}, fakeHttpProvider, withdraw());
     api.withdraw({
       coin,
-      outputs
+      to,
+      amount
     });
   });
 });

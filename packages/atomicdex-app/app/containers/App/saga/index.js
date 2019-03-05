@@ -1,7 +1,6 @@
 import { all, takeEvery } from 'redux-saga/effects';
 import { takeFirst } from 'barterdex-rssm';
 import {
-  LOAD_WITHDRAW,
   ELECTRUM_LOAD,
   ELECTRUM_ADD,
   LOGOUT,
@@ -18,7 +17,6 @@ import listenForLoadingBalance, {
   handlingLoadBalance,
   handlingLoadBalanceError
 } from './balance';
-import { loadWithdrawProcess } from './withdraw';
 import { handlingLoginError, handlingLoginSuccess } from './login';
 import electrums, { loadElectrum } from './electrums';
 import listenForLoadingDataFromDB, {
@@ -28,7 +26,6 @@ import logoutFlow from './logout';
 
 export default function* root() {
   yield all([
-    yield takeFirst(LOAD_WITHDRAW, loadWithdrawProcess),
     yield takeFirst(ELECTRUM_LOAD, electrums),
     yield takeEvery(ELECTRUM_ADD, loadElectrum),
     yield takeFirst(LOGOUT, logoutFlow),
