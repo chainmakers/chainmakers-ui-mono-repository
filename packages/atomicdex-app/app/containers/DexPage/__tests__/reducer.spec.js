@@ -13,7 +13,9 @@ import {
   closeSelectCoinModal,
   clickSelectCoinModal,
   selectCoinPayment,
-  skipSearchStateCreation
+  skipSearchStateCreation,
+  openJoyride,
+  closeJoyride
 } from '../actions';
 import { SWAP_TX_DEFAULT, SEARCH_STATE_READY } from '../constants';
 import {
@@ -852,5 +854,21 @@ describe('containers/DexPage/reducers/skipSearchStateCreation', () => {
     expect(buyReducer(initialState, skipSearchStateCreation())).toEqual(
       expectedResult
     );
+  });
+});
+
+describe('containers/DexPage/reducers/openJoyride', () => {
+  it('should handle the openJoyride action correctly', () => {
+    const expectedResult = initialState.setIn(['joyride', 'open'], true);
+
+    expect(buyReducer(initialState, openJoyride())).toEqual(expectedResult);
+  });
+});
+
+describe('containers/DexPage/reducers/closeJoyride', () => {
+  it('should handle the closeJoyride action correctly', () => {
+    const expectedResult = initialState.setIn(['joyride', 'open'], true);
+
+    expect(buyReducer(expectedResult, closeJoyride())).toEqual(initialState);
   });
 });

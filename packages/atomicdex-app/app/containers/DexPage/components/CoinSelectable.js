@@ -62,6 +62,7 @@ const styles = () => ({
 });
 
 type Props = {
+  id?: string | null,
   key: string,
   // eslint-disable-next-line flowtype/no-weak-types
   classes: Object,
@@ -82,6 +83,7 @@ type Props = {
 
 class CoinSelectable extends React.PureComponent<Props> {
   static defaultProps = {
+    id: null,
     title: null,
     subTitle: null,
     price: null,
@@ -92,6 +94,8 @@ class CoinSelectable extends React.PureComponent<Props> {
     className: '',
     dispatchLoadPrice: () => {}
   };
+
+  static displayName = 'CoinSelectable';
 
   componentDidMount = () => {
     const { dispatchLoadPrice, data } = this.props;
@@ -115,6 +119,7 @@ class CoinSelectable extends React.PureComponent<Props> {
     debug(`render`);
 
     const {
+      id,
       key,
       classes,
       className,
@@ -133,6 +138,7 @@ class CoinSelectable extends React.PureComponent<Props> {
 
     return (
       <ButtonBase
+        id={id}
         disabled={disabled}
         focusRipple
         key={key}
@@ -171,7 +177,5 @@ class CoinSelectable extends React.PureComponent<Props> {
     );
   }
 }
-
-CoinSelectable.displayName = 'CoinSelectable';
 
 export default withStyles(styles)(CoinSelectable);

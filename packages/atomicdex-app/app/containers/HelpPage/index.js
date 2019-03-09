@@ -26,8 +26,6 @@ type Props = {
 };
 
 class HelpPage extends Component<Props> {
-  props: Props;
-
   render() {
     const { classes } = this.props;
 
@@ -374,9 +372,17 @@ const Index = () => (
       <MDCAppBar>
         <MDCHeader
           title={
-            <FormattedMessage id="atomicapp.containers.HelpPage.title">
-              {(...content) => content}
-            </FormattedMessage>
+            <Typography
+              style={{
+                flexGrow: 1
+              }}
+              variant="h6"
+              color="inherit"
+            >
+              <FormattedMessage id="atomicapp.containers.HelpPage.title">
+                {(...content) => content}
+              </FormattedMessage>
+            </Typography>
           }
         />
       </MDCAppBar>

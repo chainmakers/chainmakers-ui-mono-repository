@@ -707,7 +707,12 @@ class AmountSection extends React.Component<Props, State> {
 
     return (
       <React.Fragment>
-        <Grid container className={classes.amountform} spacing={24}>
+        <Grid
+          container
+          className={classes.amountform}
+          spacing={24}
+          id="amount-section-placeorder-dexpage"
+        >
           <Grid
             item
             xs={12}

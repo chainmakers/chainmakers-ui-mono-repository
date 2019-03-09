@@ -28,6 +28,12 @@ Object {
 }
 `;
 
+exports[`containers/DexPage/actions/closeJoyride should closeJoyride should create closeJoyride action 1`] = `
+Object {
+  "type": "atomicapp/DexPage/JOYRIDE_CLOSE",
+}
+`;
+
 exports[`containers/DexPage/actions/closeSelectCoinModal should closeSelectCoinModal should create closeSelectCoinModal action 1`] = `
 Object {
   "type": "atomicapp/DexPage/SELECT_COIN_MODAL_CLOSE",
@@ -116,6 +122,12 @@ Object {
     "uuid": "uuid",
   },
   "type": "atomicapp/DexPage/SWAP_DETAIL_MODAL_OPEN",
+}
+`;
+
+exports[`containers/DexPage/actions/openJoyride should openJoyride should create openJoyride action 1`] = `
+Object {
+  "type": "atomicapp/DexPage/JOYRIDE_OPEN",
 }
 `;
 

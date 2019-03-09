@@ -1,5 +1,4 @@
 // @flow
-
 import {
   LOAD_PRICE,
   LOAD_PRICES,
@@ -29,8 +28,11 @@ import {
   SELECT_COIN_MODAL_SETUP_SEARCH_API,
   SELECT_COIN_MODAL_SETUP_SEARCH_API_SUCCESS,
   COIN_PAYMENT_SELECT,
-  SEARCH_STATE_SKIP_CREATION
+  SEARCH_STATE_SKIP_CREATION,
+  JOYRIDE_OPEN,
+  JOYRIDE_CLOSE
 } from './constants';
+
 import type {
   BuyCoinPayload,
   BestPricePayload,
@@ -234,5 +236,17 @@ export function selectCoinPayment(payload: SelectCoinPayload) {
 export function skipSearchStateCreation() {
   return {
     type: SEARCH_STATE_SKIP_CREATION
+  };
+}
+
+export function openJoyride() {
+  return {
+    type: JOYRIDE_OPEN
+  };
+}
+
+export function closeJoyride() {
+  return {
+    type: JOYRIDE_CLOSE
   };
 }

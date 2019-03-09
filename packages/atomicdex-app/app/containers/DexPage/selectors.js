@@ -156,6 +156,18 @@ const makeSelectSearchList = () =>
     searchState => searchState.get('list')
   );
 
+const makeSelectJoyride = () =>
+  createSelector(
+    selectBuy,
+    buyState => buyState.get('joyride')
+  );
+
+const makeSelectJoyrideOpenState = () =>
+  createSelector(
+    makeSelectJoyride(),
+    joyrideState => joyrideState.get('open')
+  );
+
 export {
   selectBuy,
   makeSelectPrices,
@@ -180,5 +192,7 @@ export {
   makeSelectSearch,
   makeSelectSearchState,
   makeSelectSearchErrors,
-  makeSelectSearchList
+  makeSelectSearchList,
+  makeSelectJoyride,
+  makeSelectJoyrideOpenState
 };

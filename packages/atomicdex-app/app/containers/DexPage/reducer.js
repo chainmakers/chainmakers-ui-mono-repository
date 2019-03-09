@@ -30,7 +30,9 @@ import {
   SEARCH_STATE_SKIP_CREATION,
   SEARCH_STATE_NULL,
   SEARCH_STATE_CREATE,
-  SEARCH_STATE_READY
+  SEARCH_STATE_READY,
+  JOYRIDE_OPEN,
+  JOYRIDE_CLOSE
 } from './constants';
 
 // The initial state of the App
@@ -86,6 +88,10 @@ export const initialState = fromJS({
     state: SEARCH_STATE_NULL,
     errors: {},
     list: []
+  },
+
+  joyride: {
+    open: false
   }
 });
 
@@ -641,6 +647,10 @@ export default handleActions(
 
     [SEARCH_STATE_SKIP_CREATION]: state =>
       state.setIn(['search', 'state'], SEARCH_STATE_READY),
+
+    [JOYRIDE_OPEN]: state => state.setIn(['joyride', 'open'], true),
+
+    [JOYRIDE_CLOSE]: state => state.setIn(['joyride', 'open'], false),
 
     [LOGOUT]: () => initialState
   },

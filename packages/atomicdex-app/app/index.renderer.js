@@ -9,6 +9,11 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from './components/Theme';
 import configureStore from './store/configureStore';
 import LanguageProvider from './containers/LanguageProvider';
+import App from './containers/App';
+import ElectrumDialog from './containers/ElectrumDialog';
+import LogoutDialog from './containers/LogoutDialog';
+import Snackbars from './containers/Snackbars';
+import WebSocketComponent from './containers/WebSocketComponent';
 import Routes from './containers/Routes';
 import history from './utils/history';
 import { translationMessages } from './i18n';
@@ -25,6 +30,11 @@ const render = (AppComponent, messages) => {
         <LanguageProvider messages={messages}>
           <MuiThemeProvider theme={theme}>
             <CssBaseline />
+            <App />
+            <ElectrumDialog />
+            <LogoutDialog />
+            <Snackbars />
+            <WebSocketComponent />
             <ConnectedRouter history={history}>
               <AppComponent />
             </ConnectedRouter>

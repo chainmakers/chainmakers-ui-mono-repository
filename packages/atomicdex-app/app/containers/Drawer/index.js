@@ -207,6 +207,7 @@ class DICDrawer extends Component<Props, State> {
 
           <ListItem
             button
+            id="dex-drawer-navigation-layout"
             className={classNames(classes.drawer__icon, {
               [classes.drawer__iconSelected]: pathname === routes.BUY
             })}

@@ -73,6 +73,8 @@ type Props = {
 class PaymentSection extends React.PureComponent<Props> {
   static defaultProps = {};
 
+  static displayName = 'PaymentSection';
+
   onClickPaymentCoin = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
     const { value } = evt.target;
@@ -143,8 +145,6 @@ class PaymentSection extends React.PureComponent<Props> {
     return balanceAvailable.map(this.renderPaymentCoin);
   }
 }
-
-PaymentSection.displayName = 'PaymentSection';
 
 // eslint-disable-next-line flowtype/no-weak-types
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {

@@ -61,4 +61,5 @@ export default function* root() {
   yield takeFirst(LOGIN, loginFlow);
 }
 
+// FIXME: only for test, remove this soon
 window.api = api;

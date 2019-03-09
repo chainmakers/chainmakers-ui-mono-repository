@@ -34,6 +34,8 @@ type Props = {
 class CurrencySection extends React.PureComponent<Props> {
   static defaultProps = {};
 
+  static displayName = 'CurrencySection';
+
   onClick = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
     const { dispatchOpenSelectCoinModal } = this.props;
@@ -51,6 +53,7 @@ class CurrencySection extends React.PureComponent<Props> {
     if (!currency.get('name'))
       return (
         <CoinSelectable
+          id="add-icon-placeorder-dexpage"
           key="baseCoinAddIcon"
           icon={<AddIcon color="primary" />}
           onClick={this.onClick}
@@ -61,6 +64,7 @@ class CurrencySection extends React.PureComponent<Props> {
     const b = balance.get(currency.get('symbol'));
     return (
       <CoinSelectable
+        id="add-icon-placeorder-dexpage"
         key={`baseCoin${currency.get('symbol')}`}
         selected
         data={currency.get('symbol')}
@@ -73,8 +77,6 @@ class CurrencySection extends React.PureComponent<Props> {
     );
   }
 }
-
-CurrencySection.displayName = 'CurrencySection';
 
 // eslint-disable-next-line flowtype/no-weak-types
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {

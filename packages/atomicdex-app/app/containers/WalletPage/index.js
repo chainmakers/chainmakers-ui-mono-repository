@@ -27,7 +27,7 @@ import { makeSelectGlobalLoadedDataFromDB } from '../App/selectors';
 import { loadDataFromDB, loadElectrums } from '../App/actions';
 import { NavigationLayout } from '../Layout';
 import HeaderTabs from './components/HeaderTabs';
-import JoyrideModal from './components/JoyrideModal';
+import JoyrideGuilddance from './components/JoyrideGuilddance';
 import { openJoyride } from './actions';
 import TransactionsTab from './TransactionsTab';
 import WithdrawModal from './WithdrawModal';
@@ -155,15 +155,13 @@ class WalletPage extends React.PureComponent<
                   </Typography>
                 }
               >
-                <div>
-                  <IconButton
-                    color="primary"
-                    component="span"
-                    onClick={this.openJoyride}
-                  >
-                    <HelpOutlineIcon />
-                  </IconButton>
-                </div>
+                <IconButton
+                  color="primary"
+                  component="span"
+                  onClick={this.openJoyride}
+                >
+                  <HelpOutlineIcon />
+                </IconButton>
               </MDCHeader>
               <MDCTabBar>
                 <HeaderTabs handleChange={this.handleChange} value={value} />
@@ -213,7 +211,7 @@ class WalletPage extends React.PureComponent<
         </NavigationLayout>
         <WithdrawModal />
         <DepositModal />
-        <JoyrideModal />
+        <JoyrideGuilddance />
       </React.Fragment>
     );
   }

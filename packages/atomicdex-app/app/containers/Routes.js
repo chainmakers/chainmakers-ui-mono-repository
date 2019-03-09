@@ -5,17 +5,17 @@ import { Switch, Route, Redirect } from 'react-router';
 import { makeSelectAuthenticated, makeSelectLoading } from './App/selectors';
 import connectedRouterRedirect from '../utils/auth-wrapper/connected-router-redirect';
 import { routes } from '../constants';
-import App from './App';
-import ElectrumDialog from './ElectrumDialog';
+// import App from './App';
+// import ElectrumDialog from './ElectrumDialog';
 import DexPage from './DexPage';
 import WalletPage from './WalletPage';
 import HelpPage from './HelpPage';
 import SeedPage from './SeedPage';
 import LoginPage from './LoginPage';
 import NotFoundPage from './NotFoundPage';
-import LogoutDialog from './LogoutDialog';
-import Snackbars from './Snackbars';
-import WebSocketComponent from './WebSocketComponent';
+// import LogoutDialog from './LogoutDialog';
+// import Snackbars from './Snackbars';
+// import WebSocketComponent from './WebSocketComponent';
 
 const userIsNotAuthenticatedRedir = connectedRouterRedirect({
   AuthenticatingComponent: null,
@@ -46,11 +46,11 @@ const LoginFallback = userIsNotAuthenticatedRedir(
 
 export default () => (
   <React.Fragment>
-    <Route component={App} />
-    <Route component={LogoutDialog} />
-    <Route component={ElectrumDialog} />
-    <Route component={WebSocketComponent} />
-    <Route component={Snackbars} />
+    {/* <Route component={App} /> */}
+    {/* <Route component={LogoutDialog} /> */}
+    {/* <Route component={ElectrumDialog} /> */}
+    {/* <Route component={WebSocketComponent} /> */}
+    {/* <Route component={Snackbars} /> */}
     <Switch>
       <Route path={routes.BUY} component={DexFallback} />
       <Route path={routes.WALLET} component={WalletFallback} />
@@ -60,5 +60,6 @@ export default () => (
       <Route exact path={routes.HOME} component={HomeFallback} />
       <Route component={NotFoundPage} />
     </Switch>
+    {/* <LogoutDialog /> */}
   </React.Fragment>
 );

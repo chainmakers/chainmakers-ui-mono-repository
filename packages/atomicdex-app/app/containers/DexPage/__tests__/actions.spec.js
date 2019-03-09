@@ -15,7 +15,9 @@ import {
   closeSelectCoinModal,
   clickSelectCoinModal,
   selectCoinPayment,
-  skipSearchStateCreation
+  skipSearchStateCreation,
+  openJoyride,
+  closeJoyride
 } from '../actions';
 import {
   LOAD_PRICE,
@@ -34,7 +36,9 @@ import {
   SELECT_COIN_MODAL_CLOSE,
   SELECT_COIN_MODAL_CLICK,
   COIN_PAYMENT_SELECT,
-  SEARCH_STATE_SKIP_CREATION
+  SEARCH_STATE_SKIP_CREATION,
+  JOYRIDE_OPEN,
+  JOYRIDE_CLOSE
 } from '../constants';
 
 describe('containers/DexPage/actions/loadPrice', () => {
@@ -361,5 +365,33 @@ describe('containers/DexPage/actions/skipSearchStateCreation', () => {
     };
 
     expect(skipSearchStateCreation()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/DexPage/actions/openJoyride', () => {
+  it('should openJoyride should create openJoyride action', () => {
+    expect(openJoyride()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: JOYRIDE_OPEN
+    };
+
+    expect(openJoyride()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/DexPage/actions/closeJoyride', () => {
+  it('should closeJoyride should create closeJoyride action', () => {
+    expect(closeJoyride()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: JOYRIDE_CLOSE
+    };
+
+    expect(closeJoyride()).toEqual(expectedResult);
   });
 });

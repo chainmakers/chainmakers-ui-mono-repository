@@ -81,3 +81,7 @@ export const SEARCH_STATE_CREATE = 'atomicapp/DexPage/SEARCH_STATE_CREATE';
 export const SEARCH_STATE_SKIP_CREATION =
   'atomicapp/DexPage/SEARCH_STATE_SKIP_CREATION';
 export const SEARCH_STATE_READY = 'atomicapp/DexPage/SEARCH_STATE_READY';
+
+// Joyride actions
+export const JOYRIDE_OPEN = 'atomicapp/DexPage/JOYRIDE_OPEN';
+export const JOYRIDE_CLOSE = 'atomicapp/DexPage/JOYRIDE_CLOSE';
