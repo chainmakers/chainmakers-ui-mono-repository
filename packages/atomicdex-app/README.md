@@ -81,15 +81,17 @@ You can [download](https://github.com/particle4dev/komodo-ui-mono-repository/rel
 
 ## Documentation
 
-- [How to contribute this project](/docs/how-to-contribute.md)
+- [How to contribute this project](docs/how-to-contribute.md)
 
-- [Release Process](/docs/release-process.md)
+- [Release Process](docs/release-process.md)
+
+- [Run atomicdex app in your local](docs/run-atomicdex-app-in-your-local.md)
 
 ## Credits
 
 - **Nam Hoang** - _Initial work and maintainer_ - [particle4dev](https://github.com/particle4dev)
 
-See also the list of [contributors](/AUTHORS.md) who participated in this project.
+See also the list of [contributors](AUTHORS.md) who participated in this project.
 
 ## License
 
