@@ -50,7 +50,7 @@ main.js.map
 .idea
 npm-debug.log.*
 myipaddr
-**/DB/*
+# **/DB/*
 
 build-renderer.json
 __mocks__/tw-data.json
