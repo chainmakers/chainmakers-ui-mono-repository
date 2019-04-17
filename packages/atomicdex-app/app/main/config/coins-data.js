@@ -11,16 +11,18 @@ const data = [
     asset: 'BTC',
     urls: ['electrum1.cipig.net:10000', 'electrum2.cipig.net:10000'],
     active: 1,
-    market_cap: 97822306639.0
+    market_cap: 97822306639,
+    mm2: 1
   },
   {
     coin: 'KMD',
     name: 'Komodo',
     asset: 'KMD',
-    txversion: 4, // to activate Sapling tx format
+    txversion: 4,
     urls: ['electrum1.cipig.net:10001', 'electrum2.cipig.net:10001'],
     active: 1,
-    market_cap: 107340275.0
+    market_cap: 107340275,
+    mm2: 1
   },
   {
     coin: 'EQL',
@@ -29,7 +31,8 @@ const data = [
     rpcport: 10306,
     urls: ['159.65.91.235:10801', '167.99.204.42:10801'],
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'LTC',
@@ -42,23 +45,25 @@ const data = [
     wiftype: 176,
     txfee: 100000,
     active: 0,
-    market_cap: 2578993869.0
+    market_cap: 2578993869,
+    mm2: 1
   },
   {
     coin: 'COQUI',
     name: 'Coqui Cash',
     asset: 'COQUI',
-    txversion: 4, // to activate Sapling tx format
+    txversion: 4,
     urls: ['electrum1.cipig.net:10011', 'electrum2.cipig.net:10011'],
     rpcport: 14276,
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'CHIPS',
     name: 'Chips',
     asset: 'CHIPS',
-    txversion: 4, // to activate Sapling tx format
+    txversion: 4,
     urls: ['electrum1.cipig.net:10053', 'electrum2.cipig.net:10053'],
     rpcport: 57776,
     pubtype: 60,
@@ -66,7 +71,8 @@ const data = [
     wiftype: 188,
     txfee: 10000,
     active: 0,
-    market_cap: 1609044
+    market_cap: 1609044,
+    mm2: 1
   },
   {
     asset: 'REVS',
@@ -79,13 +85,14 @@ const data = [
       'electrum3.cipig.net:10003'
     ],
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'VRSC',
     name: 'VerusCoin',
     asset: 'VRSC',
-    txversion: 4, // to activate Sapling tx format
+    txversion: 4,
     urls: [
       'el0.vrsc.0x03.services:10000',
       'el1.vrsc.0x03.services:10000',
@@ -93,13 +100,14 @@ const data = [
     ],
     rpcport: 27486,
     active: 0,
-    market_cap: 1609044
+    market_cap: 1609044,
+    mm2: 1
   },
   {
     coin: 'KMDICE',
     name: 'KMDice',
     asset: 'KMDice',
-    txversion: 4, // to activate Sapling tx format
+    txversion: 4,
     urls: [
       'electrum1.cipig.net:10031',
       'electrum2.cipig.net:10031',
@@ -107,13 +115,14 @@ const data = [
     ],
     rpcport: 30177,
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'CHAIN',
     name: 'Chainmakers',
     asset: 'CHAIN',
-    txversion: 4, // to activate Sapling tx format
+    txversion: 4,
     urls: [
       'electrum1.cipig.net:10032',
       'electrum2.cipig.net:10032',
@@ -121,13 +130,14 @@ const data = [
     ],
     rpcport: 15587,
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'BCH',
     name: 'Bitcoin Cash',
     asset: 'bch',
-    txversion: 4, // to activate Sapling tx format
+    txversion: 4,
     urls: [
       'bch.imaginary.cash:50001',
       'electroncash.dk:50001',
@@ -140,7 +150,8 @@ const data = [
     wiftype: 128,
     txfee: 1000,
     active: 0,
-    market_cap: 2197468013
+    market_cap: 2197468013,
+    mm2: 1
   },
   {
     coin: 'QTUM',
@@ -158,13 +169,14 @@ const data = [
     wiftype: 128,
     txfee: 400000,
     active: 0,
-    market_cap: 167615207
+    market_cap: 167615207,
+    mm2: 1
   },
   {
     coin: 'ZEC',
     name: 'Zcash',
     asset: 'zcash',
-    txversion: 4, // to activate Sapling tx format
+    txversion: 4,
     urls: [
       'electrum1.cipig.net:10058',
       'electrum2.cipig.net:10058',
@@ -177,29 +189,31 @@ const data = [
     wiftype: 128,
     txfee: 10000,
     active: 0,
-    market_cap: 289458275
+    market_cap: 289458275,
+    mm2: 1
   },
   {
     coin: 'BEER',
     name: 'Beer',
     asset: 'BEER',
-    txversion: 4, // to activate Sapling tx format
+    txversion: 4,
     rpcport: 8923,
     urls: ['electrum1.cipig.net:10022', 'electrum2.cipig.net:10022'],
     active: 0,
-    market_cap: -1 // NOTE: we should display test coin at end of the list
+    market_cap: -1,
+    mm2: 1
   },
   {
     coin: 'PIZZA',
     name: 'Pizza',
     asset: 'PIZZA',
-    txversion: 4, // to activate Sapling tx format
+    txversion: 4,
     rpcport: 11608,
     urls: ['electrum1.cipig.net:10024', 'electrum2.cipig.net:10024'],
     active: 0,
-    market_cap: -2 // NOTE: we should display test coin at end of the list
+    market_cap: -2,
+    mm2: 1
   },
-  // ok
   {
     coin: '$PAC',
     rpcport: 7111,
@@ -211,7 +225,8 @@ const data = [
     name: 'PACcoin',
     asset: '$PAC',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: '1ST',
@@ -220,7 +235,8 @@ const data = [
     rpcport: 80,
     asset: '1ST',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'ADT',
@@ -229,7 +245,8 @@ const data = [
     rpcport: 80,
     asset: 'ADT',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'AE',
@@ -238,7 +255,8 @@ const data = [
     rpcport: 80,
     asset: 'AE',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'AION',
@@ -247,7 +265,8 @@ const data = [
     rpcport: 80,
     asset: 'AION',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'AMB',
@@ -256,13 +275,15 @@ const data = [
     rpcport: 80,
     asset: 'AMB',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'ANN',
     name: 'Agent Not Needed',
     etomic: '0xe0e73E8fc3a0fA161695be1D75E1Bc3E558957c4',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'ANT',
@@ -271,7 +292,8 @@ const data = [
     rpcport: 80,
     asset: 'ANT',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'AST',
@@ -280,7 +302,8 @@ const data = [
     rpcport: 80,
     asset: 'AST',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'BAT',
@@ -289,25 +312,29 @@ const data = [
     rpcport: 80,
     asset: 'BAT',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'BBT',
     name: 'Bitboost',
     etomic: '0x1500205f50bf3fd976466d0662905c9ff254fc9c',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'BCAP',
     name: 'Bcap',
     etomic: '0xFf3519eeeEA3e76F1F699CCcE5E23ee0bdDa41aC',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'BITSOKO',
     name: 'Bitsoko',
     etomic: '0xb72627650f1149ea5e54834b2f468e5d430e67bf',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'BLK',
@@ -325,7 +352,8 @@ const data = [
     name: 'BlackCoin',
     asset: 'BLK',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'BNB',
@@ -334,7 +362,8 @@ const data = [
     rpcport: 80,
     asset: 'BNB',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'BNT',
@@ -343,7 +372,8 @@ const data = [
     rpcport: 80,
     asset: 'BNT',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'BOTS',
@@ -354,7 +384,8 @@ const data = [
       'electrum1.cipig.net:10007',
       'electrum2.cipig.net:10007',
       'electrum3.cipig.net:10007'
-    ]
+    ],
+    mm2: 1
   },
   {
     coin: 'BOX',
@@ -363,7 +394,8 @@ const data = [
     rpcport: 80,
     asset: 'BOX',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'BTCH',
@@ -374,7 +406,8 @@ const data = [
       'electrum1.cipig.net:10020',
       'electrum2.cipig.net:10020',
       'electrum3.cipig.net:10020'
-    ]
+    ],
+    mm2: 1
   },
   {
     coin: 'BTCL',
@@ -383,7 +416,8 @@ const data = [
     rpcport: 80,
     asset: 'BTCL',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'BTCP',
@@ -397,7 +431,8 @@ const data = [
     name: 'Bitcoin Private',
     asset: 'BTCP',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'BTCZ',
@@ -415,7 +450,8 @@ const data = [
     name: 'BitcoinZ',
     asset: 'BTCZ',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'BTG',
@@ -433,7 +469,8 @@ const data = [
     name: 'Bitcoin Gold',
     asset: 'BTG',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'BTK',
@@ -442,7 +479,8 @@ const data = [
     rpcport: 80,
     asset: 'BTK',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'BTM',
@@ -451,7 +489,8 @@ const data = [
     rpcport: 80,
     asset: 'BTM',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'BTX',
@@ -468,7 +507,8 @@ const data = [
     name: 'Bitcore',
     asset: 'BTX',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'CDT',
@@ -477,7 +517,8 @@ const data = [
     rpcport: 80,
     asset: 'CDT',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'CENNZ',
@@ -486,7 +527,8 @@ const data = [
     rpcport: 80,
     asset: 'CENNZ',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'CFI',
@@ -495,13 +537,15 @@ const data = [
     rpcport: 80,
     asset: 'CFI',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'CIX',
     name: 'Cryptonetix',
     etomic: '0x1175a66a5c3343Bbf06AA818BB482DdEc30858E0',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'CMT',
@@ -510,7 +554,8 @@ const data = [
     rpcport: 80,
     asset: 'CMT',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'CC',
@@ -522,7 +567,8 @@ const data = [
       'electrum1.cipig.net:10029',
       'electrum2.cipig.net:10029',
       'electrum3.cipig.net:10029'
-    ]
+    ],
+    mm2: 1
   },
   {
     coin: 'CRW',
@@ -544,7 +590,8 @@ const data = [
     name: 'Crown',
     asset: 'CRW',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'CRYPTO',
@@ -555,7 +602,8 @@ const data = [
       'electrum1.cipig.net:10008',
       'electrum2.cipig.net:10008',
       'electrum3.cipig.net:10008'
-    ]
+    ],
+    mm2: 1
   },
   {
     coin: 'CS',
@@ -564,7 +612,8 @@ const data = [
     rpcport: 80,
     asset: 'CS',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'CVC',
@@ -573,7 +622,8 @@ const data = [
     rpcport: 80,
     asset: 'CVC',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'DAI',
@@ -582,7 +632,8 @@ const data = [
     rpcport: 80,
     asset: 'DAI',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'DASH',
@@ -599,7 +650,8 @@ const data = [
     name: 'Dash',
     asset: 'DASH',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'DATA',
@@ -608,7 +660,8 @@ const data = [
     rpcport: 80,
     asset: 'DATA',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'DCN',
@@ -617,13 +670,15 @@ const data = [
     rpcport: 80,
     asset: 'DCN',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'DEC8',
     name: 'DEC8 (TESTCOIN)',
     etomic: '0x3ab100442484dc2414aa75b2952a0a6f03f8abfd',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'DEX',
@@ -636,7 +691,8 @@ const data = [
       'electrum3.cipig.net:10006'
     ],
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'DGB',
@@ -653,7 +709,8 @@ const data = [
     name: 'DigiByte',
     asset: 'DGB',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'DGD',
@@ -663,13 +720,15 @@ const data = [
     rpcport: 80,
     asset: 'DGD',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'DGPT',
     name: 'DigiPulse',
     etomic: '0xf6cFe53d6FEbaEEA051f400ff5fc14F0cBBDacA1',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'DICE',
@@ -678,7 +737,8 @@ const data = [
     rpcport: 80,
     asset: 'DICE',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'DNT',
@@ -687,7 +747,8 @@ const data = [
     rpcport: 80,
     asset: 'DNT',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'DOGE',
@@ -704,7 +765,8 @@ const data = [
     name: 'Dogecoin',
     asset: 'DOGE',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'DRGN',
@@ -713,7 +775,8 @@ const data = [
     rpcport: 80,
     asset: 'DRGN',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'DROP',
@@ -722,7 +785,8 @@ const data = [
     rpcport: 80,
     asset: 'DROP',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'DRT',
@@ -731,7 +795,8 @@ const data = [
     rpcport: 80,
     asset: 'DRT',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'EDG',
@@ -740,13 +805,15 @@ const data = [
     rpcport: 80,
     asset: 'EDG',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'ELD',
     name: 'Electrum Dark',
     etomic: '0xaaf7d4cd097317d68174215395eb02c2cca81e31',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'ELF',
@@ -755,7 +822,8 @@ const data = [
     rpcport: 80,
     asset: 'ELF',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'EMC2',
@@ -772,7 +840,8 @@ const data = [
     name: 'Einsteinium',
     asset: 'EMC2',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'ENG',
@@ -781,7 +850,8 @@ const data = [
     rpcport: 80,
     asset: 'ENG',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'ENJ',
@@ -790,7 +860,8 @@ const data = [
     rpcport: 80,
     asset: 'ENJ',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'EOS',
@@ -799,14 +870,16 @@ const data = [
     rpcport: 80,
     asset: 'EOS',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'EQLI',
     name: 'Equaliser',
     asset: 'EQL',
     rpcport: 10306,
-    urls: ['159.65.91.235:10801', '167.99.204.42:10801']
+    urls: ['159.65.91.235:10801', '167.99.204.42:10801'],
+    mm2: 1
   },
   {
     coin: 'ETH',
@@ -815,7 +888,8 @@ const data = [
     name: 'Ethereum',
     asset: 'ETH',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'ETA',
@@ -824,7 +898,8 @@ const data = [
     rpcport: 80,
     asset: 'ETA',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'ETHOS',
@@ -833,7 +908,8 @@ const data = [
     rpcport: 80,
     asset: 'ETHOS',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'ETOMIC',
@@ -844,7 +920,8 @@ const data = [
       'electrum1.cipig.net:10025',
       'electrum2.cipig.net:10025',
       'electrum3.cipig.net:10025'
-    ]
+    ],
+    mm2: 1
   },
   {
     coin: 'FAIR',
@@ -861,7 +938,8 @@ const data = [
     name: 'FairCoin',
     asset: 'FAIR',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'FJC',
@@ -878,13 +956,15 @@ const data = [
     name: 'FujiCoin',
     asset: 'FJC',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'FLLW',
     name: 'FollowCoin',
     etomic: '0x0200412995f1bafef0d3f97c4e28ac2515ec1ece',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'FSN',
@@ -893,7 +973,8 @@ const data = [
     rpcport: 80,
     asset: 'FSN',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'FTC',
@@ -910,7 +991,8 @@ const data = [
     name: 'Feathercoin',
     asset: 'FTC',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'FUN',
@@ -919,13 +1001,15 @@ const data = [
     rpcport: 80,
     asset: 'FUN',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'FYN',
     name: 'FundYourselfNow',
     etomic: '0x88FCFBc22C6d3dBaa25aF478C578978339BDe77a',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'GAME',
@@ -942,7 +1026,8 @@ const data = [
     name: 'GameCredits',
     asset: 'GAME',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'GBX',
@@ -959,14 +1044,16 @@ const data = [
     name: 'GoByte',
     asset: 'GBX',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'GLXT',
     name: 'GLX Token',
     asset: 'GLXT',
     rpcport: 13109,
-    urls: ['electrum1.glx.co:60012', 'electrum2.glx.co:60012']
+    urls: ['electrum1.glx.co:60012', 'electrum2.glx.co:60012'],
+    mm2: 1
   },
   {
     coin: 'GNO',
@@ -975,13 +1062,15 @@ const data = [
     rpcport: 80,
     asset: 'GNO',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'GPN',
     name: 'GPN Coin',
     etomic: '0xE2b407160AAd5540eAc0e80338b9a5085C60F25B',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'GRS',
@@ -999,7 +1088,8 @@ const data = [
     name: 'Groestlcoin',
     asset: 'GRS',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'GTO',
@@ -1008,7 +1098,8 @@ const data = [
     rpcport: 80,
     asset: 'GTO',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'GUP',
@@ -1017,7 +1108,8 @@ const data = [
     rpcport: 80,
     asset: 'GUP',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'GUSD',
@@ -1027,7 +1119,8 @@ const data = [
     rpcport: 80,
     asset: 'GUSD',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'HGT',
@@ -1036,7 +1129,8 @@ const data = [
     rpcport: 80,
     asset: 'HGT',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'HMQ',
@@ -1045,7 +1139,8 @@ const data = [
     rpcport: 80,
     asset: 'HMQ',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'HUSH',
@@ -1063,13 +1158,15 @@ const data = [
     name: 'Hush',
     asset: 'HUSH',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'HYD',
     name: 'Hydra',
     etomic: '0xD233495C48EB0143661fFC8458EAfc21b633f97f',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'ICN',
@@ -1078,7 +1175,8 @@ const data = [
     rpcport: 80,
     asset: 'ICN',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'ICX',
@@ -1088,7 +1186,8 @@ const data = [
     rpcport: 80,
     asset: 'ICX',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'IND',
@@ -1097,7 +1196,8 @@ const data = [
     rpcport: 80,
     asset: 'IND',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'IOST',
@@ -1106,19 +1206,22 @@ const data = [
     rpcport: 80,
     asset: 'IOST',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'JOI',
     name: 'JointEDU',
     etomic: '0x58ded6994124b4fff298f1416aca3fc9cdba37b2',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'JST',
     name: 'JST (TESTCOIN)',
     etomic: '0x996a8ae0304680f6a69b8a9d7c6e37d65ab5ab56',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'JUMBLR',
@@ -1130,7 +1233,8 @@ const data = [
       'electrum1.cipig.net:10004',
       'electrum2.cipig.net:10004',
       'electrum3.cipig.net:10004'
-    ]
+    ],
+    mm2: 1
   },
   {
     coin: 'KIN',
@@ -1139,7 +1243,8 @@ const data = [
     rpcport: 80,
     asset: 'KIN',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'KNC',
@@ -1148,7 +1253,8 @@ const data = [
     rpcport: 80,
     asset: 'KNC',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'KV',
@@ -1159,7 +1265,8 @@ const data = [
       'electrum1.cipig.net:10016',
       'electrum2.cipig.net:10016',
       'electrum3.cipig.net:10016'
-    ]
+    ],
+    mm2: 1
   },
   {
     coin: 'LALA',
@@ -1168,7 +1275,8 @@ const data = [
     rpcport: 80,
     asset: 'LALA',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'LIKE',
@@ -1177,7 +1285,8 @@ const data = [
     rpcport: 80,
     asset: 'LIKE',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'LINK',
@@ -1186,7 +1295,8 @@ const data = [
     rpcport: 80,
     asset: 'LINK',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'LOOM',
@@ -1195,7 +1305,8 @@ const data = [
     rpcport: 80,
     asset: 'LOOM',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'LRC',
@@ -1205,7 +1316,8 @@ const data = [
     rpcport: 80,
     asset: 'LRC',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'LUN',
@@ -1214,13 +1326,15 @@ const data = [
     rpcport: 80,
     asset: 'LUN',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'LYS',
     name: 'Lightyears',
     etomic: '0xdd41fbd1ae95c5d9b198174a28e04be6b3d1aa27',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'MAN',
@@ -1229,7 +1343,8 @@ const data = [
     rpcport: 80,
     asset: 'MAN',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'MANA',
@@ -1238,7 +1353,8 @@ const data = [
     rpcport: 80,
     asset: 'MANA',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'MCO',
@@ -1247,7 +1363,8 @@ const data = [
     rpcport: 80,
     asset: 'MCO',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'MGO',
@@ -1256,7 +1373,8 @@ const data = [
     rpcport: 80,
     asset: 'MGO',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'MKR',
@@ -1265,7 +1383,8 @@ const data = [
     rpcport: 80,
     asset: 'MKR',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'MLN',
@@ -1274,13 +1393,15 @@ const data = [
     rpcport: 80,
     asset: 'MLN',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'MMX',
     name: 'Mechanix Token',
     etomic: '0xe7c33a0e04f2316bb321c4ad2976873d09538b56',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'MNX',
@@ -1297,7 +1418,8 @@ const data = [
     name: 'MinexCoin',
     asset: 'MNX',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'MNZ',
@@ -1308,7 +1430,8 @@ const data = [
       'electrum1.cipig.net:10002',
       'electrum2.cipig.net:10002',
       'electrum3.cipig.net:10002'
-    ]
+    ],
+    mm2: 1
   },
   {
     coin: 'MONA',
@@ -1326,7 +1449,8 @@ const data = [
     name: 'MonaCoin',
     asset: 'MONA',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'MSHARK',
@@ -1337,7 +1461,8 @@ const data = [
       'electrum1.cipig.net:10013',
       'electrum2.cipig.net:10013',
       'electrum3.cipig.net:10013'
-    ]
+    ],
+    mm2: 1
   },
   {
     coin: 'MTL',
@@ -1346,7 +1471,8 @@ const data = [
     rpcport: 80,
     asset: 'MTL',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'MYB',
@@ -1355,14 +1481,16 @@ const data = [
     rpcport: 80,
     asset: 'MYB',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'MYTH',
     name: 'Unicoin',
     decimals: 18,
     etomic: '0x277ab4b9dde09a8e710fd755deeb9d0d9532d047',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'NAS',
@@ -1371,13 +1499,15 @@ const data = [
     rpcport: 80,
     asset: 'NAS',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'NET',
     name: 'Nimiq',
     etomic: '0xcfb98637bcae43C13323EAa1731cED2B716962fD',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'NMC',
@@ -1394,7 +1524,8 @@ const data = [
     name: 'Namecoin',
     asset: 'NMC',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'NMR',
@@ -1403,7 +1534,8 @@ const data = [
     rpcport: 80,
     asset: 'NMR',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'NOAH',
@@ -1412,7 +1544,8 @@ const data = [
     rpcport: 80,
     asset: 'NOAH',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'NULS',
@@ -1421,7 +1554,8 @@ const data = [
     rpcport: 80,
     asset: 'NULS',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'OCC',
@@ -1430,7 +1564,8 @@ const data = [
     rpcport: 80,
     asset: 'OCC',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'OCT',
@@ -1439,7 +1574,8 @@ const data = [
     rpcport: 80,
     asset: 'OCT',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'OMG',
@@ -1448,13 +1584,15 @@ const data = [
     rpcport: 80,
     asset: 'OMG',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'ONNI',
     name: 'Misericordae',
     etomic: '0xbd9c6028e1132a6b52f1ca15c0933a2fd342e21f',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'OOT',
@@ -1463,7 +1601,8 @@ const data = [
     rpcport: 12467,
     urls: ['electrum1.utrum.io:10088', 'electrum2.utrum.io:10088'],
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'PANGEA',
@@ -1474,7 +1613,8 @@ const data = [
       'electrum1.cipig.net:10010',
       'electrum2.cipig.net:10010',
       'electrum3.cipig.net:10010'
-    ]
+    ],
+    mm2: 1
   },
   {
     coin: 'PAT',
@@ -1483,7 +1623,8 @@ const data = [
     rpcport: 80,
     asset: 'PAT',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'PAY',
@@ -1492,7 +1633,8 @@ const data = [
     rpcport: 80,
     asset: 'PAY',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'PCL',
@@ -1501,7 +1643,8 @@ const data = [
     rpcport: 80,
     asset: 'PCL',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'PGT',
@@ -1510,7 +1653,8 @@ const data = [
     rpcport: 46705,
     urls: ['agama.komodo.build:10002', 'agama2.komodo.build:10002'],
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'PLU',
@@ -1519,7 +1663,8 @@ const data = [
     rpcport: 80,
     asset: 'PLU',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'POLIS',
@@ -1536,7 +1681,8 @@ const data = [
     name: 'Polis',
     asset: 'POLIS',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'POLY',
@@ -1545,7 +1691,8 @@ const data = [
     rpcport: 80,
     asset: 'POLY',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'POWR',
@@ -1554,7 +1701,8 @@ const data = [
     rpcport: 80,
     asset: 'POWR',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'PPT',
@@ -1563,25 +1711,29 @@ const data = [
     rpcport: 80,
     asset: 'PPT',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'PRL',
     name: 'Oyster',
     etomic: '0x1844b21593262668b7248d0f57a220caaba46ab9',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'PURC',
     name: 'Peurcoin',
     etomic: '0x7148b80b38278853ca8263cfc0b57d4478ae6a6e',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'PXT',
     name: 'Populous XBRL Token',
     etomic: '0xc14830e53aa344e8c14603a91229a0b925b0b262',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'QASH',
@@ -1590,7 +1742,8 @@ const data = [
     rpcport: 80,
     asset: 'QASH',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'QBIT',
@@ -1599,7 +1752,8 @@ const data = [
     rpcport: 80,
     asset: 'QBIT',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'QSP',
@@ -1608,7 +1762,8 @@ const data = [
     rpcport: 80,
     asset: 'QSP',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'R',
@@ -1617,7 +1772,8 @@ const data = [
     rpcport: 80,
     asset: 'R',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'RAP',
@@ -1627,7 +1783,8 @@ const data = [
     p2shtype: 16,
     wiftype: 204,
     txfee: 10000,
-    urls: ['electrum.our-rapture.com:50001', 'electrum2.our-rapture.com:50001']
+    urls: ['electrum.our-rapture.com:50001', 'electrum2.our-rapture.com:50001'],
+    mm2: 1
   },
   {
     coin: 'RCN',
@@ -1636,7 +1793,8 @@ const data = [
     rpcport: 80,
     asset: 'RCN',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'RDN',
@@ -1645,7 +1803,8 @@ const data = [
     rpcport: 80,
     asset: 'RDN',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'REP',
@@ -1654,7 +1813,8 @@ const data = [
     rpcport: 80,
     asset: 'REP',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'REQ',
@@ -1663,7 +1823,8 @@ const data = [
     rpcport: 80,
     asset: 'REQ',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'RHOC',
@@ -1672,7 +1833,8 @@ const data = [
     rpcport: 80,
     asset: 'RHOC',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'RLC',
@@ -1681,13 +1843,15 @@ const data = [
     rpcport: 80,
     asset: 'RLC',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'RLTY',
     name: 'SMARTRealty',
     etomic: '0xbe99b09709fc753b09bcf557a992f6605d5997b0',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'RVT',
@@ -1696,7 +1860,8 @@ const data = [
     rpcport: 80,
     asset: 'RVT',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'SALT',
@@ -1705,7 +1870,8 @@ const data = [
     rpcport: 80,
     asset: 'SALT',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'SAN',
@@ -1714,13 +1880,15 @@ const data = [
     rpcport: 80,
     asset: 'SAN',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'SANC',
     name: 'Sancoj',
     etomic: '0x03ec7bb59be036870ef696a2abf124f496d6735a',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'SIB',
@@ -1737,7 +1905,8 @@ const data = [
     name: 'SIBCoin',
     asset: 'SIB',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'SMART',
@@ -1755,7 +1924,8 @@ const data = [
     name: 'SmartCash',
     asset: 'SMART',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'SNGLS',
@@ -1764,7 +1934,8 @@ const data = [
     rpcport: 80,
     asset: 'SNGLS',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'SNT',
@@ -1773,7 +1944,8 @@ const data = [
     rpcport: 80,
     asset: 'SNT',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'SPANK',
@@ -1782,7 +1954,8 @@ const data = [
     rpcport: 80,
     asset: 'SPANK',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'SRN',
@@ -1791,7 +1964,8 @@ const data = [
     rpcport: 80,
     asset: 'SRN',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'STAK',
@@ -1808,7 +1982,8 @@ const data = [
     name: 'STRAKS',
     asset: 'STAK',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'STORJ',
@@ -1817,7 +1992,8 @@ const data = [
     rpcport: 80,
     asset: 'STORJ',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'STORM',
@@ -1826,19 +2002,22 @@ const data = [
     rpcport: 80,
     asset: 'STORM',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'STRM41',
     name: 'Stream41',
     etomic: '0xbad7a7f7ba71ce3659fe6dcad34af86b9de2a4b2',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'STWY',
     name: 'StorweeyToken',
     etomic: '0x8a8c71f032362fca2994f75d854f911ec381ac5a',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'SUB',
@@ -1847,7 +2026,8 @@ const data = [
     rpcport: 80,
     asset: 'SUB',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'SUPERNET',
@@ -1858,7 +2038,8 @@ const data = [
       'electrum1.cipig.net:10005',
       'electrum2.cipig.net:10005',
       'electrum3.cipig.net:10005'
-    ]
+    ],
+    mm2: 1
   },
   {
     coin: 'SWT',
@@ -1867,7 +2048,8 @@ const data = [
     rpcport: 80,
     asset: 'SWT',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'TAAS',
@@ -1876,7 +2058,8 @@ const data = [
     rpcport: 80,
     asset: 'TAAS',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'THETA',
@@ -1885,7 +2068,8 @@ const data = [
     rpcport: 80,
     asset: 'THETA',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'TIME',
@@ -1894,7 +2078,8 @@ const data = [
     rpcport: 80,
     asset: 'TIME',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'TKN',
@@ -1903,7 +2088,8 @@ const data = [
     rpcport: 80,
     asset: 'TKN',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'TRST',
@@ -1912,7 +2098,8 @@ const data = [
     rpcport: 80,
     asset: 'TRST',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'TUSD',
@@ -1921,7 +2108,8 @@ const data = [
     rpcport: 80,
     asset: 'TUSD',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'UCASH',
@@ -1930,7 +2118,8 @@ const data = [
     rpcport: 80,
     asset: 'UCASH',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'USDT',
@@ -1939,13 +2128,15 @@ const data = [
     rpcport: 80,
     asset: 'USDT',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'VEN',
     name: 'VeChain',
     etomic: '0xd850942ef8811f2a866692a623011bde52a462c1',
-    rpcport: 80
+    rpcport: 80,
+    mm2: 1
   },
   {
     coin: 'VIA',
@@ -1962,7 +2153,8 @@ const data = [
     name: 'Viacoin',
     asset: 'VIA',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'VSL',
@@ -1972,7 +2164,8 @@ const data = [
     rpcport: 80,
     asset: 'VSL',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'VTC',
@@ -1990,7 +2183,8 @@ const data = [
     name: 'Vertcoin',
     asset: 'VTC',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'WAX',
@@ -1999,7 +2193,8 @@ const data = [
     rpcport: 80,
     asset: 'WAX',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'WINGS',
@@ -2008,7 +2203,8 @@ const data = [
     rpcport: 80,
     asset: 'WINGS',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'WLC',
@@ -2019,7 +2215,8 @@ const data = [
       'electrum1.cipig.net:10014',
       'electrum2.cipig.net:10014',
       'electrum3.cipig.net:10014'
-    ]
+    ],
+    mm2: 1
   },
   {
     coin: 'WTC',
@@ -2028,7 +2225,8 @@ const data = [
     rpcport: 80,
     asset: 'WTC',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'XAUR',
@@ -2037,7 +2235,8 @@ const data = [
     rpcport: 80,
     asset: 'XAUR',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'XMCC',
@@ -2054,7 +2253,8 @@ const data = [
     name: 'Monoeci',
     asset: 'XMCC',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'XOV',
@@ -2063,7 +2263,8 @@ const data = [
     rpcport: 80,
     asset: 'XOV',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'XSG',
@@ -2077,7 +2278,8 @@ const data = [
     urls: ['electrumsvr.snowgem.org:50001', 'electrumsvr2.snowgem.org:50001'],
     asset: 'XSG',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'XZC',
@@ -2090,7 +2292,8 @@ const data = [
     name: 'Zcoin',
     asset: 'XZC',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'ZCL',
@@ -2108,7 +2311,8 @@ const data = [
     name: 'ZClassic',
     asset: 'ZCL',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'ZIL',
@@ -2117,7 +2321,8 @@ const data = [
     rpcport: 80,
     asset: 'ZIL',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   },
   {
     coin: 'ZILLA',
@@ -2128,7 +2333,8 @@ const data = [
       'electrum1.cipig.net:10028',
       'electrum2.cipig.net:10028',
       'electrum3.cipig.net:10028'
-    ]
+    ],
+    mm2: 1
   },
   {
     coin: 'ZRX',
@@ -2137,7 +2343,8 @@ const data = [
     rpcport: 80,
     asset: 'ZRX',
     active: 0,
-    market_cap: 0
+    market_cap: 0,
+    mm2: 1
   }
 ];
 

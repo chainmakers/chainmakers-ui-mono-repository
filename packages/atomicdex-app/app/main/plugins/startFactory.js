@@ -17,6 +17,7 @@ export default function startFactory(marketmaker) {
           // NOTE: For testing
           passphrase,
           netid: 9999
+          // mm2: 1
         },
         {
           logs: true

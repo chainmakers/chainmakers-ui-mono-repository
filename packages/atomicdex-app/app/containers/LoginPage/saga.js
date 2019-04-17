@@ -13,15 +13,16 @@ const debug = require('debug')('atomicapp:containers:LoginPage:saga');
 export function* authorize(passphrase: string) {
   try {
     debug(`authorize is running`);
+
+    api.setUserpass(passphrase);
+    const userpass = api.getUserpass();
     const data = yield call([ipc, 'callMain'], 'marketmaker:start', passphrase);
 
     if (data.ok === 'failed') {
       throw new Error(data.message);
     }
 
-    api.setUserpass(passphrase);
     yield call([api, 'waitUntilReady']);
-    const userpass = api.getUserpass();
     // const db = open(userpass);
     open(userpass);
 
