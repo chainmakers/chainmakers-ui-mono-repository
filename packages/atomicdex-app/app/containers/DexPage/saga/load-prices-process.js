@@ -15,7 +15,8 @@ export function* loadPrice(coin) {
 
   const getprices = {
     base: currency.get('symbol'),
-    rel: coin
+    rel: coin,
+    queueid: undefined,
   };
   let bestprice = 0;
   let request = null;

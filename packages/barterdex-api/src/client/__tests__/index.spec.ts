@@ -17,6 +17,7 @@ describe('packages/barterdex-api/src/index', () => {
     expect(typeof BarterDexAPI.orderbook).toEqual('function');
     expect(typeof BarterDexAPI.privateCall).toEqual('function');
     expect(typeof BarterDexAPI.swapstatus).toEqual('function');
+    expect(typeof BarterDexAPI.myswapstatus).toEqual('function');
     expect(typeof BarterDexAPI.setUserpass).toEqual('function');
     expect(typeof BarterDexAPI.getUserpass).toEqual('function');
     expect(typeof BarterDexAPI.listunspent).toEqual('function');

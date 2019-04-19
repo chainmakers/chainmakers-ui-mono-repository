@@ -22,6 +22,7 @@ export interface BarterdexApi {
   orderbook: Function,
   privateCall: Function,
   swapstatus: Function,
+  myswapstatus: Function,
   setUserpass: Function,
   getUserpass: Function,
   listunspent: Function,
