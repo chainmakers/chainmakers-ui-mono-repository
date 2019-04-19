@@ -1,23 +1,19 @@
-api.privateCall({
-  "queueid": 0,
-  "needjson": 1,
-  "method": "buy",
-  "base": "BEER",
-  "rel": "COQUI",
-  "relvolume": 0.1,
-  "price": 0.2415
-})
+# Making a swap
 
-api.myswapstatus({params: {uuid: "6c854637862bd438ec4ea358b0f4772a9946d03d97534bf84d778da256ca538e"}})
+Send a request to making a swap
 
-TEST CASE 1:
-
-Request 1:
+### Request:
 
 ```
+POST / HTTP/1.1
+Host: http://127.0.0.1:7783/
+Referrer Policy: no-referrer-when-downgrade
+Content-Type: application/json
+Content-Length: 52
+
 {
 	"queueid": 0,
-	"userpass": "7b9896847c4efc05d369d23bf69e79245b85b5b237065eb802c28b7603fabe36",
+	"userpass": "<userpass>",
 	"needjson": 1,
 	"method": "buy",
 	"base": "BEER",
@@ -27,9 +23,9 @@ Request 1:
 }
 ```
 
-Response:
+### Response:
 
-```
+```js
 {
 	"result": "success",
 	"swaps": [
@@ -58,13 +54,22 @@ Response:
 }
 ```
 
+# Get swap status
 
-Request 2:
+Send a request to update a swap
+
+### Request 1:
 
 ```
+POST / HTTP/1.1
+Host: http://127.0.0.1:7783/
+Referrer Policy: no-referrer-when-downgrade
+Content-Type: application/json
+Content-Length: 
+
 {
 	"queueid": 0,
-	"userpass": "7b9896847c4efc05d369d23bf69e79245b85b5b237065eb802c28b7603fabe36",
+	"userpass": "<userpass>",
 	"params": {
 		"uuid": "6c854637862bd438ec4ea358b0f4772a9946d03d97534bf84d778da256ca538e"
 	},
@@ -72,9 +77,9 @@ Request 2:
 }
 ```
 
-Response:
+### Response:
 
-```
+```js
 {
 	"result": {
 		"error_events": ["StartFailed", "NegotiateFailed", "TakerFeeSendFailed", "MakerPaymentValidateFailed", "TakerPaymentTransactionFailed", "TakerPaymentDataSendFailed", "TakerPaymentWaitForSpendFailed", "MakerPaymentSpendFailed", "TakerPaymentRefunded", "TakerPaymentRefundFailed"],
@@ -106,13 +111,18 @@ Response:
 }
 ```
 
-
-Request 3:
+### Request 2:
 
 ```
+POST / HTTP/1.1
+Host: http://127.0.0.1:7783/
+Referrer Policy: no-referrer-when-downgrade
+Content-Type: application/json
+Content-Length:
+
 {
 	"queueid": 0,
-	"userpass": "7b9896847c4efc05d369d23bf69e79245b85b5b237065eb802c28b7603fabe36",
+	"userpass": "<userpass>",
 	"params": {
 		"uuid": "6c854637862bd438ec4ea358b0f4772a9946d03d97534bf84d778da256ca538e"
 	},
@@ -120,9 +130,9 @@ Request 3:
 }
 ```
 
-Response:
+### Response:
 
-```
+```js
 {
 	"result": {
 		"error_events": ["StartFailed", "NegotiateFailed", "TakerFeeSendFailed", "MakerPaymentValidateFailed", "TakerPaymentTransactionFailed", "TakerPaymentDataSendFailed", "TakerPaymentWaitForSpendFailed", "MakerPaymentSpendFailed", "TakerPaymentRefunded", "TakerPaymentRefundFailed"],
@@ -160,13 +170,18 @@ Response:
 }
 ```
 
-
-Request 4:
+### Request 3:
 
 ```
+POST / HTTP/1.1
+Host: http://127.0.0.1:7783/
+Referrer Policy: no-referrer-when-downgrade
+Content-Type: application/json
+Content-Length:
+
 {
 	"queueid": 0,
-	"userpass": "7b9896847c4efc05d369d23bf69e79245b85b5b237065eb802c28b7603fabe36",
+	"userpass": "<userpass>",
 	"params": {
 		"uuid": "6c854637862bd438ec4ea358b0f4772a9946d03d97534bf84d778da256ca538e"
 	},
@@ -174,8 +189,9 @@ Request 4:
 }
 ```
 
-Response:
-```
+### Response:
+
+```js
 {
 	"result": {
 		"error_events": ["StartFailed", "NegotiateFailed", "TakerFeeSendFailed", "MakerPaymentValidateFailed", "TakerPaymentTransactionFailed", "TakerPaymentDataSendFailed", "TakerPaymentWaitForSpendFailed", "MakerPaymentSpendFailed", "TakerPaymentRefunded", "TakerPaymentRefundFailed"],
@@ -226,14 +242,18 @@ Response:
 }
 ```
 
-
-
-Request 5:
+### Request 4:
 
 ```
+POST / HTTP/1.1
+Host: http://127.0.0.1:7783/
+Referrer Policy: no-referrer-when-downgrade
+Content-Type: application/json
+Content-Length:
+
 {
 	"queueid": 0,
-	"userpass": "7b9896847c4efc05d369d23bf69e79245b85b5b237065eb802c28b7603fabe36",
+	"userpass": "<userpass>",
 	"params": {
 		"uuid": "6c854637862bd438ec4ea358b0f4772a9946d03d97534bf84d778da256ca538e"
 	},
@@ -241,8 +261,9 @@ Request 5:
 }
 ```
 
-Response:
-```
+### Response:
+
+```js
 {
 	"result": {
 		"error_events": ["StartFailed", "NegotiateFailed", "TakerFeeSendFailed", "MakerPaymentValidateFailed", "TakerPaymentTransactionFailed", "TakerPaymentDataSendFailed", "TakerPaymentWaitForSpendFailed", "MakerPaymentSpendFailed", "TakerPaymentRefunded", "TakerPaymentRefundFailed"],
@@ -311,13 +332,18 @@ Response:
 }
 ```
 
-
-Request 6:
+### Request 5:
 
 ```
+POST / HTTP/1.1
+Host: http://127.0.0.1:7783/
+Referrer Policy: no-referrer-when-downgrade
+Content-Type: application/json
+Content-Length:
+
 {
 	"queueid": 0,
-	"userpass": "7b9896847c4efc05d369d23bf69e79245b85b5b237065eb802c28b7603fabe36",
+	"userpass": "<userpass>",
 	"params": {
 		"uuid": "6c854637862bd438ec4ea358b0f4772a9946d03d97534bf84d778da256ca538e"
 	},
@@ -325,8 +351,9 @@ Request 6:
 }
 ```
 
-Response:
-```
+### Response:
+
+```js
 {
 	"result": {
 		"error_events": ["StartFailed", "NegotiateFailed", "TakerFeeSendFailed", "MakerPaymentValidateFailed", "TakerPaymentTransactionFailed", "TakerPaymentDataSendFailed", "TakerPaymentWaitForSpendFailed", "MakerPaymentSpendFailed", "TakerPaymentRefunded", "TakerPaymentRefundFailed"],
@@ -413,13 +440,18 @@ Response:
 }
 ```
 
-
-Request 7:
+### Request 6:
 
 ```
+POST / HTTP/1.1
+Host: http://127.0.0.1:7783/
+Referrer Policy: no-referrer-when-downgrade
+Content-Type: application/json
+Content-Length:
+
 {
 	"queueid": 0,
-	"userpass": "7b9896847c4efc05d369d23bf69e79245b85b5b237065eb802c28b7603fabe36",
+	"userpass": "<userpass>",
 	"params": {
 		"uuid": "6c854637862bd438ec4ea358b0f4772a9946d03d97534bf84d778da256ca538e"
 	},
@@ -427,8 +459,9 @@ Request 7:
 }
 ```
 
-Response:
-```
+### Response:
+
+```js
 {
 	"result": {
 		"error_events": ["StartFailed", "NegotiateFailed", "TakerFeeSendFailed", "MakerPaymentValidateFailed", "TakerPaymentTransactionFailed", "TakerPaymentDataSendFailed", "TakerPaymentWaitForSpendFailed", "MakerPaymentSpendFailed", "TakerPaymentRefunded", "TakerPaymentRefundFailed"],
@@ -546,68 +579,20 @@ Response:
 }
 ```
 
+# NOTE
 
-Request 8:
+Quick command
 
+```js
+api.privateCall({
+  "queueid": 0,
+  "needjson": 1,
+  "method": "buy",
+  "base": "BEER",
+  "rel": "COQUI",
+  "relvolume": 0.1,
+  "price": 0.2415
+})
+
+api.myswapstatus({params: {uuid: "<uuid>"}})
 ```
-{
-	"queueid": 0,
-	"userpass": "7b9896847c4efc05d369d23bf69e79245b85b5b237065eb802c28b7603fabe36",
-	"params": {
-		"uuid": "6c854637862bd438ec4ea358b0f4772a9946d03d97534bf84d778da256ca538e"
-	},
-	"method": "my_swap_status"
-}
-```
-
-Response:
-
-
-
-Request 9:
-
-```
-{
-	"queueid": 0,
-	"userpass": "7b9896847c4efc05d369d23bf69e79245b85b5b237065eb802c28b7603fabe36",
-	"params": {
-		"uuid": "6c854637862bd438ec4ea358b0f4772a9946d03d97534bf84d778da256ca538e"
-	},
-	"method": "my_swap_status"
-}
-```
-
-Response:
-
-
-
-Request 10:
-
-```
-{
-	"queueid": 0,
-	"userpass": "7b9896847c4efc05d369d23bf69e79245b85b5b237065eb802c28b7603fabe36",
-	"params": {
-		"uuid": "6c854637862bd438ec4ea358b0f4772a9946d03d97534bf84d778da256ca538e"
-	},
-	"method": "my_swap_status"
-}
-```
-
-Response:
-
-
-Request 11:
-
-```
-{
-	"queueid": 0,
-	"userpass": "7b9896847c4efc05d369d23bf69e79245b85b5b237065eb802c28b7603fabe36",
-	"params": {
-		"uuid": "6c854637862bd438ec4ea358b0f4772a9946d03d97534bf84d778da256ca538e"
-	},
-	"method": "my_swap_status"
-}
-```
-
-Response:
