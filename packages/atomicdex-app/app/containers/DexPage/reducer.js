@@ -32,7 +32,9 @@ import {
   SEARCH_STATE_CREATE,
   SEARCH_STATE_READY,
   JOYRIDE_OPEN,
-  JOYRIDE_CLOSE
+  JOYRIDE_CLOSE,
+  STARTED_SWAPS_STATE,
+  FINISHED_SWAPS_STATE
 } from './constants';
 
 // The initial state of the App
@@ -209,6 +211,54 @@ export default handleActions(
         .setIn(['buying', 'loading'], false),
 
     [LOAD_RECENT_SWAPS_COIN]: (state, { payload }) => {
+      const {
+        result: { events, uuid }
+      } = payload;
+      // const {
+      //   uuid,
+      //   event: { type }
+      // } = payload;
+
+      // step one: update list
+      let processingList = state.getIn(['swaps', 'processingList']);
+      let finishedList = state.getIn(['swaps', 'finishedList']);
+
+      // step two: update entities
+      let entities = state.getIn(['swaps', 'entities']);
+      let entity = entities.get(uuid);
+
+      for (let i = 0; i < events.length; i += 1) {
+        const { event } = events[i];
+        // sentflags
+        const sentf = entity.get('sentflags');
+        if (!sentf.find(value => value === event.type)) {
+          entity = entity.set('sentflags', sentf.push(event.type));
+        }
+        // expiration
+        if (event.type === STARTED_SWAPS_STATE) {
+          entity = entity.set(
+            'expiration',
+            entity.get('expiration') + 4 * 60 * 60
+          ); // + 4 hours
+        }
+        if (event.type === FINISHED_SWAPS_STATE) {
+          processingList = processingList.filter(o => o !== uuid);
+          finishedList = finishedList.push(uuid);
+        }
+        // update status
+        if (entity.get('status') !== event.type) {
+          entity = entity.set('status', event.type);
+        }
+      }
+
+      entities = entities.set(uuid, entity);
+
+      return state
+        .setIn(['swaps', 'processingList'], processingList)
+        .setIn(['swaps', 'finishedList'], finishedList)
+        .setIn(['swaps', 'entities'], entities);
+
+      /**
       // NOTE: still not hanle this case
       // error: "swap never started"
       // uuid: ""
@@ -403,6 +453,7 @@ export default handleActions(
           .setIn(['swaps', 'entities'], entities);
       }
       return state.setIn(['swaps', 'entities'], entities);
+      */
     },
 
     [LOAD_RECENT_SWAPS_DATA_FROM_WEBSOCKET]: (state, { payload }) => {

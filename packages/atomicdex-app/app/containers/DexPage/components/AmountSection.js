@@ -30,7 +30,8 @@ import {
   STATE_SWAPS,
   SWAP_WARNING_MESSAGE,
   NA,
-  DEXFEE
+  DEXFEE,
+  FINISHED_SWAPS_STATE
 } from '../constants';
 import {
   loadBuyCoin,
@@ -569,8 +570,7 @@ class AmountSection extends React.Component<Props, State> {
         </Grid>
         <Grid item xs={12} className={classes.amountform__itemCenter}>
           <Typography variant="body2" gutterBottom>
-            Step {0}
-            /6: {STATE_SWAPS[0]}
+            Step {0}/{STATE_SWAPS.length}: {STATE_SWAPS[0]}
           </Typography>
           <LinearProgress color="primary" variant="determinate" value={0} />
         </Grid>
@@ -595,7 +595,7 @@ class AmountSection extends React.Component<Props, State> {
 
   renderProcessingSwapForm = () => {
     const { classes, entity } = this.props;
-    const swapsLoading = entity.get('status') !== 'finished';
+    const swapsLoading = entity.get('status') !== FINISHED_SWAPS_STATE;
     const swapsError = entity.get('error');
     const confirmed = entity.get('sentflags').size > 0;
     return (
@@ -633,13 +633,15 @@ class AmountSection extends React.Component<Props, State> {
         </Grid>
         <Grid item xs={12} className={classes.amountform__itemCenter}>
           <Typography variant="body2" gutterBottom>
-            Step {entity.get('sentflags').size + 1}
-            /6: {STATE_SWAPS[entity.get('sentflags').size + 1]}
+            Step {entity.get('sentflags').size}/{STATE_SWAPS.length - 1}:{' '}
+            {STATE_SWAPS[entity.get('sentflags').size]}
           </Typography>
           <LinearProgress
             color="primary"
             variant="determinate"
-            value={entity.get('sentflags').size * 20}
+            value={
+              (entity.get('sentflags').size * 100) / (STATE_SWAPS.length - 1)
+            }
           />
         </Grid>
         <Grid item xs={12} className={classes.amountform__itemCenter}>

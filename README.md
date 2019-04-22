@@ -3,7 +3,6 @@
 </p>
 
 <h1 align="center">
-  <br>
   Komodo UI Mono Repository
   <br>
 </h1>
@@ -19,3 +18,7 @@
 [![Build Status](https://travis-ci.com/particle4dev/komodo-ui-mono-repository.svg?branch=master)](https://travis-ci.com/particle4dev/komodo-ui-mono-repository)
 
 </div>
+
+## Project structure
+
+- [packages/atomicdex-app](packages/atomicdex-app)

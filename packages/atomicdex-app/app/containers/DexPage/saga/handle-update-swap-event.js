@@ -2,7 +2,7 @@ import { put, all, call, cancelled, select } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { takeFirst } from 'barterdex-rssm';
 import api from '../../../lib/barter-dex-api';
-// import { loadSwapSuccess } from '../../App/actions';
+import { loadSwapSuccess /* loadBalance */ } from '../../App/actions';
 import {
   loadRecentSwapsCoin,
   loadRecentSwapsError,
@@ -12,24 +12,62 @@ import { makeSelectSwapsEntities, makeSelectCurrentSwaps } from '../selectors';
 import {
   CHECK_UPDATE_SWAP_EVENT,
   LOAD_RECENT_SWAPS,
-  TIME_LOOP
+  TIME_LOOP,
+  FINISHED_SWAPS_STATE
 } from '../constants';
 
 const debug = require('debug')(
   'atomicapp:containers:DexPage:saga:handle-update-swap-event'
 );
 
-export function* checkSwap(requestid, quoteid, isPending) {
+export function* checkSwap(swap, isPending) {
   try {
+    const uuid = swap.get('uuid');
     const swapelem = {
-      requestid,
-      quoteid
+      params: {
+        uuid
+      }
     };
 
-    const swapstatusResult = yield call([api, 'swapstatus'], swapelem);
+    const swapstatusResult = yield call([api, 'myswapstatus'], swapelem);
+    // ONE CASE
+    // Status Code: 404 Not Found
+    // {error: "swap data is not found"}
 
     yield put(loadRecentSwapsCoin(swapstatusResult));
 
+    const {
+      result: { events }
+    } = swapstatusResult;
+    if (events.length > 0) {
+      const { event } = events[events.length - 1];
+      if (event.type === FINISHED_SWAPS_STATE) {
+        // NOTE: If you buy COQUI with BEER then COQUI balance will not update automatically after swap finish (maybe we should wait few second)
+        // yield put(
+        //   loadBalance({
+        //     coin: swap.get('alice')
+        //   })
+        // );
+        // yield put(
+        //   loadBalance({
+        //     coin: swap.get('bob')
+        //   })
+        // );
+        yield put(
+          loadSwapSuccess([
+            {
+              coin: swap.get('bob'),
+              value: swap.get('bobamount')
+            },
+            {
+              coin: swap.get('alice'),
+              value: 0 - swap.get('aliceamount')
+            }
+          ])
+        );
+      }
+    }
+    /**
     if (isPending && swapstatusResult.status === 'finished') {
       // NOTE: turn this off since we really run it in subscribe func
       debug(`isPending = ${isPending}`);
@@ -46,6 +84,7 @@ export function* checkSwap(requestid, quoteid, isPending) {
       //   ])
       // );
     }
+    */
     return true;
   } finally {
     if (yield cancelled()) {
@@ -57,25 +96,30 @@ export function* checkSwap(requestid, quoteid, isPending) {
 export function* loadRecentSwapsProcess() {
   try {
     const recentswapsResult = yield call([api, 'recentswaps']);
+    console.log(recentswapsResult, 'recentswapsResult');
 
     const swapsEntities = yield select(makeSelectSwapsEntities());
-
-    const { swaps } = recentswapsResult;
+    const currentSwaps = yield select(makeSelectCurrentSwaps());
     const requests = [];
-    for (let i = 0; i < swaps.length; i += 1) {
-      const swapobj = swaps[i];
-      // eslint-disable-next-line no-await-in-loop
-      const e = swapsEntities.find(
-        val =>
-          val.get('requestid') === swapobj[0] &&
-          val.get('quoteid') === swapobj[1]
-      );
-      if (!e) {
-        requests.push(call(checkSwap, swapobj[0], swapobj[1]));
-      } else if (e.get('status') === 'pending') {
-        requests.push(call(checkSwap, swapobj[0], swapobj[1], true));
-      }
+    for (let idx = 0; idx < currentSwaps.size; idx++) {
+      const item = currentSwaps.get(idx);
+      requests.push(call(checkSwap, item));
     }
+    // const { swaps } = recentswapsResult;
+    // for (let i = 0; i < swaps.length; i += 1) {
+    //   const swapobj = swaps[i];
+    //   // eslint-disable-next-line no-await-in-loop
+    //   const e = swapsEntities.find(
+    //     val =>
+    //       val.get('requestid') === swapobj[0] &&
+    //       val.get('quoteid') === swapobj[1]
+    //   );
+    //   if (!e) {
+    //     requests.push(call(checkSwap, swapobj[0], swapobj[1]));
+    //   } else if (e.get('status') === 'pending') {
+    //     requests.push(call(checkSwap, swapobj[0], swapobj[1], true));
+    //   }
+    // }
     const data = yield all(requests);
     debug('load recent swaps process', data);
   } catch (err) {

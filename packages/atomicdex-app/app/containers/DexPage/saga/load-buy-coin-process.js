@@ -43,47 +43,7 @@ export default function* loadBuyCoinProcess({ payload, time = intervalTime }) {
       throw new Error('Not enough balance!');
     }
 
-    const isSplittingTheFund = false;
-    // const startTime = Date.now();
-
-    // while (true) {
-    // const durationTime = Date.now() - startTime;
-    // if (durationTime > 20 * 1000) {
-    //   debug('cancel');
-    //   yield cancel();
-    // }
-
-    // step five: get listunspent data
-    const unspent = yield call([api, 'listunspent'], {
-      coin: paymentcoin,
-      address: paymentsmartaddress
-    });
-
-    // if (unspent.length < 2) {
-    //   // splitting utxos
-    //   debug('splitting utxos');
-    //   if (!isSplittingTheFund) {
-    //     // FIXED ME: This is UI code. We should move it to somewhere else (react component).
-    //     swal(
-    //       'Splitting Procedure',
-    //       'You will need at least 2 UTXOs to perform your swap. We are trying to split it for you. Dont turn off the application.'
-    //     );
-    //     const buyparams = {
-    //       base: basecoin,
-    //       rel: paymentcoin,
-    //       relvolume: +relvolume.toFixed(8),
-    //       price: +price.get('bestPrice').toFixed(8)
-    //     };
-    //     const result = yield call([api, 'buy'], buyparams);
-
-    //     debug('UTXO autosplit TX INFO:', result);
-    //     if (result.error) {
-    //       throw new Error(result.error);
-    //     }
-    //     isSplittingTheFund = true;
-    //   }
-    // } else {
-    //   debug('ready to buy');
+    // step five: check balance
     const buyparams = {
       base: basecoin,
       rel: paymentcoin,
@@ -108,9 +68,7 @@ export default function* loadBuyCoinProcess({ payload, time = intervalTime }) {
       result.pending.alicesmartaddress = basesmartaddress;
       return yield put(loadBuyCoinSuccess(result.pending));
     }
-    // }
     yield call(delay, time);
-    // }
   } catch (err) {
     return yield put(loadBuyCoinError(err.message));
   } finally {

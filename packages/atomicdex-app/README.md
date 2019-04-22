@@ -1,5 +1,4 @@
 <h1 align="center">
-  <br>
   Atomic Decentralized Exchange 
   <br>
 </h1>
