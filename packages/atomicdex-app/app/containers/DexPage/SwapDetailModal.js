@@ -377,13 +377,15 @@ export class SwapDetail extends React.PureComponent<Props> {
             </Grid>
             <Grid item xs={12} className={classes.amountform__itemCenter}>
               <Typography variant="body2" gutterBottom>
-                Step {swap.get('sentflags').size + 1}
-                /6: {STATE_SWAPS[swap.get('sentflags').size]}
+                Step {swap.get('sentflags').size}/{STATE_SWAPS.length - 1}:{' '}
+                {STATE_SWAPS[swap.get('sentflags').size]}
               </Typography>
               <LinearProgress
                 color="primary"
                 variant="determinate"
-                value={swap.get('sentflags').size * 20}
+                value={
+                  (swap.get('sentflags').size * 100) / (STATE_SWAPS.length - 1)
+                }
               />
             </Grid>
             <Grid item xs={12} className={classes.amountform__itemCenter}>

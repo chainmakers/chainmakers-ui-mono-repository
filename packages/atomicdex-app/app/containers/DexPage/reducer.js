@@ -34,6 +34,11 @@ import {
   JOYRIDE_OPEN,
   JOYRIDE_CLOSE,
   STARTED_SWAPS_STATE,
+  TAKER_FEE_SENT_SWAPS_STATE,
+  MAKER_PAYMENT_RECEIVED_SWAPS_STATE,
+  TAKER_PAYMENT_SENT_SWAPS_STATE,
+  MAKER_PAYMENT_SPENT_SWAPS_STATE,
+  TAKER_PAYMENT_SPENT_SWAPS_STATE,
   FINISHED_SWAPS_STATE
 } from './constants';
 
@@ -239,11 +244,53 @@ export default handleActions(
           // first time enter this state
           entity = entity.set('expiration', entity.get('expiration') + 30 * 60); // + 30 mins
         }
+
+        if (event.type === TAKER_FEE_SENT_SWAPS_STATE) {
+          const { tx_hash } = event.data;
+          let myfee = entity.get('myfee');
+          myfee = myfee.set('tx', tx_hash);
+          myfee = myfee.set('coin', entity.get('alice'));
+          entity = entity.set('myfee', myfee);
+        }
+
+        if (event.type === MAKER_PAYMENT_RECEIVED_SWAPS_STATE) {
+          const { tx_hash } = event.data;
+          let bobdeposit = entity.get('bobdeposit');
+          bobdeposit = bobdeposit.set('tx', tx_hash);
+          bobdeposit = bobdeposit.set('coin', entity.get('bob'));
+          entity = entity.set('bobdeposit', bobdeposit);
+        }
+
+        if (event.type === TAKER_PAYMENT_SENT_SWAPS_STATE) {
+          const { tx_hash } = event.data;
+          let alicepayment = entity.get('alicepayment');
+          alicepayment = alicepayment.set('tx', tx_hash);
+          alicepayment = alicepayment.set('coin', entity.get('alice'));
+          entity = entity.set('alicepayment', alicepayment);
+        }
+
+        if (event.type === TAKER_PAYMENT_SPENT_SWAPS_STATE) {
+          const { tx_hash } = event.data[0];
+          let alicespend = entity.get('alicespend');
+          alicespend = alicespend.set('tx', tx_hash);
+          alicespend = alicespend.set('coin', entity.get('alice'));
+          entity = entity.set('alicespend', alicespend);
+        }
+
+        if (event.type === MAKER_PAYMENT_SPENT_SWAPS_STATE) {
+          const { tx_hash } = event.data;
+          let bobpayment = entity.get('bobpayment');
+          bobpayment = bobpayment.set('tx', tx_hash);
+          bobpayment = bobpayment.set('coin', entity.get('bob'));
+          entity = entity.set('bobpayment', bobpayment);
+        }
+
         if (event.type === FINISHED_SWAPS_STATE) {
           // first time enter this state
           processingList = processingList.filter(o => o !== uuid);
           finishedList = finishedList.push(uuid);
         }
+
         // update status
         if (entity.get('status') !== event.type) {
           entity = entity.set('status', event.type);
