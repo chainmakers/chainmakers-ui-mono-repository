@@ -28,7 +28,6 @@ import type { BuyCoinPayload } from '../schema';
 import {
   AUTO_HIDE_SNACKBAR_TIME,
   STATE_SWAPS,
-  SWAP_WARNING_MESSAGE,
   NA,
   DEXFEE,
   FINISHED_SWAPS_STATE
@@ -548,7 +547,9 @@ class AmountSection extends React.Component<Props, State> {
       <React.Fragment>
         <Grid item xs={12} className={classes.amountform__itemCenter}>
           <Typography gutterBottom className={classes.amountform__warning}>
-            {SWAP_WARNING_MESSAGE}
+            <FormattedMessage id="atomicapp.containers.DexPage.swap_warning_message">
+              {(...content) => content}
+            </FormattedMessage>
           </Typography>
         </Grid>
         <Grid item xs={6} className={classes.amountform__itemCenter}>
@@ -602,7 +603,9 @@ class AmountSection extends React.Component<Props, State> {
       <React.Fragment>
         <Grid item xs={12} className={classes.amountform__itemCenter}>
           <Typography gutterBottom className={classes.amountform__warning}>
-            {SWAP_WARNING_MESSAGE}
+            <FormattedMessage id="atomicapp.containers.DexPage.swap_warning_message">
+              {(...content) => content}
+            </FormattedMessage>
           </Typography>
         </Grid>
 

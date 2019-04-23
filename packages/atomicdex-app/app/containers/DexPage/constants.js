@@ -83,9 +83,6 @@ export const SELECT_COIN_MODAL_SETUP_SEARCH_API_ERROR =
 
 export const COIN_PAYMENT_SELECT = 'atomicapp/DexPage/COIN_PAYMENT_SELECT';
 
-export const SWAP_WARNING_MESSAGE =
-  "The swap is running, don't exit the application";
-
 export const NA = 'N/A';
 
 export const DEXFEE = 777;
