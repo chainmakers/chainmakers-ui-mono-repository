@@ -7,6 +7,14 @@ import ListItemText from '@material-ui/core/ListItemText';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { getMonth } from '../utils';
 import getCoinMemoize from '../../../components/CryptoIcons';
+import {
+  AUTO_HIDE_SNACKBAR_TIME,
+  STATE_SWAPS,
+  SWAP_WARNING_MESSAGE,
+  NA,
+  DEXFEE,
+  FINISHED_SWAPS_STATE
+} from '../constants';
 
 const debug = require('debug')(
   'atomicapp:containers:DexPage:TransactionRecord'
@@ -84,7 +92,9 @@ export class Transaction extends React.PureComponent<Props> {
           {getCoinMemoize(swap.get('bob'))}
           <ListItemText
             primary={swap.get('uuid')}
-            secondary={`Step ${swap.get('sentflags').size + 1}/6`}
+            secondary={`Step ${
+              swap.get('sentflags').size
+            }/${STATE_SWAPS.length - 1}`}
             className={classes.transactionRecord__ItemText}
           />
           <ListItemText
@@ -102,9 +112,10 @@ export class Transaction extends React.PureComponent<Props> {
           />
         </ListItem>
         <LinearProgress
+          color="primary"
           variant="determinate"
-          value={swap.get('sentflags').size * 20}
           className={classes.transactionRecord__linearProgress}
+          value={(swap.get('sentflags').size * 100) / (STATE_SWAPS.length - 1)}
         />
       </React.Fragment>
     );

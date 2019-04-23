@@ -231,17 +231,16 @@ export default handleActions(
         const { event } = events[i];
         // sentflags
         const sentf = entity.get('sentflags');
-        if (!sentf.find(value => value === event.type)) {
-          entity = entity.set('sentflags', sentf.push(event.type));
-        }
+
+        if (sentf.find(value => value === event.type)) continue;
+
         // expiration
         if (event.type === STARTED_SWAPS_STATE) {
-          entity = entity.set(
-            'expiration',
-            entity.get('expiration') + 4 * 60 * 60
-          ); // + 4 hours
+          // first time enter this state
+          entity = entity.set('expiration', entity.get('expiration') + 30 * 60); // + 30 mins
         }
         if (event.type === FINISHED_SWAPS_STATE) {
+          // first time enter this state
           processingList = processingList.filter(o => o !== uuid);
           finishedList = finishedList.push(uuid);
         }
@@ -249,9 +248,11 @@ export default handleActions(
         if (entity.get('status') !== event.type) {
           entity = entity.set('status', event.type);
         }
-      }
 
-      entities = entities.set(uuid, entity);
+        entity = entity.set('sentflags', sentf.push(event.type));
+
+        entities = entities.set(uuid, entity);
+      }
 
       return state
         .setIn(['swaps', 'processingList'], processingList)
