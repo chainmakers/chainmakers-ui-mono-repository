@@ -60,12 +60,12 @@ export default function* loadBuyCoinProcess({ payload, time = intervalTime }) {
       throw new Error(result.error);
     }
     if (result.pending) {
-      result.pending.bobsmartaddress = paymentsmartaddress;
+      result.pending.bobsmartaddress = basesmartaddress;
       result.pending.requested = {
         bobAmount: amount,
         aliceAmount: amount * price.get('bestPrice')
       };
-      result.pending.alicesmartaddress = basesmartaddress;
+      result.pending.alicesmartaddress = paymentsmartaddress;
       return yield put(loadBuyCoinSuccess(result.pending));
     }
     yield call(delay, time);
