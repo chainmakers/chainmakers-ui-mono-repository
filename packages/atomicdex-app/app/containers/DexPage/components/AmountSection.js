@@ -602,11 +602,13 @@ class AmountSection extends React.Component<Props, State> {
     return (
       <React.Fragment>
         <Grid item xs={12} className={classes.amountform__itemCenter}>
-          <Typography gutterBottom className={classes.amountform__warning}>
-            <FormattedMessage id="atomicapp.containers.DexPage.swap_warning_message">
-              {(...content) => content}
-            </FormattedMessage>
-          </Typography>
+          {swapsLoading && (
+            <Typography gutterBottom className={classes.amountform__warning}>
+              <FormattedMessage id="atomicapp.containers.DexPage.swap_warning_message">
+                {(...content) => content}
+              </FormattedMessage>
+            </Typography>
+          )}
         </Grid>
 
         <Grid item xs={6} className={classes.amountform__itemCenter}>

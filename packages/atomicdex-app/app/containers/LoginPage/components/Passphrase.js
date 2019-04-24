@@ -15,7 +15,9 @@ type IPassphraseProps = {
   className: string,
   passphrase: string,
   // eslint-disable-next-line flowtype/no-weak-types
-  onChange: Function
+  onChange: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  onKeyPress: Function
 };
 
 type IPassphraseState = {
@@ -40,7 +42,7 @@ export default class Passphrase extends React.PureComponent<
 
   render() {
     debug('render');
-    const { loading, className, passphrase, onChange } = this.props;
+    const { loading, className, passphrase, onChange, onKeyPress } = this.props;
     const { showPassword } = this.state;
 
     return (
@@ -52,6 +54,7 @@ export default class Passphrase extends React.PureComponent<
           type={showPassword ? 'text' : 'password'}
           value={passphrase}
           onChange={onChange}
+          onKeyPress={onKeyPress}
           endAdornment={
             <InputAdornment position="end">
               <IconButton

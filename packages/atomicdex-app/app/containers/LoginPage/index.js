@@ -122,8 +122,7 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
     }
   };
 
-  onLoginButtonClick = async (evt: SyntheticInputEvent<>) => {
-    evt.preventDefault();
+  login = () => {
     const { passphrase } = this.state;
     if (passphrase === '' || passphrase.length < 4) {
       return swal(
@@ -136,6 +135,18 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
     dispatchLogin({
       passphrase
     });
+  };
+
+  onLoginButtonClick = async (evt: SyntheticInputEvent<>) => {
+    evt.preventDefault();
+    this.login();
+  };
+
+  onKeyPress = (evt: SyntheticInputEvent<>) => {
+    evt.preventDefault();
+    if (evt.which === 13) {
+      this.login();
+    }
   };
 
   onChange = (evt: SyntheticInputEvent<>) => {
@@ -190,6 +201,7 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
               passphrase={passphrase}
               className={classes.loginContainer__item}
               onChange={this.onChange}
+              onKeyPress={this.onKeyPress}
             />
 
             <Button
