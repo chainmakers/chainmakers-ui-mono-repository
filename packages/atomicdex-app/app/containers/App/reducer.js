@@ -39,7 +39,9 @@ import {
   BALANCE_LOAD_SUCCESS,
   BALANCE_LOAD_ERROR,
   DATA_FROM_DB_LOAD_SUCCESS,
-  DATA_FROM_DB_LOAD_ERROR
+  DATA_FROM_DB_LOAD_ERROR,
+
+  DISABLE_COINS
 } from './constants';
 import type { ErrorType } from '../schema';
 import type {
@@ -58,15 +60,17 @@ function getSupportedCoins(data = COIN_DATA) {
     entities: {}
   };
   each(data, (e, k) => {
-    result.list.push(e.coin);
-    result.entities[e.coin] = Object.assign(
-      {
-        id: k,
-        marketcap: 0,
-        symbol: e.coin
-      },
-      e
-    );
+    if (DISABLE_COINS.indexOf(e.coin) === -1) {
+      result.list.push(e.coin);
+      result.entities[e.coin] = Object.assign(
+        {
+          id: k,
+          marketcap: 0,
+          symbol: e.coin
+        },
+        e
+      );
+    }
   });
   return result;
 }
@@ -82,11 +86,11 @@ export const initialState = fromJS({
     fetchStatus: {},
     errors: {},
     list: [
-      {
-        symbol: 'BTC',
-        status: ENABLE,
-        marketcap: 97822306639.0
-      },
+      // {
+      //   symbol: 'BTC',
+      //   status: ENABLE,
+      //   marketcap: 97822306639.0
+      // },
       {
         symbol: 'KMD',
         status: ENABLE,
@@ -94,12 +98,12 @@ export const initialState = fromJS({
       }
     ],
     entities: {
-      BTC: {
-        coin: 'BTC',
-        address: '',
-        balance: 0,
-        fee: 0
-      },
+      // BTC: {
+      //   coin: 'BTC',
+      //   address: '',
+      //   balance: 0,
+      //   fee: 0
+      // },
       KMD: {
         coin: 'KMD',
         address: '',
@@ -254,8 +258,14 @@ const appReducer = handleActions(
         .setIn(['marketmaker', 'state'], STATE_TERMINATED),
 
     [DATA_FROM_DB_LOAD_SUCCESS]: (state, { payload }) => {
+
+      const supportedCoinsList = state.getIn(['supported_coins', 'list']);
+
       for (let i = 0; i < payload.length; i += 1) {
         const coin = payload[i];
+        if (!supportedCoinsList.find(obj => obj === coin)) {
+          continue;
+        }
         // step one: update entities
         if (!state.hasIn(['balance', 'entities', coin]))
           state = state.setIn(

@@ -4,7 +4,7 @@
 import { put, select, cancelled } from 'redux-saga/effects';
 import { CANCEL } from 'redux-saga';
 import { ENABLE } from '../../../constants';
-import { BALANCE_LOAD } from '../constants';
+import { BALANCE_LOAD, DISABLE_COINS } from '../constants';
 import api from '../../../lib/barter-dex-api';
 import { openSnackbars } from '../../Snackbars/actions';
 import { makeSelectBalance } from '../selectors';
@@ -52,14 +52,16 @@ export function* handlingLoadBalance({
     });
     const balanceReponse = yield balanceRequest;
     const feeResponse = yield feeRequest;
-    yield put(
-      loadBalanceSuccess({
-        coin: payload.coin,
-        address: balanceReponse.address,
-        balance: balanceReponse.balance,
-        fee: feeResponse.txfee
-      })
-    );
+    if (DISABLE_COINS.indexOf(payload.coin) === -1) {
+      yield put(
+        loadBalanceSuccess({
+          coin: payload.coin,
+          address: balanceReponse.address,
+          balance: balanceReponse.balance,
+          fee: feeResponse.txfee
+        })
+      );
+    }
   } catch (err) {
     debug(`loading ${payload.coin} balance error: ${err.message}`);
     yield put(

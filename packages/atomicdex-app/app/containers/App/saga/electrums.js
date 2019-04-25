@@ -3,7 +3,7 @@ import { put, select, cancelled } from 'redux-saga/effects';
 import { CANCEL } from 'redux-saga';
 import api from '../../../lib/barter-dex-api';
 import { DISABLE } from '../../../constants';
-import { ELECTRUM_ADD } from '../constants';
+import { ELECTRUM_ADD, ALREADY_INIT_LIST } from '../constants';
 import {
   makeSelectBalance,
   makeSelectSupportedCoinsEntities
@@ -12,8 +12,6 @@ import { addElectrum, addElectrumSuccess, addElectrumError } from '../actions';
 import type { AddElectrumPayload } from '../schema';
 
 const debug = require('debug')('atomicapp:containers:App:saga:electrums');
-
-const ALREADY_INIT_LIST = ['BTC', 'KMD'];
 
 export default function* listenForLoadingElectrums() {
   debug(`load electrums server`);
@@ -29,7 +27,8 @@ export default function* listenForLoadingElectrums() {
   for (let i = 0; i < list.size; i += 1) {
     const coin = list.get(i);
     if (ALREADY_INIT_LIST.indexOf(coin) === -1) {
-      yield put(addElectrum(supportedCoinsEntities.get(coin).toJS()));
+      const config = supportedCoinsEntities.get(coin);
+      if (config && config.toJS) yield put(addElectrum(config.toJS()));
     }
   }
 }

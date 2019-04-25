@@ -270,7 +270,7 @@ export default handleActions(
         }
 
         if (event.type === TAKER_PAYMENT_SPENT_SWAPS_STATE) {
-          const { tx_hash } = event.data[0];
+          const { tx_hash } = event.data.transaction;
           let alicespend = entity.get('alicespend');
           alicespend = alicespend.set('tx', tx_hash);
           alicespend = alicespend.set('coin', entity.get('alice'));
