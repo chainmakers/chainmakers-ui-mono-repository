@@ -145,14 +145,12 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
   };
 
   onKeyPress = (evt: SyntheticInputEvent<>) => {
-    evt.preventDefault();
     if (evt.which === 13) {
       this.login();
     }
   };
 
   onChange = (evt: SyntheticInputEvent<>) => {
-    evt.preventDefault();
     const { value } = evt.target;
     this.setState({
       passphrase: value
