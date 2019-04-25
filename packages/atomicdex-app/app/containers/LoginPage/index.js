@@ -28,6 +28,8 @@ import {
 import { APP_STATE_NAME } from './constants';
 import LOGO from './logo.svg';
 
+const LOGO_SIZE = 120;
+
 // const styles = theme => ({
 const styles = () => ({
   loginContainer: {
@@ -53,8 +55,8 @@ const styles = () => ({
   loginContainer__logo: {
     margin: '14px auto 0px',
     position: 'relative',
-    height: 85,
-    width: 85,
+    height: LOGO_SIZE,
+    width: LOGO_SIZE,
     display: 'flex'
   },
 
@@ -174,8 +176,8 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
           {loading && <LinearProgress />}
           <LOGO
             className={classes.loginContainer__logo}
-            width="85"
-            height="85"
+            width={LOGO_SIZE}
+            height={LOGO_SIZE}
             viewBox="0 0 32 32"
             alt="logo"
           />
