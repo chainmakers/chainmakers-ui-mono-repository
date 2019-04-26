@@ -209,11 +209,15 @@ const data = [
     asset: 'PIZZA',
     txversion: 4,
     rpcport: 11608,
-    urls: ['electrum1.cipig.net:10024', 'electrum2.cipig.net:10024', 'electrum3.cipig.net:10024'],
+    urls: [
+      'electrum1.cipig.net:10024',
+      'electrum2.cipig.net:10024',
+      'electrum3.cipig.net:10024'
+    ],
     active: 0,
     market_cap: -2,
     mm2: 1
-  },
+  }
   // {
   //   coin: '$PAC',
   //   rpcport: 7111,

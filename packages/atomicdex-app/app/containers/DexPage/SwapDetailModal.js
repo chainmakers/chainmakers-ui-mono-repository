@@ -420,16 +420,18 @@ export class SwapDetail extends React.PureComponent<Props> {
                   <ListItemSecondaryAction
                     className={classes.swapDetail__ListItemRight}
                   >
-                    <a
-                      href={explorer.address(
-                        swap.get('alicesmartaddress'),
-                        swap.get('alice')
-                      )}
-                      onClick={this.openExplorer}
-                      className={classes.amountform__uuidlink}
-                    >
-                      {swap.get('alicesmartaddress')}
-                    </a>
+                    <Typography variant="caption">
+                      <a
+                        href={explorer.address(
+                          swap.get('alicesmartaddress'),
+                          swap.get('alice')
+                        )}
+                        onClick={this.openExplorer}
+                        className={classes.amountform__uuidlink}
+                      >
+                        {swap.get('alicesmartaddress')}
+                      </a>
+                    </Typography>
                   </ListItemSecondaryAction>
                 </ListItem>
                 <ListItem className={classes.swapDetail__listitem}>
@@ -443,16 +445,18 @@ export class SwapDetail extends React.PureComponent<Props> {
                   <ListItemSecondaryAction
                     className={classes.swapDetail__ListItemRight}
                   >
-                    <a
-                      href={explorer.address(
-                        swap.get('bobsmartaddress'),
-                        swap.get('bob')
-                      )}
-                      onClick={this.openExplorer}
-                      className={classes.amountform__uuidlink}
-                    >
-                      {swap.get('bobsmartaddress')}
-                    </a>
+                    <Typography variant="caption">
+                      <a
+                        href={explorer.address(
+                          swap.get('bobsmartaddress'),
+                          swap.get('bob')
+                        )}
+                        onClick={this.openExplorer}
+                        className={classes.amountform__uuidlink}
+                      >
+                        {swap.get('bobsmartaddress')}
+                      </a>
+                    </Typography>
                   </ListItemSecondaryAction>
                 </ListItem>
                 <Divider className={classes.swapDetail__divider} />

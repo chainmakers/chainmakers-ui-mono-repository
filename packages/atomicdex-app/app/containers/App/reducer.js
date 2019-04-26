@@ -40,7 +40,6 @@ import {
   BALANCE_LOAD_ERROR,
   DATA_FROM_DB_LOAD_SUCCESS,
   DATA_FROM_DB_LOAD_ERROR,
-
   DISABLE_COINS
 } from './constants';
 import type { ErrorType } from '../schema';
@@ -258,7 +257,6 @@ const appReducer = handleActions(
         .setIn(['marketmaker', 'state'], STATE_TERMINATED),
 
     [DATA_FROM_DB_LOAD_SUCCESS]: (state, { payload }) => {
-
       const supportedCoinsList = state.getIn(['supported_coins', 'list']);
 
       for (let i = 0; i < payload.length; i += 1) {
