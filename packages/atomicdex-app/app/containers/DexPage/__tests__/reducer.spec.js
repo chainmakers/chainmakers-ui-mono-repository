@@ -1,3 +1,4 @@
+import { cloneDeep, last } from 'lodash';
 import { fromJS } from 'immutable';
 import buyReducer, { initialState } from '../reducer';
 import {
@@ -27,14 +28,11 @@ import {
   WEBSOCKET_STATE_FIVE,
   WEBSOCKET_STATE_SIX,
   WEBSOCKET_STATE_SEVEN,
-  SWAP_STATE_ZERO,
-  SWAP_STATE_ONE,
-  SWAP_STATE_TWO,
-  SWAP_STATE_THREE,
-  SWAP_STATE_FOUR,
-  SWAP_STATE_FIVE
+  SWAP_STATE_ZERO
   // LOAD_SWAP_SUCCESS
 } from '../../__tests__/fake-data';
+import SWAP_STATE_TEN from '../../__tests__/swap-status.json';
+import BUY_STATE from '../../__tests__/buy.json';
 
 describe('containers/DexPage/reducers/initial', () => {
   it('should return the initial state', () => {
@@ -329,6 +327,40 @@ describe('containers/DexPage/reducers/loadRecentSwapsDataFromWebsocket', () => {
 
 describe('containers/DexPage/reducers/loadRecentSwapsCoin', () => {
   const {
+    result: { events }
+  } = SWAP_STATE_TEN;
+
+  const { length } = events;
+
+  const SWAP_STATE_NINE = cloneDeep(SWAP_STATE_TEN);
+  SWAP_STATE_NINE.result.events = events.slice(0, length - 1);
+  // console.log(JSON.stringify(SWAP_STATE_NINE), 'SWAP_STATE_NINE');
+
+  const SWAP_STATE_EIGHT = cloneDeep(SWAP_STATE_TEN);
+  SWAP_STATE_EIGHT.result.events = events.slice(0, length - 2);
+
+  const SWAP_STATE_SEVEN = cloneDeep(SWAP_STATE_TEN);
+  SWAP_STATE_SEVEN.result.events = events.slice(0, length - 3);
+
+  const SWAP_STATE_SIX = cloneDeep(SWAP_STATE_TEN);
+  SWAP_STATE_SIX.result.events = events.slice(0, length - 4);
+
+  const SWAP_STATE_FIVE = cloneDeep(SWAP_STATE_TEN);
+  SWAP_STATE_FIVE.result.events = events.slice(0, length - 5);
+
+  const SWAP_STATE_FOUR = cloneDeep(SWAP_STATE_TEN);
+  SWAP_STATE_FOUR.result.events = events.slice(0, length - 6);
+
+  const SWAP_STATE_THREE = cloneDeep(SWAP_STATE_TEN);
+  SWAP_STATE_THREE.result.events = events.slice(0, length - 7);
+
+  const SWAP_STATE_TWO = cloneDeep(SWAP_STATE_TEN);
+  SWAP_STATE_TWO.result.events = events.slice(0, length - 8);
+
+  const SWAP_STATE_ONE = cloneDeep(SWAP_STATE_TEN);
+  SWAP_STATE_ONE.result.events = events.slice(0, length - 9);
+
+  const {
     uuid,
     tradeid,
     requestid,
@@ -340,7 +372,7 @@ describe('containers/DexPage/reducers/loadRecentSwapsCoin', () => {
     relvalue,
     bobsmartaddress,
     alicesmartaddress
-  } = SWAP_STATE_ZERO;
+  } = BUY_STATE.pending;
   let store = initialState
     .setIn(['swaps', 'processingList'], fromJS([uuid]))
     .setIn(
@@ -387,22 +419,11 @@ describe('containers/DexPage/reducers/loadRecentSwapsCoin', () => {
   it('should handle the loadRecentSwapsCoin action correctly', () => {
     let entities = store.getIn(['swaps', 'entities']);
     let entity = entities.get(uuid);
-    const d1 = SWAP_STATE_ONE.txChain.find(e => e.stage === 'myfee');
+    let lastEvent = last(SWAP_STATE_ONE.result.events);
     entity = entity
-      .set('sentflags', fromJS(SWAP_STATE_ONE.sentflags))
-      .set('expiration', SWAP_STATE_ONE.expiration)
-      .set('requestid', SWAP_STATE_ONE.requestid)
-      .set('quoteid', SWAP_STATE_ONE.quoteid)
-      .set('bobamount', SWAP_STATE_ONE.srcamount)
-      .set('aliceamount', SWAP_STATE_ONE.destamount)
-      .set(
-        'myfee',
-        fromJS({
-          coin: d1.coin,
-          tx: d1.txid,
-          value: d1.amount
-        })
-      );
+      .set('sentflags', entity.get('sentflags').push(lastEvent.event.type))
+      .set('status', lastEvent.event.type)
+      .set('expiration', 1556258374);
     let expectedResult = store.setIn(
       ['swaps', 'entities'],
       entities.set(uuid, entity)
@@ -413,22 +434,10 @@ describe('containers/DexPage/reducers/loadRecentSwapsCoin', () => {
     store = expectedResult;
     entities = store.getIn(['swaps', 'entities']);
     entity = entities.get(uuid);
-    const d2 = SWAP_STATE_TWO.txChain.find(e => e.stage === 'bobdeposit');
+    lastEvent = last(SWAP_STATE_TWO.result.events);
     entity = entity
-      .set('sentflags', fromJS(SWAP_STATE_TWO.sentflags))
-      .set('expiration', SWAP_STATE_TWO.expiration)
-      .set('requestid', SWAP_STATE_TWO.requestid)
-      .set('quoteid', SWAP_STATE_TWO.quoteid)
-      .set('bobamount', SWAP_STATE_TWO.srcamount)
-      .set('aliceamount', SWAP_STATE_TWO.destamount)
-      .set(
-        'bobdeposit',
-        fromJS({
-          coin: d2.coin,
-          tx: d2.txid,
-          value: d2.amount
-        })
-      );
+      .set('sentflags', entity.get('sentflags').push(lastEvent.event.type))
+      .set('status', lastEvent.event.type);
     expectedResult = store.setIn(
       ['swaps', 'entities'],
       entities.set(uuid, entity)
@@ -438,6 +447,250 @@ describe('containers/DexPage/reducers/loadRecentSwapsCoin', () => {
     store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_ONE));
     expect(store).toEqual(expectedResult);
 
+    store = expectedResult;
+    entities = store.getIn(['swaps', 'entities']);
+    entity = entities.get(uuid);
+    lastEvent = last(SWAP_STATE_THREE.result.events);
+    entity = entity
+      .set('sentflags', entity.get('sentflags').push(lastEvent.event.type))
+      .set('status', lastEvent.event.type)
+      .set(
+        'myfee',
+        fromJS({
+          coin: entity.get('alice'),
+          tx: lastEvent.event.data.tx_hash,
+          value: 0
+        })
+      );
+    expectedResult = store.setIn(
+      ['swaps', 'entities'],
+      entities.set(uuid, entity)
+    );
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_THREE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_ONE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_TWO));
+    expect(store).toEqual(expectedResult);
+
+    store = expectedResult;
+    entities = store.getIn(['swaps', 'entities']);
+    entity = entities.get(uuid);
+    lastEvent = last(SWAP_STATE_FOUR.result.events);
+    entity = entity
+      .set('sentflags', entity.get('sentflags').push(lastEvent.event.type))
+      .set('status', lastEvent.event.type)
+      .set(
+        'bobdeposit',
+        fromJS({
+          coin: entity.get('bob'),
+          tx: lastEvent.event.data.tx_hash,
+          value: 0
+        })
+      );
+    expectedResult = store.setIn(
+      ['swaps', 'entities'],
+      entities.set(uuid, entity)
+    );
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_FOUR));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_THREE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_ONE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_TWO));
+    expect(store).toEqual(expectedResult);
+
+    store = expectedResult;
+    entities = store.getIn(['swaps', 'entities']);
+    entity = entities.get(uuid);
+    lastEvent = last(SWAP_STATE_FIVE.result.events);
+    entity = entity
+      .set('sentflags', entity.get('sentflags').push(lastEvent.event.type))
+      .set('status', lastEvent.event.type);
+    expectedResult = store.setIn(
+      ['swaps', 'entities'],
+      entities.set(uuid, entity)
+    );
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_FIVE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_FOUR));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_THREE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_ONE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_TWO));
+    expect(store).toEqual(expectedResult);
+
+    store = expectedResult;
+    entities = store.getIn(['swaps', 'entities']);
+    entity = entities.get(uuid);
+    lastEvent = last(SWAP_STATE_SIX.result.events);
+    entity = entity
+      .set('sentflags', entity.get('sentflags').push(lastEvent.event.type))
+      .set('status', lastEvent.event.type);
+    expectedResult = store.setIn(
+      ['swaps', 'entities'],
+      entities.set(uuid, entity)
+    );
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_SIX));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_FIVE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_FOUR));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_THREE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_ONE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_TWO));
+    expect(store).toEqual(expectedResult);
+
+    store = expectedResult;
+    entities = store.getIn(['swaps', 'entities']);
+    entity = entities.get(uuid);
+    lastEvent = last(SWAP_STATE_SEVEN.result.events);
+    entity = entity
+      .set('sentflags', entity.get('sentflags').push(lastEvent.event.type))
+      .set('status', lastEvent.event.type)
+      .set(
+        'alicepayment',
+        fromJS({
+          coin: entity.get('alice'),
+          tx: lastEvent.event.data.tx_hash,
+          value: 0
+        })
+      );
+    expectedResult = store.setIn(
+      ['swaps', 'entities'],
+      entities.set(uuid, entity)
+    );
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_SEVEN));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_SIX));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_FIVE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_FOUR));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_THREE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_ONE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_TWO));
+    expect(store).toEqual(expectedResult);
+
+    store = expectedResult;
+    entities = store.getIn(['swaps', 'entities']);
+    entity = entities.get(uuid);
+    lastEvent = last(SWAP_STATE_EIGHT.result.events);
+    entity = entity
+      .set('sentflags', entity.get('sentflags').push(lastEvent.event.type))
+      .set('status', lastEvent.event.type)
+      .set(
+        'alicespend',
+        fromJS({
+          coin: entity.get('alice'),
+          tx: lastEvent.event.data.transaction.tx_hash,
+          value: 0
+        })
+      );
+
+    expectedResult = store.setIn(
+      ['swaps', 'entities'],
+      entities.set(uuid, entity)
+    );
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_EIGHT));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_SEVEN));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_SIX));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_FIVE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_FOUR));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_THREE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_ONE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_TWO));
+    expect(store).toEqual(expectedResult);
+
+    store = expectedResult;
+    entities = store.getIn(['swaps', 'entities']);
+    entity = entities.get(uuid);
+    lastEvent = last(SWAP_STATE_NINE.result.events);
+    entity = entity
+      .set('sentflags', entity.get('sentflags').push(lastEvent.event.type))
+      .set('status', lastEvent.event.type)
+      .set(
+        'bobpayment',
+        fromJS({
+          coin: entity.get('bob'),
+          tx: lastEvent.event.data.tx_hash,
+          value: 0
+        })
+      );
+
+    expectedResult = store.setIn(
+      ['swaps', 'entities'],
+      entities.set(uuid, entity)
+    );
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_NINE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_EIGHT));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_SEVEN));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_SIX));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_FIVE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_FOUR));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_THREE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_ONE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_TWO));
+    expect(store).toEqual(expectedResult);
+
+    store = expectedResult;
+    entities = store.getIn(['swaps', 'entities']);
+    entity = entities.get(uuid);
+    lastEvent = last(SWAP_STATE_TEN.result.events);
+    entity = entity
+      .set('sentflags', entity.get('sentflags').push(lastEvent.event.type))
+      .set('status', lastEvent.event.type);
+
+    expectedResult = store
+      .setIn(['swaps', 'entities'], entities.set(uuid, entity))
+      .setIn(['swaps', 'processingList'], fromJS([]))
+      .setIn(['swaps', 'finishedList'], fromJS([uuid]));
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_TEN));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_NINE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_EIGHT));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_SEVEN));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_SIX));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_FIVE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_FOUR));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_THREE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_ONE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_TWO));
+    expect(store).toEqual(expectedResult);
+
+    /**
     store = expectedResult;
     entities = store.getIn(['swaps', 'entities']);
     entity = entities.get(uuid);
@@ -534,6 +787,7 @@ describe('containers/DexPage/reducers/loadRecentSwapsCoin', () => {
     expect(store).toEqual(expectedResult);
     store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_TWO));
     expect(store).toEqual(expectedResult);
+    */
   });
 });
 

@@ -219,11 +219,6 @@ export default handleActions(
       const {
         result: { events, uuid }
       } = payload;
-      // const {
-      //   uuid,
-      //   event: { type }
-      // } = payload;
-
       // step one: update list
       let processingList = state.getIn(['swaps', 'processingList']);
       let finishedList = state.getIn(['swaps', 'finishedList']);

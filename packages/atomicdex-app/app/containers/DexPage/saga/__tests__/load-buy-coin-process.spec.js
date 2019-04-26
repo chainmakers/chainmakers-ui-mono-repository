@@ -21,6 +21,7 @@ const TIMEOUT = 20 * 1000;
 
 describe('containers/DexPage/saga/load-buy-coin-process', () => {
   api.setUserpass('userpass');
+
   // Scenario: Normal swap
   it(
     'should handle loadBuyCoinProcess correctly',
@@ -78,6 +79,8 @@ describe('containers/DexPage/saga/load-buy-coin-process', () => {
     },
     TIMEOUT
   );
+  /**
+  NOTE: IN NEW MM2, WE NO NEED AUTO SPLITTING STUFF
   // Scenario: Auto splitting
   it(
     'should handle loadBuyCoinProcess correctly (Auto splitting)',
@@ -141,69 +144,69 @@ describe('containers/DexPage/saga/load-buy-coin-process', () => {
     },
     TIMEOUT
   );
-
+  */
   // Scenario: Cant find a deposit that is close enough in size
-  it(
-    'should dispatch appropriate error when handle loadBuyCoinProcess',
-    async done => {
-      let listunspentstep = 0;
-      let buystep = 0;
-      nock(TEST_URL)
-        .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-        .persist()
-        .post('/', () => true)
-        .reply(200, (uri, body, cb) => {
-          const { method } = JSON.parse(body);
+  // it(
+  //   'should dispatch appropriate error when handle loadBuyCoinProcess',
+  //   async done => {
+  //     let listunspentstep = 0;
+  //     let buystep = 0;
+  //     nock(TEST_URL)
+  //       .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
+  //       .persist()
+  //       .post('/', () => true)
+  //       .reply(200, (uri, body, cb) => {
+  //         const { method } = JSON.parse(body);
 
-          if (method === 'listunspent' && listunspentstep === 0) {
-            listunspentstep = 1;
-            cb(null, listunspentstep1);
-          } else if (method === 'listunspent' && listunspentstep === 1) {
-            listunspentstep = 2;
-            cb(null, listunspentstep2);
-          }
+  //         if (method === 'listunspent' && listunspentstep === 0) {
+  //           listunspentstep = 1;
+  //           cb(null, listunspentstep1);
+  //         } else if (method === 'listunspent' && listunspentstep === 1) {
+  //           listunspentstep = 2;
+  //           cb(null, listunspentstep2);
+  //         }
 
-          if (method === 'buy' && buystep === 0) {
-            buystep = 1;
-            cb(null, buy1);
-          } else if (method === 'buy' && buystep === 1) {
-            buystep = 2;
-            cb(null, buyAppropriateError);
-          }
-        });
+  //         if (method === 'buy' && buystep === 0) {
+  //           buystep = 1;
+  //           cb(null, buy1);
+  //         } else if (method === 'buy' && buystep === 1) {
+  //           buystep = 2;
+  //           cb(null, buyAppropriateError);
+  //         }
+  //       });
 
-      const dispatched = [];
+  //     const dispatched = [];
 
-      const saga = await runSaga(
-        {
-          dispatch: action => dispatched.push(action),
-          getState: () => fromJS(data)
-        },
-        loadBuyCoinProcess,
-        {
-          payload: {
-            basecoin: 'COQUI',
-            paymentcoin: 'BEER',
-            amount: 10
-          },
-          time: 0
-        }
-      ).done;
+  //     const saga = await runSaga(
+  //       {
+  //         dispatch: action => dispatched.push(action),
+  //         getState: () => fromJS(data)
+  //       },
+  //       loadBuyCoinProcess,
+  //       {
+  //         payload: {
+  //           basecoin: 'COQUI',
+  //           paymentcoin: 'BEER',
+  //           amount: 10
+  //         },
+  //         time: 0
+  //       }
+  //     ).done;
 
-      expect(saga).toEqual(1);
-      expect(dispatched).toEqual([
-        {
-          error: {
-            message: 'Please try a different amount to pay (1/2 or 2x)'
-          },
-          type: 'atomicapp/DexPage/LOAD_BUY_COIN_ERROR'
-        }
-      ]);
+  //     expect(saga).toEqual(1);
+  //     expect(dispatched).toEqual([
+  //       {
+  //         error: {
+  //           message: 'Please try a different amount to pay (1/2 or 2x)'
+  //         },
+  //         type: 'atomicapp/DexPage/LOAD_BUY_COIN_ERROR'
+  //       }
+  //     ]);
 
-      nock.cleanAll();
-      nock.enableNetConnect();
-      done();
-    },
-    TIMEOUT
-  );
+  //     nock.cleanAll();
+  //     nock.enableNetConnect();
+  //     done();
+  //   },
+  //   TIMEOUT
+  // );
 });

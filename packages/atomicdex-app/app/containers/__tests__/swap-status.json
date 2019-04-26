@@ -1,0 +1,157 @@
+{
+	"result": {
+		"error_events": ["StartFailed", "NegotiateFailed", "TakerFeeSendFailed", "MakerPaymentValidateFailed", "TakerPaymentTransactionFailed", "TakerPaymentDataSendFailed", "TakerPaymentWaitForSpendFailed", "MakerPaymentSpendFailed", "TakerPaymentRefunded", "TakerPaymentRefundFailed"],
+		"events": [{
+			"event": {
+				"data": {
+					"lock_duration": 7800,
+					"maker": "9f8491f430a938757c5ac9d23b29651a03de10f8612c9d8f87c0a625603f950d",
+					"maker_amount": 20000000,
+					"maker_coin": "COQUI",
+					"maker_payment_confirmations": 1,
+					"maker_payment_wait": 1556259148,
+					"my_persistent_pub": "02471f64357636038d6db76677369f3995bbaf4531bf39a919286ca36f1a680002",
+					"started_at": 1556256548,
+					"taker_amount": 50000000,
+					"taker_coin": "BEER",
+					"taker_payment_confirmations": 1,
+					"taker_payment_lock": 1556264348,
+					"uuid": "20d193cdc0e91a74f6107408572dc084a730b7f85db19529284a5541c3cee1c4"
+				},
+				"type": "Started"
+			},
+			"timestamp": 1556256548825
+		}, {
+			"event": {
+				"data": {
+					"maker_payment_locktime": 1556272147,
+					"maker_pubkey": "03171bf8c5dddb31488f8e02419ed38370487c4a1dc4adeed4c7b757432d183dbd",
+					"secret_hash": "6f469eb8927869fd1cfd109ee4c7ffda8a55d3d8"
+				},
+				"type": "Negotiated"
+			},
+			"timestamp": 1556256609850
+		}, {
+			"event": {
+				"data": {
+					"block_height": 0,
+					"coin": "BEER",
+					"fee_details": {
+						"amount": 0.00001
+					},
+					"from": ["RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu"],
+					"my_balance_change": -0.0006535,
+					"received_by_me": 21.89780407,
+					"spent_by_me": 21.89845757,
+					"to": ["RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu", "RThtXup6Zo7LZAi8kRWgjAyi1s4u6U9Cpf"],
+					"total_amount": 21.89845757,
+					"tx_hash": "bbb42f123e3306fb539ccc32c0b4cf3fa50dd35f5d6c1aa2bf47527cce92d450",
+					"tx_hex": "0400008085202f8901432871cba7a8f5775f43a011ff42b6e5ab8ae88236682a2d6c334aebb53b6990010000006a4730440220677d8db6b85483cdc1457b3b326fcb29150d419eb69277dc2d1e5ed2ff66293b0220542c56492a60efb7416860efcea3bbb76c29ccb80998e415f332f1ae1694bfad012102471f64357636038d6db76677369f3995bbaf4531bf39a919286ca36f1a680002ffffffff025efb0000000000001976a914ca1e04745e8ca0c60d8c5881531d51bec470743f88acb7658582000000001976a914b1cc1a6fe678e98fda7572a76679363dcfad6a8f88ac00000000000000000000000000000000000000"
+				},
+				"type": "TakerFeeSent"
+			},
+			"timestamp": 1556256613030
+		}, {
+			"event": {
+				"data": {
+					"block_height": 0,
+					"coin": "COQUI",
+					"fee_details": {
+						"amount": 0.00001
+					},
+					"from": ["RT6NtDUy9QEpXyHpKAthxHY8wH5Z9AKMGj"],
+					"my_balance_change": 0.0,
+					"received_by_me": 0.0,
+					"spent_by_me": 0.0,
+					"to": ["RT6NtDUy9QEpXyHpKAthxHY8wH5Z9AKMGj", "bFpS6aoBbRBz1doct65jv8YD1xoA6kGUjA"],
+					"total_amount": 40.30993,
+					"tx_hash": "2b675443f98545946483c2fa0d220b77f6ca572adc795ef24e2af29732b1edef",
+					"tx_hex": "0400008085202f8901299afbab9c29ba32ed942904f3039255e37ef2fb890e14ba969071a78c7a3c84010000006a473044022066328fd6332552e19dd64c094a1f9777f5ddd6b96dee4b64ac6cd33ff4d4e6d7022048a6cf3b13f128a0c56ae32272aa9d80446484485d4b3c1dd743132d0fae14c0012103171bf8c5dddb31488f8e02419ed38370487c4a1dc4adeed4c7b757432d183dbdffffffff02002d31010000000017a91421e24e5b8105522828bb3e129c7c104a3d46739e8780e112ef000000001976a914c366b54ea90b8d77e7b1d6cc304f04b5c24a512988ac00000000000000000000000000000000000000"
+				},
+				"type": "MakerPaymentReceived"
+			},
+			"timestamp": 1556256653779
+		}, {
+			"event": {
+				"type": "MakerPaymentWaitConfirmStarted"
+			},
+			"timestamp": 1556256653780
+		}, {
+			"event": {
+				"type": "MakerPaymentValidatedAndConfirmed"
+			},
+			"timestamp": 1556256674575
+		}, {
+			"event": {
+				"data": {
+					"block_height": 0,
+					"coin": "BEER",
+					"fee_details": {
+						"amount": 0.00001
+					},
+					"from": ["RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu"],
+					"my_balance_change": -0.50001,
+					"received_by_me": 21.39779407,
+					"spent_by_me": 21.89780407,
+					"to": ["RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu", "bJc195WQt84vcPSJ5WFu9ebvqTZ52pyT7L"],
+					"total_amount": 21.89780407,
+					"tx_hash": "e47f43a30b02471fcdda8fe53c9cabad587155914b385a2132b4d3442afa63a9",
+					"tx_hex": "0400008085202f890150d492ce7c5247bfa21a6c5d5fd30da53fcfb4c032cc9c53fb06333e122fb4bb010000006b4830450221008c360d579200bc7ef15bf358d5b3fe47da250a325710692d9a921ca2e04d5ed20220708fb9a48572f6cbdd2dc5313664cffcad99e8767d4d085b88d1f222cb834742012102471f64357636038d6db76677369f3995bbaf4531bf39a919286ca36f1a680002ffffffff0280f0fa020000000017a9144070dbddd6ddaf431eb29c55f302c92b848dca6e874f718a7f000000001976a914b1cc1a6fe678e98fda7572a76679363dcfad6a8f88ac00000000000000000000000000000000000000"
+				},
+				"type": "TakerPaymentSent"
+			},
+			"timestamp": 1556256677791
+		}, {
+			"event": {
+				"data": {
+					"secret": "ef22f1f87823d3d88198410144f8463ea6feb29fa98e562075de64be56fda6dd",
+					"transaction": {
+						"block_height": 0,
+						"coin": "BEER",
+						"fee_details": {
+							"amount": 0.00001
+						},
+						"from": ["bJc195WQt84vcPSJ5WFu9ebvqTZ52pyT7L"],
+						"my_balance_change": 0.0,
+						"received_by_me": 0.0,
+						"spent_by_me": 0.0,
+						"to": ["RT6NtDUy9QEpXyHpKAthxHY8wH5Z9AKMGj"],
+						"total_amount": 0.5,
+						"tx_hash": "aa841f375634ad84717220da97a80176b89425c1a50aa9415fedae40d00affc5",
+						"tx_hex": "0400008085202f8901a963fa2a44d3b432215a384b91557158adab9c3ce58fdacd1f47020ba3437fe400000000d747304402207e4372b33358162dd7e18e7b5474e5aa8f99e7d4bf1fe942f3e3669c96e571b002200c8ccd5c7ab3de2614e5e4ebaec6f8eb25ea7b0091d4108924813872c1ee6fb70120ef22f1f87823d3d88198410144f8463ea6feb29fa98e562075de64be56fda6dd004c6b63049cb5c25cb1752102471f64357636038d6db76677369f3995bbaf4531bf39a919286ca36f1a680002ac6782012088a9146f469eb8927869fd1cfd109ee4c7ffda8a55d3d8882103171bf8c5dddb31488f8e02419ed38370487c4a1dc4adeed4c7b757432d183dbdac68ffffffff0198ecfa02000000001976a914c366b54ea90b8d77e7b1d6cc304f04b5c24a512988ac1398c25c000000000000000000000000000000"
+					}
+				},
+				"type": "TakerPaymentSpent"
+			},
+			"timestamp": 1556256801181
+		}, {
+			"event": {
+				"data": {
+					"block_height": 0,
+					"coin": "COQUI",
+					"fee_details": {
+						"amount": 0.00001
+					},
+					"from": ["bFpS6aoBbRBz1doct65jv8YD1xoA6kGUjA"],
+					"my_balance_change": 0.19999,
+					"received_by_me": 0.19999,
+					"spent_by_me": 0.0,
+					"to": ["RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu"],
+					"total_amount": 0.2,
+					"tx_hash": "a244d7b309c24a48c601b2e9345d25df8965cd134d1a64504e60d3d3b38e18d1",
+					"tx_hex": "0400008085202f8901efedb13297f22a4ef25e79dc2a57caf6770b220dfac28364944585f94354672b00000000d8483045022100d0d2aabaa4765d642b77df9004109912df818f49716e2da6705f66f2b553a24702200b038ac6bcf2fc2734e4411df06b3e4a77ab132345fdcad343bfcf80734d45db0120ef22f1f87823d3d88198410144f8463ea6feb29fa98e562075de64be56fda6dd004c6b630413d4c25cb1752103171bf8c5dddb31488f8e02419ed38370487c4a1dc4adeed4c7b757432d183dbdac6782012088a9146f469eb8927869fd1cfd109ee4c7ffda8a55d3d8882102471f64357636038d6db76677369f3995bbaf4531bf39a919286ca36f1a680002ac68ffffffff0118293101000000001976a914b1cc1a6fe678e98fda7572a76679363dcfad6a8f88ac2198c25c000000000000000000000000000000"
+				},
+				"type": "MakerPaymentSpent"
+			},
+			"timestamp": 1556256802985
+		}, {
+			"event": {
+				"type": "Finished"
+			},
+			"timestamp": 1556256802999
+		}],
+		"success_events": ["Started", "Negotiated", "TakerFeeSent", "MakerPaymentReceived", "MakerPaymentWaitConfirmStarted", "MakerPaymentValidatedAndConfirmed", "TakerPaymentSent", "TakerPaymentSpent", "MakerPaymentSpent", "Finished"],
+		"type": "Taker",
+		"uuid": "20d193cdc0e91a74f6107408572dc084a730b7f85db19529284a5541c3cee1c4"
+	}
+}
