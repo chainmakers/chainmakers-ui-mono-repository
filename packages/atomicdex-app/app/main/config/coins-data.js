@@ -217,7 +217,7 @@ const data = [
     active: 0,
     market_cap: -2,
     mm2: 1
-  }
+  },
   // {
   //   coin: '$PAC',
   //   rpcport: 7111,
@@ -1015,24 +1015,24 @@ const data = [
   //   rpcport: 80,
   //   mm2: 1
   // },
-  // {
-  //   coin: 'GAME',
-  //   rpcport: 40001,
-  //   pubtype: 38,
-  //   p2shtype: 5,
-  //   wiftype: 166,
-  //   txfee: 1000000,
-  //   urls: [
-  //     'electrum1.cipig.net:10072',
-  //     'electrum2.cipig.net:10072',
-  //     'electrum3.cipig.net:10072'
-  //   ],
-  //   name: 'GameCredits',
-  //   asset: 'GAME',
-  //   active: 0,
-  //   market_cap: 0,
-  //   mm2: 1
-  // },
+  {
+    coin: 'GAME',
+    rpcport: 40001,
+    pubtype: 38,
+    p2shtype: 5,
+    wiftype: 166,
+    txfee: 1000000,
+    urls: [
+      'electrum1.cipig.net:10072',
+      'electrum2.cipig.net:10072',
+      'electrum3.cipig.net:10072'
+    ],
+    name: 'GameCredits',
+    asset: 'GAME',
+    active: 0,
+    market_cap: 0,
+    mm2: 1
+  },
   // {
   //   coin: 'GBX',
   //   rpcport: 12454,
