@@ -103,21 +103,21 @@ const data = [
   //   market_cap: 1609044,
   //   mm2: 1
   // },
-  // {
-  //   coin: 'KMDICE',
-  //   name: 'KMDice',
-  //   asset: 'KMDice',
-  //   txversion: 4,
-  //   urls: [
-  //     'electrum1.cipig.net:10031',
-  //     'electrum2.cipig.net:10031',
-  //     'electrum3.cipig.net:10031'
-  //   ],
-  //   rpcport: 30177,
-  //   active: 0,
-  //   market_cap: 0,
-  //   mm2: 1
-  // },
+  {
+    coin: 'KMDICE',
+    name: 'KMDice',
+    asset: 'KMDice',
+    txversion: 4,
+    urls: [
+      'electrum1.cipig.net:10031',
+      'electrum2.cipig.net:10031',
+      'electrum3.cipig.net:10031'
+    ],
+    rpcport: 30177,
+    active: 0,
+    market_cap: 0,
+    mm2: 1
+  },
   {
     coin: 'CHAIN',
     name: 'Chainmakers',
