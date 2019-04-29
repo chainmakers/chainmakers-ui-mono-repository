@@ -230,6 +230,11 @@ class Asset extends React.PureComponent<IAssetProps> {
               ? error.get('message')
               : `${entity.get('balance')} ${symbol}`}
           </Typography>
+          {/* <Typography variant="body1" gutterBottom style={{
+            color: 'rgba(0, 0, 0, 0.54)'
+          }}>
+            98,765.23 USD
+          </Typography> */}
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
           {this.renderActions()}

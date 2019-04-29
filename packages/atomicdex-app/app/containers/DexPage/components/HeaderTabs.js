@@ -23,15 +23,17 @@ const styles = theme => ({
   },
 
   buyTabs__badge: {
-    top: 0,
-    right: -10,
     // The border color match the background color.
     border: `2px solid ${
       theme.palette.type === 'light'
         ? theme.palette.grey[200]
         : theme.palette.grey[900]
     }`
-  }
+  },
+
+  buyTabs__tablabel: {
+    padding: `0 ${theme.spacing.unit * 2}px`,
+  },
 });
 
 type Props = {
@@ -69,6 +71,7 @@ class HeaderTabs extends React.PureComponent<Props> {
               <Badge
                 color="secondary"
                 badgeContent={size}
+                className={classes.buyTabs__tablabel}
                 classes={{ badge: classes.buyTabs__badge }}
               >
                 My Orders
