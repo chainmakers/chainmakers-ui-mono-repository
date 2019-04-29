@@ -133,26 +133,26 @@ const data = [
     market_cap: 0,
     mm2: 1
   },
-  // {
-  //   coin: 'BCH',
-  //   name: 'Bitcoin Cash',
-  //   asset: 'bch',
-  //   txversion: 4,
-  //   urls: [
-  //     'bch.imaginary.cash:50001',
-  //     'electroncash.dk:50001',
-  //     'electrum.imaginary.cash:50001',
-  //     'abc1.hsmiths.com:60001'
-  //   ],
-  //   rpcport: 33333,
-  //   pubtype: 0,
-  //   p2shtype: 5,
-  //   wiftype: 128,
-  //   txfee: 1000,
-  //   active: 0,
-  //   market_cap: 2197468013,
-  //   mm2: 1
-  // },
+  {
+    coin: 'BCH',
+    name: 'Bitcoin Cash',
+    asset: 'bch',
+    txversion: 4,
+    urls: [
+      'bch.imaginary.cash:50001',
+      // 'electroncash.dk:50001',
+      // 'electrum.imaginary.cash:50001',
+      // 'abc1.hsmiths.com:60001'
+    ],
+    rpcport: 33333,
+    pubtype: 0,
+    p2shtype: 5,
+    wiftype: 128,
+    txfee: 1000,
+    active: 0,
+    market_cap: 2197468013,
+    mm2: 1
+  },
   // {
   //   coin: 'QTUM',
   //   name: 'Qtum',
