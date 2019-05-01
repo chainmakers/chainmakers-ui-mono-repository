@@ -32,8 +32,8 @@ const styles = theme => ({
   },
 
   buyTabs__tablabel: {
-    padding: `0 ${theme.spacing.unit * 2}px`,
-  },
+    padding: `0 ${theme.spacing.unit * 2}px`
+  }
 });
 
 type Props = {

@@ -139,7 +139,7 @@ const data = [
     asset: 'bch',
     txversion: 4,
     urls: [
-      'bch.imaginary.cash:50001',
+      'bch.imaginary.cash:50001'
       // 'electroncash.dk:50001',
       // 'electrum.imaginary.cash:50001',
       // 'abc1.hsmiths.com:60001'
@@ -1032,7 +1032,7 @@ const data = [
     active: 0,
     market_cap: 0,
     mm2: 1
-  },
+  }
   // {
   //   coin: 'GBX',
   //   rpcport: 12454,

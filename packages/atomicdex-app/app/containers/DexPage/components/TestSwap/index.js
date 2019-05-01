@@ -9,9 +9,7 @@ import {
   loadBuyCoinSuccess,
   loadRecentSwapsCoin
 } from '../../actions';
-import {
-  LOAD_SWAP_SUCCESS
-} from '../../../__tests__/fake-data';
+import { LOAD_SWAP_SUCCESS } from '../../../__tests__/fake-data';
 // import type { BuyCoinPayload } from '../../schema';
 import SWAP_STATE_TEN from '../../../__tests__/swap-status.json';
 import SWAP_STATE_ZERO from '../../../__tests__/buy.json';
