@@ -20,9 +20,7 @@ describe('containers/WalletPage/<ProgressBar />', () => {
       <ProgressBar transactionsLoading assetLoading classes={classes} />
     );
     expect(renderedComponent.type()).toEqual(LinearProgress);
-    renderedComponent = shallow(
-      <ProgressBar assetLoading classes={classes} />
-    );
+    renderedComponent = shallow(<ProgressBar assetLoading classes={classes} />);
     expect(renderedComponent.type()).toEqual(LinearProgress);
     renderedComponent = shallow(
       <ProgressBar transactionsLoading classes={classes} />

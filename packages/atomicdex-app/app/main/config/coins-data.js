@@ -5,15 +5,15 @@
 // https://github.com/jl777/coins/blob/master/coins
 
 const data = [
-  // {
-  //   coin: 'BTC',
-  //   name: 'Bitcoin',
-  //   asset: 'BTC',
-  //   urls: ['electrum1.cipig.net:10000', 'electrum2.cipig.net:10000'],
-  //   active: 1,
-  //   market_cap: 97822306639,
-  //   mm2: 1
-  // },
+  {
+    coin: 'BTC',
+    name: 'Bitcoin',
+    asset: 'BTC',
+    urls: ['electrum1.cipig.net:10000', 'electrum2.cipig.net:10000'],
+    active: 1,
+    market_cap: 97822306639,
+    mm2: 1
+  },
   {
     coin: 'KMD',
     name: 'Komodo',

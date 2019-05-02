@@ -96,7 +96,6 @@ export function* checkSwap(swap, isPending) {
 export function* loadRecentSwapsProcess() {
   try {
     const recentswapsResult = yield call([api, 'recentswaps']);
-    console.log(recentswapsResult, 'recentswapsResult');
 
     const swapsEntities = yield select(makeSelectSwapsEntities());
     const currentSwaps = yield select(makeSelectCurrentSwaps());

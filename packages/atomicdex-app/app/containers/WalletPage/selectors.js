@@ -104,14 +104,12 @@ export {
   makeSelectTransactionsQueueids,
   makeSelectTransactionsCoins,
   makeSelectLatestTransactions,
-
   makeSelectAssetModal,
   makeSelectCoinAssetModal,
   makeSelectBalanceAssetModal,
   makeSelectLoadingAssetModal,
   makeSelectTabAssetModal,
   makeSelectErrorAssetModal,
-
   makeSelectJoyride,
   makeSelectJoyrideOpenState
 };

@@ -85,11 +85,11 @@ export const initialState = fromJS({
     fetchStatus: {},
     errors: {},
     list: [
-      // {
-      //   symbol: 'BTC',
-      //   status: ENABLE,
-      //   marketcap: 97822306639.0
-      // },
+      {
+        symbol: 'BTC',
+        status: ENABLE,
+        marketcap: 97822306639.0
+      },
       {
         symbol: 'KMD',
         status: ENABLE,
@@ -97,12 +97,12 @@ export const initialState = fromJS({
       }
     ],
     entities: {
-      // BTC: {
-      //   coin: 'BTC',
-      //   address: '',
-      //   balance: 0,
-      //   fee: 0
-      // },
+      BTC: {
+        coin: 'BTC',
+        address: '',
+        balance: 0,
+        fee: 0
+      },
       KMD: {
         coin: 'KMD',
         address: '',

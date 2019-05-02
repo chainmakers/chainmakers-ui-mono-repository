@@ -17,10 +17,7 @@ import CardActions from '@material-ui/core/CardActions';
 import { LOADING } from '../../../constants';
 import getCoinMemoize from '../../../components/CryptoIcons';
 import { covertSymbolToName } from '../../../utils/coin';
-import {
-  openAssetModal,
-  retryAction
-} from '../actions';
+import { openAssetModal, retryAction } from '../actions';
 import {
   makeSelectBalanceFetchStatus,
   makeSelectBalanceEntities,

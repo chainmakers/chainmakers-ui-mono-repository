@@ -14,7 +14,7 @@ export const LOAD_WITHDRAW_SUCCESS = 'atomicapp/App/LOAD_WITHDRAW_SUCCESS';
 
 export const LOAD_SWAP_SUCCESS = 'atomicapp/App/LOAD_SWAP_SUCCESS';
 
-export const DISABLE_COINS = ['BTC'];
+export const DISABLE_COINS = [];
 
 export const ALREADY_INIT_LIST = ['BTC', 'KMD'];
 

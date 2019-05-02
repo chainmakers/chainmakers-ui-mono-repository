@@ -114,11 +114,11 @@ describe('containers/App/reducers/addElectrum', () => {
       .setIn(
         ['balance', 'list'],
         fromJS([
-          // {
-          //   symbol: 'BTC',
-          //   status: ENABLE,
-          //   marketcap: 97822306639
-          // },
+          {
+            symbol: 'BTC',
+            status: ENABLE,
+            marketcap: 97822306639
+          },
           {
             symbol: 'KMD',
             status: ENABLE,
@@ -177,11 +177,11 @@ describe('containers/App/reducers/addElectrumSuccess', () => {
       .setIn(
         ['balance', 'list'],
         fromJS([
-          // {
-          //   symbol: 'BTC',
-          //   status: ENABLE,
-          //   marketcap: 97822306639
-          // },
+          {
+            symbol: 'BTC',
+            status: ENABLE,
+            marketcap: 97822306639
+          },
           {
             symbol: 'KMD',
             status: ENABLE,
@@ -221,11 +221,11 @@ describe('containers/App/reducers/addElectrumError', () => {
       .setIn(
         ['balance', 'list'],
         fromJS([
-          // {
-          //   symbol: 'BTC',
-          //   status: ENABLE,
-          //   marketcap: 97822306639
-          // },
+          {
+            symbol: 'BTC',
+            status: ENABLE,
+            marketcap: 97822306639
+          },
           {
             symbol: 'KMD',
             status: ENABLE,
@@ -250,11 +250,11 @@ describe('containers/App/reducers/loadBalance', () => {
       .setIn(
         ['balance', 'list'],
         fromJS([
-          // {
-          //   symbol: 'BTC',
-          //   status: ENABLE,
-          //   marketcap: 97822306639.0
-          // },
+          {
+            symbol: 'BTC',
+            status: ENABLE,
+            marketcap: 97822306639.0
+          },
           {
             symbol: 'KMD',
             status: ENABLE,
