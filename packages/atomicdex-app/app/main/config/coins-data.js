@@ -59,21 +59,21 @@ const data = [
     market_cap: 0,
     mm2: 1
   },
-  // {
-  //   coin: 'CHIPS',
-  //   name: 'Chips',
-  //   asset: 'CHIPS',
-  //   txversion: 4,
-  //   urls: ['electrum1.cipig.net:10053', 'electrum2.cipig.net:10053'],
-  //   rpcport: 57776,
-  //   pubtype: 60,
-  //   p2shtype: 85,
-  //   wiftype: 188,
-  //   txfee: 10000,
-  //   active: 0,
-  //   market_cap: 1609044,
-  //   mm2: 1
-  // },
+  {
+    coin: 'CHIPS',
+    name: 'Chips',
+    asset: 'CHIPS',
+    txversion: 4,
+    urls: ['electrum1.cipig.net:10053', 'electrum2.cipig.net:10053'],
+    rpcport: 57776,
+    pubtype: 60,
+    p2shtype: 85,
+    wiftype: 188,
+    txfee: 10000,
+    active: 0,
+    market_cap: 1609044,
+    mm2: 1
+  },
   // {
   //   asset: 'REVS',
   //   coin: 'REVS',
