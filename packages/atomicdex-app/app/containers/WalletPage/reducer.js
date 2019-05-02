@@ -1,14 +1,11 @@
 /* eslint-disable no-case-declarations, no-param-reassign */
 import { fromJS } from 'immutable';
+
 import { handleActions } from 'redux-actions';
 
 import {
   LOAD_TRANSACTIONS_SUCCESS,
   LOAD_TRANSACTIONS_ERROR,
-  WITHDRAW_MODAL_OPEN,
-  WITHDRAW_MODAL_CLOSE,
-  DEPOSIT_MODAL_OPEN,
-  DEPOSIT_MODAL_CLOSE,
   TRANSACTIONS_LOAD,
   COIN_TRANSACTIONS_LOAD,
   COIN_TRANSACTIONS_SUCCESS,
@@ -16,7 +13,12 @@ import {
   JOYRIDE_CLOSE,
   WITHDRAW_LOAD,
   WITHDRAW_LOAD_SUCCESS,
-  WITHDRAW_LOAD_ERROR
+  WITHDRAW_LOAD_ERROR,
+  WITHDRAW_TAB,
+  DEPOSIT_TAB,
+  TAB_ASSET_INFO_SWITCH,
+  ASSET_MODAL_OPEN,
+  ASSET_MODAL_CLOSE
 } from './constants';
 
 import { LOGOUT } from '../App/constants';
@@ -37,20 +39,20 @@ export const initialState = fromJS({
     queueids: {},
     coins: {}
   },
-  withdrawModal: {
+
+  assetModal: {
     open: false,
     coin: null,
     loading: false,
-    error: false
+    error: false,
+    tab: DEPOSIT_TAB
   },
-  depositModal: {
-    open: false,
-    coin: null
-  },
+
   utxosModal: {
     open: false,
     coin: null
   },
+
   joyride: {
     open: false
   }
@@ -78,14 +80,6 @@ const walletReducer = handleActions(
       state
         .setIn(['transactions', 'error'], error)
         .setIn(['transactions', 'loading'], false),
-
-    [DEPOSIT_MODAL_OPEN]: (state, { payload }) =>
-      state
-        .setIn(['depositModal', 'open'], true)
-        .setIn(['depositModal', 'coin'], payload.coin),
-
-    [DEPOSIT_MODAL_CLOSE]: state =>
-      state.setIn(['depositModal', 'open'], false),
 
     [COIN_TRANSACTIONS_LOAD]: (state, { payload }) => {
       const { coin, queueId } = payload;
@@ -139,26 +133,29 @@ const walletReducer = handleActions(
 
     [JOYRIDE_CLOSE]: state => state.setIn(['joyride', 'open'], false),
 
-    [WITHDRAW_MODAL_OPEN]: (state, { payload }) =>
+    [ASSET_MODAL_OPEN]: (state, { payload }) =>
       state
-        .setIn(['withdrawModal', 'open'], true)
-        .setIn(['withdrawModal', 'coin'], payload.coin),
+        .setIn(['assetModal', 'open'], true)
+        .setIn(['assetModal', 'coin'], payload.coin)
+        .setIn(['assetModal', 'tab'], payload.tab),
 
-    [WITHDRAW_MODAL_CLOSE]: state =>
-      state.setIn(['withdrawModal', 'open'], false),
+    [ASSET_MODAL_CLOSE]: state => state.setIn(['assetModal', 'open'], false),
+
+    [TAB_ASSET_INFO_SWITCH]: (state, { payload }) =>
+      state.setIn(['assetModal', 'tab'], payload.tab),
 
     [WITHDRAW_LOAD]: state =>
       state
-        .setIn(['withdrawModal', 'loading'], true)
-        .setIn(['withdrawModal', 'error'], false),
+        .setIn(['assetModal', 'loading'], true)
+        .setIn(['assetModal', 'error'], false),
 
     [WITHDRAW_LOAD_SUCCESS]: state =>
-      state.setIn(['withdrawModal', 'loading'], false),
+      state.setIn(['assetModal', 'loading'], false),
 
     [WITHDRAW_LOAD_ERROR]: (state, { error }: { error: ErrorType }) =>
       state
-        .setIn(['withdrawModal', 'loading'], false)
-        .setIn(['withdrawModal', 'error'], fromJS(error)),
+        .setIn(['assetModal', 'loading'], false)
+        .setIn(['assetModal', 'error'], fromJS(error)),
 
     [LOGOUT]: () => initialState
   },

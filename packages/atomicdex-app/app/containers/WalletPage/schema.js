@@ -40,10 +40,16 @@ type RetryActionPayload = {
   coin: string
 };
 
+type OpenAssetModalPayload = {
+  coin: string,
+  tab: number
+};
+
 // eslint-disable-next-line import/prefer-default-export
 export type {
   TransactionPayload,
   CoinTransactionsLoadPayload,
   CoinTransactionsSuccessPayload,
-  RetryActionPayload
+  RetryActionPayload,
+  OpenAssetModalPayload
 };

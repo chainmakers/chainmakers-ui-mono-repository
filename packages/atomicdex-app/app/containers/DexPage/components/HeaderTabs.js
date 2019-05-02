@@ -96,9 +96,7 @@ const withConnect = connect(
   null
 );
 
-const HeaderTabsWapper = compose(
+export default compose(
   withConnect,
   withStyles(styles)
 )(HeaderTabs);
-
-export default HeaderTabsWapper;

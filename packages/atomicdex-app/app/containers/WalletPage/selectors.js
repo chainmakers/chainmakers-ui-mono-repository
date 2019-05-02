@@ -47,48 +47,41 @@ const makeSelectLatestTransactions = () =>
       }, List())
   );
 
-const makeSelectWithdrawModal = () =>
+const makeSelectAssetModal = () =>
   createSelector(
     selectWallet,
-    walletState => walletState.get('withdrawModal')
+    walletState => walletState.get('assetModal')
   );
 
-const makeSelectCoinWithdrawModal = () =>
+const makeSelectCoinAssetModal = () =>
   createSelector(
-    makeSelectWithdrawModal(),
-    withdrawModal => withdrawModal.get('coin')
+    makeSelectAssetModal(),
+    assetModal => assetModal.get('coin')
   );
 
-const makeSelectBalanceWithdrawModal = () =>
+const makeSelectBalanceAssetModal = () =>
   createSelector(
-    makeSelectWithdrawModal(),
+    makeSelectAssetModal(),
     makeSelectBalanceEntities(),
-    (withdrawModal, balance) => balance.get(withdrawModal.get('coin'))
+    (assetModal, balance) => balance.get(assetModal.get('coin'))
   );
 
-const makeSelectLoadingWithdrawModal = () =>
+const makeSelectLoadingAssetModal = () =>
   createSelector(
-    makeSelectWithdrawModal(),
-    withdrawModal => withdrawModal.get('loading')
+    makeSelectAssetModal(),
+    assetModal => assetModal.get('loading')
   );
 
-const makeSelectErrorWithdrawModal = () =>
+const makeSelectTabAssetModal = () =>
   createSelector(
-    makeSelectWithdrawModal(),
-    withdrawModal => withdrawModal.get('error')
+    makeSelectAssetModal(),
+    assetModal => assetModal.get('tab')
   );
 
-const makeSelectDepositModal = () =>
+const makeSelectErrorAssetModal = () =>
   createSelector(
-    selectWallet,
-    walletState => walletState.get('depositModal')
-  );
-
-const makeSelectCoinDepositModal = () =>
-  createSelector(
-    makeSelectDepositModal(),
-    makeSelectBalanceEntities(),
-    (depositModal, balance) => balance.get(depositModal.get('coin'))
+    makeSelectAssetModal(),
+    assetModal => assetModal.get('error')
   );
 
 const makeSelectJoyride = () =>
@@ -111,13 +104,14 @@ export {
   makeSelectTransactionsQueueids,
   makeSelectTransactionsCoins,
   makeSelectLatestTransactions,
-  makeSelectWithdrawModal,
-  makeSelectCoinWithdrawModal,
-  makeSelectBalanceWithdrawModal,
-  makeSelectLoadingWithdrawModal,
-  makeSelectErrorWithdrawModal,
-  makeSelectDepositModal,
-  makeSelectCoinDepositModal,
+
+  makeSelectAssetModal,
+  makeSelectCoinAssetModal,
+  makeSelectBalanceAssetModal,
+  makeSelectLoadingAssetModal,
+  makeSelectTabAssetModal,
+  makeSelectErrorAssetModal,
+
   makeSelectJoyride,
   makeSelectJoyrideOpenState
 };

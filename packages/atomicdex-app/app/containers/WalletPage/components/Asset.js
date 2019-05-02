@@ -9,6 +9,7 @@ import { createSelector } from 'reselect';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
@@ -16,12 +17,16 @@ import CardActions from '@material-ui/core/CardActions';
 import { LOADING } from '../../../constants';
 import getCoinMemoize from '../../../components/CryptoIcons';
 import { covertSymbolToName } from '../../../utils/coin';
-import { openWithdrawModal, openDepositModal, retryAction } from '../actions';
+import {
+  openAssetModal,
+  retryAction
+} from '../actions';
 import {
   makeSelectBalanceFetchStatus,
   makeSelectBalanceEntities,
   makeSelectBalanceErrors
 } from '../../App/selectors';
+import { INFO_TAB, DEPOSIT_TAB, WITHDRAW_TAB } from '../constants';
 
 const debug = require('debug')('atomicapp:containers:WalletPage:Asset');
 
@@ -114,11 +119,9 @@ type IAssetProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   error: Map<*, *>,
   // eslint-disable-next-line flowtype/no-weak-types
-  openWithdraw: Function,
+  dispatchRetryAction: Function,
   // eslint-disable-next-line flowtype/no-weak-types
-  openDeposit: Function,
-  // eslint-disable-next-line flowtype/no-weak-types
-  dispatchRetryAction: Function
+  dispatchOpenAssetModal: Function
 };
 
 class Asset extends React.PureComponent<IAssetProps> {
@@ -126,14 +129,20 @@ class Asset extends React.PureComponent<IAssetProps> {
 
   openWithdraw = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
-    const { openWithdraw, symbol } = this.props;
-    openWithdraw(symbol);
+    const { dispatchOpenAssetModal, symbol } = this.props;
+    dispatchOpenAssetModal(symbol, WITHDRAW_TAB);
   };
 
   openDeposit = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
-    const { openDeposit, symbol } = this.props;
-    openDeposit(symbol);
+    const { dispatchOpenAssetModal, symbol } = this.props;
+    dispatchOpenAssetModal(symbol, DEPOSIT_TAB);
+  };
+
+  openInfo = (evt: SyntheticInputEvent<>) => {
+    evt.preventDefault();
+    const { dispatchOpenAssetModal, symbol } = this.props;
+    dispatchOpenAssetModal(symbol, INFO_TAB);
   };
 
   onRetryAction = (evt: SyntheticInputEvent<>) => {
@@ -215,7 +224,11 @@ class Asset extends React.PureComponent<IAssetProps> {
               [classes.wallet__textWhite]: isError
             })
           }}
-          action={getCoinMemoize(symbol)}
+          action={
+            <IconButton onClick={this.openInfo}>
+              {getCoinMemoize(symbol)}
+            </IconButton>
+          }
           title={covertSymbolToName(symbol)}
           subheader={symbol}
         />
@@ -247,8 +260,13 @@ class Asset extends React.PureComponent<IAssetProps> {
 // eslint-disable-next-line flowtype/no-weak-types
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   return {
-    openWithdraw: (coin: string) => dispatch(openWithdrawModal(coin)),
-    openDeposit: (coin: string) => dispatch(openDepositModal(coin)),
+    dispatchOpenAssetModal: (coin: string, tab: string) =>
+      dispatch(
+        openAssetModal({
+          coin,
+          tab
+        })
+      ),
     dispatchRetryAction: (coin: string) => dispatch(retryAction(coin))
   };
 }

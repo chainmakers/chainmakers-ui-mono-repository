@@ -1,20 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`containers/WalletPage/actions/closeDepositModal should loadTransactionsSuccess should create closeDepositModal action 1`] = `
+exports[`containers/WalletPage/actions/closeAssetModal should loadTransactionsSuccess should create closeAssetModal action 1`] = `
 Object {
-  "type": "atomicapp/WalletPage/DEPOSIT_MODAL_CLOSE",
+  "type": "atomicapp/WalletPage/ASSET_MODAL_CLOSE",
 }
 `;
 
 exports[`containers/WalletPage/actions/closeJoyride should closeJoyride should create closeJoyride action 1`] = `
 Object {
   "type": "atomicapp/WalletPage/JOYRIDE_CLOSE",
-}
-`;
-
-exports[`containers/WalletPage/actions/closeWithdrawModal should loadTransactionsSuccess should create closeWithdrawModal action 1`] = `
-Object {
-  "type": "atomicapp/WalletPage/WITHDRAW_MODAL_CLOSE",
 }
 `;
 
@@ -82,12 +76,13 @@ Object {
 }
 `;
 
-exports[`containers/WalletPage/actions/openDepositModal should loadTransactionsSuccess should create openDepositModal action 1`] = `
+exports[`containers/WalletPage/actions/openAssetModal should loadTransactionsSuccess should create openAssetModal action 1`] = `
 Object {
   "payload": Object {
     "coin": "KMD",
+    "tab": 1,
   },
-  "type": "atomicapp/WalletPage/DEPOSIT_MODAL_OPEN",
+  "type": "atomicapp/WalletPage/ASSET_MODAL_OPEN",
 }
 `;
 
@@ -97,11 +92,11 @@ Object {
 }
 `;
 
-exports[`containers/WalletPage/actions/openWithdrawModal should loadTransactionsSuccess should create openWithdrawModal action 1`] = `
+exports[`containers/WalletPage/actions/switchTabAssetInfo should switchTabAssetInfo should create switchTabAssetInfo action 1`] = `
 Object {
   "payload": Object {
-    "coin": "KMD",
+    "tab": 2,
   },
-  "type": "atomicapp/WalletPage/WITHDRAW_MODAL_OPEN",
+  "type": "atomicapp/DexPage/TAB_ASSET_INFO_SWITCH",
 }
 `;

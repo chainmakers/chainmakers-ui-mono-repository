@@ -6,21 +6,21 @@ import { createStructuredSelector } from 'reselect';
 import LinearProgress from '../../components/ProgressBar';
 import {
   makeSelectTransactionsLoading,
-  makeSelectLoadingWithdrawModal
+  makeSelectLoadingAssetModal
 } from './selectors';
 
 const debug = require('debug')('atomicapp:containers:WalletPage:ProgressBar');
 
 type IProgressBarProps = {
   transactionsLoading: boolean,
-  withdrawLoading: boolean
+  assetLoading: boolean
 };
 
 export class ProgressBarUI extends React.PureComponent<IProgressBarProps> {
   render() {
     debug('render');
-    const { transactionsLoading, withdrawLoading } = this.props;
-    if (transactionsLoading || withdrawLoading) {
+    const { transactionsLoading, assetLoading } = this.props;
+    if (transactionsLoading || assetLoading) {
       return <LinearProgress />;
     }
     return null;
@@ -29,7 +29,7 @@ export class ProgressBarUI extends React.PureComponent<IProgressBarProps> {
 
 const mapStateToProps = createStructuredSelector({
   transactionsLoading: makeSelectTransactionsLoading(),
-  withdrawLoading: makeSelectLoadingWithdrawModal()
+  assetLoading: makeSelectLoadingAssetModal()
 });
 
 const withConnect = connect(

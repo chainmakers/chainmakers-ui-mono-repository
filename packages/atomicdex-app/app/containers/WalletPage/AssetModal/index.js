@@ -9,27 +9,18 @@ import { withStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Typography from '@material-ui/core/Typography';
 import CloudOff from '@material-ui/icons/CloudOff';
-import { makeSelectWithdrawModal } from '../selectors';
-import { closeWithdrawModal } from '../actions';
-import WithdrawModalContent from './WithdrawModalContent';
+import { makeSelectAssetModal } from '../selectors';
+import { closeAssetModal } from '../actions';
+import AsseModalContent from './AsseModalContent';
 
-const debug = require('debug')('atomicapp:containers:WalletPage:WithdrawModal');
+const debug = require('debug')('atomicapp:containers:WalletPage:AssetModal');
 
 function onOpenEmpty() {
   debug('onOpenEmpty');
 }
 
-type Props = {
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object,
-  // eslint-disable-next-line flowtype/no-weak-types
-  onClose: Function,
-  // eslint-disable-next-line flowtype/no-weak-types
-  withdrawModal: Map<*, *>
-};
-
 const styles = () => ({
-  withdrawmodal__emptystate: {
+  root__emptystate: {
     position: 'absolute',
     top: '45%',
     left: '50%',
@@ -37,24 +28,37 @@ const styles = () => ({
     fontSize: 25
   },
 
-  withdrawmodal__iconemptystate: {
+  root__iconemptystate: {
     fontSize: 50
   },
 
-  withdrawmodal__content: {
+  root__content: {
     width: 500,
-    textAlign: 'center',
+    textAlign: 'left',
     overflowY: 'hidden'
   }
 });
 
-export class WithdrawModal extends React.PureComponent<Props> {
+type Props = {
+  // eslint-disable-next-line flowtype/no-weak-types
+  classes: Object,
+  // eslint-disable-next-line flowtype/no-weak-types
+  onClose: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  assetModal: Map<*, *>
+};
+
+class AssetModal extends React.PureComponent<Props> {
+  static displayName = 'AssetModal';
+
+  static defaultProps = {};
+
   renderEmptyState = () => {
     const { classes } = this.props;
     return (
-      <div className={classes.withdrawmodal__emptystate}>
+      <div className={classes.root__emptystate}>
         <Typography variant="title" gutterBottom>
-          <CloudOff className={classes.withdrawmodal__iconemptystate} />
+          <CloudOff className={classes.root__iconemptystate} />
         </Typography>
         <Typography variant="subheading" gutterBottom>
           No data found. Please select an asset.
@@ -63,24 +67,20 @@ export class WithdrawModal extends React.PureComponent<Props> {
     );
   };
 
-  renderCoin = () => <WithdrawModalContent />;
+  renderCoin = () => <AsseModalContent />;
 
   render() {
     debug('render');
-    const { classes, withdrawModal, onClose } = this.props;
-    const coin = withdrawModal.get('coin');
+    const { classes, assetModal, onClose } = this.props;
+    const coin = assetModal.get('coin');
     return (
       <SwipeableDrawer
         anchor="right"
-        open={withdrawModal.get('open')}
+        open={assetModal.get('open')}
         onClose={onClose}
         onOpen={onOpenEmpty}
       >
-        <div
-          tabIndex={0}
-          role="button"
-          className={classes.withdrawmodal__content}
-        >
+        <div tabIndex={0} role="button" className={classes.root__content}>
           {!coin && this.renderEmptyState()}
           {coin && this.renderCoin()}
         </div>
@@ -92,12 +92,12 @@ export class WithdrawModal extends React.PureComponent<Props> {
 // eslint-disable-next-line flowtype/no-weak-types
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   return {
-    onClose: () => dispatch(closeWithdrawModal())
+    onClose: () => dispatch(closeAssetModal())
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  withdrawModal: makeSelectWithdrawModal()
+  assetModal: makeSelectAssetModal()
 });
 
 const withConnect = connect(
@@ -108,4 +108,4 @@ const withConnect = connect(
 export default compose(
   withConnect,
   withStyles(styles)
-)(WithdrawModal);
+)(AssetModal);

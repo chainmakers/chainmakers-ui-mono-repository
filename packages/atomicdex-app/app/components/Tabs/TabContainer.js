@@ -27,6 +27,8 @@ type Props = {
 type State = {};
 
 export class TabContainer extends React.PureComponent<Props, State> {
+  static displayName = 'TabContainer';
+
   static defaultProps = {
     className: ''
   };
@@ -59,7 +61,5 @@ export class TabContainer extends React.PureComponent<Props, State> {
     );
   }
 }
-
-TabContainer.displayName = 'TabContainer';
 
 export default withStyles(styles)(TabContainer);

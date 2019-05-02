@@ -6,10 +6,7 @@ export const LOAD_TRANSACTIONS_ERROR =
   'atomicapp/WalletPage/LOAD_TRANSACTIONS_ERROR';
 
 export const LIMIT_TRANSACTIONS_RETURN = 10;
-export const WITHDRAW_MODAL_OPEN = 'atomicapp/WalletPage/WITHDRAW_MODAL_OPEN';
-export const WITHDRAW_MODAL_CLOSE = 'atomicapp/WalletPage/WITHDRAW_MODAL_CLOSE';
-export const DEPOSIT_MODAL_OPEN = 'atomicapp/WalletPage/DEPOSIT_MODAL_OPEN';
-export const DEPOSIT_MODAL_CLOSE = 'atomicapp/WalletPage/DEPOSIT_MODAL_CLOSE';
+
 export const TRANSACTIONS_LOAD = 'atomicapp/WalletPage/TRANSACTIONS_LOAD';
 export const COIN_TRANSACTIONS_LOAD =
   'atomicapp/WalletPage/COIN_TRANSACTIONS_LOAD';
@@ -29,3 +26,10 @@ export const WITHDRAW_LOAD = 'atomicapp/WalletPage/WITHDRAW_LOAD';
 export const WITHDRAW_LOAD_SUCCESS =
   'atomicapp/WalletPage/WITHDRAW_LOAD_SUCCESS';
 export const WITHDRAW_LOAD_ERROR = 'atomicapp/WalletPage/WITHDRAW_LOAD_ERROR';
+
+export const ASSET_MODAL_OPEN = 'atomicapp/WalletPage/ASSET_MODAL_OPEN';
+export const ASSET_MODAL_CLOSE = 'atomicapp/WalletPage/ASSET_MODAL_CLOSE';
+export const INFO_TAB = 0;
+export const DEPOSIT_TAB = 1;
+export const WITHDRAW_TAB = 2;
+export const TAB_ASSET_INFO_SWITCH = 'atomicapp/DexPage/TAB_ASSET_INFO_SWITCH';

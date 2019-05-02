@@ -4,28 +4,30 @@ import {
   loadTransactionsSuccess,
   openWithdrawModal,
   closeWithdrawModal,
-  openDepositModal,
-  closeDepositModal,
   loadCoinTransactions,
   openJoyride,
   closeJoyride,
   loadWithdraw,
   loadWithdrawSuccess,
-  loadWithdrawError
+  loadWithdrawError,
+  switchTabAssetInfo,
+  openAssetModal,
+  closeAssetModal
 } from '../actions';
 import {
   TRANSACTIONS_LOAD,
   LOAD_TRANSACTIONS_SUCCESS,
-  WITHDRAW_MODAL_OPEN,
-  WITHDRAW_MODAL_CLOSE,
-  DEPOSIT_MODAL_OPEN,
-  DEPOSIT_MODAL_CLOSE,
   COIN_TRANSACTIONS_LOAD,
   JOYRIDE_OPEN,
   JOYRIDE_CLOSE,
   WITHDRAW_LOAD,
   WITHDRAW_LOAD_SUCCESS,
-  WITHDRAW_LOAD_ERROR
+  WITHDRAW_LOAD_ERROR,
+  WITHDRAW_TAB,
+  DEPOSIT_TAB,
+  TAB_ASSET_INFO_SWITCH,
+  ASSET_MODAL_OPEN,
+  ASSET_MODAL_CLOSE
 } from '../constants';
 import type { ErrorType } from '../../schema';
 
@@ -54,70 +56,6 @@ describe('containers/WalletPage/actions/loadTransactionsSuccess', () => {
     };
 
     expect(loadTransactionsSuccess()).toEqual(expectedResult);
-  });
-});
-
-describe('containers/WalletPage/actions/openWithdrawModal', () => {
-  const coin = 'KMD';
-  it('should loadTransactionsSuccess should create openWithdrawModal action', () => {
-    expect(openWithdrawModal(coin)).toMatchSnapshot();
-  });
-
-  it('should return the correct type and the passed name', () => {
-    const expectedResult = {
-      type: WITHDRAW_MODAL_OPEN,
-      payload: {
-        coin
-      }
-    };
-
-    expect(openWithdrawModal(coin)).toEqual(expectedResult);
-  });
-});
-
-describe('containers/WalletPage/actions/closeWithdrawModal', () => {
-  it('should loadTransactionsSuccess should create closeWithdrawModal action', () => {
-    expect(closeWithdrawModal()).toMatchSnapshot();
-  });
-
-  it('should return the correct type and the passed name', () => {
-    const expectedResult = {
-      type: WITHDRAW_MODAL_CLOSE
-    };
-
-    expect(closeWithdrawModal()).toEqual(expectedResult);
-  });
-});
-
-describe('containers/WalletPage/actions/openDepositModal', () => {
-  const coin = 'KMD';
-  it('should loadTransactionsSuccess should create openDepositModal action', () => {
-    expect(openDepositModal(coin)).toMatchSnapshot();
-  });
-
-  it('should return the correct type and the passed name', () => {
-    const expectedResult = {
-      type: DEPOSIT_MODAL_OPEN,
-      payload: {
-        coin
-      }
-    };
-
-    expect(openDepositModal(coin)).toEqual(expectedResult);
-  });
-});
-
-describe('containers/WalletPage/actions/closeDepositModal', () => {
-  it('should loadTransactionsSuccess should create closeDepositModal action', () => {
-    expect(closeDepositModal()).toMatchSnapshot();
-  });
-
-  it('should return the correct type and the passed name', () => {
-    const expectedResult = {
-      type: DEPOSIT_MODAL_CLOSE
-    };
-
-    expect(closeDepositModal()).toEqual(expectedResult);
   });
 });
 
@@ -235,5 +173,56 @@ describe('containers/WalletPage/actions/loadWithdrawError', () => {
     };
 
     expect(loadWithdrawError(error)).toEqual(expectedResult);
+  });
+});
+
+describe('containers/WalletPage/actions/switchTabAssetInfo', () => {
+  const payload = {
+    tab: WITHDRAW_TAB
+  };
+  it('should switchTabAssetInfo should create switchTabAssetInfo action', () => {
+    expect(switchTabAssetInfo(WITHDRAW_TAB)).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: TAB_ASSET_INFO_SWITCH,
+      payload
+    };
+
+    expect(switchTabAssetInfo(WITHDRAW_TAB)).toEqual(expectedResult);
+  });
+});
+
+describe('containers/WalletPage/actions/openAssetModal', () => {
+  const payload = {
+    coin: 'KMD',
+    tab: 1
+  };
+  it('should loadTransactionsSuccess should create openAssetModal action', () => {
+    expect(openAssetModal(payload)).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: ASSET_MODAL_OPEN,
+      payload
+    };
+
+    expect(openAssetModal(payload)).toEqual(expectedResult);
+  });
+});
+
+describe('containers/WalletPage/actions/closeAssetModal', () => {
+  it('should loadTransactionsSuccess should create closeAssetModal action', () => {
+    expect(closeAssetModal()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: ASSET_MODAL_CLOSE
+    };
+
+    expect(closeAssetModal()).toEqual(expectedResult);
   });
 });

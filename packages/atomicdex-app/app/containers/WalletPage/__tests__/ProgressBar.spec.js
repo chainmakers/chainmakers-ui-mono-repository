@@ -17,11 +17,11 @@ describe('containers/WalletPage/<ProgressBar />', () => {
 
   it('should render an LinearProgress component', () => {
     let renderedComponent = shallow(
-      <ProgressBar transactionsLoading withdrawLoading classes={classes} />
+      <ProgressBar transactionsLoading assetLoading classes={classes} />
     );
     expect(renderedComponent.type()).toEqual(LinearProgress);
     renderedComponent = shallow(
-      <ProgressBar withdrawLoading classes={classes} />
+      <ProgressBar assetLoading classes={classes} />
     );
     expect(renderedComponent.type()).toEqual(LinearProgress);
     renderedComponent = shallow(

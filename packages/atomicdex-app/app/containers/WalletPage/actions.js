@@ -2,10 +2,6 @@
 import {
   LOAD_TRANSACTIONS_SUCCESS,
   LOAD_TRANSACTIONS_ERROR,
-  WITHDRAW_MODAL_OPEN,
-  WITHDRAW_MODAL_CLOSE,
-  DEPOSIT_MODAL_OPEN,
-  DEPOSIT_MODAL_CLOSE,
   TRANSACTIONS_LOAD,
   COIN_TRANSACTIONS_LOAD,
   COIN_TRANSACTIONS_SUCCESS,
@@ -14,12 +10,18 @@ import {
   JOYRIDE_CLOSE,
   WITHDRAW_LOAD,
   WITHDRAW_LOAD_SUCCESS,
-  WITHDRAW_LOAD_ERROR
+  WITHDRAW_LOAD_ERROR,
+  WITHDRAW_TAB,
+  DEPOSIT_TAB,
+  TAB_ASSET_INFO_SWITCH,
+  ASSET_MODAL_OPEN,
+  ASSET_MODAL_CLOSE
 } from './constants';
 import type {
   CoinTransactionsLoadPayload,
   CoinTransactionsSuccessPayload,
-  RetryActionPayload
+  RetryActionPayload,
+  OpenAssetModalPayload
 } from './schema';
 import type { ErrorType } from '../schema';
 
@@ -35,36 +37,6 @@ export function loadTransactionsError(message: string) {
     error: {
       message
     }
-  };
-}
-
-export function openWithdrawModal(coin: string) {
-  return {
-    type: WITHDRAW_MODAL_OPEN,
-    payload: {
-      coin
-    }
-  };
-}
-
-export function closeWithdrawModal() {
-  return {
-    type: WITHDRAW_MODAL_CLOSE
-  };
-}
-
-export function openDepositModal(coin: string) {
-  return {
-    type: DEPOSIT_MODAL_OPEN,
-    payload: {
-      coin
-    }
-  };
-}
-
-export function closeDepositModal() {
-  return {
-    type: DEPOSIT_MODAL_CLOSE
   };
 }
 
@@ -137,5 +109,27 @@ export function loadWithdrawError(error: ErrorType) {
   return {
     type: WITHDRAW_LOAD_ERROR,
     error
+  };
+}
+
+export function switchTabAssetInfo(tab: string) {
+  return {
+    type: TAB_ASSET_INFO_SWITCH,
+    payload: {
+      tab
+    }
+  };
+}
+
+export function openAssetModal(payload: OpenAssetModalPayload) {
+  return {
+    type: ASSET_MODAL_OPEN,
+    payload
+  };
+}
+
+export function closeAssetModal() {
+  return {
+    type: ASSET_MODAL_CLOSE
   };
 }

@@ -30,8 +30,7 @@ import HeaderTabs from './components/HeaderTabs';
 import JoyrideGuilddance from './components/JoyrideGuilddance';
 import { openJoyride } from './actions';
 import TransactionsTab from './TransactionsTab';
-import WithdrawModal from './WithdrawModal';
-import DepositModal from './DepositModal';
+import AssetModal from './AssetModal';
 import PortfolioTab from './PortfolioTab';
 import ProgressBar from './ProgressBar';
 import reducer from './reducer';
@@ -209,8 +208,7 @@ class WalletPage extends React.PureComponent<
             </Placeholder>
           </ErrorBoundary>
         </NavigationLayout>
-        <WithdrawModal />
-        <DepositModal />
+        <AssetModal />
         <JoyrideGuilddance />
       </React.Fragment>
     );

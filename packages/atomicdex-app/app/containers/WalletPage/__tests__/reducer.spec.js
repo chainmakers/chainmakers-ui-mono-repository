@@ -8,16 +8,14 @@ import { WITHDRAW_LOAD } from '../constants';
 import {
   loadTransactions,
   loadCoinTransactions,
-  openWithdrawModal,
-  closeWithdrawModal,
-  openDepositModal,
-  closeDepositModal,
   loadCoinTransactionsSuccess,
   openJoyride,
   closeJoyride,
   loadWithdraw,
   loadWithdrawSuccess,
-  loadWithdrawError
+  loadWithdrawError,
+  openAssetModal,
+  closeAssetModal
 } from '../actions';
 import type { ErrorType } from '../../schema';
 
@@ -40,29 +38,6 @@ describe('containers/WalletPage/reducers/loadTransactions', () => {
   });
 });
 
-describe('containers/WalletPage/reducers/openWithdrawModal', () => {
-  const coin = 'KMD';
-  it('should handle the openWithdrawModal action correctly', () => {
-    const expectedResult = initialState
-      .setIn(['withdrawModal', 'open'], true)
-      .setIn(['withdrawModal', 'coin'], coin);
-
-    expect(walletReducer(initialState, openWithdrawModal(coin))).toEqual(
-      expectedResult
-    );
-  });
-});
-
-describe('containers/WalletPage/reducers/closeWithdrawModal', () => {
-  it('should handle the closeWithdrawModal action correctly', () => {
-    const expectedResult = initialState.setIn(['withdrawModal', 'open'], false);
-
-    expect(walletReducer(initialState, closeWithdrawModal())).toEqual(
-      expectedResult
-    );
-  });
-});
-
 describe('containers/WalletPage/reducers/loadWithdraw', () => {
   const payload = {
     amount: 0.1,
@@ -71,8 +46,8 @@ describe('containers/WalletPage/reducers/loadWithdraw', () => {
   };
   it('should handle the loadWithdraw action correctly', () => {
     const expectedResult = initialState
-      .setIn(['withdrawModal', 'loading'], true)
-      .setIn(['withdrawModal', 'error'], false);
+      .setIn(['assetModal', 'loading'], true)
+      .setIn(['assetModal', 'error'], false);
 
     expect(walletReducer(initialState, loadWithdraw(payload))).toEqual(
       expectedResult
@@ -88,8 +63,8 @@ describe('containers/WalletPage/reducers/loadWithdrawSuccess', () => {
   };
   it('should handle the loadWithdrawSuccess action correctly', () => {
     const store = initialState
-      .setIn(['withdrawModal', 'loading'], true)
-      .setIn(['withdrawModal', 'error'], false);
+      .setIn(['assetModal', 'loading'], true)
+      .setIn(['assetModal', 'error'], false);
 
     expect(walletReducer(store, loadWithdrawSuccess(payload))).toEqual(
       initialState
@@ -112,33 +87,10 @@ describe('containers/WalletPage/reducers/loadWithdrawError', () => {
   };
   it('should handle the loadWithdrawError action correctly', () => {
     const expectedResult = initialState
-      .setIn(['withdrawModal', 'loading'], false)
-      .setIn(['withdrawModal', 'error'], fromJS(error));
+      .setIn(['assetModal', 'loading'], false)
+      .setIn(['assetModal', 'error'], fromJS(error));
 
     expect(walletReducer(initialState, loadWithdrawError(error))).toEqual(
-      expectedResult
-    );
-  });
-});
-
-describe('containers/WalletPage/reducers/openDepositModal', () => {
-  const coin = 'KMD';
-  it('should handle the openDepositModal action correctly', () => {
-    const expectedResult = initialState
-      .setIn(['depositModal', 'open'], true)
-      .setIn(['depositModal', 'coin'], coin);
-
-    expect(walletReducer(initialState, openDepositModal(coin))).toEqual(
-      expectedResult
-    );
-  });
-});
-
-describe('containers/WalletPage/reducers/closeDepositModal', () => {
-  it('should handle the closeDepositModal action correctly', () => {
-    const expectedResult = initialState.setIn(['depositModal', 'open'], false);
-
-    expect(walletReducer(initialState, closeDepositModal())).toEqual(
       expectedResult
     );
   });
@@ -275,5 +227,32 @@ describe('containers/WalletPage/reducers/closeJoyride', () => {
     const expectedResult = initialState.setIn(['joyride', 'open'], true);
 
     expect(walletReducer(expectedResult, closeJoyride())).toEqual(initialState);
+  });
+});
+
+describe('containers/WalletPage/reducers/openAssetModal', () => {
+  const payload = {
+    coin: 'KMD',
+    tab: 2
+  };
+  it('should handle the openAssetModal action correctly', () => {
+    const expectedResult = initialState
+      .setIn(['assetModal', 'open'], true)
+      .setIn(['assetModal', 'coin'], payload.coin)
+      .setIn(['assetModal', 'tab'], payload.tab);
+
+    expect(walletReducer(initialState, openAssetModal(payload))).toEqual(
+      expectedResult
+    );
+  });
+});
+
+describe('containers/WalletPage/reducers/closeAssetModal', () => {
+  it('should handle the closeAssetModal action correctly', () => {
+    const expectedResult = initialState.setIn(['assetModal', 'open'], false);
+
+    expect(walletReducer(initialState, closeAssetModal())).toEqual(
+      expectedResult
+    );
   });
 });

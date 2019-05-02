@@ -20,9 +20,10 @@ const styles = () => ({
       content: '""',
       display: 'inline-block',
       height: 0,
-      borderBottom: '1px solid #263241',
-      width: '100%',
-      opacity: 0.3
+      // borderBottom: '1px solid #263241',
+      borderBottom: '1px solid #f1f3f4',
+      width: '25%'
+      // opacity: 0.3
     },
 
     '&::after': {
@@ -30,9 +31,10 @@ const styles = () => ({
       content: '""',
       display: 'inline-block',
       height: 0,
-      borderBottom: '1px solid #263241',
-      width: '100%',
-      opacity: 0.3
+      // borderBottom: '1px solid #263241',
+      borderBottom: '1px solid #f1f3f4',
+      width: '25%'
+      // opacity: 0.3
     }
   }
 });
