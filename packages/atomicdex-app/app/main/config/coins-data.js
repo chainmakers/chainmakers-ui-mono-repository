@@ -684,20 +684,20 @@ const data = [
   //   rpcport: 80,
   //   mm2: 1
   // },
-  // {
-  //   coin: 'DEX',
-  //   name: 'DEX',
-  //   asset: 'DEX',
-  //   rpcport: 11890,
-  //   urls: [
-  //     'electrum1.cipig.net:10006',
-  //     'electrum2.cipig.net:10006',
-  //     'electrum3.cipig.net:10006'
-  //   ],
-  //   active: 0,
-  //   market_cap: 0,
-  //   mm2: 1
-  // },
+  {
+    coin: 'DEX',
+    name: 'DEX',
+    asset: 'DEX',
+    rpcport: 11890,
+    urls: [
+      'electrum1.cipig.net:10006',
+      'electrum2.cipig.net:10006',
+      'electrum3.cipig.net:10006'
+    ],
+    active: 0,
+    market_cap: 0,
+    mm2: 1
+  },
   // {
   //   coin: 'DGB',
   //   rpcport: 14022,
