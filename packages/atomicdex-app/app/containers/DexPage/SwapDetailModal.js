@@ -327,7 +327,7 @@ export class SwapDetail extends React.PureComponent<Props> {
         <CardHeader
           title={
             <Typography variant="h6" gutterBottom>
-              Detail Swap
+              Swap Detail
             </Typography>
           }
           subheader={
