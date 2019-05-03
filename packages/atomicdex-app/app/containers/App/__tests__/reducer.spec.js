@@ -115,16 +115,6 @@ describe('containers/App/reducers/addElectrum', () => {
         ['balance', 'list'],
         fromJS([
           {
-            symbol: 'BTC',
-            status: ENABLE,
-            marketcap: 97822306639
-          },
-          {
-            symbol: 'KMD',
-            status: ENABLE,
-            marketcap: 107340275
-          },
-          {
             symbol: 'BEER',
             status: DISABLE,
             marketcap: 0
@@ -174,21 +164,7 @@ describe('containers/App/reducers/addElectrumSuccess', () => {
       .setIn(['balance', 'fetchStatus', payload.coin], LOADED)
       .setIn(['balance', 'errors', payload.coin], null)
       .setIn(['balance', 'entities', payload.coin], fromJS(payload))
-      .setIn(
-        ['balance', 'list'],
-        fromJS([
-          {
-            symbol: 'BTC',
-            status: ENABLE,
-            marketcap: 97822306639
-          },
-          {
-            symbol: 'KMD',
-            status: ENABLE,
-            marketcap: 107340275
-          }
-        ])
-      );
+      .setIn(['balance', 'list'], fromJS([]));
 
     expect(appReducer(initialState, addElectrumSuccess(payload))).toEqual(
       state
@@ -218,21 +194,7 @@ describe('containers/App/reducers/addElectrumError', () => {
     const state = initialState
       .setIn(['balance', 'fetchStatus', 'PIZZA'], FAILED)
       .setIn(['balance', 'errors', 'PIZZA'], fromJS(error))
-      .setIn(
-        ['balance', 'list'],
-        fromJS([
-          {
-            symbol: 'BTC',
-            status: ENABLE,
-            marketcap: 97822306639
-          },
-          {
-            symbol: 'KMD',
-            status: ENABLE,
-            marketcap: 107340275
-          }
-        ])
-      );
+      .setIn(['balance', 'list'], fromJS([]));
 
     expect(appReducer(initialState, addElectrumError(error))).toEqual(state);
   });
@@ -247,21 +209,7 @@ describe('containers/App/reducers/loadBalance', () => {
     state = initialState
       .setIn(['balance', 'fetchStatus', payload.coin], LOADING)
       .setIn(['balance', 'errors', payload.coin], null)
-      .setIn(
-        ['balance', 'list'],
-        fromJS([
-          {
-            symbol: 'BTC',
-            status: ENABLE,
-            marketcap: 97822306639.0
-          },
-          {
-            symbol: 'KMD',
-            status: ENABLE,
-            marketcap: 107340275.0
-          }
-        ])
-      );
+      .setIn(['balance', 'list'], fromJS([]));
 
     expect(appReducer(initialState, loadBalance(payload))).toEqual(state);
   });
@@ -270,21 +218,7 @@ describe('containers/App/reducers/loadBalance', () => {
     state = initialState
       .setIn(['balance', 'fetchStatus', payload.coin], LOADING)
       .setIn(['balance', 'errors', payload.coin], null)
-      .setIn(
-        ['balance', 'list'],
-        fromJS([
-          {
-            symbol: 'BTC',
-            status: ENABLE,
-            marketcap: 97822306639.0
-          },
-          {
-            symbol: 'KMD',
-            status: ENABLE,
-            marketcap: 107340275.0
-          }
-        ])
-      );
+      .setIn(['balance', 'list'], fromJS([]));
 
     expect(appReducer(state, loadBalance(payload))).toEqual(state);
   });

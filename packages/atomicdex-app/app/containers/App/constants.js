@@ -16,7 +16,7 @@ export const LOAD_SWAP_SUCCESS = 'atomicapp/App/LOAD_SWAP_SUCCESS';
 
 export const DISABLE_COINS = [];
 
-export const ALREADY_INIT_LIST = ['BTC', 'KMD'];
+export const ALREADY_INIT_LIST = [];
 
 // electrum actions
 export const ELECTRUM_LOAD = 'atomicapp/App/ELECTRUM_LOAD';
