@@ -1,7 +1,6 @@
 import { List } from 'immutable';
 import { createSelector } from 'reselect';
 import { APP_STATE_NAME, LIMIT_TRANSACTIONS_RETURN } from './constants';
-import { makeSelectBalanceEntities } from '../App/selectors';
 
 const selectWallet = state => state.get(APP_STATE_NAME);
 
@@ -59,13 +58,6 @@ const makeSelectCoinAssetModal = () =>
     assetModal => assetModal.get('coin')
   );
 
-const makeSelectBalanceAssetModal = () =>
-  createSelector(
-    makeSelectAssetModal(),
-    makeSelectBalanceEntities(),
-    (assetModal, balance) => balance.get(assetModal.get('coin'))
-  );
-
 const makeSelectLoadingAssetModal = () =>
   createSelector(
     makeSelectAssetModal(),
@@ -106,7 +98,6 @@ export {
   makeSelectLatestTransactions,
   makeSelectAssetModal,
   makeSelectCoinAssetModal,
-  makeSelectBalanceAssetModal,
   makeSelectLoadingAssetModal,
   makeSelectTabAssetModal,
   makeSelectErrorAssetModal,

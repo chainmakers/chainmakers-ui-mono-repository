@@ -13,7 +13,6 @@ import {
   makeSelectJoyrideOpenState,
   makeSelectAssetModal,
   makeSelectCoinAssetModal,
-  makeSelectBalanceAssetModal,
   makeSelectLoadingAssetModal,
   makeSelectTabAssetModal,
   makeSelectErrorAssetModal
@@ -108,21 +107,6 @@ describe('containers/WalletPage/selectors/makeSelectCoinAssetModal', () => {
 
     const selectCoinAssetModal = makeSelectCoinAssetModal();
     expect(selectCoinAssetModal(mockedState)).toEqual(coin);
-  });
-});
-
-describe('containers/WalletPage/selectors/makeSelectBalanceAssetModal', () => {
-  const coin = 'KMD';
-  it('should select the coin of assetModal state', () => {
-    let mockedState = fromJS(data);
-    mockedState = mockedState.setIn(
-      [APP_STATE_NAME, 'assetModal', 'coin'],
-      coin
-    );
-
-    const expected = fromJS(data.global.balance.entities[coin]);
-    const selectBalanceAssetModal = makeSelectBalanceAssetModal();
-    expect(selectBalanceAssetModal(mockedState)).toEqual(expected);
   });
 });
 

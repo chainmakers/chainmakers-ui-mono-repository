@@ -2,8 +2,6 @@
 import {
   loadTransactions,
   loadTransactionsSuccess,
-  openWithdrawModal,
-  closeWithdrawModal,
   loadCoinTransactions,
   openJoyride,
   closeJoyride,
@@ -24,7 +22,7 @@ import {
   WITHDRAW_LOAD_SUCCESS,
   WITHDRAW_LOAD_ERROR,
   WITHDRAW_TAB,
-  DEPOSIT_TAB,
+  // DEPOSIT_TAB,
   TAB_ASSET_INFO_SWITCH,
   ASSET_MODAL_OPEN,
   ASSET_MODAL_CLOSE

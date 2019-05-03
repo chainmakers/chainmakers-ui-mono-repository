@@ -116,9 +116,9 @@ type IAssetProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   error: Map<*, *>,
   // eslint-disable-next-line flowtype/no-weak-types
-  dispatchRetryAction: Function,
+  dispatchOpenAssetModal: Function,
   // eslint-disable-next-line flowtype/no-weak-types
-  dispatchOpenAssetModal: Function
+  dispatchRetryAction: Function
 };
 
 class Asset extends React.PureComponent<IAssetProps> {

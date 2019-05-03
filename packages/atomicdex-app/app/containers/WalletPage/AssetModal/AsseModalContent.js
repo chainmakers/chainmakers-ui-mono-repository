@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import type { Dispatch } from 'redux';
 import type { Map } from 'immutable';
-import { createStructuredSelector } from 'reselect';
+import { createSelector } from 'reselect';
 import { withStyles } from '@material-ui/core/styles';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -27,9 +27,14 @@ import { required, requiredNumber } from '../../../components/Form/helper';
 import validate from '../../../components/Form/validate';
 import { loadWithdraw, switchTabAssetInfo } from '../actions';
 import { INFO_TAB, DEPOSIT_TAB, WITHDRAW_TAB } from '../constants';
-import { makeSelectSupportedCoinsEntities } from '../../App/selectors';
+import { LOADING } from '../../../constants';
 import {
-  makeSelectBalanceAssetModal,
+  makeSelectBalanceEntities,
+  makeSelectBalanceFetchStatus,
+  makeSelectSupportedCoinsEntities
+} from '../../App/selectors';
+import {
+  makeSelectCoinAssetModal,
   makeSelectLoadingAssetModal,
   makeSelectErrorAssetModal,
   makeSelectTabAssetModal
@@ -38,6 +43,7 @@ import HeaderTabs from './HeaderTabs';
 import { covertSymbolToName } from '../../../utils/coin';
 import { openSnackbars } from '../../Snackbars/actions';
 import Or from '../components/Or';
+import { loadBalance } from '../../App/actions';
 
 const debug = require('debug')(
   'atomicapp:containers:WalletPage:AsseModalContent'
@@ -191,8 +197,13 @@ type Props = {
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchSwitchTabAssetInfo: Function,
   // eslint-disable-next-line flowtype/no-weak-types
+  dispatchLoadBalance: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
   supportedCoinsEntities: Map<*, *>,
-  tab: number
+  // eslint-disable-next-line flowtype/no-weak-types
+  coinConfiguration: Map<*, *>,
+  tab: number,
+  fetchStatus: string
 };
 
 type State = {
@@ -333,10 +344,17 @@ class AsseModalContent extends React.PureComponent<Props, State> {
     evt.target.focus();
   };
 
+  onLoadBalance = async (evt: SyntheticInputEvent<>) => {
+    evt.stopPropagation();
+    const { balance, dispatchLoadBalance } = this.props;
+    console.log(balance.toJS());
+    dispatchLoadBalance(balance.get('coin'));
+  };
+
   renderDetailTab = () => {
-    const { classes, balance, supportedCoinsEntities } = this.props;
+    const { classes, balance, coinConfiguration, fetchStatus } = this.props;
     const CIcon = getCoinMemoize(balance.get('coin'));
-    const coinConfiguration = supportedCoinsEntities.get(balance.get('coin'));
+    const loading = fetchStatus === LOADING;
 
     return (
       <DialogContent
@@ -419,9 +437,11 @@ class AsseModalContent extends React.PureComponent<Props, State> {
           }}
         >
           <Button
+            disabled={loading}
             color="primary"
             variant="outlined"
             className={classes.root__tabInfoButton}
+            onClick={this.onLoadBalance}
             style={{
               margin: '0 6px 0 auto'
             }}
@@ -634,17 +654,43 @@ export function mapDispatchToProps(dispatch: Dispatch<Object>) {
     dispatchSwitchTabAssetInfo: (tab: string) =>
       dispatch(switchTabAssetInfo(tab)),
 
-    dispatchOpenSnackbars: (message: string) => dispatch(openSnackbars(message))
+    dispatchOpenSnackbars: (message: string) =>
+      dispatch(openSnackbars(message)),
+
+    dispatchLoadBalance: (coin: string) =>
+      dispatch(
+        loadBalance({
+          coin
+        })
+      )
   };
 }
 
-const mapStateToProps = createStructuredSelector({
-  balance: makeSelectBalanceAssetModal(),
-  error: makeSelectErrorAssetModal(),
-  loading: makeSelectLoadingAssetModal(),
-  tab: makeSelectTabAssetModal(),
-  supportedCoinsEntities: makeSelectSupportedCoinsEntities()
-});
+const mapStateToProps = createSelector(
+  makeSelectCoinAssetModal(),
+  makeSelectBalanceEntities(),
+  makeSelectErrorAssetModal(),
+  makeSelectLoadingAssetModal(),
+  makeSelectTabAssetModal(),
+  makeSelectSupportedCoinsEntities(),
+  makeSelectBalanceFetchStatus(),
+  (
+    coin,
+    balanceEntities,
+    error,
+    loading,
+    tab,
+    supportedCoinsEntities,
+    balanceFetchStatus
+  ) => ({
+    balance: balanceEntities.get(coin),
+    error,
+    loading,
+    tab,
+    coinConfiguration: supportedCoinsEntities.get(coin),
+    fetchStatus: balanceFetchStatus.get(coin)
+  })
+);
 
 const withConnect = connect(
   mapStateToProps,
