@@ -8,7 +8,6 @@ const data = [
   {
     coin: 'BTC',
     name: 'Bitcoin',
-    asset: 'BTC',
     urls: ['electrum1.cipig.net:10000', 'electrum2.cipig.net:10000'],
     active: 1,
     market_cap: 97822306639,
