@@ -20,6 +20,7 @@ import TextField from '@material-ui/core/TextField';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import CloseIcon from '@material-ui/icons/Close';
 import { BuyButton } from 'barterdex-components';
+import { floor } from 'barterdex-utilities';
 import { Circle, Line } from '../../../components/placeholder';
 import getCoinMemoize from '../../../components/CryptoIcons';
 import { requiredNumber } from '../../../components/Form/helper';
@@ -50,7 +51,6 @@ import {
   makeSelectCurrency,
   makeSelectPayment
 } from '../selectors';
-import { floor } from '../utils';
 import CoinSelectable from './CoinSelectable';
 
 const debug = require('debug')('atomicapp:containers:DexPage:AmountSection');
@@ -390,7 +390,7 @@ class AmountSection extends React.Component<Props, State> {
       const bestPrice = this.getBestPrice();
       const paymentInput = this.paymentInput.current;
       const payment = base * bestPrice;
-      await paymentInput.setValue(payment);
+      await paymentInput.setValue(floor(payment, 8));
 
       this.controlBuyButton(false, floor(payment / DEXFEE, 8));
     } catch (err) {
@@ -407,7 +407,7 @@ class AmountSection extends React.Component<Props, State> {
 
       const bestPrice = this.getBestPrice();
       const baseInput = this.baseInput.current;
-      await baseInput.setValue(payment / bestPrice);
+      await baseInput.setValue(floor(payment / bestPrice, 8));
 
       this.controlBuyButton(false, floor(payment / DEXFEE, 8));
     } catch (err) {

@@ -5,11 +5,11 @@ import { compose } from 'redux';
 import type { Dispatch } from 'redux';
 import type { List, Map } from 'immutable';
 import { createStructuredSelector } from 'reselect';
+import { floor } from 'barterdex-utilities';
 import getCoinMemoize from '../../../components/CryptoIcons';
 import { Line, Circle } from '../../../components/placeholder';
 import { covertSymbolToName } from '../../../utils/coin';
 import { makeSelectBalanceAvailable } from '../../App/selectors';
-import { floor } from '../utils';
 import { selectCoinPayment, loadPrice } from '../actions';
 import {
   makeSelectPricesEntities,

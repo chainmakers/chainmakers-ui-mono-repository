@@ -16,7 +16,6 @@ const data = [
   {
     coin: 'KMD',
     name: 'Komodo',
-    asset: 'KMD',
     txversion: 4,
     urls: ['electrum1.cipig.net:10001', 'electrum2.cipig.net:10001'],
     active: 1,

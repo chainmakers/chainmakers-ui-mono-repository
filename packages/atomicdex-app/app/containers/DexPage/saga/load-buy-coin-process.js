@@ -2,12 +2,12 @@ import swal from 'sweetalert';
 // import { put, call, select, cancel, cancelled } from 'redux-saga/effects';
 import { put, call, select, cancelled } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
+import { floor } from 'barterdex-utilities';
 import api from '../../../lib/barter-dex-api';
 import { makeSelectBalanceEntities } from '../../App/selectors';
 import { loadBuyCoinError, loadBuyCoinSuccess } from '../actions';
 import { makeSelectPricesEntities } from '../selectors';
 import { NUMCOIN, APPROPRIATE_ERROR_UTXOS } from '../constants';
-import { floor } from '../utils';
 
 const debug = require('debug')(
   'atomicapp:containers:DexPage:saga:load-buy-coin-process'

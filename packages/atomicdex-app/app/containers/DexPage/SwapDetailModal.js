@@ -22,7 +22,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Divider from '@material-ui/core/Divider';
 import CloudOff from '@material-ui/icons/CloudOff';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
-import { formatDate } from 'barterdex-utilities';
+import { formatDate, floor } from 'barterdex-utilities';
 import { BuyButton } from 'barterdex-components';
 import explorer from '../../lib/explorer';
 import getCoinMemoize from '../../components/CryptoIcons';
@@ -33,7 +33,6 @@ import {
   makeSelectSwapInDetailModal
 } from './selectors';
 import CoinSelectable from './components/CoinSelectable';
-import { floor } from './utils';
 
 const debug = require('debug')('atomicapp:containers:DexPage:SwapDetailModal');
 
