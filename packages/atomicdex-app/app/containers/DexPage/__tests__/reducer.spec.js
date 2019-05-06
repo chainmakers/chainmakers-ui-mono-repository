@@ -423,7 +423,7 @@ describe('containers/DexPage/reducers/loadRecentSwapsCoin', () => {
     entity = entity
       .set('sentflags', entity.get('sentflags').push(lastEvent.event.type))
       .set('status', lastEvent.event.type)
-      .set('expiration', 1556258374);
+      .set('expiration', 1556263774);
     let expectedResult = store.setIn(
       ['swaps', 'entities'],
       entities.set(uuid, entity)

@@ -232,15 +232,20 @@ export default handleActions(
         // sentflags
         const sentf = entity.get('sentflags');
 
+        // eslint-disable-next-line no-continue
         if (sentf.find(value => value === event.type)) continue;
 
         // expiration
         if (event.type === STARTED_SWAPS_STATE) {
           // first time enter this state
-          entity = entity.set('expiration', entity.get('expiration') + 30 * 60); // + 30 mins
+          entity = entity.set(
+            'expiration',
+            entity.get('expiration') + 120 * 60
+          ); // + 120 mins
         }
 
         if (event.type === TAKER_FEE_SENT_SWAPS_STATE) {
+          // eslint-disable-next-line camelcase
           const { tx_hash } = event.data;
           let myfee = entity.get('myfee');
           myfee = myfee.set('tx', tx_hash);
@@ -249,6 +254,7 @@ export default handleActions(
         }
 
         if (event.type === MAKER_PAYMENT_RECEIVED_SWAPS_STATE) {
+          // eslint-disable-next-line camelcase
           const { tx_hash } = event.data;
           let bobdeposit = entity.get('bobdeposit');
           bobdeposit = bobdeposit.set('tx', tx_hash);
@@ -257,6 +263,7 @@ export default handleActions(
         }
 
         if (event.type === TAKER_PAYMENT_SENT_SWAPS_STATE) {
+          // eslint-disable-next-line camelcase
           const { tx_hash } = event.data;
           let alicepayment = entity.get('alicepayment');
           alicepayment = alicepayment.set('tx', tx_hash);
@@ -265,6 +272,7 @@ export default handleActions(
         }
 
         if (event.type === TAKER_PAYMENT_SPENT_SWAPS_STATE) {
+          // eslint-disable-next-line camelcase
           const { tx_hash } = event.data.transaction;
           let alicespend = entity.get('alicespend');
           alicespend = alicespend.set('tx', tx_hash);
@@ -273,6 +281,7 @@ export default handleActions(
         }
 
         if (event.type === MAKER_PAYMENT_SPENT_SWAPS_STATE) {
+          // eslint-disable-next-line camelcase
           const { tx_hash } = event.data;
           let bobpayment = entity.get('bobpayment');
           bobpayment = bobpayment.set('tx', tx_hash);
