@@ -1,10 +1,10 @@
 {
-  "name": "atomicdex-app",
-  "productName": "AtomicDex Application",
+  "name": "chainswap-app",
+  "productName": "Chainswap Application",
   "version": "0.18.0",
   "private": true,
   "description": "An instant exchange built on top of BarterDEX swap",
-  "homepage": "https://github.com/particle4dev/komodo-ui-mono-repository/tree/master/packages/atomicdex-app#readme",
+  "homepage": "https://github.com/chainmakers/komodo-ui-mono-repository/tree/master/packages/atomicdex-app#readme",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
     "build-dll": "cross-env NODE_ENV=development webpack --config ./configs/webpack.config.renderer.dev.dll.babel.js --colors",
@@ -65,9 +65,9 @@
   },
   "main": "./app/main.prod.js",
   "build": {
-    "productName": "AtomicDex",
+    "productName": "Chainswap",
     "compression": "maximum",
-    "appId": "com.komodoplatform.AtomicDex",
+    "appId": "com.chainmakers.Chainswap",
     "asarUnpack": [
       "app/bin/marketmaker"
     ],
