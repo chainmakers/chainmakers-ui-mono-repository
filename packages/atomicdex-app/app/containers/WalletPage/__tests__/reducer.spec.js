@@ -15,7 +15,9 @@ import {
   loadWithdrawSuccess,
   loadWithdrawError,
   openAssetModal,
-  closeAssetModal
+  closeAssetModal,
+  openRemoveElectrumModal,
+  closeRemoveElectrumModal
 } from '../actions';
 import type { ErrorType } from '../../schema';
 
@@ -253,6 +255,24 @@ describe('containers/WalletPage/reducers/closeAssetModal', () => {
 
     expect(walletReducer(initialState, closeAssetModal())).toEqual(
       expectedResult
+    );
+  });
+});
+
+describe('containers/WalletPage/reducers/openRemoveElectrumModal', () => {
+  const coin = 'KMD';
+
+  it('should handle the openRemoveElectrumModal action correctly', () => {
+    const expectedResult = initialState
+      .setIn(['removingElectrumModal', 'open'], true)
+      .setIn(['removingElectrumModal', 'coin'], coin);
+
+    expect(walletReducer(initialState, openRemoveElectrumModal(coin))).toEqual(
+      expectedResult
+    );
+
+    expect(walletReducer(expectedResult, closeRemoveElectrumModal())).toEqual(
+      expectedResult.setIn(['removingElectrumModal', 'open'], false)
     );
   });
 });

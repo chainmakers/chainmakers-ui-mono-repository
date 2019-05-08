@@ -5,7 +5,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 
 const styles = theme => ({
   linearprogress: {
-    zIndex: theme.zIndex.drawer + 10,
+    zIndex: theme.zIndex.modal + 10,
     height: 3,
     position: 'fixed',
     width: '100%',

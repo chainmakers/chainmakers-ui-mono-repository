@@ -3,6 +3,7 @@ import { fromJS } from 'immutable';
 import {
   FAILED,
   DISABLE,
+  INITIALIZATION,
   STATE_STARTED,
   STATE_RUNNING,
   STATE_TERMINATED
@@ -92,10 +93,8 @@ describe('containers/App/selectors/makeSelectBalanceList', () => {
     expect(selectBalanceList(mockedState)).toEqual(
       fromJS([
         { symbol: 'BTC', status: 'ENABLE', marketcap: 97822306639 },
-        { symbol: 'LTC', status: 'DISABLE', marketcap: 2578993869 },
-        { symbol: 'BCH', status: 'ENABLE', marketcap: 2197468013 },
+        { symbol: 'BCH', status: INITIALIZATION, marketcap: 2197468013 },
         { symbol: 'ZEC', status: 'ENABLE', marketcap: 289458275 },
-        { symbol: 'QTUM', status: 'ENABLE', marketcap: 167615207 },
         { symbol: 'KMD', status: 'ENABLE', marketcap: 107340275 },
         { symbol: 'CHIPS', status: 'ENABLE', marketcap: 1609044 },
         { symbol: 'VRSC', status: 'ENABLE', marketcap: 1609044 },

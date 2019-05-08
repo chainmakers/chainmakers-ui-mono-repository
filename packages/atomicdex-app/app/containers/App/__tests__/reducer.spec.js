@@ -4,8 +4,9 @@ import {
   LOADING,
   LOADED,
   FAILED,
-  ENABLE,
   DISABLE,
+  ENABLE,
+  INITIALIZATION,
   STATE_STARTED,
   STATE_RUNNING,
   STATE_TERMINATED
@@ -21,7 +22,9 @@ import {
   addElectrumError,
   loadBalance,
   loadDataFromDBError,
-  loadDataFromDBSuccess
+  loadDataFromDBSuccess,
+  removeElectrum,
+  loadWithdrawBalanceSuccess
 } from '../actions';
 import { ELECTRUM_ADD, LOGIN } from '../constants';
 import type { ErrorType } from '../../schema';
@@ -116,7 +119,7 @@ describe('containers/App/reducers/addElectrum', () => {
         fromJS([
           {
             symbol: 'BEER',
-            status: DISABLE,
+            status: INITIALIZATION,
             marketcap: 0
           }
         ])
@@ -247,11 +250,126 @@ describe('containers/App/reducers/loadDataFromDBSuccess', () => {
         })
       )
       .updateIn(['balance', 'list'], arr =>
-        arr.push(fromJS({ symbol: coin, status: DISABLE, marketcap: 0 }))
+        arr.push(fromJS({ symbol: coin, status: INITIALIZATION, marketcap: 0 }))
       );
     expect(
       appReducer(initialState, loadDataFromDBSuccess(['BTC', 'KMD', coin]))
     ).toEqual(state);
+  });
+});
+
+describe('containers/App/reducers/removeElectrum', () => {
+  const coin = 'BEER';
+  let state;
+  it('should handle the removeElectrum action correctly', () => {
+    state = initialState
+      .setIn(['balance', 'fetchStatus', coin], LOADED)
+      .setIn(['balance', 'errors', coin], null)
+      .setIn(
+        ['balance', 'entities', coin],
+        fromJS({
+          coin,
+          address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
+          balance: 6433.39037744,
+          fee: 0.00001
+        })
+      )
+      .setIn(
+        ['balance', 'list'],
+        fromJS([
+          {
+            symbol: coin,
+            status: ENABLE,
+            marketcap: 0
+          }
+        ])
+      );
+
+    const expectedResult = initialState
+      .setIn(
+        ['balance', 'entities', coin],
+        fromJS({
+          coin,
+          address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
+          balance: 6433.39037744,
+          fee: 0.00001
+        })
+      )
+      .setIn(
+        ['balance', 'list'],
+        fromJS([
+          {
+            symbol: coin,
+            status: DISABLE,
+            marketcap: 0
+          }
+        ])
+      );
+
+    expect(appReducer(state, removeElectrum(coin))).toEqual(expectedResult);
+  });
+});
+
+describe('containers/App/reducers/loadWithdrawBalanceSuccess', () => {
+  const coin = 'BEER';
+  const amount = 3.39037744;
+  const address = 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu';
+  const payload = {
+    coin,
+    address,
+    amount
+  };
+  let state;
+  it('should handle the loadWithdrawBalanceSuccess action correctly', () => {
+    state = initialState
+      .setIn(['balance', 'fetchStatus', coin], LOADED)
+      .setIn(['balance', 'errors', coin], null)
+      .setIn(
+        ['balance', 'entities', coin],
+        fromJS({
+          coin,
+          address,
+          balance: 6433.39037744,
+          fee: 0.00001
+        })
+      )
+      .setIn(
+        ['balance', 'list'],
+        fromJS([
+          {
+            symbol: coin,
+            status: ENABLE,
+            marketcap: 0
+          }
+        ])
+      );
+
+    const expectedResult = initialState
+      .setIn(['balance', 'fetchStatus', coin], LOADED)
+      .setIn(['balance', 'errors', coin], null)
+      .setIn(
+        ['balance', 'entities', coin],
+        fromJS({
+          coin,
+          address,
+          balance: 6430,
+          fee: 0.00001
+        })
+      )
+      .setIn(
+        ['balance', 'list'],
+        fromJS([
+          {
+            symbol: coin,
+            status: ENABLE,
+            marketcap: 0
+          }
+        ])
+      );
+
+    expect(appReducer(state, loadWithdrawBalanceSuccess(payload))).toEqual(
+      expectedResult
+    );
   });
 });
 

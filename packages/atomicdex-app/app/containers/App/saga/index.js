@@ -11,7 +11,8 @@ import {
   BALANCE_LOAD_ERROR,
   DATA_FROM_DB_LOAD,
   ELECTRUM_ADD_SUCCESS,
-  BALANCE_LOAD_SUCCESS
+  BALANCE_LOAD_SUCCESS,
+  ELECTRUM_REMOVE
 } from '../constants';
 import listenForLoadingBalance, {
   handlingLoadBalance,
@@ -20,7 +21,8 @@ import listenForLoadingBalance, {
 import { handlingLoginError, handlingLoginSuccess } from './login';
 import electrums, { loadElectrum } from './electrums';
 import listenForLoadingDataFromDB, {
-  listenForLoadBalanceOrElectrumSuccessful
+  listenForLoadBalanceOrElectrumSuccessful,
+  listenForRemoveElectrum
 } from './db';
 import logoutFlow from './logout';
 
@@ -38,6 +40,7 @@ export default function* root() {
     yield takeFirst(LOGIN_SUCCESS, handlingLoginSuccess),
     yield takeFirst(BALANCE_LOAD_ALL, listenForLoadingBalance),
     yield takeEvery(BALANCE_LOAD, handlingLoadBalance),
-    yield takeEvery(BALANCE_LOAD_ERROR, handlingLoadBalanceError)
+    yield takeEvery(BALANCE_LOAD_ERROR, handlingLoadBalanceError),
+    yield takeEvery(ELECTRUM_REMOVE, listenForRemoveElectrum)
   ]);
 }

@@ -7,14 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { getMonth } from '../utils';
 import getCoinMemoize from '../../../components/CryptoIcons';
-import {
-  AUTO_HIDE_SNACKBAR_TIME,
-  STATE_SWAPS,
-  SWAP_WARNING_MESSAGE,
-  NA,
-  DEXFEE,
-  FINISHED_SWAPS_STATE
-} from '../constants';
+import { STATE_SWAPS } from '../constants';
 
 const debug = require('debug')(
   'atomicapp:containers:DexPage:TransactionRecord'

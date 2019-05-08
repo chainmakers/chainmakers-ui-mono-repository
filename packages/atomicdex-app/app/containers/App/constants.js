@@ -23,6 +23,7 @@ export const ELECTRUM_LOAD = 'atomicapp/App/ELECTRUM_LOAD';
 export const ELECTRUM_ADD = 'atomicapp/App/ELECTRUM_ADD';
 export const ELECTRUM_ADD_SUCCESS = 'atomicapp/App/ELECTRUM_ADD_SUCCESS';
 export const ELECTRUM_ADD_ERROR = 'atomicapp/App/ELECTRUM_ADD_ERROR';
+export const ELECTRUM_REMOVE = 'atomicapp/App/ELECTRUM_REMOVE';
 
 // balance
 export const BALANCE_LOAD_ALL = 'atomicapp/App/BALANCE_LOAD_ALL';

@@ -2,7 +2,7 @@
 import { put, select, cancelled } from 'redux-saga/effects';
 import { CANCEL } from 'redux-saga';
 import api from '../../../lib/barter-dex-api';
-import { DISABLE } from '../../../constants';
+import { INITIALIZATION } from '../../../constants';
 import { ELECTRUM_ADD, ALREADY_INIT_LIST } from '../constants';
 import {
   makeSelectBalance,
@@ -21,7 +21,7 @@ export default function* listenForLoadingElectrums() {
   );
   const list = balance
     .get('list')
-    .filter(item => item.get('status') === DISABLE)
+    .filter(item => item.get('status') === INITIALIZATION)
     .map(e => e.get('symbol'));
 
   for (let i = 0; i < list.size; i += 1) {

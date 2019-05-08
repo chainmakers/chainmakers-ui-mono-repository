@@ -14,10 +14,16 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
+import RemoveIcon from '@material-ui/icons/Clear';
+import Tooltip from '@material-ui/core/Tooltip';
 import { LOADING } from '../../../constants';
 import getCoinMemoize from '../../../components/CryptoIcons';
 import { covertSymbolToName } from '../../../utils/coin';
-import { openAssetModal, retryAction } from '../actions';
+import {
+  openAssetModal,
+  openRemoveElectrumModal,
+  retryAction
+} from '../actions';
 import {
   makeSelectBalanceFetchStatus,
   makeSelectBalanceEntities,
@@ -28,6 +34,11 @@ import { INFO_TAB, DEPOSIT_TAB, WITHDRAW_TAB } from '../constants';
 const debug = require('debug')('atomicapp:containers:WalletPage:Asset');
 
 const styles = theme => ({
+  wallet__card: {
+    border: '1px solid #dadce0',
+    boxShadow: 'none'
+  },
+
   leftIcon: {
     marginRight: theme.spacing.unit
   },
@@ -77,11 +88,6 @@ const styles = theme => ({
     }
   },
 
-  wallet__card: {
-    border: '1px solid #dadce0',
-    boxShadow: 'none'
-  },
-
   wallet__buttonBorder: {
     borderLeft: '1px solid rgba(0, 0, 0, 0.1)',
     margin: '0px 16px',
@@ -103,6 +109,21 @@ const styles = theme => ({
     '&:hover': {
       color: '#fff'
     }
+  },
+
+  wallet__removeAction: {
+    opacity: 0,
+    transition: 'opacity .218s ease-in',
+    visibility: 'hidden'
+  },
+
+  wallet__removeActionHover: {
+    color: 'rgba(0, 0, 0, 0.54)',
+    opacity: 0.71
+  },
+
+  wallet__removeActionReady: {
+    visibility: 'visible'
   }
 });
 
@@ -118,11 +139,21 @@ type IAssetProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchOpenAssetModal: Function,
   // eslint-disable-next-line flowtype/no-weak-types
-  dispatchRetryAction: Function
+  dispatchRetryAction: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchOpenRemoveElectrumModal: Function
 };
 
-class Asset extends React.PureComponent<IAssetProps> {
+type IAssetState = {
+  hover: boolean
+};
+
+class Asset extends React.PureComponent<IAssetProps, IAssetState> {
   static displayName = 'Asset';
+
+  state = {
+    hover: false
+  };
 
   openWithdraw = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
@@ -148,6 +179,22 @@ class Asset extends React.PureComponent<IAssetProps> {
     dispatchRetryAction({
       coin: symbol
     });
+  };
+
+  onClickOpenRemoveElectrumModal = async (evt: SyntheticInputEvent<>) => {
+    evt.preventDefault();
+    const { dispatchOpenRemoveElectrumModal, symbol } = this.props;
+    dispatchOpenRemoveElectrumModal(symbol);
+  };
+
+  toggleHoverOpen = () => {
+    const { hover } = this.state;
+    if (!hover) this.setState({ hover: true });
+  };
+
+  toggleHoverClose = () => {
+    const { hover } = this.state;
+    if (hover) this.setState({ hover: false });
   };
 
   renderActions = () => {
@@ -201,8 +248,10 @@ class Asset extends React.PureComponent<IAssetProps> {
   render() {
     debug(`render`);
 
-    const { classes, symbol, entity, error } = this.props;
+    const { classes, symbol, entity, error, fetchStatus } = this.props;
+    const { hover } = this.state;
     const isError = !!error;
+    const loading = fetchStatus === LOADING;
 
     return (
       <Card
@@ -210,6 +259,10 @@ class Asset extends React.PureComponent<IAssetProps> {
         className={ClassNames(classes.wallet__card, {
           [classes.wallet__error]: isError
         })}
+        onMouseOver={this.toggleHoverOpen}
+        onMouseLeave={this.toggleHoverClose}
+        onFocus={this.toggleHoverOpen}
+        onBlur={this.toggleHoverClose}
       >
         <CardHeader
           classes={{
@@ -221,10 +274,29 @@ class Asset extends React.PureComponent<IAssetProps> {
               [classes.wallet__textWhite]: isError
             })
           }}
-          action={
-            <IconButton onClick={this.openInfo}>
-              {getCoinMemoize(symbol)}
+          avatar={
+            <IconButton
+              onClick={this.openInfo}
+              style={{
+                padding: 0
+              }}
+            >
+              {getCoinMemoize(symbol, 40, 40)}
             </IconButton>
+          }
+          action={
+            <Tooltip title="Remove">
+              <IconButton
+                disabled={loading}
+                onClick={this.onClickOpenRemoveElectrumModal}
+                className={ClassNames(classes.wallet__removeAction, {
+                  [classes.wallet__removeActionHover]: hover,
+                  [classes.wallet__removeActionReady]: !loading
+                })}
+              >
+                <RemoveIcon />
+              </IconButton>
+            </Tooltip>
           }
           title={covertSymbolToName(symbol)}
           subheader={symbol}
@@ -264,7 +336,10 @@ export function mapDispatchToProps(dispatch: Dispatch<Object>) {
           tab
         })
       ),
-    dispatchRetryAction: (coin: string) => dispatch(retryAction(coin))
+    dispatchRetryAction: (coin: string) => dispatch(retryAction(coin)),
+
+    dispatchOpenRemoveElectrumModal: (coin: string) =>
+      dispatch(openRemoveElectrumModal(coin))
   };
 }
 

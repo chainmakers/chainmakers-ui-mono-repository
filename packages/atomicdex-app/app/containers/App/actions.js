@@ -28,6 +28,7 @@ import {
   ELECTRUM_ADD,
   ELECTRUM_ADD_SUCCESS,
   ELECTRUM_ADD_ERROR,
+  ELECTRUM_REMOVE,
   BALANCE_LOAD_ALL,
   BALANCE_LOAD,
   BALANCE_LOAD_SUCCESS,
@@ -101,6 +102,15 @@ export function addElectrum(payload: AddElectrumPayload) {
   return {
     type: ELECTRUM_ADD,
     payload
+  };
+}
+
+export function removeElectrum(coin: string) {
+  return {
+    type: ELECTRUM_REMOVE,
+    payload: {
+      coin
+    }
   };
 }
 

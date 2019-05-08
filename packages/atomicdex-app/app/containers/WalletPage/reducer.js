@@ -17,7 +17,9 @@ import {
   DEPOSIT_TAB,
   TAB_ASSET_INFO_SWITCH,
   ASSET_MODAL_OPEN,
-  ASSET_MODAL_CLOSE
+  ASSET_MODAL_CLOSE,
+  REMOVING_ELECTRUM_MODAL_OPEN,
+  REMOVING_ELECTRUM_MODAL_CLOSE
 } from './constants';
 
 import { LOGOUT } from '../App/constants';
@@ -47,7 +49,7 @@ export const initialState = fromJS({
     tab: DEPOSIT_TAB
   },
 
-  utxosModal: {
+  removingElectrumModal: {
     open: false,
     coin: null
   },
@@ -155,6 +157,14 @@ const walletReducer = handleActions(
       state
         .setIn(['assetModal', 'loading'], false)
         .setIn(['assetModal', 'error'], fromJS(error)),
+
+    [REMOVING_ELECTRUM_MODAL_OPEN]: (state, { payload }) =>
+      state
+        .setIn(['removingElectrumModal', 'open'], true)
+        .setIn(['removingElectrumModal', 'coin'], payload.coin),
+
+    [REMOVING_ELECTRUM_MODAL_CLOSE]: state =>
+      state.setIn(['removingElectrumModal', 'open'], false),
 
     [LOGOUT]: () => initialState
   },

@@ -88,6 +88,24 @@ const makeSelectJoyrideOpenState = () =>
     joyrideState => joyrideState.get('open')
   );
 
+const makeSelectRemovingElectrumModal = () =>
+  createSelector(
+    selectWallet,
+    walletState => walletState.get('removingElectrumModal')
+  );
+
+const makeSelectOpenStateRemovingElectrumModal = () =>
+  createSelector(
+    makeSelectRemovingElectrumModal(),
+    removingElectrumModal => removingElectrumModal.get('open')
+  );
+
+const makeSelectCoinRemovingElectrumModal = () =>
+  createSelector(
+    makeSelectRemovingElectrumModal(),
+    removingElectrumModal => removingElectrumModal.get('coin')
+  );
+
 export {
   selectWallet,
   makeSelectTransactionsLoading,
@@ -102,5 +120,8 @@ export {
   makeSelectTabAssetModal,
   makeSelectErrorAssetModal,
   makeSelectJoyride,
-  makeSelectJoyrideOpenState
+  makeSelectJoyrideOpenState,
+  makeSelectRemovingElectrumModal,
+  makeSelectOpenStateRemovingElectrumModal,
+  makeSelectCoinRemovingElectrumModal
 };

@@ -51,6 +51,7 @@ class PortfolioTab extends React.PureComponent<IPortfolioTabProps> {
 
   renderWallet = (data, k) => {
     const { classes } = this.props;
+
     return (
       <Grid
         key={`wallet_page_overview${data.get('symbol')}`}

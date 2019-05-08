@@ -1,7 +1,13 @@
 // @flow
 // The global state selectors
 import { createSelector } from 'reselect';
-import { LOADING, ENABLE, STATE_STARTED, STATE_RUNNING } from '../../constants';
+import {
+  LOADING,
+  DISABLE,
+  ENABLE,
+  STATE_STARTED,
+  STATE_RUNNING
+} from '../../constants';
 import { APP_STATE_NAME } from './constants';
 
 const selectRoot = state => state;
@@ -64,7 +70,8 @@ const makeSelectBalanceLoading = () =>
 const makeSelectBalanceList = () =>
   createSelector(
     makeSelectBalance(),
-    balanceState => balanceState.get('list')
+    balanceState =>
+      balanceState.get('list').filter(item => item.get('status') !== DISABLE)
   );
 
 const makeSelectBalanceEntities = () =>

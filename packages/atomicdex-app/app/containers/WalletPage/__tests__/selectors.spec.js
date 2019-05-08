@@ -15,7 +15,10 @@ import {
   makeSelectCoinAssetModal,
   makeSelectLoadingAssetModal,
   makeSelectTabAssetModal,
-  makeSelectErrorAssetModal
+  makeSelectErrorAssetModal,
+  makeSelectRemovingElectrumModal,
+  makeSelectOpenStateRemovingElectrumModal,
+  makeSelectCoinRemovingElectrumModal
 } from '../selectors';
 import data from '../../__tests__/app-state.json';
 
@@ -29,7 +32,7 @@ describe('containers/WalletPage/selectors/selectWallet', () => {
 });
 
 describe('containers/WalletPage/selectors/makeSelectTransactionsLoading', () => {
-  it('should select the withdrawModal state', () => {
+  it('should select the TransactionsCoins state', () => {
     const mockedState = fromJS({
       [APP_STATE_NAME]: initialState
     });
@@ -131,11 +134,43 @@ describe('containers/WalletPage/selectors/makeSelectTabAssetModal', () => {
 });
 
 describe('containers/WalletPage/selectors/makeSelectErrorAssetModal', () => {
-  it('should select the withdrawModal state', () => {
+  it('should select the assetModal state', () => {
     const mockedState = fromJS({
       [APP_STATE_NAME]: initialState
     });
     const selectErrorAssetModal = makeSelectErrorAssetModal();
     expect(selectErrorAssetModal(mockedState)).toEqual(false);
+  });
+});
+
+describe('containers/WalletPage/selectors/makeSelectRemovingElectrumModal', () => {
+  it('should select the RemovingElectrumModal state', () => {
+    const mockedState = fromJS({
+      [APP_STATE_NAME]: initialState
+    });
+    const selectRemovingElectrumModal = makeSelectRemovingElectrumModal();
+    expect(selectRemovingElectrumModal(mockedState)).toEqual(
+      initialState.get('removingElectrumModal')
+    );
+  });
+});
+
+describe('containers/WalletPage/selectors/makeSelectOpenStateRemovingElectrumModal', () => {
+  it('should select the RemovingElectrumModal state', () => {
+    const mockedState = fromJS({
+      [APP_STATE_NAME]: initialState
+    });
+    const selectOpenStateRemovingElectrumModal = makeSelectOpenStateRemovingElectrumModal();
+    expect(selectOpenStateRemovingElectrumModal(mockedState)).toEqual(false);
+  });
+});
+
+describe('containers/WalletPage/selectors/makeSelectCoinRemovingElectrumModal', () => {
+  it('should select the RemovingElectrumModal state', () => {
+    const mockedState = fromJS({
+      [APP_STATE_NAME]: initialState
+    });
+    const selectCoinRemovingElectrumModal = makeSelectCoinRemovingElectrumModal();
+    expect(selectCoinRemovingElectrumModal(mockedState)).toEqual(null);
   });
 });

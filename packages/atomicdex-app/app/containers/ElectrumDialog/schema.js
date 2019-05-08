@@ -1,7 +1,8 @@
 // @flow
 
-type AddElectrumPayload = {
+type ElectrumPayload = {
   coins: Array<string>
 };
 
-export type { AddElectrumPayload };
+// eslint-disable-next-line import/prefer-default-export
+export type { ElectrumPayload };

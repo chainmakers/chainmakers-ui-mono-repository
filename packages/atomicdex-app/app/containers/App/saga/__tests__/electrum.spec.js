@@ -27,20 +27,25 @@ describe('containers/App/saga/electrums/listenForLoadingElectrums', () => {
       expect(dispatched).toEqual([
         {
           payload: {
+            txfee: 1000,
+            urls: [
+              'bch.imaginary.cash:50001',
+              'electroncash.dk:50001',
+              'electrum.imaginary.cash:50001',
+              'abc1.hsmiths.com:60001'
+            ],
             active: 0,
-            asset: 'LTC',
-            coin: 'LTC',
-            id: 3,
-            market_cap: 2578993869,
-            marketcap: 0,
-            name: 'Litecoin',
+            rpcport: 33333,
+            name: 'Bitcoin Cash',
+            wiftype: 128,
+            market_cap: 2197468013,
+            coin: 'BCH',
             p2shtype: 5,
-            pubtype: 48,
-            rpcport: 9332,
-            symbol: 'LTC',
-            txfee: 100000,
-            urls: ['electrum1.cipig.net:10065', 'electrum2.cipig.net:10065'],
-            wiftype: 176
+            txversion: 4,
+            marketcap: 0,
+            pubtype: 0,
+            symbol: 'BCH',
+            id: 10
           },
           type: 'atomicapp/App/ELECTRUM_ADD'
         }

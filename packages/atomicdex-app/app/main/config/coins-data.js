@@ -25,7 +25,6 @@ const data = [
   // {
   //   coin: 'EQL',
   //   name: 'Equaliser',
-  //   asset: 'EQL',
   //   rpcport: 10306,
   //   urls: ['159.65.91.235:10801', '167.99.204.42:10801'],
   //   active: 0,
@@ -35,7 +34,6 @@ const data = [
   // {
   //   coin: 'LTC',
   //   name: 'Litecoin',
-  //   asset: 'LTC',
   //   urls: ['electrum1.cipig.net:10065', 'electrum2.cipig.net:10065'],
   //   rpcport: 9332,
   //   pubtype: 48,
@@ -49,7 +47,6 @@ const data = [
   {
     coin: 'COQUI',
     name: 'Coqui Cash',
-    asset: 'COQUI',
     txversion: 4,
     urls: ['electrum1.cipig.net:10011', 'electrum2.cipig.net:10011'],
     rpcport: 14276,
@@ -60,7 +57,6 @@ const data = [
   {
     coin: 'CHIPS',
     name: 'Chips',
-    asset: 'CHIPS',
     txversion: 4,
     urls: ['electrum1.cipig.net:10053', 'electrum2.cipig.net:10053'],
     rpcport: 57776,
@@ -73,7 +69,6 @@ const data = [
     mm2: 1
   },
   // {
-  //   asset: 'REVS',
   //   coin: 'REVS',
   //   name: 'Revs',
   //   rpcport: 10196,
@@ -89,7 +84,6 @@ const data = [
   // {
   //   coin: 'VRSC',
   //   name: 'VerusCoin',
-  //   asset: 'VRSC',
   //   txversion: 4,
   //   urls: [
   //     'el0.vrsc.0x03.services:10000',
@@ -104,7 +98,6 @@ const data = [
   {
     coin: 'KMDICE',
     name: 'KMDice',
-    asset: 'KMDice',
     txversion: 4,
     urls: [
       'electrum1.cipig.net:10031',
@@ -119,7 +112,6 @@ const data = [
   {
     coin: 'CHAIN',
     name: 'Chainmakers',
-    asset: 'CHAIN',
     txversion: 4,
     urls: [
       'electrum1.cipig.net:10032',
@@ -134,7 +126,6 @@ const data = [
   {
     coin: 'BCH',
     name: 'Bitcoin Cash',
-    asset: 'bch',
     txversion: 4,
     urls: [
       'bch.imaginary.cash:50001'
@@ -154,7 +145,6 @@ const data = [
   // {
   //   coin: 'QTUM',
   //   name: 'Qtum',
-  //   asset: 'qtum',
   //   urls: [
   //     's4.qtum.info:50001',
   //     's5.qtum.info:50001',
@@ -173,7 +163,6 @@ const data = [
   // {
   //   coin: 'ZEC',
   //   name: 'Zcash',
-  //   asset: 'zcash',
   //   txversion: 4,
   //   urls: [
   //     'electrum1.cipig.net:10058',
@@ -193,7 +182,6 @@ const data = [
   {
     coin: 'BEER',
     name: 'Beer',
-    asset: 'BEER',
     txversion: 4,
     rpcport: 8923,
     urls: ['electrum1.cipig.net:10022', 'electrum2.cipig.net:10022'],
@@ -204,7 +192,6 @@ const data = [
   {
     coin: 'PIZZA',
     name: 'Pizza',
-    asset: 'PIZZA',
     txversion: 4,
     rpcport: 11608,
     urls: [
@@ -225,7 +212,6 @@ const data = [
   //   txfee: 10000,
   //   urls: ['electrum.paccoin.io:50001', 'electro-pac.paccoin.io:50001'],
   //   name: 'PACcoin',
-  //   asset: '$PAC',
   //   active: 0,
   //   market_cap: 0,
   //   mm2: 1
@@ -235,7 +221,6 @@ const data = [
   //   name: 'FirstBlood',
   //   etomic: '0xAf30D2a7E90d7DC361c8C4585e9BB7D2F6f15bc7',
   //   rpcport: 80,
-  //   asset: '1ST',
   //   active: 0,
   //   market_cap: 0,
   //   mm2: 1
@@ -245,7 +230,6 @@ const data = [
   //   name: 'adToken',
   //   etomic: '0xD0D6D6C5Fe4a677D343cC433536BB717bAe167dD',
   //   rpcport: 80,
-  //   asset: 'ADT',
   //   active: 0,
   //   market_cap: 0,
   //   mm2: 1
@@ -255,7 +239,6 @@ const data = [
   //   name: 'Aeternity',
   //   etomic: '0x5ca9a71b1d01849c0a95490cc00559717fcf0d1d',
   //   rpcport: 80,
-  //   asset: 'AE',
   //   active: 0,
   //   market_cap: 0,
   //   mm2: 1
@@ -265,7 +248,6 @@ const data = [
   //   name: 'Aion',
   //   etomic: '0x4CEdA7906a5Ed2179785Cd3A40A69ee8bc99C466',
   //   rpcport: 80,
-  //   asset: 'AION',
   //   active: 0,
   //   market_cap: 0,
   //   mm2: 1
@@ -275,7 +257,6 @@ const data = [
   //   name: 'Ambrosus',
   //   etomic: '0x4DC3643DbC642b72C158E7F3d2ff232df61cb6CE',
   //   rpcport: 80,
-  //   asset: 'AMB',
   //   active: 0,
   //   market_cap: 0,
   //   mm2: 1
@@ -292,7 +273,6 @@ const data = [
   //   name: 'Aragon',
   //   etomic: '0x960b236A07cf122663c4303350609A66A7B288C0',
   //   rpcport: 80,
-  //   asset: 'ANT',
   //   active: 0,
   //   market_cap: 0,
   //   mm2: 1
@@ -685,7 +665,6 @@ const data = [
   {
     coin: 'DEX',
     name: 'DEX',
-    asset: 'DEX',
     rpcport: 11890,
     urls: [
       'electrum1.cipig.net:10006',
@@ -888,7 +867,6 @@ const data = [
   //   etomic: '0x0000000000000000000000000000000000000000',
   //   rpcport: 80,
   //   name: 'Ethereum',
-  //   asset: 'ETH',
   //   active: 0,
   //   market_cap: 0,
   //   mm2: 1
@@ -1026,7 +1004,6 @@ const data = [
       'electrum3.cipig.net:10072'
     ],
     name: 'GameCredits',
-    asset: 'GAME',
     active: 0,
     market_cap: 0,
     mm2: 1

@@ -18,6 +18,7 @@ import {
   LOADING,
   LOADED,
   FAILED,
+  INITIALIZATION,
   ENABLE,
   DISABLE,
   STATE_STARTED,
@@ -35,6 +36,7 @@ import {
   ELECTRUM_ADD,
   ELECTRUM_ADD_SUCCESS,
   ELECTRUM_ADD_ERROR,
+  ELECTRUM_REMOVE,
   BALANCE_LOAD,
   BALANCE_LOAD_SUCCESS,
   BALANCE_LOAD_ERROR,
@@ -49,6 +51,9 @@ import type {
   LoadbalacePayload,
   LoadBalanceSuccessPayload
 } from './schema';
+
+// BALANCE STATUS
+// => INITIALIZATION => ENABLE <=> DISABLE
 
 const config = getConfig();
 const COIN_DATA = config.get('marketmaker.data');
@@ -166,7 +171,7 @@ const appReducer = handleActions(
           .push(
             fromJS({
               symbol: payload.coin,
-              status: DISABLE,
+              status: INITIALIZATION,
               marketcap:
                 state.getIn(['supported_coins', payload.coin, 'marketcap']) || 0
             })
@@ -212,10 +217,51 @@ const appReducer = handleActions(
         .setIn(['balance', 'errors', params.coin], fromJS(error));
     },
 
-    [BALANCE_LOAD]: (state, { payload }: { payload: LoadbalacePayload }) =>
-      state
+    [ELECTRUM_REMOVE]: (state, { payload }) => {
+      const { coin } = payload;
+
+      // step one: update entities
+      // state = state.setIn(
+      //   ['balance', 'entities'],
+      //   state.getIn(['balance', 'entities']).delete(coin)
+      // );
+
+      // step two: update key in list
+      // let list = state.getIn(['balance', 'list']);
+      // list = list.filter(item => item.get('symbol') !== coin);
+      // state = state.setIn(['balance', 'list'], list);
+      let list = state.getIn(['balance', 'list']);
+      const index = list.findIndex(item => item.get('symbol') === coin);
+      if (index !== -1) {
+        list = list.update(index, item => item.set('status', DISABLE));
+        state = state.setIn(['balance', 'list'], list);
+      }
+
+      // step three: update fetch status
+      state = state.setIn(
+        ['balance', 'fetchStatus'],
+        state.getIn(['balance', 'fetchStatus']).delete(coin)
+      );
+
+      state = state.setIn(
+        ['balance', 'errors'],
+        state.getIn(['balance', 'errors']).delete(coin)
+      );
+
+      return state;
+    },
+
+    [BALANCE_LOAD]: (state, { payload }: { payload: LoadbalacePayload }) => {
+      let list = state.getIn(['balance', 'list']);
+      const index = list.findIndex(item => item.get('symbol') === payload.coin);
+      if (index !== -1) {
+        list = list.update(index, item => item.set('status', ENABLE));
+        state = state.setIn(['balance', 'list'], list);
+      }
+      return state
         .setIn(['balance', 'fetchStatus', payload.coin], LOADING)
-        .setIn(['balance', 'errors', payload.coin], null),
+        .setIn(['balance', 'errors', payload.coin], null);
+    },
 
     [BALANCE_LOAD_SUCCESS]: (
       state,
@@ -262,6 +308,7 @@ const appReducer = handleActions(
       for (let i = 0; i < payload.length; i += 1) {
         const coin = payload[i];
         if (!supportedCoinsList.find(obj => obj === coin)) {
+          // eslint-disable-next-line no-continue
           continue;
         }
         // step one: update entities
@@ -282,7 +329,7 @@ const appReducer = handleActions(
             .push(
               fromJS({
                 symbol: coin,
-                status: DISABLE,
+                status: INITIALIZATION,
                 marketcap:
                   state.getIn(['supported_coins', coin, 'marketcap']) || 0
               })

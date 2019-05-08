@@ -5,7 +5,9 @@ export const ENABLE = 'ENABLE';
 export const DISABLE = 'DISABLE';
 export const SELECTED = 'SELECTED';
 export const UNSELECTED = 'UNSELECTED';
-
+export const INITIALIZATION = 'INITIALIZATION';
+// BALANCE STATUS
+// => INITIALIZATION => ENABLE <=> DISABLE
 // https://www.tutorialspoint.com/operating_system/os_processes.htm
 // Operating System - Processes
 export const STATE_STARTED = 'STATE_STARTED';

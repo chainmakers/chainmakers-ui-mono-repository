@@ -213,6 +213,7 @@ import JPY from './jpy.svg';
 import KCS from './kcs.svg';
 import KIN from './kin.svg';
 import KMD from './kmd.svg';
+import KMDICE from './kmdice.svg';
 import KNC from './knc.svg';
 import KRB from './krb.svg';
 import LBC from './lbc.svg';
@@ -629,6 +630,7 @@ const list = {
   KCS,
   KIN,
   KMD,
+  KMDICE,
   KNC,
   KRB,
   LBC,

@@ -26,6 +26,27 @@ export function* listenForLoadBalanceOrElectrumSuccessful({ payload }) {
   }
 }
 
+export function* listenForRemoveElectrum({ payload }) {
+  let balanceList;
+  const db = get();
+  try {
+    debug(`remove electrum successful`);
+    balanceList = yield call([db, 'get'], 'balance_list');
+    if (balanceList) {
+      const l = balanceList.filter(e => e !== payload.coin);
+      if (l.length !== balanceList.length) {
+        yield call([db, 'put'], 'balance_list', l);
+      }
+    }
+  } catch (err) {
+    debug(`remove electrum error: ${err.message}`);
+  } finally {
+    if (yield cancelled()) {
+      debug(`remove electrum cancelled`);
+    }
+  }
+}
+
 export default function* listenForLoadingDataFromDB() {
   debug(`load data from db`);
   try {

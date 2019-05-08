@@ -15,7 +15,9 @@ import {
   // DEPOSIT_TAB,
   TAB_ASSET_INFO_SWITCH,
   ASSET_MODAL_OPEN,
-  ASSET_MODAL_CLOSE
+  ASSET_MODAL_CLOSE,
+  REMOVING_ELECTRUM_MODAL_OPEN,
+  REMOVING_ELECTRUM_MODAL_CLOSE
 } from './constants';
 import type {
   CoinTransactionsLoadPayload,
@@ -131,5 +133,20 @@ export function openAssetModal(payload: OpenAssetModalPayload) {
 export function closeAssetModal() {
   return {
     type: ASSET_MODAL_CLOSE
+  };
+}
+
+export function openRemoveElectrumModal(coin: string) {
+  return {
+    type: REMOVING_ELECTRUM_MODAL_OPEN,
+    payload: {
+      coin
+    }
+  };
+}
+
+export function closeRemoveElectrumModal() {
+  return {
+    type: REMOVING_ELECTRUM_MODAL_CLOSE
   };
 }

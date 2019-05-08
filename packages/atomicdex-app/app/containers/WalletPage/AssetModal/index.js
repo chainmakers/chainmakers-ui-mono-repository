@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import CloudOff from '@material-ui/icons/CloudOff';
 import { makeSelectAssetModal } from '../selectors';
 import { closeAssetModal } from '../actions';
-import AsseModalContent from './AsseModalContent';
+import AssetModalContent from './AssetModalContent';
 
 const debug = require('debug')('atomicapp:containers:WalletPage:AssetModal');
 
@@ -67,7 +67,7 @@ class AssetModal extends React.PureComponent<Props> {
     );
   };
 
-  renderCoin = () => <AsseModalContent />;
+  renderCoin = () => <AssetModalContent />;
 
   render() {
     debug('render');

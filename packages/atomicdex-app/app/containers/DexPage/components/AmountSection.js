@@ -241,7 +241,6 @@ type Props = {
   payment: Map<*, *>,
   buyingLoading: boolean,
   // eslint-dis,able-next-line flowtype/no-weak-types
-  // buyingError: boolean | Object,
   entity?: Map<*, *>,
   // eslint-disable-next-line flowtype/no-weak-types
   buyingError: boolean | Object,

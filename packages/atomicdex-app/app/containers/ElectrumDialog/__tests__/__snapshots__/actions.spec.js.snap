@@ -1,8 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`containers/ElectrumDialog/actions/addElectrum should addElectrum should create addElectrum action 1`] = `
+Object {
+  "payload": Object {
+    "coins": Array [
+      "KMD",
+      "BTC",
+    ],
+  },
+  "type": "atomicapp/ElectrumDialog/ELECTRUM_ADD",
+}
+`;
+
 exports[`containers/ElectrumDialog/actions/hideElectrumDialog should hideElectrumDialog should create hideElectrumDialog action 1`] = `
 Object {
   "type": "atomicapp/ElectrumDialog/ELECTRUM_DIALOG_HIDE",
+}
+`;
+
+exports[`containers/ElectrumDialog/actions/removeElectrum should removeElectrum should create removeElectrum action 1`] = `
+Object {
+  "payload": Object {
+    "coins": Array [
+      "KMD",
+      "BTC",
+    ],
+  },
+  "type": "atomicapp/ElectrumDialog/ELECTRUM_REMOVE",
 }
 `;
 

@@ -29,9 +29,7 @@ describe('containers/App/saga/balance/listenForLoadingBalance', () => {
     expect(saga).toEqual(undefined);
     expect(dispatched).toEqual([
       { payload: { coin: 'BTC' }, type: 'atomicapp/App/BALANCE_LOAD' },
-      { payload: { coin: 'BCH' }, type: 'atomicapp/App/BALANCE_LOAD' },
       { payload: { coin: 'ZEC' }, type: 'atomicapp/App/BALANCE_LOAD' },
-      { payload: { coin: 'QTUM' }, type: 'atomicapp/App/BALANCE_LOAD' },
       { payload: { coin: 'KMD' }, type: 'atomicapp/App/BALANCE_LOAD' },
       { payload: { coin: 'CHIPS' }, type: 'atomicapp/App/BALANCE_LOAD' },
       { payload: { coin: 'VRSC' }, type: 'atomicapp/App/BALANCE_LOAD' },

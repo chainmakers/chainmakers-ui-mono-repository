@@ -27,33 +27,10 @@ describe('containers/DexPage/saga/search', () => {
             active: 1,
             name: 'Bitcoin',
             market_cap: 97822306639,
-            asset: 'BTC',
             coin: 'BTC',
             marketcap: 0,
             symbol: 'BTC',
             id: 0
-          },
-          {
-            txfee: 1000,
-            urls: [
-              'bch.imaginary.cash:50001',
-              'electroncash.dk:50001',
-              'electrum.imaginary.cash:50001',
-              'abc1.hsmiths.com:60001'
-            ],
-            active: 0,
-            rpcport: 33333,
-            name: 'Bitcoin Cash',
-            wiftype: 128,
-            market_cap: 2197468013,
-            asset: 'bch',
-            coin: 'BCH',
-            p2shtype: 5,
-            txversion: 4,
-            marketcap: 0,
-            pubtype: 0,
-            symbol: 'BCH',
-            id: 10
           },
           {
             txfee: 10000,
@@ -68,7 +45,6 @@ describe('containers/DexPage/saga/search', () => {
             name: 'Zcash',
             wiftype: 128,
             market_cap: 289458275,
-            asset: 'zcash',
             coin: 'ZEC',
             p2shtype: 189,
             txversion: 4,
@@ -78,32 +54,10 @@ describe('containers/DexPage/saga/search', () => {
             id: 12
           },
           {
-            txfee: 400000,
-            urls: [
-              's4.qtum.info:50001',
-              's5.qtum.info:50001',
-              's7.qtum.info:50001',
-              's8.qtum.info:50001'
-            ],
-            active: 0,
-            rpcport: 3889,
-            name: 'Qtum',
-            wiftype: 128,
-            market_cap: 167615207,
-            asset: 'qtum',
-            coin: 'QTUM',
-            p2shtype: 50,
-            marketcap: 0,
-            pubtype: 58,
-            symbol: 'QTUM',
-            id: 11
-          },
-          {
             urls: ['electrum1.cipig.net:10001', 'electrum2.cipig.net:10001'],
             active: 1,
             name: 'Komodo',
             market_cap: 107340275,
-            asset: 'KMD',
             coin: 'KMD',
             txversion: 4,
             marketcap: 0,
@@ -118,7 +72,6 @@ describe('containers/DexPage/saga/search', () => {
             name: 'Chips',
             wiftype: 188,
             market_cap: 1609044,
-            asset: 'CHIPS',
             coin: 'CHIPS',
             p2shtype: 85,
             txversion: 4,
@@ -137,7 +90,6 @@ describe('containers/DexPage/saga/search', () => {
             rpcport: 27486,
             name: 'VerusCoin',
             market_cap: 1609044,
-            asset: 'VRSC',
             coin: 'VRSC',
             txversion: 4,
             marketcap: 0,
@@ -150,7 +102,6 @@ describe('containers/DexPage/saga/search', () => {
             rpcport: 10306,
             name: 'Equaliser',
             market_cap: 0,
-            asset: 'EQL',
             coin: 'EQL',
             marketcap: 0,
             symbol: 'EQL',
@@ -162,7 +113,6 @@ describe('containers/DexPage/saga/search', () => {
             rpcport: 14276,
             name: 'Coqui Cash',
             market_cap: 0,
-            asset: 'COQUI',
             coin: 'COQUI',
             txversion: 4,
             marketcap: 0,
@@ -179,7 +129,6 @@ describe('containers/DexPage/saga/search', () => {
             rpcport: 30177,
             name: 'KMDice',
             market_cap: 0,
-            asset: 'KMDice',
             coin: 'KMDICE',
             txversion: 4,
             marketcap: 0,
@@ -196,7 +145,6 @@ describe('containers/DexPage/saga/search', () => {
             rpcport: 15587,
             name: 'Chainmakers',
             market_cap: 0,
-            asset: 'CHAIN',
             coin: 'CHAIN',
             txversion: 4,
             marketcap: 0,
@@ -209,7 +157,6 @@ describe('containers/DexPage/saga/search', () => {
             rpcport: 8923,
             name: 'Beer',
             market_cap: -1,
-            asset: 'BEER',
             coin: 'BEER',
             txversion: 4,
             marketcap: 0,
@@ -222,7 +169,6 @@ describe('containers/DexPage/saga/search', () => {
             rpcport: 11608,
             name: 'Pizza',
             market_cap: -2,
-            asset: 'PIZZA',
             coin: 'PIZZA',
             txversion: 4,
             marketcap: 0,
@@ -265,7 +211,6 @@ describe('containers/DexPage/saga/search', () => {
         payload: [
           {
             active: 1,
-            asset: 'BTC',
             coin: 'BTC',
             id: 0,
             market_cap: 97822306639,
@@ -276,29 +221,6 @@ describe('containers/DexPage/saga/search', () => {
           },
           {
             active: 0,
-            asset: 'bch',
-            coin: 'BCH',
-            id: 10,
-            market_cap: 2197468013,
-            marketcap: 0,
-            name: 'Bitcoin Cash',
-            p2shtype: 5,
-            pubtype: 0,
-            rpcport: 33333,
-            symbol: 'BCH',
-            txfee: 1000,
-            txversion: 4,
-            urls: [
-              'bch.imaginary.cash:50001',
-              'electroncash.dk:50001',
-              'electrum.imaginary.cash:50001',
-              'abc1.hsmiths.com:60001'
-            ],
-            wiftype: 128
-          },
-          {
-            active: 0,
-            asset: 'zcash',
             coin: 'ZEC',
             id: 12,
             market_cap: 289458275,
@@ -319,29 +241,7 @@ describe('containers/DexPage/saga/search', () => {
             wiftype: 128
           },
           {
-            active: 0,
-            asset: 'qtum',
-            coin: 'QTUM',
-            id: 11,
-            market_cap: 167615207,
-            marketcap: 0,
-            name: 'Qtum',
-            p2shtype: 50,
-            pubtype: 58,
-            rpcport: 3889,
-            symbol: 'QTUM',
-            txfee: 400000,
-            urls: [
-              's4.qtum.info:50001',
-              's5.qtum.info:50001',
-              's7.qtum.info:50001',
-              's8.qtum.info:50001'
-            ],
-            wiftype: 128
-          },
-          {
             active: 1,
-            asset: 'KMD',
             coin: 'KMD',
             id: 1,
             market_cap: 107340275,
@@ -353,7 +253,6 @@ describe('containers/DexPage/saga/search', () => {
           },
           {
             active: 0,
-            asset: 'CHIPS',
             coin: 'CHIPS',
             id: 5,
             market_cap: 1609044,
@@ -370,7 +269,6 @@ describe('containers/DexPage/saga/search', () => {
           },
           {
             active: 0,
-            asset: 'VRSC',
             coin: 'VRSC',
             id: 7,
             market_cap: 1609044,
@@ -387,7 +285,6 @@ describe('containers/DexPage/saga/search', () => {
           },
           {
             active: 0,
-            asset: 'EQL',
             coin: 'EQL',
             id: 2,
             market_cap: 0,
@@ -399,7 +296,6 @@ describe('containers/DexPage/saga/search', () => {
           },
           {
             active: 0,
-            asset: 'COQUI',
             coin: 'COQUI',
             id: 4,
             market_cap: 0,
@@ -412,7 +308,6 @@ describe('containers/DexPage/saga/search', () => {
           },
           {
             active: 0,
-            asset: 'KMDice',
             coin: 'KMDICE',
             id: 8,
             market_cap: 0,
@@ -429,7 +324,6 @@ describe('containers/DexPage/saga/search', () => {
           },
           {
             active: 0,
-            asset: 'CHAIN',
             coin: 'CHAIN',
             id: 9,
             market_cap: 0,
@@ -446,7 +340,6 @@ describe('containers/DexPage/saga/search', () => {
           },
           {
             active: 0,
-            asset: 'BEER',
             coin: 'BEER',
             id: 13,
             market_cap: -1,
@@ -459,7 +352,6 @@ describe('containers/DexPage/saga/search', () => {
           },
           {
             active: 1,
-            asset: 'PIZZA',
             coin: 'PIZZA',
             id: 14,
             market_cap: -2,

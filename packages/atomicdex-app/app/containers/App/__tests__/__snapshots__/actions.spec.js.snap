@@ -144,3 +144,12 @@ Object {
   "type": "atomicapp/App/LOGOUT",
 }
 `;
+
+exports[`containers/App/actions/removeElectrum should removeElectrum should create removeElectrum action 1`] = `
+Object {
+  "payload": Object {
+    "coin": "BEER",
+  },
+  "type": "atomicapp/App/ELECTRUM_REMOVE",
+}
+`;

@@ -2,9 +2,10 @@
 import {
   ELECTRUM_DIALOG_SHOW,
   ELECTRUM_DIALOG_HIDE,
-  ELECTRUM_ADD
+  ELECTRUM_ADD,
+  ELECTRUM_REMOVE
 } from './constants';
-import type { AddElectrumPayload } from '';
+import type { ElectrumPayload } from './schema';
 
 export function showElectrumDialog() {
   return {
@@ -18,9 +19,16 @@ export function hideElectrumDialog() {
   };
 }
 
-export function addElectrum(payload: AddElectrumPayload) {
+export function addElectrum(payload: ElectrumPayload) {
   return {
     type: ELECTRUM_ADD,
+    payload
+  };
+}
+
+export function removeElectrum(payload: ElectrumPayload) {
+  return {
+    type: ELECTRUM_REMOVE,
     payload
   };
 }

@@ -33,3 +33,9 @@ export const INFO_TAB = 0;
 export const DEPOSIT_TAB = 1;
 export const WITHDRAW_TAB = 2;
 export const TAB_ASSET_INFO_SWITCH = 'atomicapp/DexPage/TAB_ASSET_INFO_SWITCH';
+
+// electrum modal actions
+export const REMOVING_ELECTRUM_MODAL_OPEN =
+  'atomicapp/WalletPage/REMOVING_ELECTRUM_MODAL_OPEN';
+export const REMOVING_ELECTRUM_MODAL_CLOSE =
+  'atomicapp/WalletPage/REMOVING_ELECTRUM_MODAL_CLOSE';

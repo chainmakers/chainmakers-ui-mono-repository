@@ -10,7 +10,9 @@ import {
   loadWithdrawError,
   switchTabAssetInfo,
   openAssetModal,
-  closeAssetModal
+  closeAssetModal,
+  openRemoveElectrumModal,
+  closeRemoveElectrumModal
 } from '../actions';
 import {
   TRANSACTIONS_LOAD,
@@ -25,7 +27,9 @@ import {
   // DEPOSIT_TAB,
   TAB_ASSET_INFO_SWITCH,
   ASSET_MODAL_OPEN,
-  ASSET_MODAL_CLOSE
+  ASSET_MODAL_CLOSE,
+  REMOVING_ELECTRUM_MODAL_OPEN,
+  REMOVING_ELECTRUM_MODAL_CLOSE
 } from '../constants';
 import type { ErrorType } from '../../schema';
 
@@ -222,5 +226,38 @@ describe('containers/WalletPage/actions/closeAssetModal', () => {
     };
 
     expect(closeAssetModal()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/WalletPage/actions/openRemoveElectrumModal', () => {
+  const coin = 'KMD';
+
+  it('should loadTransactionsSuccess should create openRemoveElectrumModal action', () => {
+    expect(openRemoveElectrumModal(coin)).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: REMOVING_ELECTRUM_MODAL_OPEN,
+      payload: {
+        coin
+      }
+    };
+
+    expect(openRemoveElectrumModal(coin)).toEqual(expectedResult);
+  });
+});
+
+describe('containers/WalletPage/actions/closeRemoveElectrumModal', () => {
+  it('should loadTransactionsSuccess should create closeRemoveElectrumModal action', () => {
+    expect(closeRemoveElectrumModal()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: REMOVING_ELECTRUM_MODAL_CLOSE
+    };
+
+    expect(closeRemoveElectrumModal()).toEqual(expectedResult);
   });
 });

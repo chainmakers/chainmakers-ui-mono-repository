@@ -12,6 +12,12 @@ Object {
 }
 `;
 
+exports[`containers/WalletPage/actions/closeRemoveElectrumModal should loadTransactionsSuccess should create closeRemoveElectrumModal action 1`] = `
+Object {
+  "type": "atomicapp/WalletPage/REMOVING_ELECTRUM_MODAL_CLOSE",
+}
+`;
+
 exports[`containers/WalletPage/actions/loadCoinTransactions should loadCoinTransactions should create loadCoinTransactions action 1`] = `
 Object {
   "payload": Object {
@@ -89,6 +95,15 @@ Object {
 exports[`containers/WalletPage/actions/openJoyride should openJoyride should create openJoyride action 1`] = `
 Object {
   "type": "atomicapp/WalletPage/JOYRIDE_OPEN",
+}
+`;
+
+exports[`containers/WalletPage/actions/openRemoveElectrumModal should loadTransactionsSuccess should create openRemoveElectrumModal action 1`] = `
+Object {
+  "payload": Object {
+    "coin": "KMD",
+  },
+  "type": "atomicapp/WalletPage/REMOVING_ELECTRUM_MODAL_OPEN",
 }
 `;
 

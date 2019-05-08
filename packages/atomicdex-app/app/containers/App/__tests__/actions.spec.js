@@ -6,6 +6,7 @@ import {
   loadBalance,
   loadElectrums,
   addElectrum,
+  removeElectrum,
   addElectrumSuccess,
   addElectrumError,
   loadAllBalance,
@@ -20,6 +21,7 @@ import {
   LOGIN_SUCCESS,
   ELECTRUM_LOAD,
   ELECTRUM_ADD,
+  ELECTRUM_REMOVE,
   ELECTRUM_ADD_SUCCESS,
   ELECTRUM_ADD_ERROR,
   BALANCE_LOAD_ALL,
@@ -77,6 +79,24 @@ describe('containers/App/actions/addElectrum', () => {
     };
 
     expect(addElectrum(payload)).toEqual(expectedResult);
+  });
+});
+
+describe('containers/App/actions/removeElectrum', () => {
+  const coin = 'BEER';
+  it('should removeElectrum should create removeElectrum action', () => {
+    expect(removeElectrum(coin)).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: ELECTRUM_REMOVE,
+      payload: {
+        coin
+      }
+    };
+
+    expect(removeElectrum(coin)).toEqual(expectedResult);
   });
 });
 

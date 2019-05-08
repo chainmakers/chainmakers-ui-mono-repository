@@ -18,10 +18,10 @@ import Chip from '@material-ui/core/Chip';
 import { Circle, Line } from '../../../components/placeholder';
 import injectReducer from '../../../utils/inject-reducer';
 import search from '../../../utils/search';
-import { FAILED, LOADED, SELECTED } from '../../../constants';
+import { FAILED, LOADED, SELECTED, UNSELECTED } from '../../../constants';
 import { makeSelectBalanceFetchStatus } from '../../App/selectors';
 import reducer from '../reducer';
-import { hideElectrumDialog, addElectrum } from '../actions';
+import { hideElectrumDialog, addElectrum, removeElectrum } from '../actions';
 import { APP_STATE_NAME } from '../constants';
 import CryptoCurrencyChip from './CryptoCurrencyChip';
 import InputSearch from './InputSearch';
@@ -123,6 +123,8 @@ type ILogoutDialogProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchAddElectrum: Function,
   // eslint-disable-next-line flowtype/no-weak-types
+  dispatchRemoveElectrum: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
   balanceFetchStatus: Map<*, *>,
   show: boolean
 };
@@ -165,6 +167,7 @@ class ElectrumDialogContent extends React.Component<
     const {
       dispatchHideElectrumDialog,
       dispatchAddElectrum,
+      dispatchRemoveElectrum,
       balanceFetchStatus
     } = this.props;
     const { selected } = this.state;
@@ -173,7 +176,12 @@ class ElectrumDialogContent extends React.Component<
         .filter(e => e === SELECTED)
         .keySeq()
         .toArray();
+      const unselectedlist = selected
+        .filter(e => e === UNSELECTED)
+        .keySeq()
+        .toArray();
       dispatchAddElectrum(list);
+      dispatchRemoveElectrum(unselectedlist);
     }
     dispatchHideElectrumDialog();
   };
@@ -184,10 +192,12 @@ class ElectrumDialogContent extends React.Component<
     const valueS = selected.get(coin);
     const valueP = balanceFetchStatus.get(coin);
     if (valueS === LOADED || valueS === SELECTED) {
+      // unselect
       if (valueP === FAILED) {
         selected = selected.set(coin, FAILED);
-      } else selected = selected.delete(coin);
+      } else selected = selected.set(coin, UNSELECTED);
     } else if (valueP === LOADED) selected = selected.set(coin, LOADED);
+    // select
     else selected = selected.set(coin, SELECTED);
     this.setState({
       selected
@@ -276,6 +286,12 @@ export function mapDispatchToProps(dispatch: Dispatch<Object>) {
     dispatchAddElectrum: (coins: Array<string>) =>
       dispatch(
         addElectrum({
+          coins
+        })
+      ),
+    dispatchRemoveElectrum: (coins: Array<string>) =>
+      dispatch(
+        removeElectrum({
           coins
         })
       )
