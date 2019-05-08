@@ -78,11 +78,13 @@ app.on('ready', async () => {
   }
 
   const loginWindowSize = config.get('loginWindowSize');
-
+  const minWindowSize = config.get('minWindowSize');
   mainWindow = new BrowserWindow({
     show: false,
     width: loginWindowSize.width,
-    height: loginWindowSize.height
+    height: loginWindowSize.height,
+    minWidth: minWindowSize.width,
+    minHeight: minWindowSize.height
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
