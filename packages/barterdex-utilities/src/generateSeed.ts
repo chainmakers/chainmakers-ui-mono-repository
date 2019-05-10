@@ -1,72 +1,67 @@
-import { encode } from 'bs58';
-import { sha256 } from 'sha.js';
+import { sha256 } from 'js-sha256';
+import { fromBuffer } from 'bigi';
+import { ECPair } from'bitgo-utxo-lib';
 import wordlist from './wordlist';
 import { choice } from './random';
 
-const sha256Obj = new sha256();
-
-function toHexString(byteArray) {
-  return Array.from(byteArray, (byte: any) =>
-    `0${(byte & 0xff).toString(16)}`.slice(-2)
-  ).join('');
-}
-
-function toByteArray(hexString) {
-  const result = [];
-  while (hexString.length >= 2) {
-    result.push(parseInt(hexString.substring(0, 2), 16));
-    // eslint-disable-next-line no-param-reassign
-    hexString = hexString.substring(2, hexString.length);
+const network = {
+  kmd: {
+    messagePrefix: '\x19Komodo Signed Message:\n',
+    bip44: 141,
+    bip32: {
+      public: 0x0488b21e,
+      private: 0x0488ade4,
+    },
+    pubKeyHash: 0x3c,
+    scriptHash: 0x55,
+    wif: 0xbc,
+    consensusBranchId: {
+      1: 0x00,
+      2: 0x00,
+      3: 0x5ba81b19,
+      4: 0x76b809bb,
+    },
+    dustThreshold: 1000,
+    isZcash: true,
+    sapling: true,
+    saplingActivationTimestamp: 1544835600,
+    kmdInterest: true,
   }
-  return result;
-}
+};
 
 export function generateSeed() {
   let seed = '';
   for (let i = 0; i < 14; i += 1) {
     const buf = choice(wordlist);
-    seed += seed.search(buf) < 0 ? `${buf} ` : '';
+    if(seed.search(buf) === -1) {
+      seed += `${buf} `;
+    }
+    else {
+      i -= 1;
+    }
   }
 
   return seed.trim();
 }
 
 export function generateWif(seed) {
-  let seedhash = sha256Obj
-    .update(seed.trim())
-    .digest('hex');
-  const result = [];
+  const sha256Obj = sha256.create();
+  const bytes = sha256Obj.update(seed.trim()).array();
 
-  while (seedhash.length >= 2) {
-    result.push(parseInt(seedhash.substring(0, 2), 16));
-    seedhash = seedhash.substring(2, seedhash.length);
-  }
+  bytes[0] &= 248;
+  bytes[31] &= 127;
+  bytes[31] |= 64;
 
-  result[0] &= 248;
-  result[31] &= 127;
-  result[31] |= 64;
+  const d = fromBuffer(bytes);
+  const key = new ECPair(d, null, {
+    network: network.kmd
+  });
 
-  const pre2 = 0xff & 188;
-  // eslint-disable-next-line no-unused-vars
-  const pre = pre2.toString(16);
+  // const keys = {
+  //   priv: key.toWIF(),
+  //   pub: key.getAddress(),
+  //   pubHex: key.getPublicKeyBuffer().toString('hex'),
+  // };
 
-  const hash = [];
-  for (let i = 0; i < result.length + 2; i += 1) {
-    hash[i] =
-      // eslint-disable-next-line no-nested-ternary
-      i === 0 ? 0xff & 188 : i === result.length + 1 ? 0xff & 1 : result[i - 1];
-  }
-
-  const doublesha = sha256Obj
-    .update(
-      toByteArray(
-        sha256Obj
-          .update(hash)
-          .digest('hex')
-      )
-    )
-    .digest('hex');
-  const priv = toHexString(hash) + doublesha.substr(0, 8);
-  const wif = encode(Buffer.from(toByteArray(priv)));
-  return wif;
+  return key.toWIF();
 }

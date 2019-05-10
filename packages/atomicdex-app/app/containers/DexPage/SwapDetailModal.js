@@ -40,17 +40,6 @@ function onOpenEmpty() {
   debug('onOpenEmpty');
 }
 
-type Props = {
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object,
-  // eslint-disable-next-line flowtype/no-weak-types
-  onClose: Function,
-  // eslint-disable-next-line flowtype/no-weak-types
-  detailModal: Map<*, *>,
-  // eslint-disable-next-line flowtype/no-weak-types
-  swap: Map<*, *>
-};
-
 const styles = theme => ({
   swapDetail__content: {
     width: 500,
@@ -136,7 +125,19 @@ const styles = theme => ({
   }
 });
 
+type Props = {
+  // eslint-disable-next-line flowtype/no-weak-types
+  classes: Object,
+  // eslint-disable-next-line flowtype/no-weak-types
+  onClose: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  detailModal: Map<*, *>,
+  // eslint-disable-next-line flowtype/no-weak-types
+  swap: Map<*, *>
+};
+
 export class SwapDetail extends React.PureComponent<Props> {
+
   renderNotFound = () => {
     const { classes } = this.props;
     return (
@@ -539,9 +540,7 @@ const withConnect = connect(
   mapDispatchToProps
 );
 
-const SwapDetailWapper = compose(
+export default compose(
   withConnect,
   withStyles(styles)
 )(SwapDetail);
-
-export default SwapDetailWapper;

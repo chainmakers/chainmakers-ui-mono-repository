@@ -11,7 +11,13 @@ const data = [
     urls: ['electrum1.cipig.net:10000', 'electrum2.cipig.net:10000'],
     active: 1,
     market_cap: 97822306639,
-    mm2: 1
+    mm2: 1,
+    fname: 'Bitcoin',
+    rpcport: 8332,
+    pubtype: 0,
+    p2shtype: 5,
+    wiftype: 128,
+    txfee: 20000
   },
   {
     coin: 'KMD',
@@ -20,7 +26,13 @@ const data = [
     urls: ['electrum1.cipig.net:10001', 'electrum2.cipig.net:10001'],
     active: 1,
     market_cap: 107340275,
-    mm2: 1
+    mm2: 1,
+    fname: 'Komodo',
+    rpcport: 7771,
+    pubtype: 60,
+    p2shtype: 85,
+    wiftype: 188,
+    txfee: 1000
   },
   // {
   //   coin: 'EQL',
@@ -2328,6 +2340,7 @@ const data = [
 ];
 
 export default function loadCoinsData(config) {
+  // console.log(JSON.stringify(data));
   return config.set('marketmaker', {
     data
   });
