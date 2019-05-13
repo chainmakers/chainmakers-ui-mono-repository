@@ -137,7 +137,6 @@ type Props = {
 };
 
 export class SwapDetail extends React.PureComponent<Props> {
-
   renderNotFound = () => {
     const { classes } = this.props;
     return (

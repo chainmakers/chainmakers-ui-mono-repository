@@ -8,11 +8,11 @@ import loadBuyCoinProcess from '../load-buy-coin-process';
 import { LOAD_BUY_COIN_SUCCESS } from '../../constants';
 import data from '../../../__tests__/app-state.json';
 import {
-  listunspentstep1,
+  // listunspentstep1,
   listunspentstep2,
-  buy1,
-  buy2,
-  buyAppropriateError
+  // buy1,
+  buy2
+  // buyAppropriateError
 } from './fake-data';
 
 const TEST_URL = 'http://127.0.0.1:7783';

@@ -2,7 +2,7 @@ import nock from 'nock';
 import { fromJS } from 'immutable';
 import { runSaga } from 'redux-saga';
 import api from '../../../../lib/barter-dex-api';
-import loadWithdrawProcess from '../withdraw';
+import loadWithdrawProcess, { generateMessage } from '../withdraw';
 import data from '../../../__tests__/app-state.json';
 
 const TEST_URL = 'http://127.0.0.1:7783';
@@ -14,6 +14,8 @@ describe('containers/WalletPage/saga/loadWithdrawProcess', () => {
   const userpass = 'userpass';
   const amount = 0.1;
   const payload = { amount, address, coin };
+  const tx_hash =
+    '0b024ea6997e16387c0931de9f203d534c6b2b8500e4bda2df51a36b52a3ef33';
 
   api.setUserpass(userpass);
   it(
@@ -39,8 +41,7 @@ describe('containers/WalletPage/saga/loadWithdrawProcess', () => {
             }
             if (method === 'send_raw_transaction') {
               cb(null, {
-                tx_hash:
-                  '0b024ea6997e16387c0931de9f203d534c6b2b8500e4bda2df51a36b52a3ef33'
+                tx_hash
               });
             }
             return cb(new Error('unexpected api'));
@@ -50,7 +51,15 @@ describe('containers/WalletPage/saga/loadWithdrawProcess', () => {
 
         const saga = await runSaga(
           {
-            dispatch: action => dispatched.push(action),
+            dispatch: action => {
+              if (action.type === 'atomicapp/BuyPage/SNACKBARS_OPEN') {
+                return dispatched.push({
+                  type: action.type,
+                  payload: JSON.stringify(action.payload)
+                });
+              }
+              return dispatched.push(action);
+            },
             getState: () => fromJS(data)
           },
           loadWithdrawProcess,
@@ -60,7 +69,9 @@ describe('containers/WalletPage/saga/loadWithdrawProcess', () => {
         expect(saga).toEqual(3);
         expect(dispatched).toEqual([
           {
-            payload: { message: 'Successful withdrawal' },
+            payload: JSON.stringify({
+              message: generateMessage(tx_hash, coin)
+            }),
             type: 'atomicapp/BuyPage/SNACKBARS_OPEN'
           },
           {
