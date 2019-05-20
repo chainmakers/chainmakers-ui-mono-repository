@@ -15,6 +15,7 @@ export interface BarterdexApi {
   electrum: Function,
   balance: Function,
   buy: Function,
+  setprice: Function,
   getendpoint: Function,
   getfee: Function,
   isready: Function,

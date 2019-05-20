@@ -2,6 +2,7 @@ import httpprovider from './http-provider';
 import electrumFactory from './electrum';
 import balanceFactory from './balance';
 import buyFactory from './buy';
+import setpriceFactory from './setprice';
 import getendpointFactory from './get-endpoint';
 import getfeeFactory from './getfee';
 import isReadyFactory from './is-ready';
@@ -34,6 +35,7 @@ export default function setupClient({
     electrumFactory(),
     balanceFactory(),
     buyFactory(),
+    setpriceFactory(),
     getendpointFactory(),
     getfeeFactory(),
     isReadyFactory(),
