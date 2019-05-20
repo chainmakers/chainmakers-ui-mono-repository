@@ -396,6 +396,21 @@ class AssetModalContent extends React.PureComponent<Props, State> {
           </ListItem>
 
           <ListItem
+            classes={{
+              secondaryAction: classes.root__listItem
+            }}
+          >
+            <ListItemText primary="Transaction Fee" />
+            <ListItemSecondaryAction
+              className={classes.root__listItemSecondaryAction}
+            >
+              <Typography variant="body1" color="textSecondary" gutterBottom>
+                {balance.get('fee')} {balance.get('coin')}
+              </Typography>
+            </ListItemSecondaryAction>
+          </ListItem>
+
+          <ListItem
             disableGutters
             classes={{
               secondaryAction: classes.root__listItem

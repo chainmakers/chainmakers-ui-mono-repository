@@ -21,5 +21,6 @@ export const routes = {
   WALLET: '/wallet',
   HELP: '/help',
   LOGIN: '/login',
-  DASHBOARD: '/dashboard'
+  DASHBOARD: '/dashboard',
+  ORDER: '/order'
 };

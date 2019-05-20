@@ -15,14 +15,14 @@ const styles = () => ({
   }
 });
 
-type Props = {
+type IHeaderTabsProps = {
   classes: Styles,
   // eslint-disable-next-line flowtype/no-weak-types
   handleChange: Function,
   value: number
 };
 
-class HeaderTabs extends React.PureComponent<Props> {
+class HeaderTabs extends React.PureComponent<IHeaderTabsProps> {
   render() {
     const { value, classes, handleChange } = this.props;
     return (

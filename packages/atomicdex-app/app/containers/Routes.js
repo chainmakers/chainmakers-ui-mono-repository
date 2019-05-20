@@ -9,6 +9,7 @@ import { routes } from '../constants';
 // import ElectrumDialog from './ElectrumDialog';
 import DexPage from './DexPage';
 import WalletPage from './WalletPage';
+import OrdersPage from './OrdersPage';
 import HelpPage from './HelpPage';
 import SeedPage from './SeedPage';
 import LoginPage from './LoginPage';
@@ -33,6 +34,9 @@ const HomeFallback = userIsNotAuthenticatedRedir(WalletPage, () => (
 const WalletFallback = userIsNotAuthenticatedRedir(WalletPage, () => (
   <Redirect to={routes.LOGIN} />
 ));
+const OrdersFallback = userIsNotAuthenticatedRedir(OrdersPage, () => (
+  <Redirect to={routes.LOGIN} />
+));
 const DexFallback = userIsNotAuthenticatedRedir(DexPage, () => (
   <Redirect to={routes.LOGIN} />
 ));
@@ -54,6 +58,7 @@ export default () => (
     <Switch>
       <Route path={routes.BUY} component={DexFallback} />
       <Route path={routes.WALLET} component={WalletFallback} />
+      <Route path={routes.ORDER} component={OrdersFallback} />
       <Route path={routes.HELP} component={HelpFallback} />
       <Route path={routes.LOGIN} component={LoginFallback} />
       <Route path={routes.SEED} component={SeedPage} />

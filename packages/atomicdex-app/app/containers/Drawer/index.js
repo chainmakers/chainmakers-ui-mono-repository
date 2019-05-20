@@ -18,6 +18,7 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 // import SettingsIcon from '@material-ui/icons/Settings';
 import MenuIcon from '@material-ui/icons/Menu';
+import CachedIcon from '@material-ui/icons/Cached';
 import { withStyles } from '@material-ui/core/styles';
 import { showLogoutDialog } from '../LogoutDialog/actions';
 import { routes } from '../../constants';
@@ -27,6 +28,8 @@ const debug = require('debug')('atomicapp:containers:Drawer');
 const drawerWidth = 240;
 
 const accountBalanceWalletIconCache = <AccountBalanceWalletIcon />;
+
+const cachedIconIconCache = <CachedIcon />;
 
 const addShoppingCartIconCache = <AddShoppingCartIcon />;
 
@@ -153,6 +156,10 @@ class DICDrawer extends Component<Props, State> {
     this.goto(routes.BUY);
   };
 
+  gotoOrderPage = () => {
+    this.goto(routes.ORDER);
+  };
+
   gotoHelpPage = () => {
     this.goto(routes.HELP);
   };
@@ -214,13 +221,27 @@ class DICDrawer extends Component<Props, State> {
             onClick={this.gotoBuyPage}
           >
             <ListItemIcon className={classes.drawer__iconCenter}>
-              {addShoppingCartIconCache}
+              {cachedIconIconCache}
             </ListItemIcon>
             <span className={classes.drawer__text}>
               <FormattedMessage id="atomicapp.containers.Drawer.buy">
                 {(...content) => content}
               </FormattedMessage>
             </span>
+          </ListItem>
+
+          <ListItem
+            button
+            id="dex-drawer-navigation-layout"
+            className={classNames(classes.drawer__icon, {
+              [classes.drawer__iconSelected]: pathname === routes.ORDER
+            })}
+            onClick={this.gotoBuyPage}
+          >
+            <ListItemIcon className={classes.drawer__iconCenter}>
+              {addShoppingCartIconCache}
+            </ListItemIcon>
+            <span className={classes.drawer__text}>Order</span>
           </ListItem>
 
           {/* <ListItem
