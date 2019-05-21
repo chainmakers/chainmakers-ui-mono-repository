@@ -69,7 +69,6 @@ const data = [
   {
     coin: 'CHIPS',
     name: 'Chips',
-    txversion: 4,
     urls: ['electrum1.cipig.net:10053', 'electrum2.cipig.net:10053'],
     rpcport: 57776,
     pubtype: 60,
