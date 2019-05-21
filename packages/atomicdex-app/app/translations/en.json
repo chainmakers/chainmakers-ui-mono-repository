@@ -11,6 +11,7 @@
   "atomicapp.containers.DexPage.loading": "Loading...",
   "atomicapp.containers.Drawer.wallet": "Wallet",
   "atomicapp.containers.Drawer.buy": "Swap",
+  "atomicapp.containers.Drawer.order": "Order",
   "atomicapp.containers.Drawer.help": "Help",
   "atomicapp.containers.Wallet.title": "Wallet",
   "atomicapp.containers.Wallet.overview": "Overview",

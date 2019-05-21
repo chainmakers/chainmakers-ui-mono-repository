@@ -236,12 +236,16 @@ class DICDrawer extends Component<Props, State> {
             className={classNames(classes.drawer__icon, {
               [classes.drawer__iconSelected]: pathname === routes.ORDER
             })}
-            onClick={this.gotoBuyPage}
+            onClick={this.gotoOrderPage}
           >
             <ListItemIcon className={classes.drawer__iconCenter}>
               {addShoppingCartIconCache}
             </ListItemIcon>
-            <span className={classes.drawer__text}>Order</span>
+            <span className={classes.drawer__text}>
+              <FormattedMessage id="atomicapp.containers.Drawer.order">
+                {(...content) => content}
+              </FormattedMessage>
+            </span>
           </ListItem>
 
           {/* <ListItem

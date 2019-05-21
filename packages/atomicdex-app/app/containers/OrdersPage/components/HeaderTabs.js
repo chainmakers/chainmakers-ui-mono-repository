@@ -66,13 +66,6 @@ class HeaderTabs extends React.PureComponent<IHeaderTabsProps> {
           className={classes.buyTabs__tab}
         />
         <Tab
-          classes={{
-            labelContainer: classes.buyTabs__labelContainer
-          }}
-          label={<span>Place Order</span>}
-          className={classes.buyTabs__tab}
-        />
-        <Tab
           label={
             size > 0 ? (
               <Badge
@@ -81,10 +74,10 @@ class HeaderTabs extends React.PureComponent<IHeaderTabsProps> {
                 className={classes.buyTabs__tablabel}
                 classes={{ badge: classes.buyTabs__badge }}
               >
-                My Swaps
+                My Orders
               </Badge>
             ) : (
-              'My Swaps'
+              'My Orders'
             )
           }
           className={classes.buyTabs__tab}

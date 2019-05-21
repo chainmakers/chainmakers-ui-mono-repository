@@ -4,7 +4,7 @@
 interface SetpriceType {
   base: string,
   rel: string,
-  price: string,
+  price: number,
   broadcast?: number
 };
 

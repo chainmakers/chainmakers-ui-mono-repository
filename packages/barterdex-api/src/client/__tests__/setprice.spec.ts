@@ -3,7 +3,7 @@ import setpriceFactory from '../setprice';
 describe('packages/barterdex-api/src/client/setprice', () => {
   const base = 'COQUI';
   const rel = 'KMD';
-  const price = '0.1';
+  const price = 0.1;
 
   it('should handle the setprice correctly', () => {
     const fakeHttpProvider = {
