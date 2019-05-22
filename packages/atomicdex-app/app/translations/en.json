@@ -10,6 +10,8 @@
   "atomicapp.containers.DexPage.execute_buy": "Swap",
   "atomicapp.containers.DexPage.loading": "Loading...",
   "atomicapp.containers.OrderPage.title": "Orders",
+  "atomicapp.containers.OrderPage.deposit": "Deposit",
+  "atomicapp.containers.OrderPage.recevie": "Recevie",
   "atomicapp.containers.OrderPage.orderbook": "Orderbook",
   "atomicapp.containers.Drawer.wallet": "Wallet",
   "atomicapp.containers.Drawer.buy": "Swap",

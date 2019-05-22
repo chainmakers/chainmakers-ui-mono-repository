@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import ClassNames from 'classnames';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import type { Dispatch } from 'redux';
@@ -27,11 +28,12 @@ import {
 import { loadAllBalance } from '../App/actions';
 import CurrencySection from './components/CurrencySection';
 import PaymentSection from './components/PaymentSection';
+import Order from './components/Order';
 import { loadPrices } from './actions';
 
-const debug = require('debug')('atomicapp:containers:DexPage:PlaceOrder');
+const debug = require('debug')('atomicapp:containers:DexPage:SellOrderTab');
 
-const styles = () => ({
+const styles = theme => ({
   container: {
     // marginTop: 65,
     marginTop: 112,
@@ -57,10 +59,26 @@ const styles = () => ({
 
   debug: {
     // border: '1px solid red'
+  },
+
+  root__centerForMDScreen: {
+    [theme.breakpoints.up('md')]: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      display: 'flex'
+    }
+  },
+
+  root__endForMDScreen: {
+    [theme.breakpoints.up('md')]: {
+      justifyContent: 'flex-end',
+      alignItems: 'flex-end',
+      display: 'flex'
+    }
   }
 });
 
-type Props = {
+type ISellOrderTabProps = {
   balanceLoading: boolean,
   classes: Styles,
   // eslint-disable-next-line flowtype/no-weak-types
@@ -71,9 +89,7 @@ type Props = {
   balance: Object
 };
 
-type State = {};
-
-class PlaceOrder extends Component<Props, State> {
+class SellOrderTab extends Component<ISellOrderTabProps> {
   componentDidMount = () => {
     const { dispatchLoadAllBalance } = this.props;
 
@@ -96,11 +112,7 @@ class PlaceOrder extends Component<Props, State> {
 
     return (
       <Grid container spacing={0} className={classes.container}>
-        <Grid
-          item
-          xs={2}
-          className={classes.debug}
-        >
+        <Grid item md={2} xs={12} className={classes.debug}>
           {/* <CoinSelectable selected>
             {icon}
             <Typography component="div" variant="h6" color="inherit">
@@ -114,49 +126,41 @@ class PlaceOrder extends Component<Props, State> {
           </CoinSelectable>
           <CoinSelectable disabled>CoinSelectable</CoinSelectable> */}
 
-          <div className={classes.cardContent}>
-            <PageSectionTitle
-              title={
-                <FormattedMessage id="atomicapp.containers.DexPage.currency">
-                  {(...content) => content}
-                </FormattedMessage>
-              }
-            />
-            <CurrencySection balance={balance} style={{
-              marginRight: 0
-            }}/>
-          </div>
+          <PageSectionTitle
+            title={
+              <FormattedMessage id="atomicapp.containers.OrderPage.deposit">
+                {(...content) => content}
+              </FormattedMessage>
+            }
+          />
+          <CurrencySection
+            balance={balance}
+            style={{
+              marginRight: 0,
+              marginBottom: 30
+            }}
+          />
         </Grid>
 
         <Grid
           item
-          xs={3}
-          className={classes.debug}
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            display: 'flex'
-          }}
+          md={3}
+          xs={12}
+          className={ClassNames(classes.debug, classes.root__centerForMDScreen)}
         >
-          <div className={classes.cardContent}>
-            <SwapHorizIcon />
-          </div>
+          <SwapHorizIcon />
         </Grid>
 
         <Grid
           item
-          xs={2}
-          className={classes.debug}
-          style={{
-            justifyContent: 'flex-end',
-            alignItems: 'flex-end',
-            display: 'flex'
-          }}
+          md={2}
+          xs={12}
+          className={ClassNames(classes.debug, classes.root__endForMDScreen)}
         >
           <div className={classes.cardContent}>
             <PageSectionTitle
               title={
-                <FormattedMessage id="atomicapp.containers.DexPage.payment">
+                <FormattedMessage id="atomicapp.containers.OrderPage.recevie">
                   {(...content) => content}
                 </FormattedMessage>
               }
@@ -168,21 +172,20 @@ class PlaceOrder extends Component<Props, State> {
             >
               <Icon>cached</Icon>
             </IconButton> */}
-            <CurrencySection balance={balance} style={{
-              marginRight: 0
-            }}/>
+            <CurrencySection
+              balance={balance}
+              style={{
+                marginRight: 0
+              }}
+            />
           </div>
         </Grid>
 
         <Grid
           item
-          xs={3}
-          className={classes.debug}
-          style={{
-            justifyContent: 'flex-end',
-            alignItems: 'flex-end',
-            display: 'flex'
-          }}
+          md={3}
+          xs={12}
+          className={ClassNames(classes.debug, classes.root__endForMDScreen)}
         >
           <div className={classes.cardContent}>
             <Button
@@ -197,11 +200,7 @@ class PlaceOrder extends Component<Props, State> {
             </Button>
           </div>
         </Grid>
-        <Grid
-          item
-          xs={2}
-          className={classes.debug}
-        />
+        <Grid item md={2} xs={12} className={classes.debug} />
         <Grid item xs={12}>
           <div className={classes.cardContent}>
             <PageSectionTitle
@@ -211,43 +210,50 @@ class PlaceOrder extends Component<Props, State> {
                 </FormattedMessage>
               }
             />
-
-            {[1, 2, 3, 4, 5, 6, 7, 8].map(k =>(
+            <Order symbol="PIZZA" />
+            <br />
+            <Order symbol="BEER" />
+            <br />
+            <Order symbol="COQUI" />
+            <br />
+            <Order symbol="KMD" />
+            <br />
+            {[1, 2, 3, 4, 5, 6, 7, 8].map(k => (
               <>
-              <Card
-                key={k}
-                className={classes.card}
-                style={{
-                  border: '1px solid #dadce0',
-                  boxShadow: 'none',
-                  borderRadius: 8
-                }}
-              >
-                <CardContent>
-                  <Typography
-                    className={classes.title}
-                    color="textSecondary"
-                    gutterBottom
-                  >
-                    Word of the Day
-                  </Typography>
-                  <Typography variant="h5" component="h2">
-                    be bull nev bullobull lent
-                  </Typography>
-                  <Typography className={classes.pos} color="textSecondary">
-                    adjective
-                  </Typography>
-                  <Typography component="p">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small">Learn More</Button>
-                </CardActions>
-              </Card>
-              <br />
+                <Card
+                  key={k}
+                  className={classes.card}
+                  style={{
+                    border: '1px solid #dadce0',
+                    boxShadow: 'none',
+                    borderRadius: 8
+                  }}
+                >
+                  <CardContent>
+                    <Typography
+                      className={classes.title}
+                      color="textSecondary"
+                      gutterBottom
+                    >
+                      Word of the Day
+                    </Typography>
+                    <Typography variant="h5" component="h2">
+                      be bull nev bullobull lent
+                    </Typography>
+                    <Typography className={classes.pos} color="textSecondary">
+                      adjective
+                    </Typography>
+                    <Typography component="p">
+                      well meaning and kindly.
+                      <br />
+                      {'"a benevolent smile"'}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small">Learn More</Button>
+                  </CardActions>
+                </Card>
+                <br />
               </>
             ))}
           </div>
@@ -275,9 +281,7 @@ const withConnect = connect(
   mapDispatchToProps
 );
 
-const PlaceOrderWapper = compose(
+export default compose(
   withConnect,
   withStyles(styles)
-)(PlaceOrder);
-
-export default PlaceOrderWapper;
+)(SellOrderTab);

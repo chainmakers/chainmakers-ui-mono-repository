@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/prefer-default-export
-export const APP_STATE_NAME = 'dex';
+export const APP_STATE_NAME = 'order';
 export const LOAD_PRICES = 'atomicapp/DexPage/LOAD_PRICES';
 export const LOAD_PRICES_SUCCESS = 'atomicapp/DexPage/LOAD_PRICES_SUCCESS';
 export const LOAD_PRICES_ERROR = 'atomicapp/DexPage/LOAD_PRICES_ERROR';

@@ -27,6 +27,8 @@ class ModalContent extends React.PureComponent<Props, State> {
 
   renderListItem = e => {
     const { className, handleSelectCoin, disabled } = this.props;
+    console.log(e, 'e zzzz');
+
     return (
       <MemoizedRender
         value={{

@@ -78,7 +78,9 @@ type Props = {
   // eslint-disable-next-line flowtype/no-weak-types
   data?: string,
   className?: string,
-  price?: Node | null
+  price?: Node | null,
+  // eslint-disable-next-line flowtype/no-weak-types
+  style: Object,
 };
 
 class CoinSelectable extends React.PureComponent<Props> {
@@ -92,7 +94,8 @@ class CoinSelectable extends React.PureComponent<Props> {
     onClick: null,
     data: '',
     className: '',
-    dispatchLoadPrice: () => {}
+    dispatchLoadPrice: () => {},
+    style: {}
   };
 
   static displayName = 'CoinSelectable';
@@ -129,7 +132,7 @@ class CoinSelectable extends React.PureComponent<Props> {
       selected,
       disabled,
       price,
-      ...rest
+      style
     } = this.props;
 
     const buttonClasses = ClassNames(classes.btn, className, {
@@ -146,7 +149,7 @@ class CoinSelectable extends React.PureComponent<Props> {
         className={buttonClasses}
         focusVisibleClassName={classes.focusVisible}
         onClick={this.onClick}
-        {...rest}
+        style={style}
       >
         <span className={classes.btn__content}>
           {icon}

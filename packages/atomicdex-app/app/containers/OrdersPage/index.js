@@ -21,7 +21,7 @@ import HeaderTabs from './components/HeaderTabs';
 import JoyrideGuilddance from './components/JoyrideGuilddance';
 // import TestSwap from './components/TestSwap';
 import MyOrdersTab from './MyOrdersTab';
-import PlaceOrderTab from './PlaceOrderTab';
+import SellOrderTab from './SellOrderTab';
 import ProgressBar from './ProgressBar';
 import SwapDetailModal from './SwapDetailModal';
 import CoinsSelectionModal from './CoinsSelectionModal';
@@ -33,18 +33,18 @@ import handleUpdateSwapEvent from './saga/handle-update-swap-event';
 import saga from './saga';
 import subscribe from './subscribe';
 
-const debug = require('debug')('atomicapp:containers:DexPage');
+const debug = require('debug')('atomicapp:containers:OrderPage');
 
-type IDexPageProps = {
+type IOrderPageProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchOpenJoyride: Function
 };
 
-type IDexPageState = {
+type IOrderPageState = {
   value: number
 };
 
-class DexPage extends React.Component<IDexPageProps, IDexPageState> {
+class OrderPage extends React.Component<IOrderPageProps, IOrderPageState> {
   state = {
     value: 0
   };
@@ -99,7 +99,7 @@ class DexPage extends React.Component<IDexPageProps, IDexPageState> {
               </MDCTabBar>
             </MDCAppBar>
             <TabContainer selected={value === 0}>
-              <PlaceOrderTab />
+              <SellOrderTab />
             </TabContainer>
             <TabContainer selected={value === 1}>
               <MyOrdersTab />
@@ -150,4 +150,4 @@ export default compose(
   withSagaTimeout,
   withSagaUpdateSwap,
   withWebsocket
-)(DexPage);
+)(OrderPage);
