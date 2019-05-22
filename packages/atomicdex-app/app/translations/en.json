@@ -9,6 +9,8 @@
   "atomicapp.containers.DexPage.swap_successful_message": "Click here to make another swap",
   "atomicapp.containers.DexPage.execute_buy": "Swap",
   "atomicapp.containers.DexPage.loading": "Loading...",
+  "atomicapp.containers.OrderPage.title": "Orders",
+  "atomicapp.containers.OrderPage.orderbook": "Orderbook",
   "atomicapp.containers.Drawer.wallet": "Wallet",
   "atomicapp.containers.Drawer.buy": "Swap",
   "atomicapp.containers.Drawer.order": "Order",

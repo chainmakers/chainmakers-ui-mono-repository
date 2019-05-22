@@ -7,6 +7,7 @@ import type { List, Map } from 'immutable';
 import { createStructuredSelector } from 'reselect';
 import { floor } from 'barterdex-utilities';
 import getCoinMemoize from '../../../components/CryptoIcons';
+import CoinSelectable from '../../../components/CoinSelectable';
 import { Line, Circle } from '../../../components/placeholder';
 import { covertSymbolToName } from '../../../utils/coin';
 import { makeSelectBalanceAvailable } from '../../App/selectors';
@@ -17,7 +18,6 @@ import {
   makeSelectPayment
 } from '../selectors';
 import type { SelectCoinPayload } from '../schema';
-import CoinSelectable from './CoinSelectable';
 
 const debug = require('debug')('atomicapp:containers:DexPage:PaymentSection');
 

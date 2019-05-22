@@ -26,13 +26,13 @@ import { formatDate, floor } from 'barterdex-utilities';
 import { BuyButton } from 'barterdex-components';
 import explorer from '../../lib/explorer';
 import getCoinMemoize from '../../components/CryptoIcons';
+import CoinSelectable from '../../components/CoinSelectable';
 import { STATE_SWAPS, SWAP_TX_DEFAULT } from './constants';
 import { closeDetailModal } from './actions';
 import {
   makeSelectSwapDetailModal,
   makeSelectSwapInDetailModal
 } from './selectors';
-import CoinSelectable from './components/CoinSelectable';
 
 const debug = require('debug')('atomicapp:containers:DexPage:SwapDetailModal');
 

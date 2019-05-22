@@ -16,7 +16,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Slide from '@material-ui/core/Slide';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Circle, Line } from '../../../components/placeholder';
-import CoinSelectable from '../components/CoinSelectable';
+import CoinSelectable from '../../../components/CoinSelectable';
 import {
   makeSelectCoinModal,
   makeSelectPricesLoading,

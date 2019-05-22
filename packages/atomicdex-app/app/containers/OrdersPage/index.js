@@ -80,7 +80,7 @@ class DexPage extends React.Component<IDexPageProps, IDexPageState> {
                     variant="h6"
                     color="inherit"
                   >
-                    <FormattedMessage id="atomicapp.containers.DexPage.title">
+                    <FormattedMessage id="atomicapp.containers.OrderPage.title">
                       {(...content) => content}
                     </FormattedMessage>
                   </Typography>

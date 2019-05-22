@@ -7,7 +7,7 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
-const debug = require('debug')('atomicapp:containers:DexPage:CoinSelectable');
+const debug = require('debug')('atomicapp:components:CoinSelectable');
 
 const styles = () => ({
   btn: {
@@ -128,7 +128,8 @@ class CoinSelectable extends React.PureComponent<Props> {
       subTitle,
       selected,
       disabled,
-      price
+      price,
+      ...rest
     } = this.props;
 
     const buttonClasses = ClassNames(classes.btn, className, {
@@ -145,6 +146,7 @@ class CoinSelectable extends React.PureComponent<Props> {
         className={buttonClasses}
         focusVisibleClassName={classes.focusVisible}
         onClick={this.onClick}
+        {...rest}
       >
         <span className={classes.btn__content}>
           {icon}

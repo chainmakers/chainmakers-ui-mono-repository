@@ -7,16 +7,24 @@ import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { withStyles } from '@material-ui/core/styles';
 import CardContent from '@material-ui/core/CardContent';
+
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
+import getCoinMemoize from '../../components/CryptoIcons';
 import PageSectionTitle from '../../components/PageSectionTitle';
+import CoinSelectable from '../../components/CoinSelectable';
 import {
   makeSelectBalanceEntities,
   makeSelectBalanceLoading
 } from '../App/selectors';
 import { loadAllBalance } from '../App/actions';
-import AmountSection from './components/AmountSection';
 import CurrencySection from './components/CurrencySection';
 import PaymentSection from './components/PaymentSection';
 import { loadPrices } from './actions';
@@ -34,10 +42,6 @@ const styles = () => ({
     // paddingBottom: 30
   },
 
-  hr: {
-    marginBottom: 20
-  },
-
   cardContent: {
     position: 'relative',
     paddingTop: 0,
@@ -49,6 +53,10 @@ const styles = () => ({
     position: 'absolute',
     right: 0,
     top: -12
+  },
+
+  debug: {
+    // border: '1px solid red'
   }
 });
 
@@ -84,14 +92,29 @@ class PlaceOrder extends Component<Props, State> {
 
     const { classes, balanceLoading, balance } = this.props;
 
+    // const icon = getCoinMemoize('CHIPS', 64, 64);
+
     return (
       <Grid container spacing={0} className={classes.container}>
-        <Grid item xs={12} className={classes.containerSection}>
-          {/* <CardContent className={classes.cardContent}>
-            <Tabs />
-            <Divider className={classes.hr} />
-          </CardContent> */}
-          <CardContent className={classes.cardContent}>
+        <Grid
+          item
+          xs={2}
+          className={classes.debug}
+        >
+          {/* <CoinSelectable selected>
+            {icon}
+            <Typography component="div" variant="h6" color="inherit">
+              Beer
+            </Typography>
+            <br />
+            <Typography component="div" variant="subtitle1" color="inherit">
+              93 BEER
+            </Typography>
+            1 N/A = 0 BEER
+          </CoinSelectable>
+          <CoinSelectable disabled>CoinSelectable</CoinSelectable> */}
+
+          <div className={classes.cardContent}>
             <PageSectionTitle
               title={
                 <FormattedMessage id="atomicapp.containers.DexPage.currency">
@@ -99,10 +122,38 @@ class PlaceOrder extends Component<Props, State> {
                 </FormattedMessage>
               }
             />
-            {/* <Divider className={classes.hr} /> */}
-            <CurrencySection balance={balance} />
-          </CardContent>
-          <CardContent className={classes.cardContent}>
+            <CurrencySection balance={balance} style={{
+              marginRight: 0
+            }}/>
+          </div>
+        </Grid>
+
+        <Grid
+          item
+          xs={3}
+          className={classes.debug}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            display: 'flex'
+          }}
+        >
+          <div className={classes.cardContent}>
+            <SwapHorizIcon />
+          </div>
+        </Grid>
+
+        <Grid
+          item
+          xs={2}
+          className={classes.debug}
+          style={{
+            justifyContent: 'flex-end',
+            alignItems: 'flex-end',
+            display: 'flex'
+          }}
+        >
+          <div className={classes.cardContent}>
             <PageSectionTitle
               title={
                 <FormattedMessage id="atomicapp.containers.DexPage.payment">
@@ -110,29 +161,96 @@ class PlaceOrder extends Component<Props, State> {
                 </FormattedMessage>
               }
             />
-            <IconButton
+            {/* <IconButton
               aria-label="Reload prices"
               className={classes.cardContent__rightBtn}
               onClick={this.onReloadPrices}
             >
               <Icon>cached</Icon>
-            </IconButton>
-            {/* <Divider className={classes.hr} /> */}
-            <div id="payment-section-placeorder-dexpage">
-              <PaymentSection loading={balanceLoading} />
-            </div>
-          </CardContent>
-          <CardContent className={classes.cardContent}>
+            </IconButton> */}
+            <CurrencySection balance={balance} style={{
+              marginRight: 0
+            }}/>
+          </div>
+        </Grid>
+
+        <Grid
+          item
+          xs={3}
+          className={classes.debug}
+          style={{
+            justifyContent: 'flex-end',
+            alignItems: 'flex-end',
+            display: 'flex'
+          }}
+        >
+          <div className={classes.cardContent}>
+            <Button
+              variant="contained"
+              color="primary"
+              style={{
+                boxShadow: 'none',
+                marginBottom: 20
+              }}
+            >
+              Place new order
+            </Button>
+          </div>
+        </Grid>
+        <Grid
+          item
+          xs={2}
+          className={classes.debug}
+        />
+        <Grid item xs={12}>
+          <div className={classes.cardContent}>
             <PageSectionTitle
               title={
-                <FormattedMessage id="atomicapp.containers.DexPage.amount">
+                <FormattedMessage id="atomicapp.containers.OrderPage.orderbook">
                   {(...content) => content}
                 </FormattedMessage>
               }
             />
-            {/* <Divider className={classes.hr} /> */}
-            <AmountSection balance={balance} />
-          </CardContent>
+
+            {[1, 2, 3, 4, 5, 6, 7, 8].map(k =>(
+              <>
+              <Card
+                key={k}
+                className={classes.card}
+                style={{
+                  border: '1px solid #dadce0',
+                  boxShadow: 'none',
+                  borderRadius: 8
+                }}
+              >
+                <CardContent>
+                  <Typography
+                    className={classes.title}
+                    color="textSecondary"
+                    gutterBottom
+                  >
+                    Word of the Day
+                  </Typography>
+                  <Typography variant="h5" component="h2">
+                    be bull nev bullobull lent
+                  </Typography>
+                  <Typography className={classes.pos} color="textSecondary">
+                    adjective
+                  </Typography>
+                  <Typography component="p">
+                    well meaning and kindly.
+                    <br />
+                    {'"a benevolent smile"'}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small">Learn More</Button>
+                </CardActions>
+              </Card>
+              <br />
+              </>
+            ))}
+          </div>
         </Grid>
       </Grid>
     );

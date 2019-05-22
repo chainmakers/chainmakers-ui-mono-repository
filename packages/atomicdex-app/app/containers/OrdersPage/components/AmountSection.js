@@ -23,6 +23,7 @@ import { BuyButton } from 'barterdex-components';
 import { floor } from 'barterdex-utilities';
 import { Circle, Line } from '../../../components/placeholder';
 import getCoinMemoize from '../../../components/CryptoIcons';
+import CoinSelectable from '../../../components/CoinSelectable';
 import { requiredNumber } from '../../../components/Form/helper';
 import validate from '../../../components/Form/validate';
 import type { BuyCoinPayload } from '../schema';
@@ -51,7 +52,6 @@ import {
   makeSelectCurrency,
   makeSelectPayment
 } from '../selectors';
-import CoinSelectable from './CoinSelectable';
 
 const debug = require('debug')('atomicapp:containers:DexPage:AmountSection');
 

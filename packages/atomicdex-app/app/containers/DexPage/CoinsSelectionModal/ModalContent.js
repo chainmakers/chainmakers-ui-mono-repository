@@ -2,7 +2,7 @@
 import React from 'react';
 import { MemoizedRender } from 'react-memoize';
 import Grid from '@material-ui/core/Grid';
-import CoinSelectable from '../components/CoinSelectable';
+import CoinSelectable from '../../../components/CoinSelectable';
 import getCoinMemoize from '../../../components/CryptoIcons';
 import { covertSymbolToName } from '../../../utils/coin';
 
