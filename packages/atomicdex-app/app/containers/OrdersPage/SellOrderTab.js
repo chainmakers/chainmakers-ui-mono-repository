@@ -14,6 +14,7 @@ import Button from '@material-ui/core/Button';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
@@ -51,14 +52,14 @@ const styles = theme => ({
     paddingRight: 0
   },
 
-  cardContent__rightBtn: {
+  debug: {
+    // border: '1px solid red'
+  },
+
+  root__reloadBtn: {
     position: 'absolute',
     right: 0,
     top: -12
-  },
-
-  debug: {
-    // border: '1px solid red'
   },
 
   root__centerForMDScreen: {
@@ -210,6 +211,14 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
                 </FormattedMessage>
               }
             />
+            <Tooltip title="Reload orderbook">
+              <IconButton
+                aria-label="Reload orderbook"
+                className={classes.root__reloadBtn}
+              >
+                <Icon>cached</Icon>
+              </IconButton>
+            </Tooltip>
             <Order symbol="PIZZA" />
             <br />
             <Order symbol="BEER" />

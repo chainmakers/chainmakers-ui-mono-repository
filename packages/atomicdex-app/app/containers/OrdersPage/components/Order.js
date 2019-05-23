@@ -229,7 +229,7 @@ class Asset extends React.PureComponent<IAssetProps, IAssetState> {
           }}
           action={getCoinMemoize(symbol, 40, 40)}
           title={covertSymbolToName(symbol)}
-          subheader={"RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu"}
+          subheader="RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu"
         />
         <CardContent className={classes.wallet__content}>
           <Typography
@@ -284,7 +284,6 @@ export default compose(
   withConnect,
   withStyles(styles)
 )(Asset);
-
 
 // "coin": "PIZZA",
 // 		"address": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",

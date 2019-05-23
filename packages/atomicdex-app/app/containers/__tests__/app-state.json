@@ -595,6 +595,168 @@
       }
     }
   },
+  "order": {
+    "prices": {
+      "loading": false,
+      "error": false,
+      "entities": {
+        "BTC": {
+          "zcredits": 0,
+          "pubkey": "",
+          "depth": 0,
+          "bestPrice": 0,
+          "price": 0,
+          "avevolume": 0,
+          "base": "COQUI",
+          "address": "",
+          "numutxos": 0,
+          "rel": "BTC",
+          "maxvolume": 0,
+          "age": 0
+        },
+        "EQL": {
+          "zcredits": 0,
+          "pubkey": "",
+          "depth": 0,
+          "bestPrice": 0,
+          "price": 0,
+          "avevolume": 0,
+          "base": "COQUI",
+          "address": "",
+          "numutxos": 0,
+          "rel": "EQL",
+          "maxvolume": 0,
+          "age": 0
+        },
+        "LTC": {
+          "zcredits": 0,
+          "pubkey": "",
+          "depth": 0,
+          "bestPrice": 0,
+          "price": 0,
+          "avevolume": 0,
+          "base": "COQUI",
+          "address": "",
+          "numutxos": 0,
+          "rel": "LTC",
+          "maxvolume": 0,
+          "age": 0
+        },
+        "PIZZA": {
+          "zcredits": 0,
+          "pubkey": "",
+          "depth": 0,
+          "bestPrice": 0,
+          "price": 0,
+          "avevolume": 0,
+          "base": "COQUI",
+          "address": "",
+          "numutxos": 0,
+          "rel": "PIZZA",
+          "maxvolume": 0,
+          "age": 0
+        },
+        "KMD": {
+          "zcredits": 0,
+          "pubkey": "",
+          "depth": 0,
+          "bestPrice": 0,
+          "price": 0,
+          "avevolume": 0,
+          "base": "COQUI",
+          "address": "",
+          "numutxos": 0,
+          "rel": "KMD",
+          "maxvolume": 0,
+          "age": 0
+        },
+        "BEER": {
+          "zcredits": 0,
+          "pubkey": "f5e71f32fbb1b16599f12c264b75f45c7bea63de6ed93899c499d35cc6ef466a",
+          "depth": 248.65050119,
+          "bestPrice": 1.99000001,
+          "price": 1.99000001,
+          "avevolume": 0.9751,
+          "base": "COQUI",
+          "address": "REbwjC5mfQBRevH78CuRjcvQudxa3ii5Ma",
+          "numutxos": 255,
+          "rel": "BEER",
+          "maxvolume": 19900.00009536,
+          "age": 28
+        }
+      }
+    },
+    "buying": {
+      "loading": false,
+      "error": false
+    },
+    "swaps": {
+      "loading": true,
+      "error": false,
+      "list": [],
+      "processingList": [],
+      "finishedList": [],
+      "entities": {
+        "153a5b01fe56576c3cc4c69256b65a68decd2c407e85d84deb119085c020e2de": {
+          "alice": "BEER",
+          "requestid": 1608293148,
+          "bobamount": 18.71282889,
+          "sentflags": [
+            "myfee",
+            "bobdeposit",
+            "alicepayment",
+            "bobpayment",
+            "alicespend"
+          ],
+          "expiration": 1537798364,
+          "status": "finished",
+          "bob": "COQUI",
+          "quoteid": 483165878,
+          "aliceamount": 39.8000902,
+          "id": 78984078,
+          "uuid": "153a5b01fe56576c3cc4c69256b65a68decd2c407e85d84deb119085c020e2de"
+        },
+        "1bff08402dac74aaa9a1b1fc1d43ac79dc2e3ff3abeae622ebd9f4e63a50c15e": {
+          "alice": "BEER",
+          "requestid": 506139685,
+          "bobamount": 9.12346433,
+          "sentflags": [
+            "myfee",
+            "bobdeposit",
+            "alicepayment",
+            "bobrefund",
+            "alicereclaim"
+          ],
+          "expiration": 1537793618,
+          "status": "finished",
+          "bob": "COQUI",
+          "quoteid": 1776465996,
+          "aliceamount": 18.51860853,
+          "id": 58783593,
+          "uuid": "1bff08402dac74aaa9a1b1fc1d43ac79dc2e3ff3abeae622ebd9f4e63a50c15e"
+        },
+        "4851b94829c0c009fee4c2e646e5ba39bfd7587a0a28e37311555f35f2d44589": {
+          "alice": "BEER",
+          "requestid": 2199683683,
+          "bobamount": 4.36342802,
+          "sentflags": [
+            "myfee",
+            "bobdeposit",
+            "alicepayment",
+            "bobpayment",
+            "alicespend"
+          ],
+          "expiration": 1537801147,
+          "status": "finished",
+          "bob": "COQUI",
+          "quoteid": 3273829115,
+          "aliceamount": 9.25934926,
+          "id": 2027363021,
+          "uuid": "4851b94829c0c009fee4c2e646e5ba39bfd7587a0a28e37311555f35f2d44589"
+        }
+      }
+    }
+  },
   "wallet": {
     "transactions": {
       "loading": false,

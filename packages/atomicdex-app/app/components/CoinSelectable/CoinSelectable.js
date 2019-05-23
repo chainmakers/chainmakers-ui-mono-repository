@@ -80,7 +80,7 @@ type Props = {
   className?: string,
   price?: Node | null,
   // eslint-disable-next-line flowtype/no-weak-types
-  style: Object,
+  style: Object
 };
 
 class CoinSelectable extends React.PureComponent<Props> {

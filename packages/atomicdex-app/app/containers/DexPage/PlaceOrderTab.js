@@ -10,6 +10,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import PageSectionTitle from '../../components/PageSectionTitle';
 import {
   makeSelectBalanceEntities,
@@ -32,10 +33,6 @@ const styles = () => ({
 
   containerSection: {
     // paddingBottom: 30
-  },
-
-  hr: {
-    marginBottom: 20
   },
 
   cardContent: {
@@ -99,7 +96,6 @@ class PlaceOrder extends Component<Props, State> {
                 </FormattedMessage>
               }
             />
-            {/* <Divider className={classes.hr} /> */}
             <CurrencySection balance={balance} />
           </CardContent>
           <CardContent className={classes.cardContent}>
@@ -110,14 +106,15 @@ class PlaceOrder extends Component<Props, State> {
                 </FormattedMessage>
               }
             />
-            <IconButton
-              aria-label="Reload prices"
-              className={classes.cardContent__rightBtn}
-              onClick={this.onReloadPrices}
-            >
-              <Icon>cached</Icon>
-            </IconButton>
-            {/* <Divider className={classes.hr} /> */}
+            <Tooltip title="Reload prices">
+              <IconButton
+                aria-label="Reload prices"
+                className={classes.cardContent__rightBtn}
+                onClick={this.onReloadPrices}
+              >
+                <Icon>cached</Icon>
+              </IconButton>
+            </Tooltip>
             <div id="payment-section-placeorder-dexpage">
               <PaymentSection loading={balanceLoading} />
             </div>
@@ -130,7 +127,6 @@ class PlaceOrder extends Component<Props, State> {
                 </FormattedMessage>
               }
             />
-            {/* <Divider className={classes.hr} /> */}
             <AmountSection balance={balance} />
           </CardContent>
         </Grid>
