@@ -9,13 +9,10 @@ import { createSelector } from 'reselect';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import RemoveIcon from '@material-ui/icons/Clear';
-import Tooltip from '@material-ui/core/Tooltip';
 import { LOADING } from '../../../constants';
 import getCoinMemoize from '../../../components/CryptoIcons';
 import { covertSymbolToName } from '../../../utils/coin';
@@ -24,6 +21,7 @@ import {
   makeSelectBalanceEntities,
   makeSelectBalanceErrors
 } from '../../App/selectors';
+import { openDetailModal } from '../actions';
 
 const debug = require('debug')('atomicapp:containers:OrdersPage:Asset');
 
@@ -121,23 +119,23 @@ const styles = theme => ({
   }
 });
 
-type IAssetProps = {
+type IOrderProps = {
   classes: Styles,
   symbol: string,
   // eslint-disable-next-line flowtype/no-weak-types
   fetchStatus: List<*>,
   // eslint-disable-next-line flowtype/no-weak-types
-  entity: Map<*, *>,
+  error: Map<*, *>,
   // eslint-disable-next-line flowtype/no-weak-types
-  error: Map<*, *>
+  dispatchOpenDetailModal: Function
 };
 
-type IAssetState = {
+type IOrderState = {
   hover: boolean
 };
 
-class Asset extends React.PureComponent<IAssetProps, IAssetState> {
-  static displayName = 'Asset';
+class Order extends React.PureComponent<IOrderProps, IOrderState> {
+  static displayName = 'Order';
 
   state = {
     hover: false
@@ -153,9 +151,16 @@ class Asset extends React.PureComponent<IAssetProps, IAssetState> {
     if (hover) this.setState({ hover: false });
   };
 
+  onClickDetailButton = (evt: SyntheticInputEvent<>) => {
+    evt.preventDefault();
+    const { dispatchOpenDetailModal } = this.props;
+    dispatchOpenDetailModal();
+  };
+
   renderActions = () => {
-    const { classes, symbol, error, fetchStatus } = this.props;
+    const { classes, data, error, fetchStatus } = this.props;
     const loading = fetchStatus === LOADING;
+    const symbol = data.get('coin');
 
     return error ? (
       <Button
@@ -173,7 +178,7 @@ class Asset extends React.PureComponent<IAssetProps, IAssetState> {
     ) : (
       <React.Fragment>
         <Button
-          id={`deposit-button-portfolio-tab-${symbol}`}
+          id={`deposit-button-sellorder-tab-${symbol}`}
           disabled={loading}
           className={ClassNames(
             classes.wallet__button,
@@ -181,19 +186,10 @@ class Asset extends React.PureComponent<IAssetProps, IAssetState> {
           )}
           size="small"
           color="primary"
+          onClick={this.onClickDetailButton}
         >
           More Detail
         </Button>
-        {/* <div className={classes.wallet__buttonBorder} />
-        <Button
-          id={`withdraw-button-portfolio-tab-${symbol}`}
-          disabled={loading}
-          className={classes.wallet__button}
-          size="small"
-          color="primary"
-        >
-          Withdraw
-        </Button> */}
       </React.Fragment>
     );
   };
@@ -201,10 +197,11 @@ class Asset extends React.PureComponent<IAssetProps, IAssetState> {
   render() {
     debug(`render`);
 
-    const { classes, symbol, entity, error, fetchStatus } = this.props;
+    const { classes, error, fetchStatus, data } = this.props;
     const { hover } = this.state;
     const isError = !!error;
     const loading = fetchStatus === LOADING;
+    const symbol = data.get('coin');
 
     return (
       <Card
@@ -229,7 +226,7 @@ class Asset extends React.PureComponent<IAssetProps, IAssetState> {
           }}
           action={getCoinMemoize(symbol, 40, 40)}
           title={covertSymbolToName(symbol)}
-          subheader="RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu"
+          subheader={data.get('address')}
         />
         <CardContent className={classes.wallet__content}>
           <Typography
@@ -238,7 +235,7 @@ class Asset extends React.PureComponent<IAssetProps, IAssetState> {
               [classes.wallet__textWhite]: isError
             })}
           >
-            9.16905623 {symbol}
+            {data.get('maxvolume')} {symbol}
           </Typography>
           <Typography
             variant="body1"
@@ -247,7 +244,7 @@ class Asset extends React.PureComponent<IAssetProps, IAssetState> {
               color: 'rgba(0, 0, 0, 0.54)'
             }}
           >
-            1.10000002 PIZZA = 1 BEER
+            {data.get('price')} PIZZA = 1 BEER
           </Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
@@ -260,17 +257,17 @@ class Asset extends React.PureComponent<IAssetProps, IAssetState> {
 
 // eslint-disable-next-line flowtype/no-weak-types
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {
-  return {};
+  return {
+    dispatchOpenDetailModal: () => dispatch(openDetailModal())
+  };
 }
 
 const mapStateToProps = createSelector(
   (_, props) => props.symbol,
   makeSelectBalanceFetchStatus(),
-  makeSelectBalanceEntities(),
   makeSelectBalanceErrors(),
-  (symbol, fetchStatus, entities, errors) => ({
+  (symbol, fetchStatus, errors) => ({
     fetchStatus: fetchStatus.get(symbol),
-    entity: entities.get(symbol),
     error: errors.get(symbol)
   })
 );
@@ -283,15 +280,4 @@ const withConnect = connect(
 export default compose(
   withConnect,
   withStyles(styles)
-)(Asset);
-
-// "coin": "PIZZA",
-// 		"address": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
-// 		"price": 1.10000002,
-// 		"numutxos": 0,
-// 		"avevolume": 0,
-// 		"maxvolume": 9.16905623,
-// 		"depth": 0,
-// 		"pubkey": "c88a033b587244cd501e90709620c3ec58d9c3886e33c2e1db909d0451aa5833",
-// 		"age": 5,
-// 		"zcredits": 0
+)(Order);

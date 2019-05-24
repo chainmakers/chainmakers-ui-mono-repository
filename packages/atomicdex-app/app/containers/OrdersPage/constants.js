@@ -100,3 +100,9 @@ export const SEARCH_STATE_READY = 'atomicapp/DexPage/SEARCH_STATE_READY';
 // Joyride actions
 export const JOYRIDE_OPEN = 'atomicapp/DexPage/JOYRIDE_OPEN';
 export const JOYRIDE_CLOSE = 'atomicapp/DexPage/JOYRIDE_CLOSE';
+
+// Orderbook actions
+export const ORDERBOOK_LOAD = 'atomicapp/OrdersPage/ORDERBOOK_LOAD';
+export const ORDERBOOK_LOAD_SUCCESS =
+  'atomicapp/OrdersPage/ORDERBOOK_LOAD_SUCCESS';
+export const ORDERBOOK_LOAD_ERROR = 'atomicapp/OrdersPage/ORDERBOOK_LOAD_ERROR';

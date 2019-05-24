@@ -4,6 +4,7 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import { LOADING } from '../../../constants';
 import LinearProgress from '../../../components/ProgressBar';
 import { ProgressBarUI as ProgressBar } from '../ProgressBar';
 
@@ -24,12 +25,16 @@ describe('containers/DexPage/<ProgressBar />', () => {
 
   it('should render an LinearProgress component', () => {
     let renderedComponent = shallow(
-      <ProgressBar priceLoading classes={classes} />
+      <ProgressBar orderbookFetchStatus={LOADING} classes={classes} />
     );
     expect(renderedComponent.type()).toEqual(LinearProgress);
 
     renderedComponent = shallow(
-      <ProgressBar balanceLoading priceLoading classes={classes} />
+      <ProgressBar
+        balanceLoading
+        orderbookFetchStatus={LOADING}
+        classes={classes}
+      />
     );
     expect(renderedComponent.type()).toEqual(LinearProgress);
   });

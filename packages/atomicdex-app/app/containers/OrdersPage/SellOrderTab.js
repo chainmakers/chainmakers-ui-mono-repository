@@ -7,19 +7,14 @@ import type { Dispatch } from 'redux';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { withStyles } from '@material-ui/core/styles';
-import CardContent from '@material-ui/core/CardContent';
 
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
-import getCoinMemoize from '../../components/CryptoIcons';
 import PageSectionTitle from '../../components/PageSectionTitle';
 import CoinSelectable from '../../components/CoinSelectable';
 import {
@@ -27,10 +22,13 @@ import {
   makeSelectBalanceLoading
 } from '../App/selectors';
 import { loadAllBalance } from '../App/actions';
-import CurrencySection from './components/CurrencySection';
-import PaymentSection from './components/PaymentSection';
+
+import DepositSection from './components/DepositSection';
+import RecevieSection from './components/RecevieSection';
+
 import Order from './components/Order';
-import { loadPrices } from './actions';
+import { loadPrices, loadOrderbook } from './actions';
+import { makeSelectOrderbookAsks } from './selectors';
 
 const debug = require('debug')('atomicapp:containers:DexPage:SellOrderTab');
 
@@ -87,6 +85,8 @@ type ISellOrderTabProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchLoadAllBalance: Function,
   // eslint-disable-next-line flowtype/no-weak-types
+  dispatchLoadOrderbook: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
   balance: Object
 };
 
@@ -97,17 +97,17 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
     dispatchLoadAllBalance();
   };
 
-  onReloadPrices = (evt: SyntheticInputEvent<>) => {
+  onClickReloadOrderbook = (evt: SyntheticInputEvent<>) => {
     evt.stopPropagation();
-    const { dispatchLoadPrices } = this.props;
+    const { dispatchLoadOrderbook } = this.props;
 
-    dispatchLoadPrices();
+    dispatchLoadOrderbook();
   };
 
   render() {
     debug('render');
 
-    const { classes, balanceLoading, balance } = this.props;
+    const { classes, balanceLoading, balance, orderbookAsks } = this.props;
 
     // const icon = getCoinMemoize('CHIPS', 64, 64);
 
@@ -134,7 +134,7 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
               </FormattedMessage>
             }
           />
-          <CurrencySection
+          <DepositSection
             balance={balance}
             style={{
               marginRight: 0,
@@ -173,8 +173,7 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
             >
               <Icon>cached</Icon>
             </IconButton> */}
-            <CurrencySection
-              balance={balance}
+            <RecevieSection
               style={{
                 marginRight: 0
               }}
@@ -215,19 +214,18 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
               <IconButton
                 aria-label="Reload orderbook"
                 className={classes.root__reloadBtn}
+                onClick={this.onClickReloadOrderbook}
               >
                 <Icon>cached</Icon>
               </IconButton>
             </Tooltip>
-            <Order symbol="PIZZA" />
-            <br />
-            <Order symbol="BEER" />
-            <br />
-            <Order symbol="COQUI" />
-            <br />
-            <Order symbol="KMD" />
-            <br />
-            {[1, 2, 3, 4, 5, 6, 7, 8].map(k => (
+            {orderbookAsks.map(order => (
+              <>
+                <Order symbol="COQUI" data={order} />
+                <br />
+              </>
+            ))}
+            {/* {[1].map(k => (
               <>
                 <Card
                   key={k}
@@ -264,7 +262,7 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
                 </Card>
                 <br />
               </>
-            ))}
+            ))} */}
           </div>
         </Grid>
       </Grid>
@@ -276,13 +274,15 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   return {
     dispatchLoadPrices: () => dispatch(loadPrices()),
-    dispatchLoadAllBalance: () => dispatch(loadAllBalance())
+    dispatchLoadAllBalance: () => dispatch(loadAllBalance()),
+    dispatchLoadOrderbook: () => dispatch(loadOrderbook())
   };
 }
 
 const mapStateToProps = createStructuredSelector({
   balance: makeSelectBalanceEntities(),
-  balanceLoading: makeSelectBalanceLoading()
+  balanceLoading: makeSelectBalanceLoading(),
+  orderbookAsks: makeSelectOrderbookAsks()
 });
 
 const withConnect = connect(

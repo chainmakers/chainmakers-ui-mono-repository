@@ -1,3 +1,4 @@
+import orderbook from '../../__tests__/orderbook.json';
 import {
   loadPrice,
   loadPrices,
@@ -17,7 +18,10 @@ import {
   selectCoinPayment,
   skipSearchStateCreation,
   openJoyride,
-  closeJoyride
+  closeJoyride,
+  loadOrderbook,
+  loadOrderbookSuccess,
+  loadOrderbookError
 } from '../actions';
 import {
   LOAD_PRICE,
@@ -38,7 +42,10 @@ import {
   COIN_PAYMENT_SELECT,
   SEARCH_STATE_SKIP_CREATION,
   JOYRIDE_OPEN,
-  JOYRIDE_CLOSE
+  JOYRIDE_CLOSE,
+  ORDERBOOK_LOAD,
+  ORDERBOOK_LOAD_SUCCESS,
+  ORDERBOOK_LOAD_ERROR
 } from '../constants';
 
 describe('containers/DexPage/actions/loadPrice', () => {
@@ -393,5 +400,59 @@ describe('containers/DexPage/actions/closeJoyride', () => {
     };
 
     expect(closeJoyride()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/OrderPage/actions/loadOrderbook', () => {
+  it('should loadOrderbook should create loadOrderbook action', () => {
+    expect(loadOrderbook()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: ORDERBOOK_LOAD
+    };
+
+    expect(loadOrderbook()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/OrderPage/actions/loadOrderbookSuccess', () => {
+  const payload = orderbook;
+
+  it('should loadOrderbookSuccess should create loadOrderbookSuccess action', () => {
+    expect(loadOrderbookSuccess(payload)).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: ORDERBOOK_LOAD_SUCCESS,
+      payload
+    };
+
+    expect(loadOrderbookSuccess(payload)).toEqual(expectedResult);
+  });
+});
+
+describe('containers/OrderPage/actions/loadOrderbookError', () => {
+  const error = {
+    context: {
+      action: ORDERBOOK_LOAD
+    },
+    message: 'message',
+    type: 'RPC'
+  };
+
+  it('should loadOrderbookError should create loadOrderbookError action', () => {
+    expect(loadOrderbookError(error)).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: ORDERBOOK_LOAD_ERROR,
+      error
+    };
+
+    expect(loadOrderbookError(error)).toEqual(expectedResult);
   });
 });

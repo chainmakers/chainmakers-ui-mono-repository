@@ -596,6 +596,14 @@
     }
   },
   "order": {
+    "orderbook": {
+      "fetchStatus": null,
+      "errors": null,
+      "deposit": "BTC",
+      "recevie": "KMD",
+      "asks": [],
+      "bids": []
+    },
     "prices": {
       "loading": false,
       "error": false,

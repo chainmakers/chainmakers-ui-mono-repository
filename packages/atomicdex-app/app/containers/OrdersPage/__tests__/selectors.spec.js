@@ -4,7 +4,7 @@ import { fromJS } from 'immutable';
 import { initialState } from '../reducer';
 import { APP_STATE_NAME } from '../constants';
 import {
-  selectBuy,
+  selectOrder,
   makeSelectPrices,
   makeSelectPricesLoading,
   makeSelectPricesError,
@@ -20,15 +20,21 @@ import {
   makeSelectSwapDetailModal,
   makeSelectCoinModal,
   makeSelectCurrency,
-  makeSelectPayment
+  makeSelectPayment,
+  makeSelectOrderbook,
+  makeSelectOrderbookDeposit,
+  makeSelectOrderbookRecevie,
+  makeSelectOrderbookAsks,
+  makeSelectOrderbookBids,
+  makeSelectOrderbookFetchStatus
 } from '../selectors';
 
-describe('containers/DexPage/selectors/selectBuy', () => {
-  it('should select the buy state', () => {
+describe('containers/OrderPage/selectors/selectOrder', () => {
+  it('should select the order state', () => {
     const mockedState = fromJS({
       [APP_STATE_NAME]: initialState
     });
-    expect(selectBuy(mockedState)).toEqual(initialState);
+    expect(selectOrder(mockedState)).toEqual(initialState);
   });
 });
 
@@ -219,5 +225,87 @@ describe('containers/DexPage/selectors/makeSelectPayment', () => {
     });
     const selectPayment = makeSelectPayment();
     expect(selectPayment(mockedState)).toEqual(store.get('payment'));
+  });
+});
+
+describe('containers/OrderPage/selectors/makeSelectOrderbook', () => {
+  it('should select the orderbook state', () => {
+    const mockedState = fromJS({
+      [APP_STATE_NAME]: initialState
+    });
+    const selectOrderbook = makeSelectOrderbook();
+    expect(selectOrderbook(mockedState)).toEqual(initialState.get('orderbook'));
+
+    const selectOrderbookDeposit = makeSelectOrderbookDeposit();
+    expect(selectOrderbookDeposit(mockedState)).toEqual('BTC');
+
+    const selectOrderbookRecevie = makeSelectOrderbookRecevie();
+    expect(selectOrderbookRecevie(mockedState)).toEqual('KMD');
+
+    const selectOrderbookAsks = makeSelectOrderbookAsks();
+    expect(selectOrderbookAsks(mockedState)).toEqual(
+      fromJS([
+        {
+          zcredits: 0,
+          pubkey:
+            '90f44b66caae7e0d842a1a3e4f0b50e09d251a300987d85a9a7b136485744c09',
+          depth: 0,
+          price: 0.00015103,
+          avevolume: 0,
+          coin: 'KMD',
+          address: 'RV6YDG8pe8EaqTFUSs41QUF5obm2rqZuBb',
+          numutxos: 0,
+          maxvolume: 50.46521858,
+          age: 2
+        },
+        {
+          zcredits: 0,
+          pubkey:
+            'bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01',
+          depth: 0,
+          price: 0.00015103,
+          avevolume: 0,
+          coin: 'KMD',
+          address: 'RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd',
+          numutxos: 0,
+          maxvolume: 36.40686108,
+          age: 10
+        }
+      ])
+    );
+
+    const selectOrderbookBids = makeSelectOrderbookBids();
+    expect(selectOrderbookBids(mockedState)).toEqual(
+      fromJS([
+        {
+          zcredits: 0,
+          pubkey:
+            'bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01',
+          depth: 0,
+          price: 0.00014923,
+          avevolume: 0,
+          coin: 'BTC',
+          address: '1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1',
+          numutxos: 0,
+          maxvolume: 0.02620853,
+          age: 10
+        },
+        {
+          zcredits: 0,
+          pubkey:
+            '90f44b66caae7e0d842a1a3e4f0b50e09d251a300987d85a9a7b136485744c09',
+          depth: 0,
+          price: 0.00014923,
+          avevolume: 0,
+          coin: 'BTC',
+          address: '1LpM8kFY3JS1mStGyh4tJwut3LJS8opQiw',
+          numutxos: 0,
+          maxvolume: 0.01812016,
+          age: 2
+        }
+      ])
+    );
+    const selectOrderbookFetchStatus = makeSelectOrderbookFetchStatus();
+    expect(selectOrderbookFetchStatus(mockedState)).toEqual(null);
   });
 });

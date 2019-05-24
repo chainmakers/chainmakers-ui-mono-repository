@@ -5,36 +5,25 @@ import type { Dispatch } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import AddIcon from '@material-ui/icons/Add';
 import { floor } from 'barterdex-utilities';
-// import getConfig from '../../../utils/config';
 import getCoinMemoize from '../../../components/CryptoIcons';
 import CoinSelectable from '../../../components/CoinSelectable';
+import { covertSymbolToName } from '../../../utils/coin';
 import { openSelectCoinModal } from '../actions';
-import { makeSelectCurrency } from '../selectors';
+import { makeSelectOrderbookRecevie } from '../selectors';
 
-const debug = require('debug')('atomicapp:containers:DexPage:CurrencySection');
+const debug = require('debug')('atomicapp:containers:OrderPage:RecevieSection');
 
-// const line = (
-//   <Line
-//     width={60}
-//     style={{
-//       margin: 0
-//     }}
-//   />
-// );
-
-type Props = {
-  // eslint-disable-next-line flowtype/no-weak-types
-  balance: Object,
+type IRecevieSectionProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchOpenSelectCoinModal: Function,
   // eslint-disable-next-line flowtype/no-weak-types
-  currency: Object
+  recevie: string | null
 };
 
-class CurrencySection extends React.PureComponent<Props> {
+class RecevieSection extends React.PureComponent<IRecevieSectionProps> {
   static defaultProps = {};
 
-  static displayName = 'CurrencySection';
+  static displayName = 'RecevieSection';
 
   onClick = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
@@ -44,34 +33,27 @@ class CurrencySection extends React.PureComponent<Props> {
 
   render() {
     debug(`render`);
-    const {
-      dispatchOpenSelectCoinModal,
-      currency,
-      balance,
-      ...rest
-    } = this.props;
-    if (!currency.get('name'))
+    const { dispatchOpenSelectCoinModal, recevie, ...rest } = this.props;
+    if (!recevie)
       return (
         <CoinSelectable
-          id="add-icon-placeorder-dexpage"
-          key="baseCoinAddIcon"
+          id="add-icon-placeorder-orderpage"
+          key="recevieCoinAddIcon"
           icon={<AddIcon color="primary" />}
           onClick={this.onClick}
           {...rest}
         />
       );
-    const icon = getCoinMemoize(currency.get('symbol'));
-    const b = balance.get(currency.get('symbol'));
+    const icon = getCoinMemoize(recevie);
     return (
       <CoinSelectable
-        id="add-icon-placeorder-dexpage"
-        key={`baseCoin${currency.get('symbol')}`}
+        id="add-icon-placeorder-orderpage"
+        key={`recevieCoin${recevie}`}
         selected
-        data={currency.get('symbol')}
+        data={recevie}
         icon={icon}
-        title={currency.get('name')}
+        title={covertSymbolToName(recevie)}
         onClick={this.onClick}
-        subTitle={`${floor(b.get('balance'), 3)} ${b.get('coin')}`}
         {...rest}
       />
     );
@@ -88,7 +70,7 @@ export function mapDispatchToProps(dispatch: Dispatch<Object>) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currency: makeSelectCurrency()
+  recevie: makeSelectOrderbookRecevie()
 });
 
 const withConnect = connect(
@@ -96,6 +78,4 @@ const withConnect = connect(
   mapDispatchToProps
 );
 
-const CurrencySectionWapper = withConnect(CurrencySection);
-
-export default CurrencySectionWapper;
+export default withConnect(RecevieSection);

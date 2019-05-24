@@ -7,7 +7,8 @@ import {
   LOAD_BUY_COIN,
   SELECT_COIN_MODAL_CLICK,
   SELECT_COIN_MODAL_SETUP_SEARCH_API,
-  SELECT_COIN_MODAL_SEARCH
+  SELECT_COIN_MODAL_SEARCH,
+  ORDERBOOK_LOAD
 } from '../constants';
 import loadBuyCoinProcess from './load-buy-coin-process';
 import loadPricesProcess, { loadPriceProcess } from './load-prices-process';
@@ -15,6 +16,7 @@ import handlingSearch, {
   setupSearchApiForSelectCoinModal,
   handlingLogout
 } from './search';
+import listenForLoadingOrderbook from './orderbook';
 
 /**
  * Root saga manages watcher lifecycle
@@ -22,6 +24,7 @@ import handlingSearch, {
 export default function* buyData() {
   yield all([
     yield takeLatest([LOAD_PRICES, SELECT_COIN_MODAL_CLICK], loadPricesProcess),
+    yield takeLatest(ORDERBOOK_LOAD, listenForLoadingOrderbook),
     yield takeLatest(SELECT_COIN_MODAL_SEARCH, handlingSearch),
     yield takeEvery(LOAD_PRICE, loadPriceProcess),
     yield takeEvery(LOAD_BUY_COIN, loadBuyCoinProcess),

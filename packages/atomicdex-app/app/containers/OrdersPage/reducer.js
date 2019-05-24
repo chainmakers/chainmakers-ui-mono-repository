@@ -1,8 +1,9 @@
 /* eslint-disable no-case-declarations, no-param-reassign */
 import { fromJS } from 'immutable';
 import { handleActions } from 'redux-actions';
-import { LOGOUT } from '../App/constants';
 import logger from '../../logger';
+import { LOADING, LOADED, FAILED } from '../../constants';
+import { LOGOUT } from '../App/constants';
 import {
   LOAD_PRICES,
   LOAD_BEST_PRICE,
@@ -39,7 +40,10 @@ import {
   TAKER_PAYMENT_SENT_SWAPS_STATE,
   MAKER_PAYMENT_SPENT_SWAPS_STATE,
   TAKER_PAYMENT_SPENT_SWAPS_STATE,
-  FINISHED_SWAPS_STATE
+  FINISHED_SWAPS_STATE,
+  ORDERBOOK_LOAD,
+  ORDERBOOK_LOAD_SUCCESS,
+  ORDERBOOK_LOAD_ERROR
 } from './constants';
 
 // The initial state of the App
@@ -99,6 +103,91 @@ export const initialState = fromJS({
 
   joyride: {
     open: false
+  },
+
+  orderbook: {
+    fetchStatus: null,
+    errors: null,
+    // {
+    //   BEER: {
+    //     context: {
+    //       action: 'atomicapp/App/ELECTRUM_ADD',
+    //       params: {
+    //         urls: ['electrum1.cipig.net:10022', 'electrum2.cipig.net:10022'],
+    //         active: 0,
+    //         rpcport: 8923,
+    //         name: 'Beer',
+    //         market_cap: -1,
+    //         coin: 'BEER',
+    //         mm2: 1,
+    //         txversion: 4,
+    //         marketcap: 0,
+    //         symbol: 'BEER',
+    //         id: 7
+    //       }
+    //     },
+    //     type: 'RPC',
+    //     message: 'Request failed with status code 500'
+    //   }
+    // }
+    deposit: 'BTC',
+    recevie: 'KMD',
+    asks: [
+      {
+        coin: 'KMD',
+        address: 'RV6YDG8pe8EaqTFUSs41QUF5obm2rqZuBb',
+        price: 0.00015103,
+        numutxos: 0,
+        avevolume: 0,
+        maxvolume: 50.46521858,
+        depth: 0,
+        pubkey:
+          '90f44b66caae7e0d842a1a3e4f0b50e09d251a300987d85a9a7b136485744c09',
+        age: 2,
+        zcredits: 0
+      },
+      {
+        coin: 'KMD',
+        address: 'RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd',
+        price: 0.00015103,
+        numutxos: 0,
+        avevolume: 0,
+        maxvolume: 36.40686108,
+        depth: 0,
+        pubkey:
+          'bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01',
+        age: 10,
+        zcredits: 0
+      }
+    ],
+    bids: [
+      {
+        coin: 'BTC',
+        address: '1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1',
+        price: 0.00014923,
+        numutxos: 0,
+        avevolume: 0,
+        maxvolume: 0.02620853,
+        depth: 0,
+        pubkey:
+          'bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01',
+        age: 10,
+        zcredits: 0
+      },
+      {
+        coin: 'BTC',
+        address: '1LpM8kFY3JS1mStGyh4tJwut3LJS8opQiw',
+        price: 0.00014923,
+        numutxos: 0,
+        avevolume: 0,
+        maxvolume: 0.01812016,
+        depth: 0,
+        pubkey:
+          '90f44b66caae7e0d842a1a3e4f0b50e09d251a300987d85a9a7b136485744c09',
+        age: 2,
+        zcredits: 0
+      }
+    ]
   }
 });
 
@@ -309,203 +398,6 @@ export default handleActions(
         .setIn(['swaps', 'processingList'], processingList)
         .setIn(['swaps', 'finishedList'], finishedList)
         .setIn(['swaps', 'entities'], entities);
-
-      /**
-      // NOTE: still not hanle this case
-      // error: "swap never started"
-      // uuid: ""
-      // status: "finished"
-      // bob: ""
-      // src: ""
-      // alice: ""
-      // dest: ""
-      // requestid: 1999249337
-      // quoteid: 2452050470
-      const {
-        tradeid,
-        uuid,
-        requestid,
-        quoteid,
-        expiration,
-        bob,
-        alice,
-        srcamount,
-        destamount,
-        sentflags,
-        status,
-        alicedexfee,
-        bobdeposit,
-        alicepayment,
-        bobpayment,
-        paymentspent,
-        txChain
-      } = payload;
-      // stop when not found uuid
-      if (!uuid && uuid === '') return state;
-      // step one: update list
-      let processingList = state.getIn(['swaps', 'processingList']);
-      let finishedList = state.getIn(['swaps', 'finishedList']);
-
-      // step two: update entities
-      let entities = state.getIn(['swaps', 'entities']);
-      let entity = entities.get(uuid);
-      if (!entity) {
-        // set new
-        entity = fromJS({
-          id: tradeid,
-          uuid,
-          requestid,
-          quoteid,
-          expiration,
-          bob,
-          alice,
-          bobamount: srcamount,
-          aliceamount: destamount,
-          sentflags,
-          status,
-          myfee: {
-            tx: SWAP_TX_DEFAULT,
-            value: 0
-          },
-          bobdeposit: {
-            tx: SWAP_TX_DEFAULT,
-            value: 0
-          },
-          alicepayment: {
-            tx: SWAP_TX_DEFAULT,
-            value: 0
-          },
-          bobpayment: {
-            tx: SWAP_TX_DEFAULT,
-            value: 0
-          },
-          alicespend: {
-            tx: SWAP_TX_DEFAULT,
-            value: 0
-          }
-        });
-      } else if (entity.get('status') === 'finished') {
-        // NOTE: stop update when a swap was finished
-        return state;
-      } else {
-        entity = entity.merge(
-          fromJS({
-            id: tradeid,
-            uuid,
-            requestid,
-            quoteid,
-            expiration,
-            bob,
-            alice,
-            bobamount: srcamount,
-            aliceamount: destamount,
-            status
-          })
-        );
-      }
-      // sentflags
-      const sentf = entity.get('sentflags');
-      if (sentflags && sentf.size < sentflags.length) {
-        entity = entity.set('sentflags', fromJS(sentflags));
-      }
-
-      if (
-        alicedexfee !== SWAP_TX_DEFAULT &&
-        alicedexfee !== entity.getIn(['myfee', 'tx'])
-      ) {
-        const d = txChain.find(e => e.stage === 'myfee');
-        if (d) {
-          entity = entity.set(
-            'myfee',
-            fromJS({
-              coin: d.coin,
-              tx: d.txid,
-              value: d.amount
-            })
-          );
-        }
-      }
-
-      if (
-        bobdeposit !== SWAP_TX_DEFAULT &&
-        bobdeposit !== entity.getIn(['bobdeposit', 'tx'])
-      ) {
-        const d = txChain.find(e => e.stage === 'bobdeposit');
-        if (d) {
-          entity = entity.set(
-            'bobdeposit',
-            fromJS({
-              coin: d.coin,
-              tx: d.txid,
-              value: d.amount
-            })
-          );
-        }
-      }
-
-      if (
-        alicepayment !== SWAP_TX_DEFAULT &&
-        alicepayment !== entity.getIn(['alicepayment', 'tx'])
-      ) {
-        const d = txChain.find(e => e.stage === 'alicepayment');
-        if (d) {
-          entity = entity.set(
-            'alicepayment',
-            fromJS({
-              coin: d.coin,
-              tx: d.txid,
-              value: d.amount
-            })
-          );
-        }
-      }
-
-      if (
-        bobpayment !== SWAP_TX_DEFAULT &&
-        bobpayment !== entity.getIn(['bobpayment', 'tx'])
-      ) {
-        const d = txChain.find(e => e.stage === 'bobpayment');
-        if (d) {
-          entity = entity.set(
-            'bobpayment',
-            fromJS({
-              coin: d.coin,
-              tx: d.txid,
-              value: d.amount
-            })
-          );
-        }
-      }
-
-      if (
-        paymentspent !== SWAP_TX_DEFAULT &&
-        paymentspent !== entity.getIn(['alicespend', 'tx'])
-      ) {
-        const d = txChain.find(e => e.stage === 'alicespend');
-        if (d) {
-          entity = entity.set(
-            'alicespend',
-            fromJS({
-              coin: d.coin,
-              tx: d.txid,
-              value: d.amount
-            })
-          );
-        }
-      }
-
-      entities = entities.set(uuid, entity);
-      if (status === 'finished' && processingList.contains(uuid)) {
-        processingList = processingList.filter(o => o !== uuid);
-        finishedList = finishedList.push(uuid);
-
-        return state
-          .setIn(['swaps', 'processingList'], processingList)
-          .setIn(['swaps', 'finishedList'], finishedList)
-          .setIn(['swaps', 'entities'], entities);
-      }
-      return state.setIn(['swaps', 'entities'], entities);
-      */
     },
 
     [LOAD_RECENT_SWAPS_DATA_FROM_WEBSOCKET]: (state, { payload }) => {
@@ -754,6 +646,24 @@ export default handleActions(
     [JOYRIDE_OPEN]: state => state.setIn(['joyride', 'open'], true),
 
     [JOYRIDE_CLOSE]: state => state.setIn(['joyride', 'open'], false),
+
+    [ORDERBOOK_LOAD]: state =>
+      state
+        .setIn(['orderbook', 'fetchStatus'], LOADING)
+        .setIn(['orderbook', 'error'], null),
+
+    [ORDERBOOK_LOAD_SUCCESS]: (state, { payload }) => {
+      const { asks, bids } = payload;
+      return state
+        .setIn(['orderbook', 'fetchStatus'], LOADED)
+        .setIn(['orderbook', 'asks'], fromJS(asks))
+        .setIn(['orderbook', 'bids'], fromJS(bids));
+    },
+
+    [ORDERBOOK_LOAD_ERROR]: (state, { error }) =>
+      state
+        .setIn(['orderbook', 'fetchStatus'], FAILED)
+        .setIn(['orderbook', 'error'], fromJS(error)),
 
     [LOGOUT]: () => initialState
   },

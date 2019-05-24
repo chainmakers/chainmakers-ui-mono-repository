@@ -1,11 +1,11 @@
 import { createSelector } from 'reselect';
 import { APP_STATE_NAME } from './constants';
 
-const selectBuy = state => state.get(APP_STATE_NAME);
+const selectOrder = state => state.get(APP_STATE_NAME);
 
 const makeSelectPrices = () =>
   createSelector(
-    selectBuy,
+    selectOrder,
     buyState => buyState.get('prices')
   );
 
@@ -36,7 +36,7 @@ const makeSelectPriceEntities = () =>
 
 const makeSelectBuying = () =>
   createSelector(
-    selectBuy,
+    selectOrder,
     buyState => buyState.get('buying')
   );
 
@@ -54,7 +54,7 @@ const makeSelectBuyingError = () =>
 
 const makeSelectSwaps = () =>
   createSelector(
-    selectBuy,
+    selectOrder,
     buyState => buyState.get('swaps')
   );
 
@@ -99,7 +99,7 @@ const makeSelectCurrentSwap = () =>
 
 const makeSelectSwapDetailModal = () =>
   createSelector(
-    selectBuy,
+    selectOrder,
     buyState => buyState.get('swapDetailModal')
   );
 
@@ -116,25 +116,25 @@ const makeSelectSwapInDetailModal = () =>
 
 const makeSelectCoinModal = () =>
   createSelector(
-    selectBuy,
+    selectOrder,
     buyState => buyState.get('selectCoinModal')
   );
 
 const makeSelectCurrency = () =>
   createSelector(
-    selectBuy,
+    selectOrder,
     buyState => buyState.get('currency')
   );
 
 const makeSelectPayment = () =>
   createSelector(
-    selectBuy,
+    selectOrder,
     buyState => buyState.get('payment')
   );
 
 const makeSelectSearch = () =>
   createSelector(
-    selectBuy,
+    selectOrder,
     buyState => buyState.get('search')
   );
 
@@ -158,7 +158,7 @@ const makeSelectSearchList = () =>
 
 const makeSelectJoyride = () =>
   createSelector(
-    selectBuy,
+    selectOrder,
     buyState => buyState.get('joyride')
   );
 
@@ -168,8 +168,44 @@ const makeSelectJoyrideOpenState = () =>
     joyrideState => joyrideState.get('open')
   );
 
+const makeSelectOrderbook = () =>
+  createSelector(
+    selectOrder,
+    order => order.get('orderbook')
+  );
+
+const makeSelectOrderbookDeposit = () =>
+  createSelector(
+    makeSelectOrderbook(),
+    orderbook => orderbook.get('deposit')
+  );
+
+const makeSelectOrderbookRecevie = () =>
+  createSelector(
+    makeSelectOrderbook(),
+    orderbook => orderbook.get('recevie')
+  );
+
+const makeSelectOrderbookAsks = () =>
+  createSelector(
+    makeSelectOrderbook(),
+    orderbook => orderbook.get('asks')
+  );
+
+const makeSelectOrderbookBids = () =>
+  createSelector(
+    makeSelectOrderbook(),
+    orderbook => orderbook.get('bids')
+  );
+
+const makeSelectOrderbookFetchStatus = () =>
+  createSelector(
+    makeSelectOrderbook(),
+    orderbook => orderbook.get('fetchStatus')
+  );
+
 export {
-  selectBuy,
+  selectOrder,
   makeSelectPrices,
   makeSelectPricesLoading,
   makeSelectPricesError,
@@ -194,5 +230,11 @@ export {
   makeSelectSearchErrors,
   makeSelectSearchList,
   makeSelectJoyride,
-  makeSelectJoyrideOpenState
+  makeSelectJoyrideOpenState,
+  makeSelectOrderbook,
+  makeSelectOrderbookDeposit,
+  makeSelectOrderbookRecevie,
+  makeSelectOrderbookAsks,
+  makeSelectOrderbookBids,
+  makeSelectOrderbookFetchStatus
 };

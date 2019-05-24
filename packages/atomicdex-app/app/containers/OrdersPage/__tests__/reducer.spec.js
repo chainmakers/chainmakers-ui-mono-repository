@@ -1,5 +1,6 @@
 import { cloneDeep, last } from 'lodash';
 import { fromJS } from 'immutable';
+import orderbook from '../../__tests__/orderbook.json';
 import buyReducer, { initialState } from '../reducer';
 import {
   loadPrices,
@@ -16,9 +17,17 @@ import {
   selectCoinPayment,
   skipSearchStateCreation,
   openJoyride,
-  closeJoyride
+  closeJoyride,
+  loadOrderbook,
+  loadOrderbookSuccess,
+  loadOrderbookError
 } from '../actions';
-import { SWAP_TX_DEFAULT, SEARCH_STATE_READY } from '../constants';
+import { LOADING, LOADED, FAILED } from '../../../constants';
+import {
+  SWAP_TX_DEFAULT,
+  SEARCH_STATE_READY,
+  ORDERBOOK_LOAD
+} from '../constants';
 import {
   WEBSOCKET_STATE_ZERO,
   WEBSOCKET_STATE_ONE,
@@ -1025,5 +1034,47 @@ describe('containers/DexPage/reducers/closeJoyride', () => {
     const expectedResult = initialState.setIn(['joyride', 'open'], true);
 
     expect(buyReducer(expectedResult, closeJoyride())).toEqual(initialState);
+  });
+});
+
+describe('containers/DexPage/reducers/loadOrderbook', () => {
+  it('should handle the loadOrderbook action correctly', () => {
+    const expectedResult = initialState
+      .setIn(['orderbook', 'fetchStatus'], LOADING)
+      .setIn(['orderbook', 'error'], null);
+    expect(buyReducer(initialState, loadOrderbook())).toEqual(expectedResult);
+  });
+});
+
+describe('containers/DexPage/reducers/loadOrderbookSuccess', () => {
+  const payload = orderbook;
+  it('should handle the loadOrderbookSuccess action correctly', () => {
+    const { asks, bids } = payload;
+    const expectedResult = initialState
+      .setIn(['orderbook', 'fetchStatus'], LOADED)
+      .setIn(['orderbook', 'asks'], fromJS(asks))
+      .setIn(['orderbook', 'bids'], fromJS(bids));
+    expect(buyReducer(initialState, loadOrderbookSuccess(payload))).toEqual(
+      expectedResult
+    );
+  });
+});
+
+describe('containers/DexPage/reducers/loadOrderbookError', () => {
+  const error = {
+    context: {
+      action: ORDERBOOK_LOAD
+    },
+    message: 'message',
+    type: 'RPC'
+  };
+
+  it('should handle the loadOrderbookError action correctly', () => {
+    const expectedResult = initialState
+      .setIn(['orderbook', 'fetchStatus'], FAILED)
+      .setIn(['orderbook', 'error'], fromJS(error));
+    expect(buyReducer(initialState, loadOrderbookError(error))).toEqual(
+      expectedResult
+    );
   });
 });

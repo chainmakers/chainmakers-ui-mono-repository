@@ -30,7 +30,10 @@ import {
   COIN_PAYMENT_SELECT,
   SEARCH_STATE_SKIP_CREATION,
   JOYRIDE_OPEN,
-  JOYRIDE_CLOSE
+  JOYRIDE_CLOSE,
+  ORDERBOOK_LOAD,
+  ORDERBOOK_LOAD_SUCCESS,
+  ORDERBOOK_LOAD_ERROR
 } from './constants';
 
 import type {
@@ -39,6 +42,8 @@ import type {
   TimeoutPayload,
   SelectCoinPayload
 } from './schema';
+
+import type { ErrorType } from '../schema';
 
 export function loadPrice(coin: string) {
   return {
@@ -248,5 +253,25 @@ export function openJoyride() {
 export function closeJoyride() {
   return {
     type: JOYRIDE_CLOSE
+  };
+}
+
+export function loadOrderbook() {
+  return {
+    type: ORDERBOOK_LOAD
+  };
+}
+
+export function loadOrderbookSuccess(payload) {
+  return {
+    type: ORDERBOOK_LOAD_SUCCESS,
+    payload
+  };
+}
+
+export function loadOrderbookError(error: ErrorType) {
+  return {
+    type: ORDERBOOK_LOAD_ERROR,
+    error
   };
 }
