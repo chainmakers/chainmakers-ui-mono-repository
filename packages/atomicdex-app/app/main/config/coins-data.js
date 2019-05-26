@@ -59,6 +59,7 @@ const data = [
   {
     coin: 'COQUI',
     name: 'Coqui Cash',
+    asset: 'COQUI',
     txversion: 4,
     urls: ['electrum1.cipig.net:10011', 'electrum2.cipig.net:10011'],
     rpcport: 14276,
@@ -109,6 +110,7 @@ const data = [
   {
     coin: 'KMDICE',
     name: 'KMDice',
+    asset: 'KMDICE',
     txversion: 4,
     urls: [
       'electrum1.cipig.net:10031',
@@ -122,6 +124,7 @@ const data = [
   },
   {
     coin: 'CHAIN',
+    asset: 'CHAIN',
     name: 'Chainmakers',
     txversion: 4,
     urls: [
@@ -137,6 +140,7 @@ const data = [
   {
     coin: 'BCH',
     name: 'Bitcoin Cash',
+    fname: 'Bitcoin Cash',
     txversion: 4,
     urls: [
       'bch.imaginary.cash:50001'
@@ -193,6 +197,7 @@ const data = [
   {
     coin: 'BEER',
     name: 'Beer',
+    asset: 'BEER',
     txversion: 4,
     rpcport: 8923,
     urls: ['electrum1.cipig.net:10022', 'electrum2.cipig.net:10022'],
@@ -203,6 +208,7 @@ const data = [
   {
     coin: 'PIZZA',
     name: 'Pizza',
+    asset: 'PIZZA',
     txversion: 4,
     rpcport: 11608,
     urls: [
@@ -1004,6 +1010,8 @@ const data = [
   // },
   {
     coin: 'GAME',
+    name: 'GameCredits',
+    fname: 'GameCredits',
     rpcport: 40001,
     pubtype: 38,
     p2shtype: 5,
@@ -1014,7 +1022,6 @@ const data = [
       'electrum2.cipig.net:10072',
       'electrum3.cipig.net:10072'
     ],
-    name: 'GameCredits',
     active: 0,
     market_cap: 0,
     mm2: 1
@@ -2339,7 +2346,6 @@ const data = [
 ];
 
 export default function loadCoinsData(config) {
-  // console.log(JSON.stringify(data));
   return config.set('marketmaker', {
     data
   });
