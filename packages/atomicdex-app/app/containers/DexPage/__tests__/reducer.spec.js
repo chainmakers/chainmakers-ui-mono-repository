@@ -14,7 +14,6 @@ import {
   closeSelectCoinModal,
   clickSelectCoinModal,
   selectCoinPayment,
-  skipSearchStateCreation,
   openJoyride,
   closeJoyride
 } from '../actions';
@@ -996,19 +995,6 @@ describe('containers/DexPage/reducers/selectCoinPayment', () => {
         })
       )
     ).toEqual(expectedResult);
-  });
-});
-
-describe('containers/DexPage/reducers/skipSearchStateCreation', () => {
-  it('should handle the skipSearchStateCreation action correctly', () => {
-    const expectedResult = initialState.setIn(
-      ['search', 'state'],
-      SEARCH_STATE_READY
-    );
-
-    expect(buyReducer(initialState, skipSearchStateCreation())).toEqual(
-      expectedResult
-    );
   });
 });
 

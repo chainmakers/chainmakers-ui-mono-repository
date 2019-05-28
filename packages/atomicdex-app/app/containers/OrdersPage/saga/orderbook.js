@@ -7,7 +7,11 @@ import {
   makeSelectOrderbookDeposit,
   makeSelectOrderbookRecevie
 } from '../selectors';
-import { loadOrderbookSuccess, loadOrderbookError } from '../actions';
+import {
+  loadOrderbookSuccess,
+  loadOrderbookError,
+  skipOrderbook
+} from '../actions';
 
 const debug = require('debug')(
   'atomicapp:containers:OrdersPage:saga:orderbook'
@@ -21,6 +25,10 @@ export default function* listenForLoadingOrderbook(action) {
     const deposit = yield select(makeSelectOrderbookDeposit());
     const recevie = yield select(makeSelectOrderbookRecevie());
 
+    if (!deposit || !recevie) {
+      return yield put(skipOrderbook());
+    }
+
     request = api.orderbook({
       base: recevie,
       rel: deposit,
@@ -28,7 +36,7 @@ export default function* listenForLoadingOrderbook(action) {
     });
     const result = yield request;
 
-    yield put(loadOrderbookSuccess(result));
+    return yield put(loadOrderbookSuccess(result));
   } catch (err) {
     debug(`loading orderbook error: ${err.message}`);
     yield put(openSnackbars(err.message));

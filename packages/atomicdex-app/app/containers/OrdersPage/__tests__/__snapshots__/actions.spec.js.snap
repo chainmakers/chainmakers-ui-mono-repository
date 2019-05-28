@@ -12,16 +12,6 @@ Object {
 }
 `;
 
-exports[`containers/DexPage/actions/clickSelectCoinModal should clickSelectCoinModal should create clickSelectCoinModal action 1`] = `
-Object {
-  "payload": Object {
-    "name": "Komodo",
-    "symbol": "KMD",
-  },
-  "type": "atomicapp/DexPage/SELECT_COIN_MODAL_CLICK",
-}
-`;
-
 exports[`containers/DexPage/actions/closeDetailModal should closeDetailModal should create closeDetailModal action 1`] = `
 Object {
   "type": "atomicapp/DexPage/SWAP_DETAIL_MODAL_CLOSE",
@@ -31,12 +21,6 @@ Object {
 exports[`containers/DexPage/actions/closeJoyride should closeJoyride should create closeJoyride action 1`] = `
 Object {
   "type": "atomicapp/DexPage/JOYRIDE_CLOSE",
-}
-`;
-
-exports[`containers/DexPage/actions/closeSelectCoinModal should closeSelectCoinModal should create closeSelectCoinModal action 1`] = `
-Object {
-  "type": "atomicapp/DexPage/SELECT_COIN_MODAL_CLOSE",
 }
 `;
 
@@ -131,28 +115,6 @@ Object {
 }
 `;
 
-exports[`containers/DexPage/actions/openSelectCoinModal should openSelectCoinModal should create openSelectCoinModal action 1`] = `
-Object {
-  "type": "atomicapp/DexPage/SELECT_COIN_MODAL_OPEN",
-}
-`;
-
-exports[`containers/DexPage/actions/selectCoinPayment should selectCoinPayment should create selectCoinPayment action 1`] = `
-Object {
-  "payload": Object {
-    "name": "Komodo",
-    "symbol": "KMD",
-  },
-  "type": "atomicapp/DexPage/COIN_PAYMENT_SELECT",
-}
-`;
-
-exports[`containers/DexPage/actions/skipSearchStateCreation should skipSearchStateCreation should create skipSearchStateCreation action 1`] = `
-Object {
-  "type": "atomicapp/DexPage/SEARCH_STATE_SKIP_CREATION",
-}
-`;
-
 exports[`containers/DexPage/actions/timeoutSwap should timeoutSwap should create timeoutSwap action 1`] = `
 Object {
   "payload": Object {
@@ -227,5 +189,35 @@ Object {
     "timestamp": 1558682258,
   },
   "type": "atomicapp/OrdersPage/ORDERBOOK_LOAD_SUCCESS",
+}
+`;
+
+exports[`containers/OrderPage/actions/skipOrderbook should skipOrderbook should create skipOrderbook action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/ORDERBOOK_LOAD_SKIP",
+}
+`;
+
+exports[`containers/OrdersPage/actions/closeDepositCoinModal should closeDepositCoinModal should create closeDepositCoinModal action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/DEPOSIT_COIN_MODAL_CLOSE",
+}
+`;
+
+exports[`containers/OrdersPage/actions/closeRecevieCoinModal should closeRecevieCoinModal should create closeRecevieCoinModal action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/RECEVIE_COIN_MODAL_CLOSE",
+}
+`;
+
+exports[`containers/OrdersPage/actions/openDepositCoinModal should openDepositCoinModal should create openDepositCoinModal action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/DEPOSIT_COIN_MODAL_OPEN",
+}
+`;
+
+exports[`containers/OrdersPage/actions/openRecevieCoinModal should openRecevieCoinModal should create openRecevieCoinModal action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/RECEVIE_COIN_MODAL_OPEN",
 }
 `;

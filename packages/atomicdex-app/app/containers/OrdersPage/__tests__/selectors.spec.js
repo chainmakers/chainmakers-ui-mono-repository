@@ -237,74 +237,16 @@ describe('containers/OrderPage/selectors/makeSelectOrderbook', () => {
     expect(selectOrderbook(mockedState)).toEqual(initialState.get('orderbook'));
 
     const selectOrderbookDeposit = makeSelectOrderbookDeposit();
-    expect(selectOrderbookDeposit(mockedState)).toEqual('BTC');
+    expect(selectOrderbookDeposit(mockedState)).toEqual(null);
 
     const selectOrderbookRecevie = makeSelectOrderbookRecevie();
-    expect(selectOrderbookRecevie(mockedState)).toEqual('KMD');
+    expect(selectOrderbookRecevie(mockedState)).toEqual(null);
 
     const selectOrderbookAsks = makeSelectOrderbookAsks();
-    expect(selectOrderbookAsks(mockedState)).toEqual(
-      fromJS([
-        {
-          zcredits: 0,
-          pubkey:
-            '90f44b66caae7e0d842a1a3e4f0b50e09d251a300987d85a9a7b136485744c09',
-          depth: 0,
-          price: 0.00015103,
-          avevolume: 0,
-          coin: 'KMD',
-          address: 'RV6YDG8pe8EaqTFUSs41QUF5obm2rqZuBb',
-          numutxos: 0,
-          maxvolume: 50.46521858,
-          age: 2
-        },
-        {
-          zcredits: 0,
-          pubkey:
-            'bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01',
-          depth: 0,
-          price: 0.00015103,
-          avevolume: 0,
-          coin: 'KMD',
-          address: 'RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd',
-          numutxos: 0,
-          maxvolume: 36.40686108,
-          age: 10
-        }
-      ])
-    );
+    expect(selectOrderbookAsks(mockedState)).toEqual(fromJS([]));
 
     const selectOrderbookBids = makeSelectOrderbookBids();
-    expect(selectOrderbookBids(mockedState)).toEqual(
-      fromJS([
-        {
-          zcredits: 0,
-          pubkey:
-            'bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01',
-          depth: 0,
-          price: 0.00014923,
-          avevolume: 0,
-          coin: 'BTC',
-          address: '1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1',
-          numutxos: 0,
-          maxvolume: 0.02620853,
-          age: 10
-        },
-        {
-          zcredits: 0,
-          pubkey:
-            '90f44b66caae7e0d842a1a3e4f0b50e09d251a300987d85a9a7b136485744c09',
-          depth: 0,
-          price: 0.00014923,
-          avevolume: 0,
-          coin: 'BTC',
-          address: '1LpM8kFY3JS1mStGyh4tJwut3LJS8opQiw',
-          numutxos: 0,
-          maxvolume: 0.01812016,
-          age: 2
-        }
-      ])
-    );
+    expect(selectOrderbookBids(mockedState)).toEqual(fromJS([]));
     const selectOrderbookFetchStatus = makeSelectOrderbookFetchStatus();
     expect(selectOrderbookFetchStatus(mockedState)).toEqual(null);
   });

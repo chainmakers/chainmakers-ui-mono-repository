@@ -12,17 +12,20 @@ import {
   makeANewSwap,
   openDetailModal,
   closeDetailModal,
-  openSelectCoinModal,
-  closeSelectCoinModal,
-  clickSelectCoinModal,
-  selectCoinPayment,
-  skipSearchStateCreation,
   openJoyride,
   closeJoyride,
   loadOrderbook,
+  skipOrderbook,
   loadOrderbookSuccess,
-  loadOrderbookError
+  loadOrderbookError,
+  openDepositCoinModal,
+  closeDepositCoinModal,
+  selectCoinDeposit,
+  openRecevieCoinModal,
+  closeRecevieCoinModal,
+  selectCoinRecevie
 } from '../actions';
+
 import {
   LOAD_PRICE,
   LOAD_PRICES,
@@ -36,16 +39,16 @@ import {
   SWAP_MAKE_A_NEW,
   SWAP_DETAIL_MODAL_OPEN,
   SWAP_DETAIL_MODAL_CLOSE,
-  SELECT_COIN_MODAL_OPEN,
-  SELECT_COIN_MODAL_CLOSE,
-  SELECT_COIN_MODAL_CLICK,
-  COIN_PAYMENT_SELECT,
-  SEARCH_STATE_SKIP_CREATION,
   JOYRIDE_OPEN,
   JOYRIDE_CLOSE,
   ORDERBOOK_LOAD,
+  ORDERBOOK_LOAD_SKIP,
   ORDERBOOK_LOAD_SUCCESS,
-  ORDERBOOK_LOAD_ERROR
+  ORDERBOOK_LOAD_ERROR,
+  DEPOSIT_COIN_MODAL_OPEN,
+  DEPOSIT_COIN_MODAL_CLOSE,
+  RECEVIE_COIN_MODAL_OPEN,
+  RECEVIE_COIN_MODAL_CLOSE
 } from '../constants';
 
 describe('containers/DexPage/actions/loadPrice', () => {
@@ -273,108 +276,6 @@ describe('containers/DexPage/actions/closeDetailModal', () => {
   });
 });
 
-describe('containers/DexPage/actions/openSelectCoinModal', () => {
-  it('should openSelectCoinModal should create openSelectCoinModal action', () => {
-    expect(openSelectCoinModal()).toMatchSnapshot();
-  });
-
-  it('should return the correct type and the passed name', () => {
-    const expectedResult = {
-      type: SELECT_COIN_MODAL_OPEN
-    };
-
-    expect(openSelectCoinModal()).toEqual(expectedResult);
-  });
-});
-
-describe('containers/DexPage/actions/closeSelectCoinModal', () => {
-  it('should closeSelectCoinModal should create closeSelectCoinModal action', () => {
-    expect(closeSelectCoinModal()).toMatchSnapshot();
-  });
-
-  it('should return the correct type and the passed name', () => {
-    const expectedResult = {
-      type: SELECT_COIN_MODAL_CLOSE
-    };
-
-    expect(closeSelectCoinModal()).toEqual(expectedResult);
-  });
-});
-
-describe('containers/DexPage/actions/clickSelectCoinModal', () => {
-  const name = 'Komodo';
-  const symbol = 'KMD';
-  it('should clickSelectCoinModal should create clickSelectCoinModal action', () => {
-    expect(
-      clickSelectCoinModal({
-        name,
-        symbol
-      })
-    ).toMatchSnapshot();
-  });
-
-  it('should return the correct type and the passed name', () => {
-    const expectedResult = {
-      type: SELECT_COIN_MODAL_CLICK,
-      payload: {
-        name,
-        symbol
-      }
-    };
-
-    expect(
-      clickSelectCoinModal({
-        name,
-        symbol
-      })
-    ).toEqual(expectedResult);
-  });
-});
-
-describe('containers/DexPage/actions/selectCoinPayment', () => {
-  const name = 'Komodo';
-  const symbol = 'KMD';
-  it('should selectCoinPayment should create selectCoinPayment action', () => {
-    expect(
-      selectCoinPayment({
-        name,
-        symbol
-      })
-    ).toMatchSnapshot();
-  });
-
-  it('should return the correct type and the passed name', () => {
-    const expectedResult = {
-      type: COIN_PAYMENT_SELECT,
-      payload: {
-        name,
-        symbol
-      }
-    };
-
-    expect(
-      selectCoinPayment({
-        name,
-        symbol
-      })
-    ).toEqual(expectedResult);
-  });
-});
-
-describe('containers/DexPage/actions/skipSearchStateCreation', () => {
-  it('should skipSearchStateCreation should create skipSearchStateCreation action', () => {
-    expect(skipSearchStateCreation()).toMatchSnapshot();
-  });
-
-  it('should return the correct type and the passed name', () => {
-    const expectedResult = {
-      type: SEARCH_STATE_SKIP_CREATION
-    };
-
-    expect(skipSearchStateCreation()).toEqual(expectedResult);
-  });
-});
-
 describe('containers/DexPage/actions/openJoyride', () => {
   it('should openJoyride should create openJoyride action', () => {
     expect(openJoyride()).toMatchSnapshot();
@@ -417,6 +318,20 @@ describe('containers/OrderPage/actions/loadOrderbook', () => {
   });
 });
 
+describe('containers/OrderPage/actions/skipOrderbook', () => {
+  it('should skipOrderbook should create skipOrderbook action', () => {
+    expect(skipOrderbook()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: ORDERBOOK_LOAD_SKIP
+    };
+
+    expect(skipOrderbook()).toEqual(expectedResult);
+  });
+});
+
 describe('containers/OrderPage/actions/loadOrderbookSuccess', () => {
   const payload = orderbook;
 
@@ -454,5 +369,61 @@ describe('containers/OrderPage/actions/loadOrderbookError', () => {
     };
 
     expect(loadOrderbookError(error)).toEqual(expectedResult);
+  });
+});
+
+describe('containers/OrdersPage/actions/openDepositCoinModal', () => {
+  it('should openDepositCoinModal should create openDepositCoinModal action', () => {
+    expect(openDepositCoinModal()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: DEPOSIT_COIN_MODAL_OPEN
+    };
+
+    expect(openDepositCoinModal()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/OrdersPage/actions/closeDepositCoinModal', () => {
+  it('should closeDepositCoinModal should create closeDepositCoinModal action', () => {
+    expect(closeDepositCoinModal()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: DEPOSIT_COIN_MODAL_CLOSE
+    };
+
+    expect(closeDepositCoinModal()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/OrdersPage/actions/openRecevieCoinModal', () => {
+  it('should openRecevieCoinModal should create openRecevieCoinModal action', () => {
+    expect(openRecevieCoinModal()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: RECEVIE_COIN_MODAL_OPEN
+    };
+
+    expect(openRecevieCoinModal()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/OrdersPage/actions/closeRecevieCoinModal', () => {
+  it('should closeRecevieCoinModal should create closeRecevieCoinModal action', () => {
+    expect(closeRecevieCoinModal()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: RECEVIE_COIN_MODAL_CLOSE
+    };
+
+    expect(closeRecevieCoinModal()).toEqual(expectedResult);
   });
 });

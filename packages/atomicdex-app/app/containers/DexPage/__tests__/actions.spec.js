@@ -15,7 +15,6 @@ import {
   closeSelectCoinModal,
   clickSelectCoinModal,
   selectCoinPayment,
-  skipSearchStateCreation,
   openJoyride,
   closeJoyride
 } from '../actions';
@@ -36,7 +35,6 @@ import {
   SELECT_COIN_MODAL_CLOSE,
   SELECT_COIN_MODAL_CLICK,
   COIN_PAYMENT_SELECT,
-  SEARCH_STATE_SKIP_CREATION,
   JOYRIDE_OPEN,
   JOYRIDE_CLOSE
 } from '../constants';
@@ -351,20 +349,6 @@ describe('containers/DexPage/actions/selectCoinPayment', () => {
         symbol
       })
     ).toEqual(expectedResult);
-  });
-});
-
-describe('containers/DexPage/actions/skipSearchStateCreation', () => {
-  it('should skipSearchStateCreation should create skipSearchStateCreation action', () => {
-    expect(skipSearchStateCreation()).toMatchSnapshot();
-  });
-
-  it('should return the correct type and the passed name', () => {
-    const expectedResult = {
-      type: SEARCH_STATE_SKIP_CREATION
-    };
-
-    expect(skipSearchStateCreation()).toEqual(expectedResult);
   });
 });
 

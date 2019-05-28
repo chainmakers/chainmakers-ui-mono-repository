@@ -5,17 +5,14 @@ import {
   LOAD_PRICES,
   LOAD_PRICE,
   LOAD_BUY_COIN,
-  SELECT_COIN_MODAL_CLICK,
   SELECT_COIN_MODAL_SETUP_SEARCH_API,
   SELECT_COIN_MODAL_SEARCH,
-  ORDERBOOK_LOAD
+  ORDERBOOK_LOAD,
+  DEPOSIT_COIN_SELECT,
+  RECEVIE_COIN_SELECT
 } from '../constants';
 import loadBuyCoinProcess from './load-buy-coin-process';
 import loadPricesProcess, { loadPriceProcess } from './load-prices-process';
-import handlingSearch, {
-  setupSearchApiForSelectCoinModal,
-  handlingLogout
-} from './search';
 import listenForLoadingOrderbook from './orderbook';
 
 /**
@@ -23,16 +20,13 @@ import listenForLoadingOrderbook from './orderbook';
  */
 export default function* buyData() {
   yield all([
-    yield takeLatest([LOAD_PRICES, SELECT_COIN_MODAL_CLICK], loadPricesProcess),
-    yield takeLatest(ORDERBOOK_LOAD, listenForLoadingOrderbook),
-    yield takeLatest(SELECT_COIN_MODAL_SEARCH, handlingSearch),
-    yield takeEvery(LOAD_PRICE, loadPriceProcess),
-    yield takeEvery(LOAD_BUY_COIN, loadBuyCoinProcess),
-    yield takeFirst(
-      SELECT_COIN_MODAL_SETUP_SEARCH_API,
-      setupSearchApiForSelectCoinModal
+    yield takeLatest(LOAD_PRICES, loadPricesProcess),
+    yield takeLatest(
+      [ORDERBOOK_LOAD, DEPOSIT_COIN_SELECT, RECEVIE_COIN_SELECT],
+      listenForLoadingOrderbook
     ),
-    yield takeEvery(LOGOUT, handlingLogout)
+    yield takeEvery(LOAD_PRICE, loadPriceProcess),
+    yield takeEvery(LOAD_BUY_COIN, loadBuyCoinProcess)
     // yield takeFirst(LOAD_BUY_COIN, loadBuyCoinProcess);
   ]);
 }

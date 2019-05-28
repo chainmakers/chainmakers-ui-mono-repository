@@ -20,20 +20,18 @@ import {
   SWAP_MAKE_A_NEW,
   SWAP_DETAIL_MODAL_OPEN,
   SWAP_DETAIL_MODAL_CLOSE,
-  SELECT_COIN_MODAL_OPEN,
-  SELECT_COIN_MODAL_CLOSE,
-  SELECT_COIN_MODAL_CLICK,
-  SELECT_COIN_MODAL_SEARCH,
-  SELECT_COIN_MODAL_SEARCH_SUCCESS,
-  SELECT_COIN_MODAL_SETUP_SEARCH_API,
-  SELECT_COIN_MODAL_SETUP_SEARCH_API_SUCCESS,
-  COIN_PAYMENT_SELECT,
-  SEARCH_STATE_SKIP_CREATION,
   JOYRIDE_OPEN,
   JOYRIDE_CLOSE,
   ORDERBOOK_LOAD,
   ORDERBOOK_LOAD_SUCCESS,
-  ORDERBOOK_LOAD_ERROR
+  ORDERBOOK_LOAD_SKIP,
+  ORDERBOOK_LOAD_ERROR,
+  DEPOSIT_COIN_MODAL_OPEN,
+  DEPOSIT_COIN_MODAL_CLOSE,
+  DEPOSIT_COIN_SELECT,
+  RECEVIE_COIN_MODAL_OPEN,
+  RECEVIE_COIN_MODAL_CLOSE,
+  RECEVIE_COIN_SELECT
 } from './constants';
 
 import type {
@@ -202,48 +200,6 @@ export function clickSelectCoinModal(payload: SelectCoinPayload) {
   };
 }
 
-export function searchSelectCoinModal(input: string) {
-  return {
-    type: SELECT_COIN_MODAL_SEARCH,
-    payload: {
-      input
-    }
-  };
-}
-
-export function searchSelectCoinModalSuccess(payload) {
-  return {
-    type: SELECT_COIN_MODAL_SEARCH_SUCCESS,
-    payload
-  };
-}
-
-export function setupSearchApiForSelectCoinModal() {
-  return {
-    type: SELECT_COIN_MODAL_SETUP_SEARCH_API
-  };
-}
-
-export function setupSearchApiForSelectCoinModalSuccess(payload) {
-  return {
-    type: SELECT_COIN_MODAL_SETUP_SEARCH_API_SUCCESS,
-    payload
-  };
-}
-
-export function selectCoinPayment(payload: SelectCoinPayload) {
-  return {
-    type: COIN_PAYMENT_SELECT,
-    payload
-  };
-}
-
-export function skipSearchStateCreation() {
-  return {
-    type: SEARCH_STATE_SKIP_CREATION
-  };
-}
-
 export function openJoyride() {
   return {
     type: JOYRIDE_OPEN
@@ -262,6 +218,12 @@ export function loadOrderbook() {
   };
 }
 
+export function skipOrderbook() {
+  return {
+    type: ORDERBOOK_LOAD_SKIP
+  };
+}
+
 export function loadOrderbookSuccess(payload) {
   return {
     type: ORDERBOOK_LOAD_SUCCESS,
@@ -273,5 +235,43 @@ export function loadOrderbookError(error: ErrorType) {
   return {
     type: ORDERBOOK_LOAD_ERROR,
     error
+  };
+}
+
+export function openDepositCoinModal() {
+  return {
+    type: DEPOSIT_COIN_MODAL_OPEN
+  };
+}
+
+export function closeDepositCoinModal() {
+  return {
+    type: DEPOSIT_COIN_MODAL_CLOSE
+  };
+}
+
+export function selectCoinDeposit(payload: SelectCoinPayload) {
+  return {
+    type: DEPOSIT_COIN_SELECT,
+    payload
+  };
+}
+
+export function openRecevieCoinModal() {
+  return {
+    type: RECEVIE_COIN_MODAL_OPEN
+  };
+}
+
+export function closeRecevieCoinModal() {
+  return {
+    type: RECEVIE_COIN_MODAL_CLOSE
+  };
+}
+
+export function selectCoinRecevie(payload: SelectCoinPayload) {
+  return {
+    type: RECEVIE_COIN_SELECT,
+    payload
   };
 }

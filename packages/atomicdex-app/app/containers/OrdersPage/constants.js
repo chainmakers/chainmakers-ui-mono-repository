@@ -64,25 +64,6 @@ export const SWAP_DETAIL_MODAL_OPEN =
 export const SWAP_DETAIL_MODAL_CLOSE =
   'atomicapp/DexPage/SWAP_DETAIL_MODAL_CLOSE';
 
-export const SELECT_COIN_MODAL_OPEN =
-  'atomicapp/DexPage/SELECT_COIN_MODAL_OPEN';
-export const SELECT_COIN_MODAL_CLOSE =
-  'atomicapp/DexPage/SELECT_COIN_MODAL_CLOSE';
-export const SELECT_COIN_MODAL_CLICK =
-  'atomicapp/DexPage/SELECT_COIN_MODAL_CLICK';
-export const SELECT_COIN_MODAL_SEARCH =
-  'atomicapp/DexPage/SELECT_COIN_MODAL_SEARCH';
-export const SELECT_COIN_MODAL_SEARCH_SUCCESS =
-  'atomicapp/DexPage/SELECT_COIN_MODAL_SEARCH_SUCCESS';
-export const SELECT_COIN_MODAL_SETUP_SEARCH_API =
-  'atomicapp/DexPage/SELECT_COIN_MODAL_SETUP_SEARCH_API';
-export const SELECT_COIN_MODAL_SETUP_SEARCH_API_SUCCESS =
-  'atomicapp/DexPage/SELECT_COIN_MODAL_SETUP_SEARCH_API_SUCCESS';
-export const SELECT_COIN_MODAL_SETUP_SEARCH_API_ERROR =
-  'atomicapp/DexPage/SELECT_COIN_MODAL_SETUP_SEARCH_API_ERROR';
-
-export const COIN_PAYMENT_SELECT = 'atomicapp/DexPage/COIN_PAYMENT_SELECT';
-
 export const NA = 'N/A';
 
 export const DEXFEE = 777;
@@ -90,19 +71,27 @@ export const NUMCOIN = 100000000;
 export const BUFF_PRICES = 1.05 * NUMCOIN; // 5%
 // export const BUFF_PRICES = 1.0 * NUMCOIN; // 0%
 
-// SEARCH STATUS
-export const SEARCH_STATE_NULL = 'atomicapp/DexPage/SEARCH_STATE_NULL';
-export const SEARCH_STATE_CREATE = 'atomicapp/DexPage/SEARCH_STATE_CREATE';
-export const SEARCH_STATE_SKIP_CREATION =
-  'atomicapp/DexPage/SEARCH_STATE_SKIP_CREATION';
-export const SEARCH_STATE_READY = 'atomicapp/DexPage/SEARCH_STATE_READY';
-
 // Joyride actions
 export const JOYRIDE_OPEN = 'atomicapp/DexPage/JOYRIDE_OPEN';
 export const JOYRIDE_CLOSE = 'atomicapp/DexPage/JOYRIDE_CLOSE';
 
 // Orderbook actions
 export const ORDERBOOK_LOAD = 'atomicapp/OrdersPage/ORDERBOOK_LOAD';
+export const ORDERBOOK_LOAD_SKIP = 'atomicapp/OrdersPage/ORDERBOOK_LOAD_SKIP';
 export const ORDERBOOK_LOAD_SUCCESS =
   'atomicapp/OrdersPage/ORDERBOOK_LOAD_SUCCESS';
 export const ORDERBOOK_LOAD_ERROR = 'atomicapp/OrdersPage/ORDERBOOK_LOAD_ERROR';
+
+// Deposit Coin Modal actions
+export const DEPOSIT_COIN_MODAL_OPEN =
+  'atomicapp/OrdersPage/DEPOSIT_COIN_MODAL_OPEN';
+export const DEPOSIT_COIN_MODAL_CLOSE =
+  'atomicapp/OrdersPage/DEPOSIT_COIN_MODAL_CLOSE';
+export const DEPOSIT_COIN_SELECT = 'atomicapp/OrdersPage/DEPOSIT_COIN_SELECT';
+
+// Recevie Coin Modal actions
+export const RECEVIE_COIN_MODAL_OPEN =
+  'atomicapp/OrdersPage/RECEVIE_COIN_MODAL_OPEN';
+export const RECEVIE_COIN_MODAL_CLOSE =
+  'atomicapp/OrdersPage/RECEVIE_COIN_MODAL_CLOSE';
+export const RECEVIE_COIN_SELECT = 'atomicapp/OrdersPage/RECEVIE_COIN_SELECT';

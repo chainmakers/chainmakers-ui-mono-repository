@@ -5,6 +5,7 @@ import { runSaga } from 'redux-saga';
 import api from '../../../../lib/barter-dex-api';
 import { loadOrderbook } from '../../actions';
 import data from '../../../__tests__/app-state.json';
+import { APP_STATE_NAME } from '../../constants';
 import orderbook from '../../../__tests__/orderbook.json';
 import listenForLoadingOrderbook from '../orderbook';
 
@@ -49,7 +50,7 @@ describe('containers/OrderPage/saga/order', () => {
         payload
       }
     ]);
-    expect(saga).toEqual(undefined);
+    expect(saga).toEqual(1);
 
     nock.cleanAll();
     nock.enableNetConnect();
@@ -95,6 +96,44 @@ describe('containers/OrderPage/saga/order', () => {
       }
     ]);
     expect(saga).toEqual(undefined);
+
+    nock.cleanAll();
+    nock.enableNetConnect();
+    done();
+  });
+
+  it('should skip when handle listenForLoadingOrderbook', async done => {
+    const dispatched = [];
+
+    nock(TEST_URL)
+      .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
+      .persist()
+      .post('/', () => true)
+      .reply(200, (uri, body, cb) => {
+        const { method } = JSON.parse(body);
+        if (method === 'orderbook') {
+          cb(null, payload);
+        } else {
+          cb(new Error('error message'));
+        }
+      });
+
+    const saga = await runSaga(
+      {
+        dispatch: action => dispatched.push(action),
+        getState: () =>
+          store.setIn([APP_STATE_NAME, 'orderbook', 'deposit'], null)
+      },
+      listenForLoadingOrderbook,
+      loadOrderbook()
+    ).done;
+
+    expect(dispatched).toEqual([
+      {
+        type: 'atomicapp/OrdersPage/ORDERBOOK_LOAD_SKIP'
+      }
+    ]);
+    expect(saga).toEqual(1);
 
     nock.cleanAll();
     nock.enableNetConnect();

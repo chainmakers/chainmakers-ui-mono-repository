@@ -7,10 +7,10 @@ import getCoinMemoize from '../../../components/CryptoIcons';
 import { covertSymbolToName } from '../../../utils/coin';
 
 const debug = require('debug')(
-  'atomicapp:containers:DexPage:CoinsSelectionModal:ModalContent'
+  'atomicapp:containers:CoinsSelectionDialog:components:ModalContent'
 );
 
-type Props = {
+type IModalContentProps = {
   className: string,
   // eslint-disable-next-line flowtype/no-weak-types
   data: Map<*, *>,
@@ -19,14 +19,18 @@ type Props = {
   disabled: boolean
 };
 
-type State = {};
+type IModalContentState = {};
 
-class ModalContent extends React.PureComponent<Props, State> {
+class ModalContent extends React.PureComponent<
+  IModalContentProps,
+  IModalContentState
+> {
   // FIXME
   renderEmptyState = () => <div>render empty state</div>;
 
   renderListItem = e => {
     const { className, handleSelectCoin, disabled } = this.props;
+
     return (
       <MemoizedRender
         value={{

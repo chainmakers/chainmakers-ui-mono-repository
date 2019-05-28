@@ -17,14 +17,15 @@ import MDCTabBar from '../../components/AppBar/TabBar';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import { TabContainer } from '../../components/Tabs';
 import { NavigationLayout } from '../Layout';
+
+import CoinsSelectionDialog from '../CoinsSelectionDialog';
+
 import HeaderTabs from './components/HeaderTabs';
 import JoyrideGuilddance from './components/JoyrideGuilddance';
-// import TestSwap from './components/TestSwap';
 import MyOrdersTab from './MyOrdersTab';
 import SellOrderTab from './SellOrderTab';
 import ProgressBar from './ProgressBar';
 import SwapDetailModal from './SwapDetailModal';
-import CoinsSelectionModal from './CoinsSelectionModal';
 import { APP_STATE_NAME } from './constants';
 import { openJoyride } from './actions';
 import reducer from './reducer';
@@ -105,9 +106,7 @@ class OrderPage extends React.Component<IOrderPageProps, IOrderPageState> {
               <MyOrdersTab />
             </TabContainer>
           </ErrorBoundary>
-          {/* <TestSwap /> */}
-
-          <CoinsSelectionModal />
+          <CoinsSelectionDialog />
         </NavigationLayout>
       </React.Fragment>
     );

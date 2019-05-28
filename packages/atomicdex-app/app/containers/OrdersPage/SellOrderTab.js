@@ -11,12 +11,15 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import Tooltip from '@material-ui/core/Tooltip';
+import Typography from '@material-ui/core/Typography';
+import CloudOff from '@material-ui/icons/CloudOff';
 
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import PageSectionTitle from '../../components/PageSectionTitle';
 import CoinSelectable from '../../components/CoinSelectable';
+import CoinsSelectionDialog from '../CoinsSelectionDialog';
 import {
   makeSelectBalanceEntities,
   makeSelectBalanceLoading
@@ -27,8 +30,19 @@ import DepositSection from './components/DepositSection';
 import RecevieSection from './components/RecevieSection';
 
 import Order from './components/Order';
-import { loadPrices, loadOrderbook } from './actions';
-import { makeSelectOrderbookAsks } from './selectors';
+import {
+  loadPrices,
+  loadOrderbook,
+  closeDepositCoinModal,
+  closeRecevieCoinModal,
+  selectCoinDeposit,
+  selectCoinRecevie
+} from './actions';
+import {
+  makeSelectOrderbookAsks,
+  makeSelectDepositCoinModal,
+  makeSelectRecevieCoinModal
+} from './selectors';
 
 const debug = require('debug')('atomicapp:containers:DexPage:SellOrderTab');
 
@@ -74,6 +88,14 @@ const styles = theme => ({
       alignItems: 'flex-end',
       display: 'flex'
     }
+  },
+
+  swapform__emptystate: {
+    textAlign: 'center'
+  },
+
+  swapform__iconemptystate: {
+    fontSize: 50
   }
 });
 
@@ -104,10 +126,46 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
     dispatchLoadOrderbook();
   };
 
+  renderEmptyState = () => {
+    const { classes } = this.props;
+    return (
+      <React.Fragment>
+        <br />
+        <br />
+        <br />
+        <Typography
+          variant="h6"
+          gutterBottom
+          className={classes.swapform__emptystate}
+        >
+          <CloudOff className={classes.swapform__iconemptystate} />
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          gutterBottom
+          className={classes.swapform__emptystate}
+        >
+          No data found. Please start making a swap.
+        </Typography>
+      </React.Fragment>
+    );
+  };
+
   render() {
     debug('render');
 
-    const { classes, balanceLoading, balance, orderbookAsks } = this.props;
+    const {
+      classes,
+      balanceLoading,
+      balance,
+      orderbookAsks,
+      depositCoinModal,
+      recevieCoinModal,
+      dispatchCloseDepositCoinModal,
+      dispatchCloseRecevieCoinModal,
+      dispatchSelectCoinDeposit,
+      dispatchSelectCoinRecevie
+    } = this.props;
 
     // const icon = getCoinMemoize('CHIPS', 64, 64);
 
@@ -126,6 +184,18 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
             1 N/A = 0 BEER
           </CoinSelectable>
           <CoinSelectable disabled>CoinSelectable</CoinSelectable> */}
+
+          <CoinsSelectionDialog
+            open={depositCoinModal.get('open')}
+            onClose={dispatchCloseDepositCoinModal}
+            onSelect={dispatchSelectCoinDeposit}
+          />
+
+          <CoinsSelectionDialog
+            open={recevieCoinModal.get('open')}
+            onClose={dispatchCloseRecevieCoinModal}
+            onSelect={dispatchSelectCoinRecevie}
+          />
 
           <PageSectionTitle
             title={
@@ -219,12 +289,15 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
                 <Icon>cached</Icon>
               </IconButton>
             </Tooltip>
-            {orderbookAsks.map(order => (
-              <>
-                <Order symbol="COQUI" data={order} />
-                <br />
-              </>
-            ))}
+
+            {orderbookAsks.size === 0 && this.renderEmptyState()}
+            {orderbookAsks.size > 0 &&
+              orderbookAsks.map(order => (
+                <>
+                  <Order symbol="COQUI" data={order} />
+                  <br />
+                </>
+              ))}
             {/* {[1].map(k => (
               <>
                 <Card
@@ -275,14 +348,20 @@ export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   return {
     dispatchLoadPrices: () => dispatch(loadPrices()),
     dispatchLoadAllBalance: () => dispatch(loadAllBalance()),
-    dispatchLoadOrderbook: () => dispatch(loadOrderbook())
+    dispatchLoadOrderbook: () => dispatch(loadOrderbook()),
+    dispatchCloseDepositCoinModal: () => dispatch(closeDepositCoinModal()),
+    dispatchCloseRecevieCoinModal: () => dispatch(closeRecevieCoinModal()),
+    dispatchSelectCoinDeposit: payload => dispatch(selectCoinDeposit(payload)),
+    dispatchSelectCoinRecevie: payload => dispatch(selectCoinRecevie(payload))
   };
 }
 
 const mapStateToProps = createStructuredSelector({
   balance: makeSelectBalanceEntities(),
   balanceLoading: makeSelectBalanceLoading(),
-  orderbookAsks: makeSelectOrderbookAsks()
+  orderbookAsks: makeSelectOrderbookAsks(),
+  depositCoinModal: makeSelectDepositCoinModal(),
+  recevieCoinModal: makeSelectRecevieCoinModal()
 });
 
 const withConnect = connect(

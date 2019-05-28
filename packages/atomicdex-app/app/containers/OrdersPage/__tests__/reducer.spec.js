@@ -11,23 +11,15 @@ import {
   loadRecentSwapsCoin,
   timeoutSwap,
   makeANewSwap,
-  openSelectCoinModal,
-  closeSelectCoinModal,
-  clickSelectCoinModal,
-  selectCoinPayment,
-  skipSearchStateCreation,
   openJoyride,
   closeJoyride,
   loadOrderbook,
+  skipOrderbook,
   loadOrderbookSuccess,
   loadOrderbookError
 } from '../actions';
 import { LOADING, LOADED, FAILED } from '../../../constants';
-import {
-  SWAP_TX_DEFAULT,
-  SEARCH_STATE_READY,
-  ORDERBOOK_LOAD
-} from '../constants';
+import { SWAP_TX_DEFAULT, ORDERBOOK_LOAD } from '../constants';
 import {
   WEBSOCKET_STATE_ZERO,
   WEBSOCKET_STATE_ONE,
@@ -937,90 +929,6 @@ describe('containers/DexPage/reducers/makeANewSwap', () => {
   });
 });
 
-describe('containers/DexPage/reducers/openSelectCoinModal', () => {
-  it('should handle the openSelectCoinModal action correctly', () => {
-    const expectedResult = initialState.setIn(
-      ['selectCoinModal', 'open'],
-      true
-    );
-
-    expect(buyReducer(initialState, openSelectCoinModal())).toEqual(
-      expectedResult
-    );
-  });
-});
-
-describe('containers/DexPage/reducers/closeSelectCoinModal', () => {
-  it('should handle the closeSelectCoinModal action correctly', () => {
-    const expectedResult = initialState.setIn(
-      ['selectCoinModal', 'open'],
-      false
-    );
-
-    expect(buyReducer(initialState, closeSelectCoinModal())).toEqual(
-      expectedResult
-    );
-  });
-});
-
-describe('containers/DexPage/reducers/clickSelectCoinModal', () => {
-  const name = 'Komodo';
-  const symbol = 'KMD';
-  it('should handle the clickSelectCoinModal action correctly', () => {
-    const store = initialState
-      .setIn(['selectCoinModal', 'open'], false)
-      .setIn(['currency', 'name'], name)
-      .setIn(['currency', 'symbol'], symbol)
-      .setIn(['payment', 'name'], name)
-      .setIn(['payment', 'symbol'], symbol);
-    const expectedResult = initialState
-      .setIn(['selectCoinModal', 'open'], false)
-      .setIn(['currency', 'name'], name)
-      .setIn(['currency', 'symbol'], symbol);
-    expect(
-      buyReducer(
-        store,
-        clickSelectCoinModal({
-          name,
-          symbol
-        })
-      )
-    ).toEqual(expectedResult);
-  });
-});
-
-describe('containers/DexPage/reducers/selectCoinPayment', () => {
-  const name = 'Komodo';
-  const symbol = 'KMD';
-  it('should handle the selectCoinPayment action correctly', () => {
-    const expectedResult = initialState
-      .setIn(['payment', 'name'], name)
-      .setIn(['payment', 'symbol'], symbol);
-    expect(
-      buyReducer(
-        initialState,
-        selectCoinPayment({
-          name,
-          symbol
-        })
-      )
-    ).toEqual(expectedResult);
-  });
-});
-
-describe('containers/DexPage/reducers/skipSearchStateCreation', () => {
-  it('should handle the skipSearchStateCreation action correctly', () => {
-    const expectedResult = initialState.setIn(
-      ['search', 'state'],
-      SEARCH_STATE_READY
-    );
-
-    expect(buyReducer(initialState, skipSearchStateCreation())).toEqual(
-      expectedResult
-    );
-  });
-});
-
 describe('containers/DexPage/reducers/openJoyride', () => {
   it('should handle the openJoyride action correctly', () => {
     const expectedResult = initialState.setIn(['joyride', 'open'], true);
@@ -1043,6 +951,19 @@ describe('containers/DexPage/reducers/loadOrderbook', () => {
       .setIn(['orderbook', 'fetchStatus'], LOADING)
       .setIn(['orderbook', 'error'], null);
     expect(buyReducer(initialState, loadOrderbook())).toEqual(expectedResult);
+  });
+});
+
+describe('containers/DexPage/reducers/skipOrderbook', () => {
+  it('should handle the skipOrderbook action correctly', () => {
+    const expectedResult = initialState
+      .setIn(['orderbook', 'fetchStatus'], LOADING)
+      .setIn(['orderbook', 'error'], null);
+    expect(buyReducer(expectedResult, skipOrderbook())).toEqual(
+      initialState
+        .setIn(['orderbook', 'fetchStatus'], LOADED)
+        .setIn(['orderbook', 'error'], null)
+    );
   });
 });
 

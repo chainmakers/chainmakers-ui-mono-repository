@@ -8,14 +8,14 @@ import { floor } from 'barterdex-utilities';
 import getCoinMemoize from '../../../components/CryptoIcons';
 import CoinSelectable from '../../../components/CoinSelectable';
 import { covertSymbolToName } from '../../../utils/coin';
-import { openSelectCoinModal } from '../actions';
+import { openRecevieCoinModal } from '../actions';
 import { makeSelectOrderbookRecevie } from '../selectors';
 
 const debug = require('debug')('atomicapp:containers:OrderPage:RecevieSection');
 
 type IRecevieSectionProps = {
   // eslint-disable-next-line flowtype/no-weak-types
-  dispatchOpenSelectCoinModal: Function,
+  dispatchOpenRecevieCoinModal: Function,
   // eslint-disable-next-line flowtype/no-weak-types
   recevie: string | null
 };
@@ -27,13 +27,14 @@ class RecevieSection extends React.PureComponent<IRecevieSectionProps> {
 
   onClick = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
-    const { dispatchOpenSelectCoinModal } = this.props;
-    setTimeout(dispatchOpenSelectCoinModal, 5);
+    const { dispatchOpenRecevieCoinModal } = this.props;
+    console.log(dispatchOpenRecevieCoinModal.toString());
+    setTimeout(dispatchOpenRecevieCoinModal, 5);
   };
 
   render() {
     debug(`render`);
-    const { dispatchOpenSelectCoinModal, recevie, ...rest } = this.props;
+    const { dispatchOpenRecevieCoinModal, recevie, ...rest } = this.props;
     if (!recevie)
       return (
         <CoinSelectable
@@ -63,8 +64,8 @@ class RecevieSection extends React.PureComponent<IRecevieSectionProps> {
 // eslint-disable-next-line flowtype/no-weak-types
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   return {
-    dispatchOpenSelectCoinModal: () => {
-      dispatch(openSelectCoinModal());
+    dispatchOpenRecevieCoinModal: () => {
+      dispatch(openRecevieCoinModal());
     }
   };
 }

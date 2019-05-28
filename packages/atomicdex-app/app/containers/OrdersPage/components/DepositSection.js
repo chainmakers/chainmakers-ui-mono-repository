@@ -8,7 +8,7 @@ import { floor } from 'barterdex-utilities';
 import getCoinMemoize from '../../../components/CryptoIcons';
 import CoinSelectable from '../../../components/CoinSelectable';
 import { covertSymbolToName } from '../../../utils/coin';
-import { openSelectCoinModal } from '../actions';
+import { openDepositCoinModal } from '../actions';
 import { makeSelectOrderbookDeposit } from '../selectors';
 
 const debug = require('debug')('atomicapp:containers:OrderPage:DepositSection');
@@ -17,7 +17,7 @@ type IDepositSectionProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   balance: Object,
   // eslint-disable-next-line flowtype/no-weak-types
-  dispatchOpenSelectCoinModal: Function,
+  dispatchOpenDepositCoinModal: Function,
   // eslint-disable-next-line flowtype/no-weak-types
   deposit: string | null
 };
@@ -29,14 +29,14 @@ class DepositSection extends React.PureComponent<IDepositSectionProps> {
 
   onClick = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
-    const { dispatchOpenSelectCoinModal } = this.props;
-    setTimeout(dispatchOpenSelectCoinModal, 5);
+    const { dispatchOpenDepositCoinModal } = this.props;
+    setTimeout(dispatchOpenDepositCoinModal, 5);
   };
 
   render() {
     debug(`render`);
     const {
-      dispatchOpenSelectCoinModal,
+      dispatchOpenDepositCoinModal,
       balance,
       deposit,
       ...rest
@@ -72,8 +72,8 @@ class DepositSection extends React.PureComponent<IDepositSectionProps> {
 // eslint-disable-next-line flowtype/no-weak-types
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   return {
-    dispatchOpenSelectCoinModal: () => {
-      dispatch(openSelectCoinModal());
+    dispatchOpenDepositCoinModal: () => {
+      dispatch(openDepositCoinModal());
     }
   };
 }

@@ -13,7 +13,9 @@ import {
   skipSearchStateCreation
 } from '../actions';
 
-const debug = require('debug')('atomicapp:containers:DexPage:saga:search');
+const debug = require('debug')(
+  'atomicapp:containers:CoinsSelectionDialog:saga:search'
+);
 
 let searchApi = null;
 let cacheData = null;

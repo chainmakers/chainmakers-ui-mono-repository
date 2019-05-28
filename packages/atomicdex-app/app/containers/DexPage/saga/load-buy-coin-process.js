@@ -36,7 +36,7 @@ export default function* loadBuyCoinProcess({ payload, time = intervalTime }) {
     const relvolume = floor(Number(amount * price.get('price')), 8);
     const dexfee = floor(relvolume / 777, 8);
     if (
-      relvolume * NUMCOIN + 2 * dexfee * NUMCOIN + fee * NUMCOIN >=
+      relvolume * NUMCOIN + dexfee * NUMCOIN + 2 * fee * NUMCOIN >=
       Number(balance.get('balance') * NUMCOIN).toFixed(0)
     ) {
       throw new Error('Not enough balance!');
