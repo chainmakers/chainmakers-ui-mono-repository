@@ -423,6 +423,7 @@ describe('containers/DexPage/reducers/loadRecentSwapsCoin', () => {
       .set('sentflags', entity.get('sentflags').push(lastEvent.event.type))
       .set('status', lastEvent.event.type)
       .set('expiration', 1556263774);
+
     let expectedResult = store.setIn(
       ['swaps', 'entities'],
       entities.set(uuid, entity)
@@ -441,7 +442,9 @@ describe('containers/DexPage/reducers/loadRecentSwapsCoin', () => {
       ['swaps', 'entities'],
       entities.set(uuid, entity)
     );
+
     store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_TWO));
+
     expect(store).toEqual(expectedResult);
     store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_ONE));
     expect(store).toEqual(expectedResult);
@@ -818,7 +821,7 @@ describe('containers/DexPage/reducers/timeoutSwap', () => {
             error: {
               message: 'Timeout'
             },
-            status: 'finished'
+            status: 'Finished'
           }
         })
       );

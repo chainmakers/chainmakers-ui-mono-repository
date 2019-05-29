@@ -570,7 +570,7 @@ class AmountSection extends React.Component<Props, State> {
         </Grid>
         <Grid item xs={12} className={classes.amountform__itemCenter}>
           <Typography variant="body2" gutterBottom>
-            Step {0}/{STATE_SWAPS.length}: {STATE_SWAPS[0]}
+            Step {0}/{STATE_SWAPS.length - 1}: {STATE_SWAPS[0]}
           </Typography>
           <LinearProgress color="primary" variant="determinate" value={0} />
         </Grid>

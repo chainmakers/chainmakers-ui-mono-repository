@@ -27,6 +27,7 @@ import {
   JOYRIDE_OPEN,
   JOYRIDE_CLOSE,
   STARTED_SWAPS_STATE,
+  NEGOTIATED_SWAPS_STATE,
   TAKER_FEE_SENT_SWAPS_STATE,
   MAKER_PAYMENT_RECEIVED_SWAPS_STATE,
   TAKER_PAYMENT_SENT_SWAPS_STATE,
@@ -225,18 +226,22 @@ export default handleActions(
         // expiration
         if (event.type === STARTED_SWAPS_STATE) {
           // first time enter this state
+          entity = entity;
           entity = entity.set(
             'expiration',
             entity.get('expiration') + 120 * 60
           ); // + 120 mins
         }
+        // if (event.type === NEGOTIATED_SWAPS_STATE) {
 
+        // }
         if (event.type === TAKER_FEE_SENT_SWAPS_STATE) {
           // eslint-disable-next-line camelcase
-          const { tx_hash } = event.data;
+          const { tx_hash, my_balance_change } = event.data;
           let myfee = entity.get('myfee');
           myfee = myfee.set('tx', tx_hash);
           myfee = myfee.set('coin', entity.get('alice'));
+          myfee = myfee.set('value', my_balance_change);
           entity = entity.set('myfee', myfee);
         }
 
@@ -251,10 +256,11 @@ export default handleActions(
 
         if (event.type === TAKER_PAYMENT_SENT_SWAPS_STATE) {
           // eslint-disable-next-line camelcase
-          const { tx_hash } = event.data;
+          const { tx_hash, my_balance_change } = event.data;
           let alicepayment = entity.get('alicepayment');
           alicepayment = alicepayment.set('tx', tx_hash);
           alicepayment = alicepayment.set('coin', entity.get('alice'));
+          alicepayment = alicepayment.set('value', my_balance_change);
           entity = entity.set('alicepayment', alicepayment);
         }
 
@@ -269,10 +275,11 @@ export default handleActions(
 
         if (event.type === MAKER_PAYMENT_SPENT_SWAPS_STATE) {
           // eslint-disable-next-line camelcase
-          const { tx_hash } = event.data;
+          const { tx_hash, my_balance_change } = event.data;
           let bobpayment = entity.get('bobpayment');
           bobpayment = bobpayment.set('tx', tx_hash);
           bobpayment = bobpayment.set('coin', entity.get('bob'));
+          bobpayment = alicepayment.set('value', my_balance_change);
           entity = entity.set('bobpayment', bobpayment);
         }
 
@@ -296,203 +303,6 @@ export default handleActions(
         .setIn(['swaps', 'processingList'], processingList)
         .setIn(['swaps', 'finishedList'], finishedList)
         .setIn(['swaps', 'entities'], entities);
-
-      /**
-      // NOTE: still not hanle this case
-      // error: "swap never started"
-      // uuid: ""
-      // status: "finished"
-      // bob: ""
-      // src: ""
-      // alice: ""
-      // dest: ""
-      // requestid: 1999249337
-      // quoteid: 2452050470
-      const {
-        tradeid,
-        uuid,
-        requestid,
-        quoteid,
-        expiration,
-        bob,
-        alice,
-        srcamount,
-        destamount,
-        sentflags,
-        status,
-        alicedexfee,
-        bobdeposit,
-        alicepayment,
-        bobpayment,
-        paymentspent,
-        txChain
-      } = payload;
-      // stop when not found uuid
-      if (!uuid && uuid === '') return state;
-      // step one: update list
-      let processingList = state.getIn(['swaps', 'processingList']);
-      let finishedList = state.getIn(['swaps', 'finishedList']);
-
-      // step two: update entities
-      let entities = state.getIn(['swaps', 'entities']);
-      let entity = entities.get(uuid);
-      if (!entity) {
-        // set new
-        entity = fromJS({
-          id: tradeid,
-          uuid,
-          requestid,
-          quoteid,
-          expiration,
-          bob,
-          alice,
-          bobamount: srcamount,
-          aliceamount: destamount,
-          sentflags,
-          status,
-          myfee: {
-            tx: SWAP_TX_DEFAULT,
-            value: 0
-          },
-          bobdeposit: {
-            tx: SWAP_TX_DEFAULT,
-            value: 0
-          },
-          alicepayment: {
-            tx: SWAP_TX_DEFAULT,
-            value: 0
-          },
-          bobpayment: {
-            tx: SWAP_TX_DEFAULT,
-            value: 0
-          },
-          alicespend: {
-            tx: SWAP_TX_DEFAULT,
-            value: 0
-          }
-        });
-      } else if (entity.get('status') === 'finished') {
-        // NOTE: stop update when a swap was finished
-        return state;
-      } else {
-        entity = entity.merge(
-          fromJS({
-            id: tradeid,
-            uuid,
-            requestid,
-            quoteid,
-            expiration,
-            bob,
-            alice,
-            bobamount: srcamount,
-            aliceamount: destamount,
-            status
-          })
-        );
-      }
-      // sentflags
-      const sentf = entity.get('sentflags');
-      if (sentflags && sentf.size < sentflags.length) {
-        entity = entity.set('sentflags', fromJS(sentflags));
-      }
-
-      if (
-        alicedexfee !== SWAP_TX_DEFAULT &&
-        alicedexfee !== entity.getIn(['myfee', 'tx'])
-      ) {
-        const d = txChain.find(e => e.stage === 'myfee');
-        if (d) {
-          entity = entity.set(
-            'myfee',
-            fromJS({
-              coin: d.coin,
-              tx: d.txid,
-              value: d.amount
-            })
-          );
-        }
-      }
-
-      if (
-        bobdeposit !== SWAP_TX_DEFAULT &&
-        bobdeposit !== entity.getIn(['bobdeposit', 'tx'])
-      ) {
-        const d = txChain.find(e => e.stage === 'bobdeposit');
-        if (d) {
-          entity = entity.set(
-            'bobdeposit',
-            fromJS({
-              coin: d.coin,
-              tx: d.txid,
-              value: d.amount
-            })
-          );
-        }
-      }
-
-      if (
-        alicepayment !== SWAP_TX_DEFAULT &&
-        alicepayment !== entity.getIn(['alicepayment', 'tx'])
-      ) {
-        const d = txChain.find(e => e.stage === 'alicepayment');
-        if (d) {
-          entity = entity.set(
-            'alicepayment',
-            fromJS({
-              coin: d.coin,
-              tx: d.txid,
-              value: d.amount
-            })
-          );
-        }
-      }
-
-      if (
-        bobpayment !== SWAP_TX_DEFAULT &&
-        bobpayment !== entity.getIn(['bobpayment', 'tx'])
-      ) {
-        const d = txChain.find(e => e.stage === 'bobpayment');
-        if (d) {
-          entity = entity.set(
-            'bobpayment',
-            fromJS({
-              coin: d.coin,
-              tx: d.txid,
-              value: d.amount
-            })
-          );
-        }
-      }
-
-      if (
-        paymentspent !== SWAP_TX_DEFAULT &&
-        paymentspent !== entity.getIn(['alicespend', 'tx'])
-      ) {
-        const d = txChain.find(e => e.stage === 'alicespend');
-        if (d) {
-          entity = entity.set(
-            'alicespend',
-            fromJS({
-              coin: d.coin,
-              tx: d.txid,
-              value: d.amount
-            })
-          );
-        }
-      }
-
-      entities = entities.set(uuid, entity);
-      if (status === 'finished' && processingList.contains(uuid)) {
-        processingList = processingList.filter(o => o !== uuid);
-        finishedList = finishedList.push(uuid);
-
-        return state
-          .setIn(['swaps', 'processingList'], processingList)
-          .setIn(['swaps', 'finishedList'], finishedList)
-          .setIn(['swaps', 'entities'], entities);
-      }
-      return state.setIn(['swaps', 'entities'], entities);
-      */
     },
 
     [LOAD_RECENT_SWAPS_DATA_FROM_WEBSOCKET]: (state, { payload }) => {
@@ -633,7 +443,7 @@ export default handleActions(
           quoteid: entity.get('quoteid'),
           requestid: entity.get('requestid'),
           uuid: entity.get('uuid'),
-          status: 'finished'
+          status: FINISHED_SWAPS_STATE
         });
         return state
           .setIn(['swaps', 'processingList'], processingList)
@@ -674,7 +484,7 @@ export default handleActions(
               message: 'Timeout'
             })
           )
-          .set('status', 'finished');
+          .set('status', FINISHED_SWAPS_STATE);
         entities = entities.set(uuid, entity);
         logger.info({
           alice: entity.get('alice'),
