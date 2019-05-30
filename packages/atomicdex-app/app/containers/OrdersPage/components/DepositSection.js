@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import AddIcon from '@material-ui/icons/Add';
+import TextField from '@material-ui/core/TextField';
 import { floor } from 'barterdex-utilities';
 import getCoinMemoize from '../../../components/CryptoIcons';
 import CoinSelectable from '../../../components/CoinSelectable';
@@ -41,30 +42,60 @@ class DepositSection extends React.PureComponent<IDepositSectionProps> {
       deposit,
       ...rest
     } = this.props;
-    if (!deposit)
+    if (!deposit) {
       return (
-        <CoinSelectable
-          id="add-icon-placeorder-orderpage"
-          key="depositCoinAddIcon"
-          icon={<AddIcon color="primary" />}
-          onClick={this.onClick}
-          {...rest}
-        />
+        <div {...rest}>
+          <CoinSelectable
+            id="add-icon-placeorder-orderpage"
+            key="depositCoinAddIcon"
+            icon={<AddIcon color="primary" />}
+            onClick={this.onClick}
+            {...rest}
+          />
+          <TextField
+            inputProps={{
+              style: {
+                textAlign: 'center'
+              }
+            }}
+            disabled
+            style={{
+              width: 184
+            }}
+            value="1 N/A"
+            margin="none"
+          />
+        </div>
       );
+    }
     const icon = getCoinMemoize(deposit);
     const b = balance.get(deposit);
     return (
-      <CoinSelectable
-        id="add-icon-placeorder-orderpage"
-        key={`depositCoin${deposit}`}
-        selected
-        data={deposit}
-        icon={icon}
-        title={covertSymbolToName(deposit)}
-        onClick={this.onClick}
-        subTitle={`${floor(b.get('balance'), 3)} ${b.get('coin')}`}
-        {...rest}
-      />
+      <div {...rest}>
+        <CoinSelectable
+          id="add-icon-placeorder-orderpage"
+          key={`depositCoin${deposit}`}
+          selected
+          data={deposit}
+          icon={icon}
+          title={covertSymbolToName(deposit)}
+          onClick={this.onClick}
+          subTitle={`${floor(b.get('balance'), 3)} ${b.get('coin')}`}
+        />
+        <TextField
+          inputProps={{
+            style: {
+              textAlign: 'center'
+            }
+          }}
+          disabled
+          style={{
+            width: 184
+          }}
+          value={`1 ${b.get('coin')}`}
+          margin="none"
+        />
+      </div>
     );
   }
 }

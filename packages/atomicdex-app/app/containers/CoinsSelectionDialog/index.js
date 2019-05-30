@@ -119,7 +119,13 @@ type ICoinsSelectionModalProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   classes: Object,
   // eslint-disable-next-line flowtype/no-weak-types
-  onClose: Function
+  onClose: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchSetupSearchApiForSelectCoinModal: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  onSelect: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchSearchSelectCoinModal: Function
 };
 
 type ICoinsSelectionModalState = {
@@ -190,7 +196,6 @@ class CoinsSelectionModal extends React.PureComponent<
     const {
       open,
       classes,
-      onClose,
       searchState,
       searchList,
       balanceLoading

@@ -31,7 +31,12 @@ import {
   DEPOSIT_COIN_SELECT,
   RECEVIE_COIN_MODAL_OPEN,
   RECEVIE_COIN_MODAL_CLOSE,
-  RECEVIE_COIN_SELECT
+  RECEVIE_COIN_SELECT,
+  NEW_ORDER_SET,
+  NEW_ORDER_SET_SKIP,
+  NEW_ORDER_SET_SUCCESS,
+  NEW_ORDER_SET_ERROR,
+  NEW_ORDER_PRICE
 } from './constants';
 
 import type {
@@ -181,25 +186,6 @@ export function closeDetailModal() {
   };
 }
 
-export function openSelectCoinModal() {
-  return {
-    type: SELECT_COIN_MODAL_OPEN
-  };
-}
-
-export function closeSelectCoinModal() {
-  return {
-    type: SELECT_COIN_MODAL_CLOSE
-  };
-}
-
-export function clickSelectCoinModal(payload: SelectCoinPayload) {
-  return {
-    type: SELECT_COIN_MODAL_CLICK,
-    payload
-  };
-}
-
 export function openJoyride() {
   return {
     type: JOYRIDE_OPEN
@@ -273,5 +259,39 @@ export function selectCoinRecevie(payload: SelectCoinPayload) {
   return {
     type: RECEVIE_COIN_SELECT,
     payload
+  };
+}
+
+export function setNewOrder() {
+  return {
+    type: NEW_ORDER_SET
+  };
+}
+
+export function skipNewOrder() {
+  return {
+    type: NEW_ORDER_SET_SKIP
+  };
+}
+
+export function setNewOrderSuccess() {
+  return {
+    type: NEW_ORDER_SET_SUCCESS
+  };
+}
+
+export function setNewOrderError(error: ErrorType) {
+  return {
+    type: NEW_ORDER_SET_ERROR,
+    error
+  };
+}
+
+export function setNewOrderPrice(price: number) {
+  return {
+    type: NEW_ORDER_PRICE,
+    payload: {
+      price
+    }
   };
 }

@@ -4,6 +4,7 @@ import ClassNames from 'classnames';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import type { Dispatch } from 'redux';
+import type { Map } from 'immutable';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { withStyles } from '@material-ui/core/styles';
@@ -17,13 +18,11 @@ import CloudOff from '@material-ui/icons/CloudOff';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
+import { LOADING } from '../../constants';
 import PageSectionTitle from '../../components/PageSectionTitle';
-import CoinSelectable from '../../components/CoinSelectable';
+import { openSnackbars } from '../Snackbars/actions';
 import CoinsSelectionDialog from '../CoinsSelectionDialog';
-import {
-  makeSelectBalanceEntities,
-  makeSelectBalanceLoading
-} from '../App/selectors';
+import { makeSelectBalanceEntities } from '../App/selectors';
 import { loadAllBalance } from '../App/actions';
 
 import DepositSection from './components/DepositSection';
@@ -31,17 +30,21 @@ import RecevieSection from './components/RecevieSection';
 
 import Order from './components/Order';
 import {
-  loadPrices,
   loadOrderbook,
   closeDepositCoinModal,
   closeRecevieCoinModal,
   selectCoinDeposit,
-  selectCoinRecevie
+  selectCoinRecevie,
+  setNewOrder
 } from './actions';
 import {
   makeSelectOrderbookAsks,
+  makeSelectOrderbookBids,
   makeSelectDepositCoinModal,
-  makeSelectRecevieCoinModal
+  makeSelectRecevieCoinModal,
+  makeSelectOrderbookRecevie,
+  makeSelectOrderbookDeposit,
+  makeSelectMyOrderFetchStatus
 } from './selectors';
 
 const debug = require('debug')('atomicapp:containers:DexPage:SellOrderTab');
@@ -96,20 +99,47 @@ const styles = theme => ({
 
   swapform__iconemptystate: {
     fontSize: 50
+  },
+
+  root__warningPlate: {
+    textAlign: 'center',
+    padding: 12,
+    border: `1px dashed ${theme.colors.warning}`,
+    borderRadius: 4,
+    width: '100%'
   }
 });
 
 type ISellOrderTabProps = {
-  balanceLoading: boolean,
   classes: Styles,
-  // eslint-disable-next-line flowtype/no-weak-types
-  dispatchLoadPrices: Function,
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchLoadAllBalance: Function,
   // eslint-disable-next-line flowtype/no-weak-types
+  dispatchSetNewOrder: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
   dispatchLoadOrderbook: Function,
   // eslint-disable-next-line flowtype/no-weak-types
-  balance: Object
+  dispatchSelectCoinDeposit: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchCloseRecevieCoinModal: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchCloseDepositCoinModal: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchSelectCoinRecevie: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchOpenSnackbars: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  balance: Object,
+  // eslint-disable-next-line flowtype/no-weak-types
+  recevie: Map<*, *>,
+  // eslint-disable-next-line flowtype/no-weak-types
+  deposit: Map<*, *>,
+  // eslint-disable-next-line flowtype/no-weak-types
+  orderbookBids: Map<*, *>,
+  // eslint-disable-next-line flowtype/no-weak-types
+  depositCoinModal: Map<*, *>,
+  // eslint-disable-next-line flowtype/no-weak-types
+  recevieCoinModal: Map<*, *>
 };
 
 class SellOrderTab extends Component<ISellOrderTabProps> {
@@ -124,6 +154,39 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
     const { dispatchLoadOrderbook } = this.props;
 
     dispatchLoadOrderbook();
+  };
+
+  onClickPlaceNewOrder = (evt: SyntheticInputEvent<>) => {
+    evt.stopPropagation();
+    const { dispatchSetNewOrder } = this.props;
+
+    dispatchSetNewOrder();
+  };
+
+  onSelectCoinDeposit = coin => {
+    const {
+      recevie,
+      dispatchSelectCoinDeposit,
+      dispatchOpenSnackbars
+    } = this.props;
+    if (recevie && recevie === coin.symbol) {
+      dispatchOpenSnackbars('Deposit coin and Recevie coin can be the same');
+    } else {
+      dispatchSelectCoinDeposit(coin);
+    }
+  };
+
+  onSelectCoinRecevie = coin => {
+    const {
+      deposit,
+      dispatchSelectCoinRecevie,
+      dispatchOpenSnackbars
+    } = this.props;
+    if (deposit && deposit === coin.symbol) {
+      dispatchOpenSnackbars('Deposit coin and Recevie coin can be the same');
+    } else {
+      dispatchSelectCoinRecevie(coin);
+    }
   };
 
   renderEmptyState = () => {
@@ -156,45 +219,30 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
 
     const {
       classes,
-      balanceLoading,
+      recevie,
+      deposit,
       balance,
-      orderbookAsks,
+      orderbookBids,
       depositCoinModal,
       recevieCoinModal,
       dispatchCloseDepositCoinModal,
       dispatchCloseRecevieCoinModal,
-      dispatchSelectCoinDeposit,
-      dispatchSelectCoinRecevie
+      myOrderFetchStatus
     } = this.props;
-
-    // const icon = getCoinMemoize('CHIPS', 64, 64);
 
     return (
       <Grid container spacing={0} className={classes.container}>
         <Grid item md={2} xs={12} className={classes.debug}>
-          {/* <CoinSelectable selected>
-            {icon}
-            <Typography component="div" variant="h6" color="inherit">
-              Beer
-            </Typography>
-            <br />
-            <Typography component="div" variant="subtitle1" color="inherit">
-              93 BEER
-            </Typography>
-            1 N/A = 0 BEER
-          </CoinSelectable>
-          <CoinSelectable disabled>CoinSelectable</CoinSelectable> */}
-
           <CoinsSelectionDialog
             open={depositCoinModal.get('open')}
             onClose={dispatchCloseDepositCoinModal}
-            onSelect={dispatchSelectCoinDeposit}
+            onSelect={this.onSelectCoinDeposit}
           />
 
           <CoinsSelectionDialog
             open={recevieCoinModal.get('open')}
             onClose={dispatchCloseRecevieCoinModal}
-            onSelect={dispatchSelectCoinRecevie}
+            onSelect={this.onSelectCoinRecevie}
           />
 
           <PageSectionTitle
@@ -236,16 +284,10 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
                 </FormattedMessage>
               }
             />
-            {/* <IconButton
-              aria-label="Reload prices"
-              className={classes.cardContent__rightBtn}
-              onClick={this.onReloadPrices}
-            >
-              <Icon>cached</Icon>
-            </IconButton> */}
             <RecevieSection
               style={{
-                marginRight: 0
+                marginRight: 0,
+                marginBottom: 30
               }}
             />
           </div>
@@ -259,6 +301,12 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
         >
           <div className={classes.cardContent}>
             <Button
+              onClick={this.onClickPlaceNewOrder}
+              disabled={
+                recevie === null ||
+                deposit === null ||
+                myOrderFetchStatus === LOADING
+              }
               variant="contained"
               color="primary"
               style={{
@@ -290,14 +338,24 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
               </IconButton>
             </Tooltip>
 
-            {orderbookAsks.size === 0 && this.renderEmptyState()}
-            {orderbookAsks.size > 0 &&
-              orderbookAsks.map(order => (
-                <>
-                  <Order symbol="COQUI" data={order} />
-                  <br />
-                </>
-              ))}
+            {orderbookBids.size === 0 && this.renderEmptyState()}
+            {orderbookBids.size > 0 && (
+              <>
+                <div className={classes.root__warningPlate}>
+                  <Typography gutterBottom>
+                    Your order will only be visible to others while the app is
+                    running. Once you close the app, your order dissapears.
+                  </Typography>
+                </div>
+                <br />
+                {orderbookBids.map(order => (
+                  <>
+                    <Order data={order} />
+                    <br />
+                  </>
+                ))}
+              </>
+            )}
             {/* {[1].map(k => (
               <>
                 <Card
@@ -346,22 +404,26 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
 // eslint-disable-next-line flowtype/no-weak-types
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   return {
-    dispatchLoadPrices: () => dispatch(loadPrices()),
     dispatchLoadAllBalance: () => dispatch(loadAllBalance()),
     dispatchLoadOrderbook: () => dispatch(loadOrderbook()),
     dispatchCloseDepositCoinModal: () => dispatch(closeDepositCoinModal()),
     dispatchCloseRecevieCoinModal: () => dispatch(closeRecevieCoinModal()),
     dispatchSelectCoinDeposit: payload => dispatch(selectCoinDeposit(payload)),
-    dispatchSelectCoinRecevie: payload => dispatch(selectCoinRecevie(payload))
+    dispatchSelectCoinRecevie: payload => dispatch(selectCoinRecevie(payload)),
+    dispatchSetNewOrder: () => dispatch(setNewOrder()),
+    dispatchOpenSnackbars: (message: string) => dispatch(openSnackbars(message))
   };
 }
 
 const mapStateToProps = createStructuredSelector({
   balance: makeSelectBalanceEntities(),
-  balanceLoading: makeSelectBalanceLoading(),
   orderbookAsks: makeSelectOrderbookAsks(),
+  orderbookBids: makeSelectOrderbookBids(),
   depositCoinModal: makeSelectDepositCoinModal(),
-  recevieCoinModal: makeSelectRecevieCoinModal()
+  recevieCoinModal: makeSelectRecevieCoinModal(),
+  recevie: makeSelectOrderbookRecevie(),
+  deposit: makeSelectOrderbookDeposit(),
+  myOrderFetchStatus: makeSelectMyOrderFetchStatus()
 });
 
 const withConnect = connect(

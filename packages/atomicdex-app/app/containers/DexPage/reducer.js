@@ -237,11 +237,12 @@ export default handleActions(
         // }
         if (event.type === TAKER_FEE_SENT_SWAPS_STATE) {
           // eslint-disable-next-line camelcase
-          const { tx_hash, my_balance_change } = event.data;
+          const { tx_hash } = event.data;
+          // const { tx_hash, my_balance_change } = event.data;
           let myfee = entity.get('myfee');
           myfee = myfee.set('tx', tx_hash);
           myfee = myfee.set('coin', entity.get('alice'));
-          myfee = myfee.set('value', my_balance_change);
+          // myfee = myfee.set('value', my_balance_change);
           entity = entity.set('myfee', myfee);
         }
 
@@ -256,11 +257,12 @@ export default handleActions(
 
         if (event.type === TAKER_PAYMENT_SENT_SWAPS_STATE) {
           // eslint-disable-next-line camelcase
-          const { tx_hash, my_balance_change } = event.data;
+          const { tx_hash } = event.data;
+          // const { tx_hash, my_balance_change } = event.data;
           let alicepayment = entity.get('alicepayment');
           alicepayment = alicepayment.set('tx', tx_hash);
           alicepayment = alicepayment.set('coin', entity.get('alice'));
-          alicepayment = alicepayment.set('value', my_balance_change);
+          // alicepayment = alicepayment.set('value', my_balance_change);
           entity = entity.set('alicepayment', alicepayment);
         }
 
@@ -275,11 +277,12 @@ export default handleActions(
 
         if (event.type === MAKER_PAYMENT_SPENT_SWAPS_STATE) {
           // eslint-disable-next-line camelcase
-          const { tx_hash, my_balance_change } = event.data;
+          const { tx_hash } = event.data;
+          // const { tx_hash, my_balance_change } = event.data;
           let bobpayment = entity.get('bobpayment');
           bobpayment = bobpayment.set('tx', tx_hash);
           bobpayment = bobpayment.set('coin', entity.get('bob'));
-          bobpayment = alicepayment.set('value', my_balance_change);
+          // bobpayment = alicepayment.set('value', my_balance_change);
           entity = entity.set('bobpayment', bobpayment);
         }
 

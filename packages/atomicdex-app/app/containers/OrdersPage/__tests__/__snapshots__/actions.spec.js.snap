@@ -221,3 +221,37 @@ Object {
   "type": "atomicapp/OrdersPage/RECEVIE_COIN_MODAL_OPEN",
 }
 `;
+
+exports[`containers/OrdersPage/actions/setNewOrder should setNewOrder should create setNewOrder action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/NEW_ORDER_SET",
+}
+`;
+
+exports[`containers/OrdersPage/actions/setNewOrderError should setNewOrderError should create setNewOrderError action 1`] = `
+Object {
+  "error": undefined,
+  "type": "atomicapp/OrdersPage/NEW_ORDER_SET_ERROR",
+}
+`;
+
+exports[`containers/OrdersPage/actions/setNewOrderPrice should setNewOrderPrice should create setNewOrderPrice action 1`] = `
+Object {
+  "payload": Object {
+    "price": 10.23,
+  },
+  "type": "atomicapp/OrdersPage/NEW_ORDER_PRICE",
+}
+`;
+
+exports[`containers/OrdersPage/actions/setNewOrderSuccess should setNewOrderSuccess should create setNewOrderSuccess action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/NEW_ORDER_SET_SUCCESS",
+}
+`;
+
+exports[`containers/OrdersPage/actions/skipNewOrder should skipNewOrder should create skipNewOrder action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/NEW_ORDER_SET_SKIP",
+}
+`;

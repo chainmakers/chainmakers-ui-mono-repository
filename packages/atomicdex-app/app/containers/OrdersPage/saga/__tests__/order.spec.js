@@ -3,28 +3,29 @@ import nock from 'nock';
 import { fromJS } from 'immutable';
 import { runSaga } from 'redux-saga';
 import api from '../../../../lib/barter-dex-api';
-import { loadOrderbook } from '../../actions';
+import { setNewOrder } from '../../actions';
 import data from '../../../__tests__/app-state.json';
-import orderbook from '../../../__tests__/orderbook.json';
-import listenForLoadingOrderbook from '../orderbook';
+import setprice from '../../../__tests__/setprice.json';
+import listenForCreatingNewOrder from '../order';
 import {
   APP_STATE_NAME,
-  ORDERBOOK_LOAD,
-  ORDERBOOK_LOAD_ERROR,
-  ORDERBOOK_LOAD_SKIP,
-  ORDERBOOK_LOAD_SUCCESS
+  NEW_ORDER_SET_SUCCESS,
+  NEW_ORDER_SET,
+  NEW_ORDER_SET_ERROR,
+  NEW_ORDER_SET_SKIP,
+  ORDERBOOK_LOAD
 } from '../../constants';
 
 const store = fromJS(data);
 
 const TEST_URL = 'http://127.0.0.1:7783';
 
-describe('containers/OrderPage/saga/orderbook', () => {
+describe('containers/OrderPage/saga/order', () => {
   api.setUserpass('userpass');
 
-  const payload = orderbook;
+  const payload = setprice;
 
-  it('should handle listenForLoadingOrderbook correctly', async done => {
+  it('should handle listenForCreatingNewOrder correctly', async done => {
     const dispatched = [];
 
     nock(TEST_URL)
@@ -34,7 +35,7 @@ describe('containers/OrderPage/saga/orderbook', () => {
       .reply(200, (uri, body, cb) => {
         const { method } = JSON.parse(body);
 
-        if (method === 'orderbook') {
+        if (method === 'setprice') {
           cb(null, payload);
         } else {
           cb(new Error('error message'));
@@ -46,24 +47,24 @@ describe('containers/OrderPage/saga/orderbook', () => {
         dispatch: action => dispatched.push(action),
         getState: () => store
       },
-      listenForLoadingOrderbook,
-      loadOrderbook()
+      listenForCreatingNewOrder,
+      setNewOrder()
     ).done;
 
     expect(dispatched).toEqual([
+      { type: ORDERBOOK_LOAD },
       {
-        type: ORDERBOOK_LOAD_SUCCESS,
-        payload
+        type: NEW_ORDER_SET_SUCCESS
       }
     ]);
-    expect(saga).toEqual(1);
+    expect(saga).toEqual(undefined);
 
     nock.cleanAll();
     nock.enableNetConnect();
     done();
   });
 
-  it('should throw error when handle listenForLoadingOrderbook', async done => {
+  it('should throw error when handle listenForCreatingNewOrder', async done => {
     const dispatched = [];
 
     nock(TEST_URL)
@@ -79,8 +80,8 @@ describe('containers/OrderPage/saga/orderbook', () => {
         dispatch: action => dispatched.push(action),
         getState: () => store
       },
-      listenForLoadingOrderbook,
-      loadOrderbook()
+      listenForCreatingNewOrder,
+      setNewOrder()
     ).done;
 
     expect(dispatched).toEqual([
@@ -93,12 +94,12 @@ describe('containers/OrderPage/saga/orderbook', () => {
       {
         error: {
           context: {
-            action: ORDERBOOK_LOAD
+            action: NEW_ORDER_SET
           },
           message: 'Request failed with status code 500',
           type: 'RPC'
         },
-        type: ORDERBOOK_LOAD_ERROR
+        type: NEW_ORDER_SET_ERROR
       }
     ]);
     expect(saga).toEqual(undefined);
@@ -108,7 +109,7 @@ describe('containers/OrderPage/saga/orderbook', () => {
     done();
   });
 
-  it('should skip when handle listenForLoadingOrderbook', async done => {
+  it('should skip when handle listenForCreatingNewOrder', async done => {
     const dispatched = [];
 
     nock(TEST_URL)
@@ -130,13 +131,13 @@ describe('containers/OrderPage/saga/orderbook', () => {
         getState: () =>
           store.setIn([APP_STATE_NAME, 'orderbook', 'deposit'], null)
       },
-      listenForLoadingOrderbook,
-      loadOrderbook()
+      listenForCreatingNewOrder,
+      setNewOrder()
     ).done;
 
     expect(dispatched).toEqual([
       {
-        type: ORDERBOOK_LOAD_SKIP
+        type: NEW_ORDER_SET_SKIP
       }
     ]);
     expect(saga).toEqual(1);

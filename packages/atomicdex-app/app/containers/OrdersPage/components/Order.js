@@ -18,9 +18,12 @@ import getCoinMemoize from '../../../components/CryptoIcons';
 import { covertSymbolToName } from '../../../utils/coin';
 import {
   makeSelectBalanceFetchStatus,
-  makeSelectBalanceEntities,
   makeSelectBalanceErrors
 } from '../../App/selectors';
+import {
+  makeSelectOrderbookDeposit,
+  makeSelectOrderbookRecevie
+} from '../selectors';
 import { openDetailModal } from '../actions';
 
 const debug = require('debug')('atomicapp:containers:OrdersPage:Asset');
@@ -121,11 +124,12 @@ const styles = theme => ({
 
 type IOrderProps = {
   classes: Styles,
-  symbol: string,
   // eslint-disable-next-line flowtype/no-weak-types
   fetchStatus: List<*>,
   // eslint-disable-next-line flowtype/no-weak-types
   error: Map<*, *>,
+  // eslint-disable-next-line flowtype/no-weak-types
+  data: Map<*, *>,
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchOpenDetailModal: Function
 };
@@ -197,10 +201,8 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
   render() {
     debug(`render`);
 
-    const { classes, error, fetchStatus, data } = this.props;
-    const { hover } = this.state;
+    const { classes, error, fetchStatus, data, deposit, recevie } = this.props;
     const isError = !!error;
-    const loading = fetchStatus === LOADING;
     const symbol = data.get('coin');
 
     return (
@@ -244,7 +246,7 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
               color: 'rgba(0, 0, 0, 0.54)'
             }}
           >
-            {data.get('price')} PIZZA = 1 BEER
+            {data.get('price')} {deposit} = 1 {recevie}
           </Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
@@ -263,12 +265,16 @@ export function mapDispatchToProps(dispatch: Dispatch<Object>) {
 }
 
 const mapStateToProps = createSelector(
-  (_, props) => props.symbol,
+  (_, { data }) => data.get('coin'),
   makeSelectBalanceFetchStatus(),
   makeSelectBalanceErrors(),
-  (symbol, fetchStatus, errors) => ({
+  makeSelectOrderbookDeposit(),
+  makeSelectOrderbookRecevie(),
+  (symbol, fetchStatus, errors, deposit, recevie) => ({
     fetchStatus: fetchStatus.get(symbol),
-    error: errors.get(symbol)
+    error: errors.get(symbol),
+    deposit,
+    recevie
   })
 );
 

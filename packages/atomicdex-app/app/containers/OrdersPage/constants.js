@@ -95,3 +95,11 @@ export const RECEVIE_COIN_MODAL_OPEN =
 export const RECEVIE_COIN_MODAL_CLOSE =
   'atomicapp/OrdersPage/RECEVIE_COIN_MODAL_CLOSE';
 export const RECEVIE_COIN_SELECT = 'atomicapp/OrdersPage/RECEVIE_COIN_SELECT';
+
+// New order
+export const NEW_ORDER_SET = 'atomicapp/OrdersPage/NEW_ORDER_SET';
+export const NEW_ORDER_SET_SKIP = 'atomicapp/OrdersPage/NEW_ORDER_SET_SKIP';
+export const NEW_ORDER_SET_SUCCESS =
+  'atomicapp/OrdersPage/NEW_ORDER_SET_SUCCESS';
+export const NEW_ORDER_SET_ERROR = 'atomicapp/OrdersPage/NEW_ORDER_SET_ERROR';
+export const NEW_ORDER_PRICE = 'atomicapp/OrdersPage/NEW_ORDER_PRICE';

@@ -5,20 +5,27 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { LOADING } from '../../constants';
 import LinearProgress from '../../components/ProgressBar';
-import { makeSelectOrderbookFetchStatus } from './selectors';
+import {
+  makeSelectOrderbookFetchStatus,
+  makeSelectMyOrderFetchStatus
+} from './selectors';
 
 const debug = require('debug')('atomicapp:containers:OrderPage:ProgressBar');
 
 type IProgressBarProps = {
-  orderbookFetchStatus: string
+  orderbookFetchStatus: string,
+  myOrderFetchStatus: string
 };
 
 export class ProgressBarUI extends React.PureComponent<IProgressBarProps> {
   render() {
     debug('render');
 
-    const { orderbookFetchStatus } = this.props;
+    const { orderbookFetchStatus, myOrderFetchStatus } = this.props;
     if (orderbookFetchStatus && orderbookFetchStatus === LOADING) {
+      return <LinearProgress />;
+    }
+    if (myOrderFetchStatus && myOrderFetchStatus === LOADING) {
       return <LinearProgress />;
     }
     return null;
@@ -26,7 +33,8 @@ export class ProgressBarUI extends React.PureComponent<IProgressBarProps> {
 }
 
 const mapStateToProps = createStructuredSelector({
-  orderbookFetchStatus: makeSelectOrderbookFetchStatus()
+  orderbookFetchStatus: makeSelectOrderbookFetchStatus(),
+  myOrderFetchStatus: makeSelectMyOrderFetchStatus()
 });
 
 const withConnect = connect(

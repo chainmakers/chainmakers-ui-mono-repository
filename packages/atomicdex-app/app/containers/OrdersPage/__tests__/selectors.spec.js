@@ -26,7 +26,11 @@ import {
   makeSelectOrderbookRecevie,
   makeSelectOrderbookAsks,
   makeSelectOrderbookBids,
-  makeSelectOrderbookFetchStatus
+  makeSelectOrderbookFetchStatus,
+  makeSelectOrderbookPrice,
+  makeSelectMyOrder,
+  makeSelectMyOrderFetchStatus,
+  makeSelectMyOrderErrors
 } from '../selectors';
 
 describe('containers/OrderPage/selectors/selectOrder', () => {
@@ -247,7 +251,27 @@ describe('containers/OrderPage/selectors/makeSelectOrderbook', () => {
 
     const selectOrderbookBids = makeSelectOrderbookBids();
     expect(selectOrderbookBids(mockedState)).toEqual(fromJS([]));
+
+    const selectOrderbookPrice = makeSelectOrderbookPrice();
+    expect(selectOrderbookPrice(mockedState)).toEqual(fromJS(''));
+
     const selectOrderbookFetchStatus = makeSelectOrderbookFetchStatus();
     expect(selectOrderbookFetchStatus(mockedState)).toEqual(null);
+  });
+});
+
+describe('containers/OrderPage/selectors/makeSelectMyOrder', () => {
+  it('should select the orderbook state', () => {
+    const mockedState = fromJS({
+      [APP_STATE_NAME]: initialState
+    });
+    const selectMyOrder = makeSelectMyOrder();
+    expect(selectMyOrder(mockedState)).toEqual(initialState.get('myorder'));
+
+    const selectMyOrderErrors = makeSelectMyOrderErrors();
+    expect(selectMyOrderErrors(mockedState)).toEqual(fromJS(null));
+
+    const selectMyOrderFetchStatus = makeSelectMyOrderFetchStatus();
+    expect(selectMyOrderFetchStatus(mockedState)).toEqual(null);
   });
 });

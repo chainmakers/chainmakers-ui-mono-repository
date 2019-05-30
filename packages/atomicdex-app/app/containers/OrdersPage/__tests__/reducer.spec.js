@@ -16,10 +16,20 @@ import {
   loadOrderbook,
   skipOrderbook,
   loadOrderbookSuccess,
-  loadOrderbookError
+  loadOrderbookError,
+  setNewOrderPrice,
+  setNewOrder,
+  skipNewOrder,
+  setNewOrderSuccess,
+  setNewOrderError
 } from '../actions';
 import { LOADING, LOADED, FAILED } from '../../../constants';
-import { SWAP_TX_DEFAULT, ORDERBOOK_LOAD } from '../constants';
+import {
+  SWAP_TX_DEFAULT,
+  ORDERBOOK_LOAD,
+  NEW_ORDER_PRICE,
+  NEW_ORDER_SET
+} from '../constants';
 import {
   WEBSOCKET_STATE_ZERO,
   WEBSOCKET_STATE_ONE,
@@ -995,6 +1005,66 @@ describe('containers/DexPage/reducers/loadOrderbookError', () => {
       .setIn(['orderbook', 'fetchStatus'], FAILED)
       .setIn(['orderbook', 'error'], fromJS(error));
     expect(buyReducer(initialState, loadOrderbookError(error))).toEqual(
+      expectedResult
+    );
+  });
+});
+
+describe('containers/DexPage/reducers/setNewOrderPrice', () => {
+  const price = 0.1;
+
+  it('should handle the setNewOrderPrice action correctly', () => {
+    const expectedResult = initialState.setIn(['orderbook', 'price'], price);
+    expect(buyReducer(initialState, setNewOrderPrice(price))).toEqual(
+      expectedResult
+    );
+  });
+});
+
+describe('containers/DexPage/reducers/setNewOrder', () => {
+  it('should handle the setNewOrder action correctly', () => {
+    const expectedResult = initialState
+      .setIn(['myorder', 'fetchStatus'], LOADING)
+      .setIn(['myorder', 'error'], null);
+    expect(buyReducer(initialState, setNewOrder())).toEqual(expectedResult);
+  });
+});
+
+describe('containers/DexPage/reducers/skipNewOrder', () => {
+  it('should handle the skipNewOrder action correctly', () => {
+    const expectedResult = initialState
+      .setIn(['myorder', 'fetchStatus'], LOADED)
+      .setIn(['myorder', 'error'], null);
+    expect(buyReducer(initialState, skipNewOrder())).toEqual(expectedResult);
+  });
+});
+
+describe('containers/DexPage/reducers/setNewOrderSuccess', () => {
+  it('should handle the setNewOrderSuccess action correctly', () => {
+    const expectedResult = initialState.setIn(
+      ['myorder', 'fetchStatus'],
+      LOADED
+    );
+    expect(buyReducer(initialState, setNewOrderSuccess())).toEqual(
+      expectedResult
+    );
+  });
+});
+
+describe('containers/DexPage/reducers/setNewOrderError', () => {
+  const error = {
+    context: {
+      action: NEW_ORDER_SET
+    },
+    message: 'message',
+    type: 'RPC'
+  };
+
+  it('should handle the setNewOrderError action correctly', () => {
+    const expectedResult = initialState
+      .setIn(['myorder', 'fetchStatus'], FAILED)
+      .setIn(['myorder', 'error'], fromJS(error));
+    expect(buyReducer(initialState, setNewOrderError(error))).toEqual(
       expectedResult
     );
   });

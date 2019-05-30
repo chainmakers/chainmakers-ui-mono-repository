@@ -39,7 +39,12 @@ import {
   DEPOSIT_COIN_SELECT,
   RECEVIE_COIN_MODAL_OPEN,
   RECEVIE_COIN_MODAL_CLOSE,
-  RECEVIE_COIN_SELECT
+  RECEVIE_COIN_SELECT,
+  NEW_ORDER_PRICE,
+  NEW_ORDER_SET,
+  NEW_ORDER_SET_SKIP,
+  NEW_ORDER_SET_SUCCESS,
+  NEW_ORDER_SET_ERROR
 } from './constants';
 
 // The initial state of the App
@@ -103,6 +108,13 @@ export const initialState = fromJS({
     open: false
   },
 
+  // FIXME: Redesign data struct
+  myorder: {
+    fetchStatus: null,
+    errors: null,
+    list: []
+  },
+
   orderbook: {
     fetchStatus: null,
     errors: null,
@@ -128,6 +140,7 @@ export const initialState = fromJS({
     //     message: 'Request failed with status code 500'
     //   }
     // }
+    price: '',
     deposit: null,
     recevie: null,
     asks: [
@@ -656,6 +669,27 @@ export default handleActions(
       state
         // .setIn(['orderbook', 'name'], payload.name)
         .setIn(['orderbook', 'recevie'], payload.symbol),
+
+    [NEW_ORDER_PRICE]: (state, { payload }) =>
+      state.setIn(['orderbook', 'price'], payload.price),
+
+    [NEW_ORDER_SET]: state =>
+      state
+        .setIn(['myorder', 'fetchStatus'], LOADING)
+        .setIn(['myorder', 'error'], null),
+
+    [NEW_ORDER_SET_SKIP]: state =>
+      state
+        .setIn(['myorder', 'fetchStatus'], LOADED)
+        .setIn(['myorder', 'error'], null),
+
+    [NEW_ORDER_SET_SUCCESS]: state =>
+      state.setIn(['myorder', 'fetchStatus'], LOADED),
+
+    [NEW_ORDER_SET_ERROR]: (state, { error }) =>
+      state
+        .setIn(['myorder', 'fetchStatus'], FAILED)
+        .setIn(['myorder', 'error'], fromJS(error)),
 
     [LOGOUT]: () => initialState
   },

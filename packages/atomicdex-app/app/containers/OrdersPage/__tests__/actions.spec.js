@@ -23,7 +23,12 @@ import {
   selectCoinDeposit,
   openRecevieCoinModal,
   closeRecevieCoinModal,
-  selectCoinRecevie
+  selectCoinRecevie,
+  setNewOrder,
+  skipNewOrder,
+  setNewOrderSuccess,
+  setNewOrderError,
+  setNewOrderPrice
 } from '../actions';
 
 import {
@@ -48,7 +53,12 @@ import {
   DEPOSIT_COIN_MODAL_OPEN,
   DEPOSIT_COIN_MODAL_CLOSE,
   RECEVIE_COIN_MODAL_OPEN,
-  RECEVIE_COIN_MODAL_CLOSE
+  RECEVIE_COIN_MODAL_CLOSE,
+  NEW_ORDER_SET,
+  NEW_ORDER_SET_SKIP,
+  NEW_ORDER_SET_SUCCESS,
+  NEW_ORDER_SET_ERROR,
+  NEW_ORDER_PRICE
 } from '../constants';
 
 describe('containers/DexPage/actions/loadPrice', () => {
@@ -425,5 +435,80 @@ describe('containers/OrdersPage/actions/closeRecevieCoinModal', () => {
     };
 
     expect(closeRecevieCoinModal()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/OrdersPage/actions/setNewOrder', () => {
+  it('should setNewOrder should create setNewOrder action', () => {
+    expect(setNewOrder()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: NEW_ORDER_SET
+    };
+
+    expect(setNewOrder()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/OrdersPage/actions/setNewOrderSuccess', () => {
+  it('should setNewOrderSuccess should create setNewOrderSuccess action', () => {
+    expect(setNewOrderSuccess()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: NEW_ORDER_SET_SUCCESS
+    };
+
+    expect(setNewOrderSuccess()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/OrdersPage/actions/setNewOrderError', () => {
+  it('should setNewOrderError should create setNewOrderError action', () => {
+    expect(setNewOrderError()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: NEW_ORDER_SET_ERROR
+    };
+
+    expect(setNewOrderError()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/OrdersPage/actions/skipNewOrder', () => {
+  it('should skipNewOrder should create skipNewOrder action', () => {
+    expect(skipNewOrder()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: NEW_ORDER_SET_SKIP
+    };
+
+    expect(skipNewOrder()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/OrdersPage/actions/setNewOrderPrice', () => {
+  const price = 10.23;
+
+  it('should setNewOrderPrice should create setNewOrderPrice action', () => {
+    expect(setNewOrderPrice(price)).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: NEW_ORDER_PRICE,
+      payload: {
+        price
+      }
+    };
+
+    expect(setNewOrderPrice(price)).toEqual(expectedResult);
   });
 });
