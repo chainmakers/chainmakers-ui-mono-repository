@@ -6,8 +6,7 @@ import api from '../../../lib/barter-dex-api';
 import { openSnackbars } from '../../Snackbars/actions';
 import {
   makeSelectOrderbookDeposit,
-  makeSelectOrderbookRecevie,
-  makeSelectOrderbookPrice
+  makeSelectOrderbookRecevie
 } from '../selectors';
 import {
   skipNewOrder,
@@ -18,13 +17,13 @@ import {
 
 const debug = require('debug')('atomicapp:containers:OrdersPage:saga:order');
 
-export default function* listenForCreatingNewOrder(action) {
+export default function* listenForCreatingNewOrder({ type, payload }) {
   debug(`listen for creating order`);
   let request = null;
   try {
     const deposit = yield select(makeSelectOrderbookDeposit());
     const recevie = yield select(makeSelectOrderbookRecevie());
-    const price = yield select(makeSelectOrderbookPrice());
+    const { price } = payload;
 
     if (!deposit || !recevie) {
       return yield put(skipNewOrder());
@@ -46,7 +45,7 @@ export default function* listenForCreatingNewOrder(action) {
     yield put(
       setNewOrderError({
         context: {
-          action: action.type
+          action: type
         },
         type: 'RPC',
         message: err.message

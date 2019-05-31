@@ -28,7 +28,8 @@ import {
   skipNewOrder,
   setNewOrderSuccess,
   setNewOrderError,
-  setNewOrderPrice
+  openConfirmNewOrderModal,
+  closeConfirmNewOrderModal
 } from '../actions';
 
 import {
@@ -58,7 +59,8 @@ import {
   NEW_ORDER_SET_SKIP,
   NEW_ORDER_SET_SUCCESS,
   NEW_ORDER_SET_ERROR,
-  NEW_ORDER_PRICE
+  CONFIRM_NEW_ORDER_MODAL_OPEN,
+  CONFIRM_NEW_ORDER_MODAL_CLOSE
 } from '../constants';
 
 describe('containers/DexPage/actions/loadPrice', () => {
@@ -439,16 +441,20 @@ describe('containers/OrdersPage/actions/closeRecevieCoinModal', () => {
 });
 
 describe('containers/OrdersPage/actions/setNewOrder', () => {
+  const price = 0.1;
   it('should setNewOrder should create setNewOrder action', () => {
-    expect(setNewOrder()).toMatchSnapshot();
+    expect(setNewOrder(price)).toMatchSnapshot();
   });
 
   it('should return the correct type and the passed name', () => {
     const expectedResult = {
-      type: NEW_ORDER_SET
+      type: NEW_ORDER_SET,
+      payload: {
+        price
+      }
     };
 
-    expect(setNewOrder()).toEqual(expectedResult);
+    expect(setNewOrder(price)).toEqual(expectedResult);
   });
 });
 
@@ -494,21 +500,30 @@ describe('containers/OrdersPage/actions/skipNewOrder', () => {
   });
 });
 
-describe('containers/OrdersPage/actions/setNewOrderPrice', () => {
-  const price = 10.23;
-
-  it('should setNewOrderPrice should create setNewOrderPrice action', () => {
-    expect(setNewOrderPrice(price)).toMatchSnapshot();
+describe('containers/OrdersPage/actions/openConfirmNewOrderModal', () => {
+  it('should openConfirmNewOrderModal should create openConfirmNewOrderModal action', () => {
+    expect(openConfirmNewOrderModal()).toMatchSnapshot();
   });
 
   it('should return the correct type and the passed name', () => {
     const expectedResult = {
-      type: NEW_ORDER_PRICE,
-      payload: {
-        price
-      }
+      type: CONFIRM_NEW_ORDER_MODAL_OPEN
     };
 
-    expect(setNewOrderPrice(price)).toEqual(expectedResult);
+    expect(openConfirmNewOrderModal()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/OrdersPage/actions/closeConfirmNewOrderModal', () => {
+  it('should closeConfirmNewOrderModal should create closeConfirmNewOrderModal action', () => {
+    expect(closeConfirmNewOrderModal()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: CONFIRM_NEW_ORDER_MODAL_CLOSE
+    };
+
+    expect(closeConfirmNewOrderModal()).toEqual(expectedResult);
   });
 });

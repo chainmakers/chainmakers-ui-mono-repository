@@ -36,7 +36,8 @@ import {
   NEW_ORDER_SET_SKIP,
   NEW_ORDER_SET_SUCCESS,
   NEW_ORDER_SET_ERROR,
-  NEW_ORDER_PRICE
+  CONFIRM_NEW_ORDER_MODAL_OPEN,
+  CONFIRM_NEW_ORDER_MODAL_CLOSE
 } from './constants';
 
 import type {
@@ -262,9 +263,12 @@ export function selectCoinRecevie(payload: SelectCoinPayload) {
   };
 }
 
-export function setNewOrder() {
+export function setNewOrder(price: number) {
   return {
-    type: NEW_ORDER_SET
+    type: NEW_ORDER_SET,
+    payload: {
+      price
+    }
   };
 }
 
@@ -287,11 +291,14 @@ export function setNewOrderError(error: ErrorType) {
   };
 }
 
-export function setNewOrderPrice(price: number) {
+export function openConfirmNewOrderModal() {
   return {
-    type: NEW_ORDER_PRICE,
-    payload: {
-      price
-    }
+    type: CONFIRM_NEW_ORDER_MODAL_OPEN
+  };
+}
+
+export function closeConfirmNewOrderModal() {
+  return {
+    type: CONFIRM_NEW_ORDER_MODAL_CLOSE
   };
 }

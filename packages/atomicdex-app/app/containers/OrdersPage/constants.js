@@ -102,4 +102,9 @@ export const NEW_ORDER_SET_SKIP = 'atomicapp/OrdersPage/NEW_ORDER_SET_SKIP';
 export const NEW_ORDER_SET_SUCCESS =
   'atomicapp/OrdersPage/NEW_ORDER_SET_SUCCESS';
 export const NEW_ORDER_SET_ERROR = 'atomicapp/OrdersPage/NEW_ORDER_SET_ERROR';
-export const NEW_ORDER_PRICE = 'atomicapp/OrdersPage/NEW_ORDER_PRICE';
+
+// Confirm New Order Modal
+export const CONFIRM_NEW_ORDER_MODAL_OPEN =
+  'atomicapp/OrdersPage/CONFIRM_NEW_ORDER_MODAL_OPEN';
+export const CONFIRM_NEW_ORDER_MODAL_CLOSE =
+  'atomicapp/OrdersPage/CONFIRM_NEW_ORDER_MODAL_CLOSE';

@@ -198,6 +198,12 @@ Object {
 }
 `;
 
+exports[`containers/OrdersPage/actions/closeConfirmNewOrderModal should closeConfirmNewOrderModal should create closeConfirmNewOrderModal action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/CONFIRM_NEW_ORDER_MODAL_CLOSE",
+}
+`;
+
 exports[`containers/OrdersPage/actions/closeDepositCoinModal should closeDepositCoinModal should create closeDepositCoinModal action 1`] = `
 Object {
   "type": "atomicapp/OrdersPage/DEPOSIT_COIN_MODAL_CLOSE",
@@ -207,6 +213,12 @@ Object {
 exports[`containers/OrdersPage/actions/closeRecevieCoinModal should closeRecevieCoinModal should create closeRecevieCoinModal action 1`] = `
 Object {
   "type": "atomicapp/OrdersPage/RECEVIE_COIN_MODAL_CLOSE",
+}
+`;
+
+exports[`containers/OrdersPage/actions/openConfirmNewOrderModal should openConfirmNewOrderModal should create openConfirmNewOrderModal action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/CONFIRM_NEW_ORDER_MODAL_OPEN",
 }
 `;
 
@@ -224,6 +236,9 @@ Object {
 
 exports[`containers/OrdersPage/actions/setNewOrder should setNewOrder should create setNewOrder action 1`] = `
 Object {
+  "payload": Object {
+    "price": 0.1,
+  },
   "type": "atomicapp/OrdersPage/NEW_ORDER_SET",
 }
 `;
@@ -232,15 +247,6 @@ exports[`containers/OrdersPage/actions/setNewOrderError should setNewOrderError 
 Object {
   "error": undefined,
   "type": "atomicapp/OrdersPage/NEW_ORDER_SET_ERROR",
-}
-`;
-
-exports[`containers/OrdersPage/actions/setNewOrderPrice should setNewOrderPrice should create setNewOrderPrice action 1`] = `
-Object {
-  "payload": Object {
-    "price": 10.23,
-  },
-  "type": "atomicapp/OrdersPage/NEW_ORDER_PRICE",
 }
 `;
 

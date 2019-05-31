@@ -204,12 +204,6 @@ const makeSelectOrderbookFetchStatus = () =>
     orderbook => orderbook.get('fetchStatus')
   );
 
-const makeSelectOrderbookPrice = () =>
-  createSelector(
-    makeSelectOrderbook(),
-    orderbook => orderbook.get('price')
-  );
-
 const makeSelectDepositCoinModal = () =>
   createSelector(
     selectOrder,
@@ -238,6 +232,12 @@ const makeSelectMyOrderErrors = () =>
   createSelector(
     makeSelectMyOrder(),
     myorder => myorder.get('errors')
+  );
+
+const makeSelectConfirmNewOrderModal = () =>
+  createSelector(
+    selectOrder,
+    order => order.get('confirmNewOrderModal')
   );
 
 export {
@@ -273,10 +273,10 @@ export {
   makeSelectOrderbookAsks,
   makeSelectOrderbookBids,
   makeSelectOrderbookFetchStatus,
-  makeSelectOrderbookPrice,
   makeSelectDepositCoinModal,
   makeSelectRecevieCoinModal,
   makeSelectMyOrder,
   makeSelectMyOrderFetchStatus,
-  makeSelectMyOrderErrors
+  makeSelectMyOrderErrors,
+  makeSelectConfirmNewOrderModal
 };

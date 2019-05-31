@@ -44,58 +44,29 @@ class DepositSection extends React.PureComponent<IDepositSectionProps> {
     } = this.props;
     if (!deposit) {
       return (
-        <div {...rest}>
-          <CoinSelectable
-            id="add-icon-placeorder-orderpage"
-            key="depositCoinAddIcon"
-            icon={<AddIcon color="primary" />}
-            onClick={this.onClick}
-            {...rest}
-          />
-          <TextField
-            inputProps={{
-              style: {
-                textAlign: 'center'
-              }
-            }}
-            disabled
-            style={{
-              width: 184
-            }}
-            value="1 N/A"
-            margin="none"
-          />
-        </div>
+        <CoinSelectable
+          id="add-icon-placeorder-orderpage"
+          key="depositCoinAddIcon"
+          icon={<AddIcon color="primary" />}
+          onClick={this.onClick}
+          {...rest}
+        />
       );
     }
     const icon = getCoinMemoize(deposit);
     const b = balance.get(deposit);
     return (
-      <div {...rest}>
-        <CoinSelectable
-          id="add-icon-placeorder-orderpage"
-          key={`depositCoin${deposit}`}
-          selected
-          data={deposit}
-          icon={icon}
-          title={covertSymbolToName(deposit)}
-          onClick={this.onClick}
-          subTitle={`${floor(b.get('balance'), 3)} ${b.get('coin')}`}
-        />
-        <TextField
-          inputProps={{
-            style: {
-              textAlign: 'center'
-            }
-          }}
-          disabled
-          style={{
-            width: 184
-          }}
-          value={`1 ${b.get('coin')}`}
-          margin="none"
-        />
-      </div>
+      <CoinSelectable
+        id="add-icon-placeorder-orderpage"
+        key={`depositCoin${deposit}`}
+        selected
+        data={deposit}
+        icon={icon}
+        title={covertSymbolToName(deposit)}
+        onClick={this.onClick}
+        subTitle={`${floor(b.get('balance'), 3)} ${b.get('coin')}`}
+        {...rest}
+      />
     );
   }
 }

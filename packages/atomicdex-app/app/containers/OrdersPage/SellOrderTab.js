@@ -35,7 +35,7 @@ import {
   closeRecevieCoinModal,
   selectCoinDeposit,
   selectCoinRecevie,
-  setNewOrder
+  openConfirmNewOrderModal
 } from './actions';
 import {
   makeSelectOrderbookAsks,
@@ -115,7 +115,7 @@ type ISellOrderTabProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchLoadAllBalance: Function,
   // eslint-disable-next-line flowtype/no-weak-types
-  dispatchSetNewOrder: Function,
+  dispatchOpenConfirmNewOrderModal: Function,
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchLoadOrderbook: Function,
   // eslint-disable-next-line flowtype/no-weak-types
@@ -158,9 +158,9 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
 
   onClickPlaceNewOrder = (evt: SyntheticInputEvent<>) => {
     evt.stopPropagation();
-    const { dispatchSetNewOrder } = this.props;
+    const { dispatchOpenConfirmNewOrderModal } = this.props;
 
-    dispatchSetNewOrder();
+    dispatchOpenConfirmNewOrderModal();
   };
 
   onSelectCoinDeposit = coin => {
@@ -295,7 +295,7 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
 
         <Grid
           item
-          md={3}
+          md={4}
           xs={12}
           className={ClassNames(classes.debug, classes.root__endForMDScreen)}
         >
@@ -311,14 +311,14 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
               color="primary"
               style={{
                 boxShadow: 'none',
-                marginBottom: 20
+                marginBottom: 30
               }}
             >
               Place new order
             </Button>
           </div>
         </Grid>
-        <Grid item md={2} xs={12} className={classes.debug} />
+        <Grid item md={1} xs={12} className={classes.debug} />
         <Grid item xs={12}>
           <div className={classes.cardContent}>
             <PageSectionTitle
@@ -343,14 +343,15 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
               <>
                 <div className={classes.root__warningPlate}>
                   <Typography gutterBottom>
-                    Your order will only be visible to others while the app is
-                    running. Once you close the app, your order dissapears.
+                    <FormattedMessage id="atomicapp.containers.OrderPage.warning">
+                      {(...content) => content}
+                    </FormattedMessage>
                   </Typography>
                 </div>
                 <br />
-                {orderbookBids.map(order => (
+                {orderbookBids.map((order, key) => (
                   <>
-                    <Order data={order} />
+                    <Order key={`orderbook-${key}`} data={order} />
                     <br />
                   </>
                 ))}
@@ -410,8 +411,9 @@ export function mapDispatchToProps(dispatch: Dispatch<Object>) {
     dispatchCloseRecevieCoinModal: () => dispatch(closeRecevieCoinModal()),
     dispatchSelectCoinDeposit: payload => dispatch(selectCoinDeposit(payload)),
     dispatchSelectCoinRecevie: payload => dispatch(selectCoinRecevie(payload)),
-    dispatchSetNewOrder: () => dispatch(setNewOrder()),
-    dispatchOpenSnackbars: (message: string) => dispatch(openSnackbars(message))
+    dispatchOpenSnackbars: (message: string) =>
+      dispatch(openSnackbars(message)),
+    dispatchOpenConfirmNewOrderModal: () => dispatch(openConfirmNewOrderModal())
   };
 }
 

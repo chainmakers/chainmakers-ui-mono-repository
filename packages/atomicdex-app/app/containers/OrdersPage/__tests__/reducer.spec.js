@@ -17,19 +17,15 @@ import {
   skipOrderbook,
   loadOrderbookSuccess,
   loadOrderbookError,
-  setNewOrderPrice,
   setNewOrder,
   skipNewOrder,
   setNewOrderSuccess,
-  setNewOrderError
+  setNewOrderError,
+  openConfirmNewOrderModal,
+  closeConfirmNewOrderModal
 } from '../actions';
 import { LOADING, LOADED, FAILED } from '../../../constants';
-import {
-  SWAP_TX_DEFAULT,
-  ORDERBOOK_LOAD,
-  NEW_ORDER_PRICE,
-  NEW_ORDER_SET
-} from '../constants';
+import { SWAP_TX_DEFAULT, ORDERBOOK_LOAD, NEW_ORDER_SET } from '../constants';
 import {
   WEBSOCKET_STATE_ZERO,
   WEBSOCKET_STATE_ONE,
@@ -1010,17 +1006,6 @@ describe('containers/DexPage/reducers/loadOrderbookError', () => {
   });
 });
 
-describe('containers/DexPage/reducers/setNewOrderPrice', () => {
-  const price = 0.1;
-
-  it('should handle the setNewOrderPrice action correctly', () => {
-    const expectedResult = initialState.setIn(['orderbook', 'price'], price);
-    expect(buyReducer(initialState, setNewOrderPrice(price))).toEqual(
-      expectedResult
-    );
-  });
-});
-
 describe('containers/DexPage/reducers/setNewOrder', () => {
   it('should handle the setNewOrder action correctly', () => {
     const expectedResult = initialState
@@ -1066,6 +1051,32 @@ describe('containers/DexPage/reducers/setNewOrderError', () => {
       .setIn(['myorder', 'error'], fromJS(error));
     expect(buyReducer(initialState, setNewOrderError(error))).toEqual(
       expectedResult
+    );
+  });
+});
+
+describe('containers/DexPage/reducers/openConfirmNewOrderModal', () => {
+  it('should handle the openConfirmNewOrderModal action correctly', () => {
+    const expectedResult = initialState.setIn(
+      ['confirmNewOrderModal', 'open'],
+      true
+    );
+
+    expect(buyReducer(initialState, openConfirmNewOrderModal())).toEqual(
+      expectedResult
+    );
+  });
+});
+
+describe('containers/DexPage/reducers/closeConfirmNewOrderModal', () => {
+  it('should handle the closeConfirmNewOrderModal action correctly', () => {
+    const expectedResult = initialState.setIn(
+      ['confirmNewOrderModal', 'open'],
+      true
+    );
+
+    expect(buyReducer(expectedResult, closeConfirmNewOrderModal())).toEqual(
+      initialState
     );
   });
 });
