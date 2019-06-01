@@ -8,7 +8,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
-import { makeSelectCurrentSwaps } from '../selectors';
 
 const debug = require('debug')('atomicapp:containers:DexPage:HeaderTabs');
 
@@ -38,7 +37,7 @@ const styles = theme => ({
 
 type IHeaderTabsProps = {
   // eslint-disable-next-line flowtype/no-weak-types
-  currentSwaps: List<*>,
+  // currentSwaps: List<*>,
   // eslint-disable-next-line flowtype/no-weak-types
   classes: Object,
   // eslint-disable-next-line flowtype/no-weak-types
@@ -49,8 +48,7 @@ type IHeaderTabsProps = {
 class HeaderTabs extends React.PureComponent<IHeaderTabsProps> {
   render() {
     debug(`render`);
-    const { value, classes, currentSwaps, handleChange } = this.props;
-    const { size } = currentSwaps;
+    const { value, classes, handleChange } = this.props;
     return (
       <Tabs
         value={value}
@@ -87,9 +85,7 @@ class HeaderTabs extends React.PureComponent<IHeaderTabsProps> {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  currentSwaps: makeSelectCurrentSwaps()
-});
+const mapStateToProps = createStructuredSelector({});
 
 const withConnect = connect(
   mapStateToProps,

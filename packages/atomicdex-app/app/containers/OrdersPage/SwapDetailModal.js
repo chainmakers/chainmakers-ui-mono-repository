@@ -29,10 +29,7 @@ import getCoinMemoize from '../../components/CryptoIcons';
 import CoinSelectable from '../../components/CoinSelectable';
 import { STATE_SWAPS, SWAP_TX_DEFAULT } from './constants';
 import { closeDetailModal } from './actions';
-import {
-  makeSelectSwapDetailModal,
-  makeSelectSwapInDetailModal
-} from './selectors';
+import { makeSelectSwapDetailModal } from './selectors';
 
 const debug = require('debug')('atomicapp:containers:DexPage:SwapDetailModal');
 
@@ -530,8 +527,7 @@ export function mapDispatchToProps(dispatch: Dispatch<Object>) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  detailModal: makeSelectSwapDetailModal(),
-  swap: makeSelectSwapInDetailModal()
+  detailModal: makeSelectSwapDetailModal()
 });
 
 const withConnect = connect(

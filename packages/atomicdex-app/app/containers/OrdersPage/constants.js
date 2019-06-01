@@ -1,26 +1,5 @@
 // eslint-disable-next-line import/prefer-default-export
 export const APP_STATE_NAME = 'order';
-export const LOAD_PRICES = 'atomicapp/DexPage/LOAD_PRICES';
-export const LOAD_PRICES_SUCCESS = 'atomicapp/DexPage/LOAD_PRICES_SUCCESS';
-export const LOAD_PRICES_ERROR = 'atomicapp/DexPage/LOAD_PRICES_ERROR';
-export const LOAD_PRICE = 'atomicapp/DexPage/LOAD_PRICE';
-export const LOAD_BEST_PRICE = 'atomicapp/DexPage/LOAD_BEST_PRICE';
-export const LOAD_BUY_COIN = 'atomicapp/DexPage/LOAD_BUY_COIN';
-export const LOAD_BUY_COIN_SUCCESS = 'atomicapp/DexPage/LOAD_BUY_COIN_SUCCESS';
-export const LOAD_BUY_COIN_ERROR = 'atomicapp/DexPage/LOAD_BUY_COIN_ERROR';
-export const CLEAR_BUY_COIN_ERROR = 'atomicapp/DexPage/CLEAR_BUY_COIN_ERROR';
-export const LOAD_RECENT_SWAPS = 'atomicapp/DexPage/LOAD_RECENT_SWAPS';
-export const LOAD_RECENT_SWAPS_COIN =
-  'atomicapp/DexPage/LOAD_RECENT_SWAPS_COIN';
-export const LOAD_RECENT_SWAPS_SUCCESS =
-  'atomicapp/DexPage/LOAD_RECENT_SWAPS_SUCCESS';
-export const LOAD_RECENT_SWAPS_DATA_FROM_WEBSOCKET =
-  'atomicapp/DexPage/LOAD_SWAP_DATA_FROM_WEBSOCKET';
-export const LOAD_RECENT_SWAPS_ERROR =
-  'atomicapp/DexPage/LOAD_RECENT_SWAPS_ERROR';
-export const CHECK_TIMEOUT_EVENT = 'atomicapp/DexPage/CHECK_TIMEOUT_EVENT';
-export const CHECK_UPDATE_SWAP_EVENT =
-  'atomicapp/DexPage/CHECK_UPDATE_SWAP_EVENT';
 export const AUTO_HIDE_SNACKBAR_TIME = 6000;
 export const TIME_LOOP = 5 * 1000;
 
@@ -57,8 +36,6 @@ export const APPROPRIATE_ERROR_UTXOS =
 export const SWAP_TX_DEFAULT =
   '0000000000000000000000000000000000000000000000000000000000000000';
 
-export const SWAP_TIMEOUT = 'atomicapp/DexPage/SWAP_TIMEOUT';
-export const SWAP_MAKE_A_NEW = 'atomicapp/DexPage/SWAP_MAKE_A_NEW';
 export const SWAP_DETAIL_MODAL_OPEN =
   'atomicapp/DexPage/SWAP_DETAIL_MODAL_OPEN';
 export const SWAP_DETAIL_MODAL_CLOSE =

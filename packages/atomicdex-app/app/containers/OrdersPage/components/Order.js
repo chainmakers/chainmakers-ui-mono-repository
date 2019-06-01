@@ -131,7 +131,11 @@ type IOrderProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   data: Map<*, *>,
   // eslint-disable-next-line flowtype/no-weak-types
-  dispatchOpenDetailModal: Function
+  dispatchOpenDetailModal: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  deposit: Map<*, *>,
+  // eslint-disable-next-line flowtype/no-weak-types
+  recevie: Map<*, *>
 };
 
 type IOrderState = {
@@ -201,7 +205,7 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
   render() {
     debug(`render`);
 
-    const { classes, error, fetchStatus, data, deposit, recevie } = this.props;
+    const { classes, error, data, deposit, recevie } = this.props;
     const isError = !!error;
     const symbol = data.get('coin');
 

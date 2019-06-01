@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import AddIcon from '@material-ui/icons/Add';
-import TextField from '@material-ui/core/TextField';
 import getCoinMemoize from '../../../components/CryptoIcons';
 import CoinSelectable from '../../../components/CoinSelectable';
 import { covertSymbolToName } from '../../../utils/coin';

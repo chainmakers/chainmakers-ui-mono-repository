@@ -3,29 +3,6 @@
 // https://github.com/paularmstrong/normalizr
 // import { normalize, schema } from 'normalizr';
 
-type BuyCoinPayload = {
-  basecoin: string,
-  paymentcoin: string,
-  amount: number
-};
-
-type BestPricePayload = {
-  bestPrice: number,
-  price: number, // the max price you are willing to pay for 1 base
-  avevolume: number,
-  maxvolume: number,
-  numutxos: number,
-  base: string, // the currency you want to buy
-  rel: string, // the currency you are paying with
-  age: number,
-  zcredits: number,
-  address: string,
-  pubkey: string,
-  depth: number,
-  createdAt?: Date,
-  updatedAt?: Date
-};
-
 type SwapError = {
   code: number,
   message: string
@@ -77,15 +54,6 @@ type SwapCoin = {
   updatedAt?: Date
 };
 
-type TimeoutPayload = {
-  id: number, // the unique id, alias trade id
-  uuid: string, // the unique id
-  requestid: number,
-  quoteid: number,
-  bob: string, // eg: KMD, BTC, LTC
-  alice: string // eg: KMD, BTC, LTC
-};
-
 type SelectCoinPayload = {
   name: string,
   symbol: string
@@ -97,11 +65,4 @@ type PriceType = {
   name: string
 };
 
-export type {
-  BuyCoinPayload,
-  BestPricePayload,
-  SwapCoin,
-  TimeoutPayload,
-  SelectCoinPayload,
-  PriceType
-};
+export type { SwapCoin, SelectCoinPayload, PriceType };
