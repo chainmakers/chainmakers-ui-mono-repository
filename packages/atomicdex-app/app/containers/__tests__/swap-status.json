@@ -28,7 +28,7 @@
             "taker_coin": "BEER",
             "taker_payment_confirmations": 1,
             "taker_payment_lock": 1556264348,
-            "uuid": "20d193cdc0e91a74f6107408572dc084a730b7f85db19529284a5541c3cee1c4"
+            "uuid": "3ee41a9c-e963-4237-bcba-904b2bf519af"
           },
           "type": "Started"
         },
@@ -194,6 +194,6 @@
       "Finished"
     ],
     "type": "Taker",
-    "uuid": "20d193cdc0e91a74f6107408572dc084a730b7f85db19529284a5541c3cee1c4"
+    "uuid": "3ee41a9c-e963-4237-bcba-904b2bf519af"
   }
 }

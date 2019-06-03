@@ -2,6 +2,7 @@
 // @docs
 // https://github.com/react-boilerplate/react-boilerplate/issues/1277#issuecomment-263267639
 import { put, select, cancelled } from 'redux-saga/effects';
+import { floor } from 'barterdex-utilities';
 import { CANCEL } from 'redux-saga';
 import { ENABLE } from '../../../constants';
 import { BALANCE_LOAD, DISABLE_COINS } from '../constants';
@@ -57,7 +58,7 @@ export function* handlingLoadBalance({
         loadBalanceSuccess({
           coin: payload.coin,
           address: balanceReponse.address,
-          balance: balanceReponse.balance,
+          balance: floor(balanceReponse.balance, 8),
           fee: feeResponse.txfee
         })
       );

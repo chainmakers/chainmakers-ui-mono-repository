@@ -2,11 +2,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import type { List } from 'immutable';
+// import type { List } from 'immutable';
 import { createStructuredSelector } from 'reselect';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Badge from '@material-ui/core/Badge';
+// import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
 
 const debug = require('debug')('atomicapp:containers:DexPage:HeaderTabs');

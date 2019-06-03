@@ -153,9 +153,7 @@ const withConnect = connect(
   mapDispatchToProps
 );
 
-const PlaceOrderWapper = compose(
+export default compose(
   withConnect,
   withStyles(styles)
 )(PlaceOrder);
-
-export default PlaceOrderWapper;

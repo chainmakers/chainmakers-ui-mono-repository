@@ -52,8 +52,6 @@ export const STATE_SWAPS = [
 ];
 
 // https://github.com/KomodoPlatform/Documentation/blob/master/docs/source/barterDEX/MarketmakerErrors.rst#marketmaker-error-codes
-export const APPROPRIATE_ERROR_UTXOS =
-  'cant find a deposit that is close enough in size. make another deposit that is just a bit larger than what you want to trade';
 export const SWAP_TX_DEFAULT =
   '0000000000000000000000000000000000000000000000000000000000000000';
 

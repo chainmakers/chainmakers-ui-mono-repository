@@ -32,7 +32,9 @@ export default function* listenForCreatingNewOrder({ type, payload }) {
     request = api.setprice({
       base: deposit,
       rel: recevie,
-      price: floor(price, 8)
+      price: floor(price, 8),
+      // volume: 10,
+      max: true
     });
 
     const result = yield request;

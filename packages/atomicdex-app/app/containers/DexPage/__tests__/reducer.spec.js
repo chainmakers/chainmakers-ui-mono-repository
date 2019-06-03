@@ -1,5 +1,6 @@
 import { cloneDeep, last } from 'lodash';
 import { fromJS } from 'immutable';
+import { floor } from 'barterdex-utilities';
 import buyReducer, { initialState } from '../reducer';
 import {
   loadPrices,
@@ -359,19 +360,31 @@ describe('containers/DexPage/reducers/loadRecentSwapsCoin', () => {
   const SWAP_STATE_ONE = cloneDeep(SWAP_STATE_TEN);
   SWAP_STATE_ONE.result.events = events.slice(0, length - 9);
 
-  const {
-    uuid,
-    tradeid,
-    requestid,
-    quoteid,
-    expiration,
-    bob,
-    alice,
-    basevalue,
-    relvalue,
-    bobsmartaddress,
-    alicesmartaddress
-  } = BUY_STATE.pending;
+  const { uuid, base_amount, rel_amount } = BUY_STATE.result;
+
+  // expiration
+  const expiration = 1556256548 + 30;
+  // timeleft
+  const timeleft = 30;
+  // bob
+  const bob = 'COQUI';
+  // alice
+  const alice = 'BEER';
+  // basevalue
+  const basevalue = floor(base_amount, 8);
+  // relvalue
+  const relvalue = floor(rel_amount, 8);
+  // tradeid
+  const tradeid = uuid;
+  // requestid
+  const requestid = 0;
+  // quoteid
+  const quoteid = 0;
+  // bobsmartaddress
+  const bobsmartaddress = 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu';
+  // alicesmartaddress
+  const alicesmartaddress = bobsmartaddress;
+
   let store = initialState
     .setIn(['swaps', 'processingList'], fromJS([uuid]))
     .setIn(
@@ -422,7 +435,7 @@ describe('containers/DexPage/reducers/loadRecentSwapsCoin', () => {
     entity = entity
       .set('sentflags', entity.get('sentflags').push(lastEvent.event.type))
       .set('status', lastEvent.event.type)
-      .set('expiration', 1556263774);
+      .set('expiration', 1556263778);
 
     let expectedResult = store.setIn(
       ['swaps', 'entities'],

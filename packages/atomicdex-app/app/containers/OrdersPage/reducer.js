@@ -37,18 +37,6 @@ export const initialState = fromJS({
     open: false
   },
 
-  currency: {
-    name: null,
-    symbol: null
-    // amount: 0
-  },
-
-  payment: {
-    name: null,
-    symbol: null
-    // amount: 0
-  },
-
   joyride: {
     open: false
   },

@@ -6,6 +6,8 @@ import api from '../../../../lib/barter-dex-api';
 import listenForLoadingElectrums, { loadElectrum } from '../electrums';
 import { addElectrum } from '../../actions';
 import data from '../../../__tests__/app-state.json';
+import electrum from '../../../__tests__/electrum.json';
+import getfee from '../../../__tests__/getfee.json';
 
 const TIMEOUT = 20 * 1000;
 
@@ -73,17 +75,10 @@ describe('containers/App/saga/electrums/loadElectrum', () => {
         .reply(200, (uri, body, cb) => {
           const { method } = JSON.parse(body);
           if (method === 'electrum') {
-            cb(null, {
-              address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
-              balance: 6502.66989074,
-              coin: 'BEER'
-            });
+            cb(null, electrum);
           }
           if (method === 'getfee') {
-            cb(null, {
-              coin: 'BEER',
-              txfee: 0.00001
-            });
+            cb(null, getfee);
           }
         });
 
@@ -111,7 +106,7 @@ describe('containers/App/saga/electrums/loadElectrum', () => {
           payload: {
             coin: 'BEER',
             address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
-            balance: 6502.66989074,
+            balance: 6716.3433391,
             fee: 0.00001
           }
         }
