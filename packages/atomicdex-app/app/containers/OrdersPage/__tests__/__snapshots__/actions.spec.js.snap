@@ -61,22 +61,6 @@ Object {
     "askdepth": 0,
     "asks": Array [
       Object {
-        "address": "RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd",
-        "age": 9,
-        "avevolume": 0,
-        "coin": "KMD",
-        "depth": 0,
-        "maxvolume": 36.40686108,
-        "numutxos": 0,
-        "price": 0.0001566,
-        "pubkey": "bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01",
-        "zcredits": 0,
-      },
-    ],
-    "base": "KMD",
-    "biddepth": 0,
-    "bids": Array [
-      Object {
         "address": "1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1",
         "age": 9,
         "avevolume": 0,
@@ -89,13 +73,35 @@ Object {
         "zcredits": 0,
       },
     ],
+    "base": "BTC",
+    "biddepth": 0,
+    "bids": Array [
+      Object {
+        "address": "RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd",
+        "age": 9,
+        "avevolume": 0,
+        "coin": "KMD",
+        "depth": 0,
+        "maxvolume": 36.40686108,
+        "numutxos": 0,
+        "price": 0.0001566,
+        "pubkey": "bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01",
+        "zcredits": 0,
+      },
+    ],
     "netid": 9999,
     "numasks": 1,
     "numbids": 1,
-    "rel": "BTC",
+    "rel": "KMD",
     "timestamp": 1558682258,
   },
   "type": "atomicapp/OrdersPage/ORDERBOOK_LOAD_SUCCESS",
+}
+`;
+
+exports[`containers/OrderPage/actions/reloadOrderbook should reloadOrderbook should create reloadOrderbook action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/ORDERBOOK_RELOAD",
 }
 `;
 
@@ -159,6 +165,17 @@ Object {
 
 exports[`containers/OrdersPage/actions/setNewOrderSuccess should setNewOrderSuccess should create setNewOrderSuccess action 1`] = `
 Object {
+  "payload": Object {
+    "base": "BEER",
+    "created_at": 1559621086489,
+    "matches": Object {},
+    "max_base_vol": "6729.6392886",
+    "min_base_vol": "0",
+    "price": "0.1000000000000000",
+    "rel": "COQUI",
+    "started_swaps": Array [],
+    "uuid": "89b47c5b-f441-46c4-aea1-279f6ea0d67d",
+  },
   "type": "atomicapp/OrdersPage/NEW_ORDER_SET_SUCCESS",
 }
 `;

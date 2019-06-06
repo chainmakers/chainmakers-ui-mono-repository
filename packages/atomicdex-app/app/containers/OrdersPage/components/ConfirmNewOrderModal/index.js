@@ -83,7 +83,6 @@ class ConfirmNewOrderModal extends React.PureComponent<
     } = this.props;
     const priceInput = this.priceInput.current;
     const price = floor(await priceInput.value(), 8);
-    console.log(price, 'price');
     dispatchCloseConfirmNewOrderModal();
     dispatchSetNewOrder(price);
   };

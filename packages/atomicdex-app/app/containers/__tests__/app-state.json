@@ -597,8 +597,8 @@
     "orderbook": {
       "fetchStatus": null,
       "errors": null,
-      "deposit": "BTC",
-      "recevie": "KMD",
+      "deposit": "KMD",
+      "recevie": "BTC",
       "asks": [],
       "bids": []
     },

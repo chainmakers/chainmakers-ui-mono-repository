@@ -9,7 +9,6 @@ import IconButton from '@material-ui/core/IconButton';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import injectReducer from '../../utils/inject-reducer';
 import injectSaga from '../../utils/inject-saga';
-import { WEBSOCKET_DAEMON, DAEMON } from '../../utils/constants';
 import MDCAppBar from '../../components/AppBar';
 import MDCHeader from '../../components/AppBar/Header';
 import MDCTabBar from '../../components/AppBar/TabBar';

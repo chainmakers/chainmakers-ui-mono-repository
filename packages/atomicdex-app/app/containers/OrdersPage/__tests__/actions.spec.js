@@ -1,10 +1,12 @@
 import orderbook from '../../__tests__/orderbook.json';
+import setprice from '../../__tests__/setprice.json';
 import {
   openDetailModal,
   closeDetailModal,
   openJoyride,
   closeJoyride,
   loadOrderbook,
+  reloadOrderbook,
   skipOrderbook,
   loadOrderbookSuccess,
   loadOrderbookError,
@@ -19,13 +21,13 @@ import {
   openConfirmNewOrderModal,
   closeConfirmNewOrderModal
 } from '../actions';
-
 import {
   SWAP_DETAIL_MODAL_OPEN,
   SWAP_DETAIL_MODAL_CLOSE,
   JOYRIDE_OPEN,
   JOYRIDE_CLOSE,
   ORDERBOOK_LOAD,
+  ORDERBOOK_RELOAD,
   ORDERBOOK_LOAD_SKIP,
   ORDERBOOK_LOAD_SUCCESS,
   ORDERBOOK_LOAD_ERROR,
@@ -124,6 +126,20 @@ describe('containers/OrderPage/actions/loadOrderbook', () => {
     };
 
     expect(loadOrderbook()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/OrderPage/actions/reloadOrderbook', () => {
+  it('should reloadOrderbook should create reloadOrderbook action', () => {
+    expect(reloadOrderbook()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: ORDERBOOK_RELOAD
+    };
+
+    expect(reloadOrderbook()).toEqual(expectedResult);
   });
 });
 
@@ -256,16 +272,18 @@ describe('containers/OrdersPage/actions/setNewOrder', () => {
 });
 
 describe('containers/OrdersPage/actions/setNewOrderSuccess', () => {
+  const { result } = setprice;
   it('should setNewOrderSuccess should create setNewOrderSuccess action', () => {
-    expect(setNewOrderSuccess()).toMatchSnapshot();
+    expect(setNewOrderSuccess(result)).toMatchSnapshot();
   });
 
   it('should return the correct type and the passed name', () => {
     const expectedResult = {
-      type: NEW_ORDER_SET_SUCCESS
+      type: NEW_ORDER_SET_SUCCESS,
+      payload: result
     };
 
-    expect(setNewOrderSuccess()).toEqual(expectedResult);
+    expect(setNewOrderSuccess(result)).toEqual(expectedResult);
   });
 });
 

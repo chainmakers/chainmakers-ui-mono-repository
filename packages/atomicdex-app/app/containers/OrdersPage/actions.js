@@ -5,6 +5,8 @@ import {
   JOYRIDE_OPEN,
   JOYRIDE_CLOSE,
   ORDERBOOK_LOAD,
+  ORDERBOOK_RELOAD,
+  ORDERBOOK_RELOAD_SUCCESS,
   ORDERBOOK_LOAD_SUCCESS,
   ORDERBOOK_LOAD_SKIP,
   ORDERBOOK_LOAD_ERROR,
@@ -22,7 +24,7 @@ import {
   CONFIRM_NEW_ORDER_MODAL_CLOSE
 } from './constants';
 
-import type { SelectCoinPayload } from './schema';
+import type { SelectCoinPayload, NewOrderSuccessPayload } from './schema';
 
 import type { ErrorType } from '../schema';
 
@@ -56,6 +58,18 @@ export function closeJoyride() {
 export function loadOrderbook() {
   return {
     type: ORDERBOOK_LOAD
+  };
+}
+
+export function reloadOrderbook() {
+  return {
+    type: ORDERBOOK_RELOAD
+  };
+}
+
+export function reloadOrderbookSuccess() {
+  return {
+    type: ORDERBOOK_RELOAD_SUCCESS
   };
 }
 
@@ -132,9 +146,10 @@ export function skipNewOrder() {
   };
 }
 
-export function setNewOrderSuccess() {
+export function setNewOrderSuccess(payload: NewOrderSuccessPayload) {
   return {
-    type: NEW_ORDER_SET_SUCCESS
+    type: NEW_ORDER_SET_SUCCESS,
+    payload
   };
 }
 

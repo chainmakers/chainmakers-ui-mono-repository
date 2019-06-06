@@ -1,22 +1,6 @@
 {
   "bids": [
     {
-      "coin": "BTC",
-      "address": "1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1",
-      "price": 0.00015473,
-      "numutxos": 0,
-      "avevolume": 0,
-      "maxvolume": 0.02620853,
-      "depth": 0,
-      "pubkey": "bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01",
-      "age": 9,
-      "zcredits": 0
-    }
-  ],
-  "numbids": 1,
-  "biddepth": 0,
-  "asks": [
-    {
       "coin": "KMD",
       "address": "RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd",
       "price": 0.0001566,
@@ -29,10 +13,26 @@
       "zcredits": 0
     }
   ],
+  "numbids": 1,
+  "biddepth": 0,
+  "asks": [
+    {
+      "coin": "BTC",
+      "address": "1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1",
+      "price": 0.00015473,
+      "numutxos": 0,
+      "avevolume": 0,
+      "maxvolume": 0.02620853,
+      "depth": 0,
+      "pubkey": "bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01",
+      "age": 9,
+      "zcredits": 0
+    }
+  ],
   "numasks": 1,
   "askdepth": 0,
-  "base": "KMD",
-  "rel": "BTC",
+  "base": "BTC",
+  "rel": "KMD",
   "timestamp": 1558682258,
   "netid": 9999
 }

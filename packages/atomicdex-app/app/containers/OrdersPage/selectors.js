@@ -93,6 +93,20 @@ const makeSelectOrderbookBids = () =>
     orderbook => orderbook.get('bids')
   );
 
+const makeSelectOrderbookAsksFullList = () =>
+  createSelector(
+    makeSelectOrderbookAsks(),
+    makeSelectOrders(),
+    (asks, orders) => asks.map(id => orders.get(id))
+  );
+
+const makeSelectOrderbookBidsFullList = () =>
+  createSelector(
+    makeSelectOrderbookBids(),
+    makeSelectOrders(),
+    (bids, orders) => bids.map(id => orders.get(id))
+  );
+
 const makeSelectOrderbookFetchStatus = () =>
   createSelector(
     makeSelectOrderbook(),
@@ -129,10 +143,22 @@ const makeSelectMyOrderErrors = () =>
     myorder => myorder.get('errors')
   );
 
+const makeSelectMyOrderList = () =>
+  createSelector(
+    makeSelectMyOrder(),
+    myorder => myorder.get('list')
+  );
+
 const makeSelectConfirmNewOrderModal = () =>
   createSelector(
     selectOrder,
     order => order.get('confirmNewOrderModal')
+  );
+
+const makeSelectOrders = () =>
+  createSelector(
+    selectOrder,
+    order => order.get('orders')
   );
 
 export {
@@ -152,11 +178,15 @@ export {
   makeSelectOrderbookRecevie,
   makeSelectOrderbookAsks,
   makeSelectOrderbookBids,
+  makeSelectOrderbookAsksFullList,
+  makeSelectOrderbookBidsFullList,
   makeSelectOrderbookFetchStatus,
   makeSelectDepositCoinModal,
   makeSelectRecevieCoinModal,
   makeSelectMyOrder,
   makeSelectMyOrderFetchStatus,
   makeSelectMyOrderErrors,
-  makeSelectConfirmNewOrderModal
+  makeSelectMyOrderList,
+  makeSelectConfirmNewOrderModal,
+  makeSelectOrders
 };

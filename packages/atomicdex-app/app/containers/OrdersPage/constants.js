@@ -51,6 +51,9 @@ export const JOYRIDE_OPEN = 'atomicapp/DexPage/JOYRIDE_OPEN';
 export const JOYRIDE_CLOSE = 'atomicapp/DexPage/JOYRIDE_CLOSE';
 
 // Orderbook actions
+export const ORDERBOOK_RELOAD = 'atomicapp/OrdersPage/ORDERBOOK_RELOAD';
+export const ORDERBOOK_RELOAD_SUCCESS =
+  'atomicapp/OrdersPage/ORDERBOOK_RELOAD_SUCCESS';
 export const ORDERBOOK_LOAD = 'atomicapp/OrdersPage/ORDERBOOK_LOAD';
 export const ORDERBOOK_LOAD_SKIP = 'atomicapp/OrdersPage/ORDERBOOK_LOAD_SKIP';
 export const ORDERBOOK_LOAD_SUCCESS =
@@ -83,3 +86,6 @@ export const CONFIRM_NEW_ORDER_MODAL_OPEN =
   'atomicapp/OrdersPage/CONFIRM_NEW_ORDER_MODAL_OPEN';
 export const CONFIRM_NEW_ORDER_MODAL_CLOSE =
   'atomicapp/OrdersPage/CONFIRM_NEW_ORDER_MODAL_CLOSE';
+
+export const ORDER_BOB_SITE = 'ORDER_BOB_SITE';
+export const ORDER_ALICE_SITE = 'ORDER_ALICE_SITE';

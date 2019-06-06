@@ -15,11 +15,15 @@ import {
   makeSelectOrderbookRecevie,
   makeSelectOrderbookAsks,
   makeSelectOrderbookBids,
+  makeSelectOrderbookAsksFullList,
+  makeSelectOrderbookBidsFullList,
   makeSelectOrderbookFetchStatus,
   makeSelectMyOrder,
+  makeSelectMyOrderList,
   makeSelectMyOrderFetchStatus,
   makeSelectMyOrderErrors,
-  makeSelectConfirmNewOrderModal
+  makeSelectConfirmNewOrderModal,
+  makeSelectOrders
 } from '../selectors';
 
 describe('containers/OrderPage/selectors/selectOrder', () => {
@@ -92,8 +96,29 @@ describe('containers/DexPage/selectors/makeSelectPayment', () => {
 });
 
 describe('containers/OrderPage/selectors/makeSelectOrderbook', () => {
+  const order = {
+    pubkey: 'c88a033b587244cd501e90709620c3ec58d9c3886e33c2e1db909d0451aa5833',
+    meta: {
+      coin: 'BEER',
+      numutxos: 0,
+      depth: 0,
+      age: 1,
+      zcredits: 0
+    },
+    price: 9.99999985,
+    avevolume: 0,
+    minvolume: 0,
+    base: 'BEER',
+    address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
+    rel: 'COQUI',
+    type: 'ORDER_ALICE_SITE',
+    id: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
+    createdAt: 1559705142940,
+    uuid: '61e7fa64-43ff-4858-a148-62d16d0da0d8',
+    maxvolume: 6729.6392886
+  };
   it('should select the orderbook state', () => {
-    const mockedState = fromJS({
+    let mockedState = fromJS({
       [APP_STATE_NAME]: initialState
     });
     const selectOrderbook = makeSelectOrderbook();
@@ -110,6 +135,24 @@ describe('containers/OrderPage/selectors/makeSelectOrderbook', () => {
 
     const selectOrderbookBids = makeSelectOrderbookBids();
     expect(selectOrderbookBids(mockedState)).toEqual(fromJS([]));
+
+    mockedState = mockedState
+      .setIn(['order', 'orders', order.address], fromJS(order))
+      .setIn(['order', 'orderbook', 'asks'], fromJS([order.address]))
+      .setIn(['order', 'orderbook', 'bids'], fromJS([order.address]));
+
+    const selectOrderbookAsksFullList = makeSelectOrderbookAsksFullList();
+    expect(selectOrderbookAsksFullList(mockedState)).toEqual(fromJS([order]));
+
+    const selectOrderbookBidsFullList = makeSelectOrderbookBidsFullList();
+    expect(selectOrderbookBidsFullList(mockedState)).toEqual(fromJS([order]));
+
+    const selectOrders = makeSelectOrders();
+    expect(selectOrders(mockedState)).toEqual(
+      fromJS({
+        [order.address]: order
+      })
+    );
 
     const selectOrderbookFetchStatus = makeSelectOrderbookFetchStatus();
     expect(selectOrderbookFetchStatus(mockedState)).toEqual(null);
@@ -129,6 +172,9 @@ describe('containers/OrderPage/selectors/makeSelectMyOrder', () => {
 
     const selectMyOrderFetchStatus = makeSelectMyOrderFetchStatus();
     expect(selectMyOrderFetchStatus(mockedState)).toEqual(null);
+
+    const selectMyOrderList = makeSelectMyOrderList();
+    expect(selectMyOrderList(mockedState)).toEqual(fromJS([]));
   });
 });
 

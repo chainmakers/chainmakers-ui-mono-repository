@@ -1,16 +1,18 @@
 // @flow
-import { put, call, select, cancelled } from 'redux-saga/effects';
-import { CANCEL, delay } from 'redux-saga';
+import { put, select, cancelled } from 'redux-saga/effects';
+import { CANCEL } from 'redux-saga';
 import { floor } from 'barterdex-utilities';
 import api from '../../../lib/barter-dex-api';
 import { openSnackbars } from '../../Snackbars/actions';
+import { makeSelectBalanceEntities } from '../../App/selectors';
+import { ORDER_ALICE_SITE } from '../constants';
 import {
   makeSelectOrderbookDeposit,
   makeSelectOrderbookRecevie
 } from '../selectors';
 import {
   skipNewOrder,
-  loadOrderbook,
+  reloadOrderbook,
   setNewOrderSuccess,
   setNewOrderError
 } from '../actions';
@@ -23,9 +25,13 @@ export default function* listenForCreatingNewOrder({ type, payload }) {
   try {
     const deposit = yield select(makeSelectOrderbookDeposit());
     const recevie = yield select(makeSelectOrderbookRecevie());
+    const balance = yield select(makeSelectBalanceEntities());
+    const address =
+      balance && balance.get(deposit) && balance.get(deposit).get('address');
+
     const { price } = payload;
 
-    if (!deposit || !recevie) {
+    if (!deposit || !recevie || !address) {
       return yield put(skipNewOrder());
     }
 
@@ -37,10 +43,15 @@ export default function* listenForCreatingNewOrder({ type, payload }) {
       max: true
     });
 
-    const result = yield request;
-    yield call(delay, 1000);
-    yield put(loadOrderbook());
-    yield put(setNewOrderSuccess());
+    const { result, error } = yield request;
+    if (error) {
+      throw new Error(error);
+    }
+    result.address = address;
+    result.id = address;
+    result.type = ORDER_ALICE_SITE;
+    yield put(setNewOrderSuccess(result));
+    yield put(reloadOrderbook());
   } catch (err) {
     debug(`creating order error: ${err.message}`);
     yield put(openSnackbars(err.message));

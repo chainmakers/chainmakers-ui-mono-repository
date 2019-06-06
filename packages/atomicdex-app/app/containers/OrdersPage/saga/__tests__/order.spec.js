@@ -13,7 +13,8 @@ import {
   NEW_ORDER_SET,
   NEW_ORDER_SET_ERROR,
   NEW_ORDER_SET_SKIP,
-  ORDERBOOK_LOAD
+  ORDERBOOK_RELOAD,
+  ORDER_ALICE_SITE
 } from '../../constants';
 
 const store = fromJS(data);
@@ -23,7 +24,10 @@ const TEST_URL = 'http://127.0.0.1:7783';
 describe('containers/OrderPage/saga/order', () => {
   api.setUserpass('userpass');
 
-  const payload = setprice;
+  const payload = Object.assign({}, setprice.result);
+  payload.address = 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu';
+  payload.id = 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu';
+  payload.type = ORDER_ALICE_SITE;
 
   it('should handle listenForCreatingNewOrder correctly', async done => {
     const dispatched = [];
@@ -36,7 +40,7 @@ describe('containers/OrderPage/saga/order', () => {
         const { method } = JSON.parse(body);
 
         if (method === 'setprice') {
-          cb(null, payload);
+          cb(null, setprice);
         } else {
           cb(new Error('error message'));
         }
@@ -52,10 +56,11 @@ describe('containers/OrderPage/saga/order', () => {
     ).done;
 
     expect(dispatched).toEqual([
-      { type: ORDERBOOK_LOAD },
       {
-        type: NEW_ORDER_SET_SUCCESS
-      }
+        type: NEW_ORDER_SET_SUCCESS,
+        payload
+      },
+      { type: ORDERBOOK_RELOAD }
     ]);
     expect(saga).toEqual(undefined);
 
@@ -118,8 +123,8 @@ describe('containers/OrderPage/saga/order', () => {
       .post('/', () => true)
       .reply(200, (uri, body, cb) => {
         const { method } = JSON.parse(body);
-        if (method === 'orderbook') {
-          cb(null, payload);
+        if (method === 'setprice') {
+          cb(null, setprice);
         } else {
           cb(new Error('error message'));
         }

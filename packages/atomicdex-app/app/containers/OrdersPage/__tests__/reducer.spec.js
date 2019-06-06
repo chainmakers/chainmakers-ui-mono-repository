@@ -1,5 +1,7 @@
+/* eslint no-param-reassign: ["error", { "props": false }] */
 import { fromJS } from 'immutable';
 import orderbook from '../../__tests__/orderbook.json';
+import setprice from '../../__tests__/setprice.json';
 import buyReducer, { initialState } from '../reducer';
 import {
   openJoyride,
@@ -13,10 +15,16 @@ import {
   setNewOrderSuccess,
   setNewOrderError,
   openConfirmNewOrderModal,
-  closeConfirmNewOrderModal
+  closeConfirmNewOrderModal,
+  reloadOrderbookSuccess
 } from '../actions';
 import { LOADING, LOADED, FAILED } from '../../../constants';
-import { ORDERBOOK_LOAD, NEW_ORDER_SET } from '../constants';
+import {
+  ORDERBOOK_LOAD,
+  NEW_ORDER_SET,
+  ORDER_ALICE_SITE,
+  ORDER_BOB_SITE
+} from '../constants';
 
 describe('containers/DexPage/reducers/initial', () => {
   it('should return the initial state', () => {
@@ -63,15 +71,67 @@ describe('containers/DexPage/reducers/skipOrderbook', () => {
 });
 
 describe('containers/DexPage/reducers/loadOrderbookSuccess', () => {
-  const payload = orderbook;
+  const payload = Object.assign({}, orderbook);
+  const { base, rel } = payload;
+  payload.bids.map(v => {
+    v.base = base;
+    v.rel = rel;
+    v.type = ORDER_ALICE_SITE;
+    return v;
+  });
+  payload.asks.map(v => {
+    v.base = base;
+    v.rel = rel;
+    v.type = ORDER_BOB_SITE;
+    return v;
+  });
   it('should handle the loadOrderbookSuccess action correctly', () => {
-    const { asks, bids } = payload;
-    const expectedResult = initialState
-      .setIn(['orderbook', 'fetchStatus'], LOADED)
-      .setIn(['orderbook', 'asks'], fromJS(asks))
-      .setIn(['orderbook', 'bids'], fromJS(bids));
     expect(buyReducer(initialState, loadOrderbookSuccess(payload))).toEqual(
-      expectedResult
+      fromJS({
+        selectCoinModal: { open: false },
+        myorder: { fetchStatus: null, errors: null, list: [] },
+        orders: {
+          '1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1': {
+            pubkey:
+              'bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01',
+            meta: { coin: 'BTC', numutxos: 0, depth: 0, age: 9, zcredits: 0 },
+            price: 0.00015473,
+            avevolume: 0,
+            base: 'BTC',
+            address: '1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1',
+            rel: 'KMD',
+            type: 'ORDER_BOB_SITE',
+            id: '1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1',
+            maxvolume: 0.02620853
+          },
+          RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd: {
+            pubkey:
+              'bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01',
+            meta: { coin: 'KMD', numutxos: 0, depth: 0, age: 9, zcredits: 0 },
+            price: 0.0001566,
+            avevolume: 0,
+            base: 'BTC',
+            address: 'RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd',
+            rel: 'KMD',
+            type: 'ORDER_ALICE_SITE',
+            id: 'RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd',
+            maxvolume: 36.40686108
+          }
+        },
+        swapDetailModal: { open: false, uuid: null },
+        joyride: { open: false },
+        orderbook: {
+          fetchStatus: 'LOADED',
+          errors: null,
+          deposit: null,
+          recevie: null,
+          asks: ['1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1'],
+          bids: ['RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd']
+        },
+        depositCoinModal: { open: false },
+        recevieCoinModal: { open: false },
+        confirmNewOrderModal: { open: false }
+      })
     );
   });
 });
@@ -99,7 +159,7 @@ describe('containers/DexPage/reducers/setNewOrder', () => {
   it('should handle the setNewOrder action correctly', () => {
     const expectedResult = initialState
       .setIn(['myorder', 'fetchStatus'], LOADING)
-      .setIn(['myorder', 'error'], null);
+      .setIn(['myorder', 'errors'], null);
     expect(buyReducer(initialState, setNewOrder())).toEqual(expectedResult);
   });
 });
@@ -108,19 +168,54 @@ describe('containers/DexPage/reducers/skipNewOrder', () => {
   it('should handle the skipNewOrder action correctly', () => {
     const expectedResult = initialState
       .setIn(['myorder', 'fetchStatus'], LOADED)
-      .setIn(['myorder', 'error'], null);
+      .setIn(['myorder', 'errors'], null);
     expect(buyReducer(initialState, skipNewOrder())).toEqual(expectedResult);
   });
 });
 
 describe('containers/DexPage/reducers/setNewOrderSuccess', () => {
+  const { result } = setprice;
+  result.address = 'address';
+  result.id = 'address';
+  result.type = ORDER_ALICE_SITE;
   it('should handle the setNewOrderSuccess action correctly', () => {
     const expectedResult = initialState.setIn(
       ['myorder', 'fetchStatus'],
       LOADED
     );
-    expect(buyReducer(initialState, setNewOrderSuccess())).toEqual(
-      expectedResult
+    expect(buyReducer(initialState, setNewOrderSuccess(result))).toEqual(
+      fromJS({
+        selectCoinModal: { open: false },
+        myorder: { fetchStatus: null, errors: null, list: ['address'] },
+        orders: {
+          address: {
+            meta: { matches: {}, started_swaps: [] },
+            price: 0.1,
+            minvolume: 0,
+            base: 'BEER',
+            address: 'address',
+            rel: 'COQUI',
+            type: 'ORDER_ALICE_SITE',
+            id: 'address',
+            createdAt: 1559621086489,
+            uuid: '89b47c5b-f441-46c4-aea1-279f6ea0d67d',
+            maxvolume: 6729.6392886
+          }
+        },
+        swapDetailModal: { open: false, uuid: null },
+        joyride: { open: false },
+        orderbook: {
+          fetchStatus: null,
+          errors: null,
+          deposit: null,
+          recevie: null,
+          asks: [],
+          bids: []
+        },
+        depositCoinModal: { open: false },
+        recevieCoinModal: { open: false },
+        confirmNewOrderModal: { open: false }
+      })
     );
   });
 });
@@ -137,7 +232,7 @@ describe('containers/DexPage/reducers/setNewOrderError', () => {
   it('should handle the setNewOrderError action correctly', () => {
     const expectedResult = initialState
       .setIn(['myorder', 'fetchStatus'], FAILED)
-      .setIn(['myorder', 'error'], fromJS(error));
+      .setIn(['myorder', 'errors'], fromJS(error));
     expect(buyReducer(initialState, setNewOrderError(error))).toEqual(
       expectedResult
     );
@@ -166,6 +261,19 @@ describe('containers/DexPage/reducers/closeConfirmNewOrderModal', () => {
 
     expect(buyReducer(expectedResult, closeConfirmNewOrderModal())).toEqual(
       initialState
+    );
+  });
+});
+
+describe('containers/DexPage/reducers/reloadOrderbookSuccess', () => {
+  it('should handle the reloadOrderbookSuccess action correctly', () => {
+    const expectedResult = initialState.setIn(
+      ['myorder', 'fetchStatus'],
+      LOADED
+    );
+
+    expect(buyReducer(initialState, reloadOrderbookSuccess())).toEqual(
+      expectedResult
     );
   });
 });
