@@ -21,7 +21,11 @@ import {
   NEW_ORDER_SET_SUCCESS,
   NEW_ORDER_SET_ERROR,
   CONFIRM_NEW_ORDER_MODAL_OPEN,
-  CONFIRM_NEW_ORDER_MODAL_CLOSE
+  CONFIRM_NEW_ORDER_MODAL_CLOSE,
+  CANCELING_ORDER_MODAL_OPEN,
+  CANCELING_ORDER_MODAL_CLOSE,
+  NEW_ORDER_CANCEL,
+  NEW_ORDER_CANCEL_SUCCESS
 } from './constants';
 
 import type { SelectCoinPayload, NewOrderSuccessPayload } from './schema';
@@ -169,5 +173,36 @@ export function openConfirmNewOrderModal() {
 export function closeConfirmNewOrderModal() {
   return {
     type: CONFIRM_NEW_ORDER_MODAL_CLOSE
+  };
+}
+
+export function openCancelingOrderModal(id: string) {
+  return {
+    type: CANCELING_ORDER_MODAL_OPEN,
+    payload: {
+      id
+    }
+  };
+}
+
+export function closeCancelingOrderModal() {
+  return {
+    type: CANCELING_ORDER_MODAL_CLOSE
+  };
+}
+
+export function cancelNewOrder(payload: { id: string, uuid: string }) {
+  return {
+    type: NEW_ORDER_CANCEL,
+    payload
+  };
+}
+
+export function cancelNewOrderSuccess(id: string) {
+  return {
+    type: NEW_ORDER_CANCEL_SUCCESS,
+    payload: {
+      id
+    }
   };
 }

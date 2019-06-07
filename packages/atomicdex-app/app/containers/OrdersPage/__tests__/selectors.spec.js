@@ -5,7 +5,6 @@ import { initialState } from '../reducer';
 import { APP_STATE_NAME } from '../constants';
 import {
   selectOrder,
-  makeSelectPriceEntities,
   makeSelectSwapDetailModal,
   makeSelectCoinModal,
   makeSelectCurrency,
@@ -23,6 +22,11 @@ import {
   makeSelectMyOrderFetchStatus,
   makeSelectMyOrderErrors,
   makeSelectConfirmNewOrderModal,
+  makeSelectCancelingOrderModal,
+  makeSelectCancelingOrderModalOpen,
+  makeSelectCancelingOrderModalId,
+  makeSelectCancelingOrderModalEntity,
+  makeSelectCancelingOrderModalFetchStatus,
   makeSelectOrders
 } from '../selectors';
 
@@ -186,6 +190,44 @@ describe('containers/OrderPage/selectors/makeSelectConfirmNewOrderModal', () => 
     const selectConfirmNewOrderModal = makeSelectConfirmNewOrderModal();
     expect(selectConfirmNewOrderModal(mockedState)).toEqual(
       initialState.get('confirmNewOrderModal')
+    );
+  });
+});
+
+describe('containers/OrderPage/selectors/makeSelectCancelingOrderModal', () => {
+  const id = 'id_unique';
+  const orders = {
+    [id]: {
+      id
+    }
+  };
+  it('should select the orderbook state', () => {
+    const store = initialState
+      .set('orders', fromJS(orders))
+      .setIn(['cancelingOrderModal', 'id'], id);
+    const mockedState = fromJS({
+      [APP_STATE_NAME]: store
+    });
+
+    const selectCancelingOrderModal = makeSelectCancelingOrderModal();
+    expect(selectCancelingOrderModal(mockedState)).toEqual(
+      store.get('cancelingOrderModal')
+    );
+
+    const selectCancelingOrderModalOpen = makeSelectCancelingOrderModalOpen();
+    expect(selectCancelingOrderModalOpen(mockedState)).toEqual(false);
+
+    const selectCancelingOrderModalId = makeSelectCancelingOrderModalId();
+    expect(selectCancelingOrderModalId(mockedState)).toEqual(id);
+
+    const selectCancelingOrderModalFetchStatus = makeSelectCancelingOrderModalFetchStatus();
+    expect(selectCancelingOrderModalFetchStatus(mockedState)).toEqual(null);
+
+    const selectCancelingOrderModalEntity = makeSelectCancelingOrderModalEntity();
+    expect(selectCancelingOrderModalEntity(mockedState)).toEqual(
+      fromJS({
+        id
+      })
     );
   });
 });

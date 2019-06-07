@@ -25,7 +25,7 @@ import {
   makeSelectOrderbookDeposit,
   makeSelectOrderbookRecevie
 } from '../selectors';
-import { openDetailModal } from '../actions';
+import { openDetailModal, openCancelingOrderModal } from '../actions';
 
 const debug = require('debug')('atomicapp:containers:OrdersPage:Asset');
 
@@ -152,6 +152,8 @@ type IOrderProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchOpenDetailModal: Function,
   // eslint-disable-next-line flowtype/no-weak-types
+  dispatchOpenCancelingOrderModal: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
   deposit: Map<*, *>,
   // eslint-disable-next-line flowtype/no-weak-types
   recevie: Map<*, *>
@@ -184,6 +186,12 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
     dispatchOpenDetailModal();
   };
 
+  onClickCancelButton = (evt: SyntheticInputEvent<>) => {
+    evt.preventDefault();
+    const { dispatchOpenCancelingOrderModal, data } = this.props;
+    dispatchOpenCancelingOrderModal(data.get('id'));
+  };
+
   renderActions = () => {
     const { classes, data, error, fetchStatus, selected } = this.props;
     const loading = fetchStatus === LOADING;
@@ -204,7 +212,7 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
       </Button>
     ) : (
       <React.Fragment>
-        <Button
+        {/* <Button
           id={`more-detail-button-sellorder-tab-${symbol}`}
           disabled={loading}
           className={ClassNames(
@@ -216,10 +224,10 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
           onClick={this.onClickDetailButton}
         >
           More Detail
-        </Button>
+        </Button> */}
         {selected && (
           <>
-            <div className={classes.wallet__buttonBorder} />
+            {/* <div className={classes.wallet__buttonBorder} /> */}
             <Button
               id={`cancel-order-button-sellorder-tab-${symbol}`}
               disabled={loading}
@@ -229,7 +237,7 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
               )}
               size="small"
               color="primary"
-              onClick={this.onClickDetailButton}
+              onClick={this.onClickCancelButton}
             >
               Cancel Order
             </Button>
@@ -305,7 +313,9 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
 // eslint-disable-next-line flowtype/no-weak-types
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   return {
-    dispatchOpenDetailModal: () => dispatch(openDetailModal())
+    dispatchOpenDetailModal: () => dispatch(openDetailModal()),
+    dispatchOpenCancelingOrderModal: (id: string) =>
+      dispatch(openCancelingOrderModal(id))
   };
 }
 

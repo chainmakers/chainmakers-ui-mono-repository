@@ -34,12 +34,14 @@ describe('containers/OrderPage/saga/orderbook', () => {
   payload.bids.map(v => {
     v.base = base;
     v.rel = rel;
+    v.id = `${v.address}-${rel}-${base}`;
     v.type = ORDER_ALICE_SITE;
     return v;
   });
   payload.asks.map(v => {
     v.base = base;
     v.rel = rel;
+    v.id = `${v.address}-${rel}-${base}`;
     v.type = ORDER_BOB_SITE;
     return v;
   });

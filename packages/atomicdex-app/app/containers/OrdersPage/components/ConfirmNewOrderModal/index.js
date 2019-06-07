@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import CachedIcon from '@material-ui/icons/Cached';
+import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -48,7 +48,9 @@ type IConfirmNewOrderModalProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchCloseConfirmNewOrderModal: Function,
   // eslint-disable-next-line flowtype/no-weak-types
-  dispatchSetNewOrder: Function
+  dispatchSetNewOrder: Function,
+  deposit: string,
+  recevie: string
 };
 
 type IConfirmNewOrderModalState = {
@@ -77,14 +79,8 @@ class ConfirmNewOrderModal extends React.PureComponent<
 
   onAgreeDialog = async (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
-    const {
-      dispatchCloseConfirmNewOrderModal,
-      dispatchSetNewOrder
-    } = this.props;
-    const priceInput = this.priceInput.current;
-    const price = floor(await priceInput.value(), 8);
-    dispatchCloseConfirmNewOrderModal();
-    dispatchSetNewOrder(price);
+    this.setPrice();
+    this.close();
   };
 
   controlOKButton = (state: boolean) => {
@@ -110,6 +106,25 @@ class ConfirmNewOrderModal extends React.PureComponent<
       this.controlOKButton(true);
       debug(`onChangePriceInput: ${err.message}`);
     }
+  };
+
+  onKeyPress = (evt: SyntheticInputEvent<>) => {
+    if (evt.which === 13) {
+      this.setPrice();
+      this.close();
+    }
+  };
+
+  close = () => {
+    const { dispatchCloseConfirmNewOrderModal } = this.props;
+    dispatchCloseConfirmNewOrderModal();
+  };
+
+  setPrice = async () => {
+    const { dispatchSetNewOrder } = this.props;
+    const priceInput = this.priceInput.current;
+    const price = floor(await priceInput.value(), 8);
+    dispatchSetNewOrder(price);
   };
 
   render() {
@@ -151,7 +166,7 @@ class ConfirmNewOrderModal extends React.PureComponent<
                 alignItems: 'center'
               }}
             >
-              <CachedIcon />
+              <SwapHorizIcon />
             </Grid>
             <Grid item xs={5}>
               <ValidationPriceInput
@@ -161,6 +176,7 @@ class ConfirmNewOrderModal extends React.PureComponent<
                 type="number"
                 ref={this.priceInput}
                 onChange={this.onChangePriceInput}
+                onKeyPress={this.onKeyPress}
                 // defaultValue="0"
               />
             </Grid>

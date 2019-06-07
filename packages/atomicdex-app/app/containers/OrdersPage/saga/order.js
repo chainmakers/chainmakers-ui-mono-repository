@@ -14,10 +14,38 @@ import {
   skipNewOrder,
   reloadOrderbook,
   setNewOrderSuccess,
-  setNewOrderError
+  setNewOrderError,
+  cancelNewOrderSuccess
 } from '../actions';
 
 const debug = require('debug')('atomicapp:containers:OrdersPage:saga:order');
+
+export function* listenForCancelOrder({ payload }) {
+  debug(`listen for cancel order`);
+  let request = null;
+  try {
+    const { id, uuid } = payload;
+    request = api.cancelOrder({
+      uuid
+    });
+    const { error } = yield request;
+    if (error) {
+      throw new Error(error);
+    }
+    yield put(cancelNewOrderSuccess(id));
+    // yield put(reloadOrderbook());
+  } catch (err) {
+    debug(`cancel order error: ${err.message}`);
+    yield put(openSnackbars(err.message));
+  } finally {
+    if (yield cancelled()) {
+      debug(`cancel order cancelled`);
+      if (request && request[CANCEL]) {
+        request[CANCEL]();
+      }
+    }
+  }
+}
 
 export default function* listenForCreatingNewOrder({ type, payload }) {
   debug(`listen for creating order`);
@@ -48,7 +76,7 @@ export default function* listenForCreatingNewOrder({ type, payload }) {
       throw new Error(error);
     }
     result.address = address;
-    result.id = address;
+    result.id = `${address}-${deposit}-${recevie}`;
     result.type = ORDER_ALICE_SITE;
     yield put(setNewOrderSuccess(result));
     yield put(reloadOrderbook());

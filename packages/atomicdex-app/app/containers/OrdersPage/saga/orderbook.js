@@ -51,12 +51,14 @@ export function* listenForReloadingOrderbook(action, timeout = 60) {
       result.bids.map(v => {
         v.base = recevie;
         v.rel = deposit;
+        v.id = `${v.address}-${deposit}-${recevie}`;
         v.type = ORDER_ALICE_SITE;
         return v;
       });
       result.asks.map(v => {
         v.base = recevie;
         v.rel = deposit;
+        v.id = `${v.address}-${deposit}-${recevie}`;
         v.type = ORDER_BOB_SITE;
         return v;
       });
@@ -111,12 +113,14 @@ export default function* listenForLoadingOrderbook(action) {
     result.bids.map(v => {
       v.base = recevie;
       v.rel = deposit;
+      v.id = `${v.address}-${deposit}-${recevie}`;
       v.type = ORDER_ALICE_SITE;
       return v;
     });
     result.asks.map(v => {
       v.base = recevie;
       v.rel = deposit;
+      v.id = `${v.address}-${deposit}-${recevie}`;
       v.type = ORDER_BOB_SITE;
       return v;
     });

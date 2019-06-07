@@ -80,6 +80,9 @@ export const NEW_ORDER_SET_SKIP = 'atomicapp/OrdersPage/NEW_ORDER_SET_SKIP';
 export const NEW_ORDER_SET_SUCCESS =
   'atomicapp/OrdersPage/NEW_ORDER_SET_SUCCESS';
 export const NEW_ORDER_SET_ERROR = 'atomicapp/OrdersPage/NEW_ORDER_SET_ERROR';
+export const NEW_ORDER_CANCEL = 'atomicapp/OrdersPage/NEW_ORDER_CANCEL';
+export const NEW_ORDER_CANCEL_SUCCESS =
+  'atomicapp/OrdersPage/NEW_ORDER_CANCEL_SUCCESS';
 
 // Confirm New Order Modal
 export const CONFIRM_NEW_ORDER_MODAL_OPEN =
@@ -89,3 +92,9 @@ export const CONFIRM_NEW_ORDER_MODAL_CLOSE =
 
 export const ORDER_BOB_SITE = 'ORDER_BOB_SITE';
 export const ORDER_ALICE_SITE = 'ORDER_ALICE_SITE';
+
+// Canceling Order Modal
+export const CANCELING_ORDER_MODAL_OPEN =
+  'atomicapp/OrdersPage/CANCELING_ORDER_MODAL_OPEN';
+export const CANCELING_ORDER_MODAL_CLOSE =
+  'atomicapp/OrdersPage/CANCELING_ORDER_MODAL_CLOSE';

@@ -1,6 +1,6 @@
 // import { put, call, select, cancel, cancelled } from 'redux-saga/effects';
 import { put, call, select, cancelled } from 'redux-saga/effects';
-import { delay } from 'redux-saga';
+// import { delay } from 'redux-saga';
 import { floor } from 'barterdex-utilities';
 import api from '../../../lib/barter-dex-api';
 import { makeSelectBalanceEntities } from '../../App/selectors';

@@ -19,7 +19,11 @@ import {
   setNewOrderSuccess,
   setNewOrderError,
   openConfirmNewOrderModal,
-  closeConfirmNewOrderModal
+  closeConfirmNewOrderModal,
+  openCancelingOrderModal,
+  closeCancelingOrderModal,
+  cancelNewOrder,
+  cancelNewOrderSuccess
 } from '../actions';
 import {
   SWAP_DETAIL_MODAL_OPEN,
@@ -40,7 +44,11 @@ import {
   NEW_ORDER_SET_SUCCESS,
   NEW_ORDER_SET_ERROR,
   CONFIRM_NEW_ORDER_MODAL_OPEN,
-  CONFIRM_NEW_ORDER_MODAL_CLOSE
+  CONFIRM_NEW_ORDER_MODAL_CLOSE,
+  CANCELING_ORDER_MODAL_OPEN,
+  CANCELING_ORDER_MODAL_CLOSE,
+  NEW_ORDER_CANCEL,
+  NEW_ORDER_CANCEL_SUCCESS
 } from '../constants';
 
 describe('containers/DexPage/actions/openDetailModal', () => {
@@ -340,5 +348,85 @@ describe('containers/OrdersPage/actions/closeConfirmNewOrderModal', () => {
     };
 
     expect(closeConfirmNewOrderModal()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/OrdersPage/actions/openCancelingOrderModal', () => {
+  const id = 'id';
+  it('should openCancelingOrderModal should create openCancelingOrderModal action', () => {
+    expect(openCancelingOrderModal(id)).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: CANCELING_ORDER_MODAL_OPEN,
+      payload: {
+        id
+      }
+    };
+
+    expect(openCancelingOrderModal(id)).toEqual(expectedResult);
+  });
+});
+
+describe('containers/OrdersPage/actions/closeCancelingOrderModal', () => {
+  it('should closeCancelingOrderModal should create closeCancelingOrderModal action', () => {
+    expect(closeCancelingOrderModal()).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: CANCELING_ORDER_MODAL_CLOSE
+    };
+
+    expect(closeCancelingOrderModal()).toEqual(expectedResult);
+  });
+});
+
+describe('containers/OrdersPage/actions/cancelNewOrder', () => {
+  const id = 'id';
+  const uuid = 'uuid';
+  it('should cancelNewOrder should create cancelNewOrder action', () => {
+    expect(
+      cancelNewOrder({
+        id,
+        uuid
+      })
+    ).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: NEW_ORDER_CANCEL,
+      payload: {
+        id,
+        uuid
+      }
+    };
+
+    expect(
+      cancelNewOrder({
+        id,
+        uuid
+      })
+    ).toEqual(expectedResult);
+  });
+});
+
+describe('containers/OrdersPage/actions/cancelNewOrderSuccess', () => {
+  const id = 'id';
+  it('should cancelNewOrderSuccess should create cancelNewOrderSuccess action', () => {
+    expect(cancelNewOrderSuccess(id)).toMatchSnapshot();
+  });
+
+  it('should return the correct type and the passed name', () => {
+    const expectedResult = {
+      type: NEW_ORDER_CANCEL_SUCCESS,
+      payload: {
+        id
+      }
+    };
+
+    expect(cancelNewOrderSuccess(id)).toEqual(expectedResult);
   });
 });

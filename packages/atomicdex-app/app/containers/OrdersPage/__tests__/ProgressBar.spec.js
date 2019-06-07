@@ -37,5 +37,13 @@ describe('containers/DexPage/<ProgressBar />', () => {
       />
     );
     expect(renderedComponent.type()).toEqual(LinearProgress);
+    renderedComponent = shallow(
+      <ProgressBar
+        balanceLoading
+        cancelingOrderModalFetchStatus={LOADING}
+        classes={classes}
+      />
+    );
+    expect(renderedComponent.type()).toEqual(LinearProgress);
   });
 });

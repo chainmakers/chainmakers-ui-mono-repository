@@ -19,6 +19,7 @@ import CoinsSelectionDialog from '../CoinsSelectionDialog';
 import HeaderTabs from './components/HeaderTabs';
 import JoyrideGuilddance from './components/JoyrideGuilddance';
 import ConfirmNewOrderModal from './components/ConfirmNewOrderModal';
+import CancelingOrderModal from './components/CancelingOrderModal';
 // import MyOrdersTab from './MyOrdersTab';
 import SellOrderTab from './SellOrderTab';
 import ProgressBar from './ProgressBar';
@@ -64,6 +65,7 @@ class OrderPage extends React.Component<IOrderPageProps, IOrderPageState> {
         <SwapDetailModal />
         <JoyrideGuilddance />
         <ConfirmNewOrderModal />
+        <CancelingOrderModal />
         <CoinsSelectionDialog />
         <NavigationLayout>
           <ErrorBoundary>

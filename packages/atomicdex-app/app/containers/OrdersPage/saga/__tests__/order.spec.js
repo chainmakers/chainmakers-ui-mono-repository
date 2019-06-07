@@ -3,10 +3,11 @@ import nock from 'nock';
 import { fromJS } from 'immutable';
 import { runSaga } from 'redux-saga';
 import api from '../../../../lib/barter-dex-api';
-import { setNewOrder } from '../../actions';
+import { setNewOrder, cancelNewOrder } from '../../actions';
 import data from '../../../__tests__/app-state.json';
 import setprice from '../../../__tests__/setprice.json';
-import listenForCreatingNewOrder from '../order';
+import cancelorder from '../../../__tests__/cancel_order.json';
+import listenForCreatingNewOrder, { listenForCancelOrder } from '../order';
 import {
   APP_STATE_NAME,
   NEW_ORDER_SET_SUCCESS,
@@ -14,7 +15,8 @@ import {
   NEW_ORDER_SET_ERROR,
   NEW_ORDER_SET_SKIP,
   ORDERBOOK_RELOAD,
-  ORDER_ALICE_SITE
+  ORDER_ALICE_SITE,
+  NEW_ORDER_CANCEL_SUCCESS
 } from '../../constants';
 
 const store = fromJS(data);
@@ -26,7 +28,7 @@ describe('containers/OrderPage/saga/order', () => {
 
   const payload = Object.assign({}, setprice.result);
   payload.address = 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu';
-  payload.id = 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu';
+  payload.id = 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu-KMD-BTC';
   payload.type = ORDER_ALICE_SITE;
 
   it('should handle listenForCreatingNewOrder correctly', async done => {
@@ -146,6 +148,46 @@ describe('containers/OrderPage/saga/order', () => {
       }
     ]);
     expect(saga).toEqual(1);
+
+    nock.cleanAll();
+    nock.enableNetConnect();
+    done();
+  });
+
+  it('should handle listenForCancelOrder correctly', async done => {
+    const dispatched = [];
+    const id = 'id';
+    const uuid = 'uuid';
+    nock(TEST_URL)
+      .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
+      .persist()
+      .post('/', () => true)
+      .reply(200, (uri, body, cb) => {
+        const { method } = JSON.parse(body);
+
+        if (method === 'cancel_order') {
+          cb(null, cancelorder);
+        } else {
+          cb(new Error('error message'));
+        }
+      });
+
+    const saga = await runSaga(
+      {
+        dispatch: action => dispatched.push(action),
+        getState: () => store
+      },
+      listenForCancelOrder,
+      cancelNewOrder({
+        id,
+        uuid
+      })
+    ).done;
+
+    expect(dispatched).toEqual([
+      { type: NEW_ORDER_CANCEL_SUCCESS, payload: { id } }
+    ]);
+    expect(saga).toEqual(undefined);
 
     nock.cleanAll();
     nock.enableNetConnect();

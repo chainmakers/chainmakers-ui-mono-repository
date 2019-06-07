@@ -7,25 +7,37 @@ import { LOADING } from '../../constants';
 import LinearProgress from '../../components/ProgressBar';
 import {
   makeSelectOrderbookFetchStatus,
-  makeSelectMyOrderFetchStatus
+  makeSelectMyOrderFetchStatus,
+  makeSelectCancelingOrderModalFetchStatus
 } from './selectors';
 
 const debug = require('debug')('atomicapp:containers:OrderPage:ProgressBar');
 
 type IProgressBarProps = {
   orderbookFetchStatus: string,
-  myOrderFetchStatus: string
+  myOrderFetchStatus: string,
+  cancelingOrderModalFetchStatus: string
 };
 
 export class ProgressBarUI extends React.PureComponent<IProgressBarProps> {
   render() {
     debug('render');
 
-    const { orderbookFetchStatus, myOrderFetchStatus } = this.props;
+    const {
+      orderbookFetchStatus,
+      myOrderFetchStatus,
+      cancelingOrderModalFetchStatus
+    } = this.props;
     if (orderbookFetchStatus && orderbookFetchStatus === LOADING) {
       return <LinearProgress />;
     }
     if (myOrderFetchStatus && myOrderFetchStatus === LOADING) {
+      return <LinearProgress />;
+    }
+    if (
+      cancelingOrderModalFetchStatus &&
+      cancelingOrderModalFetchStatus === LOADING
+    ) {
       return <LinearProgress />;
     }
     return null;
@@ -34,7 +46,8 @@ export class ProgressBarUI extends React.PureComponent<IProgressBarProps> {
 
 const mapStateToProps = createStructuredSelector({
   orderbookFetchStatus: makeSelectOrderbookFetchStatus(),
-  myOrderFetchStatus: makeSelectMyOrderFetchStatus()
+  myOrderFetchStatus: makeSelectMyOrderFetchStatus(),
+  cancelingOrderModalFetchStatus: makeSelectCancelingOrderModalFetchStatus()
 });
 
 const withConnect = connect(

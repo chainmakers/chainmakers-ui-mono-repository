@@ -18,7 +18,7 @@ import {
   openJoyride,
   closeJoyride
 } from '../actions';
-import { SWAP_TX_DEFAULT, SEARCH_STATE_READY } from '../constants';
+import { SWAP_TX_DEFAULT } from '../constants';
 import {
   WEBSOCKET_STATE_ZERO,
   WEBSOCKET_STATE_ONE,
@@ -360,12 +360,13 @@ describe('containers/DexPage/reducers/loadRecentSwapsCoin', () => {
   const SWAP_STATE_ONE = cloneDeep(SWAP_STATE_TEN);
   SWAP_STATE_ONE.result.events = events.slice(0, length - 9);
 
+  // eslint-disable-next-line camelcase
   const { uuid, base_amount, rel_amount } = BUY_STATE.result;
 
   // expiration
   const expiration = 1556256548 + 30;
   // timeleft
-  const timeleft = 30;
+  // const timeleft = 30;
   // bob
   const bob = 'COQUI';
   // alice

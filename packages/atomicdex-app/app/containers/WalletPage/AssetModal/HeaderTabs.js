@@ -2,13 +2,13 @@
 import React from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Badge from '@material-ui/core/Badge';
 import Divider from '@material-ui/core/Divider';
 import { withStyles } from '@material-ui/core/styles';
 
 const debug = require('debug')('atomicapp:containers:WalletPage:HeaderTabs');
 
-const styles = theme => ({
+// const styles = theme => ({
+const styles = () => ({
   root__tab: {
     minWidth: 100
   },

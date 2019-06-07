@@ -27,7 +27,11 @@ import {
   CONFIRM_NEW_ORDER_MODAL_OPEN,
   CONFIRM_NEW_ORDER_MODAL_CLOSE,
   ORDER_BOB_SITE,
-  ORDER_ALICE_SITE
+  ORDER_ALICE_SITE,
+  CANCELING_ORDER_MODAL_OPEN,
+  CANCELING_ORDER_MODAL_CLOSE,
+  NEW_ORDER_CANCEL,
+  NEW_ORDER_CANCEL_SUCCESS
 } from './constants';
 
 // The initial state of the App
@@ -55,6 +59,13 @@ export const initialState = fromJS({
 
   confirmNewOrderModal: {
     open: false
+  },
+
+  cancelingOrderModal: {
+    open: false,
+    id: null,
+    fetchStatus: null,
+    errors: null
   },
 
   // FIXME: Redesign data struct
@@ -166,15 +177,16 @@ export default handleActions(
           price,
           pubkey,
           type,
+          id,
           ...meta
         } = v;
         if (type === ORDER_BOB_SITE) {
-          asksList.push(address);
+          asksList.push(id);
         }
         if (type === ORDER_ALICE_SITE) {
-          bidsList.push(address);
+          bidsList.push(id);
         }
-        let entity = orders.find(obj => obj.get('address') === v.address);
+        let entity = orders.find(obj => obj.get('id') === id);
 
         if (entity) {
           entity = entity.merge(
@@ -190,12 +202,12 @@ export default handleActions(
               meta
             })
           );
-          orders = orders.set(v.address, entity);
+          orders = orders.set(id, entity);
         } else {
           orders = orders.set(
-            v.address,
+            id,
             fromJS({
-              id: address,
+              id,
               base,
               rel,
               avevolume,
@@ -211,6 +223,7 @@ export default handleActions(
       }
 
       function sort(a, b) {
+        if (a.price === b.price) return a.maxvolume < b.maxvolume;
         return a.price > b.price;
       }
 
@@ -305,8 +318,8 @@ export default handleActions(
 
       // step two: update myorder list
       let myorderlist = state.getIn(['myorder', 'list']);
-      if (!myorderlist.contains(address)) {
-        myorderlist = myorderlist.push(address);
+      if (!myorderlist.contains(id)) {
+        myorderlist = myorderlist.push(id);
         state = state.setIn(['myorder', 'list'], myorderlist);
       }
 
@@ -327,6 +340,45 @@ export default handleActions(
 
     [ORDERBOOK_RELOAD_SUCCESS]: state =>
       state.setIn(['myorder', 'fetchStatus'], LOADED),
+
+    [CANCELING_ORDER_MODAL_OPEN]: (state, { payload }) =>
+      state
+        .setIn(['cancelingOrderModal', 'open'], true)
+        .setIn(['cancelingOrderModal', 'id'], payload.id),
+
+    [CANCELING_ORDER_MODAL_CLOSE]: state =>
+      state.setIn(['cancelingOrderModal', 'open'], false),
+
+    [NEW_ORDER_CANCEL]: state =>
+      state
+        .setIn(['cancelingOrderModal', 'fetchStatus'], LOADING)
+        .setIn(['cancelingOrderModal', 'errors'], null),
+
+    [NEW_ORDER_CANCEL_SUCCESS]: (state, { payload }) => {
+      const { id } = payload;
+
+      // Step one: remove it from orderbook
+      const asks = state.getIn(['orderbook', 'asks']).filter(v => v !== id);
+      const bids = state.getIn(['orderbook', 'bids']).filter(v => v !== id);
+      state = state
+        .setIn(['orderbook', 'asks'], asks)
+        .setIn(['orderbook', 'bids'], bids);
+
+      // Step two: remove it from myorder
+      let myorderlist = state.getIn(['myorder', 'list']);
+      if (myorderlist.contains(id)) {
+        myorderlist = myorderlist.filter(v => v !== id);
+        state = state.setIn(['myorder', 'list'], myorderlist);
+      }
+
+      // Step three: remove it from orders
+      const orders = state.get('orders');
+      state = state.set('orders', orders.delete(id));
+
+      return state
+        .setIn(['cancelingOrderModal', 'fetchStatus'], LOADED)
+        .setIn(['cancelingOrderModal', 'errors'], null);
+    },
 
     [LOGOUT]: () => initialState
   },

@@ -1,6 +1,5 @@
 import { all, takeEvery, takeLatest } from 'redux-saga/effects';
-import { takeFirst } from 'barterdex-rssm';
-import { LOGOUT } from '../../App/constants';
+// import { takeFirst } from 'barterdex-rssm';
 import {
   LOAD_PRICES,
   LOAD_PRICE,

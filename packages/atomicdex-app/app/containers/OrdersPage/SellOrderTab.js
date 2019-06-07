@@ -362,7 +362,7 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
                   <>
                     <Order
                       key={`orderbook-${key}`}
-                      selected={myOrderList.contains(order.get('address'))}
+                      selected={myOrderList.contains(order.get('id'))}
                       data={order}
                     />
                     <br />

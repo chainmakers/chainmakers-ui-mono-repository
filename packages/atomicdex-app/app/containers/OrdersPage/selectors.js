@@ -155,6 +155,37 @@ const makeSelectConfirmNewOrderModal = () =>
     order => order.get('confirmNewOrderModal')
   );
 
+const makeSelectCancelingOrderModal = () =>
+  createSelector(
+    selectOrder,
+    order => order.get('cancelingOrderModal')
+  );
+
+const makeSelectCancelingOrderModalOpen = () =>
+  createSelector(
+    makeSelectCancelingOrderModal(),
+    cancelingOrderModal => cancelingOrderModal.get('open')
+  );
+
+const makeSelectCancelingOrderModalId = () =>
+  createSelector(
+    makeSelectCancelingOrderModal(),
+    cancelingOrderModal => cancelingOrderModal.get('id')
+  );
+
+const makeSelectCancelingOrderModalFetchStatus = () =>
+  createSelector(
+    makeSelectCancelingOrderModal(),
+    cancelingOrderModal => cancelingOrderModal.get('fetchStatus')
+  );
+
+const makeSelectCancelingOrderModalEntity = () =>
+  createSelector(
+    makeSelectCancelingOrderModalId(),
+    makeSelectOrders(),
+    (id, orders) => orders.get(id)
+  );
+
 const makeSelectOrders = () =>
   createSelector(
     selectOrder,
@@ -188,5 +219,10 @@ export {
   makeSelectMyOrderErrors,
   makeSelectMyOrderList,
   makeSelectConfirmNewOrderModal,
+  makeSelectCancelingOrderModal,
+  makeSelectCancelingOrderModalOpen,
+  makeSelectCancelingOrderModalId,
+  makeSelectCancelingOrderModalFetchStatus,
+  makeSelectCancelingOrderModalEntity,
   makeSelectOrders
 };
