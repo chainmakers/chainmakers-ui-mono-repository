@@ -345,7 +345,7 @@ class HelpPage extends Component<Props> {
           </Typography>
 
           <Typography variant="h6" gutterBottom>
-            For more information, please readl the Komodo white paper:
+            For more information, please read the Komodo white paper:
           </Typography>
           <ol>
             <li>

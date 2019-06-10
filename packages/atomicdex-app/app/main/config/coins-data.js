@@ -1025,7 +1025,7 @@ const data = [
     active: 0,
     market_cap: 0,
     mm2: 1
-  }
+  },
   // {
   //   coin: 'GBX',
   //   rpcport: 12454,
@@ -2343,6 +2343,18 @@ const data = [
   //   market_cap: 0,
   //   mm2: 1
   // }
+  {
+    coin: 'LABS',
+    name: 'LABS',
+    urls: [
+      'electrum1.cipig.net:10019',
+      'electrum2.cipig.net:10019',
+      'electrum3.cipig.net:10019'
+    ],
+    active: 0,
+    market_cap: 0,
+    mm2: 1
+  }
 ];
 
 export default function loadCoinsData(config) {

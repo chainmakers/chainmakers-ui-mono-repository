@@ -1,0 +1,221 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/DexPage/actions/closeDetailModal should closeDetailModal should create closeDetailModal action 1`] = `
+Object {
+  "type": "atomicapp/DexPage/SWAP_DETAIL_MODAL_CLOSE",
+}
+`;
+
+exports[`containers/DexPage/actions/closeJoyride should closeJoyride should create closeJoyride action 1`] = `
+Object {
+  "type": "atomicapp/DexPage/JOYRIDE_CLOSE",
+}
+`;
+
+exports[`containers/DexPage/actions/openDetailModal should openDetailModal should create openDetailModal action 1`] = `
+Object {
+  "payload": Object {
+    "uuid": undefined,
+  },
+  "type": "atomicapp/DexPage/SWAP_DETAIL_MODAL_OPEN",
+}
+`;
+
+exports[`containers/DexPage/actions/openDetailModal should openDetailModal should create openDetailModal action 2`] = `
+Object {
+  "payload": Object {
+    "uuid": "uuid",
+  },
+  "type": "atomicapp/DexPage/SWAP_DETAIL_MODAL_OPEN",
+}
+`;
+
+exports[`containers/DexPage/actions/openJoyride should openJoyride should create openJoyride action 1`] = `
+Object {
+  "type": "atomicapp/DexPage/JOYRIDE_OPEN",
+}
+`;
+
+exports[`containers/OrderPage/actions/loadOrderbook should loadOrderbook should create loadOrderbook action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/ORDERBOOK_LOAD",
+}
+`;
+
+exports[`containers/OrderPage/actions/loadOrderbookError should loadOrderbookError should create loadOrderbookError action 1`] = `
+Object {
+  "error": Object {
+    "context": Object {
+      "action": "atomicapp/OrdersPage/ORDERBOOK_LOAD",
+    },
+    "message": "message",
+    "type": "RPC",
+  },
+  "type": "atomicapp/OrdersPage/ORDERBOOK_LOAD_ERROR",
+}
+`;
+
+exports[`containers/OrderPage/actions/loadOrderbookSuccess should loadOrderbookSuccess should create loadOrderbookSuccess action 1`] = `
+Object {
+  "payload": Object {
+    "askdepth": 0,
+    "asks": Array [
+      Object {
+        "address": "1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1",
+        "age": 9,
+        "avevolume": 0,
+        "coin": "BTC",
+        "depth": 0,
+        "maxvolume": 0.02620853,
+        "numutxos": 0,
+        "price": 0.00015473,
+        "pubkey": "bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01",
+        "zcredits": 0,
+      },
+    ],
+    "base": "BTC",
+    "biddepth": 0,
+    "bids": Array [
+      Object {
+        "address": "RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd",
+        "age": 9,
+        "avevolume": 0,
+        "coin": "KMD",
+        "depth": 0,
+        "maxvolume": 36.40686108,
+        "numutxos": 0,
+        "price": 0.0001566,
+        "pubkey": "bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01",
+        "zcredits": 0,
+      },
+    ],
+    "netid": 9999,
+    "numasks": 1,
+    "numbids": 1,
+    "rel": "KMD",
+    "timestamp": 1558682258,
+  },
+  "type": "atomicapp/OrdersPage/ORDERBOOK_LOAD_SUCCESS",
+}
+`;
+
+exports[`containers/OrderPage/actions/reloadOrderbook should reloadOrderbook should create reloadOrderbook action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/ORDERBOOK_RELOAD",
+}
+`;
+
+exports[`containers/OrderPage/actions/skipOrderbook should skipOrderbook should create skipOrderbook action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/ORDERBOOK_LOAD_SKIP",
+}
+`;
+
+exports[`containers/OrdersPage/actions/cancelNewOrder should cancelNewOrder should create cancelNewOrder action 1`] = `
+Object {
+  "payload": Object {
+    "id": "id",
+    "uuid": "uuid",
+  },
+  "type": "atomicapp/OrdersPage/NEW_ORDER_CANCEL",
+}
+`;
+
+exports[`containers/OrdersPage/actions/cancelNewOrderSuccess should cancelNewOrderSuccess should create cancelNewOrderSuccess action 1`] = `
+Object {
+  "payload": Object {
+    "id": "id",
+  },
+  "type": "atomicapp/OrdersPage/NEW_ORDER_CANCEL_SUCCESS",
+}
+`;
+
+exports[`containers/OrdersPage/actions/closeCancelingOrderModal should closeCancelingOrderModal should create closeCancelingOrderModal action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/CANCELING_ORDER_MODAL_CLOSE",
+}
+`;
+
+exports[`containers/OrdersPage/actions/closeConfirmNewOrderModal should closeConfirmNewOrderModal should create closeConfirmNewOrderModal action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/CONFIRM_NEW_ORDER_MODAL_CLOSE",
+}
+`;
+
+exports[`containers/OrdersPage/actions/closeDepositCoinModal should closeDepositCoinModal should create closeDepositCoinModal action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/DEPOSIT_COIN_MODAL_CLOSE",
+}
+`;
+
+exports[`containers/OrdersPage/actions/closeRecevieCoinModal should closeRecevieCoinModal should create closeRecevieCoinModal action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/RECEVIE_COIN_MODAL_CLOSE",
+}
+`;
+
+exports[`containers/OrdersPage/actions/openCancelingOrderModal should openCancelingOrderModal should create openCancelingOrderModal action 1`] = `
+Object {
+  "payload": Object {
+    "id": "id",
+  },
+  "type": "atomicapp/OrdersPage/CANCELING_ORDER_MODAL_OPEN",
+}
+`;
+
+exports[`containers/OrdersPage/actions/openConfirmNewOrderModal should openConfirmNewOrderModal should create openConfirmNewOrderModal action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/CONFIRM_NEW_ORDER_MODAL_OPEN",
+}
+`;
+
+exports[`containers/OrdersPage/actions/openDepositCoinModal should openDepositCoinModal should create openDepositCoinModal action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/DEPOSIT_COIN_MODAL_OPEN",
+}
+`;
+
+exports[`containers/OrdersPage/actions/openRecevieCoinModal should openRecevieCoinModal should create openRecevieCoinModal action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/RECEVIE_COIN_MODAL_OPEN",
+}
+`;
+
+exports[`containers/OrdersPage/actions/setNewOrder should setNewOrder should create setNewOrder action 1`] = `
+Object {
+  "payload": Object {
+    "price": 0.1,
+  },
+  "type": "atomicapp/OrdersPage/NEW_ORDER_SET",
+}
+`;
+
+exports[`containers/OrdersPage/actions/setNewOrderError should setNewOrderError should create setNewOrderError action 1`] = `
+Object {
+  "error": undefined,
+  "type": "atomicapp/OrdersPage/NEW_ORDER_SET_ERROR",
+}
+`;
+
+exports[`containers/OrdersPage/actions/setNewOrderSuccess should setNewOrderSuccess should create setNewOrderSuccess action 1`] = `
+Object {
+  "payload": Object {
+    "base": "BEER",
+    "created_at": 1559621086489,
+    "matches": Object {},
+    "max_base_vol": "6729.6392886",
+    "min_base_vol": "0",
+    "price": "0.1000000000000000",
+    "rel": "COQUI",
+    "started_swaps": Array [],
+    "uuid": "89b47c5b-f441-46c4-aea1-279f6ea0d67d",
+  },
+  "type": "atomicapp/OrdersPage/NEW_ORDER_SET_SUCCESS",
+}
+`;
+
+exports[`containers/OrdersPage/actions/skipNewOrder should skipNewOrder should create skipNewOrder action 1`] = `
+Object {
+  "type": "atomicapp/OrdersPage/NEW_ORDER_SET_SKIP",
+}
+`;

@@ -1,0 +1,13 @@
+{
+  "result": {
+    "base": "BEER",
+    "created_at": 1559621086489,
+    "matches": {},
+    "max_base_vol": "6729.6392886",
+    "min_base_vol": "0",
+    "price": "0.1000000000000000",
+    "rel": "COQUI",
+    "started_swaps": [],
+    "uuid": "89b47c5b-f441-46c4-aea1-279f6ea0d67d"
+  }
+}

@@ -23,6 +23,7 @@ import { BuyButton } from 'barterdex-components';
 import { floor } from 'barterdex-utilities';
 import { Circle, Line } from '../../../components/placeholder';
 import getCoinMemoize from '../../../components/CryptoIcons';
+import CoinSelectable from '../../../components/CoinSelectable';
 import { requiredNumber } from '../../../components/Form/helper';
 import validate from '../../../components/Form/validate';
 import type { BuyCoinPayload } from '../schema';
@@ -51,7 +52,6 @@ import {
   makeSelectCurrency,
   makeSelectPayment
 } from '../selectors';
-import CoinSelectable from './CoinSelectable';
 
 const debug = require('debug')('atomicapp:containers:DexPage:AmountSection');
 
@@ -570,7 +570,7 @@ class AmountSection extends React.Component<Props, State> {
         </Grid>
         <Grid item xs={12} className={classes.amountform__itemCenter}>
           <Typography variant="body2" gutterBottom>
-            Step {0}/{STATE_SWAPS.length}: {STATE_SWAPS[0]}
+            Step {0}/{STATE_SWAPS.length - 1}: {STATE_SWAPS[0]}
           </Typography>
           <LinearProgress color="primary" variant="determinate" value={0} />
         </Grid>

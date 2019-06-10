@@ -68,6 +68,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const withReducer = injectReducer({ key: APP_STATE_NAME, reducer });
+
 const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps

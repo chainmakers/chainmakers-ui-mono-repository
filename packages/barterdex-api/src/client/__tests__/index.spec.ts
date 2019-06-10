@@ -10,6 +10,8 @@ describe('packages/barterdex-api/src/index', () => {
     expect(typeof BarterDexAPI.electrum).toEqual('function');
     expect(typeof BarterDexAPI.balance).toEqual('function');
     expect(typeof BarterDexAPI.buy).toEqual('function');
+    expect(typeof BarterDexAPI.cancelOrder).toEqual('function');
+    expect(typeof BarterDexAPI.setprice).toEqual('function');
     expect(typeof BarterDexAPI.getendpoint).toEqual('function');
     expect(typeof BarterDexAPI.getfee).toEqual('function');
     expect(typeof BarterDexAPI.isready).toEqual('function');

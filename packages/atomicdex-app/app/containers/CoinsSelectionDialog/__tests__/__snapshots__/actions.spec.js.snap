@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/CoinsSelectionDialog/actions/searchSelectCoinModal should searchSelectCoinModal should create searchSelectCoinModal action 1`] = `
+Object {
+  "payload": Object {
+    "input": "Komodo",
+  },
+  "type": "atomicapp/CoinsSelectionDialog/SELECT_COIN_MODAL_SEARCH",
+}
+`;
+
+exports[`containers/CoinsSelectionDialog/actions/searchSelectCoinModalSuccess should searchSelectCoinModalSuccess should create searchSelectCoinModalSuccess action 1`] = `
+Object {
+  "payload": Array [
+    Object {
+      "id": 1,
+      "market_cap": -2,
+      "name": "Pizza",
+      "symbol": "PIZZA",
+    },
+  ],
+  "type": "atomicapp/CoinsSelectionDialog/SELECT_COIN_MODAL_SEARCH_SUCCESS",
+}
+`;
+
+exports[`containers/CoinsSelectionDialog/actions/setupSearchApiForSelectCoinModal should setupSearchApiForSelectCoinModal should create setupSearchApiForSelectCoinModal action 1`] = `
+Object {
+  "type": "atomicapp/CoinsSelectionDialog/SELECT_COIN_MODAL_SETUP_SEARCH_API",
+}
+`;
+
+exports[`containers/CoinsSelectionDialog/actions/setupSearchApiForSelectCoinModalSuccess should setupSearchApiForSelectCoinModalSuccess should create setupSearchApiForSelectCoinModalSuccess action 1`] = `
+Object {
+  "payload": Array [
+    Object {
+      "active": 1,
+      "coin": "BTC",
+      "fname": "Bitcoin",
+      "id": 0,
+      "market_cap": 97822306639,
+      "marketcap": 0,
+      "mm2": 1,
+      "name": "Bitcoin",
+      "p2shtype": 5,
+      "pubtype": 0,
+      "rpcport": 8332,
+      "symbol": "BTC",
+      "txfee": 20000,
+      "urls": Array [
+        "electrum1.cipig.net:10000",
+        "electrum2.cipig.net:10000",
+      ],
+      "wiftype": 128,
+    },
+  ],
+  "type": "atomicapp/CoinsSelectionDialog/SELECT_COIN_MODAL_SETUP_SEARCH_API_SUCCESS",
+}
+`;
+
+exports[`containers/CoinsSelectionDialog/actions/skipSearchStateCreation should skipSearchStateCreation should create skipSearchStateCreation action 1`] = `
+Object {
+  "type": "atomicapp/CoinsSelectionDialog/SEARCH_STATE_SKIP_CREATION",
+}
+`;

@@ -1,6 +1,7 @@
 // @flow
 import { put, select, cancelled } from 'redux-saga/effects';
 import { CANCEL } from 'redux-saga';
+import { floor } from 'barterdex-utilities';
 import api from '../../../lib/barter-dex-api';
 import { INITIALIZATION } from '../../../constants';
 import { ELECTRUM_ADD, ALREADY_INIT_LIST } from '../constants';
@@ -48,7 +49,7 @@ export function* loadElectrum({ payload }: { payload: AddElectrumPayload }) {
       addElectrumSuccess({
         coin: payload.coin,
         address: rs.address,
-        balance: rs.balance,
+        balance: floor(rs.balance, 8),
         fee: fee.txfee
       })
     );

@@ -7,9 +7,9 @@ import AddIcon from '@material-ui/icons/Add';
 import { floor } from 'barterdex-utilities';
 // import getConfig from '../../../utils/config';
 import getCoinMemoize from '../../../components/CryptoIcons';
+import CoinSelectable from '../../../components/CoinSelectable';
 import { openSelectCoinModal } from '../actions';
 import { makeSelectCurrency } from '../selectors';
-import CoinSelectable from './CoinSelectable';
 
 const debug = require('debug')('atomicapp:containers:DexPage:CurrencySection');
 

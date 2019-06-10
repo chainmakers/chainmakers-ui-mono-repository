@@ -2,10 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import type { Dispatch } from 'redux';
-import type { List, Map } from 'immutable';
 import { createStructuredSelector } from 'reselect';
-import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -15,31 +12,31 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Slide from '@material-ui/core/Slide';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { Circle, Line } from '../../../components/placeholder';
-import CoinSelectable from '../components/CoinSelectable';
+import { withStyles } from '@material-ui/core/styles';
+import { Circle, Line } from '../../components/placeholder';
+import CoinSelectable from '../../components/CoinSelectable';
+import injectReducer from '../../utils/inject-reducer';
+import injectSaga from '../../utils/inject-saga';
+import { makeSelectBalanceLoading } from '../App/selectors';
+import InputSearch from './components/InputSearch';
+import ModalContent from './components/ModalContent';
+import reducer from './reducer';
+import saga from './saga';
+import { makeSelectSearchState, makeSelectSearchList } from './selectors';
+import { APP_STATE_NAME, SEARCH_STATE_READY } from './constants';
 import {
-  makeSelectCoinModal,
-  makeSelectPricesLoading,
-  makeSelectSearchState,
-  makeSelectSearchList
-} from '../selectors';
-import {
-  closeSelectCoinModal,
-  clickSelectCoinModal,
-  searchSelectCoinModal,
-  setupSearchApiForSelectCoinModal
-} from '../actions';
-import { SEARCH_STATE_READY } from '../constants';
-import type { SelectCoinPayload } from '../schema';
-import { makeSelectBalanceLoading } from '../../App/selectors';
-import ModalContent from './ModalContent';
-import InputSearch from './InputSearch';
+  setupSearchApiForSelectCoinModal,
+  searchSelectCoinModal
+} from './actions';
 
-const debug = require('debug')(
-  'atomicapp:containers:DexPage:CoinsSelectionModal'
-);
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
+
+const debug = require('debug')('atomicapp:containers:CoinsSelectionDialog');
 
 const circle = <Circle />;
+
 const line = (
   <Line
     width={60}
@@ -50,12 +47,13 @@ const line = (
 );
 
 const styles = theme => ({
-  appBar: {
+  root__appBar: {
     boxShadow: 'none',
     backgroundColor: theme.appbar.background,
     position: 'relative'
   },
-  appBar__divider: {
+
+  root_appBarDivider: {
     bottom: -5,
     boxShadow: 'inset 0px 4px 8px -3px rgba(17, 17, 17, .06)',
     height: 5,
@@ -66,7 +64,8 @@ const styles = theme => ({
     right: 0,
     backgroundColor: 'transparent'
   },
-  appBar__search: {
+
+  root__appBarSearch: {
     flex: 1,
     position: 'relative',
     marginRight: theme.spacing.unit * 2,
@@ -78,12 +77,14 @@ const styles = theme => ({
       width: 'auto'
     }
   },
+
   appBar__inputRoot: {
     color: 'inherit',
     width: '100%',
     height: 48,
     margin: '12px 0'
   },
+
   appBar__inputInput: {
     padding: `${theme.spacing.unit}px 0px`,
     transition: theme.transitions.create('width'),
@@ -98,6 +99,7 @@ const styles = theme => ({
       bottom: -12
     }
   },
+
   appBar__button: {
     width: '100%',
     height: '100%',
@@ -106,40 +108,34 @@ const styles = theme => ({
       borderColor: '#80BB41'
     }
   },
+
   appBar__content: {
     padding: '24px 94px'
   }
 });
 
-function Transition(props) {
-  return <Slide direction="up" {...props} />;
-}
-
-type Props = {
+type ICoinsSelectionModalProps = {
+  open: boolean,
   // eslint-disable-next-line flowtype/no-weak-types
   classes: Object,
   // eslint-disable-next-line flowtype/no-weak-types
-  selectCoinModal: Map<*, *>,
-  searchState: string,
-  // eslint-disable-next-line flowtype/no-weak-types
-  searchList: List<*>,
-  // eslint-disable-next-line flowtype/no-weak-types
-  dispatchCloseSelectCoinModal: Function,
-  // eslint-disable-next-line flowtype/no-weak-types
-  dispatchClickSelectCoinModal: Function,
-  // eslint-disable-next-line flowtype/no-weak-types
-  dispatchSearchSelectCoinModal: Function,
+  onClose: Function,
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchSetupSearchApiForSelectCoinModal: Function,
-  balanceLoading: boolean,
-  priceLoading: boolean
+  // eslint-disable-next-line flowtype/no-weak-types
+  onSelect: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchSearchSelectCoinModal: Function
 };
 
-type State = {
+type ICoinsSelectionModalState = {
   show: boolean
 };
 
-class CoinsSelectionModal extends React.Component<Props, State> {
+class CoinsSelectionModal extends React.PureComponent<
+  ICoinsSelectionModalProps,
+  ICoinsSelectionModalState
+> {
   constructor(props) {
     super(props);
 
@@ -155,27 +151,6 @@ class CoinsSelectionModal extends React.Component<Props, State> {
     dispatchSetupSearchApiForSelectCoinModal();
   };
 
-  handleSelectCoin = (evt: SyntheticInputEvent<>) => {
-    evt.preventDefault();
-    const { value } = evt.target;
-    const { dispatchClickSelectCoinModal } = this.props;
-    dispatchClickSelectCoinModal({
-      name: value.name,
-      symbol: value.symbol
-    });
-  };
-
-  handleClose = (evt: SyntheticInputEvent<>) => {
-    evt.preventDefault();
-    const { dispatchCloseSelectCoinModal } = this.props;
-    dispatchCloseSelectCoinModal();
-  };
-
-  handleSearchRequest = input => {
-    const { dispatchSearchSelectCoinModal } = this.props;
-    dispatchSearchSelectCoinModal(input);
-  };
-
   showContent = () => {
     this.setState({
       show: true
@@ -188,15 +163,42 @@ class CoinsSelectionModal extends React.Component<Props, State> {
     });
   };
 
+  handleSelectCoin = (evt: SyntheticInputEvent<>) => {
+    evt.preventDefault();
+    const { value } = evt.target;
+
+    const { onSelect } = this.props;
+
+    onSelect({
+      name: value.name,
+      symbol: value.symbol
+    });
+
+    this.onClose();
+  };
+
+  handleSearchRequest = input => {
+    const { dispatchSearchSelectCoinModal } = this.props;
+    dispatchSearchSelectCoinModal(input);
+  };
+
+  onClose = () => {
+    const { onClose, dispatchSearchSelectCoinModal } = this.props;
+    onClose();
+    setTimeout(() => {
+      dispatchSearchSelectCoinModal('');
+    }, 350);
+  };
+
   render() {
     debug(`render`);
+
     const {
+      open,
       classes,
-      selectCoinModal,
-      priceLoading,
-      balanceLoading,
       searchState,
-      searchList
+      searchList,
+      balanceLoading
     } = this.props;
     const { show } = this.state;
 
@@ -204,22 +206,22 @@ class CoinsSelectionModal extends React.Component<Props, State> {
       <Dialog
         fullScreen
         scroll="paper"
-        open={selectCoinModal.get('open')}
-        onClose={this.handleClose}
+        open={open}
+        onClose={this.onClose}
         TransitionComponent={Transition}
         onEntered={this.showContent}
         onExited={this.hideContent}
       >
-        <AppBar color="default" className={classes.appBar}>
+        <AppBar color="default" className={classes.root__appBar}>
           <Toolbar>
             <IconButton
               color="inherit"
-              onClick={this.handleClose}
+              onClick={this.onClose}
               aria-label="Close"
             >
               <ArrowBackIcon />
             </IconButton>
-            <div className={classes.appBar__search}>
+            <div className={classes.root__appBarSearch}>
               <InputSearch
                 ref={this.input}
                 handleSearchRequest={this.handleSearchRequest}
@@ -228,7 +230,7 @@ class CoinsSelectionModal extends React.Component<Props, State> {
               />
             </div>
           </Toolbar>
-          <Divider className={classes.appBar__divider} />
+          <Divider className={classes.root_appBarDivider} />
         </AppBar>
         <DialogContent className={classes.appBar__content}>
           <Grid container spacing={24}>
@@ -266,7 +268,8 @@ class CoinsSelectionModal extends React.Component<Props, State> {
             ) : (
               <ModalContent
                 data={searchList.toJS()}
-                disabled={priceLoading || balanceLoading}
+                disabled={balanceLoading}
+                // disabled={priceLoading || balanceLoading}
                 className={classes.appBar__button}
                 handleSelectCoin={this.handleSelectCoin}
               />
@@ -281,26 +284,19 @@ class CoinsSelectionModal extends React.Component<Props, State> {
 // eslint-disable-next-line flowtype/no-weak-types
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {
   return {
-    dispatchCloseSelectCoinModal: () => {
-      dispatch(closeSelectCoinModal());
-    },
-    dispatchClickSelectCoinModal: (coin: SelectCoinPayload) => {
-      dispatch(clickSelectCoinModal(coin));
+    dispatchSetupSearchApiForSelectCoinModal: () => {
+      dispatch(setupSearchApiForSelectCoinModal());
     },
     dispatchSearchSelectCoinModal: (input: string) => {
       dispatch(searchSelectCoinModal(input));
-    },
-    dispatchSetupSearchApiForSelectCoinModal: () => {
-      dispatch(setupSearchApiForSelectCoinModal());
     }
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  selectCoinModal: makeSelectCoinModal(),
   searchState: makeSelectSearchState(),
   searchList: makeSelectSearchList(),
-  priceLoading: makeSelectPricesLoading(),
+  // priceLoading: makeSelectPricesLoading(),
   balanceLoading: makeSelectBalanceLoading()
 });
 
@@ -309,9 +305,13 @@ const withConnect = connect(
   mapDispatchToProps
 );
 
-const CoinsSelectionModalWapper = compose(
+const withReducer = injectReducer({ key: APP_STATE_NAME, reducer });
+
+const withSaga = injectSaga({ key: APP_STATE_NAME, saga });
+
+export default compose(
+  withReducer,
   withConnect,
+  withSaga,
   withStyles(styles)
 )(CoinsSelectionModal);
-
-export default CoinsSelectionModalWapper;

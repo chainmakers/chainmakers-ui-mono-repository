@@ -1,12 +1,12 @@
 // import { put, call, select, cancel, cancelled } from 'redux-saga/effects';
 import { put, call, select, cancelled } from 'redux-saga/effects';
-import { delay } from 'redux-saga';
+// import { delay } from 'redux-saga';
 import { floor } from 'barterdex-utilities';
 import api from '../../../lib/barter-dex-api';
 import { makeSelectBalanceEntities } from '../../App/selectors';
 import { loadBuyCoinError, loadBuyCoinSuccess } from '../actions';
 import { makeSelectPricesEntities } from '../selectors';
-import { NUMCOIN, APPROPRIATE_ERROR_UTXOS } from '../constants';
+import { NUMCOIN } from '../constants';
 
 const debug = require('debug')(
   'atomicapp:containers:DexPage:saga:load-buy-coin-process'
@@ -36,7 +36,7 @@ export default function* loadBuyCoinProcess({ payload, time = intervalTime }) {
     const relvolume = floor(Number(amount * price.get('price')), 8);
     const dexfee = floor(relvolume / 777, 8);
     if (
-      relvolume * NUMCOIN + 2 * dexfee * NUMCOIN + fee * NUMCOIN >=
+      relvolume * NUMCOIN + dexfee * NUMCOIN + 2 * fee * NUMCOIN >=
       Number(balance.get('balance') * NUMCOIN).toFixed(0)
     ) {
       throw new Error('Not enough balance!');
@@ -46,28 +46,53 @@ export default function* loadBuyCoinProcess({ payload, time = intervalTime }) {
     const buyparams = {
       base: basecoin,
       rel: paymentcoin,
-      relvolume: +relvolume.toFixed(8),
+      volume: +relvolume.toFixed(8),
       price: +price.get('bestPrice').toFixed(8)
     };
 
-    const result = yield call([api, 'buy'], buyparams);
+    const { result, error } = yield call([api, 'buy'], buyparams);
 
-    if (result.error) {
-      if (result.error === APPROPRIATE_ERROR_UTXOS) {
-        throw new Error('Please try a different amount to pay (1/2 or 2x)');
-      }
-      throw new Error(result.error);
+    if (error) {
+      throw new Error(error);
     }
-    if (result.pending) {
-      result.pending.bobsmartaddress = basesmartaddress;
-      result.pending.requested = {
-        bobAmount: amount,
-        aliceAmount: amount * price.get('bestPrice')
-      };
-      result.pending.alicesmartaddress = paymentsmartaddress;
-      return yield put(loadBuyCoinSuccess(result.pending));
-    }
-    yield call(delay, time);
+
+    // expiration
+    if (!result.expiration)
+      result.expiration = floor(Date.now() / 1000, 0) + 30;
+
+    // timeleft
+    if (!result.timeleft) result.timeleft = 30; // 30s
+
+    // bob
+    result.bob = basecoin;
+
+    // basevalue
+    result.base_amount = floor(result.base_amount, 8);
+    result.basevalue = result.base_amount;
+
+    // alice
+    result.alice = paymentcoin;
+
+    // relvalue
+    result.rel_amount = floor(result.rel_amount, 8);
+    result.relvalue = result.rel_amount;
+
+    // tradeid
+    result.tradeid = result.uuid;
+
+    // requestid
+    result.requestid = 0;
+
+    // quoteid
+    result.requestid = 0;
+
+    result.bobsmartaddress = basesmartaddress;
+    result.requested = {
+      bobAmount: amount,
+      aliceAmount: amount * price.get('bestPrice')
+    };
+    result.alicesmartaddress = paymentsmartaddress;
+    return yield put(loadBuyCoinSuccess(result));
   } catch (err) {
     return yield put(loadBuyCoinError(err.message));
   } finally {

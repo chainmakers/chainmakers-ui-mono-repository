@@ -26,13 +26,17 @@ import { formatDate, floor } from 'barterdex-utilities';
 import { BuyButton } from 'barterdex-components';
 import explorer from '../../lib/explorer';
 import getCoinMemoize from '../../components/CryptoIcons';
-import { STATE_SWAPS, SWAP_TX_DEFAULT } from './constants';
+import CoinSelectable from '../../components/CoinSelectable';
+import {
+  STATE_SWAPS,
+  SWAP_TX_DEFAULT,
+  FINISHED_SWAPS_STATE
+} from './constants';
 import { closeDetailModal } from './actions';
 import {
   makeSelectSwapDetailModal,
   makeSelectSwapInDetailModal
 } from './selectors';
-import CoinSelectable from './components/CoinSelectable';
 
 const debug = require('debug')('atomicapp:containers:DexPage:SwapDetailModal');
 
@@ -122,6 +126,14 @@ const styles = theme => ({
   swapDetail__ListItemRight: {
     top: 12,
     transform: 'none'
+  },
+
+  root__warningPlate: {
+    textAlign: 'center',
+    padding: 12,
+    border: `1px dashed ${theme.colors.warning}`,
+    borderRadius: 4,
+    width: '100%'
   }
 });
 
@@ -137,7 +149,6 @@ type Props = {
 };
 
 export class SwapDetail extends React.PureComponent<Props> {
-
   renderNotFound = () => {
     const { classes } = this.props;
     return (
@@ -322,6 +333,8 @@ export class SwapDetail extends React.PureComponent<Props> {
 
   renderSwap = () => {
     const { swap, classes, onClose } = this.props;
+    const swapsLoading = swap.get('status') !== FINISHED_SWAPS_STATE;
+    const swapsError = swap.get('error');
     return (
       <React.Fragment>
         <CardHeader
@@ -489,6 +502,16 @@ export class SwapDetail extends React.PureComponent<Props> {
                   </ListItemSecondaryAction>
                 </ListItem>
               </List>
+              {!swapsLoading && swapsError && (
+                <div className={classes.root__warningPlate}>
+                  <Typography variant="button" gutterBottom>
+                    Error
+                  </Typography>
+                  <Typography gutterBottom>
+                    {swapsError.get('message')}
+                  </Typography>
+                </div>
+              )}
             </Grid>
             <BuyButton
               color="primary"

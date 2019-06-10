@@ -12,6 +12,7 @@ import listenForLoadingBalance, {
   handlingLoadBalance
 } from '../balance';
 import data from '../../../__tests__/app-state.json';
+import balance from '../../../__tests__/balance.json';
 
 const TIMEOUT = 20 * 1000;
 const store = fromJS(data);
@@ -87,11 +88,7 @@ describe('containers/App/saga/balance/handlingLoadBalance', () => {
         .reply(200, (uri, body, cb) => {
           const { method } = JSON.parse(body);
           if (method === 'my_balance') {
-            cb(null, {
-              address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
-              balance: 6502.66989074,
-              coin: 'BEER'
-            });
+            cb(null, balance);
           }
           if (method === 'getfee') {
             cb(null, {
@@ -118,7 +115,7 @@ describe('containers/App/saga/balance/handlingLoadBalance', () => {
           payload: {
             coin: 'BEER',
             address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
-            balance: 6502.66989074,
+            balance: 6729.343289,
             fee: 0.00001
           }
         }

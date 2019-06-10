@@ -3,11 +3,16 @@ import { fromJS } from 'immutable';
 import { runSaga } from 'redux-saga';
 import handlingSearch, { setupSearchApiForSelectCoinModal } from '../search';
 import { searchSelectCoinModal } from '../../actions';
+import {
+  SELECT_COIN_MODAL_SETUP_SEARCH_API_SUCCESS,
+  SEARCH_STATE_SKIP_CREATION,
+  SELECT_COIN_MODAL_SEARCH_SUCCESS
+} from '../../constants';
 import data from '../../../__tests__/app-state.json';
 
 const store = fromJS(data);
 
-describe('containers/DexPage/saga/search', () => {
+describe('containers/CoinsSelectionDialog/saga/search', () => {
   it('should handle setupSearchApiForSelectCoinModal correctly', async done => {
     let dispatched = [];
 
@@ -20,7 +25,7 @@ describe('containers/DexPage/saga/search', () => {
     ).done;
     expect(dispatched).toEqual([
       {
-        type: 'atomicapp/DexPage/SELECT_COIN_MODAL_SETUP_SEARCH_API_SUCCESS',
+        type: SELECT_COIN_MODAL_SETUP_SEARCH_API_SUCCESS,
         payload: [
           {
             urls: ['electrum1.cipig.net:10000', 'electrum2.cipig.net:10000'],
@@ -189,9 +194,7 @@ describe('containers/DexPage/saga/search', () => {
       },
       setupSearchApiForSelectCoinModal
     ).done;
-    expect(dispatched).toEqual([
-      { type: 'atomicapp/DexPage/SEARCH_STATE_SKIP_CREATION' }
-    ]);
+    expect(dispatched).toEqual([{ type: SEARCH_STATE_SKIP_CREATION }]);
     expect(saga).toEqual(1);
     done();
   });
@@ -363,7 +366,7 @@ describe('containers/DexPage/saga/search', () => {
             urls: ['electrum1.cipig.net:10024', 'electrum2.cipig.net:10024']
           }
         ],
-        type: 'atomicapp/DexPage/SELECT_COIN_MODAL_SEARCH_SUCCESS'
+        type: SELECT_COIN_MODAL_SEARCH_SUCCESS
       }
     ]);
     expect(saga).toEqual(1);
@@ -383,7 +386,7 @@ describe('containers/DexPage/saga/search', () => {
         payload: [
           { id: 0, market_cap: 97822306639, name: 'Bitcoin', symbol: 'BTC' }
         ],
-        type: 'atomicapp/DexPage/SELECT_COIN_MODAL_SEARCH_SUCCESS'
+        type: SELECT_COIN_MODAL_SEARCH_SUCCESS
       }
     ]);
     expect(saga).toEqual(1);
@@ -400,7 +403,7 @@ describe('containers/DexPage/saga/search', () => {
     expect(dispatched).toEqual([
       {
         payload: [],
-        type: 'atomicapp/DexPage/SELECT_COIN_MODAL_SEARCH_SUCCESS'
+        type: SELECT_COIN_MODAL_SEARCH_SUCCESS
       }
     ]);
     expect(saga).toEqual(1);

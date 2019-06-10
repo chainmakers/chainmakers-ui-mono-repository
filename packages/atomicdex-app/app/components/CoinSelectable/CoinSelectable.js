@@ -7,7 +7,7 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
-const debug = require('debug')('atomicapp:containers:DexPage:CoinSelectable');
+const debug = require('debug')('atomicapp:components:CoinSelectable');
 
 const styles = () => ({
   btn: {
@@ -78,7 +78,9 @@ type Props = {
   // eslint-disable-next-line flowtype/no-weak-types
   data?: string,
   className?: string,
-  price?: Node | null
+  price?: Node | null,
+  // eslint-disable-next-line flowtype/no-weak-types
+  style: Object
 };
 
 class CoinSelectable extends React.PureComponent<Props> {
@@ -92,7 +94,8 @@ class CoinSelectable extends React.PureComponent<Props> {
     onClick: null,
     data: '',
     className: '',
-    dispatchLoadPrice: () => {}
+    dispatchLoadPrice: () => {},
+    style: {}
   };
 
   static displayName = 'CoinSelectable';
@@ -128,7 +131,8 @@ class CoinSelectable extends React.PureComponent<Props> {
       subTitle,
       selected,
       disabled,
-      price
+      price,
+      style
     } = this.props;
 
     const buttonClasses = ClassNames(classes.btn, className, {
@@ -145,6 +149,7 @@ class CoinSelectable extends React.PureComponent<Props> {
         className={buttonClasses}
         focusVisibleClassName={classes.focusVisible}
         onClick={this.onClick}
+        style={style}
       >
         <span className={classes.btn__content}>
           {icon}

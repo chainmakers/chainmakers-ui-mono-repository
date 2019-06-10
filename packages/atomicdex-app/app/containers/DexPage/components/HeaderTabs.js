@@ -36,7 +36,7 @@ const styles = theme => ({
   }
 });
 
-type Props = {
+type IHeaderTabsProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   currentSwaps: List<*>,
   // eslint-disable-next-line flowtype/no-weak-types
@@ -46,7 +46,7 @@ type Props = {
   value: number
 };
 
-class HeaderTabs extends React.PureComponent<Props> {
+class HeaderTabs extends React.PureComponent<IHeaderTabsProps> {
   render() {
     debug(`render`);
     const { value, classes, currentSwaps, handleChange } = this.props;
@@ -74,10 +74,10 @@ class HeaderTabs extends React.PureComponent<Props> {
                 className={classes.buyTabs__tablabel}
                 classes={{ badge: classes.buyTabs__badge }}
               >
-                My Orders
+                My Swaps
               </Badge>
             ) : (
-              'My Orders'
+              'My Swaps'
             )
           }
           className={classes.buyTabs__tab}

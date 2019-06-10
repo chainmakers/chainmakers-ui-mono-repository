@@ -52,8 +52,6 @@ export const STATE_SWAPS = [
 ];
 
 // https://github.com/KomodoPlatform/Documentation/blob/master/docs/source/barterDEX/MarketmakerErrors.rst#marketmaker-error-codes
-export const APPROPRIATE_ERROR_UTXOS =
-  'cant find a deposit that is close enough in size. make another deposit that is just a bit larger than what you want to trade';
 export const SWAP_TX_DEFAULT =
   '0000000000000000000000000000000000000000000000000000000000000000';
 
@@ -70,16 +68,6 @@ export const SELECT_COIN_MODAL_CLOSE =
   'atomicapp/DexPage/SELECT_COIN_MODAL_CLOSE';
 export const SELECT_COIN_MODAL_CLICK =
   'atomicapp/DexPage/SELECT_COIN_MODAL_CLICK';
-export const SELECT_COIN_MODAL_SEARCH =
-  'atomicapp/DexPage/SELECT_COIN_MODAL_SEARCH';
-export const SELECT_COIN_MODAL_SEARCH_SUCCESS =
-  'atomicapp/DexPage/SELECT_COIN_MODAL_SEARCH_SUCCESS';
-export const SELECT_COIN_MODAL_SETUP_SEARCH_API =
-  'atomicapp/DexPage/SELECT_COIN_MODAL_SETUP_SEARCH_API';
-export const SELECT_COIN_MODAL_SETUP_SEARCH_API_SUCCESS =
-  'atomicapp/DexPage/SELECT_COIN_MODAL_SETUP_SEARCH_API_SUCCESS';
-export const SELECT_COIN_MODAL_SETUP_SEARCH_API_ERROR =
-  'atomicapp/DexPage/SELECT_COIN_MODAL_SETUP_SEARCH_API_ERROR';
 
 export const COIN_PAYMENT_SELECT = 'atomicapp/DexPage/COIN_PAYMENT_SELECT';
 
@@ -87,14 +75,12 @@ export const NA = 'N/A';
 
 export const DEXFEE = 777;
 export const NUMCOIN = 100000000;
-export const BUFF_PRICES = 1.05 * NUMCOIN; // 5%
+export const BUFF_PRICES = 1.01 * NUMCOIN; // 1%
 // export const BUFF_PRICES = 1.0 * NUMCOIN; // 0%
 
 // SEARCH STATUS
 export const SEARCH_STATE_NULL = 'atomicapp/DexPage/SEARCH_STATE_NULL';
 export const SEARCH_STATE_CREATE = 'atomicapp/DexPage/SEARCH_STATE_CREATE';
-export const SEARCH_STATE_SKIP_CREATION =
-  'atomicapp/DexPage/SEARCH_STATE_SKIP_CREATION';
 export const SEARCH_STATE_READY = 'atomicapp/DexPage/SEARCH_STATE_READY';
 
 // Joyride actions

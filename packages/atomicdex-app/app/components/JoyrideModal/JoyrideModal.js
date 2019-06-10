@@ -33,8 +33,6 @@ const styles = theme => ({
   }
 });
 
-const i = 0;
-
 type IJoyrideModalProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   classes: Object,

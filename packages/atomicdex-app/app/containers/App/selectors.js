@@ -95,10 +95,9 @@ const makeSelectBalanceAvailable = () =>
         .filter(item => item.get('status') === ENABLE)
         .map(e => e.get('symbol'));
       const entities = balanceState.get('entities');
-
       return list
         .map(key => entities.get(key))
-        .filter(value => value.get('balance'));
+        .filter(value => value.get('balance') > 0);
     }
   );
 

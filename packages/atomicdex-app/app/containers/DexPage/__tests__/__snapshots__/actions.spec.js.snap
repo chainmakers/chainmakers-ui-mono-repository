@@ -147,12 +147,6 @@ Object {
 }
 `;
 
-exports[`containers/DexPage/actions/skipSearchStateCreation should skipSearchStateCreation should create skipSearchStateCreation action 1`] = `
-Object {
-  "type": "atomicapp/DexPage/SEARCH_STATE_SKIP_CREATION",
-}
-`;
-
 exports[`containers/DexPage/actions/timeoutSwap should timeoutSwap should create timeoutSwap action 1`] = `
 Object {
   "payload": Object {

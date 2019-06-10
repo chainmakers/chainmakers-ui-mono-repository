@@ -6,6 +6,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import UndrawBugFixing from './undraw_bug_fixing.svg';
 
+const debug = require('debug')('atomicapp:components:ErrorBoundary');
+
 const styles = () => ({
   errorBoundary__container: {
     position: 'absolute',
@@ -37,8 +39,6 @@ type IErrorBoundaryProps = {
 type IErrorBoundaryState = {
   hasError: boolean
 };
-
-const debug = require('debug')('atomicapp:components:ErrorBoundary');
 
 class ErrorBoundary extends React.Component<
   IErrorBoundaryProps,
