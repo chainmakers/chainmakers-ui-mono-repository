@@ -2346,6 +2346,8 @@ const data = [
   {
     coin: 'LABS',
     name: 'LABS',
+    asset: 'LABS',
+    txversion: 4,
     urls: [
       'electrum1.cipig.net:10019',
       'electrum2.cipig.net:10019',
