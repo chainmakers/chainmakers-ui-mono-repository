@@ -2357,11 +2357,10 @@ balanced-match@^1.0.0:
     redux-saga "^0.16.2"
 
 "barterdex-utilities@file:../barterdex-utilities":
-  version "0.17.1"
+  version "0.18.0"
   dependencies:
     bigi "^1.4.2"
     bitgo-utxo-lib "^1.5.0"
-    js-sha256 "^0.9.0"
 
 base-x@^3.0.2:
   version "3.0.5"
@@ -7306,10 +7305,6 @@ js-queue@2.0.0:
 js-search@^1.4.2:
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/js-search/-/js-search-1.4.2.tgz#59a91e117d6badb20bf0d7643ba7577d5a81d7e2"
-
-js-sha256@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/js-sha256/-/js-sha256-0.9.0.tgz#0b89ac166583e91ef9123644bd3c5334ce9d0966"
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"

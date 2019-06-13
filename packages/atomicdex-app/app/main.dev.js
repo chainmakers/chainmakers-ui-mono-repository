@@ -84,7 +84,10 @@ app.on('ready', async () => {
     width: loginWindowSize.width,
     height: loginWindowSize.height,
     minWidth: minWindowSize.width,
-    minHeight: minWindowSize.height
+    minHeight: minWindowSize.height,
+    webPreferences: {
+      preload: `${__dirname}/preloader.js`
+    }
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);

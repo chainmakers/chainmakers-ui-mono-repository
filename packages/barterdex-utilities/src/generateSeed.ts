@@ -1,8 +1,8 @@
-import { sha256 } from 'js-sha256';
 import { fromBuffer } from 'bigi';
 import { ECPair } from'bitgo-utxo-lib';
 import wordlist from './wordlist';
 import { choice } from './random';
+import sha256 from './sha256';
 
 const network = {
   kmd: {
@@ -45,7 +45,7 @@ export function generateSeed() {
 }
 
 export function generateWif(seed) {
-  const sha256Obj = sha256.create();
+  const sha256Obj = new sha256();
   const bytes = sha256Obj.update(seed.trim()).array();
 
   bytes[0] &= 248;
