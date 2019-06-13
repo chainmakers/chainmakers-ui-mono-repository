@@ -7,8 +7,6 @@ const getFromEnv = parseInt(process.env.ELECTRON_IS_DEV, 10) === 1;
 
 const isDev = isEnvSet ? getFromEnv : !app.isPackaged;
 
-console.log(isDev, 'isDev');
-
 process.once('loaded', () => {
   const { HOT, NODE_ENV, PORT, DEBUG_PROD } = process.env;
   // Security precaution
