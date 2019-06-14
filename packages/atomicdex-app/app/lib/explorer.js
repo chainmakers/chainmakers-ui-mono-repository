@@ -1,4 +1,6 @@
 // @flow
+import values from 'lodash/values';
+import { parseURL } from 'barterdex-utilities';
 
 // FROM AGAMA WALLET
 // https://github.com/pbca26/agama-wallet-lib/blob/dev/src/coin-helpers.js#L58
@@ -111,7 +113,9 @@ const EXPLORER_LIST = {
   KOIN: 'http://3.0.32.41:3001/'
 };
 
-module.exports = {
+const LIST_HOSTS = values(EXPLORER_LIST).map(e => parseURL(e).host);
+
+export default {
   tx: function tx(t: string, coin: string) {
     const l = EXPLORER_LIST[coin];
     if (!l) return '#not-found';
@@ -121,5 +125,9 @@ module.exports = {
     const l = EXPLORER_LIST[coin];
     if (!l) return '#not-found';
     return `${l}/address/${addr}`;
+  },
+  isValid: function isValid(url: string) {
+    const p = parseURL(url);
+    return LIST_HOSTS.indexOf(p.host) !== -1;
   }
 };

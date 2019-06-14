@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { shell } from 'electron';
 import type { List } from 'immutable';
 import { MemoizedRender } from 'react-memoize';
 import { withStyles } from '@material-ui/core/styles';
@@ -13,6 +12,7 @@ import TableHead from '@material-ui/core/TableHead';
 import { formatDate } from 'barterdex-utilities';
 import { Line } from '../../../components/placeholder';
 import explorer from '../../../lib/explorer';
+import openNewWindow from '../../../utils/openNewWindow';
 
 const debug = require('debug')(
   'atomicapp:containers:WalletPage:TransactionsTable'
@@ -75,8 +75,7 @@ type Props = {
 class TransactionsTable extends React.PureComponent<Props> {
   onClickTranstactions = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
-    // https://github.com/electron/electron/blob/master/docs/api/shell.md#shellopenexternalurl
-    shell.openExternal(evt.target.href);
+    openNewWindow(evt.target.href);
   };
 
   renderRecord = (t, k) => {

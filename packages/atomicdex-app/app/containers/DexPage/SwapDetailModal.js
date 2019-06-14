@@ -2,7 +2,6 @@
 import React from 'react';
 import type { Node } from 'react';
 // import ClassNames from 'classnames';
-import { shell } from 'electron';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import type { Dispatch } from 'redux';
@@ -25,6 +24,7 @@ import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import { formatDate, floor } from 'barterdex-utilities';
 import { BuyButton } from 'barterdex-components';
 import explorer from '../../lib/explorer';
+import openNewWindow from '../../utils/openNewWindow';
 import getCoinMemoize from '../../components/CryptoIcons';
 import CoinSelectable from '../../components/CoinSelectable';
 import {
@@ -165,8 +165,7 @@ export class SwapDetail extends React.PureComponent<Props> {
 
   openExplorer = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
-    // https://github.com/electron/electron/blob/master/docs/api/shell.md#shellopenexternalurl
-    shell.openExternal(evt.target.href);
+    openNewWindow(evt.target.href);
   };
 
   renderTXLink = (title: string, value, link: string | Node) => {

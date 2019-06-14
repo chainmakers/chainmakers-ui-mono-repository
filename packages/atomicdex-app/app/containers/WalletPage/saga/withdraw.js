@@ -2,10 +2,10 @@
 // @docs
 // https://github.com/react-boilerplate/react-boilerplate/issues/1277#issuecomment-263267639
 import React from 'react';
-import { shell } from 'electron';
 import { put } from 'redux-saga/effects';
 import api from '../../../lib/barter-dex-api';
 import explorer from '../../../lib/explorer';
+import openNewWindow from '../../../utils/openNewWindow';
 import { openSnackbars } from '../../Snackbars/actions';
 import { loadWithdrawBalanceSuccess } from '../../App/actions';
 import { loadWithdrawSuccess, loadWithdrawError } from '../actions';
@@ -23,8 +23,7 @@ export function generateMessage(txHash, coin) {
         href={txid}
         onClick={(evt: SyntheticInputEvent<>) => {
           evt.preventDefault();
-          // https://github.com/electron/electron/blob/master/docs/api/shell.md#shellopenexternalurl
-          shell.openExternal(evt.target.href);
+          openNewWindow(evt.target.href);
         }}
       >
         here

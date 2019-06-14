@@ -10,12 +10,14 @@
  *
  * @flow
  */
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, shell } from 'electron';
+import { URL } from 'url';
 import { autoUpdater } from 'electron-updater';
 import MenuBuilder from './main/menu';
 import config from './main/config';
 import setupMarketmaker from './main/plugins/marketmaker';
 import { applicationCrashedDialog } from './main/dialogs';
+import explorer from './lib/explorer';
 
 const debug = require('debug')('atomicapp:main');
 
@@ -126,7 +128,17 @@ app.on('ready', async () => {
 // https://electronjs.org/docs/tutorial/security#12-disable-or-limit-navigation
 app.on('web-contents-created', (_, contents) => {
   contents.on('will-navigate', (event, navigationUrl) => {
-    debug(`block ${navigationUrl}`);
+    debug(`block navigate to ${navigationUrl}`);
     event.preventDefault();
+  });
+
+  contents.on('new-window', async (event, navigationUrl) => {
+    event.preventDefault();
+    const parsedUrl = new URL(navigationUrl);
+    if (explorer.isValid(parsedUrl.origin)) {
+      await shell.openExternal(navigationUrl);
+    } else {
+      debug(`block open new window ${navigationUrl}`);
+    }
   });
 });
