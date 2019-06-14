@@ -122,3 +122,11 @@ app.on('ready', async () => {
   // eslint-disable-next-line
   new AppUpdater();
 });
+
+// https://electronjs.org/docs/tutorial/security#12-disable-or-limit-navigation
+app.on('web-contents-created', (_, contents) => {
+  contents.on('will-navigate', (event, navigationUrl) => {
+    debug(`block ${navigationUrl}`);
+    event.preventDefault();
+  });
+});
