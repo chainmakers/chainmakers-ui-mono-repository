@@ -12,11 +12,13 @@
  */
 import { app, BrowserWindow, shell } from 'electron';
 import { URL } from 'url';
+import { parseURL } from 'barterdex-utilities';
 import { autoUpdater } from 'electron-updater';
 import MenuBuilder from './main/menu';
 import config from './main/config';
 import setupMarketmaker from './main/plugins/marketmaker';
 import { applicationCrashedDialog } from './main/dialogs';
+import blockIP from './main/setPermissionRequestHandler';
 import explorer from './lib/explorer';
 
 const debug = require('debug')('atomicapp:main');
@@ -78,6 +80,7 @@ app.on('ready', async () => {
   ) {
     await installExtensions();
   }
+  blockIP();
 
   const loginWindowSize = config.get('loginWindowSize');
   const minWindowSize = config.get('minWindowSize');
@@ -135,6 +138,7 @@ app.on('web-contents-created', (_, contents) => {
   contents.on('new-window', async (event, navigationUrl) => {
     event.preventDefault();
     const parsedUrl = new URL(navigationUrl);
+    console.log(parseURL(navigationUrl), parsedUrl);
     if (explorer.isValid(parsedUrl.origin)) {
       await shell.openExternal(navigationUrl);
     } else {
