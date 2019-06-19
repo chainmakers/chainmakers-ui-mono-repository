@@ -18,6 +18,8 @@ import CheckNodeEnv from '../internals/scripts/CheckNodeEnv';
 
 CheckNodeEnv('development');
 
+const pkg = require('../package.json');
+
 const port = process.env.PORT || 1212;
 const publicPath = `http://localhost:${port}/dist`;
 const dll = path.join(__dirname, '..', 'dll');
@@ -29,32 +31,42 @@ const requiredByDLLConfig = module.parent.filename.includes(
 /**
  * Warn if the DLL is not built
  */
-if (!requiredByDLLConfig && !(fs.existsSync(dll) && fs.existsSync(manifest))) {
-  console.log(
-    chalk.black.bgYellow.bold(
-      'The DLL files are missing. Sit back while we build them for you with "yarn build-dll"'
-    )
-  );
-  execSync('yarn build-dll');
-}
+// if (!requiredByDLLConfig && !(fs.existsSync(dll) && fs.existsSync(manifest))) {
+//   console.log(
+//     chalk.black.bgYellow.bold(
+//       'The DLL files are missing. Sit back while we build them for you with "yarn build-dll"'
+//     )
+//   );
+//   execSync('yarn build-dll');
+// }
 
 export default merge.smart(baseConfig, {
-  devtool: 'inline-source-map',
+  // devtool: 'inline-source-map',
+  devtool: 'cheap-module-source-map',
+  // devtool: 'eval-source-map',
+  // performance: {
+  //   hints: false,
+  // },
 
   mode: 'development',
 
-  target: 'electron-renderer',
+  // target: 'electron-renderer',
+  target: 'web', // Make web variables accessible to webpack, e.g. window
 
   entry: [
     'react-hot-loader/patch',
     `webpack-dev-server/client?http://localhost:${port}/`,
     'webpack/hot/only-dev-server',
+    // require.resolve('react-app-polyfill/ie11'),
+    // '@babel/polyfill',
     require.resolve('../app/index')
   ],
 
   output: {
     publicPath: `http://localhost:${port}/dist/`,
     filename: 'renderer.dev.js'
+    // libraryTarget: null
+    // libraryTarget: undefined
   },
 
   module: {
@@ -63,9 +75,10 @@ export default merge.smart(baseConfig, {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: require.resolve('babel-loader'),
           options: {
-            cacheDirectory: true
+            cacheDirectory: true,
+            cacheCompression: false
           }
         }
       },
@@ -197,13 +210,14 @@ export default merge.smart(baseConfig, {
   },
 
   plugins: [
-    requiredByDLLConfig
-      ? null
-      : new webpack.DllReferencePlugin({
-          context: path.join(__dirname, '..', 'dll'),
-          manifest: require(manifest),
-          sourceType: 'var'
-        }),
+    // requiredByDLLConfig
+    //   ? null
+    //   : new webpack.DllReferencePlugin({
+    //       context: path.join(__dirname, '..', 'dll'),
+    //       manifest: require(manifest),
+    //       sourceType: 'var'
+    //       // sourceType: 'umd'
+    //     }),
 
     new webpack.HotModuleReplacementPlugin({
       multiStep: true

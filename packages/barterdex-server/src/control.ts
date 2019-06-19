@@ -8,6 +8,7 @@ import {
 import killProcess from './killprocess';
 import { StateType } from "./schema";
 
+/* tslint:disable no-var-requires */
 const debug = require("debug")("barterdex-api:server:control");
 
 type StartConfigType = {
@@ -43,12 +44,12 @@ export default function controlFactory(state: StateType) {
       if (!marketmakerFile) {
         marketmakerFile = getMarketmakerPlatformPath(state.bin);
       }
-      
+
       return new Promise(async (resolve, reject) => {
         try {
           const opts: {
             cwd: string,
-            detached?: boolean 
+            detached?: boolean
           } = {
             cwd: config.userData
           };
@@ -56,7 +57,7 @@ export default function controlFactory(state: StateType) {
           if (!fs.existsSync(config.userData)) {
             fs.mkdirSync(config.userData);
           }
-          
+
           if (options.detached) {
             opts.detached = true;
           }

@@ -43,6 +43,7 @@ export default function httpProvider(
     },
     // eslint-disable-next-line flowtype/no-weak-types
     privateCall(params: Object, options: OptionsType = DEFAULT_OPTION) {
+      /* tslint:disable no-shadowed-variable */
       const userpass = this.getUserpass();
       const source = axios.CancelToken.source();
       if (!userpass) {

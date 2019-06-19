@@ -18,7 +18,8 @@ export default merge.smart(baseConfig, {
 
   mode: 'production',
 
-  target: 'electron-renderer',
+  // target: 'electron-renderer',
+  target: 'web',
 
   entry: path.join(__dirname, '..', 'app/index'),
 

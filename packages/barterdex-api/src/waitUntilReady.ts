@@ -11,6 +11,7 @@ export default function waitUntilReadyFactory() {
             resolve({
               ok: "done"
             });
+            /* tslint:disable no-empty */
           } catch (_) {}
         }, 100);
 

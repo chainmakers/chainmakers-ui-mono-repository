@@ -10,8 +10,8 @@
  *
  * @flow
  */
+import path from 'path';
 import { app, BrowserWindow, shell } from 'electron';
-import { URL } from 'url';
 import { parseURL } from 'barterdex-utilities';
 import { autoUpdater } from 'electron-updater';
 import MenuBuilder from './main/menu';
@@ -46,7 +46,7 @@ if (
   process.env.DEBUG_PROD === 'true'
 ) {
   require('electron-debug')();
-  const path = require('path');
+  // const path = require('path');
   const p = path.join(__dirname, '..', 'app', 'node_modules');
   require('module').globalPaths.push(p);
 }
@@ -91,7 +91,11 @@ app.on('ready', async () => {
     minWidth: minWindowSize.width,
     minHeight: minWindowSize.height,
     webPreferences: {
-      preload: `${__dirname}/preloader.js`
+      nodeIntegration: false,
+      // nodeIntegrationInWorker: false,
+      // contextIsolation: false,
+      preload: path.join(__dirname, 'preloader.js')
+      // nativeWindowOpen: true
     }
   });
 
@@ -137,12 +141,26 @@ app.on('web-contents-created', (_, contents) => {
 
   contents.on('new-window', async (event, navigationUrl) => {
     event.preventDefault();
-    const parsedUrl = new URL(navigationUrl);
-    console.log(parseURL(navigationUrl), parsedUrl);
-    if (explorer.isValid(parsedUrl.origin)) {
+    const parsedUrl = parseURL(navigationUrl);
+    if (explorer.isValid(parsedUrl.host)) {
       await shell.openExternal(navigationUrl);
     } else {
       debug(`block open new window ${navigationUrl}`);
     }
+  });
+
+  contents.on('will-attach-webview', (event, webPreferences, params) => {
+    // Strip away preload scripts if unused or verify their location is legitimate
+    delete webPreferences.preload;
+    delete webPreferences.preloadURL;
+
+    // Disable Node.js integration
+    webPreferences.nodeIntegration = false;
+
+    // Verify URL being loaded
+    // if (!params.src.startsWith('https://example.com/')) {
+    //   event.preventDefault()
+    // }
+    console.log(params.src, 'params.src');
   });
 });

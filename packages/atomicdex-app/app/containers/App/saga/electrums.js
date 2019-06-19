@@ -2,7 +2,7 @@
 import { put, select, cancelled } from 'redux-saga/effects';
 import { CANCEL } from 'redux-saga';
 import { floor } from 'barterdex-utilities';
-import api from '../../../lib/barter-dex-api';
+import api from 'utils/barterdex-api';
 import { INITIALIZATION } from '../../../constants';
 import { ELECTRUM_ADD, ALREADY_INIT_LIST } from '../constants';
 import {

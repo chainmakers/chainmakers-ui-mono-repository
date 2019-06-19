@@ -3,7 +3,7 @@
 import nock from 'nock';
 import { fromJS } from 'immutable';
 import { runSaga } from 'redux-saga';
-import api from '../../../../lib/barter-dex-api';
+import api from 'utils/barterdex-api';
 import { loadOrderbook, reloadOrderbook } from '../../actions';
 import data from '../../../__tests__/app-state.json';
 import orderbook from '../../../__tests__/orderbook.json';

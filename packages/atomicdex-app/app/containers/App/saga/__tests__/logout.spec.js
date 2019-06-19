@@ -1,8 +1,8 @@
 // @flow
-import ipc from 'electron-better-ipc';
+// import ipc from 'electron-better-ipc';
 import { put, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import api from '../../../../lib/barter-dex-api';
+import api from 'utils/barterdex-api';
 import { routes } from '../../../../constants';
 import logoutFlow from '../logout';
 

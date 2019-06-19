@@ -1,0 +1,9 @@
+{
+  "main": {
+    "extraEntries": ["@/preloader.js"]
+  },
+  "renderer": {
+    "webpackConfig": "webpack.renderer.additions.js"
+  },
+  "whiteListedModules": ["react", "react-dom"]
+}

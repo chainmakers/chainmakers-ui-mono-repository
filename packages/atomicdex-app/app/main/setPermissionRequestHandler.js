@@ -1,6 +1,6 @@
 // @flow
 import { session } from 'electron';
-import url from 'url';
+import { parseURL } from 'barterdex-utilities';
 
 const debug = require('debug')('atomicapp:main:ipblock');
 
@@ -12,16 +12,19 @@ export function ipblock(details, callback) {
   //   if (error) console.error('Failed to register protocol')
   // })
 
-  // console.log(details.url);
-  const matches = url.parse(details.url);
-  const whitelist = /fonts.gstatic.com|fonts.googleapis.com|127.0.0.1:7783|localhost:1212/gi;
+  const matches = parseURL(details.url);
+  const whitelist = /fonts.gstatic.com|fonts.googleapis.com|127.0.0.1|localhost/gi;
   if (
-    matches.protocol === 'file:' ||
-    matches.protocol === 'chrome-devtools:' ||
-    matches.protocol === 'chrome-extension:'
+    matches.scheme === 'file' ||
+    matches.scheme === 'chrome-devtools' ||
+    matches.scheme === 'chrome-extension'
   ) {
     callback({ cancel: false });
-  } else if (matches.protocol === 'https:' || matches.protocol === 'http:') {
+  } else if (
+    matches.scheme === 'https' ||
+    matches.scheme === 'http' ||
+    matches.scheme === 'ws'
+  ) {
     if (whitelist.test(matches.host)) {
       callback({ cancel: false });
     } else {
@@ -31,27 +34,28 @@ export function ipblock(details, callback) {
   } else {
     // we block all requests
     debug(`block request to ${matches.host}`);
-    callback({ cancel: false });
+    callback({ cancel: true });
   }
 }
 
 export default function initializeBlockingIP() {
   debug('setup');
-  session.defaultSession.webRequest.onBeforeRequest(['*://*./*'], ipblock);
-  session.defaultSession.setPermissionRequestHandler(
-    (webContents, permission, callback) => {
-      const url = webContents.getURL();
-      console.log(url, permission, 'permission');
-      if (permission === 'notifications') {
-        // Approves the permissions request
-        callback(true);
-      }
+  // session.defaultSession.setPermissionRequestHandler(null);
+  // session.defaultSession.setPermissionRequestHandler(
+  //   (webContents, permission, callback) => {
+  //     const url = webContents.getURL();
+  //     console.log(url, permission, 'permission');
+  //     if (permission === 'notifications') {
+  //       // Approves the permissions request
+  //       callback(true);
+  //     }
 
-      // Verify URL
-      if (!url.startsWith('https://example.com/')) {
-        // Denies the permissions request
-        return callback(false);
-      }
-    }
-  );
+  //     // Verify URL
+  //     if (!url.startsWith('https://example.com/')) {
+  //       // Denies the permissions request
+  //       return callback(false);
+  //     }
+  //   }
+  // );
+  session.defaultSession.webRequest.onBeforeRequest(['*://*./*'], ipblock);
 }

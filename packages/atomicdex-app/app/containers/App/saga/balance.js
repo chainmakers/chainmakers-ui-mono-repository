@@ -4,9 +4,9 @@
 import { put, select, cancelled } from 'redux-saga/effects';
 import { floor } from 'barterdex-utilities';
 import { CANCEL } from 'redux-saga';
+import api from 'utils/barterdex-api';
 import { ENABLE } from '../../../constants';
 import { BALANCE_LOAD, DISABLE_COINS } from '../constants';
-import api from '../../../lib/barter-dex-api';
 import { openSnackbars } from '../../Snackbars/actions';
 import { makeSelectBalance } from '../selectors';
 import { loadBalance, loadBalanceSuccess, loadBalanceError } from '../actions';

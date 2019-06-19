@@ -1,5 +1,5 @@
 import ipc from 'electron-better-ipc';
-import { Server } from 'barterdex-api';
+import Server from 'barterdex-server';
 import { app } from 'electron';
 import config from '../config';
 import startFactory from './startFactory';

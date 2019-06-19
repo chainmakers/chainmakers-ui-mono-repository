@@ -1,0 +1,3 @@
+# don't commit compiled files
+lib
+dist

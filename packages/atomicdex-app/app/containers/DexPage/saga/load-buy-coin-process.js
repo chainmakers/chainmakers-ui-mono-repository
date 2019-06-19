@@ -2,7 +2,7 @@
 import { put, call, select, cancelled } from 'redux-saga/effects';
 // import { delay } from 'redux-saga';
 import { floor } from 'barterdex-utilities';
-import api from '../../../lib/barter-dex-api';
+import api from 'utils/barterdex-api';
 import { makeSelectBalanceEntities } from '../../App/selectors';
 import { loadBuyCoinError, loadBuyCoinSuccess } from '../actions';
 import { makeSelectPricesEntities } from '../selectors';

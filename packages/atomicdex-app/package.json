@@ -23,7 +23,7 @@
     "package-linux": "yarn build && electron-builder build --linux",
     "package-win": "yarn build && electron-builder build --win --x64",
     "package-mac": "yarn build && electron-builder build --mac",
-    "postinstall": "yarn flow-typed && yarn build-dll && electron-builder install-app-deps package.json",
+    "postinstall": "yarn flow-typed && electron-builder install-app-deps package.json",
     "postlint-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{*{js,jsx,json},babelrc,eslintrc,prettierrc,stylelintrc}'",
     "postlint-styles-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{css,scss}'",
     "precommit": "lint-staged",
@@ -167,6 +167,7 @@
     "babel-loader": "^8.0.4",
     "babel-plugin-dev-expression": "^0.2.1",
     "babel-plugin-inline-react-svg": "1.1.0",
+    "babel-plugin-module-resolver": "^3.2.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
     "chalk": "^2.4.1",
     "concurrently": "^4.0.1",
@@ -231,6 +232,7 @@
     "barterdex-api": "file:../barterdex-api",
     "barterdex-components": "file:../barterdex-components",
     "barterdex-rssm": "file:../barterdex-rssm",
+    "barterdex-server": "file:../barterdex-server",
     "barterdex-utilities": "file:../barterdex-utilities",
     "classnames": "^2.2.6",
     "connected-react-router": "4.5.0",
@@ -276,5 +278,9 @@
     "npm": ">=6.x",
     "yarn": ">=1.x"
   },
-  "browserslist": "electron 1.6"
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "IE 10"
+  ]
 }

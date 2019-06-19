@@ -1,5 +1,5 @@
 // @flow
-import ipc from 'electron-better-ipc';
+// import ipc from 'electron-better-ipc';
 import { configManager } from 'barterdex-utilities';
 
 let config = null;
@@ -25,7 +25,6 @@ export async function setup() {
   config.set(c);
 
   // listen ipc event here
-
   return config;
 }
 

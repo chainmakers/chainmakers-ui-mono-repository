@@ -3,7 +3,7 @@
 // https://github.com/react-boilerplate/react-boilerplate/issues/1277#issuecomment-263267639
 import React from 'react';
 import { put } from 'redux-saga/effects';
-import api from '../../../lib/barter-dex-api';
+import api from 'utils/barterdex-api';
 import explorer from '../../../lib/explorer';
 import openNewWindow from '../../../utils/openNewWindow';
 import { openSnackbars } from '../../Snackbars/actions';

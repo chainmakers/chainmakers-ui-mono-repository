@@ -2,7 +2,7 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 import { put, call, select, cancelled } from 'redux-saga/effects';
 import { CANCEL, delay } from 'redux-saga';
-import api from '../../../lib/barter-dex-api';
+import api from 'utils/barterdex-api';
 import { openSnackbars } from '../../Snackbars/actions';
 import { makeSelectBalanceEntities } from '../../App/selectors';
 import { ORDER_BOB_SITE, ORDER_ALICE_SITE } from '../constants';
