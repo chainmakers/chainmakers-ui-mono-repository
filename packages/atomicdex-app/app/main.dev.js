@@ -92,10 +92,10 @@ app.on('ready', async () => {
     minHeight: minWindowSize.height,
     webPreferences: {
       nodeIntegration: false,
-      // nodeIntegrationInWorker: false,
-      // contextIsolation: false,
-      preload: path.join(__dirname, 'preloader.js')
-      // nativeWindowOpen: true
+      nodeIntegrationInWorker: false,
+      contextIsolation: false,
+      preload: path.join(__dirname, 'preloader.js'),
+      nativeWindowOpen: true
     }
   });
 

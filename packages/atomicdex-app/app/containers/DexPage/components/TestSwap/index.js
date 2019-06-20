@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
-import { cloneDeep, last } from 'lodash';
+// import { cloneDeep, last } from 'lodash';
+import { cloneDeep } from 'lodash';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import { loadSwapSuccess } from '../../../App/actions';

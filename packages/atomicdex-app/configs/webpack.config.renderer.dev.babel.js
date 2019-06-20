@@ -8,25 +8,26 @@
  */
 
 import path from 'path';
-import fs from 'fs';
+// import fs from 'fs';
 import webpack from 'webpack';
-import chalk from 'chalk';
+// import chalk from 'chalk';
 import merge from 'webpack-merge';
-import { spawn, execSync } from 'child_process';
+// import { spawn, execSync } from 'child_process';
+import { spawn } from 'child_process';
 import baseConfig from './webpack.config.base';
 import CheckNodeEnv from '../internals/scripts/CheckNodeEnv';
 
 CheckNodeEnv('development');
 
-const pkg = require('../package.json');
+// const pkg = require('../package.json');
 
 const port = process.env.PORT || 1212;
 const publicPath = `http://localhost:${port}/dist`;
-const dll = path.join(__dirname, '..', 'dll');
-const manifest = path.resolve(dll, 'renderer.json');
-const requiredByDLLConfig = module.parent.filename.includes(
-  'webpack.config.renderer.dev.dll'
-);
+// const dll = path.join(__dirname, '..', 'dll');
+// const manifest = path.resolve(dll, 'renderer.json');
+// const requiredByDLLConfig = module.parent.filename.includes(
+//   'webpack.config.renderer.dev.dll'
+// );
 
 /**
  * Warn if the DLL is not built
