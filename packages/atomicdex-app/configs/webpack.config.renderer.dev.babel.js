@@ -57,8 +57,6 @@ export default merge.smart(baseConfig, {
     'react-hot-loader/patch',
     `webpack-dev-server/client?http://localhost:${port}/`,
     'webpack/hot/only-dev-server',
-    // require.resolve('react-app-polyfill/ie11'),
-    // '@babel/polyfill',
     require.resolve('../app/index')
   ],
 
@@ -247,9 +245,20 @@ export default merge.smart(baseConfig, {
     })
   ],
 
+  // https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/config/webpack.config.js#L664
+  // Some libraries import Node modules but don't use them in the browser.
+  // Tell Webpack to provide empty mocks for them so importing them works.
   node: {
     __dirname: false,
-    __filename: false
+    __filename: false,
+    module: 'empty',
+    dgram: 'empty',
+    dns: 'mock',
+    fs: 'empty',
+    http2: 'empty',
+    net: 'empty',
+    tls: 'empty',
+    child_process: 'empty'
   },
 
   devServer: {
@@ -261,6 +270,8 @@ export default merge.smart(baseConfig, {
     inline: true,
     lazy: false,
     hot: true,
+    // https://github.com/webpack/webpack-dev-server/issues/1604#issuecomment-449465737
+    disableHostCheck: true,
     // NOTE: un comment this if you don't want to refresh the page
     // hotOnly: true,
     headers: { 'Access-Control-Allow-Origin': '*' },

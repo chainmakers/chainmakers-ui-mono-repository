@@ -4,19 +4,18 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { FormattedMessage, injectIntl } from 'react-intl';
-import type { IntlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
-import swal from 'sweetalert';
 import injectSaga from '../../utils/inject-saga';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import { routes } from '../../constants';
 import { EmptyLayout } from '../Layout';
+import { openSnackbars } from '../Snackbars/actions';
 import Passphrase from './components/Passphrase';
 import saga from './saga';
 import { login } from '../App/actions';
@@ -94,7 +93,8 @@ type ILoginPageProps = {
   error: Object | boolean,
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchLogin: Function,
-  intl: IntlShape
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchOpenSnackbars: Function
 };
 
 type ILoginPageState = {
@@ -106,34 +106,21 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
     passphrase: ''
   };
 
-  componentDidUpdate = prevProps => {
-    const { authenticated, error /* intl */ } = this.props;
-    // FIXME: we should remove this to improve UX
-    if (authenticated && !prevProps.authenticated) {
-      // swal(
-      //   'Success',
-      //   intl.formatMessage({
-      //     defaultMessage: 'Login Successful Message',
-      //     id: 'atomicapp.containers.LoginPage.login_successful_message'
-      //   }),
-      //   'success'
-      // );
-    }
+  componentDidUpdate = () => {
+    const { authenticated, dispatchOpenSnackbars, error } = this.props;
     if (!authenticated && error) {
-      swal('Something went wrong:', error.message, 'error');
+      dispatchOpenSnackbars(`Something went wrong: ${error.message}`);
     }
   };
 
   login = () => {
+    const { dispatchLogin, dispatchOpenSnackbars } = this.props;
     const { passphrase } = this.state;
     if (passphrase === '' || passphrase.length < 4) {
-      return swal(
-        'Oops!',
-        'The passphrase you entered is either empty or too short.',
-        'error'
+      return dispatchOpenSnackbars(
+        'Oops! The passphrase you entered is either empty or too short.'
       );
     }
-    const { dispatchLogin } = this.props;
     dispatchLogin({
       passphrase
     });
@@ -239,7 +226,8 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    dispatchLogin: (passphrase?: string) => dispatch(login(passphrase))
+    dispatchLogin: (passphrase?: string) => dispatch(login(passphrase)),
+    dispatchOpenSnackbars: (message: string) => dispatch(openSnackbars(message))
   };
 }
 
@@ -258,7 +246,6 @@ const withConnect = connect(
 const LoginPageWapper = compose(
   withSaga,
   withConnect,
-  injectIntl,
   withStyles(styles)
 )(LoginPage);
 

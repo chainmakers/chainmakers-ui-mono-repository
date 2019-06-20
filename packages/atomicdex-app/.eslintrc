@@ -69,5 +69,8 @@
         "config": "configs/webpack.config.eslint.js"
       }
     }
+  },
+  "globals": {
+    "ipc": true
   }
 }

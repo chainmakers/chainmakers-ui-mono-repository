@@ -148,19 +148,4 @@ app.on('web-contents-created', (_, contents) => {
       debug(`block open new window ${navigationUrl}`);
     }
   });
-
-  contents.on('will-attach-webview', (event, webPreferences, params) => {
-    // Strip away preload scripts if unused or verify their location is legitimate
-    delete webPreferences.preload;
-    delete webPreferences.preloadURL;
-
-    // Disable Node.js integration
-    webPreferences.nodeIntegration = false;
-
-    // Verify URL being loaded
-    // if (!params.src.startsWith('https://example.com/')) {
-    //   event.preventDefault()
-    // }
-    console.log(params.src, 'params.src');
-  });
 });
