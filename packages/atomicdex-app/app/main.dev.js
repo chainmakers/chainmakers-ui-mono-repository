@@ -95,7 +95,8 @@ app.on('ready', async () => {
       nodeIntegrationInWorker: false,
       contextIsolation: false,
       preload: path.join(__dirname, 'preloader.js'),
-      nativeWindowOpen: true
+      nativeWindowOpen: true,
+      enableRemoteModule: false
     }
   });
 

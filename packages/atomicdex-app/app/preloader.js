@@ -1,12 +1,9 @@
-const electron = require('electron');
 const ipc = require('electron-better-ipc');
 const WebSocket = require('faye-websocket');
 const sourceMapSupport = require('source-map-support');
 
-const app = electron.app || electron.remote.app;
-const isEnvSet = 'ELECTRON_IS_DEV' in process.env;
-const getFromEnv = parseInt(process.env.ELECTRON_IS_DEV, 10) === 1;
-const isDev = isEnvSet ? getFromEnv : !app.isPackaged;
+// https://github.com/electron/electron/issues/7714
+const isDev = process.mainModule.filename.indexOf('app.asar') === -1;
 
 process.once('loaded', () => {
   const { HOT, NODE_ENV, PORT, DEBUG_PROD } = process.env;
@@ -33,14 +30,3 @@ process.once('loaded', () => {
   };
   global.WebSocket = WebSocket;
 });
-
-// import { configManager } from 'barterdex-utilities';
-
-// let config = null;
-
-// export function getFromIPCFactory() {
-//   return {
-//     async getFromIPC(path: string) {
-//       let r = this.get(path);
-//       if (!r) {
-//         r = await ipc.callMain('config:get', path);
