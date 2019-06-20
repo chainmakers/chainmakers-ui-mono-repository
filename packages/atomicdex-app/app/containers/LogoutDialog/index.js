@@ -51,17 +51,15 @@ class LogoutDialog extends React.Component<ILogoutDialogProps> {
         onClose={this.onCancelLogoutDialog}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        style={{
-          width: 450
-        }}
       >
-        >
         <DialogTitle id="alert-dialog-title">
           <FormattedMessage id="atomicapp.containers.LogoutDialog.title">
             {(...content) => content}
           </FormattedMessage>
         </DialogTitle>
-        <DialogContent>
+        <DialogContent style={{
+          width: 350
+        }}>
           <DialogContentText id="alert-dialog-description">
             <FormattedMessage id="atomicapp.containers.LogoutDialog.description">
               {(...content) => content}
