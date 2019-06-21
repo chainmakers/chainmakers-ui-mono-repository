@@ -12,7 +12,6 @@
  */
 import path from 'path';
 import { app, BrowserWindow, shell } from 'electron';
-import { parseURL } from 'barterdex-utilities';
 import { autoUpdater } from 'electron-updater';
 import MenuBuilder from './main/menu';
 import config from './main/config';
@@ -142,8 +141,7 @@ app.on('web-contents-created', (_, contents) => {
 
   contents.on('new-window', async (event, navigationUrl) => {
     event.preventDefault();
-    const parsedUrl = parseURL(navigationUrl);
-    if (explorer.isValid(parsedUrl.host)) {
+    if (explorer.isValid(navigationUrl)) {
       await shell.openExternal(navigationUrl);
     } else {
       debug(`block open new window ${navigationUrl}`);

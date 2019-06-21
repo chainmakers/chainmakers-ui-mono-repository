@@ -57,9 +57,11 @@ class LogoutDialog extends React.Component<ILogoutDialogProps> {
             {(...content) => content}
           </FormattedMessage>
         </DialogTitle>
-        <DialogContent style={{
-          width: 350
-        }}>
+        <DialogContent
+          style={{
+            width: 350
+          }}
+        >
           <DialogContentText id="alert-dialog-description">
             <FormattedMessage id="atomicapp.containers.LogoutDialog.description">
               {(...content) => content}
