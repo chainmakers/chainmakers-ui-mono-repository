@@ -35,4 +35,20 @@ export function ipblock(details, callback) {
 export default function initializeBlockingIP() {
   debug('setup');
   session.defaultSession.webRequest.onBeforeRequest(['*://*./*'], ipblock);
+  session.defaultSession.setPermissionRequestHandler(
+    (webContents, permission, callback) => {
+      // const url = webContents.getURL();
+      if (permission === 'notifications') {
+        // Approves the permissions request
+        return callback(true);
+      }
+      return callback(false);
+
+      // // Verify URL
+      // if (!url.startsWith('https://example.com/')) {
+      //   // Denies the permissions request
+      //   return callback(false)
+      // }
+    }
+  );
 }

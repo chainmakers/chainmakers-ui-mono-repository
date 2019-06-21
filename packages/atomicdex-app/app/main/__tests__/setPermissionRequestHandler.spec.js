@@ -15,14 +15,14 @@ it('main/setPermissionRequestHandler', () => {
     'localhost:1212',
     '127.0.0.1:7783',
     'fonts.googleapis.com'
-  ].map(url => {
+  ].map(url =>
     ipblock(
       {
         url
       },
       expectedTrue
-    );
-  });
+    )
+  );
 
   [
     'https://fonts.gstatic.com',
@@ -31,12 +31,12 @@ it('main/setPermissionRequestHandler', () => {
     'chrome-devtools://devtools/bundled/help/help_module.js',
     'http://localhost:1212/dist/renderer.dev.js',
     'ws://localhost:1212/sockjs-node/052/ylqlotee/websocket'
-  ].map(url => {
+  ].map(url =>
     ipblock(
       {
         url
       },
       expectedFalse
-    );
-  });
+    )
+  );
 });

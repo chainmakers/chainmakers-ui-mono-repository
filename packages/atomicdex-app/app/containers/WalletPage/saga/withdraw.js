@@ -54,6 +54,7 @@ export default function* loadWithdrawProcess({ payload }) {
 
     // eslint-disable-next-line camelcase
     const { tx_hash } = yield api.sendrawtransaction(sendrawtx);
+    // eslint-disable-next-line camelcase
     debug(`tx_hash = ${tx_hash}`);
 
     // eslint-disable-next-line no-param-reassign

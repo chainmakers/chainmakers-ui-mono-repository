@@ -34,6 +34,26 @@ export default merge.smart(baseConfig, {
   },
 
   optimization: {
+    minimizer: process.env.E2E_BUILD
+      ? []
+      : [
+          new UglifyJSPlugin({
+            parallel: true,
+            sourceMap: true,
+            cache: true
+          }),
+          new OptimizeCSSAssetsPlugin({
+            cssProcessorOptions: {
+              map: {
+                inline: false,
+                annotation: true
+              }
+            }
+          })
+        ]
+  },
+  /*
+  optimization: {
     minimize: true,
     minimizer: [
       // This is only used in production mode
@@ -80,8 +100,17 @@ export default merge.smart(baseConfig, {
         // Enable file caching
         cache: true,
         sourceMap: shouldUseSourceMap
+      }),
+      new OptimizeCSSAssetsPlugin({
+        cssProcessorOptions: {
+          map: {
+            inline: false,
+            annotation: true
+          }
+        }
       })
     ],
+    
     // Automatically split vendor and commons
     // https://twitter.com/wSokra/status/969633336732905474
     // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -93,7 +122,7 @@ export default merge.smart(baseConfig, {
     // https://twitter.com/wSokra/status/969679223278505985
     runtimeChunk: true
   },
-
+  */
   module: {
     rules: [
       // Extract all .global.css to style.css as is
@@ -232,26 +261,6 @@ export default merge.smart(baseConfig, {
         use: 'url-loader'
       }
     ]
-  },
-
-  optimization: {
-    minimizer: process.env.E2E_BUILD
-      ? []
-      : [
-          new UglifyJSPlugin({
-            parallel: true,
-            sourceMap: true,
-            cache: true
-          }),
-          new OptimizeCSSAssetsPlugin({
-            cssProcessorOptions: {
-              map: {
-                inline: false,
-                annotation: true
-              }
-            }
-          })
-        ]
   },
 
   plugins: [
