@@ -35,7 +35,13 @@ $ yarn install
 - barterdex-api project
 ```
 $ cd packages/barterdex-api/
-$ npm run clean && npm install && npm run test && npm run prepare
+$ yarn clean && yarn install
+```
+
+- barterdex-server project
+```
+$ cd packages/barterdex-server/
+$ yarn clean && yarn install
 ```
 
 - barterdex-utilities project

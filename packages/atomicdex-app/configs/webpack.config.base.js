@@ -7,7 +7,8 @@ import webpack from 'webpack';
 import { dependencies } from '../package.json';
 
 export default {
-  externals: [...Object.keys(dependencies || {})],
+  // externals: [...Object.keys(dependencies || {})],
+  externals: [],
 
   module: {
     rules: [
@@ -25,9 +26,10 @@ export default {
   },
 
   output: {
-    path: path.join(__dirname, '..', 'app'),
+    path: path.join(__dirname, '..', 'app')
     // https://github.com/webpack/webpack/issues/1114
-    libraryTarget: 'commonjs2'
+    // libraryTarget: 'var',
+    // libraryTarget: 'commonjs2'
   },
 
   /**
@@ -35,6 +37,9 @@ export default {
    */
   resolve: {
     extensions: ['.js', '.jsx', '.json']
+    // alias: {
+    //   utils: path.join(__dirname, '..', 'app', 'utils')
+    // }
   },
 
   plugins: [

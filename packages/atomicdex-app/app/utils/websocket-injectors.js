@@ -5,7 +5,7 @@ import invariant from 'invariant';
 import conformsTo from 'lodash/conformsTo';
 
 import checkStore from './check-store';
-import barterDexSocket from './barter-dex-socket';
+import barterDexSocket from './barterdex-socket';
 import { WEBSOCKET_DAEMON, WEBSOCKET_RESTART_ON_REMOUNT } from './constants';
 
 const allowedModes = [WEBSOCKET_DAEMON, WEBSOCKET_RESTART_ON_REMOUNT];

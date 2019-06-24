@@ -1,5 +1,7 @@
 /* eslint global-require: off */
 
+const path = require('path');
+
 const developmentEnvironments = ['development', 'test'];
 
 module.exports = api => {
@@ -50,7 +52,16 @@ module.exports = api => {
       require('@babel/plugin-proposal-json-strings'),
 
       // other
-      require('babel-plugin-inline-react-svg')
+      require('babel-plugin-inline-react-svg'),
+      [
+        'module-resolver',
+        {
+          root: [path.join(__dirname, 'app')],
+          alias: {
+            utils: path.join(__dirname, 'app', 'utils')
+          }
+        }
+      ]
     ],
     env: {
       test: {

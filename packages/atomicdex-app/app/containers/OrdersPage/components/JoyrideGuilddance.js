@@ -5,8 +5,8 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import {
   JoyrideModal,
-  JoyrideStepper,
-  JoyrideBeacon
+  JoyrideStepper
+  // JoyrideBeacon
 } from '../../../components/JoyrideModal';
 import { makeSelectJoyrideOpenState } from '../selectors';
 import { closeJoyride } from '../actions';

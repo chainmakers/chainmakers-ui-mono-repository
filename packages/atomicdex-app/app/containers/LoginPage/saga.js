@@ -1,9 +1,9 @@
 // @flow
 // https://github.com/sotojuan/saga-login-flow/blob/master/app/sagas/index.js
-import ipc from 'electron-better-ipc';
+// import ipc from 'electron-better-ipc';
 import { take, race, call, put } from 'redux-saga/effects';
 import { takeFirst } from 'barterdex-rssm';
-import api from '../../lib/barter-dex-api';
+import api from 'utils/barterdex-api';
 import { open } from '../../utils/db';
 import { LOGIN, LOGOUT } from '../App/constants';
 import { loginSuccess, loginError } from '../App/actions';

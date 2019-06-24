@@ -2,7 +2,7 @@
 import { fromJS } from 'immutable';
 import { handleActions } from 'redux-actions';
 import { LOGOUT } from '../App/constants';
-import logger from '../../logger';
+// import logger from '../../logger';
 import {
   LOAD_PRICES,
   LOAD_BEST_PRICE,
@@ -435,19 +435,19 @@ export default handleActions(
       if (status === 'finished' && processingList.contains(uuid)) {
         processingList = processingList.filter(o => o !== uuid);
         finishedList = finishedList.push(uuid);
-        logger.info({
-          alice: entity.get('alice'),
-          aliceamount: entity.get('aliceamount'),
-          bob: entity.get('bob'),
-          bobamount: entity.get('bobamount'),
-          alicesmartaddress: entity.get('alicesmartaddress'),
-          bobsmartaddress: entity.get('bobsmartaddress'),
-          expiration: entity.get('expiration'),
-          quoteid: entity.get('quoteid'),
-          requestid: entity.get('requestid'),
-          uuid: entity.get('uuid'),
-          status: FINISHED_SWAPS_STATE
-        });
+        // logger.info({
+        //   alice: entity.get('alice'),
+        //   aliceamount: entity.get('aliceamount'),
+        //   bob: entity.get('bob'),
+        //   bobamount: entity.get('bobamount'),
+        //   alicesmartaddress: entity.get('alicesmartaddress'),
+        //   bobsmartaddress: entity.get('bobsmartaddress'),
+        //   expiration: entity.get('expiration'),
+        //   quoteid: entity.get('quoteid'),
+        //   requestid: entity.get('requestid'),
+        //   uuid: entity.get('uuid'),
+        //   status: FINISHED_SWAPS_STATE
+        // });
         return state
           .setIn(['swaps', 'processingList'], processingList)
           .setIn(['swaps', 'finishedList'], finishedList)
@@ -489,19 +489,19 @@ export default handleActions(
           )
           .set('status', FINISHED_SWAPS_STATE);
         entities = entities.set(uuid, entity);
-        logger.info({
-          alice: entity.get('alice'),
-          aliceamount: entity.get('aliceamount'),
-          bob: entity.get('bob'),
-          bobamount: entity.get('bobamount'),
-          alicesmartaddress: entity.get('alicesmartaddress'),
-          bobsmartaddress: entity.get('bobsmartaddress'),
-          expiration: entity.get('expiration'),
-          quoteid: entity.get('quoteid'),
-          requestid: entity.get('requestid'),
-          uuid: entity.get('uuid'),
-          status: 'failed'
-        });
+        // logger.info({
+        //   alice: entity.get('alice'),
+        //   aliceamount: entity.get('aliceamount'),
+        //   bob: entity.get('bob'),
+        //   bobamount: entity.get('bobamount'),
+        //   alicesmartaddress: entity.get('alicesmartaddress'),
+        //   bobsmartaddress: entity.get('bobsmartaddress'),
+        //   expiration: entity.get('expiration'),
+        //   quoteid: entity.get('quoteid'),
+        //   requestid: entity.get('requestid'),
+        //   uuid: entity.get('uuid'),
+        //   status: 'failed'
+        // });
       }
 
       return state

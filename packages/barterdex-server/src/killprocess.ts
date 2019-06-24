@@ -7,6 +7,6 @@ export default function killProcess(name) {
     } else {
       execFileSync('killall', ['-9', name]);
     }
-    // eslint-disable-next-line no-empty
+    /* tslint:disable no-empty */
   } catch (_) {}
 }

@@ -2,9 +2,9 @@
 import nock from 'nock';
 import { fromJS } from 'immutable';
 import { runSaga } from 'redux-saga';
+import api from 'utils/barterdex-api';
 import type { ErrorType } from '../../../schema';
 import { BALANCE_LOAD } from '../../constants';
-import api from '../../../../lib/barter-dex-api';
 import { openSnackbars } from '../../../Snackbars/actions';
 import { loadBalanceError, loadBalance } from '../../actions';
 import listenForLoadingBalance, {

@@ -2,7 +2,7 @@
 import { put, select, cancelled } from 'redux-saga/effects';
 import { CANCEL } from 'redux-saga';
 import { floor } from 'barterdex-utilities';
-import api from '../../../lib/barter-dex-api';
+import api from 'utils/barterdex-api';
 import { openSnackbars } from '../../Snackbars/actions';
 import { makeSelectBalanceEntities } from '../../App/selectors';
 import { ORDER_ALICE_SITE } from '../constants';

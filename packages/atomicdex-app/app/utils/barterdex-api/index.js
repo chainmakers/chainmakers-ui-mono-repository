@@ -1,6 +1,6 @@
 // @flow
-import { Client } from 'barterdex-api';
-import getConfig from '../config';
+import Client from 'barterdex-api';
+import getConfig from 'utils/config';
 
 const config = getConfig();
 

@@ -45,7 +45,11 @@ const debug = require('debug')('atomicapp:containers:DexPage');
 
 type IDexPageProps = {
   // eslint-disable-next-line flowtype/no-weak-types
-  dispatchOpenJoyride: Function
+  dispatchOpenJoyride: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchClickSelectCoinModal: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchCloseSelectCoinModal: Function
 };
 
 type IDexPageState = {
@@ -54,16 +58,7 @@ type IDexPageState = {
 
 class DexPage extends React.Component<IDexPageProps, IDexPageState> {
   state = {
-    value: 0,
-    recevieSelectionDialogState: true
-  };
-
-  openRecevieSelectionDialog = () => {
-    this.setState({ recevieSelectionDialogState: true });
-  };
-
-  closeRecevieSelectionDialog = () => {
-    this.setState({ recevieSelectionDialogState: false });
+    value: 0
   };
 
   handleChange = (event, value) => {
@@ -83,7 +78,7 @@ class DexPage extends React.Component<IDexPageProps, IDexPageState> {
       dispatchCloseSelectCoinModal,
       selectCoinModal
     } = this.props;
-    const { value, recevieSelectionDialogState } = this.state;
+    const { value } = this.state;
 
     return (
       <React.Fragment>

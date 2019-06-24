@@ -20,9 +20,13 @@ export default merge.smart(baseConfig, {
 
   devtool: 'eval',
 
-  mode: 'development',
+  // mode: 'development',
 
-  target: 'electron-renderer',
+  // devtool: 'source-map',
+  mode: 'production',
+
+  // target: 'electron-renderer',
+  target: 'web', // Make web variables accessible to webpack, e.g. window
 
   externals: ['fsevents', 'crypto-browserify'],
 
@@ -39,10 +43,12 @@ export default merge.smart(baseConfig, {
   },
 
   output: {
-    library: 'renderer',
+    library: 'renderer', // name
     path: dist,
     filename: '[name].dev.dll.js',
     libraryTarget: 'var'
+    // libraryTarget: 'umd',
+    // umdNamedDefine: true,
   },
 
   plugins: [
@@ -61,7 +67,7 @@ export default merge.smart(baseConfig, {
      * development checks
      */
     new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development'
+      NODE_ENV: 'production'
     }),
 
     new webpack.LoaderOptionsPlugin({

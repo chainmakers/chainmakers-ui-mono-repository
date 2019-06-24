@@ -21,7 +21,8 @@ import {
   generateWif,
   floor,
   memoize,
-  clipboardCopy
+  clipboardCopy,
+  parseURL
 } from '../index';
 
 it('packages/barterdex-utilities/src/index', () => {
@@ -47,4 +48,5 @@ it('packages/barterdex-utilities/src/index', () => {
   expect(typeof floor).toEqual('function');
   expect(typeof memoize).toEqual('function');
   expect(typeof clipboardCopy).toEqual('function');
+  expect(typeof parseURL).toEqual('function');
 });

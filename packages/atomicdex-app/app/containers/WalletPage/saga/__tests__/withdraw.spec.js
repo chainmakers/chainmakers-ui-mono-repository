@@ -1,7 +1,7 @@
 import nock from 'nock';
 import { fromJS } from 'immutable';
 import { runSaga } from 'redux-saga';
-import api from '../../../../lib/barter-dex-api';
+import api from 'utils/barterdex-api';
 import loadWithdrawProcess, { generateMessage } from '../withdraw';
 import data from '../../../__tests__/app-state.json';
 
@@ -14,6 +14,7 @@ describe('containers/WalletPage/saga/loadWithdrawProcess', () => {
   const userpass = 'userpass';
   const amount = 0.1;
   const payload = { amount, address, coin };
+  // eslint-disable-next-line camelcase
   const tx_hash =
     '0b024ea6997e16387c0931de9f203d534c6b2b8500e4bda2df51a36b52a3ef33';
 

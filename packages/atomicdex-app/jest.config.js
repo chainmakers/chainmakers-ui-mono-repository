@@ -1,3 +1,5 @@
+const ipc = require('./__mocks__/electron-better-ipc.js');
+
 module.exports = {
   // verbose: true,
   testURL: 'http://localhost/',
@@ -25,5 +27,8 @@ module.exports = {
   // ],
   setupFiles: ['./internals/scripts/CheckBuiltsExist.js'],
   testRegex: '(/__tests__/.*)\\.jsx?$',
-  collectCoverage: true
+  collectCoverage: true,
+  globals: {
+    ipc
+  }
 };

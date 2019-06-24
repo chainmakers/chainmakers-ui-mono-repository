@@ -8,42 +8,51 @@
  */
 
 import path from 'path';
-import fs from 'fs';
+// import fs from 'fs';
 import webpack from 'webpack';
-import chalk from 'chalk';
+// import chalk from 'chalk';
 import merge from 'webpack-merge';
-import { spawn, execSync } from 'child_process';
+// import { spawn, execSync } from 'child_process';
+import { spawn } from 'child_process';
 import baseConfig from './webpack.config.base';
 import CheckNodeEnv from '../internals/scripts/CheckNodeEnv';
 
 CheckNodeEnv('development');
 
+// const pkg = require('../package.json');
+
 const port = process.env.PORT || 1212;
 const publicPath = `http://localhost:${port}/dist`;
-const dll = path.join(__dirname, '..', 'dll');
-const manifest = path.resolve(dll, 'renderer.json');
-const requiredByDLLConfig = module.parent.filename.includes(
-  'webpack.config.renderer.dev.dll'
-);
+// const dll = path.join(__dirname, '..', 'dll');
+// const manifest = path.resolve(dll, 'renderer.json');
+// const requiredByDLLConfig = module.parent.filename.includes(
+//   'webpack.config.renderer.dev.dll'
+// );
 
 /**
  * Warn if the DLL is not built
  */
-if (!requiredByDLLConfig && !(fs.existsSync(dll) && fs.existsSync(manifest))) {
-  console.log(
-    chalk.black.bgYellow.bold(
-      'The DLL files are missing. Sit back while we build them for you with "yarn build-dll"'
-    )
-  );
-  execSync('yarn build-dll');
-}
+// if (!requiredByDLLConfig && !(fs.existsSync(dll) && fs.existsSync(manifest))) {
+//   console.log(
+//     chalk.black.bgYellow.bold(
+//       'The DLL files are missing. Sit back while we build them for you with "yarn build-dll"'
+//     )
+//   );
+//   execSync('yarn build-dll');
+// }
 
 export default merge.smart(baseConfig, {
-  devtool: 'inline-source-map',
+  // devtool: 'inline-source-map',
+  devtool: 'cheap-module-source-map',
+  // devtool: 'eval-source-map',
+  // performance: {
+  //   hints: false,
+  // },
 
   mode: 'development',
 
-  target: 'electron-renderer',
+  // target: 'electron-renderer',
+  target: 'web', // Make web variables accessible to webpack, e.g. window
 
   entry: [
     'react-hot-loader/patch',
@@ -55,6 +64,8 @@ export default merge.smart(baseConfig, {
   output: {
     publicPath: `http://localhost:${port}/dist/`,
     filename: 'renderer.dev.js'
+    // libraryTarget: null
+    // libraryTarget: undefined
   },
 
   module: {
@@ -63,9 +74,10 @@ export default merge.smart(baseConfig, {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: require.resolve('babel-loader'),
           options: {
-            cacheDirectory: true
+            cacheDirectory: true,
+            cacheCompression: false
           }
         }
       },
@@ -197,13 +209,14 @@ export default merge.smart(baseConfig, {
   },
 
   plugins: [
-    requiredByDLLConfig
-      ? null
-      : new webpack.DllReferencePlugin({
-          context: path.join(__dirname, '..', 'dll'),
-          manifest: require(manifest),
-          sourceType: 'var'
-        }),
+    // requiredByDLLConfig
+    //   ? null
+    //   : new webpack.DllReferencePlugin({
+    //       context: path.join(__dirname, '..', 'dll'),
+    //       manifest: require(manifest),
+    //       sourceType: 'var'
+    //       // sourceType: 'umd'
+    //     }),
 
     new webpack.HotModuleReplacementPlugin({
       multiStep: true
@@ -233,9 +246,20 @@ export default merge.smart(baseConfig, {
     })
   ],
 
+  // https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/config/webpack.config.js#L664
+  // Some libraries import Node modules but don't use them in the browser.
+  // Tell Webpack to provide empty mocks for them so importing them works.
   node: {
     __dirname: false,
-    __filename: false
+    __filename: false,
+    module: 'empty',
+    dgram: 'empty',
+    dns: 'mock',
+    fs: 'empty',
+    http2: 'empty',
+    net: 'empty',
+    tls: 'empty',
+    child_process: 'empty'
   },
 
   devServer: {
@@ -247,6 +271,8 @@ export default merge.smart(baseConfig, {
     inline: true,
     lazy: false,
     hot: true,
+    // https://github.com/webpack/webpack-dev-server/issues/1604#issuecomment-449465737
+    disableHostCheck: true,
     // NOTE: un comment this if you don't want to refresh the page
     // hotOnly: true,
     headers: { 'Access-Control-Allow-Origin': '*' },

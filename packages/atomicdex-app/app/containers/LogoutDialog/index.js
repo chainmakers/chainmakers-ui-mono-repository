@@ -57,7 +57,11 @@ class LogoutDialog extends React.Component<ILogoutDialogProps> {
             {(...content) => content}
           </FormattedMessage>
         </DialogTitle>
-        <DialogContent>
+        <DialogContent
+          style={{
+            width: 350
+          }}
+        >
           <DialogContentText id="alert-dialog-description">
             <FormattedMessage id="atomicapp.containers.LogoutDialog.description">
               {(...content) => content}
@@ -65,12 +69,28 @@ class LogoutDialog extends React.Component<ILogoutDialogProps> {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.onCancelLogoutDialog} color="primary">
+          <Button
+            onClick={this.onCancelLogoutDialog}
+            color="primary"
+            style={{
+              minWidth: 100
+            }}
+          >
             <FormattedMessage id="atomicapp.containers.LogoutDialog.cancel">
               {(...content) => content}
             </FormattedMessage>
           </Button>
-          <Button onClick={this.onAgreeLogoutDialog} color="primary" autoFocus>
+          <Button
+            onClick={this.onAgreeLogoutDialog}
+            color="primary"
+            autoFocus
+            variant="contained"
+            style={{
+              boxShadow: 'none',
+              marginLeft: 20,
+              minWidth: 100
+            }}
+          >
             <FormattedMessage id="atomicapp.containers.LogoutDialog.submit">
               {(...content) => content}
             </FormattedMessage>

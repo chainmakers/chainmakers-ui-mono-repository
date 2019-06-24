@@ -10,12 +10,15 @@
  *
  * @flow
  */
-import { app, BrowserWindow } from 'electron';
+import path from 'path';
+import { app, BrowserWindow, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import MenuBuilder from './main/menu';
 import config from './main/config';
 import setupMarketmaker from './main/plugins/marketmaker';
 import { applicationCrashedDialog } from './main/dialogs';
+import blockIP from './main/setPermissionRequestHandler';
+import explorer from './lib/explorer';
 
 const debug = require('debug')('atomicapp:main');
 
@@ -42,7 +45,7 @@ if (
   process.env.DEBUG_PROD === 'true'
 ) {
   require('electron-debug')();
-  const path = require('path');
+  // const path = require('path');
   const p = path.join(__dirname, '..', 'app', 'node_modules');
   require('module').globalPaths.push(p);
 }
@@ -76,6 +79,7 @@ app.on('ready', async () => {
   ) {
     await installExtensions();
   }
+  blockIP();
 
   const loginWindowSize = config.get('loginWindowSize');
   const minWindowSize = config.get('minWindowSize');
@@ -84,7 +88,15 @@ app.on('ready', async () => {
     width: loginWindowSize.width,
     height: loginWindowSize.height,
     minWidth: minWindowSize.width,
-    minHeight: minWindowSize.height
+    minHeight: minWindowSize.height,
+    webPreferences: {
+      nodeIntegration: false,
+      nodeIntegrationInWorker: false,
+      contextIsolation: false,
+      preload: path.join(__dirname, 'preloader.js'),
+      nativeWindowOpen: true,
+      enableRemoteModule: false
+    }
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
@@ -118,4 +130,21 @@ app.on('ready', async () => {
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
   new AppUpdater();
+});
+
+// https://electronjs.org/docs/tutorial/security#12-disable-or-limit-navigation
+app.on('web-contents-created', (_, contents) => {
+  contents.on('will-navigate', (event, navigationUrl) => {
+    debug(`block navigate to ${navigationUrl}`);
+    event.preventDefault();
+  });
+
+  contents.on('new-window', async (event, navigationUrl) => {
+    event.preventDefault();
+    if (explorer.isValid(navigationUrl)) {
+      await shell.openExternal(navigationUrl);
+    } else {
+      debug(`block open new window ${navigationUrl}`);
+    }
+  });
 });
