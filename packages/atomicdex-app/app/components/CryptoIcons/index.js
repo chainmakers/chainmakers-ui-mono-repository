@@ -210,6 +210,7 @@ import IQ from './iq.svg';
 import ITC from './itc.svg';
 import JNT from './jnt.svg';
 import JPY from './jpy.svg';
+import K64 from './k64.svg';
 import KCS from './kcs.svg';
 import KIN from './kin.svg';
 import KMD from './kmd.svg';
@@ -627,6 +628,7 @@ const list = {
   ITC,
   JNT,
   JPY,
+  K64,
   KCS,
   KIN,
   KMD,
