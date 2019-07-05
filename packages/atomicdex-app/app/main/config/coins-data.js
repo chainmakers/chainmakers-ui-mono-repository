@@ -700,6 +700,7 @@ const data = [
       'electrum3.cipig.net:10006'
     ],
     active: 0,
+    txversion: 4,
     market_cap: 0,
     mm2: 1
   },
