@@ -68,6 +68,17 @@ const data = [
     mm2: 1
   },
   {
+    coin: 'K64',
+    name: 'Komodore64',
+    asset: 'K64',
+    txversion: 4,
+    urls: ['electrum1.komodore64.com:21245', 'electrum2.komodore64.com:21245'],
+    rpcport: 12245,
+    active: 0,
+    markt_cap: 0,
+    mm2: 1
+  },
+  {
     coin: 'CHIPS',
     name: 'Chips',
     urls: ['electrum1.cipig.net:10053', 'electrum2.cipig.net:10053'],
@@ -689,6 +700,7 @@ const data = [
       'electrum3.cipig.net:10006'
     ],
     active: 0,
+    txversion: 4,
     market_cap: 0,
     mm2: 1
   },
