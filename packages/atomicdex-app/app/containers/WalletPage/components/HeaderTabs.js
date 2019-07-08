@@ -36,13 +36,10 @@ class HeaderTabs extends React.PureComponent<IHeaderTabsProps> {
           classes={{
             labelContainer: classes.buyTabs__labelContainer
           }}
-          label={<span>Portfolio</span>}
+          label="Portfolio"
           className={classes.buyTabs__tab}
         />
-        <Tab
-          label={<span>Transactions</span>}
-          className={classes.buyTabs__tab}
-        />
+        <Tab label="Transactions" className={classes.buyTabs__tab} />
       </Tabs>
     );
   }

@@ -22,8 +22,11 @@ import explorer from './lib/explorer';
 
 const debug = require('debug')('atomicapp:main');
 
-// const log = require('electron-log');
-// log.transports.file.file = __dirname + '/log.txt';
+const isDev = process.mainModule.filename.indexOf('app.asar') === -1;
+
+const log = require('electron-log');
+
+if (isDev) log.transports.file.file = path.join(__dirname, '..', 'log.txt');
 
 export default class AppUpdater {
   constructor() {
@@ -45,7 +48,6 @@ if (
   process.env.DEBUG_PROD === 'true'
 ) {
   require('electron-debug')();
-  // const path = require('path');
   const p = path.join(__dirname, '..', 'app', 'node_modules');
   require('module').globalPaths.push(p);
 }
@@ -79,10 +81,16 @@ app.on('ready', async () => {
   ) {
     await installExtensions();
   }
-  blockIP();
+
+  if (!isDev) {
+    blockIP();
+  }
 
   const loginWindowSize = config.get('loginWindowSize');
   const minWindowSize = config.get('minWindowSize');
+
+  log.info(`start app in ${isDev ? 'development' : 'production'} env`);
+
   mainWindow = new BrowserWindow({
     show: false,
     width: loginWindowSize.width,
@@ -110,7 +118,7 @@ app.on('ready', async () => {
         throw new Error('"mainWindow" is not defined');
       }
 
-      debug('setup mm2 app');
+      log.info('setup mm2 app');
       setupMarketmaker();
 
       mainWindow.show();
@@ -134,17 +142,18 @@ app.on('ready', async () => {
 
 // https://electronjs.org/docs/tutorial/security#12-disable-or-limit-navigation
 app.on('web-contents-created', (_, contents) => {
-  contents.on('will-navigate', (event, navigationUrl) => {
-    debug(`block navigate to ${navigationUrl}`);
-    event.preventDefault();
-  });
-
-  contents.on('new-window', async (event, navigationUrl) => {
-    event.preventDefault();
-    if (explorer.isValid(navigationUrl)) {
-      await shell.openExternal(navigationUrl);
-    } else {
-      debug(`block open new window ${navigationUrl}`);
-    }
-  });
+  if (!isDev) {
+    contents.on('will-navigate', (event, navigationUrl) => {
+      log.info(`block navigate to ${navigationUrl}`);
+      event.preventDefault();
+    });
+    contents.on('new-window', async (event, navigationUrl) => {
+      event.preventDefault();
+      if (explorer.isValid(navigationUrl)) {
+        await shell.openExternal(navigationUrl);
+      } else {
+        log.info(`block open new window ${navigationUrl}`);
+      }
+    });
+  }
 });

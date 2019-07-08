@@ -52,20 +52,22 @@ module.exports = api => {
       require('@babel/plugin-proposal-json-strings'),
 
       // other
-      require('babel-plugin-inline-react-svg'),
-      [
-        'module-resolver',
-        {
-          root: [path.join(__dirname, 'app')],
-          alias: {
-            utils: path.join(__dirname, 'app', 'utils')
-          }
-        }
-      ]
+      require('babel-plugin-inline-react-svg')
     ],
     env: {
       test: {
-        plugins: [require('react-hot-loader/babel')]
+        plugins: [
+          require('react-hot-loader/babel'),
+          [
+            'module-resolver',
+            {
+              root: [path.join(__dirname, 'app')],
+              alias: {
+                utils: path.join(__dirname, 'app', 'utils')
+              }
+            }
+          ]
+        ]
       },
       development: {
         plugins: [require('react-hot-loader/babel')]

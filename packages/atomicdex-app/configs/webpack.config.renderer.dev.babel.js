@@ -42,8 +42,8 @@ const publicPath = `http://localhost:${port}/dist`;
 // }
 
 export default merge.smart(baseConfig, {
-  // devtool: 'inline-source-map',
-  devtool: 'cheap-module-source-map',
+  devtool: 'inline-source-map',
+  // devtool: 'cheap-module-source-map',
   // devtool: 'eval-source-map',
   // performance: {
   //   hints: false,
@@ -218,9 +218,11 @@ export default merge.smart(baseConfig, {
     //       // sourceType: 'umd'
     //     }),
 
-    new webpack.HotModuleReplacementPlugin({
+    new webpack.NamedModulesPlugin(),
+
+    new webpack.HotModuleReplacementPlugin(/* {
       multiStep: true
-    }),
+    } */),
 
     new webpack.NoEmitOnErrorsPlugin(),
 
@@ -245,6 +247,17 @@ export default merge.smart(baseConfig, {
       debug: true
     })
   ],
+
+  /**
+   * Determine the array of extensions that should be used to resolve modules.
+   */
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+      utils: path.join(__dirname, '..', 'app', 'utils')
+    }
+  },
 
   // https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/config/webpack.config.js#L664
   // Some libraries import Node modules but don't use them in the browser.
