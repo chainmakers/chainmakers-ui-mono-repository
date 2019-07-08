@@ -233,7 +233,7 @@ class CoinsSelectionModal extends React.PureComponent<
           <Divider className={classes.root_appBarDivider} />
         </AppBar>
         <DialogContent className={classes.appBar__content}>
-          <Grid container spacing={24}>
+          <Grid container spacing={3}>
             {!show || searchState !== SEARCH_STATE_READY ? (
               <React.Fragment>
                 <Grid item xs={3}>

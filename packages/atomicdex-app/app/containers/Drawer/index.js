@@ -14,7 +14,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import IconButton from '@material-ui/core/IconButton';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import StoreIcon from '@material-ui/icons/Store';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 // import SettingsIcon from '@material-ui/icons/Settings';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -31,7 +31,7 @@ const accountBalanceWalletIconCache = <AccountBalanceWalletIcon />;
 
 const cachedIconIconCache = <CachedIcon />;
 
-const addShoppingCartIconCache = <AddShoppingCartIcon />;
+const storeIconCache = <StoreIcon />;
 
 // const settingsIconCache = <SettingsIcon />;
 
@@ -84,11 +84,13 @@ const styles = theme => ({
     position: 'relative',
     width: 72,
     height: 72,
-    paddingTop: 0
+    paddingTop: 0,
+    justifyContent: 'center'
   },
 
   drawer__iconCenter: {
-    margin: '0 auto'
+    margin: '0 auto',
+    justifyContent: 'center'
   },
 
   drawer__iconSelected: {
@@ -126,6 +128,8 @@ type State = {
 
 class DICDrawer extends Component<Props, State> {
   static defaultProps = {};
+  
+  static displayName = 'DICDrawer';
 
   state = {
     anchor: 'left',
@@ -239,7 +243,7 @@ class DICDrawer extends Component<Props, State> {
             onClick={this.gotoOrderPage}
           >
             <ListItemIcon className={classes.drawer__iconCenter}>
-              {addShoppingCartIconCache}
+              {storeIconCache}
             </ListItemIcon>
             <span className={classes.drawer__text}>
               <FormattedMessage id="atomicapp.containers.Drawer.order">
@@ -292,8 +296,6 @@ class DICDrawer extends Component<Props, State> {
     );
   }
 }
-
-DICDrawer.displayName = 'DICDrawer';
 
 // eslint-disable-next-line flowtype/no-weak-types
 export function mapDispatchToProps(dispatch: Dispatch<Object>) {
