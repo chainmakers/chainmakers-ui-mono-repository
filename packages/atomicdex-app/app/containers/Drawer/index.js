@@ -128,7 +128,7 @@ type State = {
 
 class DICDrawer extends Component<Props, State> {
   static defaultProps = {};
-  
+
   static displayName = 'DICDrawer';
 
   state = {

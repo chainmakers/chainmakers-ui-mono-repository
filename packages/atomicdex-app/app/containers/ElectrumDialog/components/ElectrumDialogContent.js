@@ -265,9 +265,15 @@ class ElectrumDialogContent extends React.Component<
           </Button>
           <Button
             onClick={this.onAgreeLogoutDialog}
-            color="primary"
-            autoFocus
             disabled={selected.equals(balanceFetchStatus)}
+            autoFocus
+            color="primary"
+            variant="contained"
+            style={{
+              boxShadow: 'none',
+              marginLeft: 20,
+              minWidth: 100
+            }}
           >
             <FormattedMessage id="atomicapp.containers.LogoutDialog.submit">
               {(...content) => content}
