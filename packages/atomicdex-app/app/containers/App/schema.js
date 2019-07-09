@@ -14,9 +14,13 @@ type LoginPayload = {
   passphrase: string
 };
 
+type ElectrumServer = {
+  url: string
+};
+
 type AddElectrumPayload = {
   txversion: number,
-  urls: Array<string>,
+  servers: Array<ElectrumServer>,
   coin: string
 };
 

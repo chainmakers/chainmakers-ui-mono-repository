@@ -38,6 +38,12 @@ $ cd packages/barterdex-api/
 $ yarn clean && yarn install
 ```
 
+- barterdex-coin project
+```
+$ cd packages/barterdex-coin/
+$ yarn clean && yarn install
+```
+
 - barterdex-server project
 ```
 $ cd packages/barterdex-server/

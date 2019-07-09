@@ -8,7 +8,6 @@ export default [
   {
     coin: 'BTC',
     name: 'Bitcoin',
-    urls: ['electrum1.cipig.net:10000', 'electrum2.cipig.net:10000'],
     active: 1,
     market_cap: 97822306639,
     mm2: 1,
@@ -17,13 +16,20 @@ export default [
     pubtype: 0,
     p2shtype: 5,
     wiftype: 128,
-    txfee: 20000
+    txfee: 20000,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10000'
+      },
+      {
+        url: 'electrum2.cipig.net:10000'
+      }
+    ]
   },
   {
     coin: 'KMD',
     name: 'Komodo',
     txversion: 4,
-    urls: ['electrum1.cipig.net:10001', 'electrum2.cipig.net:10001'],
     active: 1,
     market_cap: 107340275,
     mm2: 1,
@@ -32,7 +38,15 @@ export default [
     pubtype: 60,
     p2shtype: 85,
     wiftype: 188,
-    txfee: 1000
+    txfee: 1000,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10001'
+      },
+      {
+        url: 'electrum2.cipig.net:10001'
+      }
+    ]
   },
   // {
   //   coin: 'EQL',
@@ -61,27 +75,40 @@ export default [
     name: 'Coqui Cash',
     asset: 'COQUI',
     txversion: 4,
-    urls: ['electrum1.cipig.net:10011', 'electrum2.cipig.net:10011'],
     rpcport: 14276,
     active: 0,
     market_cap: 0,
-    mm2: 1
+    mm2: 1,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10011'
+      },
+      {
+        url: 'electrum2.cipig.net:10011'
+      }
+    ]
   },
   {
     coin: 'K64',
     name: 'Komodore64',
     asset: 'K64',
     txversion: 4,
-    urls: ['electrum1.komodore64.com:21245', 'electrum2.komodore64.com:21245'],
     rpcport: 12245,
     active: 0,
     markt_cap: 0,
-    mm2: 1
+    mm2: 1,
+    servers: [
+      {
+        url: 'electrum1.komodore64.com:21245'
+      },
+      {
+        url: 'electrum2.komodore64.com:21245'
+      }
+    ]
   },
   {
     coin: 'CHIPS',
     name: 'Chips',
-    urls: ['electrum1.cipig.net:10053', 'electrum2.cipig.net:10053'],
     rpcport: 57776,
     pubtype: 60,
     p2shtype: 85,
@@ -89,7 +116,15 @@ export default [
     txfee: 10000,
     active: 0,
     market_cap: 1609044,
-    mm2: 1
+    mm2: 1,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10053'
+      },
+      {
+        url: 'electrum2.cipig.net:10053'
+      }
+    ]
   },
   // {
   //   coin: 'REVS',
@@ -123,42 +158,48 @@ export default [
     name: 'KMDice',
     asset: 'KMDICE',
     txversion: 4,
-    urls: [
-      'electrum1.cipig.net:10031',
-      'electrum2.cipig.net:10031',
-      'electrum3.cipig.net:10031'
-    ],
     rpcport: 30177,
     active: 0,
     market_cap: 0,
-    mm2: 1
+    mm2: 1,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10031'
+      },
+      {
+        url: 'electrum2.cipig.net:10031'
+      },
+      {
+        url: 'electrum3.cipig.net:10031'
+      }
+    ]
   },
   {
     coin: 'CHAIN',
     asset: 'CHAIN',
     name: 'Chainmakers',
     txversion: 4,
-    urls: [
-      'electrum1.cipig.net:10032',
-      'electrum2.cipig.net:10032',
-      'electrum3.cipig.net:10032'
-    ],
     rpcport: 15587,
     active: 0,
     market_cap: 0,
-    mm2: 1
+    mm2: 1,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10032'
+      },
+      {
+        url: 'electrum2.cipig.net:10032'
+      },
+      {
+        url: 'electrum3.cipig.net:10032'
+      }
+    ]
   },
   {
     coin: 'BCH',
     name: 'Bitcoin Cash',
     fname: 'Bitcoin Cash',
     txversion: 4,
-    urls: [
-      'bch.imaginary.cash:50001'
-      // 'electroncash.dk:50001',
-      // 'electrum.imaginary.cash:50001',
-      // 'abc1.hsmiths.com:60001'
-    ],
     rpcport: 33333,
     pubtype: 0,
     p2shtype: 5,
@@ -166,7 +207,15 @@ export default [
     txfee: 1000,
     active: 0,
     market_cap: 2197468013,
-    mm2: 1
+    mm2: 1,
+    servers: [
+      {
+        url: 'bch.imaginary.cash:50001'
+      }
+      // 'electroncash.dk:50001',
+      // 'electrum.imaginary.cash:50001',
+      // 'abc1.hsmiths.com:60001'
+    ]
   },
   // {
   //   coin: 'QTUM',
@@ -211,10 +260,17 @@ export default [
     asset: 'BEER',
     txversion: 4,
     rpcport: 8923,
-    urls: ['electrum1.cipig.net:10022', 'electrum2.cipig.net:10022'],
     active: 0,
     market_cap: -1,
-    mm2: 1
+    mm2: 1,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10022'
+      },
+      {
+        url: 'electrum2.cipig.net:10022'
+      }
+    ]
   },
   {
     coin: 'PIZZA',
@@ -222,14 +278,20 @@ export default [
     asset: 'PIZZA',
     txversion: 4,
     rpcport: 11608,
-    urls: [
-      'electrum1.cipig.net:10024',
-      'electrum2.cipig.net:10024',
-      'electrum3.cipig.net:10024'
-    ],
     active: 0,
     market_cap: -2,
-    mm2: 1
+    mm2: 1,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10024'
+      },
+      {
+        url: 'electrum2.cipig.net:10024'
+      },
+      {
+        url: 'electrum3.cipig.net:10024'
+      }
+    ]
   },
   // {
   //   coin: '$PAC',
@@ -694,15 +756,21 @@ export default [
     coin: 'DEX',
     name: 'DEX',
     rpcport: 11890,
-    urls: [
-      'electrum1.cipig.net:10006',
-      'electrum2.cipig.net:10006',
-      'electrum3.cipig.net:10006'
-    ],
     active: 0,
     txversion: 4,
     market_cap: 0,
-    mm2: 1
+    mm2: 1,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10006'
+      },
+      {
+        url: 'electrum2.cipig.net:10006'
+      },
+      {
+        url: 'electrum3.cipig.net:10006'
+      }
+    ]
   },
   // {
   //   coin: 'DGB',
@@ -1029,14 +1097,20 @@ export default [
     p2shtype: 5,
     wiftype: 166,
     txfee: 1000000,
-    urls: [
-      'electrum1.cipig.net:10072',
-      'electrum2.cipig.net:10072',
-      'electrum3.cipig.net:10072'
-    ],
     active: 0,
     market_cap: 0,
-    mm2: 1
+    mm2: 1,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10072'
+      },
+      {
+        url: 'electrum2.cipig.net:10072'
+      },
+      {
+        url: 'electrum3.cipig.net:10072'
+      }
+    ]
   },
   // {
   //   coin: 'GBX',
@@ -2360,13 +2434,19 @@ export default [
     name: 'LABS',
     asset: 'LABS',
     txversion: 4,
-    urls: [
-      'electrum1.cipig.net:10019',
-      'electrum2.cipig.net:10019',
-      'electrum3.cipig.net:10019'
-    ],
     active: 0,
     market_cap: 0,
-    mm2: 1
+    mm2: 1,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10019'
+      },
+      {
+        url: 'electrum2.cipig.net:10019'
+      },
+      {
+        url: 'electrum3.cipig.net:10019'
+      }
+    ]
   }
 ];

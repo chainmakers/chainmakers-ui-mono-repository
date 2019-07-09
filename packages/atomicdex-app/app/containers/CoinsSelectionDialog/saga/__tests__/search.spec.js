@@ -28,7 +28,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
         type: SELECT_COIN_MODAL_SETUP_SEARCH_API_SUCCESS,
         payload: [
           {
-            urls: ['electrum1.cipig.net:10000', 'electrum2.cipig.net:10000'],
+            servers: [
+              { url: 'electrum1.cipig.net:10000' },
+              { url: 'electrum2.cipig.net:10000' }
+            ],
             active: 1,
             name: 'Bitcoin',
             market_cap: 97822306639,
@@ -39,10 +42,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
           },
           {
             txfee: 10000,
-            urls: [
-              'electrum1.cipig.net:10058',
-              'electrum2.cipig.net:10058',
-              'electrum3.cipig.net:10058'
+            servers: [
+              { url: 'electrum1.cipig.net:10058' },
+              { url: 'electrum2.cipig.net:10058' },
+              { url: 'electrum3.cipig.net:10058' }
             ],
             taddr: 28,
             active: 0,
@@ -59,7 +62,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             id: 12
           },
           {
-            urls: ['electrum1.cipig.net:10001', 'electrum2.cipig.net:10001'],
+            servers: [
+              { url: 'electrum1.cipig.net:10001' },
+              { url: 'electrum2.cipig.net:10001' }
+            ],
             active: 1,
             name: 'Komodo',
             market_cap: 107340275,
@@ -71,7 +77,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
           },
           {
             txfee: 10000,
-            urls: ['electrum1.cipig.net:10053', 'electrum2.cipig.net:10053'],
+            servers: [
+              { url: 'electrum1.cipig.net:10053' },
+              { url: 'electrum2.cipig.net:10053' }
+            ],
             active: 0,
             rpcport: 57776,
             name: 'Chips',
@@ -86,10 +95,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             id: 5
           },
           {
-            urls: [
-              'el0.vrsc.0x03.services:10000',
-              'el1.vrsc.0x03.services:10000',
-              'el2.vrsc.0x03.services:10000'
+            servers: [
+              { url: 'el0.vrsc.0x03.services:10000' },
+              { url: 'el1.vrsc.0x03.services:10000' },
+              { url: 'el2.vrsc.0x03.services:10000' }
             ],
             active: 0,
             rpcport: 27486,
@@ -102,7 +111,12 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             id: 7
           },
           {
-            urls: ['159.65.91.235:10801', '167.99.204.42:10801'],
+            servers: [
+              {
+                url: '159.65.91.235:10801'
+              },
+              { url: '167.99.204.42:10801' }
+            ],
             active: 0,
             rpcport: 10306,
             name: 'Equaliser',
@@ -113,7 +127,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             id: 2
           },
           {
-            urls: ['electrum1.cipig.net:10011', 'electrum2.cipig.net:10011'],
+            servers: [
+              { url: 'electrum1.cipig.net:10011' },
+              { url: 'electrum2.cipig.net:10011' }
+            ],
             active: 0,
             rpcport: 14276,
             name: 'Coqui Cash',
@@ -125,10 +142,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             id: 4
           },
           {
-            urls: [
-              'electrum1.cipig.net:10031',
-              'electrum2.cipig.net:10031',
-              'electrum3.cipig.net:10031'
+            servers: [
+              { url: 'electrum1.cipig.net:10031' },
+              { url: 'electrum2.cipig.net:10031' },
+              { url: 'electrum3.cipig.net:10031' }
             ],
             active: 0,
             rpcport: 30177,
@@ -141,10 +158,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             id: 8
           },
           {
-            urls: [
-              'electrum1.cipig.net:10032',
-              'electrum2.cipig.net:10032',
-              'electrum3.cipig.net:10032'
+            servers: [
+              { url: 'electrum1.cipig.net:10032' },
+              { url: 'electrum2.cipig.net:10032' },
+              { url: 'electrum3.cipig.net:10032' }
             ],
             active: 0,
             rpcport: 15587,
@@ -157,7 +174,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             id: 9
           },
           {
-            urls: ['electrum1.cipig.net:10022', 'electrum2.cipig.net:10022'],
+            servers: [
+              { url: 'electrum1.cipig.net:10022' },
+              { url: 'electrum2.cipig.net:10022' }
+            ],
             active: 0,
             rpcport: 8923,
             name: 'Beer',
@@ -169,7 +189,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             id: 13
           },
           {
-            urls: ['electrum1.cipig.net:10024', 'electrum2.cipig.net:10024'],
+            servers: [
+              { url: 'electrum1.cipig.net:10024' },
+              { url: 'electrum2.cipig.net:10024' }
+            ],
             active: 1,
             rpcport: 11608,
             name: 'Pizza',
@@ -220,7 +243,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             marketcap: 0,
             name: 'Bitcoin',
             symbol: 'BTC',
-            urls: ['electrum1.cipig.net:10000', 'electrum2.cipig.net:10000']
+            servers: [
+              { url: 'electrum1.cipig.net:10000' },
+              { url: 'electrum2.cipig.net:10000' }
+            ]
           },
           {
             active: 0,
@@ -236,10 +262,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             taddr: 28,
             txfee: 10000,
             txversion: 4,
-            urls: [
-              'electrum1.cipig.net:10058',
-              'electrum2.cipig.net:10058',
-              'electrum3.cipig.net:10058'
+            servers: [
+              { url: 'electrum1.cipig.net:10058' },
+              { url: 'electrum2.cipig.net:10058' },
+              { url: 'electrum3.cipig.net:10058' }
             ],
             wiftype: 128
           },
@@ -252,7 +278,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             name: 'Komodo',
             symbol: 'KMD',
             txversion: 4,
-            urls: ['electrum1.cipig.net:10001', 'electrum2.cipig.net:10001']
+            servers: [
+              { url: 'electrum1.cipig.net:10001' },
+              { url: 'electrum2.cipig.net:10001' }
+            ]
           },
           {
             active: 0,
@@ -267,7 +296,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             symbol: 'CHIPS',
             txfee: 10000,
             txversion: 4,
-            urls: ['electrum1.cipig.net:10053', 'electrum2.cipig.net:10053'],
+            servers: [
+              { url: 'electrum1.cipig.net:10053' },
+              { url: 'electrum2.cipig.net:10053' }
+            ],
             wiftype: 188
           },
           {
@@ -280,10 +312,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             rpcport: 27486,
             symbol: 'VRSC',
             txversion: 4,
-            urls: [
-              'el0.vrsc.0x03.services:10000',
-              'el1.vrsc.0x03.services:10000',
-              'el2.vrsc.0x03.services:10000'
+            servers: [
+              { url: 'el0.vrsc.0x03.services:10000' },
+              { url: 'el1.vrsc.0x03.services:10000' },
+              { url: 'el2.vrsc.0x03.services:10000' }
             ]
           },
           {
@@ -295,7 +327,12 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             name: 'Equaliser',
             rpcport: 10306,
             symbol: 'EQL',
-            urls: ['159.65.91.235:10801', '167.99.204.42:10801']
+            servers: [
+              {
+                url: '159.65.91.235:10801'
+              },
+              { url: '167.99.204.42:10801' }
+            ]
           },
           {
             active: 0,
@@ -307,7 +344,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             rpcport: 14276,
             symbol: 'COQUI',
             txversion: 4,
-            urls: ['electrum1.cipig.net:10011', 'electrum2.cipig.net:10011']
+            servers: [
+              { url: 'electrum1.cipig.net:10011' },
+              { url: 'electrum2.cipig.net:10011' }
+            ]
           },
           {
             active: 0,
@@ -319,10 +359,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             rpcport: 30177,
             symbol: 'KMDICE',
             txversion: 4,
-            urls: [
-              'electrum1.cipig.net:10031',
-              'electrum2.cipig.net:10031',
-              'electrum3.cipig.net:10031'
+            servers: [
+              { url: 'electrum1.cipig.net:10031' },
+              { url: 'electrum2.cipig.net:10031' },
+              { url: 'electrum3.cipig.net:10031' }
             ]
           },
           {
@@ -335,10 +375,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             rpcport: 15587,
             symbol: 'CHAIN',
             txversion: 4,
-            urls: [
-              'electrum1.cipig.net:10032',
-              'electrum2.cipig.net:10032',
-              'electrum3.cipig.net:10032'
+            servers: [
+              { url: 'electrum1.cipig.net:10032' },
+              { url: 'electrum2.cipig.net:10032' },
+              { url: 'electrum3.cipig.net:10032' }
             ]
           },
           {
@@ -351,7 +391,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             rpcport: 8923,
             symbol: 'BEER',
             txversion: 4,
-            urls: ['electrum1.cipig.net:10022', 'electrum2.cipig.net:10022']
+            servers: [
+              { url: 'electrum1.cipig.net:10022' },
+              { url: 'electrum2.cipig.net:10022' }
+            ]
           },
           {
             active: 1,
@@ -363,7 +406,10 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             rpcport: 11608,
             symbol: 'PIZZA',
             txversion: 4,
-            urls: ['electrum1.cipig.net:10024', 'electrum2.cipig.net:10024']
+            servers: [
+              { url: 'electrum1.cipig.net:10024' },
+              { url: 'electrum2.cipig.net:10024' }
+            ]
           }
         ],
         type: SELECT_COIN_MODAL_SEARCH_SUCCESS

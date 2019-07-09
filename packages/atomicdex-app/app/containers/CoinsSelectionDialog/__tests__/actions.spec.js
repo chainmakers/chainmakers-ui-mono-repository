@@ -84,7 +84,14 @@ describe('containers/CoinsSelectionDialog/actions/setupSearchApiForSelectCoinMod
   const payload = [
     {
       txfee: 20000,
-      urls: ['electrum1.cipig.net:10000', 'electrum2.cipig.net:10000'],
+      servers: [
+        {
+          url: 'electrum1.cipig.net:10000'
+        },
+        {
+          url: 'electrum2.cipig.net:10000'
+        }
+      ],
       active: 1,
       rpcport: 8332,
       name: 'Bitcoin',

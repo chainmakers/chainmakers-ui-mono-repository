@@ -97,7 +97,14 @@ describe('containers/App/reducers/loginError', () => {
 describe('containers/App/reducers/addElectrum', () => {
   const payload: AddElectrumPayload = {
     txversion: 4,
-    urls: ['electrum1.cipig.net:10024', 'electrum2.cipig.net:10024'],
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10024'
+      },
+      {
+        url: 'electrum2.cipig.net:10024'
+      }
+    ],
     coin: 'BEER'
   };
   let state;
@@ -187,7 +194,14 @@ describe('containers/App/reducers/addElectrumError', () => {
         name: 'Pizza',
         rpcport: 11608,
         txversion: 4,
-        urls: ['electrum1.cipig.net:10024', 'electrum2.cipig.net:10024']
+        servers: [
+          {
+            url: 'electrum1.cipig.net:10024'
+          },
+          {
+            url: 'electrum2.cipig.net:10024'
+          }
+        ]
       }
     },
     type: 'RPC',

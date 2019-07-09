@@ -85,11 +85,11 @@ describe('containers/ElectrumDialog/saga/electrum/listenForAddingElectrums', () 
           rpcport: 3889,
           symbol: 'QTUM',
           txfee: 400000,
-          urls: [
-            's4.qtum.info:50001',
-            's5.qtum.info:50001',
-            's7.qtum.info:50001',
-            's8.qtum.info:50001'
+          servers: [
+            { url: 's4.qtum.info:50001' },
+            { url: 's5.qtum.info:50001' },
+            { url: 's7.qtum.info:50001' },
+            { url: 's8.qtum.info:50001' }
           ],
           wiftype: 128
         },
