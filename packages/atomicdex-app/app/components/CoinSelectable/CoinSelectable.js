@@ -47,7 +47,7 @@ const styles = () => ({
   },
 
   btn__subtitle: {
-    marginTop: 8
+    marginTop: 0
   },
 
   btn__selected: {
@@ -151,8 +151,9 @@ class CoinSelectable extends React.PureComponent<Props> {
         onClick={this.onClick}
         style={style}
       >
-        <span className={classes.btn__content}>
+        <div className={classes.btn__content}>
           {icon}
+          {!subTitle && <br />}
           {title && (
             <Typography
               component="div"
@@ -174,7 +175,7 @@ class CoinSelectable extends React.PureComponent<Props> {
             </Typography>
           )}
           {price}
-        </span>
+        </div>
         {selected && (
           <CheckCircleOutlineIcon className={classes.btn__selected} />
         )}
