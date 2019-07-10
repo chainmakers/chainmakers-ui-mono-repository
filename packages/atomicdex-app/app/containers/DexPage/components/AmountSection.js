@@ -170,7 +170,7 @@ const styles = theme => ({
   },
 
   amountform__formFirstItem: {
-    margin: '0 0 24px 0',
+    margin: '8px 0 24px 0',
     position: 'relative',
     width: '100%'
   },
@@ -716,7 +716,7 @@ class AmountSection extends React.Component<Props, State> {
         <Grid
           container
           className={classes.amountform}
-          spacing={24}
+          spacing={2}
           id="amount-section-placeorder-dexpage"
         >
           <Grid

@@ -44,9 +44,10 @@ export default function* loadBuyCoinProcess({ payload, time = intervalTime }) {
 
     // step five: check balance
     const buyparams = {
-      base: basecoin,
-      rel: paymentcoin,
-      volume: +relvolume.toFixed(8),
+      base: basecoin, // receive
+      rel: paymentcoin, // sell
+      // volume: +relvolume.toFixed(8),
+      volume: floor(Number(amount), 8),
       price: +price.get('bestPrice').toFixed(8)
     };
 
