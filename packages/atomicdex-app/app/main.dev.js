@@ -97,14 +97,19 @@ app.on('ready', async () => {
     height: loginWindowSize.height,
     minWidth: minWindowSize.width,
     minHeight: minWindowSize.height,
-    webPreferences: {
-      nodeIntegration: false,
-      nodeIntegrationInWorker: false,
-      contextIsolation: false,
-      preload: path.join(__dirname, 'preloader.js'),
-      nativeWindowOpen: true,
-      enableRemoteModule: false
-    }
+    webPreferences: isDev
+      ? {
+          nodeIntegration: true,
+          preload: path.join(__dirname, 'preloader.js')
+        }
+      : {
+          nodeIntegration: false,
+          nodeIntegrationInWorker: false,
+          contextIsolation: false,
+          preload: path.join(__dirname, 'preloader.js'),
+          nativeWindowOpen: true,
+          enableRemoteModule: false
+        }
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
@@ -140,9 +145,9 @@ app.on('ready', async () => {
   new AppUpdater();
 });
 
-// https://electronjs.org/docs/tutorial/security#12-disable-or-limit-navigation
-app.on('web-contents-created', (_, contents) => {
-  if (!isDev) {
+if (!isDev) {
+  // https://electronjs.org/docs/tutorial/security#12-disable-or-limit-navigation
+  app.on('web-contents-created', (_, contents) => {
     contents.on('will-navigate', (event, navigationUrl) => {
       log.info(`block navigate to ${navigationUrl}`);
       event.preventDefault();
@@ -155,5 +160,5 @@ app.on('web-contents-created', (_, contents) => {
         log.info(`block open new window ${navigationUrl}`);
       }
     });
-  }
-});
+  });
+}

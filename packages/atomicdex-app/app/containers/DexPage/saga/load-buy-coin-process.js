@@ -85,7 +85,7 @@ export default function* loadBuyCoinProcess({ payload, time = intervalTime }) {
     result.requestid = 0;
 
     // quoteid
-    result.requestid = 0;
+    result.quoteid = 0;
 
     result.bobsmartaddress = basesmartaddress;
     result.requested = {

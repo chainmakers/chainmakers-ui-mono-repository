@@ -1,12 +1,12 @@
 {
   "result": {
     "action": "Buy",
-    "base": "BEER",
-    "base_amount": "0.09900990000000000",
+    "base": "BTC",
+    "base_amount": "0.5",
     "dest_pub_key": "0000000000000000000000000000000000000000000000000000000000000000",
     "method": "request",
-    "rel": "PIZZA",
-    "rel_amount": "0.09999999900000000000000000000000",
+    "rel": "COQUI",
+    "rel_amount": "0.2",
     "sender_pubkey": "c88a033b587244cd501e90709620c3ec58d9c3886e33c2e1db909d0451aa5833",
     "uuid": "3ee41a9c-e963-4237-bcba-904b2bf519af"
   }

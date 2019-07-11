@@ -4,6 +4,7 @@ import React from 'react';
 import { cloneDeep } from 'lodash';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
+import { floor } from 'barterdex-utilities';
 import { loadSwapSuccess } from '../../../App/actions';
 import {
   // loadBuyCoin,
@@ -111,15 +112,29 @@ export function mapDispatchToProps(dispatch: Dispatch<Object>) {
     //     amount: 8.61671724
     //   })),
     dispatchLoadSwapSuccess: () => dispatch(loadSwapSuccess(LOAD_SWAP_SUCCESS)),
-    dispatchLoadBuyCoinSuccess: () =>
-      dispatch(
-        loadBuyCoinSuccess(
-          Object.assign({}, SWAP_STATE_ZERO.pending, {
-            expiration: Date.now() / 1000 + 60
-          })
-        )
-      ),
-
+    dispatchLoadBuyCoinSuccess: () => {
+      const { result } = SWAP_STATE_ZERO;
+      const data = Object.assign({}, result, {
+        expiration: Date.now() / 1000 + 60,
+        timeleft: 30, // 30s
+        bob: result.base,
+        alice: result.rel,
+        base_amount: floor(result.base_amount, 8),
+        basevalue: floor(result.base_amount, 8),
+        rel_amount: floor(result.rel_amount, 8),
+        relvalue: floor(result.rel_amount, 8),
+        requested: {
+          bobAmount: floor(result.base_amount, 8),
+          aliceAmount: floor(result.rel_amount, 8)
+        },
+        tradeid: result.uuid,
+        requestid: 0,
+        quoteid: 0,
+        bobsmartaddress: '1HD77JGnkyqtj3ESgqjG18aJkb41aknPyv',
+        alicesmartaddress: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu'
+      });
+      dispatch(loadBuyCoinSuccess(data));
+    },
     dispatchLoadRecentSwapsCoinOne: () =>
       dispatch(
         loadRecentSwapsCoin(
@@ -173,3 +188,6 @@ const withConnect = connect(
 );
 
 export default withConnect(TestSwap);
+
+// dispatchLoadBuyCoinSuccess()
+// dispatchLoadRecentSwapsCoinOne()

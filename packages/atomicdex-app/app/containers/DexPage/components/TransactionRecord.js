@@ -27,11 +27,12 @@ const styles = theme => ({
   },
 
   transactionRecord__ItemDay: {
-    flex: 'none'
+    flex: 'none',
+    margin: '6px 12px 6px 0'
   },
 
   transactionRecord__ItemText: {
-    // flex: '5 1 auto'
+    margin: '6px 12px'
   },
 
   transactionRecord__ItemTextRight: {

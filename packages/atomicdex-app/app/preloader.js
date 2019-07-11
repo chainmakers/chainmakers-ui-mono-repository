@@ -29,4 +29,6 @@ process.once('loaded', () => {
     callMain: (...args) => ipc.callMain(...args)
   };
   global.WebSocket = WebSocket;
+  global.isDev = isDev;
+  if (isDev) global.__devtron = { require, process };
 });
