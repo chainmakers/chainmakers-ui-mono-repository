@@ -44,13 +44,13 @@ export function* loadElectrum({ payload }: { payload: AddElectrumPayload }) {
     feeRequest = api.getfee({
       coin: payload.coin
     });
-    const fee = yield feeRequest;
+    const { result } = yield feeRequest;
     yield put(
       addElectrumSuccess({
         coin: payload.coin,
         address: rs.address,
         balance: floor(rs.balance, 8),
-        fee: fee.txfee
+        fee: floor(result.amount, 8)
       })
     );
   } catch (err) {

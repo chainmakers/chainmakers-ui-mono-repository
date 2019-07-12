@@ -9,7 +9,7 @@ export default function getFeeFactory() {
   return {
     getfee(params: GetFeeType) {
       const serverparams = Object.assign({}, params, {
-        method: 'getfee'
+        method: 'get_trade_fee'
       });
       return this.privateCall(serverparams);
     }

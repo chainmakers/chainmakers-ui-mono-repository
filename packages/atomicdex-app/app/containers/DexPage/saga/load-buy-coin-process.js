@@ -7,6 +7,7 @@ import { makeSelectBalanceEntities } from '../../App/selectors';
 import { loadBuyCoinError, loadBuyCoinSuccess } from '../actions';
 import { makeSelectPricesEntities } from '../selectors';
 import { NUMCOIN } from '../constants';
+import { calculateDexfee } from '../utils';
 
 const debug = require('debug')(
   'atomicapp:containers:DexPage:saga:load-buy-coin-process'
@@ -34,7 +35,8 @@ export default function* loadBuyCoinProcess({ payload, time = intervalTime }) {
 
     // step four: check balance
     const relvolume = floor(Number(amount * price.get('price')), 8);
-    const dexfee = floor(relvolume / 777, 8);
+    const dexfee = calculateDexfee(basecoin, paymentcoin, relvolume);
+
     if (
       relvolume * NUMCOIN + dexfee * NUMCOIN + 2 * fee * NUMCOIN >=
       Number(balance.get('balance') * NUMCOIN).toFixed(0)

@@ -13,6 +13,7 @@ import listenForLoadingBalance, {
 } from '../balance';
 import data from '../../../__tests__/app-state.json';
 import balance from '../../../__tests__/balance.json';
+import getfee from '../../../__tests__/get_trade_fee.json';
 
 const TIMEOUT = 20 * 1000;
 const store = fromJS(data);
@@ -90,11 +91,8 @@ describe('containers/App/saga/balance/handlingLoadBalance', () => {
           if (method === 'my_balance') {
             cb(null, balance);
           }
-          if (method === 'getfee') {
-            cb(null, {
-              coin: 'BEER',
-              txfee: 0.00001
-            });
+          if (method === 'get_trade_fee') {
+            cb(null, getfee);
           }
         });
 

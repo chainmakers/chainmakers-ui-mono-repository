@@ -7,7 +7,7 @@ describe('packages/barterdex-api/src/client/getfee', () => {
       privateCall(params) {
         expect(params).toEqual({
           coin,
-          method: 'getfee'
+          method: 'get_trade_fee'
         });
       }
     };
