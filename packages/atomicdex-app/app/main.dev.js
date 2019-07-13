@@ -19,12 +19,14 @@ import setupMarketmaker from './main/plugins/marketmaker';
 import { applicationCrashedDialog } from './main/dialogs';
 import blockIP from './main/setPermissionRequestHandler';
 import explorer from './lib/explorer';
+import isPackaged from './utils/isPackaged';
+
+const log = require('electron-log');
 
 const debug = require('debug')('atomicapp:main');
 
-const isDev = process.mainModule.filename.indexOf('app.asar') === -1;
-
-const log = require('electron-log');
+// const isDev = process.mainModule.filename.indexOf('app.asar') === -1;
+const isDev = !isPackaged();
 
 if (isDev) log.transports.file.file = path.join(__dirname, '..', 'log.txt');
 
@@ -91,25 +93,27 @@ app.on('ready', async () => {
 
   log.info(`start app in ${isDev ? 'development' : 'production'} env`);
 
+  const webPreferences = isDev
+    ? {
+        nodeIntegration: true,
+        preload: path.join(__dirname, 'preloader.js')
+      }
+    : {
+        nodeIntegration: false,
+        nodeIntegrationInWorker: false,
+        contextIsolation: false,
+        preload: path.join(__dirname, 'preloader.js'),
+        nativeWindowOpen: true,
+        enableRemoteModule: false
+      };
+
   mainWindow = new BrowserWindow({
     show: false,
     width: loginWindowSize.width,
     height: loginWindowSize.height,
     minWidth: minWindowSize.width,
     minHeight: minWindowSize.height,
-    webPreferences: isDev
-      ? {
-          nodeIntegration: true,
-          preload: path.join(__dirname, 'preloader.js')
-        }
-      : {
-          nodeIntegration: false,
-          nodeIntegrationInWorker: false,
-          contextIsolation: false,
-          preload: path.join(__dirname, 'preloader.js'),
-          nativeWindowOpen: true,
-          enableRemoteModule: false
-        }
+    webPreferences
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
