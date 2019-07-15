@@ -2401,7 +2401,7 @@ balanced-match@^1.0.0:
     redux-saga "^0.16.2"
 
 "barterdex-server@file:../barterdex-server":
-  version "0.20.0"
+  version "0.21.0"
   dependencies:
     debug "^4.1.1"
     split2 "^3.1.0"
