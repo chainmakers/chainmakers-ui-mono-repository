@@ -16,7 +16,7 @@
   "atomicapp.containers.OrderPage.warning": "Your order will only be visible to others while the app is running. Once you close the app, your order dissapears.",
   "atomicapp.containers.Drawer.wallet": "Wallet",
   "atomicapp.containers.Drawer.buy": "Swap",
-  "atomicapp.containers.Drawer.order": "Order",
+  "atomicapp.containers.Drawer.order": "Sell",
   "atomicapp.containers.Drawer.help": "Help",
   "atomicapp.containers.Wallet.title": "Wallet",
   "atomicapp.containers.Wallet.overview": "Overview",

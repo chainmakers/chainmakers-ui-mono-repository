@@ -40,6 +40,12 @@ import {
 
 const debug = require('debug')('atomicapp:containers:DexPage:SwapDetailModal');
 
+const emptyLink = (
+  <Typography variant="caption" display="block" gutterBottom>
+    Open TX in block explorer
+  </Typography>
+);
+
 function onOpenEmpty() {
   debug('onOpenEmpty');
 }
@@ -180,11 +186,13 @@ export class SwapDetail extends React.PureComponent<Props> {
           }
           secondary={link}
         />
-        <ListItemSecondaryAction className={classes.swapDetail__ListItemRight}>
+
+        {/* <ListItemSecondaryAction className={classes.swapDetail__ListItemRight}>
           <Typography variant="caption" gutterBottom>
             {value}
           </Typography>
         </ListItemSecondaryAction>
+        */}
       </ListItem>
     );
   };
@@ -194,11 +202,7 @@ export class SwapDetail extends React.PureComponent<Props> {
     const value = swap.getIn(['myfee', 'value']);
     const tx = swap.getIn(['myfee', 'tx']);
     const coin = swap.getIn(['myfee', 'coin']);
-    let link = (
-      <Typography variant="caption" gutterBottom>
-        Open TX in block explorer
-      </Typography>
-    );
+    let link = emptyLink;
     if (tx !== SWAP_TX_DEFAULT) {
       link = (
         <a
@@ -222,11 +226,7 @@ export class SwapDetail extends React.PureComponent<Props> {
     const value = swap.getIn(['bobdeposit', 'value']);
     const tx = swap.getIn(['bobdeposit', 'tx']);
     const coin = swap.getIn(['bobdeposit', 'coin']);
-    let link = (
-      <Typography variant="caption" gutterBottom>
-        Open TX in block explorer
-      </Typography>
-    );
+    let link = emptyLink;
     if (tx !== SWAP_TX_DEFAULT) {
       link = (
         <a
@@ -250,11 +250,7 @@ export class SwapDetail extends React.PureComponent<Props> {
     const value = swap.getIn(['alicepayment', 'value']);
     const tx = swap.getIn(['alicepayment', 'tx']);
     const coin = swap.getIn(['alicepayment', 'coin']);
-    let link = (
-      <Typography variant="caption" gutterBottom>
-        Open TX in block explorer
-      </Typography>
-    );
+    let link = emptyLink;
     if (tx !== SWAP_TX_DEFAULT) {
       link = (
         <a
@@ -278,11 +274,7 @@ export class SwapDetail extends React.PureComponent<Props> {
     const value = swap.getIn(['bobpayment', 'value']);
     const tx = swap.getIn(['bobpayment', 'tx']);
     const coin = swap.getIn(['bobpayment', 'coin']);
-    let link = (
-      <Typography variant="caption" gutterBottom>
-        Open TX in block explorer
-      </Typography>
-    );
+    let link = emptyLink;
     if (tx !== SWAP_TX_DEFAULT) {
       link = (
         <a
@@ -306,11 +298,7 @@ export class SwapDetail extends React.PureComponent<Props> {
     const value = swap.getIn(['alicespend', 'value']);
     const coin = swap.getIn(['alicespend', 'coin']);
     const tx = swap.getIn(['alicespend', 'tx']);
-    let link = (
-      <Typography variant="caption" gutterBottom>
-        Open TX in block explorer
-      </Typography>
-    );
+    let link = emptyLink;
 
     if (tx !== SWAP_TX_DEFAULT) {
       link = (
@@ -349,11 +337,7 @@ export class SwapDetail extends React.PureComponent<Props> {
           }
         />
         <CardContent>
-          <Grid
-            container
-            spacing={24}
-            className={classes.swapDetail__container}
-          >
+          <Grid container spacing={2} className={classes.swapDetail__container}>
             <Grid item xs={6} className={classes.amountform__itemCenter}>
               <CoinSelectable
                 className={classes.swapform_button}
@@ -362,7 +346,7 @@ export class SwapDetail extends React.PureComponent<Props> {
                 subTitle={
                   <span className={classes.swapDetail__danger}>
                     {swap.get('aliceamount')} {swap.get('alice')}
-                    <Typography variant="caption" gutterBottom>
+                    <Typography variant="caption" display="block" gutterBottom>
                       - {floor(swap.getIn(['requested', 'aliceAmount']), 8)}{' '}
                       {swap.get('alice')}
                     </Typography>
@@ -379,7 +363,7 @@ export class SwapDetail extends React.PureComponent<Props> {
                 subTitle={
                   <span className={classes.swapDetail__success}>
                     {swap.get('bobamount')} {swap.get('bob')}
-                    <Typography variant="caption" gutterBottom>
+                    <Typography variant="caption" display="block" gutterBottom>
                       + {floor(swap.getIn(['requested', 'bobAmount']), 8)}{' '}
                       {swap.get('bob')}
                     </Typography>

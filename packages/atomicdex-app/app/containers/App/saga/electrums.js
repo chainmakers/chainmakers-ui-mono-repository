@@ -29,7 +29,9 @@ export default function* listenForLoadingElectrums() {
     const coin = list.get(i);
     if (ALREADY_INIT_LIST.indexOf(coin) === -1) {
       const config = supportedCoinsEntities.get(coin);
-      if (config && config.toJS) yield put(addElectrum(config.toJS()));
+      if (config && config.toJS) {
+        yield put(addElectrum(config.toJS()));
+      }
     }
   }
 }
@@ -44,13 +46,13 @@ export function* loadElectrum({ payload }: { payload: AddElectrumPayload }) {
     feeRequest = api.getfee({
       coin: payload.coin
     });
-    const fee = yield feeRequest;
+    const result = yield feeRequest;
     yield put(
       addElectrumSuccess({
         coin: payload.coin,
         address: rs.address,
         balance: floor(rs.balance, 8),
-        fee: fee.txfee
+        fee: floor(result.txfee, 8)
       })
     );
   } catch (err) {

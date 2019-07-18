@@ -27,11 +27,11 @@ import CoinSelectable from '../../../components/CoinSelectable';
 import { requiredNumber } from '../../../components/Form/helper';
 import validate from '../../../components/Form/validate';
 import type { BuyCoinPayload } from '../schema';
+import { calculateDexfee } from '../utils';
 import {
   AUTO_HIDE_SNACKBAR_TIME,
   STATE_SWAPS,
   NA,
-  DEXFEE,
   FINISHED_SWAPS_STATE
 } from '../constants';
 import {
@@ -170,7 +170,7 @@ const styles = theme => ({
   },
 
   amountform__formFirstItem: {
-    margin: '0 0 24px 0',
+    margin: '8px 0 24px 0',
     position: 'relative',
     width: '100%'
   },
@@ -376,6 +376,7 @@ class AmountSection extends React.Component<Props, State> {
     }
     if (disabledBuyButton !== state) {
       s.disabledBuyButton = state;
+      s.dexfee = 0;
     }
     this.setState(s);
   };
@@ -383,15 +384,19 @@ class AmountSection extends React.Component<Props, State> {
   onChangeBaseInput = async () => {
     try {
       debug(`onChangeBaseInput`);
+      const { payment, currency } = this.props;
       const baseInput = this.baseInput.current;
       const base = await baseInput.value();
 
       const bestPrice = this.getBestPrice();
       const paymentInput = this.paymentInput.current;
-      const payment = base * bestPrice;
-      await paymentInput.setValue(floor(payment, 8));
+      const amount = base * bestPrice;
+      await paymentInput.setValue(floor(amount, 8));
 
-      this.controlBuyButton(false, floor(payment / DEXFEE, 8));
+      this.controlBuyButton(
+        false,
+        calculateDexfee(currency.get('symbol'), payment.get('symbol'), amount)
+      );
     } catch (err) {
       this.controlBuyButton(true);
       debug(`onChangeBaseInput: ${err.message}`);
@@ -401,14 +406,18 @@ class AmountSection extends React.Component<Props, State> {
   onChangePaymentInput = async () => {
     try {
       debug(`onChangePaymentInput`);
+      const { payment, currency } = this.props;
       const paymentInput = this.paymentInput.current;
-      const payment = await paymentInput.value();
+      const amount = await paymentInput.value();
 
       const bestPrice = this.getBestPrice();
       const baseInput = this.baseInput.current;
-      await baseInput.setValue(floor(payment / bestPrice, 8));
+      await baseInput.setValue(floor(amount / bestPrice, 8));
 
-      this.controlBuyButton(false, floor(payment / DEXFEE, 8));
+      this.controlBuyButton(
+        false,
+        calculateDexfee(currency.get('symbol'), payment.get('symbol'), amount)
+      );
     } catch (err) {
       this.controlBuyButton(true);
       debug(`onChangePaymentInput: ${err.message}`);
@@ -716,7 +725,7 @@ class AmountSection extends React.Component<Props, State> {
         <Grid
           container
           className={classes.amountform}
-          spacing={24}
+          spacing={2}
           id="amount-section-placeorder-dexpage"
         >
           <Grid

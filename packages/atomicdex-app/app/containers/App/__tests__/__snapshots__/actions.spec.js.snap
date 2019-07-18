@@ -3,12 +3,16 @@
 exports[`containers/App/actions/addElectrum should addElectrum should create addElectrum action 1`] = `
 Object {
   "payload": Object {
-    "coin": "BEER",
-    "txversion": 4,
-    "urls": Array [
-      "electrum1.cipig.net:10024",
-      "electrum2.cipig.net:10024",
+    "coin": "PIZZA",
+    "servers": Array [
+      Object {
+        "url": "electrum1.cipig.net:10024",
+      },
+      Object {
+        "url": "electrum2.cipig.net:10024",
+      },
     ],
+    "txversion": 4,
   },
   "type": "atomicapp/App/ELECTRUM_ADD",
 }
@@ -26,11 +30,15 @@ Object {
         "market_cap": -2,
         "name": "Pizza",
         "rpcport": 11608,
-        "txversion": 4,
-        "urls": Array [
-          "electrum1.cipig.net:10024",
-          "electrum2.cipig.net:10024",
+        "servers": Array [
+          Object {
+            "url": "electrum1.cipig.net:10024",
+          },
+          Object {
+            "url": "electrum2.cipig.net:10024",
+          },
         ],
+        "txversion": 4,
       },
     },
     "message": "can't connect to electrum server",

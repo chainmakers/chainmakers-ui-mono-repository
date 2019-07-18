@@ -8,6 +8,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import Divider from '@material-ui/core/Divider';
 import AppBar from '@material-ui/core/AppBar';
+import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Slide from '@material-ui/core/Slide';
@@ -110,7 +111,7 @@ const styles = theme => ({
   },
 
   appBar__content: {
-    padding: '24px 94px'
+    padding: '32px 94px'
   }
 });
 
@@ -233,7 +234,12 @@ class CoinsSelectionModal extends React.PureComponent<
           <Divider className={classes.root_appBarDivider} />
         </AppBar>
         <DialogContent className={classes.appBar__content}>
-          <Grid container spacing={24}>
+          <Typography variant="overline" gutterBottom>
+            COINS
+          </Typography>
+          <br />
+          <br />
+          <Grid container spacing={3}>
             {!show || searchState !== SEARCH_STATE_READY ? (
               <React.Fragment>
                 <Grid item xs={3}>

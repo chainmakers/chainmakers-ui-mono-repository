@@ -7,6 +7,7 @@ import { makeSelectBalanceEntities } from '../../App/selectors';
 import { loadBuyCoinError, loadBuyCoinSuccess } from '../actions';
 import { makeSelectPricesEntities } from '../selectors';
 import { NUMCOIN } from '../constants';
+import { calculateDexfee } from '../utils';
 
 const debug = require('debug')(
   'atomicapp:containers:DexPage:saga:load-buy-coin-process'
@@ -34,7 +35,8 @@ export default function* loadBuyCoinProcess({ payload, time = intervalTime }) {
 
     // step four: check balance
     const relvolume = floor(Number(amount * price.get('price')), 8);
-    const dexfee = floor(relvolume / 777, 8);
+    const dexfee = calculateDexfee(basecoin, paymentcoin, relvolume);
+
     if (
       relvolume * NUMCOIN + dexfee * NUMCOIN + 2 * fee * NUMCOIN >=
       Number(balance.get('balance') * NUMCOIN).toFixed(0)
@@ -44,9 +46,10 @@ export default function* loadBuyCoinProcess({ payload, time = intervalTime }) {
 
     // step five: check balance
     const buyparams = {
-      base: basecoin,
-      rel: paymentcoin,
-      volume: +relvolume.toFixed(8),
+      base: basecoin, // receive
+      rel: paymentcoin, // sell
+      // volume: +relvolume.toFixed(8),
+      volume: floor(Number(amount), 8),
       price: +price.get('bestPrice').toFixed(8)
     };
 
@@ -84,7 +87,7 @@ export default function* loadBuyCoinProcess({ payload, time = intervalTime }) {
     result.requestid = 0;
 
     // quoteid
-    result.requestid = 0;
+    result.quoteid = 0;
 
     result.bobsmartaddress = basesmartaddress;
     result.requested = {

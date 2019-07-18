@@ -44,12 +44,16 @@ Object {
       "p2shtype": 5,
       "pubtype": 0,
       "rpcport": 8332,
+      "servers": Array [
+        Object {
+          "url": "electrum1.cipig.net:10000",
+        },
+        Object {
+          "url": "electrum2.cipig.net:10000",
+        },
+      ],
       "symbol": "BTC",
       "txfee": 20000,
-      "urls": Array [
-        "electrum1.cipig.net:10000",
-        "electrum2.cipig.net:10000",
-      ],
       "wiftype": 128,
     },
   ],

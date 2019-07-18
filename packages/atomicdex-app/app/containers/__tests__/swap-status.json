@@ -25,7 +25,7 @@
             "my_persistent_pub": "02471f64357636038d6db76677369f3995bbaf4531bf39a919286ca36f1a680002",
             "started_at": 1556256548,
             "taker_amount": 50000000,
-            "taker_coin": "BEER",
+            "taker_coin": "BTC",
             "taker_payment_confirmations": 1,
             "taker_payment_lock": 1556264348,
             "uuid": "3ee41a9c-e963-4237-bcba-904b2bf519af"
@@ -49,7 +49,7 @@
         "event": {
           "data": {
             "block_height": 0,
-            "coin": "BEER",
+            "coin": "BTC",
             "fee_details": {
               "amount": 0.00001
             },
@@ -109,7 +109,7 @@
         "event": {
           "data": {
             "block_height": 0,
-            "coin": "BEER",
+            "coin": "BTC",
             "fee_details": {
               "amount": 0.00001
             },
@@ -135,7 +135,7 @@
             "secret": "ef22f1f87823d3d88198410144f8463ea6feb29fa98e562075de64be56fda6dd",
             "transaction": {
               "block_height": 0,
-              "coin": "BEER",
+              "coin": "BTC",
               "fee_details": {
                 "amount": 0.00001
               },

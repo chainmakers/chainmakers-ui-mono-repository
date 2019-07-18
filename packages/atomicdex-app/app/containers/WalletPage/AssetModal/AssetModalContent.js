@@ -422,14 +422,14 @@ class AssetModalContent extends React.PureComponent<Props, State> {
           <Typography variant="body1" color="textSecondary" gutterBottom>
             [
             <br />
-            {coinConfiguration.get('urls').map(e => (
+            {coinConfiguration.get('servers').map(e => (
               <React.Fragment key={e}>
                 <span
                   style={{
                     marginLeft: 20
                   }}
                 >
-                  {e}
+                  {e.get('url')}
                 </span>
                 <br />
               </React.Fragment>

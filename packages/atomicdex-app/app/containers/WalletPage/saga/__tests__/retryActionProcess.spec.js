@@ -30,7 +30,10 @@ describe('containers/WalletPage/saga/retryActionProcess', () => {
         expect(dispatched).toEqual([
           addElectrum({
             txfee: 100000,
-            urls: ['electrum1.cipig.net:10065', 'electrum2.cipig.net:10065'],
+            servers: [
+              { url: 'electrum1.cipig.net:10065' },
+              { url: 'electrum2.cipig.net:10065' }
+            ],
             active: 1,
             rpcport: 9332,
             name: 'Litecoin',

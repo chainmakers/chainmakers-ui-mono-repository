@@ -30,11 +30,11 @@ describe('containers/App/saga/electrums/listenForLoadingElectrums', () => {
         {
           payload: {
             txfee: 1000,
-            urls: [
-              'bch.imaginary.cash:50001',
-              'electroncash.dk:50001',
-              'electrum.imaginary.cash:50001',
-              'abc1.hsmiths.com:60001'
+            servers: [
+              { url: 'bch.imaginary.cash:50001' },
+              { url: 'electroncash.dk:50001' },
+              { url: 'electrum.imaginary.cash:50001' },
+              { url: 'abc1.hsmiths.com:60001' }
             ],
             active: 0,
             rpcport: 33333,
@@ -94,7 +94,10 @@ describe('containers/App/saga/electrums/loadElectrum', () => {
           asset: 'BEER',
           txversion: 4,
           rpcport: 8923,
-          urls: ['electrum1.cipig.net:10022', 'electrum2.cipig.net:10022'],
+          servers: [
+            { url: 'electrum1.cipig.net:10022' },
+            { url: 'electrum2.cipig.net:10022' }
+          ],
           active: 1,
           market_cap: -1
         })
@@ -145,7 +148,10 @@ describe('containers/App/saga/electrums/loadElectrum', () => {
           asset: 'BEER',
           txversion: 4,
           rpcport: 8923,
-          urls: ['electrum1.cipig.net:10022', 'electrum2.cipig.net:10022'],
+          servers: [
+            { url: 'electrum1.cipig.net:10022' },
+            { url: 'electrum2.cipig.net:10022' }
+          ],
           active: 1,
           market_cap: -1
         })
@@ -164,7 +170,10 @@ describe('containers/App/saga/electrums/loadElectrum', () => {
                 name: 'Beer',
                 rpcport: 8923,
                 txversion: 4,
-                urls: ['electrum1.cipig.net:10022', 'electrum2.cipig.net:10022']
+                servers: [
+                  { url: 'electrum1.cipig.net:10022' },
+                  { url: 'electrum2.cipig.net:10022' }
+                ]
               }
             },
             message: 'Request failed with status code 500',

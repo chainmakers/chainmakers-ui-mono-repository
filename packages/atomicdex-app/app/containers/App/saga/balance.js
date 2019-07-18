@@ -52,14 +52,14 @@ export function* handlingLoadBalance({
       coin: payload.coin
     });
     const balanceReponse = yield balanceRequest;
-    const feeResponse = yield feeRequest;
+    const result = yield feeRequest;
     if (DISABLE_COINS.indexOf(payload.coin) === -1) {
       yield put(
         loadBalanceSuccess({
           coin: payload.coin,
           address: balanceReponse.address,
           balance: floor(balanceReponse.balance, 8),
-          fee: feeResponse.txfee
+          fee: floor(result.txfee, 8)
         })
       );
     }
@@ -87,10 +87,6 @@ export function* handlingLoadBalance({
     }
   }
 }
-
-// export function* handlingLoadBalanceSuccess(a1, a2, a3, a4) {
-//   console.log(a1, a2, a3, a4);
-// }
 
 export function* handlingLoadBalanceError({ error }) {
   debug(`handling load balance error: ${error.message}`);

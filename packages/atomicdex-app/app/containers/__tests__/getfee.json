@@ -1,5 +1,1 @@
-{
-  "result": "success",
-  "coin": "BEER",
-  "txfee": 0.00001
-}
+{ "result": "success", "coin": "KMD", "txfee": 0.00001 }

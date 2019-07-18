@@ -83,7 +83,10 @@ export const initialState = fromJS({
     //     context: {
     //       action: 'atomicapp/App/ELECTRUM_ADD',
     //       params: {
-    //         urls: ['electrum1.cipig.net:10022', 'electrum2.cipig.net:10022'],
+    //         servers: [
+    //           { url: 'electrum1.cipig.net:10022' },
+    //           { url: 'electrum2.cipig.net:10022' }
+    //         ],
     //         active: 0,
     //         rpcport: 8923,
     //         name: 'Beer',
@@ -99,7 +102,7 @@ export const initialState = fromJS({
     //     type: 'RPC',
     //     message: 'Request failed with status code 500'
     //   }
-    // }
+    // },
     deposit: null,
     recevie: null,
     asks: [

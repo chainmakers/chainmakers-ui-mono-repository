@@ -2,6 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as split2 from "split2";
 import { spawn, ChildProcess } from "child_process";
+import userpass from './userpass';
 import {
   getMarketmakerPlatformPath
 } from "./paths";
@@ -68,12 +69,13 @@ export default function controlFactory(state: StateType) {
               ok: "done"
             });
           }
-
+          const up = config.passphrase ? userpass(config.passphrase) : userpass('default');
           const startparams = Object.assign({
             netid: state.netid,
             client: state.client,
             gui: state.gui,
             passphrase: 'default',
+            rpc_password: up,
             userhome: state.userhome,
             rpcport: state.rpcport
           }, config);

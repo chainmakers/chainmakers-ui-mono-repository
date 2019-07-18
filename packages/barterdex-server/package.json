@@ -1,6 +1,6 @@
 {
   "name": "barterdex-server",
-  "version": "0.20.0",
+  "version": "0.21.0",
   "description": "Barterdex Application for Node",
   "author": "Hoang Nam <particle4dev@gmail.com> (particle4dev)",
   "homepage": "https://github.com/particle4dev/komodo-ui-mono-repository/tree/master/packages/barterdex-api#readme",

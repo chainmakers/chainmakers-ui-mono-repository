@@ -52,9 +52,9 @@
             "action": "atomicapp/App/ELECTRUM_ADD",
             "params": {
               "txfee": 100000,
-              "urls": [
-                "electrum1.cipig.net:10065",
-                "electrum2.cipig.net:10065"
+              "servers": [
+                { "url": "electrum1.cipig.net:10065" },
+                { "url": "electrum2.cipig.net:10065" }
               ],
               "active": 1,
               "rpcport": 9332,
@@ -194,7 +194,12 @@
       ],
       "entities": {
         "EQL": {
-          "urls": ["159.65.91.235:10801", "167.99.204.42:10801"],
+          "servers": [
+            {
+              "url": "159.65.91.235:10801"
+            },
+            { "url": "167.99.204.42:10801" }
+          ],
           "active": 0,
           "rpcport": 10306,
           "name": "Equaliser",
@@ -205,10 +210,10 @@
           "id": 2
         },
         "CHAIN": {
-          "urls": [
-            "electrum1.cipig.net:10032",
-            "electrum2.cipig.net:10032",
-            "electrum3.cipig.net:10032"
+          "servers": [
+            { "url": "electrum1.cipig.net:10032" },
+            { "url": "electrum2.cipig.net:10032" },
+            { "url": "electrum3.cipig.net:10032" }
           ],
           "active": 0,
           "rpcport": 15587,
@@ -221,7 +226,10 @@
           "id": 9
         },
         "KMD": {
-          "urls": ["electrum1.cipig.net:10001", "electrum2.cipig.net:10001"],
+          "servers": [
+            { "url": "electrum1.cipig.net:10001" },
+            { "url": "electrum2.cipig.net:10001" }
+          ],
           "active": 1,
           "name": "Komodo",
           "market_cap": 107340275,
@@ -233,11 +241,11 @@
         },
         "BCH": {
           "txfee": 1000,
-          "urls": [
-            "bch.imaginary.cash:50001",
-            "electroncash.dk:50001",
-            "electrum.imaginary.cash:50001",
-            "abc1.hsmiths.com:60001"
+          "servers": [
+            { "url": "bch.imaginary.cash:50001" },
+            { "url": "electroncash.dk:50001" },
+            { "url": "electrum.imaginary.cash:50001" },
+            { "url": "abc1.hsmiths.com:60001" }
           ],
           "active": 0,
           "rpcport": 33333,
@@ -254,7 +262,10 @@
         },
         "CHIPS": {
           "txfee": 10000,
-          "urls": ["electrum1.cipig.net:10053", "electrum2.cipig.net:10053"],
+          "servers": [
+            { "url": "electrum1.cipig.net:10053" },
+            { "url": "electrum2.cipig.net:10053" }
+          ],
           "active": 0,
           "rpcport": 57776,
           "name": "Chips",
@@ -269,7 +280,10 @@
           "id": 5
         },
         "PIZZA": {
-          "urls": ["electrum1.cipig.net:10024", "electrum2.cipig.net:10024"],
+          "servers": [
+            { "url": "electrum1.cipig.net:10024" },
+            { "url": "electrum2.cipig.net:10024" }
+          ],
           "active": 1,
           "rpcport": 11608,
           "name": "Pizza",
@@ -281,10 +295,10 @@
           "id": 14
         },
         "KMDICE": {
-          "urls": [
-            "electrum1.cipig.net:10031",
-            "electrum2.cipig.net:10031",
-            "electrum3.cipig.net:10031"
+          "servers": [
+            { "url": "electrum1.cipig.net:10031" },
+            { "url": "electrum2.cipig.net:10031" },
+            { "url": "electrum3.cipig.net:10031" }
           ],
           "active": 0,
           "rpcport": 30177,
@@ -297,10 +311,10 @@
           "id": 8
         },
         "VRSC": {
-          "urls": [
-            "el0.vrsc.0x03.services:10000",
-            "el1.vrsc.0x03.services:10000",
-            "el2.vrsc.0x03.services:10000"
+          "servers": [
+            { "url": "el0.vrsc.0x03.services:10000" },
+            { "url": "el1.vrsc.0x03.services:10000" },
+            { "url": "el2.vrsc.0x03.services:10000" }
           ],
           "active": 0,
           "rpcport": 27486,
@@ -313,7 +327,10 @@
           "id": 7
         },
         "BEER": {
-          "urls": ["electrum1.cipig.net:10022", "electrum2.cipig.net:10022"],
+          "servers": [
+            { "url": "electrum1.cipig.net:10022" },
+            { "url": "electrum2.cipig.net:10022" }
+          ],
           "active": 0,
           "rpcport": 8923,
           "name": "Beer",
@@ -325,10 +342,10 @@
           "id": 13
         },
         "REVS": {
-          "urls": [
-            "electrum1.cipig.net:10003",
-            "electrum2.cipig.net:10003",
-            "electrum3.cipig.net:10003"
+          "servers": [
+            { "url": "electrum1.cipig.net:10003" },
+            { "url": "electrum2.cipig.net:10003" },
+            { "url": "electrum3.cipig.net:10003" }
           ],
           "active": 0,
           "rpcport": 10196,
@@ -340,7 +357,10 @@
           "id": 6
         },
         "BTC": {
-          "urls": ["electrum1.cipig.net:10000", "electrum2.cipig.net:10000"],
+          "servers": [
+            { "url": "electrum1.cipig.net:10000" },
+            { "url": "electrum2.cipig.net:10000" }
+          ],
           "active": 1,
           "name": "Bitcoin",
           "market_cap": 97822306639,
@@ -351,10 +371,10 @@
         },
         "ZEC": {
           "txfee": 10000,
-          "urls": [
-            "electrum1.cipig.net:10058",
-            "electrum2.cipig.net:10058",
-            "electrum3.cipig.net:10058"
+          "servers": [
+            { "url": "electrum1.cipig.net:10058" },
+            { "url": "electrum2.cipig.net:10058" },
+            { "url": "electrum3.cipig.net:10058" }
           ],
           "taddr": 28,
           "active": 0,
@@ -371,7 +391,10 @@
           "id": 12
         },
         "COQUI": {
-          "urls": ["electrum1.cipig.net:10011", "electrum2.cipig.net:10011"],
+          "servers": [
+            { "url": "electrum1.cipig.net:10011" },
+            { "url": "electrum2.cipig.net:10011" }
+          ],
           "active": 0,
           "rpcport": 14276,
           "name": "Coqui Cash",
@@ -384,7 +407,10 @@
         },
         "LTC": {
           "txfee": 100000,
-          "urls": ["electrum1.cipig.net:10065", "electrum2.cipig.net:10065"],
+          "servers": [
+            { "url": "electrum1.cipig.net:10065" },
+            { "url": "electrum2.cipig.net:10065" }
+          ],
           "active": 0,
           "rpcport": 9332,
           "name": "Litecoin",
@@ -399,11 +425,11 @@
         },
         "QTUM": {
           "txfee": 400000,
-          "urls": [
-            "s4.qtum.info:50001",
-            "s5.qtum.info:50001",
-            "s7.qtum.info:50001",
-            "s8.qtum.info:50001"
+          "servers": [
+            { "url": "s4.qtum.info:50001" },
+            { "url": "s5.qtum.info:50001" },
+            { "url": "s7.qtum.info:50001" },
+            { "url": "s8.qtum.info:50001" }
           ],
           "active": 0,
           "rpcport": 3889,

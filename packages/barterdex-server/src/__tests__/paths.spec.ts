@@ -2,7 +2,7 @@ import {
   getMarketmakerPlatformPath
 } from "../paths";
 
-describe("packages/barterdex-api/src/server/paths", () => {
+describe("packages/barterdex-server/src/server/paths", () => {
   const bin = '/root/bin';
 
   it("getMarketmakerPlatformPath", () => {

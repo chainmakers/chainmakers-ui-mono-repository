@@ -65,8 +65,15 @@ describe('containers/App/actions/loadElectrums', () => {
 describe('containers/App/actions/addElectrum', () => {
   const payload: AddElectrumPayload = {
     txversion: 4,
-    urls: ['electrum1.cipig.net:10024', 'electrum2.cipig.net:10024'],
-    coin: 'BEER'
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10024'
+      },
+      {
+        url: 'electrum2.cipig.net:10024'
+      }
+    ],
+    coin: 'PIZZA'
   };
   it('should addElectrum should create addElectrum action', () => {
     expect(addElectrum(payload)).toMatchSnapshot();
@@ -134,7 +141,14 @@ describe('containers/App/actions/addElectrumError', () => {
         name: 'Pizza',
         rpcport: 11608,
         txversion: 4,
-        urls: ['electrum1.cipig.net:10024', 'electrum2.cipig.net:10024']
+        servers: [
+          {
+            url: 'electrum1.cipig.net:10024'
+          },
+          {
+            url: 'electrum2.cipig.net:10024'
+          }
+        ]
       }
     },
     type: 'RPC',

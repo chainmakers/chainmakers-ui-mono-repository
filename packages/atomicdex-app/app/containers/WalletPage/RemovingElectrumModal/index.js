@@ -39,13 +39,21 @@ function RemovingElectrumModal(props: Props) {
     dispatchRemoveElectrum
   } = props;
 
+  function handleCancel(evt: SyntheticInputEvent<>) {
+    evt.preventDefault();
+    dispatchCloseRemoveElectrumModal();
+  }
+
+  function handleConfirm(evt: SyntheticInputEvent<>) {
+    evt.preventDefault();
+    dispatchCloseRemoveElectrumModal();
+    dispatchRemoveElectrum(coin);
+  }
+
   return (
     <Dialog
       open={open}
-      onClose={(evt: SyntheticInputEvent<>) => {
-        evt.preventDefault();
-        dispatchCloseRemoveElectrumModal();
-      }}
+      onClose={handleCancel}
       aria-labelledby="removing-electrum-title"
       aria-describedby="removing-electrum-description"
     >
@@ -57,21 +65,23 @@ function RemovingElectrumModal(props: Props) {
       </DialogContent>
       <DialogActions>
         <Button
-          onClick={(evt: SyntheticInputEvent<>) => {
-            evt.preventDefault();
-            dispatchCloseRemoveElectrumModal();
-          }}
+          onClick={handleCancel}
           color="primary"
+          style={{
+            minWidth: 100
+          }}
         >
           Cancel
         </Button>
         <Button
-          onClick={(evt: SyntheticInputEvent<>) => {
-            evt.preventDefault();
-            dispatchCloseRemoveElectrumModal();
-            dispatchRemoveElectrum(coin);
-          }}
+          onClick={handleConfirm}
           color="primary"
+          variant="contained"
+          style={{
+            boxShadow: 'none',
+            marginLeft: 20,
+            minWidth: 100
+          }}
           autoFocus
         >
           Confirm

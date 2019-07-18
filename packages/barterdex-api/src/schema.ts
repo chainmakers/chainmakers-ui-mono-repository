@@ -19,6 +19,7 @@ export interface BarterdexApi {
   setprice: Function,
   getendpoint: Function,
   getfee: Function,
+  getTradeFee: Function,
   isready: Function,
   listTransactions: Function,
   orderbook: Function,
