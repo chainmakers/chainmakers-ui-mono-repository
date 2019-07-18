@@ -5,11 +5,11 @@ interface GetFeeType {
   coin: string
 };
 
-export default function getFeeFactory() {
+export default function getTradeFeeFactory() {
   return {
-    getfee(params: GetFeeType) {
+    getTradeFee(params: GetFeeType) {
       const serverparams = Object.assign({}, params, {
-        method: 'getfee'
+        method: 'get_trade_fee'
       });
       return this.privateCall(serverparams);
     }

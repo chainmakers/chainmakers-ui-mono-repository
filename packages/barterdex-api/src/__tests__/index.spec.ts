@@ -14,6 +14,7 @@ describe('packages/barterdex-api/src/index', () => {
     expect(typeof BarterDexAPI.setprice).toEqual('function');
     expect(typeof BarterDexAPI.getendpoint).toEqual('function');
     expect(typeof BarterDexAPI.getfee).toEqual('function');
+    expect(typeof BarterDexAPI.getTradeFee).toEqual('function');
     expect(typeof BarterDexAPI.isready).toEqual('function');
     expect(typeof BarterDexAPI.listTransactions).toEqual('function');
     expect(typeof BarterDexAPI.orderbook).toEqual('function');

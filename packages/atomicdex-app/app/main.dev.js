@@ -18,8 +18,8 @@ import config from './main/config';
 import setupMarketmaker from './main/plugins/marketmaker';
 import { applicationCrashedDialog } from './main/dialogs';
 import blockIP from './main/setPermissionRequestHandler';
+import isPackaged from './main/isPackaged';
 import explorer from './lib/explorer';
-import isPackaged from './utils/isPackaged';
 
 const log = require('electron-log');
 

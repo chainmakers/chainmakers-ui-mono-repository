@@ -3,7 +3,7 @@ import * as path from "path";
 import { execSync } from "child_process";
 import controlFactory from "../control";
 
-describe("packages/barterdex-api/src/server/control", () => {
+describe("packages/barterdex-server/src/server/control", () => {
   const state = {
     netid: 0,
     client: 1,

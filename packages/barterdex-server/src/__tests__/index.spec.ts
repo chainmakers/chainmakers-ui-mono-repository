@@ -1,6 +1,6 @@
 import Server from "../index";
 
-describe('packages/barterdex-api/src/server/index', () => {
+describe('packages/barterdex-server/src/server/index', () => {
   it('should create the Server correctly', () => {
     const d = Server({
       gui: 'AtomicDex',
