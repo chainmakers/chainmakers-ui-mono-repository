@@ -118,6 +118,7 @@ import DCR from './dcr.svg';
 import DEEZ from './deez.svg';
 import DENT from './dent.svg';
 import DEW from './dew.svg';
+import DEX from './dex.svg';
 import DGB from './dgb.svg';
 import DGD from './dgd.svg';
 import DLT from './dlt.svg';
@@ -536,6 +537,7 @@ const list = {
   DEEZ,
   DENT,
   DEW,
+  DEX,
   DGB,
   DGD,
   DLT,
