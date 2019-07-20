@@ -140,26 +140,26 @@ export default [
   //   market_cap: 0,
   //   mm2: 1
   // },
-  {
-    coin: 'VRSC',
-    name: 'VerusCoin',
-    txversion: 4,
-    servers: [
-       {
-        url: 'el0.vrsc.0x03.services:10000'
-      },
-      {
-        url: 'el1.vrsc.0x03.services:10000'
-      },
-      {
-        url: 'el2.vrsc.0x03.services:10000'
-      }
-    ],
-    rpcport: 27486,
-    active: 0,
-    market_cap: 1609044,
-    mm2: 1
-  },
+  // {
+  //   coin: 'VRSC',
+  //   name: 'VerusCoin',
+  //   txversion: 4,
+  //   servers: [
+  //      {
+  //       url: 'el0.vrsc.0x03.services:10000'
+  //     },
+  //     {
+  //       url: 'el1.vrsc.0x03.services:10000'
+  //     },
+  //     {
+  //       url: 'el2.vrsc.0x03.services:10000'
+  //     }
+  //   ],
+  //   rpcport: 27486,
+  //   active: 0,
+  //   market_cap: 1609044,
+  //   mm2: 1
+  // },
   {
     coin: 'KMDICE',
     name: 'KMDice',
@@ -1702,23 +1702,23 @@ export default [
   //   rpcport: 80,
   //   mm2: 1
   // },
-  {
-    coin: 'OOT',
-    name: 'Utrum',
-    asset: 'OOT',
-    rpcport: 12467,
-    servers: [
-      {
-        url: 'electrum1.utrum.io:10088'
-      },
-      {
-        url: 'electrum2.utrum.io:10088'
-      }
-    ],
-    active: 0,
-    market_cap: 0,
-    mm2: 1
-  },
+  // {
+  //   coin: 'OOT',
+  //   name: 'Utrum',
+  //   asset: 'OOT',
+  //   rpcport: 12467,
+  //   servers: [
+  //     {
+  //       url: 'electrum1.utrum.io:10088'
+  //     },
+  //     {
+  //       url: 'electrum2.utrum.io:10088'
+  //     }
+  //   ],
+  //   active: 0,
+  //   market_cap: 0,
+  //   mm2: 1
+  // },
   // {
   //   coin: 'PANGEA',
   //   name: 'Pangea Poker',
@@ -2449,24 +2449,25 @@ export default [
   //   market_cap: 0,
   //   mm2: 1
   // },
-  {
-    coin: 'ZILLA',
-    name: 'ChainZilla',
-    asset: 'ZILLA',
-    rpcport: 10041,
-    servers: [
-      {
-        url: 'electrum1.cipig.net:10028'
-      },
-      {
-        url: 'electrum2.cipig.net:10028'
-      },
-      {
-        url: 'electrum3.cipig.net:10028'
-      }
-    ],
-    mm2: 1
-  },
+  // {
+  //   coin: 'ZILLA',
+  //   name: 'ChainZilla',
+  //   asset: 'ZILLA',
+  //   rpcport: 10041,
+  //   servers: [
+  //     {
+  //       url: 'electrum1.cipig.net:10028'
+  //     },
+  //     {
+  //       url: 'electrum2.cipig.net:10028'
+  //     },
+  //     {
+  //       url: 'electrum3.cipig.net:10028'
+  //     }
+  //   ],
+  //   txversion: 4,
+  //   mm2: 1
+  // },
   // {
   //   coin: 'ZRX',
   //   name: '0x',
