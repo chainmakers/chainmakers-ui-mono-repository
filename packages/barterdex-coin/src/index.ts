@@ -268,8 +268,8 @@ export default [
     mm2: 1
   },
   // {
-  // coin: 'BEER',
-  // name: 'Beer',
+  //  coin: 'BEER',
+  //  name: 'Beer',
   //  asset: 'BEER',
   //  txversion: 4,
   //  rpcport: 8923,
@@ -288,7 +288,7 @@ export default [
   // {
   //  coin: 'PIZZA',
   //  name: 'Pizza',
-  // asset: 'PIZZA',
+  //  asset: 'PIZZA',
   //  txversion: 4,
   //  rpcport: 11608,
   //  active: 0,
