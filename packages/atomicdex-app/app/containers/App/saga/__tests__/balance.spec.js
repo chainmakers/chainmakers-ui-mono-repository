@@ -91,7 +91,7 @@ describe('containers/App/saga/balance/handlingLoadBalance', () => {
           if (method === 'my_balance') {
             cb(null, balance);
           }
-          if (method === 'get-trade-fee') {
+          if (method === 'get_trade_fee') {
             cb(null, getfee);
           }
         });
