@@ -54,18 +54,18 @@ module.exports = api => {
 
       // other
       [
-      require('babel-plugin-inline-react-svg'),
-      {
-        "svgo": {
-          "caseSensitive": true,
-          "plugins": [
-            {
-              "cleanupIDs": false
-            }
-          ]
+        require('babel-plugin-inline-react-svg'),
+        {
+          svgo: {
+            caseSensitive: true,
+            plugins: [
+              {
+                cleanupIDs: false
+              }
+            ]
+          }
         }
-      }
-    ]
+      ]
     ],
     env: {
       test: {

@@ -7,7 +7,7 @@ import listenForLoadingElectrums, { loadElectrum } from '../electrums';
 import { addElectrum } from '../../actions';
 import data from '../../../__tests__/app-state.json';
 import electrum from '../../../__tests__/electrum.json';
-import getfee from '../../../__tests__/getfee.json';
+import getfee from '../../../__tests__/get_trade_fee.json';
 
 const TIMEOUT = 20 * 1000;
 
@@ -77,7 +77,7 @@ describe('containers/App/saga/electrums/loadElectrum', () => {
           if (method === 'electrum') {
             cb(null, electrum);
           }
-          if (method === 'getfee') {
+          if (method === 'get_trade_fee') {
             cb(null, getfee);
           }
         });

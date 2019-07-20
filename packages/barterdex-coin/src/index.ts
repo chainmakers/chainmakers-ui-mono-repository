@@ -1,3 +1,4 @@
+
 // @flow
 // @docs
 // https://www.atomicexplorer.com/#/faucet/coqui
@@ -139,20 +140,20 @@ export default [
   //   market_cap: 0,
   //   mm2: 1
   // },
-   {
-     coin: 'VRSC',
-     name: 'VerusCoin',
-     txversion: 4,
-     urls: [
-       'el0.vrsc.0x03.services:10000',
-       'el1.vrsc.0x03.services:10000',
-       'el2.vrsc.0x03.services:10000'
-     ],
-     rpcport: 27486,
-     active: 0,
-     market_cap: 1609044,
-     mm2: 1
-   },
+  {
+    coin: 'VRSC',
+    name: 'VerusCoin',
+    txversion: 4,
+    urls: [
+      'el0.vrsc.0x03.services:10000',
+      'el1.vrsc.0x03.services:10000',
+      'el2.vrsc.0x03.services:10000'
+    ],
+    rpcport: 27486,
+    active: 0,
+    market_cap: 1609044,
+    mm2: 1
+  },
   {
     coin: 'KMDICE',
     name: 'KMDice',
@@ -235,26 +236,32 @@ export default [
   //   market_cap: 167615207,
   //   mm2: 1
   // },
+  {
+    coin: 'ZEC',
+    name: 'Zcash',
+    txversion: 4,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10058'
+      },
+      {
+        url: 'electrum2.cipig.net:10058'
+      },
+      {
+        url: 'electrum3.cipig.net:10058'
+      }
+    ],
+    rpcport: 8232,
+    taddr: 28,
+    pubtype: 184,
+    p2shtype: 189,
+    wiftype: 128,
+    txfee: 10000,
+    active: 0,
+    market_cap: 289458275,
+    mm2: 1
+  },
   // {
-     coin: 'ZEC',
-     name: 'Zcash',
-     txversion: 4,
-     urls: [
-       'electrum1.cipig.net:10058',
-       'electrum2.cipig.net:10058',
-       'electrum3.cipig.net:10058'
-     ],
-     rpcport: 8232,
-     taddr: 28,
-     pubtype: 184,
-     p2shtype: 189,
-     wiftype: 128,
-     txfee: 10000,
-     active: 0,
-     market_cap: 289458275,
-     mm2: 1
-   },
-  //{
   // coin: 'BEER',
   // name: 'Beer',
   //  asset: 'BEER',
@@ -271,8 +278,8 @@ export default [
   //      url: 'electrum2.cipig.net:10022'
   //    }
   //  ]
-  //},
-  //{
+  // },
+  // {
   //  coin: 'PIZZA',
   //  name: 'Pizza',
   // asset: 'PIZZA',
@@ -292,7 +299,7 @@ export default [
   //      url: 'electrum3.cipig.net:10024'
   //    }
   //  ]
-  //},
+  // },
   // {
   //   coin: '$PAC',
   //   rpcport: 7111,
@@ -697,16 +704,16 @@ export default [
   //   market_cap: 0,
   //   mm2: 1
   // },
-   {
-     coin: 'DAI',
-     name: 'Dai',
-     etomic: '0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359',
-     rpcport: 80,
-     asset: 'DAI',
-     active: 0,
-     market_cap: 0,
-     mm2: 1
-   },
+  {
+    coin: 'DAI',
+    name: 'Dai',
+    etomic: '0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359',
+    rpcport: 80,
+    asset: 'DAI',
+    active: 0,
+    market_cap: 0,
+    mm2: 1
+  },
   // {
   //   coin: 'DASH',
   //   rpcport: 9998,
@@ -828,24 +835,30 @@ export default [
   //   market_cap: 0,
   //   mm2: 1
   // },
-   {
-     coin: 'DOGE',
-     rpcport: 22555,
-     pubtype: 30,
-     p2shtype: 22,
-     wiftype: 158,
-     txfee: 100000000,
-     urls: [
-       'electrum1.cipig.net:10060',
-       'electrum2.cipig.net:10060',
-       'electrum3.cipig.net:10060'
-     ],
-     name: 'Dogecoin',
-     asset: 'DOGE',
-     active: 0,
-     market_cap: 0,
-     mm2: 1
-  // },
+  {
+    coin: 'DOGE',
+    rpcport: 22555,
+    pubtype: 30,
+    p2shtype: 22,
+    wiftype: 158,
+    txfee: 100000000,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10060'
+      },
+      {
+        url: 'electrum2.cipig.net:10060'
+      },
+      {
+        url: 'electrum3.cipig.net:10060'
+      }
+    ],
+    name: 'Dogecoin',
+    asset: 'DOGE',
+    active: 0,
+    market_cap: 0,
+    mm2: 1
+  },
   // {
   //   coin: 'DRGN',
   //   name: 'Dragonchain',
@@ -959,15 +972,15 @@ export default [
   //   urls: ['159.65.91.235:10801', '167.99.204.42:10801'],
   //   mm2: 1
   // },
-   {
-     coin: 'ETH',
-     etomic: '0x0000000000000000000000000000000000000000',
-     rpcport: 80,
-     name: 'Ethereum',
-     active: 0,
-     market_cap: 0,
-     mm2: 1
-   },
+  {
+    coin: 'ETH',
+    etomic: '0x0000000000000000000000000000000000000000',
+    rpcport: 80,
+    name: 'Ethereum',
+    active: 0,
+    market_cap: 0,
+    mm2: 1
+  },
   // {
   //   coin: 'ETA',
   //   name: 'Etheera',
@@ -1225,25 +1238,31 @@ export default [
   //   market_cap: 0,
   //   mm2: 1
   // },
-   {
-     coin: 'HUSH',
-     rpcport: 8822,
-     taddr: 28,
-     pubtype: 184,
-     p2shtype: 189,
-     wiftype: 128,
-     txfee: 1000,
-     urls: [
-       'electrum1.cipig.net:10064',
-       'electrum2.cipig.net:10064',
-       'electrum3.cipig.net:10064'
-     ],
-     name: 'Hush',
-     asset: 'HUSH',
-     active: 0,
-     market_cap: 0,
-     mm2: 1
-   },
+  {
+    coin: 'HUSH',
+    rpcport: 8822,
+    taddr: 28,
+    pubtype: 184,
+    p2shtype: 189,
+    wiftype: 128,
+    txfee: 1000,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10064'
+      },
+      {
+        url: 'electrum2.cipig.net:10064'
+      },
+      {
+        url: 'electrum3.cipig.net:10064'
+      }
+    ],
+    name: 'Hush',
+    asset: 'HUSH',
+    active: 0,
+    market_cap: 0,
+    mm2: 1
+  },
   // {
   //   coin: 'HYD',
   //   name: 'Hydra',
@@ -1677,16 +1696,16 @@ export default [
   //   rpcport: 80,
   //   mm2: 1
   // },
-   {
-     coin: 'OOT',
-     name: 'Utrum',
-     asset: 'OOT',
-     rpcport: 12467,
-     urls: ['electrum1.utrum.io:10088', 'electrum2.utrum.io:10088'],
-     active: 0,
-     market_cap: 0,
-     mm2: 1
-   },
+  {
+    coin: 'OOT',
+    name: 'Utrum',
+    asset: 'OOT',
+    rpcport: 12467,
+    urls: ['electrum1.utrum.io:10088', 'electrum2.utrum.io:10088'],
+    active: 0,
+    market_cap: 0,
+    mm2: 1
+  },
   // {
   //   coin: 'PANGEA',
   //   name: 'Pangea Poker',
@@ -2204,26 +2223,26 @@ export default [
   //   market_cap: 0,
   //   mm2: 1
   // },
-     {
-       coin: 'USDC',
-       name: 'usdc',
-       fname: 'USD Coin',
-       etomic: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-       rpcport: 80,
-       active: 0,
-       market_cap: 0,
-       mm2: 1
-   },
-   {
-     coin: 'USDT',
-     name: 'Tether',
-     etomic: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-     rpcport: 80,
-     asset: 'USDT',
-     active: 0,
-     market_cap: 0,
-     mm2: 1
-   },
+  {
+    coin: 'USDC',
+    name: 'usdc',
+    fname: 'USD Coin',
+    etomic: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+    rpcport: 80,
+    active: 0,
+    market_cap: 0,
+    mm2: 1
+  },
+  {
+    coin: 'USDT',
+    name: 'Tether',
+    etomic: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+    rpcport: 80,
+    asset: 'USDT',
+    active: 0,
+    market_cap: 0,
+    mm2: 1
+  },
   // {
   //   coin: 'VEN',
   //   name: 'VeChain',
@@ -2417,18 +2436,18 @@ export default [
   //   market_cap: 0,
   //   mm2: 1
   // },
-   {
-     coin: 'ZILLA',
-     name: 'ChainZilla',
-     asset: 'ZILLA',
-     rpcport: 10041,
-     urls: [
-       'electrum1.cipig.net:10028',
-       'electrum2.cipig.net:10028',
-       'electrum3.cipig.net:10028'
-     ],
-     mm2: 1
-   },
+  {
+    coin: 'ZILLA',
+    name: 'ChainZilla',
+    asset: 'ZILLA',
+    rpcport: 10041,
+    urls: [
+      'electrum1.cipig.net:10028',
+      'electrum2.cipig.net:10028',
+      'electrum3.cipig.net:10028'
+    ],
+    mm2: 1
+  },
   // {
   //   coin: 'ZRX',
   //   name: '0x',
