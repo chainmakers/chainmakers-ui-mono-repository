@@ -1,6 +1,6 @@
 {
   "name": "barterdex-coin",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Electrum config for Marketmaker",
   "author": "Hoang Nam <particle4dev@gmail.com> (particle4dev)",
   "homepage": "https://github.com/chainmakers/komodo-ui-mono-repository/tree/master/packages/barterdex-coin#readme",

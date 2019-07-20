@@ -2465,7 +2465,7 @@ balanced-match@^1.0.0:
     axios "^0.18.0"
 
 "barterdex-coin@file:../barterdex-coin":
-  version "0.2.0"
+  version "0.3.0"
 
 "barterdex-components@file:../barterdex-components":
   version "0.1.0"
