@@ -43,16 +43,16 @@ export function* loadElectrum({ payload }: { payload: AddElectrumPayload }) {
   try {
     electrumRequest = api.electrum(payload);
     const rs = yield electrumRequest;
-    feeRequest = api.getfee({
+    feeRequest = api.getTradeFee({
       coin: payload.coin
     });
-    const result = yield feeRequest;
+    const { result } = yield feeRequest;
     yield put(
       addElectrumSuccess({
         coin: payload.coin,
         address: rs.address,
         balance: floor(rs.balance, 8),
-        fee: floor(result.txfee, 8)
+        fee: floor(result.amount, 8)
       })
     );
   } catch (err) {

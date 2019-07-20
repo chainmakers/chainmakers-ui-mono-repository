@@ -53,7 +53,19 @@ module.exports = api => {
       require('@babel/plugin-proposal-json-strings'),
 
       // other
-      require('babel-plugin-inline-react-svg')
+      [
+      require('babel-plugin-inline-react-svg'),
+      {
+        "svgo": {
+          "caseSensitive": true,
+          "plugins": [
+            {
+              "cleanupIDs": false
+            }
+          ]
+        }
+      }
+    ]
     ],
     env: {
       test: {

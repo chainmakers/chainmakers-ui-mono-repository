@@ -48,18 +48,18 @@ export function* handlingLoadBalance({
     // }
 
     balanceRequest = api.myBalance(payload);
-    feeRequest = api.getfee({
+    feeRequest = api.getTradeFee({
       coin: payload.coin
     });
     const balanceReponse = yield balanceRequest;
-    const result = yield feeRequest;
+    const { result } = yield feeRequest;
     if (DISABLE_COINS.indexOf(payload.coin) === -1) {
       yield put(
         loadBalanceSuccess({
           coin: payload.coin,
           address: balanceReponse.address,
           balance: floor(balanceReponse.balance, 8),
-          fee: floor(result.txfee, 8)
+          fee: floor(result.amount, 8)
         })
       );
     }

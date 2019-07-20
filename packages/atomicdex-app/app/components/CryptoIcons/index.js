@@ -118,6 +118,7 @@ import DCR from './dcr.svg';
 import DEEZ from './deez.svg';
 import DENT from './dent.svg';
 import DEW from './dew.svg';
+import DEX from './dex.svg';
 import DGB from './dgb.svg';
 import DGD from './dgd.svg';
 import DLT from './dlt.svg';
@@ -432,6 +433,7 @@ import ZEST from './zest.svg';
 import ZIL from './zil.svg';
 import ZILLA from './zilla.svg';
 import ZRX from './zrx.svg';
+import LABS from './labs.svg';
 
 const list = {
   $PAC,
@@ -536,6 +538,7 @@ const list = {
   DEEZ,
   DENT,
   DEW,
+  DEX,
   DGB,
   DGD,
   DLT,
@@ -849,7 +852,8 @@ const list = {
   ZEST,
   ZIL,
   ZILLA,
-  ZRX
+  ZRX,
+  LABS
 };
 
 function getCoinMemoize(icon: string, width: number = 32, height: number = 32) {
