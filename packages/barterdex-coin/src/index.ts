@@ -144,10 +144,16 @@ export default [
     coin: 'VRSC',
     name: 'VerusCoin',
     txversion: 4,
-    urls: [
-      'el0.vrsc.0x03.services:10000',
-      'el1.vrsc.0x03.services:10000',
-      'el2.vrsc.0x03.services:10000'
+    servers: [
+       {
+        url: 'el0.vrsc.0x03.services:10000'
+      },
+      {
+        url: 'el1.vrsc.0x03.services:10000'
+      },
+      {
+        url: 'el2.vrsc.0x03.services:10000'
+      }
     ],
     rpcport: 27486,
     active: 0,
@@ -704,16 +710,16 @@ export default [
   //   market_cap: 0,
   //   mm2: 1
   // },
-  {
-    coin: 'DAI',
-    name: 'Dai',
-    etomic: '0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359',
-    rpcport: 80,
-    asset: 'DAI',
-    active: 0,
-    market_cap: 0,
-    mm2: 1
-  },
+  // {
+  //   coin: 'DAI',
+  //   name: 'Dai',
+  //   etomic: '0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359',
+  //   rpcport: 80,
+  //   asset: 'DAI',
+  //   active: 0,
+  //   market_cap: 0,
+  //   mm2: 1
+  // },
   // {
   //   coin: 'DASH',
   //   rpcport: 9998,
@@ -972,15 +978,15 @@ export default [
   //   urls: ['159.65.91.235:10801', '167.99.204.42:10801'],
   //   mm2: 1
   // },
-  {
-    coin: 'ETH',
-    etomic: '0x0000000000000000000000000000000000000000',
-    rpcport: 80,
-    name: 'Ethereum',
-    active: 0,
-    market_cap: 0,
-    mm2: 1
-  },
+  // {
+  //   coin: 'ETH',
+  //   etomic: '0x0000000000000000000000000000000000000000',
+  //   rpcport: 80,
+  //   name: 'Ethereum',
+  //   active: 0,
+  //   market_cap: 0,
+  //   mm2: 1
+  // },
   // {
   //   coin: 'ETA',
   //   name: 'Etheera',
@@ -1701,7 +1707,14 @@ export default [
     name: 'Utrum',
     asset: 'OOT',
     rpcport: 12467,
-    urls: ['electrum1.utrum.io:10088', 'electrum2.utrum.io:10088'],
+    servers: [
+      {
+        url: 'electrum1.utrum.io:10088'
+      },
+      {
+        url: 'electrum2.utrum.io:10088'
+      }
+    ],
     active: 0,
     market_cap: 0,
     mm2: 1
@@ -2223,26 +2236,26 @@ export default [
   //   market_cap: 0,
   //   mm2: 1
   // },
-  {
-    coin: 'USDC',
-    name: 'usdc',
-    fname: 'USD Coin',
-    etomic: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-    rpcport: 80,
-    active: 0,
-    market_cap: 0,
-    mm2: 1
-  },
-  {
-    coin: 'USDT',
-    name: 'Tether',
-    etomic: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-    rpcport: 80,
-    asset: 'USDT',
-    active: 0,
-    market_cap: 0,
-    mm2: 1
-  },
+  // {
+  //   coin: 'USDC',
+  //   name: 'usdc',
+  //   fname: 'USD Coin',
+  //   etomic: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+  //   rpcport: 80,
+  //   active: 0,
+  //   market_cap: 0,
+  //   mm2: 1
+  // },
+  // {
+  //   coin: 'USDT',
+  //   name: 'Tether',
+  //   etomic: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+  //   rpcport: 80,
+  //   asset: 'USDT',
+  //   active: 0,
+  //   market_cap: 0,
+  //   mm2: 1
+  // },
   // {
   //   coin: 'VEN',
   //   name: 'VeChain',
@@ -2441,10 +2454,16 @@ export default [
     name: 'ChainZilla',
     asset: 'ZILLA',
     rpcport: 10041,
-    urls: [
-      'electrum1.cipig.net:10028',
-      'electrum2.cipig.net:10028',
-      'electrum3.cipig.net:10028'
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10028'
+      },
+      {
+        url: 'electrum2.cipig.net:10028'
+      },
+      {
+        url: 'electrum3.cipig.net:10028'
+      }
     ],
     mm2: 1
   },
