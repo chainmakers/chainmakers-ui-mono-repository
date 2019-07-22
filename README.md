@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">
-  Komodo UI Mono Repository
+  Chainswaps UI Mono Repository
   <br>
 </h1>
 
@@ -21,4 +21,8 @@
 
 ## Project structure
 
-- [packages/atomicdex-app](packages/atomicdex-app)
+- [packages/chainswap-app](packages/atomicdex-app)
+
+- [packages/dico-app](packages/dico-app)
+
+- [packages/dice-app](packages/dice-app)

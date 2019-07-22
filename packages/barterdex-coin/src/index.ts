@@ -1,3 +1,4 @@
+
 // @flow
 // @docs
 // https://www.atomicexplorer.com/#/faucet/coqui
@@ -143,10 +144,16 @@ export default [
   //   coin: 'VRSC',
   //   name: 'VerusCoin',
   //   txversion: 4,
-  //   urls: [
-  //     'el0.vrsc.0x03.services:10000',
-  //     'el1.vrsc.0x03.services:10000',
-  //     'el2.vrsc.0x03.services:10000'
+  //   servers: [
+  //      {
+  //       url: 'el0.vrsc.0x03.services:10000'
+  //     },
+  //     {
+  //       url: 'el1.vrsc.0x03.services:10000'
+  //     },
+  //     {
+  //       url: 'el2.vrsc.0x03.services:10000'
+  //     }
   //   ],
   //   rpcport: 27486,
   //   active: 0,
@@ -235,64 +242,70 @@ export default [
   //   market_cap: 167615207,
   //   mm2: 1
   // },
+  {
+    coin: 'ZEC',
+    name: 'Zcash',
+    txversion: 4,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10058'
+      },
+      {
+        url: 'electrum2.cipig.net:10058'
+      },
+      {
+        url: 'electrum3.cipig.net:10058'
+      }
+    ],
+    rpcport: 8232,
+    taddr: 28,
+    pubtype: 184,
+    p2shtype: 189,
+    wiftype: 128,
+    txfee: 10000,
+    active: 0,
+    market_cap: 289458275,
+    mm2: 1
+  },
   // {
-  //   coin: 'ZEC',
-  //   name: 'Zcash',
-  //   txversion: 4,
-  //   urls: [
-  //     'electrum1.cipig.net:10058',
-  //     'electrum2.cipig.net:10058',
-  //     'electrum3.cipig.net:10058'
-  //   ],
-  //   rpcport: 8232,
-  //   taddr: 28,
-  //   pubtype: 184,
-  //   p2shtype: 189,
-  //   wiftype: 128,
-  //   txfee: 10000,
-  //   active: 0,
-  //   market_cap: 289458275,
-  //   mm2: 1
+  //  coin: 'BEER',
+  //  name: 'Beer',
+  //  asset: 'BEER',
+  //  txversion: 4,
+  //  rpcport: 8923,
+  //  active: 0,
+  //  market_cap: -1,
+  //  mm2: 1,
+  //  servers: [
+  //    {
+  //      url: 'electrum1.cipig.net:10022'
+  //    },
+  //    {
+  //      url: 'electrum2.cipig.net:10022'
+  //    }
+  //  ]
   // },
-  {
-    coin: 'BEER',
-    name: 'Beer',
-    asset: 'BEER',
-    txversion: 4,
-    rpcport: 8923,
-    active: 0,
-    market_cap: -1,
-    mm2: 1,
-    servers: [
-      {
-        url: 'electrum1.cipig.net:10022'
-      },
-      {
-        url: 'electrum2.cipig.net:10022'
-      }
-    ]
-  },
-  {
-    coin: 'PIZZA',
-    name: 'Pizza',
-    asset: 'PIZZA',
-    txversion: 4,
-    rpcport: 11608,
-    active: 0,
-    market_cap: -2,
-    mm2: 1,
-    servers: [
-      {
-        url: 'electrum1.cipig.net:10024'
-      },
-      {
-        url: 'electrum2.cipig.net:10024'
-      },
-      {
-        url: 'electrum3.cipig.net:10024'
-      }
-    ]
-  },
+  // {
+  //  coin: 'PIZZA',
+  //  name: 'Pizza',
+  //  asset: 'PIZZA',
+  //  txversion: 4,
+  //  rpcport: 11608,
+  //  active: 0,
+  //  market_cap: -2,
+  //  mm2: 1,
+  //  servers: [
+  //    {
+  //      url: 'electrum1.cipig.net:10024'
+  //    },
+  //    {
+  //      url: 'electrum2.cipig.net:10024'
+  //    },
+  //    {
+  //      url: 'electrum3.cipig.net:10024'
+  //    }
+  //  ]
+  // },
   // {
   //   coin: '$PAC',
   //   rpcport: 7111,
@@ -754,9 +767,11 @@ export default [
   // },
   {
     coin: 'DEX',
+    asset: 'DEX',
     name: 'DEX',
+    fname: 'InstantDEX',
     rpcport: 11890,
-    active: 0,
+    active: 1,
     txversion: 4,
     market_cap: 0,
     mm2: 1,
@@ -828,24 +843,30 @@ export default [
   //   market_cap: 0,
   //   mm2: 1
   // },
-  // {
-  //   coin: 'DOGE',
-  //   rpcport: 22555,
-  //   pubtype: 30,
-  //   p2shtype: 22,
-  //   wiftype: 158,
-  //   txfee: 100000000,
-  //   urls: [
-  //     'electrum1.cipig.net:10060',
-  //     'electrum2.cipig.net:10060',
-  //     'electrum3.cipig.net:10060'
-  //   ],
-  //   name: 'Dogecoin',
-  //   asset: 'DOGE',
-  //   active: 0,
-  //   market_cap: 0,
-  //   mm2: 1
-  // },
+  {
+    coin: 'DOGE',
+    name: 'Dogecoin',
+    fname: 'Dogecoin',
+    rpcport: 22555,
+    pubtype: 30,
+    p2shtype: 22,
+    wiftype: 158,
+    txfee: 500000000,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10060'
+      },
+      {
+        url: 'electrum2.cipig.net:10060'
+      },
+      {
+        url: 'electrum3.cipig.net:10060'
+      }
+    ],
+    active: 1,
+    market_cap: 0,
+    mm2: 1
+  },
   // {
   //   coin: 'DRGN',
   //   name: 'Dragonchain',
@@ -1225,25 +1246,31 @@ export default [
   //   market_cap: 0,
   //   mm2: 1
   // },
-  // {
-  //   coin: 'HUSH',
-  //   rpcport: 8822,
-  //   taddr: 28,
-  //   pubtype: 184,
-  //   p2shtype: 189,
-  //   wiftype: 128,
-  //   txfee: 1000,
-  //   urls: [
-  //     'electrum1.cipig.net:10064',
-  //     'electrum2.cipig.net:10064',
-  //     'electrum3.cipig.net:10064'
-  //   ],
-  //   name: 'Hush',
-  //   asset: 'HUSH',
-  //   active: 0,
-  //   market_cap: 0,
-  //   mm2: 1
-  // },
+  {
+    coin: 'HUSH',
+    rpcport: 8822,
+    taddr: 28,
+    pubtype: 184,
+    p2shtype: 189,
+    wiftype: 128,
+    txfee: 1000,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10064'
+      },
+      {
+        url: 'electrum2.cipig.net:10064'
+      },
+      {
+        url: 'electrum3.cipig.net:10064'
+      }
+    ],
+    name: 'Hush',
+    asset: 'HUSH',
+    active: 0,
+    market_cap: 0,
+    mm2: 1
+  },
   // {
   //   coin: 'HYD',
   //   name: 'Hydra',
@@ -1682,7 +1709,14 @@ export default [
   //   name: 'Utrum',
   //   asset: 'OOT',
   //   rpcport: 12467,
-  //   urls: ['electrum1.utrum.io:10088', 'electrum2.utrum.io:10088'],
+  //   servers: [
+  //     {
+  //       url: 'electrum1.utrum.io:10088'
+  //     },
+  //     {
+  //       url: 'electrum2.utrum.io:10088'
+  //     }
+  //   ],
   //   active: 0,
   //   market_cap: 0,
   //   mm2: 1
@@ -2205,6 +2239,16 @@ export default [
   //   mm2: 1
   // },
   // {
+  //   coin: 'USDC',
+  //   name: 'usdc',
+  //   fname: 'USD Coin',
+  //   etomic: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+  //   rpcport: 80,
+  //   active: 0,
+  //   market_cap: 0,
+  //   mm2: 1
+  // },
+  // {
   //   coin: 'USDT',
   //   name: 'Tether',
   //   etomic: '0xdac17f958d2ee523a2206206994597c13d831ec7',
@@ -2412,11 +2456,18 @@ export default [
   //   name: 'ChainZilla',
   //   asset: 'ZILLA',
   //   rpcport: 10041,
-  //   urls: [
-  //     'electrum1.cipig.net:10028',
-  //     'electrum2.cipig.net:10028',
-  //     'electrum3.cipig.net:10028'
+  //   servers: [
+  //     {
+  //       url: 'electrum1.cipig.net:10028'
+  //     },
+  //     {
+  //       url: 'electrum2.cipig.net:10028'
+  //     },
+  //     {
+  //       url: 'electrum3.cipig.net:10028'
+  //     }
   //   ],
+  //   txversion: 4,
   //   mm2: 1
   // },
   // {

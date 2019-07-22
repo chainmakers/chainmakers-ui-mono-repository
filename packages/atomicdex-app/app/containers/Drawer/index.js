@@ -17,9 +17,9 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import StoreIcon from '@material-ui/icons/Store';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 // import SettingsIcon from '@material-ui/icons/Settings';
-import MenuIcon from '@material-ui/icons/Menu';
 import CachedIcon from '@material-ui/icons/Cached';
 import { withStyles } from '@material-ui/core/styles';
+import getCoinMemoize from '../../components/CryptoIcons';
 import { showLogoutDialog } from '../LogoutDialog/actions';
 import { routes } from '../../constants';
 
@@ -44,7 +44,7 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    padding: 12,
+    padding: 0,
     ...theme.mixins.toolbar
   },
 
@@ -77,7 +77,14 @@ const styles = theme => ({
   },
 
   logoButton: {
-    height: 'auto'
+    height: 'auto',
+    margin: '0 auto',
+    justifyContent: 'center',
+    padding: 12
+  },
+
+  drawer__list: {
+    paddingTop: 36
   },
 
   drawer__icon: {
@@ -193,10 +200,10 @@ class DICDrawer extends Component<Props, State> {
             className={classes.logoButton}
             onClick={this.gotoHomePage}
           >
-            <MenuIcon />
+            {getCoinMemoize('CHAIN', 32, 32)}
           </IconButton>
         </div>
-        <List>
+        <List className={classes.drawer__list}>
           <ListItem
             button
             id="wallet-drawer-navigation-layout"
