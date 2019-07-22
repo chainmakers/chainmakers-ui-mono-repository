@@ -349,7 +349,7 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
             {orderbookBids.size > 0 && (
               <>
                 <div className={classes.root__warningPlate}>
-                  <Typography gutterBottom>
+                  <Typography>
                     <FormattedMessage id="atomicapp.containers.OrderPage.warning">
                       {(...content) => content}
                     </FormattedMessage>

@@ -13,7 +13,7 @@
   "atomicapp.containers.OrderPage.deposit": "Deposit",
   "atomicapp.containers.OrderPage.receive": "Receive",
   "atomicapp.containers.OrderPage.orderbook": "Orderbook",
-  "atomicapp.containers.OrderPage.warning": "Your order will only be visible to others while the app is running. Once you close the app, your order dissapears.",
+  "atomicapp.containers.OrderPage.warning": "Your order will only be visible to others while the app is running. Once you close Chainswap, your order disappears.",
   "atomicapp.containers.Drawer.wallet": "Wallet",
   "atomicapp.containers.Drawer.buy": "Swap",
   "atomicapp.containers.Drawer.order": "Sell",
