@@ -767,9 +767,11 @@ export default [
   // },
   {
     coin: 'DEX',
+    asset: 'DEX',
     name: 'DEX',
+    fname: 'InstantDEX',
     rpcport: 11890,
-    active: 0,
+    active: 1,
     txversion: 4,
     market_cap: 0,
     mm2: 1,
@@ -843,11 +845,13 @@ export default [
   // },
   {
     coin: 'DOGE',
+    name: 'Dogecoin',
+    fname: 'Dogecoin',
     rpcport: 22555,
     pubtype: 30,
     p2shtype: 22,
     wiftype: 158,
-    txfee: 100000000,
+    txfee: 500000000,
     servers: [
       {
         url: 'electrum1.cipig.net:10060'
@@ -859,9 +863,7 @@ export default [
         url: 'electrum3.cipig.net:10060'
       }
     ],
-    name: 'Dogecoin',
-    asset: 'DOGE',
-    active: 0,
+    active: 1,
     market_cap: 0,
     mm2: 1
   },
