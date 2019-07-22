@@ -8,13 +8,11 @@ import type { List, Map } from 'immutable';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { withStyles } from '@material-ui/core/styles';
-
 import Button from '@material-ui/core/Button';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import CloudOff from '@material-ui/icons/CloudOff';
-
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
@@ -288,7 +286,7 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
           <div className={classes.cardContent}>
             <PageSectionTitle
               title={
-                <FormattedMessage id="atomicapp.containers.OrderPage.recevie">
+                <FormattedMessage id="atomicapp.containers.OrderPage.receive">
                   {(...content) => content}
                 </FormattedMessage>
               }

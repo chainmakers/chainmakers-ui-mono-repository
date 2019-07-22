@@ -172,7 +172,7 @@ class ConfirmNewOrderModal extends React.PureComponent<
               <ValidationPriceInput
                 autoFocus
                 id="recevie-textfield-order-modal"
-                label={`Recevie (${recevie || 'N/A'})`}
+                label={`Receive (${recevie || 'N/A'})`}
                 type="number"
                 ref={this.priceInput}
                 onChange={this.onChangePriceInput}
