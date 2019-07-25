@@ -206,7 +206,6 @@ export default [
     coin: 'BCH',
     name: 'Bitcoin Cash',
     fname: 'Bitcoin Cash',
-    txversion: 4,
     rpcport: 33333,
     pubtype: 0,
     p2shtype: 5,
