@@ -109,6 +109,7 @@ app.on('ready', async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
+    titleBarStyle: 'default',
     width: loginWindowSize.width,
     height: loginWindowSize.height,
     minWidth: minWindowSize.width,
