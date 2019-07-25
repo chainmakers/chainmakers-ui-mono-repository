@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import userpass from './userpass';
 import { DEFAULT_OPTION, StateType, OptionsType } from './schema';
 
@@ -61,7 +61,7 @@ export default function httpProvider(
         },
         params
       );
-      const serverparams = {
+      const serverparams: AxiosRequestConfig = {
         timeout: TIMEOUT,
         headers,
         data,
@@ -69,7 +69,7 @@ export default function httpProvider(
         method: 'post',
         cancelToken: source.token
       };
-      const request = axios(serverparams)
+      const request = axios.request(serverparams)
         .then(json)
         .catch(toError);
       request[CANCEL] = () => source.cancel();
@@ -78,7 +78,7 @@ export default function httpProvider(
     // eslint-disable-next-line flowtype/no-weak-types
     post(params: Object = {}) {
       const source = axios.CancelToken.source();
-      const serverparams = {
+      const serverparams: AxiosRequestConfig = {
         timeout: TIMEOUT,
         headers,
         params,
@@ -86,7 +86,7 @@ export default function httpProvider(
         method: 'post',
         cancelToken: source.token
       };
-      const request = axios(serverparams)
+      const request = axios.request(serverparams)
         .then(json)
         .catch(toError);
       request[CANCEL] = () => source.cancel();

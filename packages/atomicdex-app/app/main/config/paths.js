@@ -11,8 +11,8 @@ export default function loadPaths(config) {
 
   const binDir =
     process.env.NODE_ENV !== 'production'
-      ? util.fixPathForAsarUnpack(resolve(__dirname, '../../bin'))
-      : util.fixPathForAsarUnpack(resolve(__dirname, 'bin'));
+      ? util.fixPathForAsarUnpack(resolve(__dirname, '..', '..', 'bin'))
+      : util.fixPathForAsarUnpack(resolve(__dirname, '..', 'bin'));
   const appDir =
     process.env.NODE_ENV !== 'production'
       ? resolve(__dirname, '../..')

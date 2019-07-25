@@ -13,13 +13,13 @@
 import path from 'path';
 import { app, BrowserWindow, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
-import MenuBuilder from './main/menu';
-import config from './main/config';
-import setupMarketmaker from './main/plugins/marketmaker';
-import { applicationCrashedDialog } from './main/dialogs';
-import blockIP from './main/setPermissionRequestHandler';
-import isPackaged from './main/isPackaged';
-import explorer from './lib/explorer';
+import MenuBuilder from './menu';
+import config from './config';
+import setupMarketmaker from './plugins/marketmaker';
+import { applicationCrashedDialog } from './dialogs';
+import blockIP from './setPermissionRequestHandler';
+import isPackaged from './isPackaged';
+import explorer from '../lib/explorer';
 
 const log = require('electron-log');
 

@@ -1,6 +1,6 @@
 {
   "name": "barterdex-api",
-  "version": "0.20.3",
+  "version": "0.20.4",
   "description": "Barterdex API for Node",
   "author": "Hoang Nam <particle4dev@gmail.com> (particle4dev)",
   "homepage": "https://github.com/particle4dev/komodo-ui-mono-repository/tree/master/packages/barterdex-api#readme",
@@ -32,7 +32,7 @@
     "url": "https://github.com/particle4dev/komodo-ui-mono-repository/issues"
   },
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.19.0"
   },
   "devDependencies": {
     "nock": "^10.0.6"
