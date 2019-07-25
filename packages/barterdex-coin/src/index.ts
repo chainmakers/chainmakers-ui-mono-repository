@@ -246,6 +246,7 @@ export default [
     coin: 'ZEC',
     name: 'Zcash',
     txversion: 4,
+    overwintered: 1,
     servers: [
       {
         url: 'electrum1.cipig.net:10058'
