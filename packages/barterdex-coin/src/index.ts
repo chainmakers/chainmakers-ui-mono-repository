@@ -204,7 +204,7 @@ export default [
   },
   {
     coin: 'BCH',
-    name: 'Bitcoin Cash',
+    name: 'bch',
     fname: 'Bitcoin Cash',
     rpcport: 33333,
     pubtype: 0,
