@@ -40,7 +40,7 @@ export function* setupSearchApiForSelectCoinModal() {
     .toJS()
     .map((e, k) => ({
       id: k,
-      name: e.name,
+      name: e.fname,
       symbol: e.coin,
       market_cap: e.market_cap
     }))
