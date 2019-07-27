@@ -716,18 +716,18 @@ export default [
   //   market_cap: 0,
   //   mm2: 1
   // },
-  {
-    coin: 'DAI',
-    name: 'dai',
-    fname: 'Dai',
-    etomic: '0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359',
-    urls: ['http://eth1.cipig.net:8555', 'http://eth2.cipig.net:8555', 'http://eth3.cipig.net:8555'],
-    swap_contract_address: '0x8500AFc0bc5214728082163326C2FF0C73f4a871',
-    gas_station_url: 'https://ethgasstation.info/json/ethgasAPI.json',
-    rpcport: 80,
-    market_cap: 0,
-    mm2: 1
-  },
+  // {
+  //   coin: 'DAI',
+  //   name: 'dai',
+  //   fname: 'Dai',
+  //   etomic: '0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359',
+  //   urls: ['http://eth1.cipig.net:8555', 'http://eth2.cipig.net:8555', 'http://eth3.cipig.net:8555'],
+  //   swap_contract_address: '0x8500AFc0bc5214728082163326C2FF0C73f4a871',
+  //   gas_station_url: 'https://ethgasstation.info/json/ethgasAPI.json',
+  //   rpcport: 80,
+  //   market_cap: 0,
+  //   mm2: 1
+  // },
   // {
   //   coin: 'DASH',
   //   rpcport: 9998,
