@@ -716,16 +716,20 @@ export default [
   //   market_cap: 0,
   //   mm2: 1
   // },
-  // {
-  //   coin: 'DAI',
-  //   name: 'Dai',
-  //   etomic: '0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359',
-  //   rpcport: 80,
-  //   asset: 'DAI',
-  //   active: 0,
-  //   market_cap: 0,
-  //   mm2: 1
-  // },
+  {
+    coin: 'DAI',
+    name: 'dai',
+    fname: 'Dai',
+    asset: 'DAI',
+    etomic: '0x0000000000000000000000000000000000000000',
+    // etomic: '0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359',
+    urls: ['http://eth1.cipig.net:8555', 'http://eth2.cipig.net:8555', 'http://eth3.cipig.net:8555'],
+    swap_contract_address: '0x8500AFc0bc5214728082163326C2FF0C73f4a871',
+    gas_station_url: 'https://ethgasstation.info/json/ethgasAPI.json',
+    rpcport: 80,
+    market_cap: 0,
+    mm2: 1
+  },
   // {
   //   coin: 'DASH',
   //   rpcport: 9998,
@@ -986,15 +990,18 @@ export default [
   //   urls: ['159.65.91.235:10801', '167.99.204.42:10801'],
   //   mm2: 1
   // },
-  // {
-  //   coin: 'ETH',
-  //   etomic: '0x0000000000000000000000000000000000000000',
-  //   rpcport: 80,
-  //   name: 'Ethereum',
-  //   active: 0,
-  //   market_cap: 0,
-  //   mm2: 1
-  // },
+  {
+    coin: 'ETH',
+    name: 'eth',
+    fname: 'Ethereum',
+    etomic: '0x0000000000000000000000000000000000000000',
+    urls: ['http://eth1.cipig.net:8555', 'http://eth2.cipig.net:8555', 'http://eth3.cipig.net:8555'],
+	  swap_contract_address: '0x8500AFc0bc5214728082163326C2FF0C73f4a871',
+	  gas_station_url: 'https://ethgasstation.info/json/ethgasAPI.json',
+    rpcport: 80,
+    market_cap: 0,
+    mm2: 1
+  },
   // {
   //   coin: 'ETA',
   //   name: 'Etheera',
@@ -1256,7 +1263,7 @@ export default [
     coin: 'HUSH',
     name: 'hush',
     asset: 'HUSH3',
-    fname: "Hush",
+    fname: 'Hush',
     rpcport: 8822,
     taddr: 28,
     pubtype: 184,
@@ -2246,26 +2253,34 @@ export default [
   //   market_cap: 0,
   //   mm2: 1
   // },
-  // {
-  //   coin: 'USDC',
-  //   name: 'usdc',
-  //   fname: 'USD Coin',
-  //   etomic: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-  //   rpcport: 80,
-  //   active: 0,
-  //   market_cap: 0,
-  //   mm2: 1
-  // },
-  // {
-  //   coin: 'USDT',
-  //   name: 'Tether',
-  //   etomic: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-  //   rpcport: 80,
-  //   asset: 'USDT',
-  //   active: 0,
-  //   market_cap: 0,
-  //   mm2: 1
-  // },
+  {
+    coin: 'USDC',
+    name: 'usdc',
+    fname: 'USD Coin',
+    asset: 'USDC',
+    // etomic: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+    etomic: '0x0000000000000000000000000000000000000000',
+    urls: ['http://eth1.cipig.net:8555', 'http://eth2.cipig.net:8555', 'http://eth3.cipig.net:8555'],
+    swap_contract_address: '0x8500AFc0bc5214728082163326C2FF0C73f4a871',
+    gas_station_url: 'https://ethgasstation.info/json/ethgasAPI.json',
+    rpcport: 80,
+    market_cap: 0,
+    mm2: 1
+  },
+  {
+    coin: 'USDT',
+    name: 'tether',
+    fname: 'Tether',
+    asset: 'USDT',
+    // etomic: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+    etomic: '0x0000000000000000000000000000000000000000',
+    urls: ['http://eth1.cipig.net:8555', 'http://eth2.cipig.net:8555', 'http://eth3.cipig.net:8555'],
+    swap_contract_address: '0x8500AFc0bc5214728082163326C2FF0C73f4a871',
+    gas_station_url: 'https://ethgasstation.info/json/ethgasAPI.json',
+    rpcport: 80,
+    market_cap: 0,
+    mm2: 1
+  },
   // {
   //   coin: 'VEN',
   //   name: 'VeChain',

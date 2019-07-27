@@ -8,6 +8,7 @@ const BarterDexAPI = setupClient({
 describe('packages/barterdex-api/src/index', () => {
   it('should create the Client correctly', () => {
     expect(typeof BarterDexAPI.electrum).toEqual('function');
+    expect(typeof BarterDexAPI.enable).toEqual('function');
     expect(typeof BarterDexAPI.balance).toEqual('function');
     expect(typeof BarterDexAPI.buy).toEqual('function');
     expect(typeof BarterDexAPI.cancelOrder).toEqual('function');

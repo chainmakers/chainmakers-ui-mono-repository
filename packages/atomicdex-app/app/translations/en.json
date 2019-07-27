@@ -1,7 +1,7 @@
 {
   "atomicapp.containers.DexPage.title": "Swap",
   "atomicapp.containers.DexPage.currency": "Receive",
-  "atomicapp.containers.DexPage.payment": "Send",
+  "atomicapp.containers.DexPage.payment": "Deposit",
   "atomicapp.containers.DexPage.amount": "Amount",
   "atomicapp.containers.DexPage.swap_warning_message": "The swap is ongoing, don't exit the application",
   "atomicapp.containers.DexPage.select_payment": "SELECT YOUR PAYMENT",

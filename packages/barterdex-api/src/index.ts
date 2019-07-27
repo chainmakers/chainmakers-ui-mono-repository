@@ -1,5 +1,6 @@
 import httpprovider from './http-provider';
 import electrumFactory from './electrum';
+import enableFactory from './enable';
 import balanceFactory from './balance';
 import cancelOrderFactory from './cancel-order';
 import buyFactory from './buy';
@@ -35,6 +36,7 @@ export default function setupClient({
   return Object.assign(
     httpprovider(state, entrypoint),
     electrumFactory(),
+    enableFactory(),
     balanceFactory(),
     buyFactory(),
     cancelOrderFactory(),
