@@ -1,11 +1,11 @@
 // @flow
-import path from 'path';
+// import path from 'path';
 import config from '../config';
 import type { ErrorRPCType } from './schema';
 
 const debug = require('debug')('atomicapp:plugins:marketmaker');
 
-const coins = path.join(__dirname, 'coins');
+// const coins = path.join(__dirname, 'coins');
 
 export default function startFactory(marketmaker) {
   return async (passphrase: string) => {
