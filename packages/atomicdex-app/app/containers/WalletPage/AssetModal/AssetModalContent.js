@@ -410,32 +410,66 @@ class AssetModalContent extends React.PureComponent<Props, State> {
             </ListItemSecondaryAction>
           </ListItem>
 
-          <ListItem
-            disableGutters
-            classes={{
-              secondaryAction: classes.root__listItem
-            }}
-          >
-            <ListItemText primary="Electrums" />
-          </ListItem>
+          {coinConfiguration.get('servers') && (
+            <>
+              <ListItem
+                disableGutters
+                classes={{
+                  secondaryAction: classes.root__listItem
+                }}
+              >
+                <ListItemText primary="Electrums" />
+              </ListItem>
 
-          <Typography variant="body1" color="textSecondary" gutterBottom>
-            [
-            <br />
-            {coinConfiguration.get('servers').map(e => (
-              <React.Fragment key={e}>
-                <span
-                  style={{
-                    marginLeft: 20
-                  }}
-                >
-                  {e.get('url')}
-                </span>
+              <Typography variant="body1" color="textSecondary" gutterBottom>
+                [
                 <br />
-              </React.Fragment>
-            ))}
-            ]
-          </Typography>
+                {coinConfiguration.get('servers').map(e => (
+                  <React.Fragment key={e}>
+                    <span
+                      style={{
+                        marginLeft: 20
+                      }}
+                    >
+                      {e.get('url')}
+                    </span>
+                    <br />
+                  </React.Fragment>
+                ))}
+                ]
+              </Typography>
+            </>
+          )}
+          {coinConfiguration.get('urls') && (
+            <>
+              <ListItem
+                disableGutters
+                classes={{
+                  secondaryAction: classes.root__listItem
+                }}
+              >
+                <ListItemText primary="Urls" />
+              </ListItem>
+
+              <Typography variant="body1" color="textSecondary" gutterBottom>
+                [
+                <br />
+                {coinConfiguration.get('urls').map(e => (
+                  <React.Fragment key={e}>
+                    <span
+                      style={{
+                        marginLeft: 20
+                      }}
+                    >
+                      {e}
+                    </span>
+                    <br />
+                  </React.Fragment>
+                ))}
+                ]
+              </Typography>
+            </>
+          )}
         </List>
 
         <BuyButton

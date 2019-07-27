@@ -8,6 +8,7 @@ import { floor } from 'barterdex-utilities';
 // import getConfig from '../../../utils/config';
 import getCoinMemoize from '../../../components/CryptoIcons';
 import CoinSelectable from '../../../components/CoinSelectable';
+import { covertSymbolToName } from '../../../utils/coin';
 import { openSelectCoinModal } from '../actions';
 import { makeSelectCurrency } from '../selectors';
 
@@ -69,7 +70,7 @@ class CurrencySection extends React.PureComponent<Props> {
         selected
         data={currency.get('symbol')}
         icon={icon}
-        title={currency.get('name')}
+        title={covertSymbolToName(currency.get('symbol'))}
         onClick={this.onClick}
         subTitle={`${floor(b.get('balance'), 3)} ${b.get('coin')}`}
         {...rest}

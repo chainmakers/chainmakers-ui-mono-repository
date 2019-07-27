@@ -8,7 +8,9 @@ import {
   loadRecentSwapsError,
   loadRecentSwaps
 } from '../actions';
-import { makeSelectSwapsEntities, makeSelectCurrentSwaps } from '../selectors';
+import {
+  /* makeSelectSwapsEntities, */ makeSelectCurrentSwaps
+} from '../selectors';
 import {
   CHECK_UPDATE_SWAP_EVENT,
   LOAD_RECENT_SWAPS,
@@ -20,7 +22,7 @@ const debug = require('debug')(
   'atomicapp:containers:DexPage:saga:handle-update-swap-event'
 );
 
-export function* checkSwap(swap, isPending) {
+export function* checkSwap(swap /* , isPending */) {
   try {
     const uuid = swap.get('uuid');
     const swapelem = {
@@ -96,7 +98,7 @@ export function* checkSwap(swap, isPending) {
 export function* loadRecentSwapsProcess() {
   try {
     // const recentswapsResult = yield call([api, 'recentswaps']);
-    const swapsEntities = yield select(makeSelectSwapsEntities());
+    // const swapsEntities = yield select(makeSelectSwapsEntities());
     const currentSwaps = yield select(makeSelectCurrentSwaps());
     const requests = [];
     for (let idx = 0; idx < currentSwaps.size; idx++) {

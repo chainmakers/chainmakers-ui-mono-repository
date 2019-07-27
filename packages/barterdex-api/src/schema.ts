@@ -13,6 +13,7 @@ export interface OptionsType {
 
 export interface BarterdexApi {
   electrum: Function,
+  enable: Function,
   balance: Function,
   buy: Function,
   cancelOrder: Function,

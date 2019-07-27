@@ -3,6 +3,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 import getCoinMemoize from '../../../components/CryptoIcons';
+import { covertSymbolToName } from '../../../utils/coin';
 
 const debug = require('debug')(
   'atomicapp:containers:ElectrumDialog:components:CryptoCurrencyChip'
@@ -48,7 +49,7 @@ class CryptoCurrencyChip extends React.PureComponent<ICryptoCurrencyChipProps> {
         clickable
         color={selected ? 'primary' : ''}
         icon={getCoinMemoize(data.coin)}
-        label={data.name || data.coin}
+        label={covertSymbolToName(data.coin)}
         className={classes.chip}
         onClick={this.onClickChip}
         variant="outlined"

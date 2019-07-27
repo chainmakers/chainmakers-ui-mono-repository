@@ -41,7 +41,12 @@ export function* loadElectrum({ payload }: { payload: AddElectrumPayload }) {
   let electrumRequest;
   let feeRequest;
   try {
-    electrumRequest = api.electrum(payload);
+    // ECR20
+    if (payload.swap_contract_address) {
+      electrumRequest = api.enable(payload);
+    } else {
+      electrumRequest = api.electrum(payload);
+    }
     const rs = yield electrumRequest;
     feeRequest = api.getTradeFee({
       coin: payload.coin

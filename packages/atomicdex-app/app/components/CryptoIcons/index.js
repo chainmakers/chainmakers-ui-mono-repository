@@ -434,6 +434,7 @@ import ZIL from './zil.svg';
 import ZILLA from './zilla.svg';
 import ZRX from './zrx.svg';
 import LABS from './labs.svg';
+import DAI from './dai.svg';
 
 const list = {
   $PAC,
@@ -853,7 +854,8 @@ const list = {
   ZIL,
   ZILLA,
   ZRX,
-  LABS
+  LABS,
+  DAI
 };
 
 function getCoinMemoize(icon: string, width: number = 32, height: number = 32) {

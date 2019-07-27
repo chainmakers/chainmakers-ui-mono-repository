@@ -7,6 +7,7 @@ import listenForLoadingElectrums, { loadElectrum } from '../electrums';
 import { addElectrum } from '../../actions';
 import data from '../../../__tests__/app-state.json';
 import electrum from '../../../__tests__/electrum.json';
+import enable from '../../../__tests__/enable.json';
 import getfee from '../../../__tests__/get_trade_fee.json';
 
 const TIMEOUT = 20 * 1000;
@@ -38,7 +39,8 @@ describe('containers/App/saga/electrums/listenForLoadingElectrums', () => {
             ],
             active: 0,
             rpcport: 33333,
-            name: 'Bitcoin Cash',
+            name: 'bch',
+            fname: 'Bitcoin Cash',
             wiftype: 128,
             market_cap: 2197468013,
             coin: 'BCH',
@@ -98,7 +100,6 @@ describe('containers/App/saga/electrums/loadElectrum', () => {
             { url: 'electrum1.cipig.net:10022' },
             { url: 'electrum2.cipig.net:10022' }
           ],
-          active: 1,
           market_cap: -1
         })
       ).done;
@@ -122,6 +123,71 @@ describe('containers/App/saga/electrums/loadElectrum', () => {
     },
     TIMEOUT
   );
+
+  it(
+    'should handle ECR20 correctly',
+    async done => {
+      const dispatched = [];
+      const store = fromJS(data);
+
+      nock(TEST_URL)
+        .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
+        .persist()
+        .post('/', () => true)
+        .reply(200, (uri, body, cb) => {
+          const { method } = JSON.parse(body);
+          if (method === 'enable') {
+            cb(null, enable);
+          }
+          if (method === 'get_trade_fee') {
+            cb(null, getfee);
+          }
+        });
+
+      const saga = await runSaga(
+        {
+          dispatch: action => dispatched.push(action),
+          getState: () => store
+        },
+        loadElectrum,
+        addElectrum({
+          coin: 'ETH',
+          name: 'eth',
+          fname: 'Ethereum',
+          etomic: '0x0000000000000000000000000000000000000000',
+          urls: [
+            'http://eth1.cipig.net:8555',
+            'http://eth2.cipig.net:8555',
+            'http://eth3.cipig.net:8555'
+          ],
+          swap_contract_address: '0x8500AFc0bc5214728082163326C2FF0C73f4a871',
+          gas_station_url: 'https://ethgasstation.info/json/ethgasAPI.json',
+          rpcport: 80,
+          market_cap: 0,
+          mm2: 1
+        })
+      ).done;
+
+      expect(dispatched).toEqual([
+        {
+          type: 'atomicapp/App/ELECTRUM_ADD_SUCCESS',
+          payload: {
+            address: '0x4E85559f69fB6b6A1eaA9EeD689bcf62f0f50fd7',
+            balance: 0,
+            coin: 'ETH',
+            fee: 0.00001
+          }
+        }
+      ]);
+      expect(saga).toEqual(undefined);
+
+      nock.cleanAll();
+      nock.enableNetConnect();
+      done();
+    },
+    TIMEOUT
+  );
+
   it(
     'should handle throw new error',
     async done => {

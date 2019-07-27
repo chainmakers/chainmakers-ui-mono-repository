@@ -28,33 +28,35 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
         type: SELECT_COIN_MODAL_SETUP_SEARCH_API_SUCCESS,
         payload: [
           {
+            active: 1,
+            name: 'bitcoin',
+            market_cap: 97822306639,
             servers: [
               { url: 'electrum1.cipig.net:10000' },
               { url: 'electrum2.cipig.net:10000' }
             ],
-            active: 1,
-            name: 'Bitcoin',
-            market_cap: 97822306639,
             coin: 'BTC',
+            fname: 'Bitcoin',
             marketcap: 0,
             symbol: 'BTC',
             id: 0
           },
           {
             txfee: 10000,
+            taddr: 28,
+            active: 0,
+            rpcport: 8232,
+            name: 'zcash',
+            wiftype: 128,
+            market_cap: 289458275,
             servers: [
               { url: 'electrum1.cipig.net:10058' },
               { url: 'electrum2.cipig.net:10058' },
               { url: 'electrum3.cipig.net:10058' }
             ],
-            taddr: 28,
-            active: 0,
-            rpcport: 8232,
-            name: 'Zcash',
-            wiftype: 128,
-            market_cap: 289458275,
             coin: 'ZEC',
             p2shtype: 189,
+            fname: 'Zcash',
             txversion: 4,
             marketcap: 0,
             pubtype: 184,
@@ -62,14 +64,15 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             id: 12
           },
           {
+            active: 1,
+            name: 'komodo',
+            market_cap: 107340275,
             servers: [
               { url: 'electrum1.cipig.net:10001' },
               { url: 'electrum2.cipig.net:10001' }
             ],
-            active: 1,
-            name: 'Komodo',
-            market_cap: 107340275,
             coin: 'KMD',
+            fname: 'Komodo',
             txversion: 4,
             marketcap: 0,
             symbol: 'KMD',
@@ -77,17 +80,18 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
           },
           {
             txfee: 10000,
+            active: 0,
+            rpcport: 57776,
+            name: 'chips',
+            wiftype: 188,
+            market_cap: 1609044,
             servers: [
               { url: 'electrum1.cipig.net:10053' },
               { url: 'electrum2.cipig.net:10053' }
             ],
-            active: 0,
-            rpcport: 57776,
-            name: 'Chips',
-            wiftype: 188,
-            market_cap: 1609044,
             coin: 'CHIPS',
             p2shtype: 85,
+            fname: 'Chips',
             txversion: 4,
             marketcap: 0,
             pubtype: 60,
@@ -95,109 +99,114 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
             id: 5
           },
           {
+            active: 0,
+            rpcport: 27486,
+            name: 'VRSC',
+            market_cap: 1609044,
             servers: [
               { url: 'el0.vrsc.0x03.services:10000' },
               { url: 'el1.vrsc.0x03.services:10000' },
               { url: 'el2.vrsc.0x03.services:10000' }
             ],
-            active: 0,
-            rpcport: 27486,
-            name: 'VerusCoin',
-            market_cap: 1609044,
             coin: 'VRSC',
+            fname: 'VerusCoin',
             txversion: 4,
             marketcap: 0,
             symbol: 'VRSC',
             id: 7
           },
           {
-            servers: [
-              {
-                url: '159.65.91.235:10801'
-              },
-              { url: '167.99.204.42:10801' }
-            ],
             active: 0,
             rpcport: 10306,
-            name: 'Equaliser',
+            name: 'EQL',
             market_cap: 0,
-            coin: 'EQL',
+            servers: [
+              { url: '159.65.91.235:10801' },
+              { url: '167.99.204.42:10801' }
+            ],
+            coin: 'EQLI',
+            fname: 'Equaliser',
             marketcap: 0,
             symbol: 'EQL',
             id: 2
           },
           {
+            active: 0,
+            rpcport: 14276,
+            name: 'COQUI',
+            market_cap: 0,
             servers: [
               { url: 'electrum1.cipig.net:10011' },
               { url: 'electrum2.cipig.net:10011' }
             ],
-            active: 0,
-            rpcport: 14276,
-            name: 'Coqui Cash',
-            market_cap: 0,
             coin: 'COQUI',
+            fname: 'Coqui Cash',
             txversion: 4,
             marketcap: 0,
             symbol: 'COQUI',
             id: 4
           },
           {
+            active: 0,
+            rpcport: 30177,
+            name: 'KMDICE',
+            market_cap: 0,
             servers: [
               { url: 'electrum1.cipig.net:10031' },
               { url: 'electrum2.cipig.net:10031' },
               { url: 'electrum3.cipig.net:10031' }
             ],
-            active: 0,
-            rpcport: 30177,
-            name: 'KMDice',
-            market_cap: 0,
             coin: 'KMDICE',
+            fname: 'KMDice',
             txversion: 4,
             marketcap: 0,
             symbol: 'KMDICE',
             id: 8
           },
           {
+            active: 0,
+            rpcport: 15587,
+            name: 'CHAIN',
+            market_cap: 0,
             servers: [
               { url: 'electrum1.cipig.net:10032' },
               { url: 'electrum2.cipig.net:10032' },
               { url: 'electrum3.cipig.net:10032' }
             ],
-            active: 0,
-            rpcport: 15587,
-            name: 'Chainmakers',
-            market_cap: 0,
             coin: 'CHAIN',
+            fname: 'Chainmakers',
             txversion: 4,
             marketcap: 0,
             symbol: 'CHAIN',
             id: 9
           },
           {
+            active: 0,
+            rpcport: 8923,
+            name: 'beer',
+            market_cap: -1,
             servers: [
               { url: 'electrum1.cipig.net:10022' },
               { url: 'electrum2.cipig.net:10022' }
             ],
-            active: 0,
-            rpcport: 8923,
-            name: 'Beer',
-            market_cap: -1,
             coin: 'BEER',
+            fname: 'Beer',
             txversion: 4,
             marketcap: 0,
             symbol: 'BEER',
             id: 13
           },
           {
+            active: 1,
+            rpcport: 11608,
+            name: 'pizza',
+            market_cap: -2,
             servers: [
               { url: 'electrum1.cipig.net:10024' },
               { url: 'electrum2.cipig.net:10024' }
             ],
-            active: 1,
-            rpcport: 11608,
-            name: 'Pizza',
-            market_cap: -2,
             coin: 'PIZZA',
+            fname: 'Pizza',
             txversion: 4,
             marketcap: 0,
             symbol: 'PIZZA',
@@ -232,187 +241,197 @@ describe('containers/CoinsSelectionDialog/saga/search', () => {
       handlingSearch,
       searchSelectCoinModal('')
     ).done;
+
     expect(dispatched).toEqual([
       {
+        type: SELECT_COIN_MODAL_SEARCH_SUCCESS,
         payload: [
           {
             active: 1,
-            coin: 'BTC',
-            id: 0,
+            name: 'bitcoin',
             market_cap: 97822306639,
-            marketcap: 0,
-            name: 'Bitcoin',
-            symbol: 'BTC',
             servers: [
               { url: 'electrum1.cipig.net:10000' },
               { url: 'electrum2.cipig.net:10000' }
-            ]
+            ],
+            coin: 'BTC',
+            fname: 'Bitcoin',
+            marketcap: 0,
+            symbol: 'BTC',
+            id: 0
           },
           {
-            active: 0,
-            coin: 'ZEC',
-            id: 12,
-            market_cap: 289458275,
-            marketcap: 0,
-            name: 'Zcash',
-            p2shtype: 189,
-            pubtype: 184,
-            rpcport: 8232,
-            symbol: 'ZEC',
-            taddr: 28,
             txfee: 10000,
-            txversion: 4,
+            taddr: 28,
+            active: 0,
+            rpcport: 8232,
+            name: 'zcash',
+            wiftype: 128,
+            market_cap: 289458275,
             servers: [
               { url: 'electrum1.cipig.net:10058' },
               { url: 'electrum2.cipig.net:10058' },
               { url: 'electrum3.cipig.net:10058' }
             ],
-            wiftype: 128
+            coin: 'ZEC',
+            p2shtype: 189,
+            fname: 'Zcash',
+            txversion: 4,
+            marketcap: 0,
+            pubtype: 184,
+            symbol: 'ZEC',
+            id: 12
           },
           {
             active: 1,
-            coin: 'KMD',
-            id: 1,
+            name: 'komodo',
             market_cap: 107340275,
-            marketcap: 0,
-            name: 'Komodo',
-            symbol: 'KMD',
-            txversion: 4,
             servers: [
               { url: 'electrum1.cipig.net:10001' },
               { url: 'electrum2.cipig.net:10001' }
-            ]
+            ],
+            coin: 'KMD',
+            fname: 'Komodo',
+            txversion: 4,
+            marketcap: 0,
+            symbol: 'KMD',
+            id: 1
           },
           {
-            active: 0,
-            coin: 'CHIPS',
-            id: 5,
-            market_cap: 1609044,
-            marketcap: 0,
-            name: 'Chips',
-            p2shtype: 85,
-            pubtype: 60,
-            rpcport: 57776,
-            symbol: 'CHIPS',
             txfee: 10000,
-            txversion: 4,
+            active: 0,
+            rpcport: 57776,
+            name: 'chips',
+            wiftype: 188,
+            market_cap: 1609044,
             servers: [
               { url: 'electrum1.cipig.net:10053' },
               { url: 'electrum2.cipig.net:10053' }
             ],
-            wiftype: 188
+            coin: 'CHIPS',
+            p2shtype: 85,
+            fname: 'Chips',
+            txversion: 4,
+            marketcap: 0,
+            pubtype: 60,
+            symbol: 'CHIPS',
+            id: 5
           },
           {
             active: 0,
-            coin: 'VRSC',
-            id: 7,
-            market_cap: 1609044,
-            marketcap: 0,
-            name: 'VerusCoin',
             rpcport: 27486,
-            symbol: 'VRSC',
-            txversion: 4,
+            name: 'VRSC',
+            market_cap: 1609044,
             servers: [
               { url: 'el0.vrsc.0x03.services:10000' },
               { url: 'el1.vrsc.0x03.services:10000' },
               { url: 'el2.vrsc.0x03.services:10000' }
-            ]
-          },
-          {
-            active: 0,
-            coin: 'EQL',
-            id: 2,
-            market_cap: 0,
-            marketcap: 0,
-            name: 'Equaliser',
-            rpcport: 10306,
-            symbol: 'EQL',
-            servers: [
-              {
-                url: '159.65.91.235:10801'
-              },
-              { url: '167.99.204.42:10801' }
-            ]
-          },
-          {
-            active: 0,
-            coin: 'COQUI',
-            id: 4,
-            market_cap: 0,
-            marketcap: 0,
-            name: 'Coqui Cash',
-            rpcport: 14276,
-            symbol: 'COQUI',
+            ],
+            coin: 'VRSC',
+            fname: 'VerusCoin',
             txversion: 4,
+            marketcap: 0,
+            symbol: 'VRSC',
+            id: 7
+          },
+          {
+            active: 0,
+            rpcport: 10306,
+            name: 'EQL',
+            market_cap: 0,
+            servers: [
+              { url: '159.65.91.235:10801' },
+              { url: '167.99.204.42:10801' }
+            ],
+            coin: 'EQLI',
+            fname: 'Equaliser',
+            marketcap: 0,
+            symbol: 'EQL',
+            id: 2
+          },
+          {
+            active: 0,
+            rpcport: 14276,
+            name: 'COQUI',
+            market_cap: 0,
             servers: [
               { url: 'electrum1.cipig.net:10011' },
               { url: 'electrum2.cipig.net:10011' }
-            ]
+            ],
+            coin: 'COQUI',
+            fname: 'Coqui Cash',
+            txversion: 4,
+            marketcap: 0,
+            symbol: 'COQUI',
+            id: 4
           },
           {
             active: 0,
-            coin: 'KMDICE',
-            id: 8,
-            market_cap: 0,
-            marketcap: 0,
-            name: 'KMDice',
             rpcport: 30177,
-            symbol: 'KMDICE',
-            txversion: 4,
+            name: 'KMDICE',
+            market_cap: 0,
             servers: [
               { url: 'electrum1.cipig.net:10031' },
               { url: 'electrum2.cipig.net:10031' },
               { url: 'electrum3.cipig.net:10031' }
-            ]
+            ],
+            coin: 'KMDICE',
+            fname: 'KMDice',
+            txversion: 4,
+            marketcap: 0,
+            symbol: 'KMDICE',
+            id: 8
           },
           {
             active: 0,
-            coin: 'CHAIN',
-            id: 9,
-            market_cap: 0,
-            marketcap: 0,
-            name: 'Chainmakers',
             rpcport: 15587,
-            symbol: 'CHAIN',
-            txversion: 4,
+            name: 'CHAIN',
+            market_cap: 0,
             servers: [
               { url: 'electrum1.cipig.net:10032' },
               { url: 'electrum2.cipig.net:10032' },
               { url: 'electrum3.cipig.net:10032' }
-            ]
+            ],
+            coin: 'CHAIN',
+            fname: 'Chainmakers',
+            txversion: 4,
+            marketcap: 0,
+            symbol: 'CHAIN',
+            id: 9
           },
           {
             active: 0,
-            coin: 'BEER',
-            id: 13,
-            market_cap: -1,
-            marketcap: 0,
-            name: 'Beer',
             rpcport: 8923,
-            symbol: 'BEER',
-            txversion: 4,
+            name: 'beer',
+            market_cap: -1,
             servers: [
               { url: 'electrum1.cipig.net:10022' },
               { url: 'electrum2.cipig.net:10022' }
-            ]
+            ],
+            coin: 'BEER',
+            fname: 'Beer',
+            txversion: 4,
+            marketcap: 0,
+            symbol: 'BEER',
+            id: 13
           },
           {
             active: 1,
-            coin: 'PIZZA',
-            id: 14,
-            market_cap: -2,
-            marketcap: 0,
-            name: 'Pizza',
             rpcport: 11608,
-            symbol: 'PIZZA',
-            txversion: 4,
+            name: 'pizza',
+            market_cap: -2,
             servers: [
               { url: 'electrum1.cipig.net:10024' },
               { url: 'electrum2.cipig.net:10024' }
-            ]
+            ],
+            coin: 'PIZZA',
+            fname: 'Pizza',
+            txversion: 4,
+            marketcap: 0,
+            symbol: 'PIZZA',
+            id: 14
           }
-        ],
-        type: SELECT_COIN_MODAL_SEARCH_SUCCESS
+        ]
       }
     ]);
     expect(saga).toEqual(1);

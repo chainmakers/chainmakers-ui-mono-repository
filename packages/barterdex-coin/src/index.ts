@@ -9,10 +9,10 @@ export default [
   {
     coin: 'BTC',
     name: 'Bitcoin',
+    fname: 'Bitcoin',
     active: 1,
     market_cap: 97822306639,
     mm2: 1,
-    fname: 'Bitcoin',
     rpcport: 8332,
     pubtype: 0,
     p2shtype: 5,
@@ -30,11 +30,11 @@ export default [
   {
     coin: 'KMD',
     name: 'Komodo',
+    fname: 'Komodo',
     txversion: 4,
     active: 1,
     market_cap: 107340275,
     mm2: 1,
-    fname: 'Komodo',
     rpcport: 7771,
     pubtype: 60,
     p2shtype: 85,
@@ -73,8 +73,9 @@ export default [
   // },
   {
     coin: 'COQUI',
-    name: 'Coqui Cash',
+    name: 'COQUICASH',
     asset: 'COQUI',
+    fname: 'Coqui Cash',
     txversion: 4,
     rpcport: 14276,
     active: 0,
@@ -91,7 +92,8 @@ export default [
   },
   {
     coin: 'K64',
-    name: 'Komodore64',
+    name: 'K64',
+    fname: 'Komodore64',
     asset: 'K64',
     txversion: 4,
     rpcport: 12245,
@@ -109,7 +111,8 @@ export default [
   },
   {
     coin: 'CHIPS',
-    name: 'Chips',
+    name: 'chips',
+    fname: 'Chips',
     rpcport: 57776,
     pubtype: 60,
     p2shtype: 85,
@@ -162,8 +165,9 @@ export default [
   // },
   {
     coin: 'KMDICE',
-    name: 'KMDice',
+    name: 'kmdice',
     asset: 'KMDICE',
+    fname: 'KMDice',
     txversion: 4,
     rpcport: 30177,
     active: 0,
@@ -184,7 +188,8 @@ export default [
   {
     coin: 'CHAIN',
     asset: 'CHAIN',
-    name: 'Chainmakers',
+    name: 'chainmakers',
+    fname: 'Chainmakers',
     txversion: 4,
     rpcport: 15587,
     active: 0,
@@ -204,9 +209,8 @@ export default [
   },
   {
     coin: 'BCH',
-    name: 'Bitcoin Cash',
+    name: 'bch',
     fname: 'Bitcoin Cash',
-    txversion: 4,
     rpcport: 33333,
     pubtype: 0,
     p2shtype: 5,
@@ -244,7 +248,8 @@ export default [
   // },
   {
     coin: 'ZEC',
-    name: 'Zcash',
+    name: 'zcash',
+    fname: 'Zcash',
     txversion: 4,
     overwintered: 1,
     servers: [
@@ -713,11 +718,13 @@ export default [
   // },
   // {
   //   coin: 'DAI',
-  //   name: 'Dai',
+  //   name: 'dai',
+  //   fname: 'Dai',
   //   etomic: '0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359',
+  //   urls: ['http://eth1.cipig.net:8555', 'http://eth2.cipig.net:8555', 'http://eth3.cipig.net:8555'],
+  //   swap_contract_address: '0x8500AFc0bc5214728082163326C2FF0C73f4a871',
+  //   gas_station_url: 'https://ethgasstation.info/json/ethgasAPI.json',
   //   rpcport: 80,
-  //   asset: 'DAI',
-  //   active: 0,
   //   market_cap: 0,
   //   mm2: 1
   // },
@@ -846,7 +853,7 @@ export default [
   // },
   {
     coin: 'DOGE',
-    name: 'Dogecoin',
+    name: 'dogecoin',
     fname: 'Dogecoin',
     rpcport: 22555,
     pubtype: 30,
@@ -981,15 +988,18 @@ export default [
   //   urls: ['159.65.91.235:10801', '167.99.204.42:10801'],
   //   mm2: 1
   // },
-  // {
-  //   coin: 'ETH',
-  //   etomic: '0x0000000000000000000000000000000000000000',
-  //   rpcport: 80,
-  //   name: 'Ethereum',
-  //   active: 0,
-  //   market_cap: 0,
-  //   mm2: 1
-  // },
+  {
+    coin: 'ETH',
+    name: 'eth',
+    fname: 'Ethereum',
+    etomic: '0x0000000000000000000000000000000000000000',
+    urls: ['http://eth1.cipig.net:8555', 'http://eth2.cipig.net:8555', 'http://eth3.cipig.net:8555'],
+	  swap_contract_address: '0x8500AFc0bc5214728082163326C2FF0C73f4a871',
+	  gas_station_url: 'https://ethgasstation.info/json/ethgasAPI.json',
+    rpcport: 80,
+    market_cap: 0,
+    mm2: 1
+  },
   // {
   //   coin: 'ETA',
   //   name: 'Etheera',
@@ -1112,7 +1122,7 @@ export default [
   // },
   {
     coin: 'GAME',
-    name: 'GameCredits',
+    name: 'gamecredits',
     fname: 'GameCredits',
     rpcport: 40001,
     pubtype: 38,
@@ -1249,6 +1259,9 @@ export default [
   // },
   {
     coin: 'HUSH',
+    name: 'hush',
+    asset: 'HUSH3',
+    fname: 'Hush',
     rpcport: 8822,
     taddr: 28,
     pubtype: 184,
@@ -1266,8 +1279,7 @@ export default [
         url: 'electrum3.cipig.net:10064'
       }
     ],
-    name: 'Hush',
-    asset: 'HUSH',
+
     active: 0,
     market_cap: 0,
     mm2: 1
@@ -2239,26 +2251,30 @@ export default [
   //   market_cap: 0,
   //   mm2: 1
   // },
-  // {
-  //   coin: 'USDC',
-  //   name: 'usdc',
-  //   fname: 'USD Coin',
-  //   etomic: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-  //   rpcport: 80,
-  //   active: 0,
-  //   market_cap: 0,
-  //   mm2: 1
-  // },
-  // {
-  //   coin: 'USDT',
-  //   name: 'Tether',
-  //   etomic: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-  //   rpcport: 80,
-  //   asset: 'USDT',
-  //   active: 0,
-  //   market_cap: 0,
-  //   mm2: 1
-  // },
+  {
+    coin: 'USDC',
+    name: 'usdc',
+    fname: 'USD Coin',
+    etomic: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+    urls: ['http://eth1.cipig.net:8555', 'http://eth2.cipig.net:8555', 'http://eth3.cipig.net:8555'],
+    swap_contract_address: '0x8500AFc0bc5214728082163326C2FF0C73f4a871',
+    gas_station_url: 'https://ethgasstation.info/json/ethgasAPI.json',
+    rpcport: 80,
+    market_cap: 0,
+    mm2: 1
+  },
+  //{
+  //  coin: 'USDT',
+  //  name: 'tether',
+  //  fname: 'Tether',
+  //  etomic: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
+  //  urls: ['http://eth1.cipig.net:8555', 'http://eth2.cipig.net:8555', 'http://eth3.cipig.net:8555'],
+  //  swap_contract_address: '0x8500AFc0bc5214728082163326C2FF0C73f4a871',
+  //  gas_station_url: 'https://ethgasstation.info/json/ethgasAPI.json',
+  //  rpcport: 80,
+  //  market_cap: 0,
+  //  mm2: 1
+  //},
   // {
   //   coin: 'VEN',
   //   name: 'VeChain',
@@ -2485,6 +2501,7 @@ export default [
     coin: 'LABS',
     name: 'LABS',
     asset: 'LABS',
+    fname: 'KMD Labs',
     txversion: 4,
     active: 0,
     market_cap: 0,
