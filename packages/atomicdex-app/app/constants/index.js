@@ -22,5 +22,6 @@ export const routes = {
   HELP: '/help',
   LOGIN: '/login',
   DASHBOARD: '/dashboard',
-  ORDER: '/order'
+  ORDER: '/order',
+  SETTINGS: '/settings'
 };

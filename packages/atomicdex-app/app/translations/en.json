@@ -18,6 +18,7 @@
   "atomicapp.containers.Drawer.buy": "Swap",
   "atomicapp.containers.Drawer.order": "Sell",
   "atomicapp.containers.Drawer.help": "Help",
+  "atomicapp.containers.Drawer.settings": "Settings",
   "atomicapp.containers.Wallet.title": "Wallet",
   "atomicapp.containers.Wallet.overview": "Overview",
   "atomicapp.containers.Wallet.deposit_address": "Your deposit address",

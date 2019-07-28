@@ -16,7 +16,7 @@ import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import StoreIcon from '@material-ui/icons/Store';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
-// import SettingsIcon from '@material-ui/icons/Settings';
+import SettingsIcon from '@material-ui/icons/Settings';
 import CachedIcon from '@material-ui/icons/Cached';
 import { withStyles } from '@material-ui/core/styles';
 import getCoinMemoize from '../../components/CryptoIcons';
@@ -33,7 +33,7 @@ const cachedIconIconCache = <CachedIcon />;
 
 const storeIconCache = <StoreIcon />;
 
-// const settingsIconCache = <SettingsIcon />;
+const settingsIconCache = <SettingsIcon />;
 
 const liveHelpIconCache = <LiveHelpIcon />;
 
@@ -175,6 +175,10 @@ class DICDrawer extends Component<Props, State> {
     this.goto(routes.HELP);
   };
 
+  gotoSettingsPage = () => {
+    this.goto(routes.SETTINGS);
+  };
+
   render() {
     debug(`render`);
 
@@ -259,19 +263,6 @@ class DICDrawer extends Component<Props, State> {
             </span>
           </ListItem>
 
-          {/* <ListItem
-            button
-            className={classNames(classes.drawer__icon, {
-              [classes.drawer__iconSelected]: pathname === routes.HELP
-            })}
-            onClick={this.gotoHelpPage}
-          >
-            <ListItemIcon className={classes.drawer__iconCenter}>
-              {settingsIconCache}
-            </ListItemIcon>
-            <span className={classes.drawer__text}>Settings</span>
-          </ListItem> */}
-
           <ListItem
             button
             className={classNames(classes.drawer__icon, {
@@ -284,6 +275,23 @@ class DICDrawer extends Component<Props, State> {
             </ListItemIcon>
             <span className={classes.drawer__text}>
               <FormattedMessage id="atomicapp.containers.Drawer.help">
+                {(...content) => content}
+              </FormattedMessage>
+            </span>
+          </ListItem>
+
+          <ListItem
+            button
+            className={classNames(classes.drawer__icon, {
+              [classes.drawer__iconSelected]: pathname === routes.SETTINGS
+            })}
+            onClick={this.gotoSettingsPage}
+          >
+            <ListItemIcon className={classes.drawer__iconCenter}>
+              {settingsIconCache}
+            </ListItemIcon>
+            <span className={classes.drawer__text}>
+             <FormattedMessage id="atomicapp.containers.Drawer.settings">
                 {(...content) => content}
               </FormattedMessage>
             </span>
