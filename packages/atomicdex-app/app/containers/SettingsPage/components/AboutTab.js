@@ -1,0 +1,108 @@
+// @flow
+import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Divider from '@material-ui/core/Divider';
+import InboxIcon from '@material-ui/icons/Inbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import InputBase from '@material-ui/core/InputBase';
+
+import PageSectionTitle from '../../../components/PageSectionTitle';
+import { version } from '../../../../package.json';
+
+const debug = require('debug')('atomicapp:containers:DexPage:MyOrders');
+
+const styles = () => ({
+  container: {
+    // marginTop: 65,
+    marginTop: 112,
+    padding: '40px 24px 24px 24px'
+  },
+
+  containerSection: {
+    // paddingBottom: 30
+  },
+
+  hr: {
+    marginBottom: 20
+  },
+
+  cardContent: {
+    position: 'relative',
+    paddingTop: 0,
+    paddingLeft: 0,
+    paddingRight: 0
+  },
+
+  cardContent__rightBtn: {
+    position: 'absolute',
+    right: 0,
+    top: -12
+  },
+
+  swapform__emptystate: {
+    textAlign: 'center'
+  },
+
+  swapform__iconemptystate: {
+    fontSize: 50
+  }
+});
+
+type Props = {
+  classes: Styles
+};
+
+class AboutTab extends React.PureComponent<Props> {
+  render() {
+    debug('render');
+
+    const { classes } = this.props;
+
+    return (
+      <Grid container spacing={0} className={classes.container}>
+        <Grid item xs={12} className={classes.containerSection}>
+          <List component="nav" aria-label="main mailbox folders">
+            <ListItem disableGutters>
+              <ListItemText primary="Language" />
+              <ListItemSecondaryAction>
+                <FormControl className={classes.margin}>
+                  <Select
+                    value={10}
+                    input={
+                      <OutlinedInput name="age" id="outlined-age-simple" />
+                    }
+                  >
+                    <MenuItem value={10}>English</MenuItem>
+                  </Select>
+                </FormControl>
+              </ListItemSecondaryAction>
+            </ListItem>
+          </List>
+          <Divider />
+          <List component="nav" aria-label="secondary mailbox folders">
+            <ListItem disableGutters>
+              <ListItemText primary="Version" />
+              <ListItemSecondaryAction>v{version}</ListItemSecondaryAction>
+            </ListItem>
+          </List>
+        </Grid>
+      </Grid>
+    );
+  }
+}
+
+export default withStyles(styles)(AboutTab);

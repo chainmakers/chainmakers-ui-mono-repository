@@ -6,8 +6,10 @@ import ErrorBoundary from '../../components/ErrorBoundary';
 import MDCAppBar from '../../components/AppBar';
 import MDCHeader from '../../components/AppBar/Header';
 import MDCTabBar from '../../components/AppBar/TabBar';
+import { TabContainer } from '../../components/Tabs';
 import { NavigationLayout } from '../Layout';
 import HeaderTabs from './components/HeaderTabs';
+import AboutTab from './components/AboutTab';
 
 const debug = require('debug')('atomicapp:containers:SettingsPage');
 
@@ -23,7 +25,7 @@ class SettingsPage extends Component<> {
   render() {
     debug('render');
     const { value } = this.state;
-    
+
     return (
       <React.Fragment>
         <NavigationLayout>
@@ -48,7 +50,9 @@ class SettingsPage extends Component<> {
                 <HeaderTabs handleChange={this.handleChange} value={value} />
               </MDCTabBar>
             </MDCAppBar>
-            <div>SettingsPage</div>
+            <TabContainer selected={value === 0}>
+              <AboutTab />
+            </TabContainer>
           </ErrorBoundary>
         </NavigationLayout>
       </React.Fragment>

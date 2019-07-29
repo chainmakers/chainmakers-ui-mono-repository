@@ -6,27 +6,14 @@ import { withStyles } from '@material-ui/core/styles';
 
 const debug = require('debug')('atomicapp:containers:SettingsPage:HeaderTabs');
 
-const styles = theme => ({
-  buyTabs__tab: {
+const styles = () => ({
+  headerTabs__tab: {
     minWidth: 100
   },
 
-  buyTabs__labelContainer: {
+  headerTabs__labelContainer: {
     paddingLeft: 12,
     paddingRight: 12
-  },
-
-  buyTabs__badge: {
-    // The border color match the background color.
-    border: `2px solid ${
-      theme.palette.type === 'light'
-        ? theme.palette.grey[200]
-        : theme.palette.grey[900]
-    }`
-  },
-
-  buyTabs__tablabel: {
-    padding: `0 ${theme.spacing.unit * 2}px`
   }
 });
 
@@ -53,10 +40,10 @@ class HeaderTabs extends React.PureComponent<IHeaderTabsProps> {
       >
         <Tab
           classes={{
-            labelContainer: classes.buyTabs__labelContainer
+            labelContainer: classes.headerTabs__labelContainer
           }}
-          label="About"
-          className={classes.buyTabs__tab}
+          label="General"
+          className={classes.headerTabs__tab}
         />
       </Tabs>
     );

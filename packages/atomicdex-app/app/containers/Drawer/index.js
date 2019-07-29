@@ -291,7 +291,7 @@ class DICDrawer extends Component<Props, State> {
               {settingsIconCache}
             </ListItemIcon>
             <span className={classes.drawer__text}>
-             <FormattedMessage id="atomicapp.containers.Drawer.settings">
+              <FormattedMessage id="atomicapp.containers.Drawer.settings">
                 {(...content) => content}
               </FormattedMessage>
             </span>
