@@ -8,6 +8,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListSubheader from '@material-ui/core/ListSubheader';
 import Divider from '@material-ui/core/Divider';
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
@@ -77,7 +78,10 @@ class AboutTab extends React.PureComponent<Props> {
         <Grid item xs={12} className={classes.containerSection}>
           <List component="nav" aria-label="main mailbox folders">
             <ListItem disableGutters>
-              <ListItemText primary="Language" />
+              <ListItemText
+                primary="Language"
+                secondary="Please select your language"
+              />
               <ListItemSecondaryAction>
                 <FormControl className={classes.margin}>
                   <Select
@@ -91,12 +95,53 @@ class AboutTab extends React.PureComponent<Props> {
                 </FormControl>
               </ListItemSecondaryAction>
             </ListItem>
+            <ListItem button disableGutters>
+              <ListItemText
+                primary="Feedback"
+                secondary="We appreciate your feedback"
+              />
+              {/* <ListItemSecondaryAction>
+                123
+              </ListItemSecondaryAction> */}
+            </ListItem>
+            <ListItem button disableGutters>
+              <ListItemText primary="Open source code" />
+              {/* <ListItemSecondaryAction>
+                123
+              </ListItemSecondaryAction> */}
+            </ListItem>
+            <ListItem button disableGutters>
+              <ListItemText primary="Terms of service" />
+            </ListItem>
+            <ListItem button disableGutters>
+              <ListItemText primary="Privacy policy" />
+            </ListItem>
+            <ListItem button disableGutters>
+              <ListItemText primary="Application Logs" />
+            </ListItem>
+            <ListItem button disableGutters>
+              <ListItemText primary="Market maker Logs" />
+            </ListItem>
           </List>
           <Divider />
-          <List component="nav" aria-label="secondary mailbox folders">
+          <List
+            component="nav"
+            subheader={<ListSubheader disableGutters>About</ListSubheader>}
+            aria-label="secondary mailbox folders"
+          >
             <ListItem disableGutters>
-              <ListItemText primary="Version" />
-              <ListItemSecondaryAction>v{version}</ListItemSecondaryAction>
+              <ListItemText primary="Discord" />
+              <ListItemSecondaryAction>
+                https://discord.gg/nAPmwPC
+              </ListItemSecondaryAction>
+            </ListItem>
+            <ListItem disableGutters>
+              <ListItemText primary="MM2 version" />
+              <ListItemSecondaryAction>{version}</ListItemSecondaryAction>
+            </ListItem>
+            <ListItem disableGutters>
+              <ListItemText primary="Build version" />
+              <ListItemSecondaryAction>{version}</ListItemSecondaryAction>
             </ListItem>
           </List>
         </Grid>
