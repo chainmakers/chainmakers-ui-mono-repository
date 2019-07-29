@@ -27,6 +27,7 @@
   "atomicapp.containers.Wallet.last_transactions_coin": "Coin",
   "atomicapp.containers.Wallet.last_transactions_blockheight": "Block height",
   "atomicapp.containers.Wallet.last_transactions_transactionid": "Transaction id",
+  "atomicapp.containers.Settings.title": "Settings",
   "atomicapp.containers.HelpPage.title": "Help",
   "atomicapp.containers.LoginPage.headline": "Welcome to Chainswap",
   "atomicapp.containers.LoginPage.subheading": "Please type in your Seed to Login to your existing Account",
