@@ -24,6 +24,8 @@ import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputBase from '@material-ui/core/InputBase';
 
+import api from 'utils/barterdex-api';
+
 import PageSectionTitle from '../../../components/PageSectionTitle';
 import { version } from '../../../../package.json';
 
@@ -71,19 +73,34 @@ type Props = {
 };
 
 class AboutTab extends React.PureComponent<Props> {
+  state = {
+    mm2Version: 'N/A'
+  };
+
+  async componentDidMount() {
+    const { result } = await api.version();
+    this.setState({
+      mm2Version: result
+    });
+  }
+
   render() {
     debug('render');
 
     const { classes } = this.props;
 
+    const { mm2Version } = this.state;
+
     return (
       <Grid container spacing={0} className={classes.container}>
         <Grid item xs={12} className={classes.containerSection}>
+          <PageSectionTitle disableBottom title="Application" />
           <List
+            disablePadding
             component="nav"
-            subheader={
-              <ListSubheader disableGutters>Application</ListSubheader>
-            }
+            // subheader={
+            //   <ListSubheader disableGutters>Application</ListSubheader>
+            // }
             aria-label="main mailbox folders"
           >
             <ListItem disableGutters>
@@ -149,6 +166,7 @@ class AboutTab extends React.PureComponent<Props> {
           </List>
           <Divider />
           <List
+            disablePadding
             component="nav"
             subheader={<ListSubheader disableGutters>About</ListSubheader>}
             aria-label="secondary mailbox folders"
@@ -161,7 +179,7 @@ class AboutTab extends React.PureComponent<Props> {
             </ListItem>
             <ListItem button disableGutters>
               <ListItemText primary="MM2 version" />
-              <ListItemSecondaryAction>{version}</ListItemSecondaryAction>
+              <ListItemSecondaryAction>{mm2Version}</ListItemSecondaryAction>
             </ListItem>
             <ListItem button disableGutters>
               <ListItemText primary="Build version" />
