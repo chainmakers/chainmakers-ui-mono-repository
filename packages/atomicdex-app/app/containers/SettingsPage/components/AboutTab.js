@@ -10,8 +10,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
+import LanguageIcon from '@material-ui/icons/Language';
+import FeedbackIcon from '@material-ui/icons/Feedback';
+import HttpsIcon from '@material-ui/icons/Https';
+import CodeIcon from '@material-ui/icons/Code';
+import SecurityIcon from '@material-ui/icons/Security';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 import InputLabel from '@material-ui/core/InputLabel';
@@ -76,11 +79,20 @@ class AboutTab extends React.PureComponent<Props> {
     return (
       <Grid container spacing={0} className={classes.container}>
         <Grid item xs={12} className={classes.containerSection}>
-          <List component="nav" aria-label="main mailbox folders">
+          <List
+            component="nav"
+            subheader={
+              <ListSubheader disableGutters>Application</ListSubheader>
+            }
+            aria-label="main mailbox folders"
+          >
             <ListItem disableGutters>
+              <ListItemIcon>
+                <LanguageIcon />
+              </ListItemIcon>
               <ListItemText
-                primary="Language"
-                secondary="Please select your language"
+                primary="Languages"
+                secondary="Select your language"
               />
               <ListItemSecondaryAction>
                 <FormControl className={classes.margin}>
@@ -96,6 +108,9 @@ class AboutTab extends React.PureComponent<Props> {
               </ListItemSecondaryAction>
             </ListItem>
             <ListItem button disableGutters>
+              <ListItemIcon>
+                <FeedbackIcon />
+              </ListItemIcon>
               <ListItemText
                 primary="Feedback"
                 secondary="We appreciate your feedback"
@@ -105,23 +120,32 @@ class AboutTab extends React.PureComponent<Props> {
               </ListItemSecondaryAction> */}
             </ListItem>
             <ListItem button disableGutters>
-              <ListItemText primary="Open source code" />
+              <ListItemIcon>
+                <CodeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Source code" />
               {/* <ListItemSecondaryAction>
                 123
               </ListItemSecondaryAction> */}
             </ListItem>
             <ListItem button disableGutters>
+              <ListItemIcon>
+                <HttpsIcon />
+              </ListItemIcon>
               <ListItemText primary="Terms of service" />
             </ListItem>
             <ListItem button disableGutters>
+              <ListItemIcon>
+                <SecurityIcon />
+              </ListItemIcon>
               <ListItemText primary="Privacy policy" />
             </ListItem>
-            <ListItem button disableGutters>
+            {/* <ListItem button disableGutters>
               <ListItemText primary="Application Logs" />
             </ListItem>
             <ListItem button disableGutters>
               <ListItemText primary="Market maker Logs" />
-            </ListItem>
+            </ListItem> */}
           </List>
           <Divider />
           <List
@@ -129,17 +153,17 @@ class AboutTab extends React.PureComponent<Props> {
             subheader={<ListSubheader disableGutters>About</ListSubheader>}
             aria-label="secondary mailbox folders"
           >
-            <ListItem disableGutters>
+            <ListItem button disableGutters>
               <ListItemText primary="Discord" />
               <ListItemSecondaryAction>
                 https://discord.gg/nAPmwPC
               </ListItemSecondaryAction>
             </ListItem>
-            <ListItem disableGutters>
+            <ListItem button disableGutters>
               <ListItemText primary="MM2 version" />
               <ListItemSecondaryAction>{version}</ListItemSecondaryAction>
             </ListItem>
-            <ListItem disableGutters>
+            <ListItem button disableGutters>
               <ListItemText primary="Build version" />
               <ListItemSecondaryAction>{version}</ListItemSecondaryAction>
             </ListItem>
