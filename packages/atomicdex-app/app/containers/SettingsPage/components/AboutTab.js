@@ -130,7 +130,7 @@ class AboutTab extends React.PureComponent<Props> {
               </ListItemIcon>
               <ListItemText
                 primary="Feedback"
-                secondary="We appreciate your feedback"
+                secondary="Please feel free to send us your feedback"
               />
               {/* <ListItemSecondaryAction>
                 123
