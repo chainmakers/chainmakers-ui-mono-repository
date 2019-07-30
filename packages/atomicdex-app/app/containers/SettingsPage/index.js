@@ -10,12 +10,32 @@ import { TabContainer } from '../../components/Tabs';
 import { NavigationLayout } from '../Layout';
 import HeaderTabs from './components/HeaderTabs';
 import AboutTab from './components/AboutTab';
+import ApplicationDialog from './components/ApplicationDialog';
+import MM2Dialog from './components/MM2Dialog';
+import SettingsContext from './reducer';
 
 const debug = require('debug')('atomicapp:containers:SettingsPage');
 
-class SettingsPage extends Component<> {
+type ISettingsPageProps = {};
+
+type ISettingsPageState = {
+  applicationDialog: {
+    open: boolean
+  },
+  mm2Dialog: {
+    open: boolean
+  }
+};
+
+class SettingsPage extends Component<ISettingsPageProps, ISettingsPageState> {
   state = {
-    value: 0
+    value: 0,
+    applicationDialog: {
+      open: boolean
+    },
+    mm2Dialog: {
+      open: boolean
+    }
   };
 
   handleChange = (event, value) => {
@@ -30,29 +50,33 @@ class SettingsPage extends Component<> {
       <React.Fragment>
         <NavigationLayout>
           <ErrorBoundary>
-            <MDCAppBar>
-              <MDCHeader
-                title={
-                  <Typography
-                    style={{
-                      flexGrow: 1
-                    }}
-                    variant="h6"
-                    color="inherit"
-                  >
-                    <FormattedMessage id="atomicapp.containers.Settings.title">
-                      {(...content) => content}
-                    </FormattedMessage>
-                  </Typography>
-                }
-              />
-              <MDCTabBar>
-                <HeaderTabs handleChange={this.handleChange} value={value} />
-              </MDCTabBar>
-            </MDCAppBar>
-            <TabContainer selected={value === 0}>
-              <AboutTab />
-            </TabContainer>
+            <SettingsContext.Provider>
+              <MDCAppBar>
+                <MDCHeader
+                  title={
+                    <Typography
+                      style={{
+                        flexGrow: 1
+                      }}
+                      variant="h6"
+                      color="inherit"
+                    >
+                      <FormattedMessage id="atomicapp.containers.Settings.title">
+                        {(...content) => content}
+                      </FormattedMessage>
+                    </Typography>
+                  }
+                />
+                <MDCTabBar>
+                  <HeaderTabs handleChange={this.handleChange} value={value} />
+                </MDCTabBar>
+              </MDCAppBar>
+              <TabContainer selected={value === 0}>
+                <AboutTab />
+              </TabContainer>
+              {/* <MM2Dialog />
+            <ApplicationDialog /> */}
+            </SettingsContext.Provider>
           </ErrorBoundary>
         </NavigationLayout>
       </React.Fragment>

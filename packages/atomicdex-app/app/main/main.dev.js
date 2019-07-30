@@ -18,7 +18,7 @@ import config from './config';
 import setupMarketmaker from './plugins/marketmaker';
 import { applicationCrashedDialog } from './dialogs';
 import blockIP from './setPermissionRequestHandler';
-import setupOpenNewGitHubIssue from './plugins/openNewGitHubIssue'
+import setupOpenNewGitHubIssue from './plugins/openNewGitHubIssue';
 import isPackaged from './isPackaged';
 import explorer from '../lib/explorer';
 

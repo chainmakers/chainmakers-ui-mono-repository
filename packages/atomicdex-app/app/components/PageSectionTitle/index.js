@@ -22,8 +22,6 @@ type Props = {
 };
 
 class PageSectionTitle extends React.PureComponent<Props> {
-  props: Props;
-
   static propTypes = {};
 
   render() {

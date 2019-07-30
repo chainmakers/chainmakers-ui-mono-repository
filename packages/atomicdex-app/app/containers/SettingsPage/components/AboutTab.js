@@ -2,7 +2,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-
+import Link from '@material-ui/core/Link';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -84,10 +84,20 @@ class AboutTab extends React.PureComponent<Props> {
     });
   }
 
-
   onClickFeedback = async (evt: SyntheticInputEvent<*>) => {
     evt.preventDefault();
-    const c = await ipc.callMain('open-new-github-issue');
+    // const c = await ipc.callMain('open-new-github-issue');
+    await ipc.callMain('open-new-github-issue');
+  };
+
+  onClickOpensource = async (evt: SyntheticInputEvent<*>) => {
+    evt.preventDefault();
+    await ipc.callMain('open-source-code');
+  };
+
+  onClickDiscordChannel = async (evt: SyntheticInputEvent<*>) => {
+    evt.preventDefault();
+    await ipc.callMain('open-discord-channel');
   };
 
   render() {
@@ -142,7 +152,7 @@ class AboutTab extends React.PureComponent<Props> {
                 123
               </ListItemSecondaryAction> */}
             </ListItem>
-            <ListItem button disableGutters>
+            <ListItem button disableGutters onClick={this.onClickOpensource}>
               <ListItemIcon>
                 <CodeIcon />
               </ListItemIcon>
@@ -178,9 +188,14 @@ class AboutTab extends React.PureComponent<Props> {
             aria-label="secondary mailbox folders"
           >
             <ListItem button disableGutters>
-              <ListItemText primary="Discord" />
+              <ListItemText
+                primary="Discord"
+                onClick={this.onClickDiscordChannel}
+              />
               <ListItemSecondaryAction>
-                https://discord.gg/nAPmwPC
+                <Link href="https://discord.gg/nAPmwPC">
+                  https://discord.gg/nAPmwPC
+                </Link>
               </ListItemSecondaryAction>
             </ListItem>
             <ListItem button disableGutters>
