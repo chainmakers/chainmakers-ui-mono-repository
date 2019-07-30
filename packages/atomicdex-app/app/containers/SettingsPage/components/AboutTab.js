@@ -84,6 +84,12 @@ class AboutTab extends React.PureComponent<Props> {
     });
   }
 
+
+  onClickFeedback = async (evt: SyntheticInputEvent<*>) => {
+    evt.preventDefault();
+    const c = await ipc.callMain('open-new-github-issue');
+  };
+
   render() {
     debug('render');
 
@@ -124,7 +130,7 @@ class AboutTab extends React.PureComponent<Props> {
                 </FormControl>
               </ListItemSecondaryAction>
             </ListItem>
-            <ListItem button disableGutters>
+            <ListItem button disableGutters onClick={this.onClickFeedback}>
               <ListItemIcon>
                 <FeedbackIcon />
               </ListItemIcon>
