@@ -19,23 +19,52 @@ const debug = require('debug')('atomicapp:containers:SettingsPage');
 type ISettingsPageProps = {};
 
 type ISettingsPageState = {
-  applicationDialog: {
-    open: boolean
-  },
-  mm2Dialog: {
-    open: boolean
-  }
+  value: number,
+  applicationDialog: Object,
+  mm2Dialog: Object
 };
 
 class SettingsPage extends Component<ISettingsPageProps, ISettingsPageState> {
   state = {
     value: 0,
     applicationDialog: {
-      open: boolean
+      open: false
     },
     mm2Dialog: {
-      open: boolean
+      open: false
     }
+  };
+
+  closeApplicationDialog = () => {
+    this.setState({
+      applicationDialog: {
+        open: false
+      }
+    });
+  };
+
+  openApplicationDialog = () => {
+    this.setState({
+      applicationDialog: {
+        open: true
+      }
+    });
+  };
+
+  closeMM2Dialog = () => {
+    this.setState({
+      mm2Dialog: {
+        open: false
+      }
+    });
+  };
+
+  openMM2Dialog = () => {
+    this.setState({
+      mm2Dialog: {
+        open: true
+      }
+    });
   };
 
   handleChange = (event, value) => {
@@ -44,7 +73,8 @@ class SettingsPage extends Component<ISettingsPageProps, ISettingsPageState> {
 
   render() {
     debug('render');
-    const { value } = this.state;
+
+    const { value, mm2Dialog, applicationDialog } = this.state;
 
     return (
       <React.Fragment>
@@ -72,10 +102,16 @@ class SettingsPage extends Component<ISettingsPageProps, ISettingsPageState> {
                 </MDCTabBar>
               </MDCAppBar>
               <TabContainer selected={value === 0}>
-                <AboutTab />
+                <AboutTab openApplicationDialog={this.openApplicationDialog} openMM2Dialog={this.openMM2Dialog} />
               </TabContainer>
-              {/* <MM2Dialog />
-            <ApplicationDialog /> */}
+              <MM2Dialog
+                open={mm2Dialog.open}
+                closeDialog={this.closeMM2Dialog}
+              />
+              <ApplicationDialog
+                open={applicationDialog.open}
+                closeDialog={this.closeApplicationDialog}
+              />
             </SettingsContext.Provider>
           </ErrorBoundary>
         </NavigationLayout>

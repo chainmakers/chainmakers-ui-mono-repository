@@ -103,7 +103,7 @@ class AboutTab extends React.PureComponent<Props> {
   render() {
     debug('render');
 
-    const { classes } = this.props;
+    const { classes, openMM2Dialog, openApplicationDialog } = this.props;
 
     const { mm2Version } = this.state;
 
@@ -198,11 +198,11 @@ class AboutTab extends React.PureComponent<Props> {
                 </Link>
               </ListItemSecondaryAction>
             </ListItem>
-            <ListItem button disableGutters>
+            <ListItem button disableGutters onClick={openMM2Dialog}>
               <ListItemText primary="MM2 version" />
               <ListItemSecondaryAction>{mm2Version}</ListItemSecondaryAction>
             </ListItem>
-            <ListItem button disableGutters>
+            <ListItem button disableGutters onClick={openApplicationDialog}>
               <ListItemText primary="Build version" />
               <ListItemSecondaryAction>{version}</ListItemSecondaryAction>
             </ListItem>
