@@ -16,13 +16,9 @@ import HttpsIcon from '@material-ui/icons/Https';
 import CodeIcon from '@material-ui/icons/Code';
 import SecurityIcon from '@material-ui/icons/Security';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
-import InputBase from '@material-ui/core/InputBase';
 
 import api from 'utils/barterdex-api';
 
@@ -114,9 +110,6 @@ class AboutTab extends React.PureComponent<Props> {
           <List
             disablePadding
             component="nav"
-            // subheader={
-            //   <ListSubheader disableGutters>Application</ListSubheader>
-            // }
             aria-label="main mailbox folders"
           >
             <ListItem disableGutters>
@@ -148,18 +141,12 @@ class AboutTab extends React.PureComponent<Props> {
                 primary="Feedback"
                 secondary="Please feel free to send us your feedback"
               />
-              {/* <ListItemSecondaryAction>
-                123
-              </ListItemSecondaryAction> */}
             </ListItem>
             <ListItem button disableGutters onClick={this.onClickOpensource}>
               <ListItemIcon>
                 <CodeIcon />
               </ListItemIcon>
               <ListItemText primary="Source code" />
-              {/* <ListItemSecondaryAction>
-                123
-              </ListItemSecondaryAction> */}
             </ListItem>
             <ListItem button disableGutters>
               <ListItemIcon>
@@ -173,12 +160,6 @@ class AboutTab extends React.PureComponent<Props> {
               </ListItemIcon>
               <ListItemText primary="Privacy policy" />
             </ListItem>
-            {/* <ListItem button disableGutters>
-              <ListItemText primary="Application Logs" />
-            </ListItem>
-            <ListItem button disableGutters>
-              <ListItemText primary="Market maker Logs" />
-            </ListItem> */}
           </List>
           <Divider />
           <List

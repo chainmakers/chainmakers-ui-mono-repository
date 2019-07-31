@@ -2,25 +2,11 @@
 import path from 'path';
 import fs from 'fs';
 import { shell } from 'electron';
-import throttle from 'lodash/throttle';
 import ipc from 'electron-better-ipc';
 import config from '../config';
 import readLastLines from '../utils/readLastLines';
 
 const log = require('electron-log');
-
-const readLine = throttle(() => {
-  console.log(throttle, 'throttle');
-}, 500);
-
-fs.watchFile(
-  path.join(config.get('paths.userDataDir'), 'mm2_info.log'),
-  (curr, prev) => {
-    console.log(`the current mtime is: ${curr.size} ${curr.mtime}`);
-    console.log(`the previous mtime was: ${prev.size} ${prev.mtime}`);
-    readLine();
-  }
-);
 
 // https://github.com/sindresorhus/new-github-issue-url
 // NOTE: we copy this since it's small and security reason

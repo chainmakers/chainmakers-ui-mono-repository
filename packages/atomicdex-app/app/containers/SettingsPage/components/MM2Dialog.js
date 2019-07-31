@@ -5,14 +5,7 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import Switch from '@material-ui/core/Switch';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -46,11 +39,8 @@ type IMM2DialogProps = {
 
 export default function MM2Dialog(props: IMM2DialogProps) {
   const classes = useStyles();
-  const [logs, setLogs] = React.useState('');
+  const [logText, setLogText] = React.useState('');
   const [mm2, setMM2Version] = React.useState('N/A');
-
-  const [fullWidth, setFullWidth] = React.useState(true);
-  const [maxWidth, setMaxWidth] = React.useState('sm');
 
   async function getMM2Version() {
     const { result } = await api.version();
@@ -58,8 +48,8 @@ export default function MM2Dialog(props: IMM2DialogProps) {
   }
 
   async function getLogs() {
-    const logs = await ipc.callMain('read-mm2-logs');
-    setLogs(logs);
+    const lt = await ipc.callMain('read-mm2-logs');
+    setLogText(lt);
   }
 
   React.useEffect(() => {
@@ -69,14 +59,6 @@ export default function MM2Dialog(props: IMM2DialogProps) {
   React.useEffect(() => {
     getMM2Version();
   }, []);
-
-  function handleMaxWidthChange(event) {
-    setMaxWidth(event.target.value);
-  }
-
-  function handleFullWidthChange(event) {
-    setFullWidth(event.target.checked);
-  }
 
   async function onClickOpenFullLog() {
     await ipc.callMain('open-mm2-folder');
@@ -121,7 +103,7 @@ export default function MM2Dialog(props: IMM2DialogProps) {
             overflowX: 'auto'
           }}
         >
-          <code>{logs}</code>
+          <code>{logText}</code>
         </pre>
       </DialogContent>
       <DialogActions>

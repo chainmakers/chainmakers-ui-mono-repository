@@ -5,14 +5,7 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import Switch from '@material-ui/core/Switch';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -45,27 +38,16 @@ type IApplicationDialogProps = {
 
 export default function ApplicationDialog(props: IApplicationDialogProps) {
   const classes = useStyles();
-  const [logs, setLogs] = React.useState('');
-
-  const [fullWidth, setFullWidth] = React.useState(true);
-  const [maxWidth, setMaxWidth] = React.useState('sm');
+  const [logText, setLogText] = React.useState('');
 
   async function getLogs() {
-    const logs = await ipc.callMain('read-application-logs');
-    setLogs(logs);
+    const lt = await ipc.callMain('read-application-logs');
+    setLogText(lt);
   }
 
   React.useEffect(() => {
     getLogs();
   }, []);
-
-  function handleMaxWidthChange(event) {
-    setMaxWidth(event.target.value);
-  }
-
-  function handleFullWidthChange(event) {
-    setFullWidth(event.target.checked);
-  }
 
   async function onClickOpenFullLog() {
     await ipc.callMain('open-app-folder');
@@ -110,7 +92,7 @@ export default function ApplicationDialog(props: IApplicationDialogProps) {
             overflowX: 'auto'
           }}
         >
-          {logs}
+          {logText}
         </pre>
       </DialogContent>
       <DialogActions>
