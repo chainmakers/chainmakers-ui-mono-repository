@@ -5,6 +5,7 @@ import Tab from '@material-ui/core/Tab';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSettingsContext } from '../reducer';
 import { selectCurrentTab } from '../selectors';
+import { switchMM2Tab } from '../actions';
 
 const debug = require('debug')('atomicapp:containers:SettingsPage:HeaderTabs');
 
@@ -27,7 +28,9 @@ function HeaderTabs(props: IHeaderTabsProps) {
 
   const [state, dispatch] = useSettingsContext();
 
-  const { handleChange } = props;
+  const handleChange = (event, value) => {
+    dispatch(switchMM2Tab(value));
+  };
 
   return (
     <Tabs
