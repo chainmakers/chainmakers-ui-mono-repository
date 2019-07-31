@@ -31,6 +31,10 @@ const useStyles = makeStyles(theme => ({
   },
   formControlLabel: {
     marginTop: theme.spacing(1)
+  },
+
+  minwidth: {
+    minWidth: 600
   }
 }));
 
@@ -42,12 +46,11 @@ type IApplicationDialogProps = {
 export default function ApplicationDialog(props: IApplicationDialogProps) {
   const classes = useStyles();
   const [logs, setLogs] = React.useState('');
-  const [open, setOpen] = React.useState(false);
+
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth, setMaxWidth] = React.useState('sm');
 
   async function getLogs() {
-    console.log('run only once');
     const logs = await ipc.callMain('read-application-logs');
     setLogs(logs);
   }
@@ -55,14 +58,6 @@ export default function ApplicationDialog(props: IApplicationDialogProps) {
   React.useEffect(() => {
     getLogs();
   }, []);
-
-  function handleClickOpen() {
-    setOpen(true);
-  }
-
-  function handleClose() {
-    setOpen(false);
-  }
 
   function handleMaxWidthChange(event) {
     setMaxWidth(event.target.value);
@@ -73,7 +68,7 @@ export default function ApplicationDialog(props: IApplicationDialogProps) {
   }
 
   async function onClickOpenFullLog() {
-    await ipc.callMain('open-application-folder');
+    await ipc.callMain('open-app-folder');
   }
 
   return (
@@ -83,8 +78,8 @@ export default function ApplicationDialog(props: IApplicationDialogProps) {
       open={props.open}
       onClose={props.closeDialog}
       aria-labelledby="max-width-dialog-title"
-      style={{
-        minWidth: 600
+      classes={{
+        paper: classes.minwidth
       }}
     >
       <DialogTitle id="max-width-dialog-title">Application</DialogTitle>
@@ -107,28 +102,16 @@ export default function ApplicationDialog(props: IApplicationDialogProps) {
             </ListItemSecondaryAction>
           </ListItem>
         </List>
-
-        {/* <DialogContentText
-          style={{
-            borderRadius: 1,
-            padding: 12,
-            // justify-content: center;
-            backgroundColor: '#f5f5f5',
-            // overflow: 'auto'
-          }}
-        > */}
         <pre
           style={{
             borderRadius: 1,
             padding: 12,
-            // justify-content: center;
             backgroundColor: '#f5f5f5',
             overflowX: 'auto'
           }}
         >
           {logs}
         </pre>
-        {/* </DialogContentText> */}
       </DialogContent>
       <DialogActions>
         <Button onClick={props.closeDialog} color="primary">

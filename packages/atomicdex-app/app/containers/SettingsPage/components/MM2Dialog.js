@@ -17,6 +17,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import api from 'utils/barterdex-api';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -46,12 +47,17 @@ type IMM2DialogProps = {
 export default function MM2Dialog(props: IMM2DialogProps) {
   const classes = useStyles();
   const [logs, setLogs] = React.useState('');
-  const [open, setOpen] = React.useState(false);
+  const [mm2, setMM2Version] = React.useState('N/A');
+
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth, setMaxWidth] = React.useState('sm');
 
+  async function getMM2Version() {
+    const { result } = await api.version();
+    setMM2Version(result);
+  }
+
   async function getLogs() {
-    console.log('run only once');
     const logs = await ipc.callMain('read-mm2-logs');
     setLogs(logs);
   }
@@ -60,13 +66,9 @@ export default function MM2Dialog(props: IMM2DialogProps) {
     getLogs();
   }, []);
 
-  function handleClickOpen() {
-    setOpen(true);
-  }
-
-  function handleClose() {
-    setOpen(false);
-  }
+  React.useEffect(() => {
+    getMM2Version();
+  }, []);
 
   function handleMaxWidthChange(event) {
     setMaxWidth(event.target.value);
@@ -96,7 +98,7 @@ export default function MM2Dialog(props: IMM2DialogProps) {
         <List disablePadding>
           <ListItem disableGutters>
             <ListItemText primary="Version" />
-            <ListItemSecondaryAction>0.23.0</ListItemSecondaryAction>
+            <ListItemSecondaryAction>{mm2}</ListItemSecondaryAction>
           </ListItem>
           <ListItem disableGutters>
             <ListItemText primary="Logs" />
@@ -111,27 +113,16 @@ export default function MM2Dialog(props: IMM2DialogProps) {
             </ListItemSecondaryAction>
           </ListItem>
         </List>
-        {/* <DialogContentText
-          style={{
-            borderRadius: 1,
-            padding: 12,
-            // justify-content: center;
-            backgroundColor: '#f5f5f5',
-            overflowX: 'auto'
-          }}
-        > */}
         <pre
           style={{
             borderRadius: 1,
             padding: 12,
-            // justify-content: center;
             backgroundColor: '#f5f5f5',
             overflowX: 'auto'
           }}
         >
           <code>{logs}</code>
         </pre>
-        {/* </DialogContentText> */}
       </DialogContent>
       <DialogActions>
         <Button onClick={props.closeDialog} color="primary">
