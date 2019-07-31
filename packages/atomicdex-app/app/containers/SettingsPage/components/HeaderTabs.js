@@ -2,11 +2,13 @@
 import React from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
+import { useSettingsContext } from '../reducer';
+import { selectCurrentTab } from '../selectors';
 
 const debug = require('debug')('atomicapp:containers:SettingsPage:HeaderTabs');
 
-const styles = () => ({
+const styles = makeStyles(() => ({
   headerTabs__tab: {
     minWidth: 100
   },
@@ -15,39 +17,38 @@ const styles = () => ({
     paddingLeft: 12,
     paddingRight: 12
   }
-});
+}));
 
-type IHeaderTabsProps = {
-  // eslint-disable-next-line flowtype/no-weak-types
-  // currentSwaps: List<*>,
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object,
-  // eslint-disable-next-line flowtype/no-weak-types
-  handleChange: Function,
-  value: number
-};
+type IHeaderTabsProps = {};
 
-class HeaderTabs extends React.PureComponent<IHeaderTabsProps> {
-  render() {
-    debug(`render`);
-    const { value, classes, handleChange } = this.props;
-    return (
-      <Tabs
-        value={value}
-        indicatorColor="primary"
-        textColor="primary"
-        onChange={handleChange}
-      >
-        <Tab
-          classes={{
-            labelContainer: classes.headerTabs__labelContainer
-          }}
-          label="General"
-          className={classes.headerTabs__tab}
-        />
-      </Tabs>
-    );
-  }
+function HeaderTabs(props: IHeaderTabsProps) {
+  debug(`render`);
+  const classes = useStyles();
+
+  const [state, dispatch] = useSettingsContext();
+
+  const { handleChange } = props;
+
+  return (
+    <Tabs
+      value={selectCurrentTab(state)}
+      indicatorColor="primary"
+      textColor="primary"
+      onChange={handleChange}
+    >
+      <Tab
+        classes={{
+          labelContainer: classes.headerTabs__labelContainer
+        }}
+        label="General"
+        className={classes.headerTabs__tab}
+      />
+    </Tabs>
+  );
 }
 
-export default withStyles(styles)(HeaderTabs);
+HeaderTabs.defaultProps = {};
+
+HeaderTabs.displayName = 'SettingsPage__HeaderTabs';
+
+export default HeaderTabs;

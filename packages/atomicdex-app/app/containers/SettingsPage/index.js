@@ -29,22 +29,6 @@ function SettingsPage(props: ISettingsPageProps) {
   //   }
   // };
 
-  // closeApplicationDialog = () => {
-  //   this.setState({
-  //     applicationDialog: {
-  //       open: false
-  //     }
-  //   });
-  // };
-
-  // closeMM2Dialog = () => {
-  //   this.setState({
-  //     mm2Dialog: {
-  //       open: false
-  //     }
-  //   });
-  // };
-
   // handleChange = (event, value) => {
   //   this.setState({ value });
   // };
@@ -88,16 +72,8 @@ function SettingsPage(props: ISettingsPageProps) {
             <TabContainer selected={0 === 0}>
               <AboutTab />
             </TabContainer>
-            <MM2Dialog
-              // open={mm2Dialog.open}
-              open={false}
-              // closeDialog={this.closeMM2Dialog}
-            />
-            <ApplicationDialog
-              // open={applicationDialog.open}
-              open={false}
-              // closeDialog={this.closeApplicationDialog}
-            />
+            <MM2Dialog />
+            <ApplicationDialog />
           </SettingsContext.Provider>
         </ErrorBoundary>
       </NavigationLayout>

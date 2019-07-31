@@ -64,11 +64,11 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-type IAboutTabProps = {
-  classes: Styles
-};
+type IAboutTabProps = {};
 
 function AboutTab(props: IAboutTabProps) {
+  const classes = useStyles();
+
   const [state, dispatch] = useSettingsContext();
 
   const [mm2, setMM2Version] = React.useState('N/A');
@@ -89,6 +89,7 @@ function AboutTab(props: IAboutTabProps) {
 
   const onClickOpenMM2Dialog = (evt: SyntheticInputEvent<*>) => {
     evt.preventDefault();
+    console.log(openMM2Dialog, 'openMM2Dialog');
     dispatch(openMM2Dialog());
   };
 
@@ -109,10 +110,6 @@ function AboutTab(props: IAboutTabProps) {
   };
 
   debug('render');
-
-  const classes = useStyles();
-
-  const { openMM2Dialog } = props;
 
   return (
     <Grid container spacing={0} className={classes.container}>

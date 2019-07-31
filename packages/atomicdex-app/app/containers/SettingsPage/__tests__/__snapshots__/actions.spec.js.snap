@@ -23,3 +23,12 @@ Object {
   "type": "atomicapp/SettingsPage/MM2_DIALOG_OPEN",
 }
 `;
+
+exports[`containers/SettingsPage/actions/switchMM2Tab should switchMM2Tab should create switchMM2Tab action 1`] = `
+Object {
+  "payload": Object {
+    "tab": 0,
+  },
+  "type": "atomicapp/SettingsPage/MM2_TAB_SWITCH",
+}
+`;
