@@ -16,21 +16,7 @@ import { useSettingsContext } from '../reducer';
 import { selectMM2State } from '../selectors';
 
 const useStyles = makeStyles(theme => ({
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    margin: 'auto',
-    width: 'fit-content'
-  },
-  formControl: {
-    marginTop: theme.spacing(2),
-    minWidth: 120
-  },
-  formControlLabel: {
-    marginTop: theme.spacing(1)
-  },
-
-  minwidth: {
+  mm2Dialog__minwidth: {
     minWidth: 600
   }
 }));
@@ -82,12 +68,12 @@ function MM2Dialog(props: IMM2DialogProps) {
       maxWidth="sm"
       open={selectMM2State(state)}
       onClose={onClickCloseMM2Dialog}
-      aria-labelledby="max-width-dialog-title"
+      aria-labelledby="mm2-dialog-title"
       classes={{
-        paper: classes.minwidth
+        paper: classes.mm2Dialog__minwidth
       }}
     >
-      <DialogTitle id="max-width-dialog-title">MM2 Application</DialogTitle>
+      <DialogTitle id="mm2-dialog-title">MM2 Application</DialogTitle>
       <DialogContent>
         <List disablePadding>
           <ListItem disableGutters>

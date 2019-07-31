@@ -15,21 +15,7 @@ import { useSettingsContext } from '../reducer';
 import { selectApplicationState } from '../selectors';
 
 const useStyles = makeStyles(theme => ({
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    margin: 'auto',
-    width: 'fit-content'
-  },
-  formControl: {
-    marginTop: theme.spacing(2),
-    minWidth: 120
-  },
-  formControlLabel: {
-    marginTop: theme.spacing(1)
-  },
-
-  minwidth: {
+  applicationDialog__minwidth: {
     minWidth: 600
   }
 }));
@@ -67,12 +53,12 @@ function ApplicationDialog(props: IApplicationDialogProps) {
       maxWidth="sm"
       open={selectApplicationState(state)}
       onClose={onClickCloseApplicationDialog}
-      aria-labelledby="max-width-dialog-title"
+      aria-labelledby="application-dialog-title"
       classes={{
-        paper: classes.minwidth
+        paper: classes.applicationDialog__minwidth
       }}
     >
-      <DialogTitle id="max-width-dialog-title">Application</DialogTitle>
+      <DialogTitle id="application-dialog-title">Application</DialogTitle>
       <DialogContent>
         <List disablePadding>
           <ListItem disableGutters>

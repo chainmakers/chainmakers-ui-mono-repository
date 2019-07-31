@@ -9,7 +9,7 @@ import { switchMM2Tab } from '../actions';
 
 const debug = require('debug')('atomicapp:containers:SettingsPage:HeaderTabs');
 
-const styles = makeStyles(() => ({
+const useStyles = makeStyles(() => ({
   headerTabs__tab: {
     minWidth: 100
   },

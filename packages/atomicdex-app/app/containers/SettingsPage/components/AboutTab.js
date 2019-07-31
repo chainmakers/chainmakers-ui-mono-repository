@@ -36,31 +36,6 @@ const useStyles = makeStyles(() => ({
 
   containerSection: {
     // paddingBottom: 30
-  },
-
-  hr: {
-    marginBottom: 20
-  },
-
-  cardContent: {
-    position: 'relative',
-    paddingTop: 0,
-    paddingLeft: 0,
-    paddingRight: 0
-  },
-
-  cardContent__rightBtn: {
-    position: 'absolute',
-    right: 0,
-    top: -12
-  },
-
-  swapform__emptystate: {
-    textAlign: 'center'
-  },
-
-  swapform__iconemptystate: {
-    fontSize: 50
   }
 }));
 
@@ -89,7 +64,6 @@ function AboutTab(props: IAboutTabProps) {
 
   const onClickOpenMM2Dialog = (evt: SyntheticInputEvent<*>) => {
     evt.preventDefault();
-    console.log(openMM2Dialog, 'openMM2Dialog');
     dispatch(openMM2Dialog());
   };
 
