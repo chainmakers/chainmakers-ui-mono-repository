@@ -8,7 +8,8 @@ export const def = {
   loginWindowSize: {
     width: 1156,
     height: process.platform === 'darwin' ? 680 : 730
-  }
+  },
+  repoUrl: 'https://github.com/chainmakers/chainmakers-ui-mono-repository'
 };
 
 export default function loadDefault(config) {
