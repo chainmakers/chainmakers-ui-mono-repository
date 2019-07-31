@@ -41,9 +41,20 @@ type IApplicationDialogProps = {
 
 export default function ApplicationDialog(props: IApplicationDialogProps) {
   const classes = useStyles();
+  const [logs, setLogs] = React.useState('');
   const [open, setOpen] = React.useState(false);
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth, setMaxWidth] = React.useState('sm');
+
+  async function getLogs() {
+    console.log('run only once');
+    const logs = await ipc.callMain('read-application-logs');
+    setLogs(logs);
+  }
+
+  React.useEffect(() => {
+    getLogs();
+  }, []);
 
   function handleClickOpen() {
     setOpen(true);
@@ -62,16 +73,19 @@ export default function ApplicationDialog(props: IApplicationDialogProps) {
   }
 
   async function onClickOpenFullLog() {
-    await ipc.callMain('open-app-folder');
+    await ipc.callMain('open-application-folder');
   }
 
   return (
     <Dialog
       // fullWidth={true}
-      maxWidth="lg"
+      maxWidth="sm"
       open={props.open}
       onClose={props.closeDialog}
       aria-labelledby="max-width-dialog-title"
+      style={{
+        minWidth: 600
+      }}
     >
       <DialogTitle id="max-width-dialog-title">Application</DialogTitle>
       <DialogContent>
@@ -108,55 +122,16 @@ export default function ApplicationDialog(props: IApplicationDialogProps) {
             borderRadius: 1,
             padding: 12,
             // justify-content: center;
-            backgroundColor: '#f5f5f5'
-            // overflow: 'auto'
+            backgroundColor: '#f5f5f5',
+            overflowX: 'auto'
           }}
         >
-          30 08:21:44, lp_coins:669] ticker = "USDC", etomic, block_count =
-          8250870 <br />
-          30 08:21:44, lp_coins:669] ticker = "USDC", etomic, block_count =
-          8250870 <br />
-          30 08:21:44, common:732] RPC error response: rpc:213] No such method
-          "listtransactions" <br />
-          30 08:21:44, common:732] RPC error response: rpc:213] No such method
-          "listtransactions" <br />
-          30 08:21:44, common:732] RPC error response: rpc:213] No such method
-          "listtransactions" <br />
-          30 08:21:44, common:732] RPC error response: rpc:213] No such method
-          "listtransactions" <br />
-          30 08:21:46, common:732] RPC error response: rpc:213] No such method
-          "listtransactions" <br />
-          30 08:21:46, common:732] RPC error response: rpc:213] No such method
-          "listtransactions" <br />
-          30 08:21:44, common:732] RPC error response: rpc:213] No such method
-          "listtransactions" <br />
-          30 08:21:44, common:732] RPC error response: rpc:213] No such method
-          "listtransactions" <br />
-          30 08:21:44, common:732] RPC error response: rpc:213] No such method
-          "listtransactions" <br />
-          30 08:21:44, common:732] RPC error response: rpc:213] No such method
-          "listtransactions" <br />
-          30 08:21:46, common:732] RPC error response: rpc:213] No such method
-          "listtransactions" <br />
-          30 08:21:46, common:732] RPC error response: rpc:213] No such method
-          "listtransactions" <br />
-          30 08:21:44, common:732] RPC error response: rpc:213] No such method
-          "listtransactions" <br />
-          30 08:21:44, common:732] RPC error response: rpc:213] No such method
-          "listtransactions" <br />
-          30 08:21:44, common:732] RPC error response: rpc:213] No such method
-          "listtransactions" <br />
-          30 08:21:44, common:732] RPC error response: rpc:213] No such method
-          "listtransactions" <br />
-          30 08:21:44, common:732] RPC error response: rpc:213] No such method
-          "listtransactions" <br />
-          30 08:21:44, common:732] RPC error response: rpc:213] No such method
-          "listtransactions" <br />
+          {logs}
         </pre>
         {/* </DialogContentText> */}
       </DialogContent>
       <DialogActions>
-        <Button onClose={props.closeDialog} color="primary">
+        <Button onClick={props.closeDialog} color="primary">
           Close
         </Button>
       </DialogActions>

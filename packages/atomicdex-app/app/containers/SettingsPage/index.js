@@ -71,17 +71,6 @@ class SettingsPage extends Component<ISettingsPageProps, ISettingsPageState> {
     this.setState({ value });
   };
 
-  componentDidMount = async () => {
-    try {
-      const logs1 = await ipc.callMain('read-mm2-logs');
-      console.log(logs1);
-      const logs2 = await ipc.callMain('read-application-logs');
-      console.log(logs2);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   render() {
     debug('render');
 

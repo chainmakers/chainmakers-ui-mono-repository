@@ -66,9 +66,7 @@ export default function setup() {
   ipc.answerRenderer('open-new-github-issue', () => {
     shell.openExternal(
       openNewIssueOnGithub({
-        repoUrl: config.get('repoUrl'),
-        body: `body`,
-        labels: ['bug']
+        repoUrl: config.get('repoUrl')
       })
     );
 
@@ -121,7 +119,7 @@ export default function setup() {
   ipc.answerRenderer('read-application-logs', async (maxLineCount: number) => {
     try {
       const lines = await readLastLines({
-        filePath: path.join(log.transports.file.file),
+        filePath: log.transports.file.file,
         maxLineCount
       });
       return lines;

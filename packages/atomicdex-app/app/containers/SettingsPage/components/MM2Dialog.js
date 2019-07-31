@@ -31,6 +31,10 @@ const useStyles = makeStyles(theme => ({
   },
   formControlLabel: {
     marginTop: theme.spacing(1)
+  },
+
+  minwidth: {
+    minWidth: 600
   }
 }));
 
@@ -41,9 +45,20 @@ type IMM2DialogProps = {
 
 export default function MM2Dialog(props: IMM2DialogProps) {
   const classes = useStyles();
+  const [logs, setLogs] = React.useState('');
   const [open, setOpen] = React.useState(false);
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth, setMaxWidth] = React.useState('sm');
+
+  async function getLogs() {
+    console.log('run only once');
+    const logs = await ipc.callMain('read-mm2-logs');
+    setLogs(logs);
+  }
+
+  React.useEffect(() => {
+    getLogs();
+  }, []);
 
   function handleClickOpen() {
     setOpen(true);
@@ -68,10 +83,13 @@ export default function MM2Dialog(props: IMM2DialogProps) {
   return (
     <Dialog
       // fullWidth={true}
-      maxWidth="lg"
+      maxWidth="sm"
       open={props.open}
       onClose={props.closeDialog}
       aria-labelledby="max-width-dialog-title"
+      classes={{
+        paper: classes.minwidth
+      }}
     >
       <DialogTitle id="max-width-dialog-title">MM2 Application</DialogTitle>
       <DialogContent>
@@ -93,52 +111,27 @@ export default function MM2Dialog(props: IMM2DialogProps) {
             </ListItemSecondaryAction>
           </ListItem>
         </List>
-        <DialogContentText
+        {/* <DialogContentText
           style={{
             borderRadius: 1,
             padding: 12,
             // justify-content: center;
-            backgroundColor: '#f5f5f5'
-            // overflow: 'auto'
+            backgroundColor: '#f5f5f5',
+            overflowX: 'auto'
+          }}
+        > */}
+        <pre
+          style={{
+            borderRadius: 1,
+            padding: 12,
+            // justify-content: center;
+            backgroundColor: '#f5f5f5',
+            overflowX: 'auto'
           }}
         >
-          <pre>
-            <code>
-              30 08:21:44, lp_coins:669] ticker = "USDC", etomic, block_count =
-              8250870 <br />
-              30 08:21:44, lp_coins:669] ticker = "USDC", etomic, block_count =
-              8250870 <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:46, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:46, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:46, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:46, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-            </code>
-          </pre>
-        </DialogContentText>
+          <code>{logs}</code>
+        </pre>
+        {/* </DialogContentText> */}
       </DialogContent>
       <DialogActions>
         <Button onClick={props.closeDialog} color="primary">
