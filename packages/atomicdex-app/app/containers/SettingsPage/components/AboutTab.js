@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import List from '@material-ui/core/List';
@@ -19,15 +19,15 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
 import api from 'utils/barterdex-api';
-
 import PageSectionTitle from '../../../components/PageSectionTitle';
 import { version } from '../../../../package.json';
+import { openApplicationDialog, openMM2Dialog } from '../actions';
+import { useSettingsContext } from '../reducer';
 
 const debug = require('debug')('atomicapp:containers:DexPage:MyOrders');
 
-const styles = () => ({
+const useStyles = makeStyles(() => ({
   container: {
     // marginTop: 65,
     marginTop: 112,
@@ -62,136 +62,145 @@ const styles = () => ({
   swapform__iconemptystate: {
     fontSize: 50
   }
-});
+}));
 
-type Props = {
+type IAboutTabProps = {
   classes: Styles
 };
 
-class AboutTab extends React.PureComponent<Props> {
-  state = {
-    mm2Version: 'N/A'
-  };
+function AboutTab(props: IAboutTabProps) {
+  const [state, dispatch] = useSettingsContext();
 
-  async componentDidMount() {
+  const [mm2, setMM2Version] = React.useState('N/A');
+
+  async function getMM2Version() {
     const { result } = await api.version();
-    this.setState({
-      mm2Version: result
-    });
+    setMM2Version(result);
   }
 
-  onClickFeedback = async (evt: SyntheticInputEvent<*>) => {
+  React.useEffect(() => {
+    getMM2Version();
+  }, []);
+
+  const onClickOpenApplicationDialog = (evt: SyntheticInputEvent<*>) => {
+    evt.preventDefault();
+    dispatch(openApplicationDialog());
+  };
+
+  const onClickOpenMM2Dialog = (evt: SyntheticInputEvent<*>) => {
+    evt.preventDefault();
+    dispatch(openMM2Dialog());
+  };
+
+  const onClickFeedback = async (evt: SyntheticInputEvent<*>) => {
     evt.preventDefault();
     // const c = await ipc.callMain('open-new-github-issue');
     await ipc.callMain('open-new-github-issue');
   };
 
-  onClickOpensource = async (evt: SyntheticInputEvent<*>) => {
+  const onClickOpensource = async (evt: SyntheticInputEvent<*>) => {
     evt.preventDefault();
     await ipc.callMain('open-source-code');
   };
 
-  onClickDiscordChannel = async (evt: SyntheticInputEvent<*>) => {
+  const onClickDiscordChannel = async (evt: SyntheticInputEvent<*>) => {
     evt.preventDefault();
     await ipc.callMain('open-discord-channel');
   };
 
-  render() {
-    debug('render');
+  debug('render');
 
-    const { classes, openMM2Dialog, openApplicationDialog } = this.props;
+  const classes = useStyles();
 
-    const { mm2Version } = this.state;
+  const { openMM2Dialog } = props;
 
-    return (
-      <Grid container spacing={0} className={classes.container}>
-        <Grid item xs={12} className={classes.containerSection}>
-          <PageSectionTitle disableBottom title="Application" />
-          <List
-            disablePadding
-            component="nav"
-            aria-label="main mailbox folders"
+  return (
+    <Grid container spacing={0} className={classes.container}>
+      <Grid item xs={12} className={classes.containerSection}>
+        <PageSectionTitle disableBottom title="Application" />
+        <List disablePadding component="nav" aria-label="main mailbox folders">
+          <ListItem disableGutters>
+            <ListItemIcon>
+              <LanguageIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Languages"
+              secondary="Select your language"
+            />
+            <ListItemSecondaryAction>
+              <FormControl className={classes.margin}>
+                <Select
+                  value={10}
+                  input={<OutlinedInput name="age" id="outlined-age-simple" />}
+                >
+                  <MenuItem value={10}>English</MenuItem>
+                </Select>
+              </FormControl>
+            </ListItemSecondaryAction>
+          </ListItem>
+          <ListItem button disableGutters onClick={onClickFeedback}>
+            <ListItemIcon>
+              <FeedbackIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Feedback"
+              secondary="Please feel free to send us your feedback"
+            />
+          </ListItem>
+          <ListItem button disableGutters onClick={onClickOpensource}>
+            <ListItemIcon>
+              <CodeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Source code" />
+          </ListItem>
+          <ListItem button disableGutters>
+            <ListItemIcon>
+              <HttpsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Terms of service" />
+          </ListItem>
+          <ListItem button disableGutters>
+            <ListItemIcon>
+              <SecurityIcon />
+            </ListItemIcon>
+            <ListItemText primary="Privacy policy" />
+          </ListItem>
+        </List>
+        <Divider />
+        <List
+          disablePadding
+          component="nav"
+          subheader={<ListSubheader disableGutters>About</ListSubheader>}
+          aria-label="secondary mailbox folders"
+        >
+          <ListItem button disableGutters>
+            <ListItemText primary="Discord" onClick={onClickDiscordChannel} />
+            <ListItemSecondaryAction>
+              <Link href="https://discord.gg/nAPmwPC">
+                https://discord.gg/nAPmwPC
+              </Link>
+            </ListItemSecondaryAction>
+          </ListItem>
+          <ListItem button disableGutters onClick={onClickOpenMM2Dialog}>
+            <ListItemText primary="MM2 version" />
+            <ListItemSecondaryAction>{mm2}</ListItemSecondaryAction>
+          </ListItem>
+          <ListItem
+            button
+            disableGutters
+            onClick={onClickOpenApplicationDialog}
           >
-            <ListItem disableGutters>
-              <ListItemIcon>
-                <LanguageIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="Languages"
-                secondary="Select your language"
-              />
-              <ListItemSecondaryAction>
-                <FormControl className={classes.margin}>
-                  <Select
-                    value={10}
-                    input={
-                      <OutlinedInput name="age" id="outlined-age-simple" />
-                    }
-                  >
-                    <MenuItem value={10}>English</MenuItem>
-                  </Select>
-                </FormControl>
-              </ListItemSecondaryAction>
-            </ListItem>
-            <ListItem button disableGutters onClick={this.onClickFeedback}>
-              <ListItemIcon>
-                <FeedbackIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="Feedback"
-                secondary="Please feel free to send us your feedback"
-              />
-            </ListItem>
-            <ListItem button disableGutters onClick={this.onClickOpensource}>
-              <ListItemIcon>
-                <CodeIcon />
-              </ListItemIcon>
-              <ListItemText primary="Source code" />
-            </ListItem>
-            <ListItem button disableGutters>
-              <ListItemIcon>
-                <HttpsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Terms of service" />
-            </ListItem>
-            <ListItem button disableGutters>
-              <ListItemIcon>
-                <SecurityIcon />
-              </ListItemIcon>
-              <ListItemText primary="Privacy policy" />
-            </ListItem>
-          </List>
-          <Divider />
-          <List
-            disablePadding
-            component="nav"
-            subheader={<ListSubheader disableGutters>About</ListSubheader>}
-            aria-label="secondary mailbox folders"
-          >
-            <ListItem button disableGutters>
-              <ListItemText
-                primary="Discord"
-                onClick={this.onClickDiscordChannel}
-              />
-              <ListItemSecondaryAction>
-                <Link href="https://discord.gg/nAPmwPC">
-                  https://discord.gg/nAPmwPC
-                </Link>
-              </ListItemSecondaryAction>
-            </ListItem>
-            <ListItem button disableGutters onClick={openMM2Dialog}>
-              <ListItemText primary="MM2 version" />
-              <ListItemSecondaryAction>{mm2Version}</ListItemSecondaryAction>
-            </ListItem>
-            <ListItem button disableGutters onClick={openApplicationDialog}>
-              <ListItemText primary="Build version" />
-              <ListItemSecondaryAction>{version}</ListItemSecondaryAction>
-            </ListItem>
-          </List>
-        </Grid>
+            <ListItemText primary="Build version" />
+            <ListItemSecondaryAction>{version}</ListItemSecondaryAction>
+          </ListItem>
+        </List>
       </Grid>
-    );
-  }
+    </Grid>
+  );
 }
 
-export default withStyles(styles)(AboutTab);
+AboutTab.defaultProps = {};
+
+AboutTab.displayName = 'SettingsPage__AboutTab';
+
+export default AboutTab;

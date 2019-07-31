@@ -11,6 +11,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import api from 'utils/barterdex-api';
+import { closeMM2Dialog } from '../actions';
+import { useSettingsContext } from '../reducer';
+import { selectMM2State } from '../selectors';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -37,10 +40,19 @@ type IMM2DialogProps = {
   closeDialog: Function
 };
 
-export default function MM2Dialog(props: IMM2DialogProps) {
+function MM2Dialog(props: IMM2DialogProps) {
   const classes = useStyles();
+
+  const [state, dispatch] = useSettingsContext();
+
   const [logText, setLogText] = React.useState('');
+
   const [mm2, setMM2Version] = React.useState('N/A');
+
+  const onClickCloseMM2Dialog = (evt: SyntheticInputEvent<*>) => {
+    evt.preventDefault();
+    dispatch(closeMM2Dialog());
+  };
 
   async function getMM2Version() {
     const { result } = await api.version();
@@ -68,8 +80,8 @@ export default function MM2Dialog(props: IMM2DialogProps) {
     <Dialog
       // fullWidth={true}
       maxWidth="sm"
-      open={props.open}
-      onClose={props.closeDialog}
+      open={selectMM2State(state)}
+      onClose={onClickCloseMM2Dialog}
       aria-labelledby="max-width-dialog-title"
       classes={{
         paper: classes.minwidth
@@ -107,10 +119,16 @@ export default function MM2Dialog(props: IMM2DialogProps) {
         </pre>
       </DialogContent>
       <DialogActions>
-        <Button onClick={props.closeDialog} color="primary">
+        <Button onClick={onClickCloseMM2Dialog} color="primary">
           Close
         </Button>
       </DialogActions>
     </Dialog>
   );
 }
+
+MM2Dialog.defaultProps = {};
+
+MM2Dialog.displayName = 'SettingsPage__MM2Dialog';
+
+export default MM2Dialog;

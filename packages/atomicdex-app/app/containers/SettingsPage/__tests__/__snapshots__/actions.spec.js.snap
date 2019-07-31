@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/SettingsPage/actions/closeApplicationDialog should closeApplicationDialog should create closeApplicationDialog action 1`] = `
+Object {
+  "type": "atomicapp/SettingsPage/APPLICATION_DIALOG_CLOSE",
+}
+`;
+
+exports[`containers/SettingsPage/actions/closeMM2Dialog should closeMM2Dialog should create closeMM2Dialog action 1`] = `
+Object {
+  "type": "atomicapp/SettingsPage/MM2_DIALOG_CLOSE",
+}
+`;
+
+exports[`containers/SettingsPage/actions/openApplicationDialog should openApplicationDialog should create openApplicationDialog action 1`] = `
+Object {
+  "type": "atomicapp/SettingsPage/APPLICATION_DIALOG_OPEN",
+}
+`;
+
+exports[`containers/SettingsPage/actions/openMM2Dialog should openMM2Dialog should create openMM2Dialog action 1`] = `
+Object {
+  "type": "atomicapp/SettingsPage/MM2_DIALOG_OPEN",
+}
+`;

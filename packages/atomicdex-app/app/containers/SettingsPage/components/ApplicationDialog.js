@@ -10,6 +10,9 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import { closeApplicationDialog } from '../actions';
+import { useSettingsContext } from '../reducer';
+import { selectApplicationState } from '../selectors';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -31,14 +34,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-type IApplicationDialogProps = {
-  open: booean,
-  closeDialog: Function
-};
+type IApplicationDialogProps = {};
 
-export default function ApplicationDialog(props: IApplicationDialogProps) {
+function ApplicationDialog(props: IApplicationDialogProps) {
   const classes = useStyles();
+
+  const [state, dispatch] = useSettingsContext();
+
   const [logText, setLogText] = React.useState('');
+
+  const onClickCloseApplicationDialog = (evt: SyntheticInputEvent<*>) => {
+    evt.preventDefault();
+    dispatch(closeApplicationDialog());
+  };
 
   async function getLogs() {
     const lt = await ipc.callMain('read-application-logs');
@@ -57,8 +65,8 @@ export default function ApplicationDialog(props: IApplicationDialogProps) {
     <Dialog
       // fullWidth={true}
       maxWidth="sm"
-      open={props.open}
-      onClose={props.closeDialog}
+      open={selectApplicationState(state)}
+      onClose={onClickCloseApplicationDialog}
       aria-labelledby="max-width-dialog-title"
       classes={{
         paper: classes.minwidth
@@ -96,10 +104,16 @@ export default function ApplicationDialog(props: IApplicationDialogProps) {
         </pre>
       </DialogContent>
       <DialogActions>
-        <Button onClick={props.closeDialog} color="primary">
+        <Button onClick={onClickCloseApplicationDialog} color="primary">
           Close
         </Button>
       </DialogActions>
     </Dialog>
   );
 }
+
+ApplicationDialog.defaultProps = {};
+
+ApplicationDialog.displayName = 'SettingsPage__ApplicationDialog';
+
+export default ApplicationDialog;
