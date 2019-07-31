@@ -61,10 +61,14 @@ export default function MM2Dialog(props: IMM2DialogProps) {
     setFullWidth(event.target.checked);
   }
 
+  async function onClickOpenFullLog() {
+    await ipc.callMain('open-mm2-folder');
+  }
+
   return (
     <Dialog
       // fullWidth={true}
-      maxWidth
+      maxWidth="lg"
       open={props.open}
       onClose={props.closeDialog}
       aria-labelledby="max-width-dialog-title"
@@ -79,13 +83,25 @@ export default function MM2Dialog(props: IMM2DialogProps) {
           <ListItem disableGutters>
             <ListItemText primary="Logs" />
             <ListItemSecondaryAction>
-              <Button variant="outlined" color="primary">
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={onClickOpenFullLog}
+              >
                 Open full logs
               </Button>
             </ListItemSecondaryAction>
           </ListItem>
         </List>
-        <DialogContentText>
+        <DialogContentText
+          style={{
+            borderRadius: 1,
+            padding: 12,
+            // justify-content: center;
+            backgroundColor: '#f5f5f5'
+            // overflow: 'auto'
+          }}
+        >
           <pre>
             <code>
               30 08:21:44, lp_coins:669] ticker = "USDC", etomic, block_count =

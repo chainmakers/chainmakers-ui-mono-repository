@@ -61,10 +61,14 @@ export default function ApplicationDialog(props: IApplicationDialogProps) {
     setFullWidth(event.target.checked);
   }
 
+  async function onClickOpenFullLog() {
+    await ipc.callMain('open-app-folder');
+  }
+
   return (
     <Dialog
       // fullWidth={true}
-      maxWidth
+      maxWidth="lg"
       open={props.open}
       onClose={props.closeDialog}
       aria-labelledby="max-width-dialog-title"
@@ -79,51 +83,77 @@ export default function ApplicationDialog(props: IApplicationDialogProps) {
           <ListItem disableGutters>
             <ListItemText primary="Logs" />
             <ListItemSecondaryAction>
-              <Button variant="outlined" color="primary">
-                Open
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={onClickOpenFullLog}
+              >
+                Open full logs
               </Button>
             </ListItemSecondaryAction>
           </ListItem>
         </List>
 
-        <DialogContentText>
-          <pre>
-            <code>
-              30 08:21:44, lp_coins:669] ticker = "USDC", etomic, block_count =
-              8250870 <br />
-              30 08:21:44, lp_coins:669] ticker = "USDC", etomic, block_count =
-              8250870 <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:46, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:46, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:46, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:46, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-              30 08:21:44, common:732] RPC error response: rpc:213] No such
-              method "listtransactions" <br />
-            </code>
-          </pre>
-        </DialogContentText>
+        {/* <DialogContentText
+          style={{
+            borderRadius: 1,
+            padding: 12,
+            // justify-content: center;
+            backgroundColor: '#f5f5f5',
+            // overflow: 'auto'
+          }}
+        > */}
+        <pre
+          style={{
+            borderRadius: 1,
+            padding: 12,
+            // justify-content: center;
+            backgroundColor: '#f5f5f5'
+            // overflow: 'auto'
+          }}
+        >
+          30 08:21:44, lp_coins:669] ticker = "USDC", etomic, block_count =
+          8250870 <br />
+          30 08:21:44, lp_coins:669] ticker = "USDC", etomic, block_count =
+          8250870 <br />
+          30 08:21:44, common:732] RPC error response: rpc:213] No such method
+          "listtransactions" <br />
+          30 08:21:44, common:732] RPC error response: rpc:213] No such method
+          "listtransactions" <br />
+          30 08:21:44, common:732] RPC error response: rpc:213] No such method
+          "listtransactions" <br />
+          30 08:21:44, common:732] RPC error response: rpc:213] No such method
+          "listtransactions" <br />
+          30 08:21:46, common:732] RPC error response: rpc:213] No such method
+          "listtransactions" <br />
+          30 08:21:46, common:732] RPC error response: rpc:213] No such method
+          "listtransactions" <br />
+          30 08:21:44, common:732] RPC error response: rpc:213] No such method
+          "listtransactions" <br />
+          30 08:21:44, common:732] RPC error response: rpc:213] No such method
+          "listtransactions" <br />
+          30 08:21:44, common:732] RPC error response: rpc:213] No such method
+          "listtransactions" <br />
+          30 08:21:44, common:732] RPC error response: rpc:213] No such method
+          "listtransactions" <br />
+          30 08:21:46, common:732] RPC error response: rpc:213] No such method
+          "listtransactions" <br />
+          30 08:21:46, common:732] RPC error response: rpc:213] No such method
+          "listtransactions" <br />
+          30 08:21:44, common:732] RPC error response: rpc:213] No such method
+          "listtransactions" <br />
+          30 08:21:44, common:732] RPC error response: rpc:213] No such method
+          "listtransactions" <br />
+          30 08:21:44, common:732] RPC error response: rpc:213] No such method
+          "listtransactions" <br />
+          30 08:21:44, common:732] RPC error response: rpc:213] No such method
+          "listtransactions" <br />
+          30 08:21:44, common:732] RPC error response: rpc:213] No such method
+          "listtransactions" <br />
+          30 08:21:44, common:732] RPC error response: rpc:213] No such method
+          "listtransactions" <br />
+        </pre>
+        {/* </DialogContentText> */}
       </DialogContent>
       <DialogActions>
         <Button onClose={props.closeDialog} color="primary">

@@ -71,6 +71,17 @@ class SettingsPage extends Component<ISettingsPageProps, ISettingsPageState> {
     this.setState({ value });
   };
 
+  componentDidMount = async () => {
+    try {
+      const logs1 = await ipc.callMain('read-mm2-logs');
+      console.log(logs1);
+      const logs2 = await ipc.callMain('read-application-logs');
+      console.log(logs2);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   render() {
     debug('render');
 
@@ -102,7 +113,10 @@ class SettingsPage extends Component<ISettingsPageProps, ISettingsPageState> {
                 </MDCTabBar>
               </MDCAppBar>
               <TabContainer selected={value === 0}>
-                <AboutTab openApplicationDialog={this.openApplicationDialog} openMM2Dialog={this.openMM2Dialog} />
+                <AboutTab
+                  openApplicationDialog={this.openApplicationDialog}
+                  openMM2Dialog={this.openMM2Dialog}
+                />
               </TabContainer>
               <MM2Dialog
                 open={mm2Dialog.open}

@@ -1,7 +1,11 @@
 // @flow
+import path from 'path';
 import { shell } from 'electron';
 import ipc from 'electron-better-ipc';
 import config from '../config';
+import readLastLines from '../utils/readLastLines';
+
+const log = require('electron-log');
 
 export default function setup() {
   ipc.answerRenderer('open-new-github-issue', () => {
@@ -39,5 +43,31 @@ export default function setup() {
     return {
       ok: 'done'
     };
+  });
+
+  ipc.answerRenderer('read-mm2-logs', async (maxLineCount: number) => {
+    try {
+      const lines = await readLastLines({
+        filePath: path.join(config.get('paths.userDataDir'), 'mm2_info.log'),
+        maxLineCount
+      });
+      return lines;
+    } catch (err) {
+      log.error(err.message);
+      throw err;
+    }
+  });
+
+  ipc.answerRenderer('read-application-logs', async (maxLineCount: number) => {
+    try {
+      const lines = await readLastLines({
+        filePath: path.join(log.transports.file.file),
+        maxLineCount
+      });
+      return lines;
+    } catch (err) {
+      log.error(err.message);
+      throw err;
+    }
   });
 }
