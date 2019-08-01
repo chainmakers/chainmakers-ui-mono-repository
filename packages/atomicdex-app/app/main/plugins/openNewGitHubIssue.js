@@ -90,21 +90,21 @@ export default function setup() {
   });
 
   ipc.answerRenderer('open-discord-channel', () => {
-    shell.openExternal('https://discord.gg/nAPmwPC');
+    shell.openExternal(config.get('discord'));
     return {
       ok: 'done'
     };
   });
 
   ipc.answerRenderer('open-app-folder', () => {
-    shell.openItem(config.get('paths.userDataDir'));
+    shell.openItem(log.transports.file.file);
     return {
       ok: 'done'
     };
   });
 
   ipc.answerRenderer('open-mm2-folder', () => {
-    shell.openItem(config.get('paths.userDataDir'));
+    shell.openItem(path.join(config.get('paths.userDataDir'), 'mm2_info.log'));
     return {
       ok: 'done'
     };
