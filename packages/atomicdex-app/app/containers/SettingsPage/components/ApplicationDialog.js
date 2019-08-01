@@ -13,6 +13,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import { closeApplicationDialog } from '../actions';
 import { useSettingsContext } from '../reducer';
 import { selectApplicationState } from '../selectors';
+import { version } from '../../../../package.json';
 
 const useStyles = makeStyles(() => ({
   applicationDialog__minwidth: {
@@ -63,7 +64,7 @@ function ApplicationDialog(props: IApplicationDialogProps) {
         <List disablePadding>
           <ListItem disableGutters>
             <ListItemText primary="Version" />
-            <ListItemSecondaryAction>0.23.0</ListItemSecondaryAction>
+            <ListItemSecondaryAction>{version}</ListItemSecondaryAction>
           </ListItem>
           <ListItem disableGutters>
             <ListItemText primary="Logs" />

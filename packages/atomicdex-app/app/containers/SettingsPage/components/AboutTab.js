@@ -83,7 +83,7 @@ function AboutTab(props: IAboutTabProps) {
     <Grid container spacing={0} className={classes.container}>
       <Grid item xs={12} className={classes.containerSection}>
         <PageSectionTitle disableBottom title="Application" />
-        <List disablePadding component="nav" aria-label="main mailbox folders">
+        <List disablePadding component="nav">
           <ListItem disableGutters>
             <ListItemIcon>
               <LanguageIcon />
@@ -136,7 +136,6 @@ function AboutTab(props: IAboutTabProps) {
           disablePadding
           component="nav"
           subheader={<ListSubheader disableGutters>About</ListSubheader>}
-          aria-label="secondary mailbox folders"
         >
           <ListItem button disableGutters>
             <ListItemText primary="Discord" onClick={onClickDiscordChannel} />
