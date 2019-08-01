@@ -1,6 +1,5 @@
 // @flow
 import path from 'path';
-import fs from 'fs';
 import { shell } from 'electron';
 import ipc from 'electron-better-ipc';
 import config from '../config';

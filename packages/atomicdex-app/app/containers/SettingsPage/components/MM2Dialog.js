@@ -15,16 +15,13 @@ import { closeMM2Dialog } from '../actions';
 import { useSettingsContext } from '../reducer';
 import { selectMM2State } from '../selectors';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   mm2Dialog__minwidth: {
     minWidth: 600
   }
 }));
 
-type IMM2DialogProps = {
-  open: booean,
-  closeDialog: Function
-};
+type IMM2DialogProps = {};
 
 function MM2Dialog(props: IMM2DialogProps) {
   const classes = useStyles();

@@ -9,7 +9,7 @@ import MDCTabBar from '../../components/AppBar/TabBar';
 import { TabContainer } from '../../components/Tabs';
 import { NavigationLayout } from '../Layout';
 import HeaderTabs from './components/HeaderTabs';
-import AboutTab from './components/AboutTab';
+import Content from './components/Content';
 import ApplicationDialog from './components/ApplicationDialog';
 import MM2Dialog from './components/MM2Dialog';
 import SettingsContext, { initialState, reducer } from './reducer';
@@ -19,24 +19,7 @@ const debug = require('debug')('atomicapp:containers:SettingsPage');
 type ISettingsPageProps = {};
 
 function SettingsPage(props: ISettingsPageProps) {
-  // state = {
-  //   value: 0,
-  //   applicationDialog: {
-  //     open: false
-  //   },
-  //   mm2Dialog: {
-  //     open: false
-  //   }
-  // };
-
-  // handleChange = (event, value) => {
-  //   this.setState({ value });
-  // };
-
-  // render() {
   debug('render');
-
-  // const { value, mm2Dialog, applicationDialog } = this.state;
 
   const contextValue = React.useReducer(reducer, initialState);
 
@@ -62,16 +45,10 @@ function SettingsPage(props: ISettingsPageProps) {
                 }
               />
               <MDCTabBar>
-                <HeaderTabs
-                  // handleChange={this.handleChange}
-                  value={0}
-                />
+                <HeaderTabs />
               </MDCTabBar>
             </MDCAppBar>
-            {/* <TabContainer selected={value === 0}> */}
-            <TabContainer selected={0 === 0}>
-              <AboutTab />
-            </TabContainer>
+            <Content />
             <MM2Dialog />
             <ApplicationDialog />
           </SettingsContext.Provider>

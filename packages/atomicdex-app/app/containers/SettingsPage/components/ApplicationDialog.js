@@ -14,7 +14,7 @@ import { closeApplicationDialog } from '../actions';
 import { useSettingsContext } from '../reducer';
 import { selectApplicationState } from '../selectors';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   applicationDialog__minwidth: {
     minWidth: 600
   }

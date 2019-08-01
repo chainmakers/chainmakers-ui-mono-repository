@@ -8,11 +8,13 @@ import {
   APPLICATION_DIALOG_CLOSE,
   MM2_DIALOG_OPEN,
   MM2_DIALOG_CLOSE,
-  MM2_TAB_SWITCH
+  TAB_SWITCH
 } from './constants';
 
 // The initial state of the App
 export const initialState = fromJS({
+  mm2Version: 'N/A',
+
   currentTab: 0,
 
   applicationDialog: {
@@ -38,8 +40,7 @@ export const reducer = handleActions(
 
     [MM2_DIALOG_CLOSE]: state => state.setIn(['mm2Dialog', 'open'], false),
 
-    [MM2_TAB_SWITCH]: (state, { payload }) =>
-      state.set('currentTab', payload.tab),
+    [TAB_SWITCH]: (state, { payload }) => state.set('currentTab', payload.tab),
 
     [LOGOUT]: () => initialState
   },

@@ -3,14 +3,14 @@ import {
   closeApplicationDialog,
   openMM2Dialog,
   closeMM2Dialog,
-  switchMM2Tab
+  switchTab
 } from '../actions';
 import {
   APPLICATION_DIALOG_OPEN,
   APPLICATION_DIALOG_CLOSE,
   MM2_DIALOG_OPEN,
   MM2_DIALOG_CLOSE,
-  MM2_TAB_SWITCH
+  TAB_SWITCH
 } from '../constants';
 
 describe('containers/SettingsPage/actions/openApplicationDialog', () => {
@@ -69,30 +69,30 @@ describe('containers/SettingsPage/actions/closeMM2Dialog', () => {
   });
 });
 
-describe('containers/SettingsPage/actions/switchMM2Tab', () => {
-  it('should switchMM2Tab should create switchMM2Tab action', () => {
-    expect(switchMM2Tab()).toMatchSnapshot();
+describe('containers/SettingsPage/actions/switchTab', () => {
+  it('should switchTab should create switchTab action', () => {
+    expect(switchTab()).toMatchSnapshot();
   });
 
   it('should return the correct type', () => {
     const expectedResult = {
-      type: MM2_TAB_SWITCH,
+      type: TAB_SWITCH,
       payload: {
         tab: 0
       }
     };
 
-    expect(switchMM2Tab()).toEqual(expectedResult);
+    expect(switchTab()).toEqual(expectedResult);
   });
 
   it('should return the correct type and tab', () => {
     const expectedResult = {
-      type: MM2_TAB_SWITCH,
+      type: TAB_SWITCH,
       payload: {
         tab: 3
       }
     };
 
-    expect(switchMM2Tab(3)).toEqual(expectedResult);
+    expect(switchTab(3)).toEqual(expectedResult);
   });
 });

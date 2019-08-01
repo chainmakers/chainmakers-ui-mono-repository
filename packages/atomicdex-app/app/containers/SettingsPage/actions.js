@@ -4,7 +4,7 @@ import {
   APPLICATION_DIALOG_CLOSE,
   MM2_DIALOG_OPEN,
   MM2_DIALOG_CLOSE,
-  MM2_TAB_SWITCH
+  TAB_SWITCH
 } from './constants';
 
 export function openApplicationDialog() {
@@ -31,9 +31,9 @@ export function closeMM2Dialog() {
   };
 }
 
-export function switchMM2Tab(tab: number = 0) {
+export function switchTab(tab: number = 0) {
   return {
-    type: MM2_TAB_SWITCH,
+    type: TAB_SWITCH,
     payload: {
       tab
     }
