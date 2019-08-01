@@ -1,11 +1,19 @@
 // @flow
 import path from 'path';
-import { shell } from 'electron';
+import os from 'os';
+import { shell, app } from 'electron';
 import ipc from 'electron-better-ipc';
 import config from '../config';
 import readLastLines from '../utils/readLastLines';
 
 const log = require('electron-log');
+
+const debugInfo = () =>
+  `Application: ${app.getName()} ${app.getVersion()}
+Electron: ${process.versions.electron || 'N/A'}
+OS: ${process.platform} ${os.release()}
+Locale: ${app.getLocale()}
+`.trim();
 
 // https://github.com/sindresorhus/new-github-issue-url
 // NOTE: we copy this since it's small and security reason
@@ -54,16 +62,24 @@ function openNewIssueOnGithub(options = {}) {
 }
 
 export default function setup() {
-  ipc.answerRenderer('open-new-github-issue', () => {
-    shell.openExternal(
-      openNewIssueOnGithub({
-        repoUrl: config.get('repoUrl')
-      })
-    );
+  ipc.answerRenderer('open-new-github-issue', async (mm2Version?: string) => {
+    try {
+      shell.openExternal(
+        openNewIssueOnGithub({
+          repoUrl: config.get('repoUrl'),
+          body: `MM2: ${mm2Version} \n${debugInfo()}`
+        })
+      );
 
-    return {
-      ok: 'done'
-    };
+      return {
+        ok: 'done'
+      };
+    } catch (err) {
+      log.error(err.message);
+      return {
+        ok: 'failed'
+      };
+    }
   });
 
   ipc.answerRenderer('open-source-code', () => {
