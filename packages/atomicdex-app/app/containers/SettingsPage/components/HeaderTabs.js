@@ -12,11 +12,6 @@ const debug = require('debug')('atomicapp:containers:SettingsPage:HeaderTabs');
 const useStyles = makeStyles(() => ({
   headerTabs__tab: {
     minWidth: 100
-  },
-
-  headerTabs__labelContainer: {
-    paddingLeft: 12,
-    paddingRight: 12
   }
 }));
 
@@ -39,13 +34,7 @@ function HeaderTabs(props: IHeaderTabsProps) {
       textColor="primary"
       onChange={handleChange}
     >
-      <Tab
-        classes={{
-          labelContainer: classes.headerTabs__labelContainer
-        }}
-        label="General"
-        className={classes.headerTabs__tab}
-      />
+      <Tab label="General" className={classes.headerTabs__tab} />
     </Tabs>
   );
 }

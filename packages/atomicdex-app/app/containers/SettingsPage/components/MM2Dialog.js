@@ -13,7 +13,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import api from 'utils/barterdex-api';
 import { closeMM2Dialog } from '../actions';
 import { useSettingsContext } from '../reducer';
-import { selectMM2State } from '../selectors';
+import { selectMM2State, selectMM2Version } from '../selectors';
 
 const useStyles = makeStyles(() => ({
   mm2Dialog__minwidth: {
@@ -30,17 +30,10 @@ function MM2Dialog(props: IMM2DialogProps) {
 
   const [logText, setLogText] = React.useState('');
 
-  const [mm2, setMM2Version] = React.useState('N/A');
-
   const onClickCloseMM2Dialog = (evt: SyntheticInputEvent<*>) => {
     evt.preventDefault();
     dispatch(closeMM2Dialog());
   };
-
-  async function getMM2Version() {
-    const { result } = await api.version();
-    setMM2Version(result);
-  }
 
   async function getLogs() {
     const lt = await ipc.callMain('read-mm2-logs');
@@ -49,10 +42,6 @@ function MM2Dialog(props: IMM2DialogProps) {
 
   React.useEffect(() => {
     getLogs();
-  }, []);
-
-  React.useEffect(() => {
-    getMM2Version();
   }, []);
 
   async function onClickOpenFullLog() {
@@ -75,7 +64,9 @@ function MM2Dialog(props: IMM2DialogProps) {
         <List disablePadding>
           <ListItem disableGutters>
             <ListItemText primary="Version" />
-            <ListItemSecondaryAction>{mm2}</ListItemSecondaryAction>
+            <ListItemSecondaryAction>
+              {selectMM2Version(state)}
+            </ListItemSecondaryAction>
           </ListItem>
           <ListItem disableGutters>
             <ListItemText primary="Logs" />

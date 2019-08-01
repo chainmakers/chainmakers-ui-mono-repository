@@ -24,11 +24,20 @@ Object {
 }
 `;
 
+exports[`containers/SettingsPage/actions/setMM2Version should setMM2Version should create setMM2Version action 1`] = `
+Object {
+  "payload": Object {
+    "version": "N/A",
+  },
+  "type": "atomicapp/SettingsPage/MM2_SET",
+}
+`;
+
 exports[`containers/SettingsPage/actions/switchTab should switchTab should create switchTab action 1`] = `
 Object {
   "payload": Object {
     "tab": 0,
   },
-  "type": undefined,
+  "type": "atomicapp/SettingsPage/TAB_SWITCH",
 }
 `;

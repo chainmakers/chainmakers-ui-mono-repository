@@ -6,3 +6,6 @@ export const selectMM2State = settingsState =>
 
 export const selectCurrentTab = settingsState =>
   settingsState.get('currentTab');
+
+export const selectMM2Version = settingsState =>
+  settingsState.get('mm2Version');

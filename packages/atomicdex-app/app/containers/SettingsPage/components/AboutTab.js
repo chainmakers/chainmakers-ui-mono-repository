@@ -22,10 +22,15 @@ import Select from '@material-ui/core/Select';
 import api from 'utils/barterdex-api';
 import PageSectionTitle from '../../../components/PageSectionTitle';
 import { version } from '../../../../package.json';
-import { openApplicationDialog, openMM2Dialog } from '../actions';
+import {
+  openApplicationDialog,
+  openMM2Dialog,
+  setMM2Version
+} from '../actions';
 import { useSettingsContext } from '../reducer';
+import { selectMM2Version } from '../selectors';
 
-const debug = require('debug')('atomicapp:containers:DexPage:MyOrders');
+const debug = require('debug')('atomicapp:containers:SettingsPage:AboutTab');
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -45,17 +50,6 @@ function AboutTab(props: IAboutTabProps) {
   const classes = useStyles();
 
   const [state, dispatch] = useSettingsContext();
-
-  const [mm2, setMM2Version] = React.useState('N/A');
-
-  async function getMM2Version() {
-    const { result } = await api.version();
-    setMM2Version(result);
-  }
-
-  React.useEffect(() => {
-    getMM2Version();
-  }, []);
 
   const onClickOpenApplicationDialog = (evt: SyntheticInputEvent<*>) => {
     evt.preventDefault();
@@ -154,7 +148,9 @@ function AboutTab(props: IAboutTabProps) {
           </ListItem>
           <ListItem button disableGutters onClick={onClickOpenMM2Dialog}>
             <ListItemText primary="MM2 version" />
-            <ListItemSecondaryAction>{mm2}</ListItemSecondaryAction>
+            <ListItemSecondaryAction>
+              {selectMM2Version(state)}
+            </ListItemSecondaryAction>
           </ListItem>
           <ListItem
             button
