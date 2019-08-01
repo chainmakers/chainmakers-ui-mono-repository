@@ -18,6 +18,7 @@ import config from './config';
 import setupMarketmaker from './plugins/marketmaker';
 import { applicationCrashedDialog } from './dialogs';
 import blockIP from './setPermissionRequestHandler';
+import setupOpenNewGitHubIssue from './plugins/openNewGitHubIssue';
 import isPackaged from './isPackaged';
 import explorer from '../lib/explorer';
 
@@ -103,7 +104,7 @@ app.on('ready', async () => {
         nodeIntegrationInWorker: false,
         contextIsolation: false,
         preload: path.join(__dirname, 'preloader.js'),
-        nativeWindowOpen: true,
+        // nativeWindowOpen: true,
         enableRemoteModule: false
       };
 
@@ -130,6 +131,7 @@ app.on('ready', async () => {
 
       log.info('setup mm2 app');
       setupMarketmaker();
+      setupOpenNewGitHubIssue();
 
       mainWindow.show();
       mainWindow.focus();

@@ -8,6 +8,10 @@ const styles = () => ({
   page__title: {
     marginBottom: 24,
     fontSize: 20
+  },
+
+  page__titleDisableBottom: {
+    fontSize: 20
   }
 });
 
@@ -18,15 +22,18 @@ type Props = {
 };
 
 class PageSectionTitle extends React.PureComponent<Props> {
-  props: Props;
-
   static propTypes = {};
 
   render() {
-    const { classes, title } = this.props;
+    const { classes, title, disableBottom } = this.props;
 
     return (
-      <Typography variant="h6" gutterBottom className={classes.page__title}>
+      <Typography
+        variant="h6"
+        className={
+          disableBottom ? classes.page__titleDisableBottom : classes.page__title
+        }
+      >
         {title}
       </Typography>
     );

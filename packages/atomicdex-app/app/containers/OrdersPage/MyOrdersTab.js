@@ -172,9 +172,7 @@ const withConnect = connect(
   mapDispatchToProps
 );
 
-const MyOrdersWapper = compose(
+export default compose(
   withConnect,
   withStyles(styles)
 )(MyOrders);
-
-export default MyOrdersWapper;
