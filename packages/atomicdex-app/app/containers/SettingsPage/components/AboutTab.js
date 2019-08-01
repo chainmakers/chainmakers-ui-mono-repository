@@ -64,7 +64,7 @@ function AboutTab(props: IAboutTabProps) {
   const onClickFeedback = async (evt: SyntheticInputEvent<*>) => {
     evt.preventDefault();
     // const c = await ipc.callMain('open-new-github-issue');
-    await ipc.callMain('open-new-github-issue');
+    await ipc.callMain('open-new-github-issue', selectMM2Version(state));
   };
 
   const onClickOpensource = async (evt: SyntheticInputEvent<*>) => {
