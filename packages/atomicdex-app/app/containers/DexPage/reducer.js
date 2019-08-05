@@ -293,6 +293,7 @@ export default handleActions(
 
         // ERROR
         if (STATE_FAILED_SWAPS.indexOf(event.type) !== -1) {
+          console.error(event.data.error);
           entity = entity.set(
             'error',
             fromJS({
