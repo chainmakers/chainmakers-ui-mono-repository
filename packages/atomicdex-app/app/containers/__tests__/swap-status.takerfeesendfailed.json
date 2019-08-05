@@ -28,7 +28,7 @@
             "taker_coin": "BTC",
             "taker_payment_confirmations": 1,
             "taker_payment_lock": 1556908415,
-            "uuid": "3ad4cddea8fa8968b9fdbb792aded884b205b5b4b29faae2c57d3bb54cd494c3"
+            "uuid": "3ee41a9c-e963-4237-bcba-904b2bf519af"
           },
           "type": "Started"
         },
@@ -74,6 +74,6 @@
       "Finished"
     ],
     "type": "Taker",
-    "uuid": "3ad4cddea8fa8968b9fdbb792aded884b205b5b4b29faae2c57d3bb54cd494c3"
+    "uuid": "3ee41a9c-e963-4237-bcba-904b2bf519af"
   }
 }
