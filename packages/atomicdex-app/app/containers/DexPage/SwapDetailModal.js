@@ -27,11 +27,8 @@ import explorer from '../../lib/explorer';
 import openNewWindow from '../../utils/openNewWindow';
 import getCoinMemoize from '../../components/CryptoIcons';
 import CoinSelectable from '../../components/CoinSelectable';
-import {
-  STATE_SWAPS,
-  SWAP_TX_DEFAULT,
-  FINISHED_SWAPS_STATE
-} from './constants';
+import { STATE_SWAPS, FINISHED_SWAPS_STATE } from '../../constants';
+import { SWAP_TX_DEFAULT } from './constants';
 import { closeDetailModal } from './actions';
 import {
   makeSelectSwapDetailModal,

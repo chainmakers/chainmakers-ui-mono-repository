@@ -3,6 +3,7 @@ import { delay } from 'redux-saga';
 import { takeFirst } from 'barterdex-rssm';
 import api from 'utils/barterdex-api';
 import { loadSwapSuccess /* loadBalance */ } from '../../App/actions';
+import { FINISHED_SWAPS_STATE } from '../../../constants';
 import {
   loadRecentSwapsCoin,
   loadRecentSwapsError,
@@ -14,8 +15,7 @@ import {
 import {
   CHECK_UPDATE_SWAP_EVENT,
   LOAD_RECENT_SWAPS,
-  TIME_LOOP,
-  FINISHED_SWAPS_STATE
+  TIME_LOOP
 } from '../constants';
 
 const debug = require('debug')(
