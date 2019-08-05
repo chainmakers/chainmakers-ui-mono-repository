@@ -10,7 +10,7 @@ import { ProgressBarUI as ProgressBar } from '../ProgressBar';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('containers/DexPage/<ProgressBar />', () => {
+describe('containers/OrderPage/<ProgressBar />', () => {
   const classes = {
     linearprogress: 'fakeCssClass'
   };

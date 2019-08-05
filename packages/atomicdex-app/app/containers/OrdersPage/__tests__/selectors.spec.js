@@ -39,7 +39,7 @@ describe('containers/OrderPage/selectors/selectOrder', () => {
   });
 });
 
-describe('containers/DexPage/selectors/makeSelectSwapDetailModal', () => {
+describe('containers/OrderPage/selectors/makeSelectSwapDetailModal', () => {
   it('should select the SwapDetailModal state', () => {
     let store = initialState;
     store = store.set(
@@ -59,7 +59,7 @@ describe('containers/DexPage/selectors/makeSelectSwapDetailModal', () => {
   });
 });
 
-describe('containers/DexPage/selectors/makeSelectCoinModal', () => {
+describe('containers/OrderPage/selectors/makeSelectCoinModal', () => {
   it('should select the selectCoinModal state', () => {
     let store = initialState;
     store = store.set(
@@ -77,7 +77,7 @@ describe('containers/DexPage/selectors/makeSelectCoinModal', () => {
   });
 });
 
-describe('containers/DexPage/selectors/makeSelectCurrency', () => {
+describe('containers/OrderPage/selectors/makeSelectCurrency', () => {
   it('should select the makeSelectCurrency state', () => {
     const store = initialState;
     const mockedState = fromJS({
@@ -88,7 +88,7 @@ describe('containers/DexPage/selectors/makeSelectCurrency', () => {
   });
 });
 
-describe('containers/DexPage/selectors/makeSelectPayment', () => {
+describe('containers/OrderPage/selectors/makeSelectPayment', () => {
   it('should select the makeSelectPayment state', () => {
     const store = initialState;
     const mockedState = fromJS({

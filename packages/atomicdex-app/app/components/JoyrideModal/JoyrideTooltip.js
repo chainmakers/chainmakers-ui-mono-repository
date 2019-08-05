@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 
 const debug = require('debug')(
-  'atomicapp:containers:WalletPage:components:JoyrideModal:JoyrideTooltip'
+  'atomicapp:components:JoyrideModal:JoyrideTooltip'
 );
 
 const styles = theme => ({

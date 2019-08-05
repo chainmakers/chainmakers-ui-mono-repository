@@ -35,9 +35,9 @@ export const SWAP_TX_DEFAULT =
   '0000000000000000000000000000000000000000000000000000000000000000';
 
 export const SWAP_DETAIL_MODAL_OPEN =
-  'atomicapp/DexPage/SWAP_DETAIL_MODAL_OPEN';
+  'atomicapp/OrderPage/SWAP_DETAIL_MODAL_OPEN';
 export const SWAP_DETAIL_MODAL_CLOSE =
-  'atomicapp/DexPage/SWAP_DETAIL_MODAL_CLOSE';
+  'atomicapp/OrderPage/SWAP_DETAIL_MODAL_CLOSE';
 
 export const NA = 'N/A';
 
@@ -47,8 +47,8 @@ export const BUFF_PRICES = 1.05 * NUMCOIN; // 5%
 // export const BUFF_PRICES = 1.0 * NUMCOIN; // 0%
 
 // Joyride actions
-export const JOYRIDE_OPEN = 'atomicapp/DexPage/JOYRIDE_OPEN';
-export const JOYRIDE_CLOSE = 'atomicapp/DexPage/JOYRIDE_CLOSE';
+export const JOYRIDE_OPEN = 'atomicapp/OrderPage/JOYRIDE_OPEN';
+export const JOYRIDE_CLOSE = 'atomicapp/OrderPage/JOYRIDE_CLOSE';
 
 // Orderbook actions
 export const ORDERBOOK_RELOAD = 'atomicapp/OrdersPage/ORDERBOOK_RELOAD';

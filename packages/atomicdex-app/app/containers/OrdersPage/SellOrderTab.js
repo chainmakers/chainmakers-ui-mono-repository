@@ -46,7 +46,7 @@ import {
   makeSelectMyOrderList
 } from './selectors';
 
-const debug = require('debug')('atomicapp:containers:DexPage:SellOrderTab');
+const debug = require('debug')('atomicapp:containers:OrderPage:SellOrderTab');
 
 const styles = theme => ({
   container: {
@@ -308,6 +308,7 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
         >
           <div className={classes.cardContent}>
             <Button
+              id="place-new-order-button-orderpage"
               onClick={this.onClickPlaceNewOrder}
               disabled={
                 recevie === null ||

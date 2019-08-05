@@ -274,3 +274,14 @@ export function getElementPosition(
 
   return Math.floor(top - offset);
 }
+
+// https://github.com/mui-org/material-ui/blob/master/packages/material-ui/src/utils/ownerDocument.js
+export function ownerDocument(node) {
+  return (node && node.ownerDocument) || document;
+}
+
+// https://github.com/mui-org/material-ui/blob/master/packages/material-ui/src/utils/ownerWindow.js
+export function ownerWindow(node) {
+  const doc = ownerDocument(node);
+  return doc.defaultView || window;
+}

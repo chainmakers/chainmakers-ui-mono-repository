@@ -2,7 +2,7 @@
 import React from 'react';
 
 const debug = require('debug')(
-  'atomicapp:containers:WalletPage:components:JoyrideModal:JoyrideStepper'
+  'atomicapp:components:JoyrideModal:JoyrideStepper'
 );
 
 type IJoyrideStepperProps = {

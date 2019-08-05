@@ -98,7 +98,10 @@ class PlaceOrder extends Component<Props, State> {
             />
             <CurrencySection balance={balance} />
           </CardContent>
-          <CardContent className={classes.cardContent}>
+          <CardContent
+            id="payment-section-placeorder-dexpage"
+            className={classes.cardContent}
+          >
             <PageSectionTitle
               title={
                 <FormattedMessage id="atomicapp.containers.DexPage.payment">
@@ -115,9 +118,7 @@ class PlaceOrder extends Component<Props, State> {
                 <Icon>cached</Icon>
               </IconButton>
             </Tooltip>
-            <div id="payment-section-placeorder-dexpage">
-              <PaymentSection loading={balanceLoading} />
-            </div>
+            <PaymentSection loading={balanceLoading} />
           </CardContent>
           <CardContent className={classes.cardContent}>
             <PageSectionTitle

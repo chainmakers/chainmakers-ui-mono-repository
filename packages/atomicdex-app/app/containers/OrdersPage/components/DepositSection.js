@@ -44,7 +44,7 @@ class DepositSection extends React.PureComponent<IDepositSectionProps> {
     if (!deposit) {
       return (
         <CoinSelectable
-          id="add-icon-placeorder-orderpage"
+          id="deposit-add-icon-placeorder-orderpage"
           key="depositCoinAddIcon"
           icon={<AddIcon color="primary" />}
           onClick={this.onClick}
@@ -56,7 +56,7 @@ class DepositSection extends React.PureComponent<IDepositSectionProps> {
     const b = balance.get(deposit);
     return (
       <CoinSelectable
-        id="add-icon-placeorder-orderpage"
+        id="deposit-add-icon-placeorder-orderpage"
         key={`depositCoin${deposit}`}
         selected
         data={deposit}

@@ -51,7 +51,7 @@ import {
   NEW_ORDER_CANCEL_SUCCESS
 } from '../constants';
 
-describe('containers/DexPage/actions/openDetailModal', () => {
+describe('containers/OrderPage/actions/openDetailModal', () => {
   const uuid = 'uuid';
   it('should openDetailModal should create openDetailModal action', () => {
     expect(openDetailModal()).toMatchSnapshot();
@@ -81,7 +81,7 @@ describe('containers/DexPage/actions/openDetailModal', () => {
   });
 });
 
-describe('containers/DexPage/actions/closeDetailModal', () => {
+describe('containers/OrderPage/actions/closeDetailModal', () => {
   it('should closeDetailModal should create closeDetailModal action', () => {
     expect(closeDetailModal()).toMatchSnapshot();
   });
@@ -95,7 +95,7 @@ describe('containers/DexPage/actions/closeDetailModal', () => {
   });
 });
 
-describe('containers/DexPage/actions/openJoyride', () => {
+describe('containers/OrderPage/actions/openJoyride', () => {
   it('should openJoyride should create openJoyride action', () => {
     expect(openJoyride()).toMatchSnapshot();
   });
@@ -109,7 +109,7 @@ describe('containers/DexPage/actions/openJoyride', () => {
   });
 });
 
-describe('containers/DexPage/actions/closeJoyride', () => {
+describe('containers/OrderPage/actions/closeJoyride', () => {
   it('should closeJoyride should create closeJoyride action', () => {
     expect(closeJoyride()).toMatchSnapshot();
   });

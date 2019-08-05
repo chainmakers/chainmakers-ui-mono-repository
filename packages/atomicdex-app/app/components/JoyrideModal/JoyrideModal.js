@@ -9,11 +9,15 @@ import BackdropComponent from './Backdrop';
 import JoyrideBeaconDom from './JoyrideBeaconDom';
 import JoyrideSpotlightDom from './JoyrideSpotlightDom';
 import JoyrideTooltip from './JoyrideTooltip';
-import { scrollTo, getElement, getScrollTo, getScrollParent } from './dom';
+import {
+  scrollTo,
+  getElement,
+  getScrollTo,
+  getElementPosition,
+  getScrollParent
+} from './dom';
 
-const debug = require('debug')(
-  'atomicapp:containers:WalletPage:components:JoyrideModal'
-);
+const debug = require('debug')('atomicapp:components:JoyrideModal');
 
 const styles = theme => ({
   /* Styles applied to the root element if the `Modal` has exited. */
@@ -38,11 +42,16 @@ type IJoyrideModalProps = {
   classes: Object,
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchCloseJoyride: Function,
-  joyrideState: boolean
+  joyrideState: boolean,
+  scrollOffset: number
 };
 
 class JoyrideModal extends React.PureComponent<IJoyrideModalProps> {
   static displayName = 'JoyrideModal';
+
+  static defaultProps = {
+    scrollOffset: 300
+  };
 
   state = {
     index: 0
@@ -94,47 +103,85 @@ class JoyrideModal extends React.PureComponent<IJoyrideModalProps> {
 
   prev = () => {
     let { index } = this.state;
-
+    let id;
+    let iddom;
+    let target;
     index -= 1;
-    if (index < 0) {
-      index = this.list.size - 1;
+    while (index >= 0) {
+      iddom = this.list.get(index);
+      id = iddom.get('id');
+      target = getElement(id);
+      if (target) break;
+      else {
+        debug(`not found the ${id}`);
+      }
+      index -= 1;
     }
-    const iddom = this.list.get(index);
 
-    this.toggle(iddom.get('id'), index);
+    if (index < 0) {
+      // not found
+      index = this.list.size - 1;
+      iddom = this.list.get(index);
+      id = iddom.get('id');
+      target = getElement(id);
+    }
+    if (!target) {
+      return debug(`not found the ${id}`);
+    }
+
+    this.toggle(target, index);
   };
 
   next = () => {
     let { index } = this.state;
+    let id;
+    let iddom;
+    let target;
     index += 1;
-    if (index >= this.list.size) {
-      index = 0;
+    while (index < this.list.size) {
+      iddom = this.list.get(index);
+      id = iddom.get('id');
+      target = getElement(id);
+      if (target) break;
+      else {
+        debug(`not found the ${id}`);
+      }
+      index += 1;
     }
-    const iddom = this.list.get(index);
-    this.toggle(iddom.get('id'), index);
-  };
 
-  toggle = async (id, index) => {
-    const scrollOffset = 300;
-
-    const state = {};
-    const target = getElement(id);
+    if (index >= this.list.size) {
+      // not found
+      index = 0;
+      iddom = this.list.get(index);
+      id = iddom.get('id');
+      target = getElement(id);
+    }
     if (!target) {
       return debug(`not found the ${id}`);
     }
+    this.toggle(target, index);
+  };
+
+  toggle = async (target, index) => {
+    const { scrollOffset } = this.props;
+    const state = {};
     // const react = getRelativeClientRect(target);
     // const hasCustomScroll = hasCustomScrollParent(
     //   target /* disableScrollParentFix */
     // );
+    const disableScrollParentFix = true;
     const scrollParent = getScrollParent(target /* disableScrollParentFix */);
     let scrollY =
-      Math.floor(
-        getScrollTo(target, scrollOffset /* disableScrollParentFix */)
-      ) || 0;
+      Math.floor(getScrollTo(target, scrollOffset, disableScrollParentFix)) ||
+      0;
+    const top = getElementPosition(
+      target,
+      scrollOffset /* disableScrollParentFix */
+    );
     scrollY = scrollY >= 0 ? scrollY : 0;
 
     // document.body.style.overflow = 'visible';
-    scrollTo(scrollY, scrollParent);
+    scrollTo(top, scrollParent);
     // document.body.style.overflow = 'hidden';
     state.index = index;
     this.setState(state);

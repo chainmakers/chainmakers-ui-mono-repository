@@ -28,13 +28,13 @@ import {
   ORDER_BOB_SITE
 } from '../constants';
 
-describe('containers/DexPage/reducers/initial', () => {
+describe('containers/OrderPage/reducers/initial', () => {
   it('should return the initial state', () => {
     expect(buyReducer(undefined, {})).toEqual(initialState);
   });
 });
 
-describe('containers/DexPage/reducers/openJoyride', () => {
+describe('containers/OrderPage/reducers/openJoyride', () => {
   it('should handle the openJoyride action correctly', () => {
     const expectedResult = initialState.setIn(['joyride', 'open'], true);
 
@@ -42,7 +42,7 @@ describe('containers/DexPage/reducers/openJoyride', () => {
   });
 });
 
-describe('containers/DexPage/reducers/closeJoyride', () => {
+describe('containers/OrderPage/reducers/closeJoyride', () => {
   it('should handle the closeJoyride action correctly', () => {
     const expectedResult = initialState.setIn(['joyride', 'open'], true);
 
@@ -50,7 +50,7 @@ describe('containers/DexPage/reducers/closeJoyride', () => {
   });
 });
 
-describe('containers/DexPage/reducers/loadOrderbook', () => {
+describe('containers/OrderPage/reducers/loadOrderbook', () => {
   it('should handle the loadOrderbook action correctly', () => {
     const expectedResult = initialState
       .setIn(['orderbook', 'fetchStatus'], LOADING)
@@ -59,7 +59,7 @@ describe('containers/DexPage/reducers/loadOrderbook', () => {
   });
 });
 
-describe('containers/DexPage/reducers/skipOrderbook', () => {
+describe('containers/OrderPage/reducers/skipOrderbook', () => {
   it('should handle the skipOrderbook action correctly', () => {
     const expectedResult = initialState
       .setIn(['orderbook', 'fetchStatus'], LOADING)
@@ -72,7 +72,7 @@ describe('containers/DexPage/reducers/skipOrderbook', () => {
   });
 });
 
-describe('containers/DexPage/reducers/loadOrderbookSuccess', () => {
+describe('containers/OrderPage/reducers/loadOrderbookSuccess', () => {
   const payload = Object.assign({}, orderbook);
   const { base, rel } = payload;
   payload.bids.map(v => {
@@ -146,7 +146,7 @@ describe('containers/DexPage/reducers/loadOrderbookSuccess', () => {
   });
 });
 
-describe('containers/DexPage/reducers/loadOrderbookError', () => {
+describe('containers/OrderPage/reducers/loadOrderbookError', () => {
   const error = {
     context: {
       action: ORDERBOOK_LOAD
@@ -165,7 +165,7 @@ describe('containers/DexPage/reducers/loadOrderbookError', () => {
   });
 });
 
-describe('containers/DexPage/reducers/setNewOrder', () => {
+describe('containers/OrderPage/reducers/setNewOrder', () => {
   it('should handle the setNewOrder action correctly', () => {
     const expectedResult = initialState
       .setIn(['myorder', 'fetchStatus'], LOADING)
@@ -174,7 +174,7 @@ describe('containers/DexPage/reducers/setNewOrder', () => {
   });
 });
 
-describe('containers/DexPage/reducers/skipNewOrder', () => {
+describe('containers/OrderPage/reducers/skipNewOrder', () => {
   it('should handle the skipNewOrder action correctly', () => {
     const expectedResult = initialState
       .setIn(['myorder', 'fetchStatus'], LOADED)
@@ -183,7 +183,7 @@ describe('containers/DexPage/reducers/skipNewOrder', () => {
   });
 });
 
-describe('containers/DexPage/reducers/setNewOrderSuccess', () => {
+describe('containers/OrderPage/reducers/setNewOrderSuccess', () => {
   const { result } = setprice;
   result.address = 'address';
   result.id = 'address';
@@ -232,7 +232,7 @@ describe('containers/DexPage/reducers/setNewOrderSuccess', () => {
   });
 });
 
-describe('containers/DexPage/reducers/setNewOrderError', () => {
+describe('containers/OrderPage/reducers/setNewOrderError', () => {
   const error = {
     context: {
       action: NEW_ORDER_SET
@@ -251,7 +251,7 @@ describe('containers/DexPage/reducers/setNewOrderError', () => {
   });
 });
 
-describe('containers/DexPage/reducers/openConfirmNewOrderModal', () => {
+describe('containers/OrderPage/reducers/openConfirmNewOrderModal', () => {
   it('should handle the openConfirmNewOrderModal action correctly', () => {
     const expectedResult = initialState.setIn(
       ['confirmNewOrderModal', 'open'],
@@ -264,7 +264,7 @@ describe('containers/DexPage/reducers/openConfirmNewOrderModal', () => {
   });
 });
 
-describe('containers/DexPage/reducers/closeConfirmNewOrderModal', () => {
+describe('containers/OrderPage/reducers/closeConfirmNewOrderModal', () => {
   it('should handle the closeConfirmNewOrderModal action correctly', () => {
     const expectedResult = initialState.setIn(
       ['confirmNewOrderModal', 'open'],
@@ -277,7 +277,7 @@ describe('containers/DexPage/reducers/closeConfirmNewOrderModal', () => {
   });
 });
 
-describe('containers/DexPage/reducers/reloadOrderbookSuccess', () => {
+describe('containers/OrderPage/reducers/reloadOrderbookSuccess', () => {
   it('should handle the reloadOrderbookSuccess action correctly', () => {
     const expectedResult = initialState.setIn(
       ['myorder', 'fetchStatus'],
@@ -290,7 +290,7 @@ describe('containers/DexPage/reducers/reloadOrderbookSuccess', () => {
   });
 });
 
-describe('containers/DexPage/reducers/openCancelingOrderModal', () => {
+describe('containers/OrderPage/reducers/openCancelingOrderModal', () => {
   const id = 'id';
   it('should handle the openCancelingOrderModal action correctly', () => {
     const expectedResult = initialState
@@ -303,7 +303,7 @@ describe('containers/DexPage/reducers/openCancelingOrderModal', () => {
   });
 });
 
-describe('containers/DexPage/reducers/closeCancelingOrderModal', () => {
+describe('containers/OrderPage/reducers/closeCancelingOrderModal', () => {
   it('should handle the closeCancelingOrderModal action correctly', () => {
     const expectedResult = initialState.setIn(
       ['cancelingOrderModal', 'open'],

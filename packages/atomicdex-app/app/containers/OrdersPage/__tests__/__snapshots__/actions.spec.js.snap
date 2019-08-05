@@ -1,38 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`containers/DexPage/actions/closeDetailModal should closeDetailModal should create closeDetailModal action 1`] = `
+exports[`containers/OrderPage/actions/closeDetailModal should closeDetailModal should create closeDetailModal action 1`] = `
 Object {
-  "type": "atomicapp/DexPage/SWAP_DETAIL_MODAL_CLOSE",
+  "type": "atomicapp/OrderPage/SWAP_DETAIL_MODAL_CLOSE",
 }
 `;
 
-exports[`containers/DexPage/actions/closeJoyride should closeJoyride should create closeJoyride action 1`] = `
+exports[`containers/OrderPage/actions/closeJoyride should closeJoyride should create closeJoyride action 1`] = `
 Object {
-  "type": "atomicapp/DexPage/JOYRIDE_CLOSE",
+  "type": "atomicapp/OrderPage/JOYRIDE_CLOSE",
 }
 `;
 
-exports[`containers/DexPage/actions/openDetailModal should openDetailModal should create openDetailModal action 1`] = `
+exports[`containers/OrderPage/actions/openDetailModal should openDetailModal should create openDetailModal action 1`] = `
 Object {
   "payload": Object {
     "uuid": undefined,
   },
-  "type": "atomicapp/DexPage/SWAP_DETAIL_MODAL_OPEN",
+  "type": "atomicapp/OrderPage/SWAP_DETAIL_MODAL_OPEN",
 }
 `;
 
-exports[`containers/DexPage/actions/openDetailModal should openDetailModal should create openDetailModal action 2`] = `
+exports[`containers/OrderPage/actions/openDetailModal should openDetailModal should create openDetailModal action 2`] = `
 Object {
   "payload": Object {
     "uuid": "uuid",
   },
-  "type": "atomicapp/DexPage/SWAP_DETAIL_MODAL_OPEN",
+  "type": "atomicapp/OrderPage/SWAP_DETAIL_MODAL_OPEN",
 }
 `;
 
-exports[`containers/DexPage/actions/openJoyride should openJoyride should create openJoyride action 1`] = `
+exports[`containers/OrderPage/actions/openJoyride should openJoyride should create openJoyride action 1`] = `
 Object {
-  "type": "atomicapp/DexPage/JOYRIDE_OPEN",
+  "type": "atomicapp/OrderPage/JOYRIDE_OPEN",
 }
 `;
 

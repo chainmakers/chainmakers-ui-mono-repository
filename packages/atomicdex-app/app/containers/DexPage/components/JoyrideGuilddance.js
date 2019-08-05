@@ -32,6 +32,7 @@ class JoyrideGuilddance extends React.PureComponent<IJoyrideGuilddanceProps> {
       <JoyrideModal
         dispatchCloseJoyride={dispatchCloseJoyride}
         joyrideState={joyrideState}
+        scrollOffset="230"
       >
         {/* <JoyrideStepper
           id="#asset-portfolio-tab-BTC"
@@ -44,7 +45,7 @@ class JoyrideGuilddance extends React.PureComponent<IJoyrideGuilddanceProps> {
         />
         <JoyrideStepper
           id="#payment-section-placeorder-dexpage"
-          title="Step 2: Select the coin in payment section that you want to exchange"
+          title="Step 2: Select the coin in deposit section that you want to exchange"
         />
         <JoyrideStepper
           id="#amount-section-placeorder-dexpage"

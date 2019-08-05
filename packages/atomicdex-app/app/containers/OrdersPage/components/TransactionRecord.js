@@ -10,7 +10,7 @@ import getCoinMemoize from '../../../components/CryptoIcons';
 import { STATE_SWAPS } from '../constants';
 
 const debug = require('debug')(
-  'atomicapp:containers:DexPage:TransactionRecord'
+  'atomicapp:containers:OrderPage:TransactionRecord'
 );
 
 type Props = {
