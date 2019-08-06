@@ -26,6 +26,7 @@ import { BuyButton } from 'barterdex-components';
 import explorer from '../../lib/explorer';
 import openNewWindow from '../../utils/openNewWindow';
 import getCoinMemoize from '../../components/CryptoIcons';
+import ExplorerLink from '../../components/ExplorerLink';
 import CoinSelectable from '../../components/CoinSelectable';
 import { STATE_SWAPS, FINISHED_SWAPS_STATE } from '../../constants';
 import { SWAP_TX_DEFAULT } from './constants';
@@ -202,13 +203,12 @@ export class SwapDetail extends React.PureComponent<Props> {
     let link = emptyLink;
     if (tx !== SWAP_TX_DEFAULT) {
       link = (
-        <a
-          href={explorer.tx(tx, coin)}
-          onClick={this.openExplorer}
+        <ExplorerLink
+          tx={tx}
+          symbol={coin}
           className={classes.amountform__uuidlink}
-        >
-          Open TX in block explorer
-        </a>
+          content="Open TX in block explorer"
+        />
       );
     }
     return this.renderTXLink(
@@ -226,13 +226,12 @@ export class SwapDetail extends React.PureComponent<Props> {
     let link = emptyLink;
     if (tx !== SWAP_TX_DEFAULT) {
       link = (
-        <a
-          href={explorer.tx(tx, coin)}
-          onClick={this.openExplorer}
+        <ExplorerLink
+          tx={tx}
+          symbol={coin}
           className={classes.amountform__uuidlink}
-        >
-          Open TX in block explorer
-        </a>
+          content="Open TX in block explorer"
+        />
       );
     }
     return this.renderTXLink(
@@ -250,13 +249,12 @@ export class SwapDetail extends React.PureComponent<Props> {
     let link = emptyLink;
     if (tx !== SWAP_TX_DEFAULT) {
       link = (
-        <a
-          href={explorer.tx(tx, coin)}
-          onClick={this.openExplorer}
+        <ExplorerLink
+          tx={tx}
+          symbol={coin}
           className={classes.amountform__uuidlink}
-        >
-          Open TX in block explorer
-        </a>
+          content="Open TX in block explorer"
+        />
       );
     }
     return this.renderTXLink(
@@ -274,13 +272,12 @@ export class SwapDetail extends React.PureComponent<Props> {
     let link = emptyLink;
     if (tx !== SWAP_TX_DEFAULT) {
       link = (
-        <a
-          href={explorer.tx(tx, coin)}
-          onClick={this.openExplorer}
+        <ExplorerLink
+          tx={tx}
+          symbol={coin}
           className={classes.amountform__uuidlink}
-        >
-          Open TX in block explorer
-        </a>
+          content="Open TX in block explorer"
+        />
       );
     }
     return this.renderTXLink(
@@ -299,13 +296,12 @@ export class SwapDetail extends React.PureComponent<Props> {
 
     if (tx !== SWAP_TX_DEFAULT) {
       link = (
-        <a
-          href={explorer.tx(tx, coin)}
-          onClick={this.openExplorer}
+        <ExplorerLink
+          tx={tx}
+          symbol={coin}
           className={classes.amountform__uuidlink}
-        >
-          Open TX in block explorer
-        </a>
+          content="Open TX in block explorer"
+        />
       );
     }
     return this.renderTXLink(

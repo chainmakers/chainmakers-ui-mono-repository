@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import ClassNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import explorer from '../../lib/explorer';
 import openNewWindow from '../../utils/openNewWindow';
@@ -16,12 +17,14 @@ const useStyles = makeStyles(theme => ({
 type IExplorerLinkProps = {
   symbol: string,
   address?: string,
-  tx?: string
+  tx?: string,
+  content?: string,
+  className?: string
 };
 
 function ExplorerLink(props: IExplorerLinkProps) {
   const classes = useStyles();
-  const { address, tx, symbol } = props;
+  const { address, tx, symbol, content, className, ...other } = props;
 
   const openExplorer = (evt: SyntheticInputEvent<*>) => {
     evt.preventDefault();
@@ -35,9 +38,10 @@ function ExplorerLink(props: IExplorerLinkProps) {
         address ? explorer.address(address, symbol) : explorer.tx(tx, symbol)
       }
       onClick={openExplorer}
-      className={classes.root}
+      className={ClassNames(classes.root, className)}
+      {...other}
     >
-      {address || tx}
+      {content || (address || tx)}
     </a>
   );
 }
