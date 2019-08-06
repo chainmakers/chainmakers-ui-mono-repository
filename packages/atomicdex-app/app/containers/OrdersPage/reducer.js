@@ -1,4 +1,5 @@
 /* eslint-disable no-case-declarations, no-param-reassign */
+import concat from 'lodash/concat';
 import { fromJS } from 'immutable';
 import { floor } from 'barterdex-utilities';
 import { handleActions } from 'redux-actions';
@@ -26,8 +27,6 @@ import {
   NEW_ORDER_SET_ERROR,
   CONFIRM_NEW_ORDER_MODAL_OPEN,
   CONFIRM_NEW_ORDER_MODAL_CLOSE,
-  ORDER_BOB_SITE,
-  ORDER_ALICE_SITE,
   CANCELING_ORDER_MODAL_OPEN,
   CANCELING_ORDER_MODAL_CLOSE,
   NEW_ORDER_CANCEL,
@@ -165,8 +164,11 @@ export default handleActions(
 
     [ORDERBOOK_LOAD_SUCCESS]: (state, { payload }) => {
       const { asks, bids } = payload;
-      const bidsList = [];
-      const asksList = [];
+      const list = concat(asks, bids);
+      console.log(list, 'list');
+      // const bidsList = [];
+      // const asksList = [];
+      const sortedList = [];
       let orders = state.get('orders');
 
       // step one: update order
@@ -183,12 +185,13 @@ export default handleActions(
           id,
           ...meta
         } = v;
-        if (type === ORDER_BOB_SITE) {
-          asksList.push(id);
-        }
-        if (type === ORDER_ALICE_SITE) {
-          bidsList.push(id);
-        }
+        // if (type === ORDER_BOB_SIDE) {
+        //   asksList.push(id);
+        // }
+        // if (type === ORDER_ALICE_SIDE) {
+        //   bidsList.push(id);
+        // }
+        sortedList.push(id);
         let entity = orders.find(obj => obj.get('id') === id);
 
         if (entity) {
@@ -230,9 +233,11 @@ export default handleActions(
         return a.price < b.price;
       }
 
-      asks.sort(sort).map(addOrdersEntities);
+      // asks.sort(sort).map(addOrdersEntities);
 
-      bids.sort(sort).map(addOrdersEntities);
+      // bids.sort(sort).map(addOrdersEntities);
+
+      list.sort(sort).map(addOrdersEntities);
 
       state = state.set('orders', orders);
 
@@ -240,8 +245,8 @@ export default handleActions(
 
       return state
         .setIn(['orderbook', 'fetchStatus'], LOADED)
-        .setIn(['orderbook', 'asks'], fromJS(asksList))
-        .setIn(['orderbook', 'bids'], fromJS(bidsList));
+        .setIn(['orderbook', 'asks'], fromJS(sortedList))
+        .setIn(['orderbook', 'bids'], fromJS(sortedList));
     },
 
     [ORDERBOOK_LOAD_ERROR]: (state, { error }) =>

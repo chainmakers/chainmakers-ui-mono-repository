@@ -5,7 +5,7 @@ import { CANCEL, delay } from 'redux-saga';
 import api from 'utils/barterdex-api';
 import { openSnackbars } from '../../Snackbars/actions';
 import { makeSelectBalanceEntities } from '../../App/selectors';
-import { ORDER_BOB_SITE, ORDER_ALICE_SITE } from '../constants';
+import { ORDER_BOB_SIDE, ORDER_ALICE_SIDE } from '../constants';
 import {
   makeSelectOrderbookDeposit,
   makeSelectOrderbookRecevie
@@ -52,14 +52,14 @@ export function* listenForReloadingOrderbook(action, timeout = 60) {
         v.base = recevie;
         v.rel = deposit;
         v.id = `${v.address}-${deposit}-${recevie}`;
-        v.type = ORDER_ALICE_SITE;
+        v.type = ORDER_ALICE_SIDE;
         return v;
       });
       result.asks.map(v => {
         v.base = recevie;
         v.rel = deposit;
         v.id = `${v.address}-${deposit}-${recevie}`;
-        v.type = ORDER_BOB_SITE;
+        v.type = ORDER_BOB_SIDE;
         return v;
       });
       yield put(loadOrderbookSuccess(result));
@@ -114,14 +114,14 @@ export default function* listenForLoadingOrderbook(action) {
       v.base = recevie;
       v.rel = deposit;
       v.id = `${v.address}-${deposit}-${recevie}`;
-      v.type = ORDER_ALICE_SITE;
+      v.type = ORDER_ALICE_SIDE;
       return v;
     });
     result.asks.map(v => {
       v.base = recevie;
       v.rel = deposit;
       v.id = `${v.address}-${deposit}-${recevie}`;
-      v.type = ORDER_BOB_SITE;
+      v.type = ORDER_BOB_SIDE;
       return v;
     });
     return yield put(loadOrderbookSuccess(result));

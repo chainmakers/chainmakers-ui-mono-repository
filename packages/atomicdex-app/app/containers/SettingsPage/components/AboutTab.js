@@ -19,14 +19,9 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import api from 'utils/barterdex-api';
 import PageSectionTitle from '../../../components/PageSectionTitle';
 import { version } from '../../../../package.json';
-import {
-  openApplicationDialog,
-  openMM2Dialog,
-  setMM2Version
-} from '../actions';
+import { openApplicationDialog, openMM2Dialog } from '../actions';
 import { useSettingsContext } from '../reducer';
 import { selectMM2Version } from '../selectors';
 
@@ -44,9 +39,9 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-type IAboutTabProps = {};
+// type IAboutTabProps = {};
 
-function AboutTab(props: IAboutTabProps) {
+function AboutTab() {
   const classes = useStyles();
 
   const [state, dispatch] = useSettingsContext();

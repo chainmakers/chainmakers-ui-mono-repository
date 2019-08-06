@@ -5,7 +5,7 @@ import { floor } from 'barterdex-utilities';
 import api from 'utils/barterdex-api';
 import { openSnackbars } from '../../Snackbars/actions';
 import { makeSelectBalanceEntities } from '../../App/selectors';
-import { ORDER_ALICE_SITE } from '../constants';
+import { ORDER_ALICE_SIDE } from '../constants';
 import {
   makeSelectOrderbookDeposit,
   makeSelectOrderbookRecevie
@@ -77,7 +77,7 @@ export default function* listenForCreatingNewOrder({ type, payload }) {
     }
     result.address = address;
     result.id = `${address}-${deposit}-${recevie}`;
-    result.type = ORDER_ALICE_SITE;
+    result.type = ORDER_ALICE_SIDE;
     yield put(setNewOrderSuccess(result));
     yield put(reloadOrderbook());
   } catch (err) {

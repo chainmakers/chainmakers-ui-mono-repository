@@ -17,6 +17,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import { LOADING } from '../../../constants';
 import getCoinMemoize from '../../../components/CryptoIcons';
+import ExplorerLink from '../../../components/ExplorerLink';
 import { covertSymbolToName } from '../../../utils/coin';
 import {
   makeSelectBalanceFetchStatus,
@@ -27,8 +28,9 @@ import {
   makeSelectOrderbookRecevie
 } from '../selectors';
 import { openDetailModal, openCancelingOrderModal } from '../actions';
+import { ORDER_BOB_SIDE, ORDER_ALICE_SIDE } from '../constants';
 
-const debug = require('debug')('atomicapp:containers:OrdersPage:Asset');
+const debug = require('debug')('atomicapp:containers:OrdersPage:Order');
 
 const styles = theme => ({
   wallet__card: {
@@ -138,6 +140,11 @@ const styles = theme => ({
   root__orderSelected: {
     // backgroundColor: '#80BB41',
     border: '1px solid #80BB41'
+  },
+
+  amountform__uuidlink: {
+    textDecoration: 'none',
+    color: theme.palette.primary.main
   }
 });
 
@@ -160,26 +167,10 @@ type IOrderProps = {
   recevie: Map<*, *>
 };
 
-type IOrderState = {
-  hover: boolean
-};
+type IOrderState = {};
 
 class Order extends React.PureComponent<IOrderProps, IOrderState> {
   static displayName = 'Order';
-
-  state = {
-    hover: false
-  };
-
-  toggleHoverOpen = () => {
-    const { hover } = this.state;
-    if (!hover) this.setState({ hover: true });
-  };
-
-  toggleHoverClose = () => {
-    const { hover } = this.state;
-    if (hover) this.setState({ hover: false });
-  };
 
   onClickDetailButton = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
@@ -196,7 +187,7 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
   renderActions = () => {
     const { classes, data, error, fetchStatus, selected } = this.props;
     const loading = fetchStatus === LOADING;
-    const symbol = data.get('base');
+    const id = data.get('id');
 
     return error ? (
       <Button
@@ -213,24 +204,11 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
       </Button>
     ) : (
       <React.Fragment>
-        {/* <Button
-          id={`more-detail-button-sellorder-tab-${symbol}`}
-          disabled={loading}
-          className={ClassNames(
-            classes.wallet__button,
-            classes.wallet__firstButton
-          )}
-          size="small"
-          color="primary"
-          onClick={this.onClickDetailButton}
-        >
-          More Detail
-        </Button> */}
-        {selected && (
+        {selected ? (
           <>
             {/* <div className={classes.wallet__buttonBorder} /> */}
             <Button
-              id={`cancel-order-button-sellorder-tab-${symbol}`}
+              id={`cancel-order-button-sellorder-tab-${id}`}
               disabled={loading}
               className={ClassNames(
                 classes.wallet__button,
@@ -243,6 +221,20 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
               Cancel Order
             </Button>
           </>
+        ) : (
+          <Button
+            id={`copy-button-sellorder-tab-${id}`}
+            disabled={loading}
+            className={ClassNames(
+              classes.wallet__button,
+              classes.wallet__firstButton
+            )}
+            size="small"
+            color="primary"
+            onClick={this.onClickDetailButton}
+          >
+            Copy
+          </Button>
         )}
       </React.Fragment>
     );
@@ -253,7 +245,8 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
 
     const { classes, error, data, deposit, recevie, selected } = this.props;
     const isError = !!error;
-    const symbol = data.get('rel');
+    const symbol =
+      data.get('type') === ORDER_BOB_SIDE ? data.get('base') : data.get('rel');
 
     return (
       <Card
@@ -262,10 +255,6 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
           [classes.wallet__error]: isError,
           [classes.root__orderSelected]: selected
         })}
-        onMouseOver={this.toggleHoverOpen}
-        onMouseLeave={this.toggleHoverClose}
-        onFocus={this.toggleHoverOpen}
-        onBlur={this.toggleHoverClose}
       >
         {selected && (
           <CheckCircleOutlineIcon className={classes.root__selected} />
@@ -282,7 +271,9 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
           }}
           action={getCoinMemoize(symbol, 40, 40)}
           title={covertSymbolToName(symbol)}
-          subheader={data.get('address')}
+          subheader={
+            <ExplorerLink address={data.get('address')} symbol={symbol} />
+          }
         />
         <CardContent className={classes.wallet__content}>
           <Typography
@@ -291,7 +282,7 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
               [classes.wallet__textWhite]: isError
             })}
           >
-            {data.get('maxvolume')} {symbol}
+            {floor(data.get('maxvolume'), 8)} {symbol}
           </Typography>
           <Typography
             variant="body1"

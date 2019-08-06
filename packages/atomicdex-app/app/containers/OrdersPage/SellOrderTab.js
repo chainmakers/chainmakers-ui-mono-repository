@@ -27,6 +27,7 @@ import DepositSection from './components/DepositSection';
 import RecevieSection from './components/RecevieSection';
 
 import Order from './components/Order';
+import OrderItem from './components/OrderItem';
 import {
   loadOrderbook,
   closeDepositCoinModal,
@@ -364,6 +365,7 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
                       selected={myOrderList.contains(order.get('id'))}
                       data={order}
                     />
+                    {/* <OrderItem /> */}
                     <br />
                   </>
                 ))}

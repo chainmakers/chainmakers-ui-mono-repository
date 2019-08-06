@@ -90,8 +90,8 @@ export const CONFIRM_NEW_ORDER_MODAL_OPEN =
 export const CONFIRM_NEW_ORDER_MODAL_CLOSE =
   'atomicapp/OrdersPage/CONFIRM_NEW_ORDER_MODAL_CLOSE';
 
-export const ORDER_BOB_SITE = 'ORDER_BOB_SITE';
-export const ORDER_ALICE_SITE = 'ORDER_ALICE_SITE';
+export const ORDER_BOB_SIDE = 'ORDER_BOB_SIDE';
+export const ORDER_ALICE_SIDE = 'ORDER_ALICE_SIDE';
 
 // Canceling Order Modal
 export const CANCELING_ORDER_MODAL_OPEN =
