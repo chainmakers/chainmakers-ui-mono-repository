@@ -4,6 +4,19 @@ import { handleActions } from 'redux-actions';
 import { LOGOUT } from '../App/constants';
 // import logger from '../../logger';
 import {
+  // NEGOTIATED_SWAPS_STATE,
+  STARTED_SWAPS_STATE,
+  TAKER_PAYMENT_SENT_SWAPS_STATE,
+  TAKER_FEE_SENT_SWAPS_STATE,
+  MAKER_PAYMENT_RECEIVED_SWAPS_STATE,
+  MAKER_PAYMENT_SPENT_SWAPS_STATE,
+  TAKER_PAYMENT_SPENT_SWAPS_STATE,
+  FINISHED_SWAPS_STATE,
+  STATE_FAILED_SWAPS,
+  STATE_FAILED_SWAPS_MESSAGE
+} from '../../constants';
+
+import {
   LOAD_PRICES,
   LOAD_BEST_PRICE,
   LOAD_PRICES_SUCCESS,
@@ -25,15 +38,7 @@ import {
   SELECT_COIN_MODAL_CLICK,
   COIN_PAYMENT_SELECT,
   JOYRIDE_OPEN,
-  JOYRIDE_CLOSE,
-  STARTED_SWAPS_STATE,
-  // NEGOTIATED_SWAPS_STATE,
-  TAKER_FEE_SENT_SWAPS_STATE,
-  MAKER_PAYMENT_RECEIVED_SWAPS_STATE,
-  TAKER_PAYMENT_SENT_SWAPS_STATE,
-  MAKER_PAYMENT_SPENT_SWAPS_STATE,
-  TAKER_PAYMENT_SPENT_SWAPS_STATE,
-  FINISHED_SWAPS_STATE
+  JOYRIDE_CLOSE
 } from './constants';
 
 // The initial state of the App
@@ -284,6 +289,17 @@ export default handleActions(
           bobpayment = bobpayment.set('coin', entity.get('bob'));
           // bobpayment = alicepayment.set('value', my_balance_change);
           entity = entity.set('bobpayment', bobpayment);
+        }
+
+        // ERROR
+        if (STATE_FAILED_SWAPS.indexOf(event.type) !== -1) {
+          console.error(event.data.error);
+          entity = entity.set(
+            'error',
+            fromJS({
+              message: STATE_FAILED_SWAPS_MESSAGE[event.type]
+            })
+          );
         }
 
         if (event.type === FINISHED_SWAPS_STATE) {
