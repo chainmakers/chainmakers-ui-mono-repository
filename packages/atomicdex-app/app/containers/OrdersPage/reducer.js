@@ -227,7 +227,7 @@ export default handleActions(
 
       function sort(a, b) {
         if (a.price === b.price) return a.maxvolume < b.maxvolume;
-        return a.price > b.price;
+        return a.price < b.price;
       }
 
       asks.sort(sort).map(addOrdersEntities);

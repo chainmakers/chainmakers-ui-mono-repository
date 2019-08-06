@@ -6,6 +6,7 @@ import { compose } from 'redux';
 import type { Dispatch } from 'redux';
 import type { List, Map } from 'immutable';
 import { createSelector } from 'reselect';
+import { floor } from 'barterdex-utilities';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -299,7 +300,7 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
               color: 'rgba(0, 0, 0, 0.54)'
             }}
           >
-            {data.get('price')} {deposit} = 1 {recevie}
+            {floor(data.get('price'), 8)} {deposit} = 1 {recevie}
           </Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
