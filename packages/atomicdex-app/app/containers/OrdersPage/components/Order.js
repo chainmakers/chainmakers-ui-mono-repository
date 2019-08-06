@@ -140,11 +140,6 @@ const styles = theme => ({
   root__orderSelected: {
     // backgroundColor: '#80BB41',
     border: '1px solid #80BB41'
-  },
-
-  amountform__uuidlink: {
-    textDecoration: 'none',
-    color: theme.palette.primary.main
   }
 });
 
