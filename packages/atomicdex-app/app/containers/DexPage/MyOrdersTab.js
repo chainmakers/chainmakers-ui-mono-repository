@@ -10,6 +10,7 @@ import { FormattedMessage } from 'react-intl';
 // import { FormattedMessage } from 'react-intl';
 import Grid from '@material-ui/core/Grid';
 import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
 import MDCList from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import CloudOff from '@material-ui/icons/CloudOff';
@@ -68,7 +69,9 @@ type Props = {
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchOpenDetailModal: Function,
   // eslint-disable-next-line flowtype/no-weak-types
-  dispatchCloseDetailModal: Function
+  dispatchCloseDetailModal: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  handleChangeTab: Function
 };
 
 class MyOrders extends React.PureComponent<Props> {
@@ -83,6 +86,12 @@ class MyOrders extends React.PureComponent<Props> {
     evt.preventDefault();
     const { dispatchCloseDetailModal } = this.props;
     dispatchCloseDetailModal();
+  };
+
+  onGotoPlaceOrderTab = (evt: SyntheticInputEvent<>) => {
+    evt.preventDefault();
+    const { handleChangeTab } = this.props;
+    handleChangeTab(event, 0);
   };
 
   renderSwap = swap => (
@@ -132,9 +141,15 @@ class MyOrders extends React.PureComponent<Props> {
     const hasData = finishedSwaps.size > 0;
     if (!hasData)
       return this.renderEmptyState(
-        <FormattedMessage id="atomicapp.containers.DexPage.empty_message_in_history">
-          {(...content) => content}
-        </FormattedMessage>
+        <>
+          <FormattedMessage id="atomicapp.containers.DexPage.empty_message_in_history">
+            {(...content) => content}
+          </FormattedMessage>
+          <br />
+          <Button color="primary" onClick={this.onGotoPlaceOrderTab}>
+            go to place order tab
+          </Button>
+        </>
       );
     return <MDCList>{finishedSwaps.map(this.renderSwap)}</MDCList>;
   };
