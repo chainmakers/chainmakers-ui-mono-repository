@@ -16,7 +16,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 type IWarningPlateProps = {
-  symbol: string,
   className?: string,
   children: Object
 };
