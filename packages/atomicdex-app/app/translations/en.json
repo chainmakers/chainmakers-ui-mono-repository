@@ -1,24 +1,27 @@
 {
   "atomicapp.containers.DexPage.title": "Swap",
   "atomicapp.containers.DexPage.currency": "Receive",
-  "atomicapp.containers.DexPage.payment": "Deposit",
+  "atomicapp.containers.DexPage.payment": "Send",
   "atomicapp.containers.DexPage.amount": "Amount",
   "atomicapp.containers.DexPage.swap_warning_message": "The swap is ongoing, don't exit the application",
-  "atomicapp.containers.DexPage.select_payment": "SELECT YOUR PAYMENT",
-  "atomicapp.containers.DexPage.select_currency": "SELECT YOUR CURRENCY",
+  "atomicapp.containers.DexPage.select_payment": "SELECT YOUR SENDING COIN",
+  "atomicapp.containers.DexPage.select_currency": "SELECT YOUR RECEIVING COIN",
   "atomicapp.containers.DexPage.swap_successful_message": "Click here to make another swap",
   "atomicapp.containers.DexPage.execute_buy": "Swap",
   "atomicapp.containers.DexPage.loading": "Loading...",
+
   "atomicapp.containers.OrderPage.title": "Orders",
-  "atomicapp.containers.OrderPage.deposit": "Deposit",
+  "atomicapp.containers.OrderPage.deposit": "Send",
   "atomicapp.containers.OrderPage.receive": "Receive",
   "atomicapp.containers.OrderPage.orderbook": "Orderbook",
   "atomicapp.containers.OrderPage.warning": "Your order will only be visible to others while the app is running. Once you close Chainswap, your order disappears.",
+
   "atomicapp.containers.Drawer.wallet": "Wallet",
   "atomicapp.containers.Drawer.buy": "Swap",
   "atomicapp.containers.Drawer.order": "Sell",
   "atomicapp.containers.Drawer.help": "Help",
   "atomicapp.containers.Drawer.settings": "Settings",
+
   "atomicapp.containers.Wallet.title": "Wallet",
   "atomicapp.containers.Wallet.overview": "Overview",
   "atomicapp.containers.Wallet.deposit_address": "Your deposit address",
@@ -27,13 +30,17 @@
   "atomicapp.containers.Wallet.last_transactions_coin": "Coin",
   "atomicapp.containers.Wallet.last_transactions_blockheight": "Block height",
   "atomicapp.containers.Wallet.last_transactions_transactionid": "Transaction id",
+
   "atomicapp.containers.Settings.title": "Settings",
+
   "atomicapp.containers.HelpPage.title": "Help",
+
   "atomicapp.containers.LoginPage.headline": "Welcome to Chainswap",
   "atomicapp.containers.LoginPage.subheading": "Please type in your Seed to Login to your existing Account",
   "atomicapp.containers.LoginPage.submit": "Log In",
   "atomicapp.containers.LoginPage.new_account": "Click Here to Create a New Account",
   "atomicapp.containers.LoginPage.login_successful_message": "Welcome to the Chainswap",
+
   "atomicapp.containers.SeedPage.title": "Generate a new Passphrase/Seed",
   "atomicapp.containers.SeedPage.instructions": "Click on Generate to create your New Account details. Once your new login data is generated and shown in the box below please back up your Seed and your WIF key to a secure place. Without this data you will NOT be able to access your funds/tokens.. If your lose your Seed you will also lose all your funds/addresses associated with this Seed. The Seed is the password that gains you access to your funds/tokens on the blockchain.",
   "atomicapp.containers.SeedPage.copy": "Seed (click to copy)",
@@ -41,6 +48,7 @@
   "atomicapp.containers.SeedPage.Passphrase.generate": "Generate",
   "atomicapp.containers.SeedPage.Passphrase.copy_seed": "Copy Seed to clipboard",
   "atomicapp.containers.SeedPage.Passphrase.reveal_wif": "Reveal private WIF key",
+
   "atomicapp.containers.LogoutDialog.title": "Logout!",
   "atomicapp.containers.LogoutDialog.description": "Are you sure you want to logout?",
   "atomicapp.containers.LogoutDialog.cancel": "Cancel",

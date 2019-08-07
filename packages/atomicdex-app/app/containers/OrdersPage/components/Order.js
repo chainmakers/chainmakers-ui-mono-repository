@@ -199,7 +199,7 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
       </Button>
     ) : (
       <React.Fragment>
-        {selected ? (
+        {selected && (
           <>
             {/* <div className={classes.wallet__buttonBorder} /> */}
             <Button
@@ -216,7 +216,8 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
               Cancel Order
             </Button>
           </>
-        ) : (
+        )}
+        {/**  (
           <Button
             id={`copy-button-sellorder-tab-${id}`}
             disabled={loading}
@@ -230,7 +231,7 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
           >
             Copy
           </Button>
-        )}
+        )* */}
       </React.Fragment>
     );
   };
