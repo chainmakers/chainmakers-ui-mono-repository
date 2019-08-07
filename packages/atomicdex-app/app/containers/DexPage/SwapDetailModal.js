@@ -2,6 +2,7 @@
 import React from 'react';
 import type { Node } from 'react';
 // import ClassNames from 'classnames';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import type { Dispatch } from 'redux';
@@ -335,7 +336,11 @@ export class SwapDetail extends React.PureComponent<Props> {
               <CoinSelectable
                 className={classes.swapform_button}
                 icon={getCoinMemoize(swap.get('alice'))}
-                title="Deposit"
+                title={
+                  <FormattedMessage id="atomicapp.containers.DexPage.payment">
+                    {(...content) => content}
+                  </FormattedMessage>
+                }
                 subTitle={
                   <span className={classes.swapDetail__danger}>
                     {swap.get('aliceamount')} {swap.get('alice')}
@@ -352,7 +357,11 @@ export class SwapDetail extends React.PureComponent<Props> {
               <CoinSelectable
                 className={classes.swapform_button}
                 icon={getCoinMemoize(swap.get('bob'))}
-                title="Receive"
+                title={
+                  <FormattedMessage id="atomicapp.containers.DexPage.currency">
+                    {(...content) => content}
+                  </FormattedMessage>
+                }
                 subTitle={
                   <span className={classes.swapDetail__success}>
                     {swap.get('bobamount')} {swap.get('bob')}
