@@ -6,6 +6,7 @@ import type { Dispatch } from 'redux';
 import type { List } from 'immutable';
 import { createStructuredSelector } from 'reselect';
 import { withStyles } from '@material-ui/core/styles';
+import { FormattedMessage } from 'react-intl';
 // import { FormattedMessage } from 'react-intl';
 import Grid from '@material-ui/core/Grid';
 import CardContent from '@material-ui/core/CardContent';
@@ -92,7 +93,7 @@ class MyOrders extends React.PureComponent<Props> {
     />
   );
 
-  renderEmptyState = () => {
+  renderEmptyState = message => {
     const { classes } = this.props;
     return (
       <React.Fragment>
@@ -108,7 +109,7 @@ class MyOrders extends React.PureComponent<Props> {
           gutterBottom
           className={classes.swapform__emptystate}
         >
-          No data found. Please start making a swap.
+          {message}
         </Typography>
       </React.Fragment>
     );
@@ -117,14 +118,24 @@ class MyOrders extends React.PureComponent<Props> {
   renderCurrentSwaps = () => {
     const { currentSwaps } = this.props;
     const hasData = currentSwaps.size > 0;
-    if (!hasData) return this.renderEmptyState();
+    if (!hasData)
+      return this.renderEmptyState(
+        <FormattedMessage id="atomicapp.containers.DexPage.empty_message_in_swap_in_progress">
+          {(...content) => content}
+        </FormattedMessage>
+      );
     return <MDCList>{currentSwaps.map(this.renderSwap)}</MDCList>;
   };
 
   renderfinishedSwaps = () => {
     const { finishedSwaps } = this.props;
     const hasData = finishedSwaps.size > 0;
-    if (!hasData) return this.renderEmptyState();
+    if (!hasData)
+      return this.renderEmptyState(
+        <FormattedMessage id="atomicapp.containers.DexPage.empty_message_in_history">
+          {(...content) => content}
+        </FormattedMessage>
+      );
     return <MDCList>{finishedSwaps.map(this.renderSwap)}</MDCList>;
   };
 

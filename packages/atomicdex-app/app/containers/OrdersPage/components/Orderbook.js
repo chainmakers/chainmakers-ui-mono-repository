@@ -63,7 +63,9 @@ function Orderbook(props: IOrderbookProps) {
           gutterBottom
           className={classes.root__emptystate}
         >
-          No data found. Please start making a swap.
+          <FormattedMessage id="atomicapp.containers.OrderPage.empty_message_in_orderbook">
+            {(...content) => content}
+          </FormattedMessage>
         </Typography>
       </React.Fragment>
     );
