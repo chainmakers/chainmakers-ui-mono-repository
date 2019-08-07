@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { APP_STATE_NAME } from './constants';
+import { APP_STATE_NAME, ORDER_BOB_SIDE, ORDER_ALICE_SIDE } from './constants';
 
 const selectOrder = state => state.get(APP_STATE_NAME);
 
@@ -81,30 +81,29 @@ const makeSelectOrderbookRecevie = () =>
     orderbook => orderbook.get('recevie')
   );
 
-const makeSelectOrderbookAsks = () =>
+const makeSelectOrderbookList = () =>
   createSelector(
     makeSelectOrderbook(),
-    orderbook => orderbook.get('asks')
+    orderbook => orderbook.get('list')
   );
 
-const makeSelectOrderbookBids = () =>
+const makeSelectOrderbookFullList = () =>
   createSelector(
-    makeSelectOrderbook(),
-    orderbook => orderbook.get('bids')
+    makeSelectOrderbookList(),
+    makeSelectOrders(),
+    (list, orders) => list.map(id => orders.get(id))
   );
 
 const makeSelectOrderbookAsksFullList = () =>
   createSelector(
-    makeSelectOrderbookAsks(),
-    makeSelectOrders(),
-    (asks, orders) => asks.map(id => orders.get(id))
+    makeSelectOrderbookFullList(),
+    list => list.filter(v => v.get('type') === ORDER_BOB_SIDE)
   );
 
 const makeSelectOrderbookBidsFullList = () =>
   createSelector(
-    makeSelectOrderbookBids(),
-    makeSelectOrders(),
-    (bids, orders) => bids.map(id => orders.get(id))
+    makeSelectOrderbookFullList(),
+    list => list.filter(v => v.get('type') === ORDER_ALICE_SIDE)
   );
 
 const makeSelectOrderbookFetchStatus = () =>
@@ -207,10 +206,10 @@ export {
   makeSelectOrderbook,
   makeSelectOrderbookDeposit,
   makeSelectOrderbookRecevie,
-  makeSelectOrderbookAsks,
-  makeSelectOrderbookBids,
   makeSelectOrderbookAsksFullList,
   makeSelectOrderbookBidsFullList,
+  makeSelectOrderbookList,
+  makeSelectOrderbookFullList,
   makeSelectOrderbookFetchStatus,
   makeSelectDepositCoinModal,
   makeSelectRecevieCoinModal,
