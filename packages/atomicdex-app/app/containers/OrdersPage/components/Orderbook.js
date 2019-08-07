@@ -6,8 +6,9 @@ import { createStructuredSelector } from 'reselect';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import CloudOff from '@material-ui/icons/CloudOff';
+import WarningPlate from '../../../components/WarningPlate';
 import Order from './Order';
-import OrderItem from './OrderItem';
+// import OrderItem from './OrderItem';
 import {
   makeSelectOrderbookFullList,
   makeSelectMyOrderList
@@ -15,15 +16,7 @@ import {
 
 const debug = require('debug')('atomicapp:containers:OrdersPage:Orderbook');
 
-const useStyles = makeStyles(theme => ({
-  root__warningPlate: {
-    textAlign: 'center',
-    padding: 12,
-    border: `1px dashed ${theme.colors.warning}`,
-    borderRadius: 4,
-    width: '100%'
-  },
-
+const useStyles = makeStyles(() => ({
   root__emptystate: {
     textAlign: 'center'
   },
@@ -63,7 +56,9 @@ function Orderbook(props: IOrderbookProps) {
           gutterBottom
           className={classes.root__emptystate}
         >
-          No data found. Please start making a swap.
+          <FormattedMessage id="atomicapp.containers.OrderPage.empty_message_in_orderbook">
+            {(...content) => content}
+          </FormattedMessage>
         </Typography>
       </React.Fragment>
     );
@@ -71,13 +66,17 @@ function Orderbook(props: IOrderbookProps) {
 
   return (
     <>
-      <div className={classes.root__warningPlate}>
-        <Typography>
+      <WarningPlate>
+        <Typography
+          style={{
+            textAlign: 'center'
+          }}
+        >
           <FormattedMessage id="atomicapp.containers.OrderPage.warning">
             {(...content) => content}
           </FormattedMessage>
         </Typography>
-      </div>
+      </WarningPlate>
       <br />
       {orderbook.map((order, key) => (
         <>

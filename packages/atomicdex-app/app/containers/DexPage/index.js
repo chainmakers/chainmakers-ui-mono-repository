@@ -122,7 +122,7 @@ class DexPage extends React.Component<IDexPageProps, IDexPageState> {
               <PlaceOrderTab />
             </TabContainer>
             <TabContainer selected={value === 1}>
-              <MyOrdersTab />
+              <MyOrdersTab handleChangeTab={this.handleChange} />
             </TabContainer>
           </ErrorBoundary>
           <TestSwap />

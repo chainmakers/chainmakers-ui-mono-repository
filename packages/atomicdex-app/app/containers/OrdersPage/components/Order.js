@@ -28,7 +28,7 @@ import {
   makeSelectOrderbookRecevie
 } from '../selectors';
 import { openDetailModal, openCancelingOrderModal } from '../actions';
-import { ORDER_BOB_SIDE, ORDER_ALICE_SIDE } from '../constants';
+import { ORDER_BOB_SIDE } from '../constants';
 
 const debug = require('debug')('atomicapp:containers:OrdersPage:Order');
 

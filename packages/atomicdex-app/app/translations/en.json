@@ -9,12 +9,15 @@
   "atomicapp.containers.DexPage.swap_successful_message": "Click here to make another swap",
   "atomicapp.containers.DexPage.execute_buy": "Swap",
   "atomicapp.containers.DexPage.loading": "Loading...",
+  "atomicapp.containers.DexPage.empty_message_in_swap_in_progress": "Any active swaps will show up here.",
+  "atomicapp.containers.DexPage.empty_message_in_history": "No data found. Please start making a swap.",
 
   "atomicapp.containers.OrderPage.title": "Orders",
   "atomicapp.containers.OrderPage.deposit": "Send",
   "atomicapp.containers.OrderPage.receive": "Receive",
   "atomicapp.containers.OrderPage.orderbook": "Orderbook",
   "atomicapp.containers.OrderPage.warning": "Your order will only be visible to others while the app is running. Once you close Chainswap, your order disappears.",
+  "atomicapp.containers.OrderPage.empty_message_in_orderbook": "No data found. Please start making an order.",
 
   "atomicapp.containers.Drawer.wallet": "Wallet",
   "atomicapp.containers.Drawer.buy": "Swap",

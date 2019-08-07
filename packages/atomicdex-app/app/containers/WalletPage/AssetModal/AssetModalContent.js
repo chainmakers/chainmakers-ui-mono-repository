@@ -22,6 +22,7 @@ import Button from '@material-ui/core/Button';
 import { BuyButton } from 'barterdex-components';
 import QRCode from 'qrcode.react';
 import getCoinMemoize from '../../../components/CryptoIcons';
+import WarningPlate from '../../../components/WarningPlate';
 import { TabContainer } from '../../../components/Tabs';
 import { required, requiredNumber } from '../../../components/Form/helper';
 import validate from '../../../components/Form/validate';
@@ -143,14 +144,6 @@ const styles = theme => ({
     paddingLeft: 0,
     paddingTop: 10,
     paddingBottom: 10
-  },
-
-  root__warningPlate: {
-    textAlign: 'left',
-    padding: 12,
-    border: `1px dashed ${theme.colors.warning}`,
-    borderRadius: 4,
-    width: '100%'
   },
 
   root__listItemSecondaryAction: {
@@ -489,7 +482,7 @@ class AssetModalContent extends React.PureComponent<Props, State> {
     const { classes, balance } = this.props;
     return (
       <DialogContent>
-        <div className={classes.root__warningPlate}>
+        <WarningPlate>
           <Typography variant="button" gutterBottom>
             Send only {balance.get('coin')} to this deposit address.
           </Typography>
@@ -497,8 +490,7 @@ class AssetModalContent extends React.PureComponent<Props, State> {
             Sending tokens or any other currency to this address will result in
             the permanent loss of your deposit.
           </Typography>
-        </div>
-
+        </WarningPlate>
         <List>
           <ListItem
             classes={{
@@ -535,7 +527,7 @@ class AssetModalContent extends React.PureComponent<Props, State> {
 
     return (
       <DialogContent>
-        <div className={classes.root__warningPlate}>
+        <WarningPlate>
           <Typography variant="button" gutterBottom>
             Warning
           </Typography>
@@ -543,7 +535,7 @@ class AssetModalContent extends React.PureComponent<Props, State> {
             Please verify your withdrawal address. We cannot refund an incorrect
             withdrawal.
           </Typography>
-        </div>
+        </WarningPlate>
 
         <ValidationAddressInput
           id="address"
