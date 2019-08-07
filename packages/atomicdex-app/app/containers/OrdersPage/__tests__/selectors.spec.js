@@ -12,10 +12,10 @@ import {
   makeSelectOrderbook,
   makeSelectOrderbookDeposit,
   makeSelectOrderbookRecevie,
-  makeSelectOrderbookAsks,
-  makeSelectOrderbookBids,
   makeSelectOrderbookAsksFullList,
   makeSelectOrderbookBidsFullList,
+  makeSelectOrderbookList,
+  makeSelectOrderbookFullList,
   makeSelectOrderbookFetchStatus,
   makeSelectMyOrder,
   makeSelectMyOrderList,
@@ -134,22 +134,21 @@ describe('containers/OrderPage/selectors/makeSelectOrderbook', () => {
     const selectOrderbookRecevie = makeSelectOrderbookRecevie();
     expect(selectOrderbookRecevie(mockedState)).toEqual(null);
 
-    const selectOrderbookAsks = makeSelectOrderbookAsks();
-    expect(selectOrderbookAsks(mockedState)).toEqual(fromJS([]));
-
-    const selectOrderbookBids = makeSelectOrderbookBids();
-    expect(selectOrderbookBids(mockedState)).toEqual(fromJS([]));
+    const selectOrderbookList = makeSelectOrderbookList();
+    expect(selectOrderbookList(mockedState)).toEqual(fromJS([]));
 
     mockedState = mockedState
       .setIn(['order', 'orders', order.address], fromJS(order))
-      .setIn(['order', 'orderbook', 'asks'], fromJS([order.address]))
-      .setIn(['order', 'orderbook', 'bids'], fromJS([order.address]));
+      .setIn(['order', 'orderbook', 'list'], fromJS([order.address]));
 
     const selectOrderbookAsksFullList = makeSelectOrderbookAsksFullList();
-    expect(selectOrderbookAsksFullList(mockedState)).toEqual(fromJS([order]));
+    expect(selectOrderbookAsksFullList(mockedState)).toEqual(fromJS([]));
 
     const selectOrderbookBidsFullList = makeSelectOrderbookBidsFullList();
     expect(selectOrderbookBidsFullList(mockedState)).toEqual(fromJS([order]));
+
+    const selectOrderbookFullList = makeSelectOrderbookFullList();
+    expect(selectOrderbookFullList(mockedState)).toEqual(fromJS([order]));
 
     const selectOrders = makeSelectOrders();
     expect(selectOrders(mockedState)).toEqual(

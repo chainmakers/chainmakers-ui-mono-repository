@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
+import { floor } from 'barterdex-utilities';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -120,7 +121,7 @@ class CancelingOrderModal extends React.PureComponent<
             title={order.get('rel')}
             subTitle={
               <span className={classes.swapDetail__success}>
-                {order.get('price')} {order.get('rel')}
+                {floor(order.get('price'), 8)} {order.get('rel')}
               </span>
             }
           />

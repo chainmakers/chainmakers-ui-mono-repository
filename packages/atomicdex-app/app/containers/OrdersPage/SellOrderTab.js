@@ -4,15 +4,13 @@ import ClassNames from 'classnames';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import type { Dispatch } from 'redux';
-import type { List, Map } from 'immutable';
+import type { Map } from 'immutable';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
-import CloudOff from '@material-ui/icons/CloudOff';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
@@ -25,9 +23,8 @@ import { loadAllBalance } from '../App/actions';
 
 import DepositSection from './components/DepositSection';
 import RecevieSection from './components/RecevieSection';
+import Orderbook from './components/Orderbook';
 
-import Order from './components/Order';
-import OrderItem from './components/OrderItem';
 import {
   loadOrderbook,
   closeDepositCoinModal,
@@ -37,14 +34,11 @@ import {
   openConfirmNewOrderModal
 } from './actions';
 import {
-  makeSelectOrderbookAsksFullList,
-  makeSelectOrderbookBidsFullList,
   makeSelectDepositCoinModal,
   makeSelectRecevieCoinModal,
   makeSelectOrderbookRecevie,
   makeSelectOrderbookDeposit,
-  makeSelectMyOrderFetchStatus,
-  makeSelectMyOrderList
+  makeSelectMyOrderFetchStatus
 } from './selectors';
 
 const debug = require('debug')('atomicapp:containers:OrderPage:SellOrderTab');
@@ -91,22 +85,6 @@ const styles = theme => ({
       alignItems: 'flex-end',
       display: 'flex'
     }
-  },
-
-  swapform__emptystate: {
-    textAlign: 'center'
-  },
-
-  swapform__iconemptystate: {
-    fontSize: 50
-  },
-
-  root__warningPlate: {
-    textAlign: 'center',
-    padding: 12,
-    border: `1px dashed ${theme.colors.warning}`,
-    borderRadius: 4,
-    width: '100%'
   }
 });
 
@@ -133,13 +111,9 @@ type ISellOrderTabProps = {
   // eslint-disable-next-line flowtype/no-weak-types
   deposit: Map<*, *>,
   // eslint-disable-next-line flowtype/no-weak-types
-  orderbookBids: Map<*, *>,
-  // eslint-disable-next-line flowtype/no-weak-types
   depositCoinModal: Map<*, *>,
   // eslint-disable-next-line flowtype/no-weak-types
   recevieCoinModal: Map<*, *>,
-  // eslint-disable-next-line flowtype/no-weak-types
-  myOrderList: List<*>,
   myOrderFetchStatus: string
 };
 
@@ -196,31 +170,6 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
     }
   };
 
-  renderEmptyState = () => {
-    const { classes } = this.props;
-    return (
-      <React.Fragment>
-        <br />
-        <br />
-        <br />
-        <Typography
-          variant="h6"
-          gutterBottom
-          className={classes.swapform__emptystate}
-        >
-          <CloudOff className={classes.swapform__iconemptystate} />
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          gutterBottom
-          className={classes.swapform__emptystate}
-        >
-          No data found. Please start making a swap.
-        </Typography>
-      </React.Fragment>
-    );
-  };
-
   render() {
     debug('render');
 
@@ -229,13 +178,11 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
       recevie,
       deposit,
       balance,
-      orderbookBids,
       depositCoinModal,
       recevieCoinModal,
       dispatchCloseDepositCoinModal,
       dispatchCloseRecevieCoinModal,
-      myOrderFetchStatus,
-      myOrderList
+      myOrderFetchStatus
     } = this.props;
 
     return (
@@ -346,31 +293,7 @@ class SellOrderTab extends Component<ISellOrderTabProps> {
                 <Icon>cached</Icon>
               </IconButton>
             </Tooltip>
-
-            {orderbookBids.size === 0 && this.renderEmptyState()}
-            {orderbookBids.size > 0 && (
-              <>
-                <div className={classes.root__warningPlate}>
-                  <Typography>
-                    <FormattedMessage id="atomicapp.containers.OrderPage.warning">
-                      {(...content) => content}
-                    </FormattedMessage>
-                  </Typography>
-                </div>
-                <br />
-                {orderbookBids.map((order, key) => (
-                  <>
-                    <Order
-                      key={`orderbook-${key}`}
-                      selected={myOrderList.contains(order.get('id'))}
-                      data={order}
-                    />
-                    {/* <OrderItem /> */}
-                    <br />
-                  </>
-                ))}
-              </>
-            )}
+            <Orderbook />
           </div>
         </Grid>
       </Grid>
@@ -393,14 +316,11 @@ export function mapDispatchToProps(dispatch: Dispatch<Object>) {
 
 const mapStateToProps = createStructuredSelector({
   balance: makeSelectBalanceEntities(),
-  orderbookAsks: makeSelectOrderbookAsksFullList(),
-  orderbookBids: makeSelectOrderbookBidsFullList(),
   depositCoinModal: makeSelectDepositCoinModal(),
   recevieCoinModal: makeSelectRecevieCoinModal(),
   recevie: makeSelectOrderbookRecevie(),
   deposit: makeSelectOrderbookDeposit(),
-  myOrderFetchStatus: makeSelectMyOrderFetchStatus(),
-  myOrderList: makeSelectMyOrderList()
+  myOrderFetchStatus: makeSelectMyOrderFetchStatus()
 });
 
 const withConnect = connect(

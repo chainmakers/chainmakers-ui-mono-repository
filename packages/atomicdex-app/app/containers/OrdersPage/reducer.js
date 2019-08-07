@@ -104,7 +104,7 @@ export const initialState = fromJS({
     // },
     deposit: null,
     recevie: null,
-    asks: [
+    list: [
       // {
       //   coin: 'KMD',
       //   address: 'RV6YDG8pe8EaqTFUSs41QUF5obm2rqZuBb',
@@ -118,8 +118,6 @@ export const initialState = fromJS({
       //   age: 2,
       //   zcredits: 0
       // },
-    ],
-    bids: [
       // {
       //   coin: 'BTC',
       //   address: '1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1',
@@ -165,9 +163,6 @@ export default handleActions(
     [ORDERBOOK_LOAD_SUCCESS]: (state, { payload }) => {
       const { asks, bids } = payload;
       const list = concat(asks, bids);
-      console.log(list, 'list');
-      // const bidsList = [];
-      // const asksList = [];
       const sortedList = [];
       let orders = state.get('orders');
 
@@ -185,12 +180,6 @@ export default handleActions(
           id,
           ...meta
         } = v;
-        // if (type === ORDER_BOB_SIDE) {
-        //   asksList.push(id);
-        // }
-        // if (type === ORDER_ALICE_SIDE) {
-        //   bidsList.push(id);
-        // }
         sortedList.push(id);
         let entity = orders.find(obj => obj.get('id') === id);
 
@@ -232,21 +221,13 @@ export default handleActions(
         if (a.price === b.price) return a.maxvolume < b.maxvolume;
         return a.price < b.price;
       }
-
-      // asks.sort(sort).map(addOrdersEntities);
-
-      // bids.sort(sort).map(addOrdersEntities);
-
       list.sort(sort).map(addOrdersEntities);
 
-      state = state.set('orders', orders);
-
-      // step two: update asks, bids
-
+      // step two: update list
       return state
         .setIn(['orderbook', 'fetchStatus'], LOADED)
-        .setIn(['orderbook', 'asks'], fromJS(sortedList))
-        .setIn(['orderbook', 'bids'], fromJS(sortedList));
+        .set('orders', orders)
+        .setIn(['orderbook', 'list'], fromJS(sortedList));
     },
 
     [ORDERBOOK_LOAD_ERROR]: (state, { error }) =>
@@ -366,11 +347,8 @@ export default handleActions(
       const { id } = payload;
 
       // Step one: remove it from orderbook
-      const asks = state.getIn(['orderbook', 'asks']).filter(v => v !== id);
-      const bids = state.getIn(['orderbook', 'bids']).filter(v => v !== id);
-      state = state
-        .setIn(['orderbook', 'asks'], asks)
-        .setIn(['orderbook', 'bids'], bids);
+      const list = state.getIn(['orderbook', 'list']).filter(v => v !== id);
+      state = state.setIn(['orderbook', 'list'], list);
 
       // Step two: remove it from myorder
       let myorderlist = state.getIn(['myorder', 'list']);

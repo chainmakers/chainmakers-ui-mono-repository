@@ -174,11 +174,9 @@ describe('containers/OrderPage/reducers/loadOrderbookSuccess', () => {
           errors: null,
           deposit: null,
           recevie: null,
-          asks: [
+          list: [
             '12fj3npPKwTNxUgDMN8XcCDcR2Z4DBehj6-KMD-BTC',
-            '1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1-KMD-BTC'
-          ],
-          bids: [
+            '1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1-KMD-BTC',
             'RAwv8JhfvmFx2V3QpY7ehiYpBJ1eqxxdxR-KMD-BTC',
             'RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd-KMD-BTC',
             'RHy2obsEHhAdTag4fDsC4SfCEqm5ZzTUSH-KMD-BTC'
@@ -261,8 +259,7 @@ describe('containers/OrderPage/reducers/setNewOrderSuccess', () => {
           errors: null,
           deposit: null,
           recevie: null,
-          asks: [],
-          bids: []
+          list: []
         },
         depositCoinModal: { open: false },
         recevieCoinModal: { open: false },
