@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import CloudOff from '@material-ui/icons/CloudOff';
 import WarningPlate from '../../../components/WarningPlate';
 import Order from './Order';
-import OrderItem from './OrderItem';
+// import OrderItem from './OrderItem';
 import {
   makeSelectOrderbookFullList,
   makeSelectMyOrderList

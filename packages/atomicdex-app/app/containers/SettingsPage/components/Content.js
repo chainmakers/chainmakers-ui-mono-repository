@@ -1,14 +1,13 @@
 // @flow
 import React from 'react';
+import api from 'utils/barterdex-api';
 import { TabContainer } from '../../../components/Tabs';
 import { useSettingsContext } from '../reducer';
 import { selectCurrentTab } from '../selectors';
 import { setMM2Version } from '../actions';
 import AboutTab from './AboutTab';
 
-type IContentProps = {};
-
-function Content(props: IContentProps) {
+function Content() {
   const [state, dispatch] = useSettingsContext();
 
   async function getMM2Version() {
