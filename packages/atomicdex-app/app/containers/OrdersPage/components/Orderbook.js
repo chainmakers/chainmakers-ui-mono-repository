@@ -67,9 +67,11 @@ function Orderbook(props: IOrderbookProps) {
   return (
     <>
       <WarningPlate>
-        <Typography style={{
-          textAlign: 'center'
-        }}>
+        <Typography
+          style={{
+            textAlign: 'center'
+          }}
+        >
           <FormattedMessage id="atomicapp.containers.OrderPage.warning">
             {(...content) => content}
           </FormattedMessage>
