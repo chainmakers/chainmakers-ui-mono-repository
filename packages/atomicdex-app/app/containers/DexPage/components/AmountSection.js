@@ -4,6 +4,7 @@ import React from 'react';
 import ClassNames from 'classnames';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import isNumber from 'lodash/isNumber';
 import type { Dispatch } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage, injectIntl } from 'react-intl';
@@ -99,7 +100,7 @@ export const lessThanMaxvolume = (value: mixed, props: mixed) =>
     const { maxvolume } = props;
     const n = Number(value);
     const b = Number(maxvolume);
-    if (n >= b) {
+    if (n > b) {
       return reject(new Error('Value is large than max volume'));
     }
     return resolve(true);
@@ -373,7 +374,7 @@ class AmountSection extends React.Component<Props, State> {
     }
     if (disabledBuyButton !== state) {
       s.disabledBuyButton = state;
-      s.dexfee = 0;
+      if (!isNumber(fee)) s.dexfee = 0;
     }
     this.setState(s);
   };
@@ -434,9 +435,29 @@ class AmountSection extends React.Component<Props, State> {
     });
   };
 
-  onClickMaxVolumeButton = (evt: SyntheticInputEvent<>) => {
-    evt.preventDefault();
-    console.log('onClickMaxVolumeButton');
+  onClickMaxVolumeButton = async (evt: SyntheticInputEvent<>) => {
+    try {
+      debug(`onClickMaxVolumeButton`);
+      evt.preventDefault();
+      const { price, payment, currency } = this.props;
+
+      const maxvolume = price.get('maxvolume');
+      const baseInput = this.baseInput.current;
+      await baseInput.setValue(floor(maxvolume, 8));
+
+      const bestPrice = this.getBestPrice();
+      const paymentInput = this.paymentInput.current;
+      const amount = maxvolume * bestPrice;
+      await paymentInput.setValue(floor(amount, 8));
+
+      this.controlBuyButton(
+        false,
+        calculateDexfee(currency.get('symbol'), payment.get('symbol'), amount)
+      );
+    } catch (err) {
+      this.controlBuyButton(true);
+      debug(`onClickMaxVolumeButton: ${err.message}`);
+    }
   };
 
   clickProcessButton = (evt: SyntheticInputEvent<>) => {
@@ -745,7 +766,11 @@ class AmountSection extends React.Component<Props, State> {
               </span>
             </div>
             <Button
-              disabled={!currency || !payment || buyingLoading}
+              disabled={
+                !currency.get('symbol') ||
+                !payment.get('symbol') ||
+                buyingLoading
+              }
               color="primary"
               className={ClassNames(
                 classes.amountform__infoBorder,
@@ -757,10 +782,13 @@ class AmountSection extends React.Component<Props, State> {
                 padding: 0,
                 color: 'rgba(0, 0, 0, 0.87)'
               }}
+              onClick={this.onClickMaxVolumeButton}
             >
               <Typography variant="subtitle1">Max Volume</Typography>
               <span className={classes.amountform__infosubtitle2}>
-                {price ? `${price.get('maxvolume')} ${price.get('base')}` : NA}
+                {price
+                  ? `${floor(price.get('maxvolume'), 8)} ${price.get('base')}`
+                  : NA}
               </span>
             </Button>
             <div className={classes.amountform__infoItem}>

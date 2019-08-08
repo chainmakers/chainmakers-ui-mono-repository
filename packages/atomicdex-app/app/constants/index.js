@@ -43,6 +43,7 @@ export const MAKER_PAYMENT_SPENT_SWAPS_STATE = 'MakerPaymentSpent';
 export const FINISHED_SWAPS_STATE = 'Finished';
 
 export const START_FAILED_SWAP_STATE = 'StartFailed';
+export const NEGOTIATE_FAILED_SWAP_STATE = 'NegotiateFailed';
 export const TAKER_FEE_SEND_FAILED_SWAP_STATE = 'TakerFeeSendFailed';
 export const TAKER_PAYMENT_TRANSACTION_FAILED_SWAP_STATE =
   'TakerPaymentTransactionFailed';
@@ -73,6 +74,7 @@ export const STATE_SWAPS = [
 
 export const STATE_FAILED_SWAPS = [
   START_FAILED_SWAP_STATE,
+  NEGOTIATE_FAILED_SWAP_STATE,
   TAKER_FEE_SEND_FAILED_SWAP_STATE,
   TAKER_PAYMENT_TRANSACTION_FAILED_SWAP_STATE,
   TAKER_PAYMENT_DATA_SEND_FAILED_SWAP_STATE,
@@ -85,6 +87,7 @@ export const STATE_FAILED_SWAPS = [
 
 export const STATE_FAILED_SWAPS_MESSAGE = {
   [START_FAILED_SWAP_STATE]: 'Start Failed',
+  [NEGOTIATE_FAILED_SWAP_STATE]: 'Negotiate Failed',
   [TAKER_FEE_SEND_FAILED_SWAP_STATE]: 'Taker Fee Send Failed',
   [TAKER_PAYMENT_TRANSACTION_FAILED_SWAP_STATE]:
     'Taker Payment Transaction Failed',
