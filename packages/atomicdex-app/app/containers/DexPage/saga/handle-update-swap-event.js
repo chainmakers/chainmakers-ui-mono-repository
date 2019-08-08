@@ -51,7 +51,7 @@ export function* checkSwap(swap /* , isPending */) {
             event: { type }
           } = events[i];
           if (STATE_FAILED_SWAPS.indexOf(type) !== -1) {
-            swapFailed = false;
+            swapFailed = true;
             break;
           }
         }

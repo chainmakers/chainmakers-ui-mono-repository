@@ -439,21 +439,28 @@ class AmountSection extends React.Component<Props, State> {
     try {
       debug(`onClickMaxVolumeButton`);
       evt.preventDefault();
-      const { price, payment, currency } = this.props;
+      const { price, payment, currency, balance } = this.props;
+
+      const b = balance.get(currency.get('symbol'));
 
       const maxvolume = price.get('maxvolume');
       const baseInput = this.baseInput.current;
-      await baseInput.setValue(floor(maxvolume, 8));
 
       const bestPrice = this.getBestPrice();
       const paymentInput = this.paymentInput.current;
       const amount = maxvolume * bestPrice;
-      await paymentInput.setValue(floor(amount, 8));
 
-      this.controlBuyButton(
-        false,
-        calculateDexfee(currency.get('symbol'), payment.get('symbol'), amount)
+      const dexfee = calculateDexfee(
+        currency.get('symbol'),
+        payment.get('symbol'),
+        amount
       );
+      const fee = b.get('fee');
+      const m = maxvolume - dexfee - 2 * fee;
+      await baseInput.setValue(floor(m, 8));
+      await paymentInput.setValue(floor(m * bestPrice, 8));
+
+      this.controlBuyButton(false, dexfee);
     } catch (err) {
       this.controlBuyButton(true);
       debug(`onClickMaxVolumeButton: ${err.message}`);
