@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
@@ -433,6 +434,11 @@ class AmountSection extends React.Component<Props, State> {
     });
   };
 
+  onClickMaxVolumeButton = (evt: SyntheticInputEvent<>) => {
+    evt.preventDefault();
+    console.log('onClickMaxVolumeButton');
+  };
+
   clickProcessButton = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
     const { dispatchMakeANewSwap } = this.props;
@@ -713,7 +719,7 @@ class AmountSection extends React.Component<Props, State> {
 
   render() {
     debug(`render`);
-    const { classes, buyingLoading, price } = this.props;
+    const { classes, buyingLoading, currency, payment, price } = this.props;
     const { openSnackbar, snackbarMessage } = this.state;
 
     return (
@@ -738,17 +744,25 @@ class AmountSection extends React.Component<Props, State> {
                 {price ? `${price.get('avevolume')} ${price.get('base')}` : NA}
               </span>
             </div>
-            <div
+            <Button
+              disabled={!currency || !payment || buyingLoading}
+              color="primary"
               className={ClassNames(
                 classes.amountform__infoBorder,
                 classes.amountform__infoItem
               )}
+              style={{
+                display: 'inline-block',
+                textTransform: 'inherit',
+                padding: 0,
+                color: 'rgba(0, 0, 0, 0.87)'
+              }}
             >
               <Typography variant="subtitle1">Max Volume</Typography>
               <span className={classes.amountform__infosubtitle2}>
                 {price ? `${price.get('maxvolume')} ${price.get('base')}` : NA}
               </span>
-            </div>
+            </Button>
             <div className={classes.amountform__infoItem}>
               <Typography variant="subtitle1">Instant rate</Typography>
               <span className={classes.amountform__infosubtitle2}>
