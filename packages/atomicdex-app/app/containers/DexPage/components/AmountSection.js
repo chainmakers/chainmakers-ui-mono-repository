@@ -441,23 +441,22 @@ class AmountSection extends React.Component<Props, State> {
       evt.preventDefault();
       const { price, payment, currency, balance } = this.props;
 
-      let feeRate = 1 / DEXFEE;
-      if (currency.get('symbol') === 'KMD' || payment.get('symbol') === 'KMD') {
-        feeRate *= 0.9;
-      }
       const b = balance.get(currency.get('symbol'));
       const fee = b.get('fee');
-      const maxvolume = floor(
-        (price.get('maxvolume') - 2 * fee) / (1 + feeRate),
+      const maxvolume = floor(price.get('maxvolume') - fee, 8);
+      const bestPrice = this.getBestPrice();
+      const amount = floor(maxvolume * bestPrice, 8);
+      const dexfee = floor(
+        calculateDexfee(
+          currency.get('symbol'),
+          payment.get('symbol'),
+          maxvolume
+        ),
         8
       );
-      const bestPrice = this.getBestPrice();
-      const dexfee = floor(maxvolume * feeRate, 8);
-      const amount = maxvolume * bestPrice;
 
       const baseInput = this.baseInput.current;
       const paymentInput = this.paymentInput.current;
-
       await baseInput.setValue(maxvolume);
       await paymentInput.setValue(amount);
       this.controlBuyButton(false, dexfee);
