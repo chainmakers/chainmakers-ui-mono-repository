@@ -492,9 +492,7 @@ export class SwapDetail extends React.PureComponent<Props> {
                   <Typography variant="button" gutterBottom>
                     Error
                   </Typography>
-                  <Typography gutterBottom>
-                    {swapsError.get('message')}
-                  </Typography>
+                  <Typography>{swapsError.get('message')}</Typography>
                 </div>
               )}
             </Grid>
