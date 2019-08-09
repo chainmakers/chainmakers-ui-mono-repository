@@ -1,38 +1,74 @@
 {
-  "bids": [
-    {
-      "coin": "KMD",
-      "address": "RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd",
-      "price": 0.0001566,
-      "numutxos": 0,
-      "avevolume": 0,
-      "maxvolume": 36.40686108,
-      "depth": 0,
-      "pubkey": "bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01",
-      "age": 9,
-      "zcredits": 0
-    }
-  ],
-  "numbids": 1,
-  "biddepth": 0,
+  "askdepth": 0,
   "asks": [
     {
       "coin": "BTC",
-      "address": "1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1",
-      "price": 0.00015473,
+      "address": "12fj3npPKwTNxUgDMN8XcCDcR2Z4DBehj6",
+      "price": 11765.318803369999,
       "numutxos": 0,
-      "avevolume": 0,
-      "maxvolume": 0.02620853,
-      "depth": 0,
-      "pubkey": "bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01",
+      "avevolume": 0.0,
+      "maxvolume": 0.15931538,
+      "depth": 0.0,
+      "pubkey": "dbd8c73e2e80e4f3cf88d2f04a9d2d0df4269496608b14a3e17556fdcb01e0c1",
+      "age": 1,
+      "zcredits": 0
+    },
+    {
+      "coin": "BTC",
+      "address": "1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1",
+      "price": 11751.74655523,
+      "numutxos": 0,
+      "avevolume": 0.0,
+      "maxvolume": 0.10416148,
+      "depth": 0.0,
+      "pubkey": "1bb83b58ec130e28e0a6d5d2acf2eb01b0d3f1670e021d47d31db8a858219da8",
       "age": 9,
       "zcredits": 0
     }
   ],
-  "numasks": 1,
-  "askdepth": 0,
   "base": "BTC",
+  "biddepth": 0,
+  "bids": [
+    {
+      "coin": "KMD",
+      "address": "RAwv8JhfvmFx2V3QpY7ehiYpBJ1eqxxdxR",
+      "price": 11636.025133814292,
+      "numutxos": 0,
+      "avevolume": 0.0,
+      "maxvolume": 570.67205239,
+      "depth": 0.0,
+      "pubkey": "dbd8c73e2e80e4f3cf88d2f04a9d2d0df4269496608b14a3e17556fdcb01e0c1",
+      "age": 1,
+      "zcredits": 0
+    },
+    {
+      "coin": "KMD",
+      "address": "RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd",
+      "price": 11622.501162250117,
+      "numutxos": 0,
+      "avevolume": 0.0,
+      "maxvolume": 19956.77585582,
+      "depth": 0.0,
+      "pubkey": "1bb83b58ec130e28e0a6d5d2acf2eb01b0d3f1670e021d47d31db8a858219da8",
+      "age": 9,
+      "zcredits": 0
+    },
+    {
+      "coin": "KMD",
+      "address": "RHy2obsEHhAdTag4fDsC4SfCEqm5ZzTUSH",
+      "price": 8333.333333333332,
+      "numutxos": 0,
+      "avevolume": 0.0,
+      "maxvolume": 208.21649055,
+      "depth": 0.0,
+      "pubkey": "98d2273b6580b2b3d5c35e43bb7176dc8e60af60e19ec2bfdfb0b40b7ccde792",
+      "age": 8,
+      "zcredits": 0
+    }
+  ],
+  "netid": 0,
+  "numasks": 2,
+  "numbids": 3,
   "rel": "KMD",
-  "timestamp": 1558682258,
-  "netid": 9999
+  "timestamp": 1565070353
 }

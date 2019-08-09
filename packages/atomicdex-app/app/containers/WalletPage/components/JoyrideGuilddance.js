@@ -70,7 +70,7 @@ class JoyrideGuilddance extends React.PureComponent<IJoyrideGuilddanceProps> {
         />
         <JoyrideStepper
           id="#dex-drawer-navigation-layout"
-          title={`Click "buy" to go to DEX page`}
+          title={`Click "Swap" to go to DEX page`}
           next={2}
           prev={0}
         />

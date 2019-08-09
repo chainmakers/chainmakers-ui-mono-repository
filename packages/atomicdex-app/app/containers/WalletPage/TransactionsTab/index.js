@@ -87,10 +87,10 @@ class TransactionsTab extends React.PureComponent<Props> {
       <div className={classes.walletTable__emptyContainer}>
         <CloudOff className={classes.walletTable__iconemptystate} />
         <Typography variant="h6" gutterBottom>
-          No data found
+          No transactions yet
         </Typography>
         <Typography variant="subtitle1" gutterBottom>
-          Please start making a swap
+          Start with receiving coins or making a swap
         </Typography>
         <Button color="primary" onClick={switchToPortfolioTab}>
           go to portfolio

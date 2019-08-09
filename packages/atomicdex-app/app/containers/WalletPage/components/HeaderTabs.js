@@ -7,11 +7,6 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = () => ({
   buyTabs__tab: {
     minWidth: 100
-  },
-
-  buyTabs__labelContainer: {
-    paddingLeft: 12,
-    paddingRight: 12
   }
 });
 
@@ -32,13 +27,7 @@ class HeaderTabs extends React.PureComponent<IHeaderTabsProps> {
         textColor="primary"
         onChange={handleChange}
       >
-        <Tab
-          classes={{
-            labelContainer: classes.buyTabs__labelContainer
-          }}
-          label="Portfolio"
-          className={classes.buyTabs__tab}
-        />
+        <Tab label="Portfolio" className={classes.buyTabs__tab} />
         <Tab label="Transactions" className={classes.buyTabs__tab} />
       </Tabs>
     );

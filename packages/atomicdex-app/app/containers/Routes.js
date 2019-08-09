@@ -14,6 +14,7 @@ import HelpPage from './HelpPage';
 import SeedPage from './SeedPage';
 import LoginPage from './LoginPage';
 import NotFoundPage from './NotFoundPage';
+import SettingsPage from './SettingsPage';
 // import LogoutDialog from './LogoutDialog';
 // import Snackbars from './Snackbars';
 // import WebSocketComponent from './WebSocketComponent';
@@ -43,6 +44,9 @@ const DexFallback = userIsNotAuthenticatedRedir(DexPage, () => (
 const HelpFallback = userIsNotAuthenticatedRedir(HelpPage, () => (
   <Redirect to={routes.LOGIN} />
 ));
+const SettingsFallback = userIsNotAuthenticatedRedir(SettingsPage, () => (
+  <Redirect to={routes.LOGIN} />
+));
 const LoginFallback = userIsNotAuthenticatedRedir(
   () => <Redirect to={routes.LOGIN} />,
   LoginPage
@@ -60,6 +64,7 @@ export default () => (
       <Route path={routes.WALLET} component={WalletFallback} />
       <Route path={routes.ORDER} component={OrdersFallback} />
       <Route path={routes.HELP} component={HelpFallback} />
+      <Route path={routes.SETTINGS} component={SettingsFallback} />
       <Route path={routes.LOGIN} component={LoginFallback} />
       <Route path={routes.SEED} component={SeedPage} />
       <Route exact path={routes.HOME} component={HomeFallback} />

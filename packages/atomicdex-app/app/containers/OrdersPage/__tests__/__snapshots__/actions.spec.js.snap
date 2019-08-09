@@ -1,38 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`containers/DexPage/actions/closeDetailModal should closeDetailModal should create closeDetailModal action 1`] = `
+exports[`containers/OrderPage/actions/closeDetailModal should closeDetailModal should create closeDetailModal action 1`] = `
 Object {
-  "type": "atomicapp/DexPage/SWAP_DETAIL_MODAL_CLOSE",
+  "type": "atomicapp/OrderPage/SWAP_DETAIL_MODAL_CLOSE",
 }
 `;
 
-exports[`containers/DexPage/actions/closeJoyride should closeJoyride should create closeJoyride action 1`] = `
+exports[`containers/OrderPage/actions/closeJoyride should closeJoyride should create closeJoyride action 1`] = `
 Object {
-  "type": "atomicapp/DexPage/JOYRIDE_CLOSE",
-}
-`;
-
-exports[`containers/DexPage/actions/openDetailModal should openDetailModal should create openDetailModal action 1`] = `
-Object {
-  "payload": Object {
-    "uuid": undefined,
-  },
-  "type": "atomicapp/DexPage/SWAP_DETAIL_MODAL_OPEN",
-}
-`;
-
-exports[`containers/DexPage/actions/openDetailModal should openDetailModal should create openDetailModal action 2`] = `
-Object {
-  "payload": Object {
-    "uuid": "uuid",
-  },
-  "type": "atomicapp/DexPage/SWAP_DETAIL_MODAL_OPEN",
-}
-`;
-
-exports[`containers/DexPage/actions/openJoyride should openJoyride should create openJoyride action 1`] = `
-Object {
-  "type": "atomicapp/DexPage/JOYRIDE_OPEN",
+  "type": "atomicapp/OrderPage/JOYRIDE_CLOSE",
 }
 `;
 
@@ -61,15 +37,27 @@ Object {
     "askdepth": 0,
     "asks": Array [
       Object {
+        "address": "12fj3npPKwTNxUgDMN8XcCDcR2Z4DBehj6",
+        "age": 1,
+        "avevolume": 0,
+        "coin": "BTC",
+        "depth": 0,
+        "maxvolume": 0.15931538,
+        "numutxos": 0,
+        "price": 11765.318803369999,
+        "pubkey": "dbd8c73e2e80e4f3cf88d2f04a9d2d0df4269496608b14a3e17556fdcb01e0c1",
+        "zcredits": 0,
+      },
+      Object {
         "address": "1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1",
         "age": 9,
         "avevolume": 0,
         "coin": "BTC",
         "depth": 0,
-        "maxvolume": 0.02620853,
+        "maxvolume": 0.10416148,
         "numutxos": 0,
-        "price": 0.00015473,
-        "pubkey": "bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01",
+        "price": 11751.74655523,
+        "pubkey": "1bb83b58ec130e28e0a6d5d2acf2eb01b0d3f1670e021d47d31db8a858219da8",
         "zcredits": 0,
       },
     ],
@@ -77,25 +65,73 @@ Object {
     "biddepth": 0,
     "bids": Array [
       Object {
+        "address": "RAwv8JhfvmFx2V3QpY7ehiYpBJ1eqxxdxR",
+        "age": 1,
+        "avevolume": 0,
+        "coin": "KMD",
+        "depth": 0,
+        "maxvolume": 570.67205239,
+        "numutxos": 0,
+        "price": 11636.025133814292,
+        "pubkey": "dbd8c73e2e80e4f3cf88d2f04a9d2d0df4269496608b14a3e17556fdcb01e0c1",
+        "zcredits": 0,
+      },
+      Object {
         "address": "RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd",
         "age": 9,
         "avevolume": 0,
         "coin": "KMD",
         "depth": 0,
-        "maxvolume": 36.40686108,
+        "maxvolume": 19956.77585582,
         "numutxos": 0,
-        "price": 0.0001566,
-        "pubkey": "bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01",
+        "price": 11622.501162250117,
+        "pubkey": "1bb83b58ec130e28e0a6d5d2acf2eb01b0d3f1670e021d47d31db8a858219da8",
+        "zcredits": 0,
+      },
+      Object {
+        "address": "RHy2obsEHhAdTag4fDsC4SfCEqm5ZzTUSH",
+        "age": 8,
+        "avevolume": 0,
+        "coin": "KMD",
+        "depth": 0,
+        "maxvolume": 208.21649055,
+        "numutxos": 0,
+        "price": 8333.333333333332,
+        "pubkey": "98d2273b6580b2b3d5c35e43bb7176dc8e60af60e19ec2bfdfb0b40b7ccde792",
         "zcredits": 0,
       },
     ],
-    "netid": 9999,
-    "numasks": 1,
-    "numbids": 1,
+    "netid": 0,
+    "numasks": 2,
+    "numbids": 3,
     "rel": "KMD",
-    "timestamp": 1558682258,
+    "timestamp": 1565070353,
   },
   "type": "atomicapp/OrdersPage/ORDERBOOK_LOAD_SUCCESS",
+}
+`;
+
+exports[`containers/OrderPage/actions/openDetailModal should openDetailModal should create openDetailModal action 1`] = `
+Object {
+  "payload": Object {
+    "uuid": undefined,
+  },
+  "type": "atomicapp/OrderPage/SWAP_DETAIL_MODAL_OPEN",
+}
+`;
+
+exports[`containers/OrderPage/actions/openDetailModal should openDetailModal should create openDetailModal action 2`] = `
+Object {
+  "payload": Object {
+    "uuid": "uuid",
+  },
+  "type": "atomicapp/OrderPage/SWAP_DETAIL_MODAL_OPEN",
+}
+`;
+
+exports[`containers/OrderPage/actions/openJoyride should openJoyride should create openJoyride action 1`] = `
+Object {
+  "type": "atomicapp/OrderPage/JOYRIDE_OPEN",
 }
 `;
 

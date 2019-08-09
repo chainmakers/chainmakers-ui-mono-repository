@@ -15,7 +15,7 @@ import {
   NEW_ORDER_SET_ERROR,
   NEW_ORDER_SET_SKIP,
   ORDERBOOK_RELOAD,
-  ORDER_ALICE_SITE,
+  ORDER_ALICE_SIDE,
   NEW_ORDER_CANCEL_SUCCESS
 } from '../../constants';
 
@@ -29,7 +29,7 @@ describe('containers/OrderPage/saga/order', () => {
   const payload = Object.assign({}, setprice.result);
   payload.address = 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu';
   payload.id = 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu-KMD-BTC';
-  payload.type = ORDER_ALICE_SITE;
+  payload.type = ORDER_ALICE_SIDE;
 
   it('should handle listenForCreatingNewOrder correctly', async done => {
     const dispatched = [];

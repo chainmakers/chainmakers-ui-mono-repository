@@ -13,11 +13,6 @@ const styles = () => ({
     minWidth: 100
   },
 
-  root__labelContainer: {
-    paddingLeft: 12,
-    paddingRight: 12
-  },
-
   root__divider: {
     opacity: 1,
     backgroundColor: 'transparent',
@@ -45,13 +40,7 @@ class HeaderTabs extends React.PureComponent<Props> {
           textColor="primary"
           onChange={handleChange}
         >
-          <Tab
-            classes={{
-              labelContainer: classes.root__labelContainer
-            }}
-            label="Detail"
-            className={classes.root__tab}
-          />
+          <Tab label="Detail" className={classes.root__tab} />
           <Tab label="Deposit" className={classes.root__tab} />
           <Tab label="Withdraw" className={classes.root__tab} />
         </Tabs>

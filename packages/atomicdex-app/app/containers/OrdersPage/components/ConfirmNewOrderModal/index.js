@@ -152,7 +152,11 @@ class ConfirmNewOrderModal extends React.PureComponent<
                 disabled
                 margin="dense"
                 id="deposit-textfield-order-modal"
-                label={`Deposit (${deposit || 'N/A'})`}
+                label={
+                  <FormattedMessage id="atomicapp.containers.OrderPage.deposit">
+                    {(...content) => `${content} (${deposit || 'N/A'})`}
+                  </FormattedMessage>
+                }
                 value="1"
                 fullWidth
               />
@@ -172,7 +176,11 @@ class ConfirmNewOrderModal extends React.PureComponent<
               <ValidationPriceInput
                 autoFocus
                 id="recevie-textfield-order-modal"
-                label={`Receive (${recevie || 'N/A'})`}
+                label={
+                  <FormattedMessage id="atomicapp.containers.OrderPage.receive">
+                    {(...content) => `${content} (${recevie || 'N/A'})`}
+                  </FormattedMessage>
+                }
                 type="number"
                 ref={this.priceInput}
                 onChange={this.onChangePriceInput}

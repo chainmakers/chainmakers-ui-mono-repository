@@ -31,7 +31,9 @@ import { STATE_SWAPS, SWAP_TX_DEFAULT } from './constants';
 import { closeDetailModal } from './actions';
 import { makeSelectSwapDetailModal } from './selectors';
 
-const debug = require('debug')('atomicapp:containers:DexPage:SwapDetailModal');
+const debug = require('debug')(
+  'atomicapp:containers:OrderPage:SwapDetailModal'
+);
 
 function onOpenEmpty() {
   debug('onOpenEmpty');

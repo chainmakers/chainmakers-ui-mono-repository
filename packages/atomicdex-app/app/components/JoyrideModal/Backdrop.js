@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Fade from '@material-ui/core/Fade';
+import { ownerDocument } from './dom';
 
 export const styles = {
   /* Styles applied to the root element. */
@@ -37,6 +38,24 @@ const Backdrop = React.forwardRef((props, ref) => {
     children,
     ...other
   } = props;
+
+  function setBodyHidden() {
+    const doc = ownerDocument();
+    doc.body.style.overflow = 'hidden';
+  }
+
+  function setBodyInherit() {
+    const doc = ownerDocument();
+    doc.body.style.overflow = 'inherit';
+  }
+
+  React.useEffect(() => {
+    if (open) {
+      setBodyHidden();
+    } else {
+      setBodyInherit();
+    }
+  }, [open]);
 
   return (
     <Fade in={open} timeout={transitionDuration} {...other}>

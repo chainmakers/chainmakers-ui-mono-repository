@@ -21,7 +21,7 @@ import { NavigationLayout } from '../Layout';
 import CoinsSelectionDialog from '../CoinsSelectionDialog';
 import HeaderTabs from './components/HeaderTabs';
 import JoyrideGuilddance from './components/JoyrideGuilddance';
-import TestSwap from './components/TestSwap';
+// import TestSwap from './components/TestSwap';
 import MyOrdersTab from './MyOrdersTab';
 import PlaceOrderTab from './PlaceOrderTab';
 import ProgressBar from './ProgressBar';
@@ -122,10 +122,10 @@ class DexPage extends React.Component<IDexPageProps, IDexPageState> {
               <PlaceOrderTab />
             </TabContainer>
             <TabContainer selected={value === 1}>
-              <MyOrdersTab />
+              <MyOrdersTab handleChangeTab={this.handleChange} />
             </TabContainer>
           </ErrorBoundary>
-          <TestSwap />
+          {/* <TestSwap /> */}
         </NavigationLayout>
       </React.Fragment>
     );

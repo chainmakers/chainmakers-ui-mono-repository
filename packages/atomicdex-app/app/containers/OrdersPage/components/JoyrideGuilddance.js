@@ -12,7 +12,7 @@ import { makeSelectJoyrideOpenState } from '../selectors';
 import { closeJoyride } from '../actions';
 
 const debug = require('debug')(
-  'atomicapp:containers:DexPage:components:JoyrideGuilddance'
+  'atomicapp:containers:OrderPage:components:JoyrideGuilddance'
 );
 
 type IJoyrideGuilddanceProps = {
@@ -33,26 +33,18 @@ class JoyrideGuilddance extends React.PureComponent<IJoyrideGuilddanceProps> {
         dispatchCloseJoyride={dispatchCloseJoyride}
         joyrideState={joyrideState}
       >
-        {/* <JoyrideStepper
-          id="#asset-portfolio-tab-BTC"
-          title="This is your BTC asset"
-          message="Note: BTC and KMD asset are enabled by default"
-        /> */}
         <JoyrideStepper
-          id="#add-icon-placeorder-dexpage"
-          title={`Step 1: Click "plus icon" to select coin that you want to buy`}
+          id="#deposit-add-icon-placeorder-orderpage"
+          title={`Step 1: Click "plus icon" in Deposit section to select coin that you want to exchange`}
         />
         <JoyrideStepper
-          id="#payment-section-placeorder-dexpage"
-          title="Step 2: Select the coin in payment section that you want to exchange"
+          id="#recevie-add-icon-placeorder-orderpage"
+          title={`Step 1: Click "plus icon" in Recevie section to select coin that you want to buy`}
         />
         <JoyrideStepper
-          id="#amount-section-placeorder-dexpage"
-          title={`Step 3: Click "plus icon" to select coin that you want to buy`}
-        />
-        <JoyrideStepper
-          id="#wallet-drawer-navigation-layout"
-          title={`Click "wallet" to go to WALLET page`}
+          id="#place-new-order-button-orderpage"
+          title="Step 3: Click here to make a new oder"
+          idBeacon="#place-new-order-button-orderpage"
         />
       </JoyrideModal>
     );

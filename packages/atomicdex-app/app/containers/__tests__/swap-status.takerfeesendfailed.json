@@ -1,0 +1,79 @@
+{
+  "result": {
+    "error_events": [
+      "StartFailed",
+      "NegotiateFailed",
+      "TakerFeeSendFailed",
+      "MakerPaymentValidateFailed",
+      "TakerPaymentTransactionFailed",
+      "TakerPaymentDataSendFailed",
+      "TakerPaymentWaitForSpendFailed",
+      "MakerPaymentSpendFailed",
+      "TakerPaymentRefunded",
+      "TakerPaymentRefundFailed"
+    ],
+    "events": [
+      {
+        "event": {
+          "data": {
+            "lock_duration": 78000,
+            "maker": "5491037c6539149fddbdc43eddfe14881b6b20a0504030257c9ad0c5c7de1a77",
+            "maker_amount": 9400000000,
+            "maker_coin": "KMD",
+            "maker_payment_confirmations": 1,
+            "maker_payment_wait": 1556856415,
+            "my_persistent_pub": "031650607bf13082f2edfc2f84e8737a9ee2a42e2f99d38660cccad6a04f868812",
+            "started_at": 1556830415,
+            "taker_amount": 1786000,
+            "taker_coin": "BTC",
+            "taker_payment_confirmations": 1,
+            "taker_payment_lock": 1556908415,
+            "uuid": "3ee41a9c-e963-4237-bcba-904b2bf519af"
+          },
+          "type": "Started"
+        },
+        "timestamp": 1556830415593
+      },
+      {
+        "event": {
+          "data": {
+            "maker_payment_locktime": 1556986414,
+            "maker_pubkey": "02c47176ec122114261ef66dafefae1350d9babf31ca6a04f1322aebffb6b1403d",
+            "secret_hash": "d1239a2d0b9ee22650cb2acc6ff1fe63f51ced0a"
+          },
+          "type": "Negotiated"
+        },
+        "timestamp": 1556830476375
+      },
+      {
+        "event": {
+          "data": {
+            "error": "lp_swap:1194] utxo:448] jsonrpc_client:66] Rpc request JsonRpcRequest { jsonrpc: \"2.0\", id: \"33\", method: \"blockchain.transaction.broadcast\", params: [String(\"0400008085202f890160ef15d8eef273316cd67b670a6738f8a7fa6444d63b826a0c95ffd260c70e92000000006b483045022100b0261349cc40a790312bd9f5a5af40b16861b3a32c99458094628224987908d4022020384a56c516597862319a5870f11ea19031a3f379f24d0580e923db07caf1180121031650607bf13082f2edfc2f84e8737a9ee2a42e2f99d38660cccad6a04f868812ffffffff02fa080000000000001976a914ca1e04745e8ca0c60d8c5881531d51bec470743f88ac86531e00000000001976a91490c11e0a72f3bb8010f6aa15529e1772a44787d488ac0c59cb5c000000000000000000000000000000\")] } failed with error, response: JsonRpcResponse { jsonrpc: \"2.0\", id: \"33\", result: Null, error: Object({\"code\": Number(1), \"message\": String(\"the transaction was rejected by network rules.\\n\\nTX decode failed\\n[0400008085202f890160ef15d8eef273316cd67b670a6738f8a7fa6444d63b826a0c95ffd260c70e92000000006b483045022100b0261349cc40a790312bd9f5a5af40b16861b3a32c99458094628224987908d4022020384a56c516597862319a5870f11ea19031a3f379f24d0580e923db07caf1180121031650607bf13082f2edfc2f84e8737a9ee2a42e2f99d38660cccad6a04f868812ffffffff02fa080000000000001976a914ca1e04745e8ca0c60d8c5881531d51bec470743f88ac86531e00000000001976a91490c11e0a72f3bb8010f6aa15529e1772a44787d488ac0c59cb5c000000000000000000000000000000]\")}) }"
+          },
+          "type": "TakerFeeSendFailed"
+        },
+        "timestamp": 1556830476967
+      },
+      {
+        "event": {
+          "type": "Finished"
+        },
+        "timestamp": 1556830476968
+      }
+    ],
+    "success_events": [
+      "Started",
+      "Negotiated",
+      "TakerFeeSent",
+      "MakerPaymentReceived",
+      "MakerPaymentWaitConfirmStarted",
+      "MakerPaymentValidatedAndConfirmed",
+      "TakerPaymentSent",
+      "TakerPaymentSpent",
+      "MakerPaymentSpent",
+      "Finished"
+    ],
+    "type": "Taker",
+    "uuid": "3ee41a9c-e963-4237-bcba-904b2bf519af"
+  }
+}

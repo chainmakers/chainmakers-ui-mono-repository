@@ -19,6 +19,10 @@
 
 - https://github.com/webtorrent/webtorrent-desktop
 
+### Spectrum
+
+- https://github.com/withspectrum/spectrum
+
 ### Links
 
 - https://github.com/sindresorhus/awesome-electron#apps

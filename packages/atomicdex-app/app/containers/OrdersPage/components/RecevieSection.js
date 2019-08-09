@@ -42,7 +42,7 @@ class RecevieSection extends React.PureComponent<IRecevieSectionProps> {
     if (!recevie) {
       return (
         <CoinSelectable
-          id="add-icon-placeorder-orderpage"
+          id="recevie-add-icon-placeorder-orderpage"
           key="recevieCoinAddIcon"
           icon={<AddIcon color="primary" />}
           onClick={this.onClick}
@@ -53,7 +53,7 @@ class RecevieSection extends React.PureComponent<IRecevieSectionProps> {
     const icon = getCoinMemoize(recevie);
     return (
       <CoinSelectable
-        id="add-icon-placeorder-orderpage"
+        id="recevie-add-icon-placeorder-orderpage"
         key={`recevieCoin${recevie}`}
         selected
         data={recevie}

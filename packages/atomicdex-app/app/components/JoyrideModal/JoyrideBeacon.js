@@ -2,23 +2,19 @@
 import React from 'react';
 
 const debug = require('debug')(
-  'atomicapp:containers:WalletPage:components:JoyrideModal:JoyrideBeacon'
+  'atomicapp:components:JoyrideModal:JoyrideBeacon'
 );
 
-type IJoyrideStepperProps = {};
+type IJoyrideBeaconProps = {};
 
-class JoyrideBeacon extends React.PureComponent<IJoyrideStepperProps> {
-  static displayName = 'JoyrideBeacon';
+function JoyrideBeacon(props: IJoyrideBeaconProps) {
+  debug(`render`);
 
-  componentDidUpdate = () => {};
-
-  componentDidMount = () => {};
-
-  render() {
-    debug(`render`);
-    console.log(this.props, 'this.props');
-    return null;
-  }
+  return null;
 }
+
+JoyrideBeacon.defaultProps = {};
+
+JoyrideBeacon.displayName = 'JoyrideModal__JoyrideBeacon';
 
 export default JoyrideBeacon;

@@ -4,9 +4,9 @@ import injectSaga from '../../utils/inject-saga';
 import { APP_STATE_NAME } from './constants';
 import saga from './saga';
 
-type Props = {};
+type IAppProps = {};
 
-class App extends React.PureComponent<Props> {
+class App extends React.PureComponent<IAppProps> {
   render() {
     return null;
   }

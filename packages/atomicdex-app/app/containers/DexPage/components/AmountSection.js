@@ -4,6 +4,7 @@ import React from 'react';
 import ClassNames from 'classnames';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import isNumber from 'lodash/isNumber';
 import type { Dispatch } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage, injectIntl } from 'react-intl';
@@ -15,6 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
@@ -28,12 +30,8 @@ import { requiredNumber } from '../../../components/Form/helper';
 import validate from '../../../components/Form/validate';
 import type { BuyCoinPayload } from '../schema';
 import { calculateDexfee } from '../utils';
-import {
-  AUTO_HIDE_SNACKBAR_TIME,
-  STATE_SWAPS,
-  NA,
-  FINISHED_SWAPS_STATE
-} from '../constants';
+import { STATE_SWAPS, NA, FINISHED_SWAPS_STATE } from '../../../constants';
+import { AUTO_HIDE_SNACKBAR_TIME, DEXFEE } from '../constants';
 import {
   loadBuyCoin,
   loadRecentSwaps,
@@ -102,7 +100,7 @@ export const lessThanMaxvolume = (value: mixed, props: mixed) =>
     const { maxvolume } = props;
     const n = Number(value);
     const b = Number(maxvolume);
-    if (n >= b) {
+    if (n > b) {
       return reject(new Error('Value is large than max volume'));
     }
     return resolve(true);
@@ -376,7 +374,7 @@ class AmountSection extends React.Component<Props, State> {
     }
     if (disabledBuyButton !== state) {
       s.disabledBuyButton = state;
-      s.dexfee = 0;
+      if (!isNumber(fee)) s.dexfee = 0;
     }
     this.setState(s);
   };
@@ -435,6 +433,37 @@ class AmountSection extends React.Component<Props, State> {
       paymentcoin: payment.get('symbol'),
       amount: Number(base)
     });
+  };
+
+  onClickMaxVolumeButton = async (evt: SyntheticInputEvent<>) => {
+    try {
+      debug(`onClickMaxVolumeButton`);
+      evt.preventDefault();
+      const { price, payment, currency, balance } = this.props;
+
+      const b = balance.get(currency.get('symbol'));
+      const fee = b.get('fee');
+      const maxvolume = floor(price.get('maxvolume') - fee, 8);
+      const bestPrice = this.getBestPrice();
+      const amount = floor(maxvolume * bestPrice, 8);
+      const dexfee = floor(
+        calculateDexfee(
+          currency.get('symbol'),
+          payment.get('symbol'),
+          maxvolume
+        ),
+        8
+      );
+
+      const baseInput = this.baseInput.current;
+      const paymentInput = this.paymentInput.current;
+      await baseInput.setValue(maxvolume);
+      await paymentInput.setValue(amount);
+      this.controlBuyButton(false, dexfee);
+    } catch (err) {
+      this.controlBuyButton(true);
+      debug(`onClickMaxVolumeButton: ${err.message}`);
+    }
   };
 
   clickProcessButton = (evt: SyntheticInputEvent<>) => {
@@ -717,7 +746,7 @@ class AmountSection extends React.Component<Props, State> {
 
   render() {
     debug(`render`);
-    const { classes, buyingLoading, price } = this.props;
+    const { classes, buyingLoading, currency, payment, price } = this.props;
     const { openSnackbar, snackbarMessage } = this.state;
 
     return (
@@ -742,17 +771,32 @@ class AmountSection extends React.Component<Props, State> {
                 {price ? `${price.get('avevolume')} ${price.get('base')}` : NA}
               </span>
             </div>
-            <div
+            <Button
+              disabled={
+                !currency.get('symbol') ||
+                !payment.get('symbol') ||
+                buyingLoading
+              }
+              color="primary"
               className={ClassNames(
                 classes.amountform__infoBorder,
                 classes.amountform__infoItem
               )}
+              style={{
+                display: 'inline-block',
+                textTransform: 'inherit',
+                padding: 0,
+                color: 'rgba(0, 0, 0, 0.87)'
+              }}
+              onClick={this.onClickMaxVolumeButton}
             >
               <Typography variant="subtitle1">Max Volume</Typography>
               <span className={classes.amountform__infosubtitle2}>
-                {price ? `${price.get('maxvolume')} ${price.get('base')}` : NA}
+                {price
+                  ? `${floor(price.get('maxvolume'), 8)} ${price.get('base')}`
+                  : NA}
               </span>
-            </div>
+            </Button>
             <div className={classes.amountform__infoItem}>
               <Typography variant="subtitle1">Instant rate</Typography>
               <span className={classes.amountform__infosubtitle2}>

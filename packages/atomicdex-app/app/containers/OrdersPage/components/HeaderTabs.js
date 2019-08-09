@@ -9,16 +9,11 @@ import Tab from '@material-ui/core/Tab';
 // import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
 
-const debug = require('debug')('atomicapp:containers:DexPage:HeaderTabs');
+const debug = require('debug')('atomicapp:containers:OrderPage:HeaderTabs');
 
 const styles = theme => ({
   buyTabs__tab: {
     minWidth: 100
-  },
-
-  buyTabs__labelContainer: {
-    paddingLeft: 12,
-    paddingRight: 12
   },
 
   buyTabs__badge: {
@@ -56,13 +51,7 @@ class HeaderTabs extends React.PureComponent<IHeaderTabsProps> {
         textColor="primary"
         onChange={handleChange}
       >
-        <Tab
-          classes={{
-            labelContainer: classes.buyTabs__labelContainer
-          }}
-          label={<span>Sell Order</span>}
-          className={classes.buyTabs__tab}
-        />
+        <Tab label={<span>Sell Order</span>} className={classes.buyTabs__tab} />
         {/* <Tab
           label={
             size > 0 ? (

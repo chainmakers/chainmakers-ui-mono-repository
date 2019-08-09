@@ -32,6 +32,7 @@ import {
   // LOAD_SWAP_SUCCESS
 } from '../../__tests__/fake-data';
 import SWAP_STATE_TEN from '../../__tests__/swap-status.json';
+import SWAP_STATE_ERROR from '../../__tests__/swap-status.takerfeesendfailed.json';
 import BUY_STATE from '../../__tests__/buy.json';
 
 describe('containers/DexPage/reducers/initial', () => {
@@ -699,6 +700,151 @@ describe('containers/DexPage/reducers/loadRecentSwapsCoin', () => {
     expect(store).toEqual(expectedResult);
     store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_FOUR));
     expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_THREE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_ONE));
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_TWO));
+    expect(store).toEqual(expectedResult);
+  });
+});
+
+describe('containers/DexPage/reducers/loadRecentSwapsCoinError', () => {
+  const {
+    result: { events }
+  } = SWAP_STATE_ERROR;
+
+  const { length } = events;
+
+  const SWAP_STATE_THREE = cloneDeep(SWAP_STATE_ERROR);
+  SWAP_STATE_THREE.result.events = events.slice(0, length - 1);
+
+  const SWAP_STATE_TWO = cloneDeep(SWAP_STATE_ERROR);
+  SWAP_STATE_TWO.result.events = events.slice(0, length - 2);
+
+  const SWAP_STATE_ONE = cloneDeep(SWAP_STATE_ERROR);
+  SWAP_STATE_ONE.result.events = events.slice(0, length - 3);
+
+  // eslint-disable-next-line camelcase
+  const { uuid, base_amount, rel_amount } = BUY_STATE.result;
+
+  // expiration
+  const expiration = 1556256548 + 30;
+  // timeleft
+  // const timeleft = 30;
+  // bob
+  const bob = 'COQUI';
+  // alice
+  const alice = 'BEER';
+  // basevalue
+  const basevalue = floor(base_amount, 8);
+  // relvalue
+  const relvalue = floor(rel_amount, 8);
+  // tradeid
+  const tradeid = uuid;
+  // requestid
+  const requestid = 0;
+  // quoteid
+  const quoteid = 0;
+  // bobsmartaddress
+  const bobsmartaddress = 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu';
+  // alicesmartaddress
+  const alicesmartaddress = bobsmartaddress;
+
+  let store = initialState
+    .setIn(['swaps', 'processingList'], fromJS([uuid]))
+    .setIn(
+      ['swaps', 'entities'],
+      fromJS({
+        [uuid]: {
+          id: tradeid,
+          uuid,
+          requestid,
+          quoteid,
+          expiration,
+          bob,
+          alice,
+          bobsmartaddress,
+          alicesmartaddress,
+          bobamount: basevalue,
+          aliceamount: relvalue,
+          sentflags: [],
+          status: 'pending',
+          myfee: {
+            tx: SWAP_TX_DEFAULT,
+            value: 0
+          },
+          bobdeposit: {
+            tx: SWAP_TX_DEFAULT,
+            value: 0
+          },
+          alicepayment: {
+            tx: SWAP_TX_DEFAULT,
+            value: 0
+          },
+          bobpayment: {
+            tx: SWAP_TX_DEFAULT,
+            value: 0
+          },
+          alicespend: {
+            tx: SWAP_TX_DEFAULT,
+            value: 0
+          }
+        }
+      })
+    );
+
+  it('should handle the loadRecentSwapsCoin action correctly', () => {
+    let entities = store.getIn(['swaps', 'entities']);
+    let entity = entities.get(uuid);
+    let lastEvent = last(SWAP_STATE_ONE.result.events);
+    entity = entity
+      .set('sentflags', entity.get('sentflags').push(lastEvent.event.type))
+      .set('status', lastEvent.event.type)
+      .set('expiration', 1556263778);
+
+    let expectedResult = store.setIn(
+      ['swaps', 'entities'],
+      entities.set(uuid, entity)
+    );
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_ONE));
+    expect(store).toEqual(expectedResult);
+
+    store = expectedResult;
+    entities = store.getIn(['swaps', 'entities']);
+    entity = entities.get(uuid);
+    lastEvent = last(SWAP_STATE_TWO.result.events);
+    entity = entity
+      .set('sentflags', entity.get('sentflags').push(lastEvent.event.type))
+      .set('status', lastEvent.event.type);
+    expectedResult = store.setIn(
+      ['swaps', 'entities'],
+      entities.set(uuid, entity)
+    );
+
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_TWO));
+
+    expect(store).toEqual(expectedResult);
+    store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_ONE));
+    expect(store).toEqual(expectedResult);
+
+    store = expectedResult;
+    entities = store.getIn(['swaps', 'entities']);
+    entity = entities.get(uuid);
+    lastEvent = last(SWAP_STATE_THREE.result.events);
+    entity = entity
+      .set('sentflags', entity.get('sentflags').push(lastEvent.event.type))
+      .set('status', lastEvent.event.type)
+      .set(
+        'error',
+        fromJS({
+          message: 'Taker Fee Send Failed'
+        })
+      );
+    expectedResult = store.setIn(
+      ['swaps', 'entities'],
+      entities.set(uuid, entity)
+    );
     store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_THREE));
     expect(store).toEqual(expectedResult);
     store = buyReducer(store, loadRecentSwapsCoin(SWAP_STATE_ONE));

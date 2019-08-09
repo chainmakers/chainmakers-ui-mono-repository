@@ -16,8 +16,8 @@ import {
   ORDERBOOK_LOAD_ERROR,
   ORDERBOOK_LOAD_SKIP,
   ORDERBOOK_LOAD_SUCCESS,
-  ORDER_BOB_SITE,
-  ORDER_ALICE_SITE,
+  ORDER_BOB_SIDE,
+  ORDER_ALICE_SIDE,
   ORDERBOOK_RELOAD_SUCCESS
 } from '../../constants';
 
@@ -35,14 +35,14 @@ describe('containers/OrderPage/saga/orderbook', () => {
     v.base = base;
     v.rel = rel;
     v.id = `${v.address}-${rel}-${base}`;
-    v.type = ORDER_ALICE_SITE;
+    v.type = ORDER_ALICE_SIDE;
     return v;
   });
   payload.asks.map(v => {
     v.base = base;
     v.rel = rel;
     v.id = `${v.address}-${rel}-${base}`;
-    v.type = ORDER_BOB_SITE;
+    v.type = ORDER_BOB_SIDE;
     return v;
   });
 

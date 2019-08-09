@@ -17,11 +17,6 @@ const styles = theme => ({
     minWidth: 100
   },
 
-  buyTabs__labelContainer: {
-    paddingLeft: 12,
-    paddingRight: 12
-  },
-
   buyTabs__badge: {
     // The border color match the background color.
     border: `2px solid ${
@@ -58,13 +53,7 @@ class HeaderTabs extends React.PureComponent<IHeaderTabsProps> {
         textColor="primary"
         onChange={handleChange}
       >
-        <Tab
-          classes={{
-            labelContainer: classes.buyTabs__labelContainer
-          }}
-          label="Place Order"
-          className={classes.buyTabs__tab}
-        />
+        <Tab label="Place Order" className={classes.buyTabs__tab} />
         <Tab
           label={
             size > 0 ? (

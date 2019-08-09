@@ -24,33 +24,6 @@ export const CHECK_UPDATE_SWAP_EVENT =
 export const AUTO_HIDE_SNACKBAR_TIME = 6000;
 export const TIME_LOOP = 5 * 1000;
 
-export const WAITING_SWAPS_STATE = 'WaitingTheConfirmation';
-export const STARTED_SWAPS_STATE = 'Started';
-export const NEGOTIATED_SWAPS_STATE = 'Negotiated';
-export const TAKER_FEE_SENT_SWAPS_STATE = 'TakerFeeSent';
-export const MAKER_PAYMENT_RECEIVED_SWAPS_STATE = 'MakerPaymentReceived';
-export const MAKER_PAYMENT_WAIT_CONFIRM_STARTED_SWAPS_STATE =
-  'MakerPaymentWaitConfirmStarted';
-export const MAKER_PAYMENT_VALIDATED_AND_CONFIRMED_SWAPS_STATE =
-  'MakerPaymentValidatedAndConfirmed';
-export const TAKER_PAYMENT_SENT_SWAPS_STATE = 'TakerPaymentSent';
-export const TAKER_PAYMENT_SPENT_SWAPS_STATE = 'TakerPaymentSpent';
-export const MAKER_PAYMENT_SPENT_SWAPS_STATE = 'MakerPaymentSpent';
-export const FINISHED_SWAPS_STATE = 'Finished';
-export const STATE_SWAPS = [
-  WAITING_SWAPS_STATE,
-  STARTED_SWAPS_STATE,
-  NEGOTIATED_SWAPS_STATE,
-  TAKER_FEE_SENT_SWAPS_STATE,
-  MAKER_PAYMENT_RECEIVED_SWAPS_STATE,
-  MAKER_PAYMENT_WAIT_CONFIRM_STARTED_SWAPS_STATE,
-  MAKER_PAYMENT_VALIDATED_AND_CONFIRMED_SWAPS_STATE,
-  TAKER_PAYMENT_SENT_SWAPS_STATE,
-  TAKER_PAYMENT_SPENT_SWAPS_STATE,
-  MAKER_PAYMENT_SPENT_SWAPS_STATE,
-  FINISHED_SWAPS_STATE
-];
-
 // https://github.com/KomodoPlatform/Documentation/blob/master/docs/source/barterDEX/MarketmakerErrors.rst#marketmaker-error-codes
 export const SWAP_TX_DEFAULT =
   '0000000000000000000000000000000000000000000000000000000000000000';

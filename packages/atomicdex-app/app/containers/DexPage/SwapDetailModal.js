@@ -2,6 +2,7 @@
 import React from 'react';
 import type { Node } from 'react';
 // import ClassNames from 'classnames';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import type { Dispatch } from 'redux';
@@ -26,12 +27,10 @@ import { BuyButton } from 'barterdex-components';
 import explorer from '../../lib/explorer';
 import openNewWindow from '../../utils/openNewWindow';
 import getCoinMemoize from '../../components/CryptoIcons';
+import ExplorerLink from '../../components/ExplorerLink';
 import CoinSelectable from '../../components/CoinSelectable';
-import {
-  STATE_SWAPS,
-  SWAP_TX_DEFAULT,
-  FINISHED_SWAPS_STATE
-} from './constants';
+import { STATE_SWAPS, FINISHED_SWAPS_STATE } from '../../constants';
+import { SWAP_TX_DEFAULT } from './constants';
 import { closeDetailModal } from './actions';
 import {
   makeSelectSwapDetailModal,
@@ -205,13 +204,12 @@ export class SwapDetail extends React.PureComponent<Props> {
     let link = emptyLink;
     if (tx !== SWAP_TX_DEFAULT) {
       link = (
-        <a
-          href={explorer.tx(tx, coin)}
-          onClick={this.openExplorer}
+        <ExplorerLink
+          tx={tx}
+          symbol={coin}
           className={classes.amountform__uuidlink}
-        >
-          Open TX in block explorer
-        </a>
+          content="Open TX in block explorer"
+        />
       );
     }
     return this.renderTXLink(
@@ -229,13 +227,12 @@ export class SwapDetail extends React.PureComponent<Props> {
     let link = emptyLink;
     if (tx !== SWAP_TX_DEFAULT) {
       link = (
-        <a
-          href={explorer.tx(tx, coin)}
-          onClick={this.openExplorer}
+        <ExplorerLink
+          tx={tx}
+          symbol={coin}
           className={classes.amountform__uuidlink}
-        >
-          Open TX in block explorer
-        </a>
+          content="Open TX in block explorer"
+        />
       );
     }
     return this.renderTXLink(
@@ -253,13 +250,12 @@ export class SwapDetail extends React.PureComponent<Props> {
     let link = emptyLink;
     if (tx !== SWAP_TX_DEFAULT) {
       link = (
-        <a
-          href={explorer.tx(tx, coin)}
-          onClick={this.openExplorer}
+        <ExplorerLink
+          tx={tx}
+          symbol={coin}
           className={classes.amountform__uuidlink}
-        >
-          Open TX in block explorer
-        </a>
+          content="Open TX in block explorer"
+        />
       );
     }
     return this.renderTXLink(
@@ -277,13 +273,12 @@ export class SwapDetail extends React.PureComponent<Props> {
     let link = emptyLink;
     if (tx !== SWAP_TX_DEFAULT) {
       link = (
-        <a
-          href={explorer.tx(tx, coin)}
-          onClick={this.openExplorer}
+        <ExplorerLink
+          tx={tx}
+          symbol={coin}
           className={classes.amountform__uuidlink}
-        >
-          Open TX in block explorer
-        </a>
+          content="Open TX in block explorer"
+        />
       );
     }
     return this.renderTXLink(
@@ -302,13 +297,12 @@ export class SwapDetail extends React.PureComponent<Props> {
 
     if (tx !== SWAP_TX_DEFAULT) {
       link = (
-        <a
-          href={explorer.tx(tx, coin)}
-          onClick={this.openExplorer}
+        <ExplorerLink
+          tx={tx}
+          symbol={coin}
           className={classes.amountform__uuidlink}
-        >
-          Open TX in block explorer
-        </a>
+          content="Open TX in block explorer"
+        />
       );
     }
     return this.renderTXLink(
@@ -342,7 +336,11 @@ export class SwapDetail extends React.PureComponent<Props> {
               <CoinSelectable
                 className={classes.swapform_button}
                 icon={getCoinMemoize(swap.get('alice'))}
-                title="Deposit"
+                title={
+                  <FormattedMessage id="atomicapp.containers.DexPage.payment">
+                    {(...content) => content}
+                  </FormattedMessage>
+                }
                 subTitle={
                   <span className={classes.swapDetail__danger}>
                     {swap.get('aliceamount')} {swap.get('alice')}
@@ -359,7 +357,11 @@ export class SwapDetail extends React.PureComponent<Props> {
               <CoinSelectable
                 className={classes.swapform_button}
                 icon={getCoinMemoize(swap.get('bob'))}
-                title="Receive"
+                title={
+                  <FormattedMessage id="atomicapp.containers.DexPage.currency">
+                    {(...content) => content}
+                  </FormattedMessage>
+                }
                 subTitle={
                   <span className={classes.swapDetail__success}>
                     {swap.get('bobamount')} {swap.get('bob')}
@@ -490,9 +492,7 @@ export class SwapDetail extends React.PureComponent<Props> {
                   <Typography variant="button" gutterBottom>
                     Error
                   </Typography>
-                  <Typography gutterBottom>
-                    {swapsError.get('message')}
-                  </Typography>
+                  <Typography>{swapsError.get('message')}</Typography>
                 </div>
               )}
             </Grid>

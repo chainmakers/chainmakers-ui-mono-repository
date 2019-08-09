@@ -24,17 +24,17 @@ import { LOADING, LOADED, FAILED } from '../../../constants';
 import {
   ORDERBOOK_LOAD,
   NEW_ORDER_SET,
-  ORDER_ALICE_SITE,
-  ORDER_BOB_SITE
+  ORDER_ALICE_SIDE,
+  ORDER_BOB_SIDE
 } from '../constants';
 
-describe('containers/DexPage/reducers/initial', () => {
+describe('containers/OrderPage/reducers/initial', () => {
   it('should return the initial state', () => {
     expect(buyReducer(undefined, {})).toEqual(initialState);
   });
 });
 
-describe('containers/DexPage/reducers/openJoyride', () => {
+describe('containers/OrderPage/reducers/openJoyride', () => {
   it('should handle the openJoyride action correctly', () => {
     const expectedResult = initialState.setIn(['joyride', 'open'], true);
 
@@ -42,7 +42,7 @@ describe('containers/DexPage/reducers/openJoyride', () => {
   });
 });
 
-describe('containers/DexPage/reducers/closeJoyride', () => {
+describe('containers/OrderPage/reducers/closeJoyride', () => {
   it('should handle the closeJoyride action correctly', () => {
     const expectedResult = initialState.setIn(['joyride', 'open'], true);
 
@@ -50,7 +50,7 @@ describe('containers/DexPage/reducers/closeJoyride', () => {
   });
 });
 
-describe('containers/DexPage/reducers/loadOrderbook', () => {
+describe('containers/OrderPage/reducers/loadOrderbook', () => {
   it('should handle the loadOrderbook action correctly', () => {
     const expectedResult = initialState
       .setIn(['orderbook', 'fetchStatus'], LOADING)
@@ -59,7 +59,7 @@ describe('containers/DexPage/reducers/loadOrderbook', () => {
   });
 });
 
-describe('containers/DexPage/reducers/skipOrderbook', () => {
+describe('containers/OrderPage/reducers/skipOrderbook', () => {
   it('should handle the skipOrderbook action correctly', () => {
     const expectedResult = initialState
       .setIn(['orderbook', 'fetchStatus'], LOADING)
@@ -72,21 +72,21 @@ describe('containers/DexPage/reducers/skipOrderbook', () => {
   });
 });
 
-describe('containers/DexPage/reducers/loadOrderbookSuccess', () => {
+describe('containers/OrderPage/reducers/loadOrderbookSuccess', () => {
   const payload = Object.assign({}, orderbook);
   const { base, rel } = payload;
   payload.bids.map(v => {
     v.base = base;
     v.rel = rel;
     v.id = `${v.address}-${rel}-${base}`;
-    v.type = ORDER_ALICE_SITE;
+    v.type = ORDER_ALICE_SIDE;
     return v;
   });
   payload.asks.map(v => {
     v.base = base;
     v.rel = rel;
     v.id = `${v.address}-${rel}-${base}`;
-    v.type = ORDER_BOB_SITE;
+    v.type = ORDER_BOB_SIDE;
     return v;
   });
   it('should handle the loadOrderbookSuccess action correctly', () => {
@@ -95,32 +95,77 @@ describe('containers/DexPage/reducers/loadOrderbookSuccess', () => {
         selectCoinModal: { open: false },
         myorder: { fetchStatus: null, errors: null, list: [] },
         orders: {
+          '12fj3npPKwTNxUgDMN8XcCDcR2Z4DBehj6-KMD-BTC': {
+            pubkey:
+              'dbd8c73e2e80e4f3cf88d2f04a9d2d0df4269496608b14a3e17556fdcb01e0c1',
+            meta: { coin: 'BTC', numutxos: 0, depth: 0, age: 1, zcredits: 0 },
+            price: 11765.318803369999,
+            avevolume: 0,
+            base: 'BTC',
+            address: '12fj3npPKwTNxUgDMN8XcCDcR2Z4DBehj6',
+            rel: 'KMD',
+            type: 'ORDER_BOB_SIDE',
+            id: '12fj3npPKwTNxUgDMN8XcCDcR2Z4DBehj6-KMD-BTC',
+            maxvolume: 0.15931538
+          },
           '1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1-KMD-BTC': {
             pubkey:
-              'bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01',
+              '1bb83b58ec130e28e0a6d5d2acf2eb01b0d3f1670e021d47d31db8a858219da8',
             meta: { coin: 'BTC', numutxos: 0, depth: 0, age: 9, zcredits: 0 },
-            price: 0.00015473,
+            price: 11751.74655523,
             avevolume: 0,
             base: 'BTC',
             address: '1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1',
             rel: 'KMD',
-            type: 'ORDER_BOB_SITE',
+            type: 'ORDER_BOB_SIDE',
             id: '1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1-KMD-BTC',
-            maxvolume: 0.02620853
+            maxvolume: 0.10416148
+          },
+          'RAwv8JhfvmFx2V3QpY7ehiYpBJ1eqxxdxR-KMD-BTC': {
+            pubkey:
+              'dbd8c73e2e80e4f3cf88d2f04a9d2d0df4269496608b14a3e17556fdcb01e0c1',
+            meta: { coin: 'KMD', numutxos: 0, depth: 0, age: 1, zcredits: 0 },
+            price: 11636.025133814292,
+            avevolume: 0,
+            base: 'BTC',
+            address: 'RAwv8JhfvmFx2V3QpY7ehiYpBJ1eqxxdxR',
+            rel: 'KMD',
+            type: 'ORDER_ALICE_SIDE',
+            id: 'RAwv8JhfvmFx2V3QpY7ehiYpBJ1eqxxdxR-KMD-BTC',
+            maxvolume: 570.67205239
           },
           'RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd-KMD-BTC': {
             pubkey:
-              'bab6ad2eebe1e666369cab504d4622b22c1f1ef718ef388e88020f30a1573e01',
+              '1bb83b58ec130e28e0a6d5d2acf2eb01b0d3f1670e021d47d31db8a858219da8',
             meta: { coin: 'KMD', numutxos: 0, depth: 0, age: 9, zcredits: 0 },
-            price: 0.0001566,
+            price: 11622.501162250117,
             avevolume: 0,
             base: 'BTC',
             address: 'RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd',
             rel: 'KMD',
-            type: 'ORDER_ALICE_SITE',
+            type: 'ORDER_ALICE_SIDE',
             id: 'RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd-KMD-BTC',
-            maxvolume: 36.40686108
+            maxvolume: 19956.77585582
+          },
+          'RHy2obsEHhAdTag4fDsC4SfCEqm5ZzTUSH-KMD-BTC': {
+            pubkey:
+              '98d2273b6580b2b3d5c35e43bb7176dc8e60af60e19ec2bfdfb0b40b7ccde792',
+            meta: { coin: 'KMD', numutxos: 0, depth: 0, age: 8, zcredits: 0 },
+            price: 8333.333333333332,
+            avevolume: 0,
+            base: 'BTC',
+            address: 'RHy2obsEHhAdTag4fDsC4SfCEqm5ZzTUSH',
+            rel: 'KMD',
+            type: 'ORDER_ALICE_SIDE',
+            id: 'RHy2obsEHhAdTag4fDsC4SfCEqm5ZzTUSH-KMD-BTC',
+            maxvolume: 208.21649055
           }
+        },
+        cancelingOrderModal: {
+          open: false,
+          id: null,
+          fetchStatus: null,
+          errors: null
         },
         swapDetailModal: { open: false, uuid: null },
         joyride: { open: false },
@@ -129,24 +174,23 @@ describe('containers/DexPage/reducers/loadOrderbookSuccess', () => {
           errors: null,
           deposit: null,
           recevie: null,
-          asks: ['1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1-KMD-BTC'],
-          bids: ['RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd-KMD-BTC']
+          list: [
+            '12fj3npPKwTNxUgDMN8XcCDcR2Z4DBehj6-KMD-BTC',
+            '1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1-KMD-BTC',
+            'RAwv8JhfvmFx2V3QpY7ehiYpBJ1eqxxdxR-KMD-BTC',
+            'RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd-KMD-BTC',
+            'RHy2obsEHhAdTag4fDsC4SfCEqm5ZzTUSH-KMD-BTC'
+          ]
         },
         depositCoinModal: { open: false },
         recevieCoinModal: { open: false },
-        confirmNewOrderModal: { open: false },
-        cancelingOrderModal: {
-          open: false,
-          id: null,
-          fetchStatus: null,
-          errors: null
-        }
+        confirmNewOrderModal: { open: false }
       })
     );
   });
 });
 
-describe('containers/DexPage/reducers/loadOrderbookError', () => {
+describe('containers/OrderPage/reducers/loadOrderbookError', () => {
   const error = {
     context: {
       action: ORDERBOOK_LOAD
@@ -165,7 +209,7 @@ describe('containers/DexPage/reducers/loadOrderbookError', () => {
   });
 });
 
-describe('containers/DexPage/reducers/setNewOrder', () => {
+describe('containers/OrderPage/reducers/setNewOrder', () => {
   it('should handle the setNewOrder action correctly', () => {
     const expectedResult = initialState
       .setIn(['myorder', 'fetchStatus'], LOADING)
@@ -174,7 +218,7 @@ describe('containers/DexPage/reducers/setNewOrder', () => {
   });
 });
 
-describe('containers/DexPage/reducers/skipNewOrder', () => {
+describe('containers/OrderPage/reducers/skipNewOrder', () => {
   it('should handle the skipNewOrder action correctly', () => {
     const expectedResult = initialState
       .setIn(['myorder', 'fetchStatus'], LOADED)
@@ -183,11 +227,11 @@ describe('containers/DexPage/reducers/skipNewOrder', () => {
   });
 });
 
-describe('containers/DexPage/reducers/setNewOrderSuccess', () => {
+describe('containers/OrderPage/reducers/setNewOrderSuccess', () => {
   const { result } = setprice;
   result.address = 'address';
   result.id = 'address';
-  result.type = ORDER_ALICE_SITE;
+  result.type = ORDER_ALICE_SIDE;
   it('should handle the setNewOrderSuccess action correctly', () => {
     expect(buyReducer(initialState, setNewOrderSuccess(result))).toEqual(
       fromJS({
@@ -201,7 +245,7 @@ describe('containers/DexPage/reducers/setNewOrderSuccess', () => {
             base: 'BEER',
             address: 'address',
             rel: 'COQUI',
-            type: 'ORDER_ALICE_SITE',
+            type: 'ORDER_ALICE_SIDE',
             id: 'address',
             createdAt: 1559621086489,
             uuid: '89b47c5b-f441-46c4-aea1-279f6ea0d67d',
@@ -215,8 +259,7 @@ describe('containers/DexPage/reducers/setNewOrderSuccess', () => {
           errors: null,
           deposit: null,
           recevie: null,
-          asks: [],
-          bids: []
+          list: []
         },
         depositCoinModal: { open: false },
         recevieCoinModal: { open: false },
@@ -232,7 +275,7 @@ describe('containers/DexPage/reducers/setNewOrderSuccess', () => {
   });
 });
 
-describe('containers/DexPage/reducers/setNewOrderError', () => {
+describe('containers/OrderPage/reducers/setNewOrderError', () => {
   const error = {
     context: {
       action: NEW_ORDER_SET
@@ -251,7 +294,7 @@ describe('containers/DexPage/reducers/setNewOrderError', () => {
   });
 });
 
-describe('containers/DexPage/reducers/openConfirmNewOrderModal', () => {
+describe('containers/OrderPage/reducers/openConfirmNewOrderModal', () => {
   it('should handle the openConfirmNewOrderModal action correctly', () => {
     const expectedResult = initialState.setIn(
       ['confirmNewOrderModal', 'open'],
@@ -264,7 +307,7 @@ describe('containers/DexPage/reducers/openConfirmNewOrderModal', () => {
   });
 });
 
-describe('containers/DexPage/reducers/closeConfirmNewOrderModal', () => {
+describe('containers/OrderPage/reducers/closeConfirmNewOrderModal', () => {
   it('should handle the closeConfirmNewOrderModal action correctly', () => {
     const expectedResult = initialState.setIn(
       ['confirmNewOrderModal', 'open'],
@@ -277,7 +320,7 @@ describe('containers/DexPage/reducers/closeConfirmNewOrderModal', () => {
   });
 });
 
-describe('containers/DexPage/reducers/reloadOrderbookSuccess', () => {
+describe('containers/OrderPage/reducers/reloadOrderbookSuccess', () => {
   it('should handle the reloadOrderbookSuccess action correctly', () => {
     const expectedResult = initialState.setIn(
       ['myorder', 'fetchStatus'],
@@ -290,7 +333,7 @@ describe('containers/DexPage/reducers/reloadOrderbookSuccess', () => {
   });
 });
 
-describe('containers/DexPage/reducers/openCancelingOrderModal', () => {
+describe('containers/OrderPage/reducers/openCancelingOrderModal', () => {
   const id = 'id';
   it('should handle the openCancelingOrderModal action correctly', () => {
     const expectedResult = initialState
@@ -303,7 +346,7 @@ describe('containers/DexPage/reducers/openCancelingOrderModal', () => {
   });
 });
 
-describe('containers/DexPage/reducers/closeCancelingOrderModal', () => {
+describe('containers/OrderPage/reducers/closeCancelingOrderModal', () => {
   it('should handle the closeCancelingOrderModal action correctly', () => {
     const expectedResult = initialState.setIn(
       ['cancelingOrderModal', 'open'],

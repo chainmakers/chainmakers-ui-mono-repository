@@ -5,10 +5,10 @@ import Transition from 'react-transition-group/Transition';
 import { withStyles } from '@material-ui/core/styles';
 import { duration } from '@material-ui/core/styles/transitions';
 import { noob, opacity, getTransitionProps } from './utils';
-import { getElement, getRelativeClientRect } from './dom';
+import { getElement, getRelativeClientRect, getElementPosition } from './dom';
 
 const debug = require('debug')(
-  'atomicapp:containers:WalletPage:components:JoyrideModal:JoyrideBeaconDom'
+  'atomicapp:components:JoyrideModal:JoyrideBeaconDom'
 );
 
 const styles = theme => ({
@@ -147,7 +147,7 @@ class JoyrideBeaconDom extends React.PureComponent<IJoyrideBeaconProps> {
 
   onClick = (evt: SyntheticInputEvent<>) => {
     evt.preventDefault();
-    debug('click zzz');
+    debug('onClick');
   };
 
   handleEnter = node => {
@@ -169,10 +169,12 @@ class JoyrideBeaconDom extends React.PureComponent<IJoyrideBeaconProps> {
       transitionProps
     );
 
-    const react = getRelativeClientRect(getElement(id));
-    const transform = `translate(${react.x -
-      18 +
-      react.width / 2}px, ${react.y - 18 + react.height / 2}px)`;
+    const element = getElement(id);
+    const top = getElementPosition(element, 0);
+    const react = getRelativeClientRect(element);
+    const transform = `translate(${react.x - 18 + react.width / 2}px, ${
+      /* react.y */ top - 18 + react.height / 2
+    }px)`;
     // eslint-disable-next-line no-param-reassign
     node.style.webkitTransform = transform;
     // eslint-disable-next-line no-param-reassign
@@ -219,10 +221,12 @@ class JoyrideBeaconDom extends React.PureComponent<IJoyrideBeaconProps> {
   updatePosition() {
     if (this.transitionRef) {
       const { id } = this.props;
-      const react = getRelativeClientRect(getElement(id));
-      const transform = `translate(${react.x -
+      const element = getElement(id);
+      const top = getElementPosition(element, 0);
+      const react = getRelativeClientRect(element);
+      const transform = `translate(${react.x - 18 + react.width / 2}px, ${top -
         18 +
-        react.width / 2}px, ${react.y - 18 + react.height / 2}px)`;
+        react.height / 2}px)`;
       // eslint-disable-next-line no-param-reassign
       this.transitionRef.style.webkitTransform = transform;
       // eslint-disable-next-line no-param-reassign

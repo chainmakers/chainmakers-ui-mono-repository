@@ -36,7 +36,7 @@ function stylesSpotlight(id: string, node: HTMLElement): undefined {
 }
 
 const debug = require('debug')(
-  'atomicapp:containers:WalletPage:components:JoyrideModal:JoyrideSpotlightDom'
+  'atomicapp:components:JoyrideModal:JoyrideSpotlightDom'
 );
 
 const styles = () => ({
