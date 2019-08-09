@@ -31,7 +31,7 @@ import validate from '../../../components/Form/validate';
 import type { BuyCoinPayload } from '../schema';
 import { calculateDexfee } from '../utils';
 import { STATE_SWAPS, NA, FINISHED_SWAPS_STATE } from '../../../constants';
-import { AUTO_HIDE_SNACKBAR_TIME } from '../constants';
+import { AUTO_HIDE_SNACKBAR_TIME, DEXFEE } from '../constants';
 import {
   loadBuyCoin,
   loadRecentSwaps,
@@ -441,25 +441,25 @@ class AmountSection extends React.Component<Props, State> {
       evt.preventDefault();
       const { price, payment, currency, balance } = this.props;
 
+      let feeRate = 1 / DEXFEE;
+      if (currency.get('symbol') === 'KMD' || payment.get('symbol') === 'KMD') {
+        feeRate *= 0.9;
+      }
       const b = balance.get(currency.get('symbol'));
-
-      const maxvolume = price.get('maxvolume');
-      const baseInput = this.baseInput.current;
-
+      const fee = b.get('fee');
+      const maxvolume = floor(
+        (price.get('maxvolume') - 2 * fee) / (1 + feeRate),
+        8
+      );
       const bestPrice = this.getBestPrice();
-      const paymentInput = this.paymentInput.current;
+      const dexfee = floor(maxvolume * feeRate, 8);
       const amount = maxvolume * bestPrice;
 
-      const dexfee = calculateDexfee(
-        currency.get('symbol'),
-        payment.get('symbol'),
-        amount
-      );
-      const fee = b.get('fee');
-      const m = maxvolume - dexfee - 2 * fee;
-      await baseInput.setValue(floor(m, 8));
-      await paymentInput.setValue(floor(m * bestPrice, 8));
+      const baseInput = this.baseInput.current;
+      const paymentInput = this.paymentInput.current;
 
+      await baseInput.setValue(maxvolume);
+      await paymentInput.setValue(amount);
       this.controlBuyButton(false, dexfee);
     } catch (err) {
       this.controlBuyButton(true);
