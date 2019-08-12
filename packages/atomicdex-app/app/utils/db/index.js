@@ -10,7 +10,6 @@ export function open(id: string) {
   db = level(`${config.get('paths.userDataDir')}/${id}`, {
     valueEncoding: 'json'
   });
-  window.db = db;
   return db;
 }
 

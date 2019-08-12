@@ -7,7 +7,6 @@ import type { Dispatch } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 import { withStyles } from '@material-ui/core/styles';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
@@ -16,11 +15,12 @@ import injectSaga from '../../utils/inject-saga';
 import injectWebsocket from '../../utils/inject-websocket';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import { TabContainer } from '../../components/Tabs';
-import Placeholder from '../../components/placeholder';
 import MDCAppBar from '../../components/AppBar';
 import MDCHeader from '../../components/AppBar/Header';
 import MDCTabBar from '../../components/AppBar/TabBar';
 import PageSectionTitle from '../../components/PageSectionTitle';
+import FullscreenLoading from '../../components/FullscreenLoading';
+
 import { WEBSOCKET_DAEMON } from '../../utils/constants';
 import { makeSelectGlobalLoadedDataFromDB } from '../App/selectors';
 import { loadDataFromDB, loadElectrums } from '../App/actions';
@@ -51,15 +51,6 @@ const styles = () => ({
 
   containerSection: {
     paddingBottom: 25
-  },
-
-  placeholder: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    marginLeft: '-100px',
-    width: '200px',
-    textAlign: 'center'
   }
 });
 
@@ -166,17 +157,8 @@ class WalletPage extends React.PureComponent<
                 <HeaderTabs handleChange={this.handleChange} value={value} />
               </MDCTabBar>
             </MDCAppBar>
-            <Placeholder
-              ready={globalLoadedDataFromDB}
-              placeholder={
-                <div className={classes.placeholder}>
-                  <Typography variant="overline" gutterBottom>
-                    LOADING DATA FROM DB
-                  </Typography>
-                  <LinearProgress />
-                </div>
-              }
-            >
+
+            <FullscreenLoading open={!globalLoadedDataFromDB}>
               <TabContainer
                 selected={value === 0}
                 className={classes.container}
@@ -205,7 +187,7 @@ class WalletPage extends React.PureComponent<
                   switchToPortfolioTab={this.switchToPortfolioTab}
                 />
               </TabContainer>
-            </Placeholder>
+            </FullscreenLoading>
           </ErrorBoundary>
         </NavigationLayout>
         <AssetModal />
