@@ -26,4 +26,3 @@ export function close() {
 export function get() {
   return db;
 }
-// /Users/lehoang/Library/Application\ Support/Electron/atomicapp
