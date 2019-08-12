@@ -20,7 +20,8 @@ import {
   makeSelectSwapDetailModal,
   makeSelectCoinModal,
   makeSelectCurrency,
-  makeSelectPayment
+  makeSelectPayment,
+  makeSelectlLoadedDataFromDB
 } from '../selectors';
 
 describe('containers/DexPage/selectors/selectBuy', () => {
@@ -219,5 +220,18 @@ describe('containers/DexPage/selectors/makeSelectPayment', () => {
     });
     const selectPayment = makeSelectPayment();
     expect(selectPayment(mockedState)).toEqual(store.get('payment'));
+  });
+});
+
+describe('containers/DexPage/selectors/makeSelectlLoadedDataFromDB', () => {
+  it('should select the makeSelectlLoadedDataFromDB state', () => {
+    const store = initialState;
+    const mockedState = fromJS({
+      [APP_STATE_NAME]: store
+    });
+    const selectlLoadedDataFromDB = makeSelectlLoadedDataFromDB();
+    expect(selectlLoadedDataFromDB(mockedState)).toEqual(
+      store.get('loadedDataFromDB')
+    );
   });
 });

@@ -16,7 +16,9 @@ import MDCAppBar from '../../components/AppBar';
 import MDCHeader from '../../components/AppBar/Header';
 import MDCTabBar from '../../components/AppBar/TabBar';
 import ErrorBoundary from '../../components/ErrorBoundary';
+import FullscreenLoading from '../../components/FullscreenLoading';
 import { TabContainer } from '../../components/Tabs';
+
 import { NavigationLayout } from '../Layout';
 import CoinsSelectionDialog from '../CoinsSelectionDialog';
 import HeaderTabs from './components/HeaderTabs';
@@ -118,12 +120,15 @@ class DexPage extends React.Component<IDexPageProps, IDexPageState> {
                 <HeaderTabs handleChange={this.handleChange} value={value} />
               </MDCTabBar>
             </MDCAppBar>
-            <TabContainer selected={value === 0}>
-              <PlaceOrderTab />
-            </TabContainer>
-            <TabContainer selected={value === 1}>
-              <MyOrdersTab handleChangeTab={this.handleChange} />
-            </TabContainer>
+
+            <FullscreenLoading open={false}>
+              <TabContainer selected={value === 0}>
+                <PlaceOrderTab />
+              </TabContainer>
+              <TabContainer selected={value === 1}>
+                <MyOrdersTab handleChangeTab={this.handleChange} />
+              </TabContainer>
+            </FullscreenLoading>
           </ErrorBoundary>
           {/* <TestSwap /> */}
         </NavigationLayout>

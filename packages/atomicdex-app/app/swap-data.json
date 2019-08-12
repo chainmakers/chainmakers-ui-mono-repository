@@ -1,1 +1,199 @@
-{"result":{"error_events":["StartFailed","NegotiateFailed","TakerFeeSendFailed","MakerPaymentValidateFailed","TakerPaymentTransactionFailed","TakerPaymentDataSendFailed","TakerPaymentWaitForSpendFailed","MakerPaymentSpendFailed","TakerPaymentRefunded","TakerPaymentRefundFailed"],"events":[{"event":{"data":{"lock_duration":7800,"maker":"7932139a858bb9c65eafdc74fa0798617efc18b81c0c5946c798c7a5a6b95d08","maker_amount":"0.2000000000000000","maker_coin":"CHIPS","maker_coin_start_block":4355524,"maker_payment_confirmations":1,"maker_payment_wait":1565609991,"my_persistent_pub":"02471f64357636038d6db76677369f3995bbaf4531bf39a919286ca36f1a680002","started_at":1565607391,"taker_amount":"2.0000000000000000","taker_coin":"COQUI","taker_coin_start_block":72597,"taker_payment_confirmations":1,"taker_payment_lock":1565615191,"uuid":"9faa0d1a-3abf-4777-8653-4d1522fe7c8c"},"type":"Started"},"timestamp":1565607391955},{"event":{"data":{"maker_payment_locktime":1565622991,"maker_pubkey":"027932139a858bb9c65eafdc74fa0798617efc18b81c0c5946c798c7a5a6b95d08","secret_hash":"fa598049111388774b2318c68ce200d42d6a9346"},"type":"Negotiated"},"timestamp":1565607453214},{"event":{"data":{"block_height":0,"coin":"COQUI","fee_details":{"amount":0.00001},"from":["RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu"],"internal_id":"7978c7bc92f64519d962b1f9eb919a7d191af3d4a546785c05d7c2ec372f49b3","my_balance_change":-0.002584,"received_by_me":521.82036293,"spent_by_me":521.82294693,"timestamp":0,"to":["RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu","RThtXup6Zo7LZAi8kRWgjAyi1s4u6U9Cpf"],"total_amount":521.82294693,"tx_hash":"7978c7bc92f64519d962b1f9eb919a7d191af3d4a546785c05d7c2ec372f49b3","tx_hex":"0400008085202f890135e4b71f13c9a6428f2dbb7360bff8220ae0d74b003d2182232fce6dc44f39b1010000006b483045022100ff90b8b601d531367422a255044d530889e931574cbb072efc255b019c31583a02206f82c00584c1195133a91aef22a9fa65057c5947345bf0ebe6a337c7c3b84ccb012102471f64357636038d6db76677369f3995bbaf4531bf39a919286ca36f1a680002ffffffff0278ed0300000000001976a914ca1e04745e8ca0c60d8c5881531d51bec470743f88ac45af4a260c0000001976a914b1cc1a6fe678e98fda7572a76679363dcfad6a8f88ac1d46515d000000000000000000000000000000"},"type":"TakerFeeSent"},"timestamp":1565607458379},{"event":{"data":{"block_height":0,"coin":"CHIPS","fee_details":{"amount":0.0001},"from":["RL1XYoxbKaETGSqiS4po3pk1ZjRYqHBqvc"],"internal_id":"9a56a92c1734ac8b344ab3ba8a9c9f9394986a583e3b2ffe460b41c2d99a04c3","my_balance_change":0.0,"received_by_me":0.0,"spent_by_me":0.0,"timestamp":0,"to":["RL1XYoxbKaETGSqiS4po3pk1ZjRYqHBqvc","bXecxxCs7wToZMTnPqUxfzjRLBh7Uz5jxd"],"total_amount":7.36529634,"tx_hash":"9a56a92c1734ac8b344ab3ba8a9c9f9394986a583e3b2ffe460b41c2d99a04c3","tx_hex":"0100000001e5fb311bdbd959c7d57250bb266263df30e1ae4f898e8176d916d3ad37814e5e010000006b48304502210088c6e0a6b1b61f5446196ad203274c3d0606c26c0d59778860aaa2e902a466fd02206a4710a24c63bec6022da222223f3cc6df70bc65ad8b9290b12eeded2384ae270121027932139a858bb9c65eafdc74fa0798617efc18b81c0c5946c798c7a5a6b95d08ffffffff02002d31010000000017a914cf893b44b5f0c56bc99eca0dbef417f198c5a2a687d238b52a000000001976a91475b2fb414f5b06d11f5142316911582f98adc1ec88ac3a46515d"},"type":"MakerPaymentReceived"},"timestamp":1565607515906},{"event":{"type":"MakerPaymentWaitConfirmStarted"},"timestamp":1565607515908},{"event":{"type":"MakerPaymentValidatedAndConfirmed"},"timestamp":1565607526797},{"event":{"data":{"block_height":0,"coin":"COQUI","fee_details":{"amount":0.00001},"from":["RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu"],"internal_id":"6da2f8ecb2b9e127fce7914d5ee6ba77dd81c73916018f74a2ae76f61cd344f5","my_balance_change":-2.00001,"received_by_me":519.82035293,"spent_by_me":521.82036293,"timestamp":0,"to":["RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu","bJ3G8qTu71ZEPswXoJCEf59a4nMMEKpGyq"],"total_amount":521.82036293,"tx_hash":"6da2f8ecb2b9e127fce7914d5ee6ba77dd81c73916018f74a2ae76f61cd344f5","tx_hex":"0400008085202f8901b3492f37ecc2d7055c7846a5d4f31a197d9a91ebf9b162d91945f692bcc77879010000006b4830450221009ffee45e8c8e773ea0a8570a1bb8f66a4d26c09b176251fa5a19951a49bb47fa0220469d2f8ea114c86bdf6a9730cfbefedc65f30fc2da16f0b546456c1836a94c0e012102471f64357636038d6db76677369f3995bbaf4531bf39a919286ca36f1a680002ffffffff0200c2eb0b0000000017a9143a3fa6665b98c36073c5a14e4af9058125ba2f19875de95e1a0c0000001976a914b1cc1a6fe678e98fda7572a76679363dcfad6a8f88ac6746515d000000000000000000000000000000"},"type":"TakerPaymentSent"},"timestamp":1565607533967},{"event":{"data":{"secret":"11d0314ab327a3d372272ebd4049bc94de6968ecf3f5a3a405429af75d8cff96","transaction":{"block_height":0,"coin":"COQUI","fee_details":{"amount":0.00001},"from":["bJ3G8qTu71ZEPswXoJCEf59a4nMMEKpGyq"],"internal_id":"58bfacc4d2229e23a9fa1cf5d773416d963c9d6ecd431b61a8b3d94cd3b5e7ac","my_balance_change":0.0,"received_by_me":0.0,"spent_by_me":0.0,"timestamp":0,"to":["RL1XYoxbKaETGSqiS4po3pk1ZjRYqHBqvc"],"total_amount":2.0,"tx_hash":"58bfacc4d2229e23a9fa1cf5d773416d963c9d6ecd431b61a8b3d94cd3b5e7ac","tx_hex":"0400008085202f8901f544d31cf676aea2748f011639c781dd77bae65e4d91e7fc27e1b9b2ecf8a26d00000000d8483045022100d6074494a6794f239bf3936dbfc17941d93777879c254541e85e19764192b5020220224a6c80d5a2e0e9e53572d016aa0b6af461059f0126ed3d0fecb509d90d41d8012011d0314ab327a3d372272ebd4049bc94de6968ecf3f5a3a405429af75d8cff96004c6b63045764515db1752102471f64357636038d6db76677369f3995bbaf4531bf39a919286ca36f1a680002ac6782012088a914fa598049111388774b2318c68ce200d42d6a93468821027932139a858bb9c65eafdc74fa0798617efc18b81c0c5946c798c7a5a6b95d08ac68ffffffff0118beeb0b000000001976a91475b2fb414f5b06d11f5142316911582f98adc1ec88acc339515d000000000000000000000000000000"}},"type":"TakerPaymentSpent"},"timestamp":1565607903482},{"event":{"data":{"block_height":0,"coin":"CHIPS","fee_details":{"amount":0.0001},"from":["bXecxxCs7wToZMTnPqUxfzjRLBh7Uz5jxd"],"internal_id":"87fcefb2aefd1f9bca746c5c9f997ee856202c26dc1138199251c62923601718","my_balance_change":0.1999,"received_by_me":0.1999,"spent_by_me":0.0,"timestamp":0,"to":["RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu"],"total_amount":0.2,"tx_hash":"87fcefb2aefd1f9bca746c5c9f997ee856202c26dc1138199251c62923601718","tx_hex":"0100000001c3049ad9c2410b46fe2f3b3e586a9894939f9c8abab34a348bac34172ca9569a00000000d8483045022100c082c052b17a265b9bbbe9e89c6a53aebc388e13b142faacc96bf62a1d4ca17f0220203056a1e526ceedff44e32616526fc95ade542b61787e3228d0cccfdbeb35d0012011d0314ab327a3d372272ebd4049bc94de6968ecf3f5a3a405429af75d8cff96004c6b6304cf82515db17521027932139a858bb9c65eafdc74fa0798617efc18b81c0c5946c798c7a5a6b95d08ac6782012088a914fa598049111388774b2318c68ce200d42d6a9346882102471f64357636038d6db76677369f3995bbaf4531bf39a919286ca36f1a680002ac68ffffffff01f0053101000000001976a914b1cc1a6fe678e98fda7572a76679363dcfad6a8f88accf39515d"},"type":"MakerPaymentSpent"},"timestamp":1565607905420},{"event":{"type":"Finished"},"timestamp":1565607905422}],"my_info":{"my_amount":"2.0000000000000000","my_coin":"COQUI","other_amount":"0.2000000000000000","other_coin":"CHIPS","started_at":1565607391},"success_events":["Started","Negotiated","TakerFeeSent","MakerPaymentReceived","MakerPaymentWaitConfirmStarted","MakerPaymentValidatedAndConfirmed","TakerPaymentSent","TakerPaymentSpent","MakerPaymentSpent","Finished"],"type":"Taker","uuid":"9faa0d1a-3abf-4777-8653-4d1522fe7c8c"}}
+{
+  "result": {
+    "error_events": [
+      "StartFailed",
+      "NegotiateFailed",
+      "TakerFeeSendFailed",
+      "MakerPaymentValidateFailed",
+      "TakerPaymentTransactionFailed",
+      "TakerPaymentDataSendFailed",
+      "TakerPaymentWaitForSpendFailed",
+      "MakerPaymentSpendFailed",
+      "TakerPaymentRefunded",
+      "TakerPaymentRefundFailed"
+    ],
+    "events": [
+      {
+        "event": {
+          "data": {
+            "lock_duration": 7800,
+            "maker": "7932139a858bb9c65eafdc74fa0798617efc18b81c0c5946c798c7a5a6b95d08",
+            "maker_amount": "0.2000000000000000",
+            "maker_coin": "CHIPS",
+            "maker_coin_start_block": 4355524,
+            "maker_payment_confirmations": 1,
+            "maker_payment_wait": 1565609991,
+            "my_persistent_pub": "02471f64357636038d6db76677369f3995bbaf4531bf39a919286ca36f1a680002",
+            "started_at": 1565607391,
+            "taker_amount": "2.0000000000000000",
+            "taker_coin": "COQUI",
+            "taker_coin_start_block": 72597,
+            "taker_payment_confirmations": 1,
+            "taker_payment_lock": 1565615191,
+            "uuid": "9faa0d1a-3abf-4777-8653-4d1522fe7c8c"
+          },
+          "type": "Started"
+        },
+        "timestamp": 1565607391955
+      },
+      {
+        "event": {
+          "data": {
+            "maker_payment_locktime": 1565622991,
+            "maker_pubkey": "027932139a858bb9c65eafdc74fa0798617efc18b81c0c5946c798c7a5a6b95d08",
+            "secret_hash": "fa598049111388774b2318c68ce200d42d6a9346"
+          },
+          "type": "Negotiated"
+        },
+        "timestamp": 1565607453214
+      },
+      {
+        "event": {
+          "data": {
+            "block_height": 0,
+            "coin": "COQUI",
+            "fee_details": { "amount": 0.00001 },
+            "from": ["RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu"],
+            "internal_id": "7978c7bc92f64519d962b1f9eb919a7d191af3d4a546785c05d7c2ec372f49b3",
+            "my_balance_change": -0.002584,
+            "received_by_me": 521.82036293,
+            "spent_by_me": 521.82294693,
+            "timestamp": 0,
+            "to": [
+              "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
+              "RThtXup6Zo7LZAi8kRWgjAyi1s4u6U9Cpf"
+            ],
+            "total_amount": 521.82294693,
+            "tx_hash": "7978c7bc92f64519d962b1f9eb919a7d191af3d4a546785c05d7c2ec372f49b3",
+            "tx_hex": "0400008085202f890135e4b71f13c9a6428f2dbb7360bff8220ae0d74b003d2182232fce6dc44f39b1010000006b483045022100ff90b8b601d531367422a255044d530889e931574cbb072efc255b019c31583a02206f82c00584c1195133a91aef22a9fa65057c5947345bf0ebe6a337c7c3b84ccb012102471f64357636038d6db76677369f3995bbaf4531bf39a919286ca36f1a680002ffffffff0278ed0300000000001976a914ca1e04745e8ca0c60d8c5881531d51bec470743f88ac45af4a260c0000001976a914b1cc1a6fe678e98fda7572a76679363dcfad6a8f88ac1d46515d000000000000000000000000000000"
+          },
+          "type": "TakerFeeSent"
+        },
+        "timestamp": 1565607458379
+      },
+      {
+        "event": {
+          "data": {
+            "block_height": 0,
+            "coin": "CHIPS",
+            "fee_details": { "amount": 0.0001 },
+            "from": ["RL1XYoxbKaETGSqiS4po3pk1ZjRYqHBqvc"],
+            "internal_id": "9a56a92c1734ac8b344ab3ba8a9c9f9394986a583e3b2ffe460b41c2d99a04c3",
+            "my_balance_change": 0.0,
+            "received_by_me": 0.0,
+            "spent_by_me": 0.0,
+            "timestamp": 0,
+            "to": [
+              "RL1XYoxbKaETGSqiS4po3pk1ZjRYqHBqvc",
+              "bXecxxCs7wToZMTnPqUxfzjRLBh7Uz5jxd"
+            ],
+            "total_amount": 7.36529634,
+            "tx_hash": "9a56a92c1734ac8b344ab3ba8a9c9f9394986a583e3b2ffe460b41c2d99a04c3",
+            "tx_hex": "0100000001e5fb311bdbd959c7d57250bb266263df30e1ae4f898e8176d916d3ad37814e5e010000006b48304502210088c6e0a6b1b61f5446196ad203274c3d0606c26c0d59778860aaa2e902a466fd02206a4710a24c63bec6022da222223f3cc6df70bc65ad8b9290b12eeded2384ae270121027932139a858bb9c65eafdc74fa0798617efc18b81c0c5946c798c7a5a6b95d08ffffffff02002d31010000000017a914cf893b44b5f0c56bc99eca0dbef417f198c5a2a687d238b52a000000001976a91475b2fb414f5b06d11f5142316911582f98adc1ec88ac3a46515d"
+          },
+          "type": "MakerPaymentReceived"
+        },
+        "timestamp": 1565607515906
+      },
+      {
+        "event": { "type": "MakerPaymentWaitConfirmStarted" },
+        "timestamp": 1565607515908
+      },
+      {
+        "event": { "type": "MakerPaymentValidatedAndConfirmed" },
+        "timestamp": 1565607526797
+      },
+      {
+        "event": {
+          "data": {
+            "block_height": 0,
+            "coin": "COQUI",
+            "fee_details": { "amount": 0.00001 },
+            "from": ["RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu"],
+            "internal_id": "6da2f8ecb2b9e127fce7914d5ee6ba77dd81c73916018f74a2ae76f61cd344f5",
+            "my_balance_change": -2.00001,
+            "received_by_me": 519.82035293,
+            "spent_by_me": 521.82036293,
+            "timestamp": 0,
+            "to": [
+              "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
+              "bJ3G8qTu71ZEPswXoJCEf59a4nMMEKpGyq"
+            ],
+            "total_amount": 521.82036293,
+            "tx_hash": "6da2f8ecb2b9e127fce7914d5ee6ba77dd81c73916018f74a2ae76f61cd344f5",
+            "tx_hex": "0400008085202f8901b3492f37ecc2d7055c7846a5d4f31a197d9a91ebf9b162d91945f692bcc77879010000006b4830450221009ffee45e8c8e773ea0a8570a1bb8f66a4d26c09b176251fa5a19951a49bb47fa0220469d2f8ea114c86bdf6a9730cfbefedc65f30fc2da16f0b546456c1836a94c0e012102471f64357636038d6db76677369f3995bbaf4531bf39a919286ca36f1a680002ffffffff0200c2eb0b0000000017a9143a3fa6665b98c36073c5a14e4af9058125ba2f19875de95e1a0c0000001976a914b1cc1a6fe678e98fda7572a76679363dcfad6a8f88ac6746515d000000000000000000000000000000"
+          },
+          "type": "TakerPaymentSent"
+        },
+        "timestamp": 1565607533967
+      },
+      {
+        "event": {
+          "data": {
+            "secret": "11d0314ab327a3d372272ebd4049bc94de6968ecf3f5a3a405429af75d8cff96",
+            "transaction": {
+              "block_height": 0,
+              "coin": "COQUI",
+              "fee_details": { "amount": 0.00001 },
+              "from": ["bJ3G8qTu71ZEPswXoJCEf59a4nMMEKpGyq"],
+              "internal_id": "58bfacc4d2229e23a9fa1cf5d773416d963c9d6ecd431b61a8b3d94cd3b5e7ac",
+              "my_balance_change": 0.0,
+              "received_by_me": 0.0,
+              "spent_by_me": 0.0,
+              "timestamp": 0,
+              "to": ["RL1XYoxbKaETGSqiS4po3pk1ZjRYqHBqvc"],
+              "total_amount": 2.0,
+              "tx_hash": "58bfacc4d2229e23a9fa1cf5d773416d963c9d6ecd431b61a8b3d94cd3b5e7ac",
+              "tx_hex": "0400008085202f8901f544d31cf676aea2748f011639c781dd77bae65e4d91e7fc27e1b9b2ecf8a26d00000000d8483045022100d6074494a6794f239bf3936dbfc17941d93777879c254541e85e19764192b5020220224a6c80d5a2e0e9e53572d016aa0b6af461059f0126ed3d0fecb509d90d41d8012011d0314ab327a3d372272ebd4049bc94de6968ecf3f5a3a405429af75d8cff96004c6b63045764515db1752102471f64357636038d6db76677369f3995bbaf4531bf39a919286ca36f1a680002ac6782012088a914fa598049111388774b2318c68ce200d42d6a93468821027932139a858bb9c65eafdc74fa0798617efc18b81c0c5946c798c7a5a6b95d08ac68ffffffff0118beeb0b000000001976a91475b2fb414f5b06d11f5142316911582f98adc1ec88acc339515d000000000000000000000000000000"
+            }
+          },
+          "type": "TakerPaymentSpent"
+        },
+        "timestamp": 1565607903482
+      },
+      {
+        "event": {
+          "data": {
+            "block_height": 0,
+            "coin": "CHIPS",
+            "fee_details": { "amount": 0.0001 },
+            "from": ["bXecxxCs7wToZMTnPqUxfzjRLBh7Uz5jxd"],
+            "internal_id": "87fcefb2aefd1f9bca746c5c9f997ee856202c26dc1138199251c62923601718",
+            "my_balance_change": 0.1999,
+            "received_by_me": 0.1999,
+            "spent_by_me": 0.0,
+            "timestamp": 0,
+            "to": ["RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu"],
+            "total_amount": 0.2,
+            "tx_hash": "87fcefb2aefd1f9bca746c5c9f997ee856202c26dc1138199251c62923601718",
+            "tx_hex": "0100000001c3049ad9c2410b46fe2f3b3e586a9894939f9c8abab34a348bac34172ca9569a00000000d8483045022100c082c052b17a265b9bbbe9e89c6a53aebc388e13b142faacc96bf62a1d4ca17f0220203056a1e526ceedff44e32616526fc95ade542b61787e3228d0cccfdbeb35d0012011d0314ab327a3d372272ebd4049bc94de6968ecf3f5a3a405429af75d8cff96004c6b6304cf82515db17521027932139a858bb9c65eafdc74fa0798617efc18b81c0c5946c798c7a5a6b95d08ac6782012088a914fa598049111388774b2318c68ce200d42d6a9346882102471f64357636038d6db76677369f3995bbaf4531bf39a919286ca36f1a680002ac68ffffffff01f0053101000000001976a914b1cc1a6fe678e98fda7572a76679363dcfad6a8f88accf39515d"
+          },
+          "type": "MakerPaymentSpent"
+        },
+        "timestamp": 1565607905420
+      },
+      { "event": { "type": "Finished" }, "timestamp": 1565607905422 }
+    ],
+    "my_info": {
+      "my_amount": "2.0000000000000000",
+      "my_coin": "COQUI",
+      "other_amount": "0.2000000000000000",
+      "other_coin": "CHIPS",
+      "started_at": 1565607391
+    },
+    "success_events": [
+      "Started",
+      "Negotiated",
+      "TakerFeeSent",
+      "MakerPaymentReceived",
+      "MakerPaymentWaitConfirmStarted",
+      "MakerPaymentValidatedAndConfirmed",
+      "TakerPaymentSent",
+      "TakerPaymentSpent",
+      "MakerPaymentSpent",
+      "Finished"
+    ],
+    "type": "Taker",
+    "uuid": "9faa0d1a-3abf-4777-8653-4d1522fe7c8c"
+  }
+}

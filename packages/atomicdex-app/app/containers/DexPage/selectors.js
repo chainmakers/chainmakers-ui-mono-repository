@@ -144,6 +144,12 @@ const makeSelectJoyrideOpenState = () =>
     joyrideState => joyrideState.get('open')
   );
 
+const makeSelectlLoadedDataFromDB = () =>
+  createSelector(
+    selectBuy,
+    buyState => buyState.get('loadedDataFromDB')
+  );
+
 export {
   selectBuy,
   makeSelectPrices,
@@ -166,5 +172,6 @@ export {
   makeSelectCurrency,
   makeSelectPayment,
   makeSelectJoyride,
-  makeSelectJoyrideOpenState
+  makeSelectJoyrideOpenState,
+  makeSelectlLoadedDataFromDB
 };
