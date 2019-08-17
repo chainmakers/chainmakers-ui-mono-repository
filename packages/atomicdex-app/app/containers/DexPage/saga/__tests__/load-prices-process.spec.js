@@ -52,7 +52,6 @@ describe('containers/DexPage/saga/load-prices-process', () => {
       expect(dispatched).toEqual([
         {
           payload: {
-            coin: 'BTC',
             address: '1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1',
             price: 11751.74655523,
             numutxos: 0,
