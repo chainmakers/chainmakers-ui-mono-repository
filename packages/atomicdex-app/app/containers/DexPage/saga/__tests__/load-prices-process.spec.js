@@ -12,7 +12,7 @@ const TIMEOUT = 20 * 1000;
 
 describe('containers/DexPage/saga/load-prices-process', () => {
   api.setUserpass('userpass');
-  // Scenario: Normal swap
+
   it(
     'should handle loadPrice correctly',
     async done => {
