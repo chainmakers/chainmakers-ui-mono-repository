@@ -29,7 +29,13 @@ export function* loadPrice(coin) {
     }
     request = api.orderbook(getprices);
     const result = yield request;
-    const ask = result.asks.find(e => e.maxvolume > 0);
+    const ask = result.asks
+      .map(e => {
+        e.price = parseFloat(e.price);
+        return e;
+      })
+      .sort((a, b) => a.price > b.price)
+      .find(e => e.maxvolume > 0);
     if (!ask) {
       throw new Error('not found the best price');
     }

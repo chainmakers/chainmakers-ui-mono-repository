@@ -632,6 +632,10 @@
           }
         }
       }
+    },
+    "currency": {
+      "name": "Komodo",
+      "symbol": "KMD"
     }
   },
   "order": {
