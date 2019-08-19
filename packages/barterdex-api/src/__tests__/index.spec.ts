@@ -30,6 +30,7 @@ describe('packages/barterdex-api/src/index', () => {
     expect(typeof BarterDexAPI.myOrders).toEqual('function');
     expect(typeof BarterDexAPI.myRecentSwaps).toEqual('function');
     expect(typeof BarterDexAPI.sendrawtransaction).toEqual('function');
+    expect(typeof BarterDexAPI.stop).toEqual('function');
     expect(typeof BarterDexAPI.recentswaps).toEqual('function');
     expect(typeof BarterDexAPI.resetUserpass).toEqual('function');
     expect(typeof BarterDexAPI.version).toEqual('function');

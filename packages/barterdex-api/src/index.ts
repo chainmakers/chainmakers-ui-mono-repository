@@ -18,6 +18,7 @@ import myRecentSwapsFactory from './my-recent-swaps';
 import orderbookFactory from './orderbook';
 import recentswapsFactory from './recentswaps';
 import sendRawTransactionFactory from './send-raw-transaction';
+import stopFactory from './stop';
 import swapstatusFactory from './swapstatus';
 import myswapstatusFactory from './my-swapstatus';
 import versionFactory from './version';
@@ -57,6 +58,7 @@ export default function setupClient({
     orderbookFactory(),
     recentswapsFactory(),
     sendRawTransactionFactory(),
+    stopFactory(),
     swapstatusFactory(),
     myswapstatusFactory(),
     versionFactory(),

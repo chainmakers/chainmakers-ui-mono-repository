@@ -38,6 +38,7 @@ export interface BarterdexApi {
   recentswaps: Function,
   resetUserpass: Function,
   version: Function,
+  stop: Function,
   waitUntilReady: Function,
   withdraw: Function
 };
