@@ -8,6 +8,7 @@ import setpriceFactory from './setprice';
 import getendpointFactory from './get-endpoint';
 import getfeeFactory from './getfee';
 import getTradeFeeFactory from './get-trade-fee';
+import getEnabledCoinsFactory from './get-enabled-coins';
 import isReadyFactory from './is-ready';
 import listTransactionsFactory from './list-transactions';
 import listunspentFactory from './listunspent';
@@ -44,6 +45,7 @@ export default function setupClient({
     getendpointFactory(),
     getfeeFactory(),
     getTradeFeeFactory(),
+    getEnabledCoinsFactory(),
     isReadyFactory(),
     listTransactionsFactory(),
     listunspentFactory(),
