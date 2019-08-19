@@ -32,6 +32,7 @@ export interface BarterdexApi {
   getUserpass: Function,
   listunspent: Function,
   myBalance: Function,
+  myOrders: Function,
   sendrawtransaction: Function,
   recentswaps: Function,
   resetUserpass: Function,
