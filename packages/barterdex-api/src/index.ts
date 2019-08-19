@@ -14,6 +14,7 @@ import listTransactionsFactory from './list-transactions';
 import listunspentFactory from './listunspent';
 import myBalanceFactory from './my-balance';
 import myOrdersFactory from './my-orders';
+import myRecentSwapsFactory from './my-recent-swaps';
 import orderbookFactory from './orderbook';
 import recentswapsFactory from './recentswaps';
 import sendRawTransactionFactory from './send-raw-transaction';
@@ -52,6 +53,7 @@ export default function setupClient({
     listunspentFactory(),
     myBalanceFactory(),
     myOrdersFactory(),
+    myRecentSwapsFactory(),
     orderbookFactory(),
     recentswapsFactory(),
     sendRawTransactionFactory(),
