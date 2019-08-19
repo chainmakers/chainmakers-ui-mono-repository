@@ -21,7 +21,8 @@ import ExplorerLink from '../../../components/ExplorerLink';
 import { covertSymbolToName } from '../../../utils/coin';
 import {
   makeSelectBalanceFetchStatus,
-  makeSelectBalanceErrors
+  makeSelectBalanceErrors,
+  makeSelectBalanceEntities
 } from '../../App/selectors';
 import {
   makeSelectOrderbookDeposit,
@@ -180,10 +181,11 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
   };
 
   renderActions = () => {
-    const { classes, data, error, fetchStatus, selected } = this.props;
+    const { classes, data, error, fetchStatus, depositAddress, recevieAddress } = this.props;
     const loading = fetchStatus === LOADING;
     const id = data.get('id');
-
+    console.log(depositAddress, recevieAddress, data.toJS(), 'zzzzzz');
+    const selected = depositAddress === data.get('address') || recevieAddress === data.get('address');
     return error ? (
       <Button
         disabled={loading}
@@ -311,13 +313,16 @@ const mapStateToProps = createSelector(
   (_, { data }) => data.get('coin'),
   makeSelectBalanceFetchStatus(),
   makeSelectBalanceErrors(),
+  makeSelectBalanceEntities(),
   makeSelectOrderbookDeposit(),
   makeSelectOrderbookRecevie(),
-  (symbol, fetchStatus, errors, deposit, recevie) => ({
+  (symbol, fetchStatus, errors, entities, deposit, recevie) => ({
     fetchStatus: fetchStatus.get(symbol),
     error: errors.get(symbol),
     deposit,
-    recevie
+    recevie,
+    depositAddress: entities.getIn([deposit, 'address']),
+    recevieAddress: entities.getIn([recevie, 'address']),
   })
 );
 

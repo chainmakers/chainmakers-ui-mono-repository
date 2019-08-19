@@ -14,6 +14,7 @@ function setup() {
     entrypoint: config.get('barterdex'),
     home: paths.homeDir
   });
+  window.api = api;
   return api;
 }
 
