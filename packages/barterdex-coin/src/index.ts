@@ -1262,12 +1262,7 @@ export default [
     name: 'hush',
     asset: 'HUSH3',
     fname: 'Hush',
-    rpcport: 8822,
-    taddr: 28,
-    pubtype: 184,
-    p2shtype: 189,
-    wiftype: 128,
-    txfee: 1000,
+    rpcport: 18031,
     servers: [
       {
         url: 'electrum1.cipig.net:10064'
@@ -1279,8 +1274,6 @@ export default [
         url: 'electrum3.cipig.net:10064'
       }
     ],
-
-    active: 0,
     market_cap: 0,
     mm2: 1
   },
