@@ -178,6 +178,7 @@ export default handleActions(
           pubkey,
           type,
           id,
+          uuid,
           ...meta
         } = v;
         sortedList.push(id);
@@ -194,7 +195,8 @@ export default handleActions(
               price,
               pubkey,
               type,
-              meta
+              meta,
+              uuid
             })
           );
           orders = orders.set(id, entity);
@@ -211,7 +213,8 @@ export default handleActions(
               price,
               pubkey,
               type,
-              meta
+              meta,
+              uuid
             })
           );
         }

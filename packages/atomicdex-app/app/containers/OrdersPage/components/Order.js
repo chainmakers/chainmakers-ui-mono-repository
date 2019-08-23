@@ -181,11 +181,20 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
   };
 
   renderActions = () => {
-    const { classes, data, error, fetchStatus, depositAddress, recevieAddress } = this.props;
+    const {
+      classes,
+      data,
+      error,
+      fetchStatus,
+      depositAddress,
+      recevieAddress
+    } = this.props;
     const loading = fetchStatus === LOADING;
     const id = data.get('id');
     console.log(depositAddress, recevieAddress, data.toJS(), 'zzzzzz');
-    const selected = depositAddress === data.get('address') || recevieAddress === data.get('address');
+    const selected =
+      depositAddress === data.get('address') ||
+      recevieAddress === data.get('address');
     return error ? (
       <Button
         disabled={loading}
@@ -322,7 +331,7 @@ const mapStateToProps = createSelector(
     deposit,
     recevie,
     depositAddress: entities.getIn([deposit, 'address']),
-    recevieAddress: entities.getIn([recevie, 'address']),
+    recevieAddress: entities.getIn([recevie, 'address'])
   })
 );
 
