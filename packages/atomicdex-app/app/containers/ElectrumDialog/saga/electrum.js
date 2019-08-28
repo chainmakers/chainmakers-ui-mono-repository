@@ -57,7 +57,9 @@ export default function* listenForAddingElectrums({
         debug(`ERROR: not found ${coins[i]} config`);
         yield put(
           openSnackbars(
-            `Not Found - ${coins[i]} config is missing. Please contact to maintainer to fix issue.`
+            `Not Found - ${
+              coins[i]
+            } config is missing. Please contact to maintainer to fix issue.`
           )
         );
       }

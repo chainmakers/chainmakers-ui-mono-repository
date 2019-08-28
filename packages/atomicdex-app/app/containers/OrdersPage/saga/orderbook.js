@@ -77,7 +77,7 @@ export function* loadingOrderbook(
           }
         });
         console.log(f);
-        if(v) {
+        if (v) {
           v.uuid = f.uuid;
         }
         return v;
@@ -102,7 +102,7 @@ export function* loadingOrderbook(
           }
         });
         console.log(f);
-        if(v) {
+        if (v) {
           v.uuid = f.uuid;
         }
         return v;

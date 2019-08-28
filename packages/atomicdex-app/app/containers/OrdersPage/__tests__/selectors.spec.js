@@ -18,7 +18,6 @@ import {
   makeSelectOrderbookFullList,
   makeSelectOrderbookFetchStatus,
   makeSelectMyOrder,
-  makeSelectMyOrderList,
   makeSelectMyOrderFetchStatus,
   makeSelectMyOrderErrors,
   makeSelectConfirmNewOrderModal,
@@ -175,9 +174,6 @@ describe('containers/OrderPage/selectors/makeSelectMyOrder', () => {
 
     const selectMyOrderFetchStatus = makeSelectMyOrderFetchStatus();
     expect(selectMyOrderFetchStatus(mockedState)).toEqual(null);
-
-    const selectMyOrderList = makeSelectMyOrderList();
-    expect(selectMyOrderList(mockedState)).toEqual(fromJS([]));
   });
 });
 

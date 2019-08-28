@@ -139,13 +139,11 @@ const styles = theme => ({
   },
 
   root__orderSelected: {
-    // backgroundColor: '#80BB41',
     border: '1px solid #80BB41'
   }
 });
 
 type IOrderProps = {
-  selected: boolean,
   classes: Styles,
   // eslint-disable-next-line flowtype/no-weak-types
   fetchStatus: List<*>,
@@ -181,20 +179,10 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
   };
 
   renderActions = () => {
-    const {
-      classes,
-      data,
-      error,
-      fetchStatus,
-      depositAddress,
-      recevieAddress
-    } = this.props;
+    const { classes, data, error, fetchStatus } = this.props;
     const loading = fetchStatus === LOADING;
     const id = data.get('id');
-    console.log(depositAddress, recevieAddress, data.toJS(), 'zzzzzz');
-    const selected =
-      depositAddress === data.get('address') ||
-      recevieAddress === data.get('address');
+    const selected = !!data.get('uuid');
     return error ? (
       <Button
         disabled={loading}
@@ -250,10 +238,11 @@ class Order extends React.PureComponent<IOrderProps, IOrderState> {
   render() {
     debug(`render`);
 
-    const { classes, error, data, deposit, recevie, selected } = this.props;
+    const { classes, error, data, deposit, recevie } = this.props;
     const isError = !!error;
     const symbol =
       data.get('type') === ORDER_BOB_SIDE ? data.get('base') : data.get('rel');
+    const selected = !!data.get('uuid');
 
     return (
       <Card
@@ -322,16 +311,13 @@ const mapStateToProps = createSelector(
   (_, { data }) => data.get('coin'),
   makeSelectBalanceFetchStatus(),
   makeSelectBalanceErrors(),
-  makeSelectBalanceEntities(),
   makeSelectOrderbookDeposit(),
   makeSelectOrderbookRecevie(),
-  (symbol, fetchStatus, errors, entities, deposit, recevie) => ({
+  (symbol, fetchStatus, errors, deposit, recevie) => ({
     fetchStatus: fetchStatus.get(symbol),
     error: errors.get(symbol),
     deposit,
-    recevie,
-    depositAddress: entities.getIn([deposit, 'address']),
-    recevieAddress: entities.getIn([recevie, 'address'])
+    recevie
   })
 );
 

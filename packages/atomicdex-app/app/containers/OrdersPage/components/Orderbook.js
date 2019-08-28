@@ -9,10 +9,7 @@ import CloudOff from '@material-ui/icons/CloudOff';
 import WarningPlate from '../../../components/WarningPlate';
 import Order from './Order';
 // import OrderItem from './OrderItem';
-import {
-  makeSelectOrderbookFullList,
-  makeSelectMyOrderList
-} from '../selectors';
+import { makeSelectOrderbookFullList } from '../selectors';
 
 const debug = require('debug')('atomicapp:containers:OrdersPage:Orderbook');
 
@@ -28,15 +25,13 @@ const useStyles = makeStyles(() => ({
 
 type IOrderbookProps = {
   // eslint-disable-next-line flowtype/no-weak-types
-  orderbook: List<*>,
-  // eslint-disable-next-line flowtype/no-weak-types
-  myOrderList: List<*>
+  orderbook: List<*>
 };
 
 function Orderbook(props: IOrderbookProps) {
   debug(`render`);
   const classes = useStyles();
-  const { orderbook, myOrderList } = props;
+  const { orderbook } = props;
 
   if (!orderbook || orderbook.size === 0) {
     return (
@@ -80,11 +75,7 @@ function Orderbook(props: IOrderbookProps) {
       <br />
       {orderbook.map((order, key) => (
         <>
-          <Order
-            key={`orderbook-${key}`}
-            selected={myOrderList.contains(order.get('id'))}
-            data={order}
-          />
+          <Order key={`orderbook-${key}`} data={order} />
           {/* <OrderItem /> */}
           <br />
         </>
@@ -98,8 +89,7 @@ Orderbook.defaultProps = {};
 Orderbook.displayName = 'OrdersPage__Orderbook';
 
 const mapStateToProps = createStructuredSelector({
-  orderbook: makeSelectOrderbookFullList(),
-  myOrderList: makeSelectMyOrderList()
+  orderbook: makeSelectOrderbookFullList()
 });
 
 const withConnect = connect(
