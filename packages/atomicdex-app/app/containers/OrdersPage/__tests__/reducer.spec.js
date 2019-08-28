@@ -123,17 +123,17 @@ describe('containers/OrderPage/reducers/loadOrderbookSuccess', () => {
             uuid: null,
             maxvolume: 0.10416148
           },
-          'RAwv8JhfvmFx2V3QpY7ehiYpBJ1eqxxdxR-KMD-BTC': {
+          'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu-KMD-BTC': {
             pubkey:
               'dbd8c73e2e80e4f3cf88d2f04a9d2d0df4269496608b14a3e17556fdcb01e0c1',
             meta: { coin: 'KMD', numutxos: 0, depth: 0, age: 1, zcredits: 0 },
             price: 11636.025133814292,
             avevolume: 0,
             base: 'BTC',
-            address: 'RAwv8JhfvmFx2V3QpY7ehiYpBJ1eqxxdxR',
+            address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
             rel: 'KMD',
             type: 'ORDER_ALICE_SIDE',
-            id: 'RAwv8JhfvmFx2V3QpY7ehiYpBJ1eqxxdxR-KMD-BTC',
+            id: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu-KMD-BTC',
             uuid: null,
             maxvolume: 570.67205239
           },
@@ -182,7 +182,7 @@ describe('containers/OrderPage/reducers/loadOrderbookSuccess', () => {
           list: [
             '12fj3npPKwTNxUgDMN8XcCDcR2Z4DBehj6-KMD-BTC',
             '1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1-KMD-BTC',
-            'RAwv8JhfvmFx2V3QpY7ehiYpBJ1eqxxdxR-KMD-BTC',
+            'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu-KMD-BTC',
             'RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd-KMD-BTC',
             'RHy2obsEHhAdTag4fDsC4SfCEqm5ZzTUSH-KMD-BTC'
           ]

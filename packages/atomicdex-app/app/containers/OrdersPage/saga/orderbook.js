@@ -62,57 +62,30 @@ export function* loadingOrderbook(
     });
 
     data.bids.map(v => {
-      try {
-        v.base = recevie;
-        v.rel = deposit;
-        v.id = `${v.address}-${deposit}-${recevie}`;
-        v.type = ORDER_ALICE_SIDE;
-        console.log(makerOrders, takerOrders, 'result');
-        const f = makerOrders.find(e => {
-          try {
-            console.log(e);
-            return e.id === v.id;
-          } catch (err) {
-            console.log(err);
-          }
-        });
-        console.log(f);
-        if (v) {
-          v.uuid = f.uuid;
-        }
-        return v;
-      } catch (err) {
-        console.log(err);
+      v.base = recevie;
+      v.rel = deposit;
+      v.id = `${v.address}-${deposit}-${recevie}`;
+      v.type = ORDER_ALICE_SIDE;
+      const f = makerOrders.find(e => e.id === v.id);
+      if (f) {
+        v.uuid = f.uuid;
       }
+      console.log(f, makerOrders, v.id, 'makerOrders');
+      return v;
     });
 
     data.asks.map(v => {
-      try {
-        v.base = recevie;
-        v.rel = deposit;
-        v.id = `${v.address}-${deposit}-${recevie}`;
-        v.type = ORDER_BOB_SIDE;
-        console.log(makerOrders, takerOrders, 'result');
-        const f = takerOrders.find(e => {
-          try {
-            console.log(e);
-            return e.id === v.id;
-          } catch (err) {
-            console.log(err);
-          }
-        });
-        console.log(f);
-        if (v) {
-          v.uuid = f.uuid;
-        }
-        return v;
-      } catch (err) {
-        console.log(err);
+      v.base = recevie;
+      v.rel = deposit;
+      v.id = `${v.address}-${deposit}-${recevie}`;
+      v.type = ORDER_BOB_SIDE;
+      const f = takerOrders.find(e => e.id === v.id);
+      if (f) {
+        v.uuid = f.uuid;
       }
+      console.log(f, takerOrders, v.id, 'takerOrders');
+      return v;
     });
-
-    console.log(makerOrders, takerOrders, 'result');
-
     return data;
   } catch (err) {
     debug(`loading orderbook error: ${err.message}`);
@@ -183,13 +156,11 @@ export default function* listenForLoadingOrderbook(action) {
   try {
     const deposit = yield select(makeSelectOrderbookDeposit());
     const recevie = yield select(makeSelectOrderbookRecevie());
-    const balance = yield select(makeSelectBalanceEntities());
-    const address = balance.get(deposit).get('address');
-
     if (!deposit || !recevie) {
       return yield put(skipOrderbook());
     }
-
+    const balance = yield select(makeSelectBalanceEntities());
+    const address = balance.get(deposit).get('address');
     const result = yield call(loadingOrderbook, deposit, recevie, address);
 
     return yield put(loadOrderbookSuccess(result));

@@ -112,10 +112,10 @@ describe('containers/OrderPage/selectors/makeSelectOrderbook', () => {
     avevolume: 0,
     minvolume: 0,
     base: 'BEER',
-    address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
+    address: '12fj3npPKwTNxUgDMN8XcCDcR2Z4DBehj6',
     rel: 'COQUI',
     type: 'ORDER_ALICE_SIDE',
-    id: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
+    id: '12fj3npPKwTNxUgDMN8XcCDcR2Z4DBehj6',
     createdAt: 1559705142940,
     uuid: '61e7fa64-43ff-4858-a148-62d16d0da0d8',
     maxvolume: 6729.6392886

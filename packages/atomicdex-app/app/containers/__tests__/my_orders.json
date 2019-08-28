@@ -1,0 +1,20 @@
+{
+  "result": {
+    "maker_orders": {
+      "eb211104-b6d9-46ea-aba9-c645a5570bb4": {
+        "available_amount": "0.15931538",
+        "base": "KMD",
+        "cancellable": true,
+        "created_at": 1566967538275,
+        "matches": {},
+        "max_base_vol": "0.15931538",
+        "min_base_vol": "0",
+        "price": "11765.318803369999",
+        "rel": "BTC",
+        "started_swaps": [],
+        "uuid": "eb211104-b6d9-46ea-aba9-c645a5570bb4"
+      }
+    },
+    "taker_orders": {}
+  }
+}
