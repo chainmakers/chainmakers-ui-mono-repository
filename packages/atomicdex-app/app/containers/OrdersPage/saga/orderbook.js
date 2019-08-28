@@ -46,7 +46,7 @@ export function* loadingOrderbook(
     const takerOrders = [];
 
     // orders that are currently active in market maker mode (SELL)
-    each(result.maker_orders, (entity, uuid) => {
+    each(result.maker_orders, entity => {
       if (entity.base === deposit && entity.rel === recevie) {
         entity.id = `${address}-${deposit}-${recevie}`;
         makerOrders.push(entity);
@@ -54,7 +54,7 @@ export function* loadingOrderbook(
     });
 
     // orders that are currently active in market taker mode (BUY)
-    each(result.taker_orders, (entity, uuid) => {
+    each(result.taker_orders, entity => {
       if (entity.base === deposit && entity.rel === recevie) {
         entity.id = `${address}-${deposit}-${recevie}`;
         takerOrders.push(entity);
@@ -173,9 +173,6 @@ export function* listenForReloadingOrderbook(action, timeout = 60) {
   } finally {
     if (yield cancelled()) {
       debug(`reloading orderbook cancelled`);
-      if (request && request[CANCEL]) {
-        request[CANCEL]();
-      }
     }
   }
 }
@@ -195,7 +192,6 @@ export default function* listenForLoadingOrderbook(action) {
 
     const result = yield call(loadingOrderbook, deposit, recevie, address);
 
-    console.log(result, 'result');
     return yield put(loadOrderbookSuccess(result));
   } catch (err) {
     debug(`loading orderbook error: ${err.message}`);
@@ -212,9 +208,6 @@ export default function* listenForLoadingOrderbook(action) {
   } finally {
     if (yield cancelled()) {
       debug(`loading orderbook cancelled`);
-      if (request && request[CANCEL]) {
-        request[CANCEL]();
-      }
     }
   }
 }

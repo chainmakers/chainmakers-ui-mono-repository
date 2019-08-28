@@ -177,7 +177,7 @@ export default handleActions(
           pubkey,
           type,
           id,
-          uuid,
+          uuid = null,
           ...meta
         } = v;
         sortedList.push(id);
@@ -272,7 +272,7 @@ export default handleActions(
     [NEW_ORDER_SET_SUCCESS]: (state, { payload }) => {
       const {
         id,
-        uuid,
+        uuid = null,
         base,
         rel,
         price,

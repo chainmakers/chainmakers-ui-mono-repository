@@ -93,7 +93,7 @@ describe('containers/OrderPage/reducers/loadOrderbookSuccess', () => {
     expect(buyReducer(initialState, loadOrderbookSuccess(payload))).toEqual(
       fromJS({
         selectCoinModal: { open: false },
-        myorder: { fetchStatus: null, errors: null, list: [] },
+        myorder: { fetchStatus: null, errors: null },
         orders: {
           '12fj3npPKwTNxUgDMN8XcCDcR2Z4DBehj6-KMD-BTC': {
             pubkey:
@@ -106,6 +106,7 @@ describe('containers/OrderPage/reducers/loadOrderbookSuccess', () => {
             rel: 'KMD',
             type: 'ORDER_BOB_SIDE',
             id: '12fj3npPKwTNxUgDMN8XcCDcR2Z4DBehj6-KMD-BTC',
+            uuid: null,
             maxvolume: 0.15931538
           },
           '1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1-KMD-BTC': {
@@ -119,6 +120,7 @@ describe('containers/OrderPage/reducers/loadOrderbookSuccess', () => {
             rel: 'KMD',
             type: 'ORDER_BOB_SIDE',
             id: '1JsAjr6d21j9T8EMsYnQ6GXf1mM523JAv1-KMD-BTC',
+            uuid: null,
             maxvolume: 0.10416148
           },
           'RAwv8JhfvmFx2V3QpY7ehiYpBJ1eqxxdxR-KMD-BTC': {
@@ -132,6 +134,7 @@ describe('containers/OrderPage/reducers/loadOrderbookSuccess', () => {
             rel: 'KMD',
             type: 'ORDER_ALICE_SIDE',
             id: 'RAwv8JhfvmFx2V3QpY7ehiYpBJ1eqxxdxR-KMD-BTC',
+            uuid: null,
             maxvolume: 570.67205239
           },
           'RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd-KMD-BTC': {
@@ -145,6 +148,7 @@ describe('containers/OrderPage/reducers/loadOrderbookSuccess', () => {
             rel: 'KMD',
             type: 'ORDER_ALICE_SIDE',
             id: 'RT9MpMyucqXiX8bZLimXBnrrn2ofmdGNKd-KMD-BTC',
+            uuid: null,
             maxvolume: 19956.77585582
           },
           'RHy2obsEHhAdTag4fDsC4SfCEqm5ZzTUSH-KMD-BTC': {
@@ -158,6 +162,7 @@ describe('containers/OrderPage/reducers/loadOrderbookSuccess', () => {
             rel: 'KMD',
             type: 'ORDER_ALICE_SIDE',
             id: 'RHy2obsEHhAdTag4fDsC4SfCEqm5ZzTUSH-KMD-BTC',
+            uuid: null,
             maxvolume: 208.21649055
           }
         },
@@ -236,7 +241,7 @@ describe('containers/OrderPage/reducers/setNewOrderSuccess', () => {
     expect(buyReducer(initialState, setNewOrderSuccess(result))).toEqual(
       fromJS({
         selectCoinModal: { open: false },
-        myorder: { fetchStatus: null, errors: null, list: ['address'] },
+        myorder: { fetchStatus: null, errors: null },
         orders: {
           address: {
             meta: { matches: {}, started_swaps: [] },
