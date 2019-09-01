@@ -142,12 +142,6 @@ const makeSelectMyOrderErrors = () =>
     myorder => myorder.get('errors')
   );
 
-const makeSelectMyOrderList = () =>
-  createSelector(
-    makeSelectMyOrder(),
-    myorder => myorder.get('list')
-  );
-
 const makeSelectConfirmNewOrderModal = () =>
   createSelector(
     selectOrder,
@@ -216,7 +210,6 @@ export {
   makeSelectMyOrder,
   makeSelectMyOrderFetchStatus,
   makeSelectMyOrderErrors,
-  makeSelectMyOrderList,
   makeSelectConfirmNewOrderModal,
   makeSelectCancelingOrderModal,
   makeSelectCancelingOrderModalOpen,

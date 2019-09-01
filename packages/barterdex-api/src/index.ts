@@ -8,13 +8,17 @@ import setpriceFactory from './setprice';
 import getendpointFactory from './get-endpoint';
 import getfeeFactory from './getfee';
 import getTradeFeeFactory from './get-trade-fee';
+import getEnabledCoinsFactory from './get-enabled-coins';
 import isReadyFactory from './is-ready';
 import listTransactionsFactory from './list-transactions';
 import listunspentFactory from './listunspent';
 import myBalanceFactory from './my-balance';
+import myOrdersFactory from './my-orders';
+import myRecentSwapsFactory from './my-recent-swaps';
 import orderbookFactory from './orderbook';
 import recentswapsFactory from './recentswaps';
 import sendRawTransactionFactory from './send-raw-transaction';
+import stopFactory from './stop';
 import swapstatusFactory from './swapstatus';
 import myswapstatusFactory from './my-swapstatus';
 import versionFactory from './version';
@@ -44,13 +48,17 @@ export default function setupClient({
     getendpointFactory(),
     getfeeFactory(),
     getTradeFeeFactory(),
+    getEnabledCoinsFactory(),
     isReadyFactory(),
     listTransactionsFactory(),
     listunspentFactory(),
     myBalanceFactory(),
+    myOrdersFactory(),
+    myRecentSwapsFactory(),
     orderbookFactory(),
     recentswapsFactory(),
     sendRawTransactionFactory(),
+    stopFactory(),
     swapstatusFactory(),
     myswapstatusFactory(),
     versionFactory(),

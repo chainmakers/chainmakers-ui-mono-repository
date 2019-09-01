@@ -16,6 +16,7 @@ describe('packages/barterdex-api/src/index', () => {
     expect(typeof BarterDexAPI.getendpoint).toEqual('function');
     expect(typeof BarterDexAPI.getfee).toEqual('function');
     expect(typeof BarterDexAPI.getTradeFee).toEqual('function');
+    expect(typeof BarterDexAPI.getEnabledCoins).toEqual('function');
     expect(typeof BarterDexAPI.isready).toEqual('function');
     expect(typeof BarterDexAPI.listTransactions).toEqual('function');
     expect(typeof BarterDexAPI.orderbook).toEqual('function');
@@ -26,7 +27,10 @@ describe('packages/barterdex-api/src/index', () => {
     expect(typeof BarterDexAPI.getUserpass).toEqual('function');
     expect(typeof BarterDexAPI.listunspent).toEqual('function');
     expect(typeof BarterDexAPI.myBalance).toEqual('function');
+    expect(typeof BarterDexAPI.myOrders).toEqual('function');
+    expect(typeof BarterDexAPI.myRecentSwaps).toEqual('function');
     expect(typeof BarterDexAPI.sendrawtransaction).toEqual('function');
+    expect(typeof BarterDexAPI.stop).toEqual('function');
     expect(typeof BarterDexAPI.recentswaps).toEqual('function');
     expect(typeof BarterDexAPI.resetUserpass).toEqual('function');
     expect(typeof BarterDexAPI.version).toEqual('function');

@@ -6,7 +6,6 @@ import ErrorBoundary from '../../components/ErrorBoundary';
 import MDCAppBar from '../../components/AppBar';
 import MDCHeader from '../../components/AppBar/Header';
 import MDCTabBar from '../../components/AppBar/TabBar';
-import { TabContainer } from '../../components/Tabs';
 import { NavigationLayout } from '../Layout';
 import HeaderTabs from './components/HeaderTabs';
 import Content from './components/Content';
@@ -16,9 +15,7 @@ import SettingsContext, { initialState, reducer } from './reducer';
 
 const debug = require('debug')('atomicapp:containers:SettingsPage');
 
-type ISettingsPageProps = {};
-
-function SettingsPage(props: ISettingsPageProps) {
+function SettingsPage() {
   debug('render');
 
   const contextValue = React.useReducer(reducer, initialState);

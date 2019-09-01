@@ -92,7 +92,7 @@ const ValidationAddressInput = validate(TextInput, [required], {
   onChange: true
 });
 
-const styles = theme => ({
+const styles = () => ({
   root__dialogTitle: {
     padding: '20px 24px'
   },

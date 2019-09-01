@@ -7,6 +7,7 @@ import api from 'utils/barterdex-api';
 import { loadOrderbook, reloadOrderbook } from '../../actions';
 import data from '../../../__tests__/app-state.json';
 import orderbook from '../../../__tests__/orderbook.json';
+import myOrders from '../../../__tests__/my_orders.json';
 import listenForLoadingOrderbook, {
   listenForReloadingOrderbook
 } from '../orderbook';
@@ -36,6 +37,9 @@ describe('containers/OrderPage/saga/orderbook', () => {
     v.rel = rel;
     v.id = `${v.address}-${rel}-${base}`;
     v.type = ORDER_ALICE_SIDE;
+    if (v.address === 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu') {
+      v.uuid = 'eb211104-b6d9-46ea-aba9-c645a5570bb4';
+    }
     return v;
   });
   payload.asks.map(v => {
@@ -58,6 +62,8 @@ describe('containers/OrderPage/saga/orderbook', () => {
 
         if (method === 'orderbook') {
           cb(null, orderbook);
+        } else if (method === 'my_orders') {
+          cb(null, myOrders);
         } else {
           cb(new Error('error message'));
         }
@@ -180,6 +186,8 @@ describe('containers/OrderPage/saga/orderbook', () => {
 
         if (method === 'orderbook') {
           cb(null, orderbook);
+        } else if (method === 'my_orders') {
+          cb(null, myOrders);
         } else {
           cb(new Error('error message'));
         }
@@ -196,10 +204,6 @@ describe('containers/OrderPage/saga/orderbook', () => {
     ).done;
 
     expect(dispatched).toEqual([
-      {
-        type: ORDERBOOK_LOAD_SUCCESS,
-        payload
-      },
       {
         type: ORDERBOOK_LOAD_SUCCESS,
         payload

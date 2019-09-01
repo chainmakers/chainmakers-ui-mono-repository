@@ -1,5 +1,6 @@
 // @flow
 /* eslint no-param-reassign: ["error", { "props": false }] */
+import each from 'lodash/each';
 import { put, call, select, cancelled } from 'redux-saga/effects';
 import { CANCEL, delay } from 'redux-saga';
 import api from 'utils/barterdex-api';
@@ -21,9 +22,84 @@ const debug = require('debug')(
   'atomicapp:containers:OrdersPage:saga:orderbook'
 );
 
+export function* loadingOrderbook(
+  deposit: string,
+  recevie: string,
+  address: string
+) {
+  debug(`loading orderbook`);
+
+  let request = null;
+
+  try {
+    request = api.orderbook({
+      base: recevie,
+      rel: deposit,
+      queueid: undefined
+    });
+
+    const data = yield request;
+
+    request = api.myOrders();
+    const { result } = yield request;
+    const makerOrders = [];
+    const takerOrders = [];
+
+    // orders that are currently active in market maker mode (SELL)
+    each(result.maker_orders, entity => {
+      if (entity.base === deposit && entity.rel === recevie) {
+        entity.id = `${address}-${deposit}-${recevie}`;
+        makerOrders.push(entity);
+      }
+    });
+
+    // orders that are currently active in market taker mode (BUY)
+    each(result.taker_orders, entity => {
+      if (entity.base === deposit && entity.rel === recevie) {
+        entity.id = `${address}-${deposit}-${recevie}`;
+        takerOrders.push(entity);
+      }
+    });
+
+    data.bids.map(v => {
+      v.base = recevie;
+      v.rel = deposit;
+      v.id = `${v.address}-${deposit}-${recevie}`;
+      v.type = ORDER_ALICE_SIDE;
+      const f = makerOrders.find(e => e.id === v.id);
+      if (f) {
+        v.uuid = f.uuid;
+      }
+      return v;
+    });
+
+    data.asks.map(v => {
+      v.base = recevie;
+      v.rel = deposit;
+      v.id = `${v.address}-${deposit}-${recevie}`;
+      v.type = ORDER_BOB_SIDE;
+      const f = takerOrders.find(e => e.id === v.id);
+      if (f) {
+        v.uuid = f.uuid;
+      }
+      return v;
+    });
+    return data;
+  } catch (err) {
+    debug(`loading orderbook error: ${err.message}`);
+    throw err;
+  } finally {
+    if (yield cancelled()) {
+      debug(`loading orderbook cancelled`);
+      if (request && request[CANCEL]) {
+        request[CANCEL]();
+      }
+    }
+  }
+}
+
 export function* listenForReloadingOrderbook(action, timeout = 60) {
   debug(`listen for reloading orderbook`);
-  let request = null;
   try {
     // if not found stop
     const deposit = yield select(makeSelectOrderbookDeposit());
@@ -42,26 +118,9 @@ export function* listenForReloadingOrderbook(action, timeout = 60) {
         debug('stop, timeout');
         break;
       }
-      request = api.orderbook({
-        base: recevie,
-        rel: deposit,
-        queueid: undefined
-      });
-      const result = yield request;
-      result.bids.map(v => {
-        v.base = recevie;
-        v.rel = deposit;
-        v.id = `${v.address}-${deposit}-${recevie}`;
-        v.type = ORDER_ALICE_SIDE;
-        return v;
-      });
-      result.asks.map(v => {
-        v.base = recevie;
-        v.rel = deposit;
-        v.id = `${v.address}-${deposit}-${recevie}`;
-        v.type = ORDER_BOB_SIDE;
-        return v;
-      });
+
+      const result = yield call(loadingOrderbook, deposit, recevie, address);
+
       yield put(loadOrderbookSuccess(result));
       const f = result.bids.find(e => e.address === address);
       if (f && f.maxvolume > 0) {
@@ -85,9 +144,6 @@ export function* listenForReloadingOrderbook(action, timeout = 60) {
   } finally {
     if (yield cancelled()) {
       debug(`reloading orderbook cancelled`);
-      if (request && request[CANCEL]) {
-        request[CANCEL]();
-      }
     }
   }
 }
@@ -95,35 +151,16 @@ export function* listenForReloadingOrderbook(action, timeout = 60) {
 export default function* listenForLoadingOrderbook(action) {
   debug(`listen for loading orderbook`);
 
-  let request = null;
   try {
     const deposit = yield select(makeSelectOrderbookDeposit());
     const recevie = yield select(makeSelectOrderbookRecevie());
-
     if (!deposit || !recevie) {
       return yield put(skipOrderbook());
     }
+    const balance = yield select(makeSelectBalanceEntities());
+    const address = balance.get(deposit).get('address');
+    const result = yield call(loadingOrderbook, deposit, recevie, address);
 
-    request = api.orderbook({
-      base: recevie,
-      rel: deposit,
-      queueid: undefined
-    });
-    const result = yield request;
-    result.bids.map(v => {
-      v.base = recevie;
-      v.rel = deposit;
-      v.id = `${v.address}-${deposit}-${recevie}`;
-      v.type = ORDER_ALICE_SIDE;
-      return v;
-    });
-    result.asks.map(v => {
-      v.base = recevie;
-      v.rel = deposit;
-      v.id = `${v.address}-${deposit}-${recevie}`;
-      v.type = ORDER_BOB_SIDE;
-      return v;
-    });
     return yield put(loadOrderbookSuccess(result));
   } catch (err) {
     debug(`loading orderbook error: ${err.message}`);
@@ -140,9 +177,6 @@ export default function* listenForLoadingOrderbook(action) {
   } finally {
     if (yield cancelled()) {
       debug(`loading orderbook cancelled`);
-      if (request && request[CANCEL]) {
-        request[CANCEL]();
-      }
     }
   }
 }

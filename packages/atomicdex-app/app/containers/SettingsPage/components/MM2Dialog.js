@@ -10,7 +10,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import api from 'utils/barterdex-api';
 import { closeMM2Dialog } from '../actions';
 import { useSettingsContext } from '../reducer';
 import { selectMM2State, selectMM2Version } from '../selectors';
@@ -21,9 +20,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-type IMM2DialogProps = {};
-
-function MM2Dialog(props: IMM2DialogProps) {
+function MM2Dialog() {
   const classes = useStyles();
 
   const [state, dispatch] = useSettingsContext();

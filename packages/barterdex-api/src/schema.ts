@@ -21,6 +21,7 @@ export interface BarterdexApi {
   getendpoint: Function,
   getfee: Function,
   getTradeFee: Function,
+  getEnabledCoins: Function,
   isready: Function,
   listTransactions: Function,
   orderbook: Function,
@@ -31,10 +32,13 @@ export interface BarterdexApi {
   getUserpass: Function,
   listunspent: Function,
   myBalance: Function,
+  myOrders: Function,
+  myRecentSwaps: Function,
   sendrawtransaction: Function,
   recentswaps: Function,
   resetUserpass: Function,
   version: Function,
+  stop: Function,
   waitUntilReady: Function,
   withdraw: Function
 };

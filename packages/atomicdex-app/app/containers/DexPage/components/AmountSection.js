@@ -31,7 +31,7 @@ import validate from '../../../components/Form/validate';
 import type { BuyCoinPayload } from '../schema';
 import { calculateDexfee } from '../utils';
 import { STATE_SWAPS, NA, FINISHED_SWAPS_STATE } from '../../../constants';
-import { AUTO_HIDE_SNACKBAR_TIME, DEXFEE } from '../constants';
+import { AUTO_HIDE_SNACKBAR_TIME } from '../constants';
 import {
   loadBuyCoin,
   loadRecentSwaps,

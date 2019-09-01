@@ -70,8 +70,7 @@ export const initialState = fromJS({
   // FIXME: Redesign data struct
   myorder: {
     fetchStatus: null,
-    errors: null,
-    list: []
+    errors: null
   },
 
   orderbook: {
@@ -178,6 +177,7 @@ export default handleActions(
           pubkey,
           type,
           id,
+          uuid = null,
           ...meta
         } = v;
         sortedList.push(id);
@@ -194,7 +194,8 @@ export default handleActions(
               price,
               pubkey,
               type,
-              meta
+              meta,
+              uuid
             })
           );
           orders = orders.set(id, entity);
@@ -211,7 +212,8 @@ export default handleActions(
               price,
               pubkey,
               type,
-              meta
+              meta,
+              uuid
             })
           );
         }
@@ -270,7 +272,7 @@ export default handleActions(
     [NEW_ORDER_SET_SUCCESS]: (state, { payload }) => {
       const {
         id,
-        uuid,
+        uuid = null,
         base,
         rel,
         price,
@@ -304,13 +306,6 @@ export default handleActions(
         })
       );
       state = state.set('orders', orders);
-
-      // step two: update myorder list
-      let myorderlist = state.getIn(['myorder', 'list']);
-      if (!myorderlist.contains(id)) {
-        myorderlist = myorderlist.push(id);
-        state = state.setIn(['myorder', 'list'], myorderlist);
-      }
 
       // step three:
       return state;
@@ -349,13 +344,6 @@ export default handleActions(
       // Step one: remove it from orderbook
       const list = state.getIn(['orderbook', 'list']).filter(v => v !== id);
       state = state.setIn(['orderbook', 'list'], list);
-
-      // Step two: remove it from myorder
-      let myorderlist = state.getIn(['myorder', 'list']);
-      if (myorderlist.contains(id)) {
-        myorderlist = myorderlist.filter(v => v !== id);
-        state = state.setIn(['myorder', 'list'], myorderlist);
-      }
 
       // Step three: remove it from orders
       const orders = state.get('orders');
