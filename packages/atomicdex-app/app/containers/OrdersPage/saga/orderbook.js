@@ -70,7 +70,6 @@ export function* loadingOrderbook(
       if (f) {
         v.uuid = f.uuid;
       }
-      console.log(f, makerOrders, v.id, 'makerOrders');
       return v;
     });
 
@@ -83,7 +82,6 @@ export function* loadingOrderbook(
       if (f) {
         v.uuid = f.uuid;
       }
-      console.log(f, takerOrders, v.id, 'takerOrders');
       return v;
     });
     return data;
