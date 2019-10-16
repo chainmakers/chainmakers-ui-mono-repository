@@ -66,7 +66,7 @@ $ cd atomicdex
 $ yarn install
 ```
 
-Lastly, download the latest version of marketmaker app on [https://github.com/artemii235/SuperNET/releases](https://github.com/artemii235/SuperNET/releases) and and save it at `app/bin/marketmaker` folder.
+Lastly, download the latest version of marketmaker app on [https://github.com/KomodoPlatform/atomicDEX-API/releases](https://github.com/KomodoPlatform/atomicDEX-API/releases) and and save it at `app/bin/marketmaker` folder.
 
 Start the app in the `dev` environment. This starts the renderer process in [**hot-module-replacement**](https://webpack.js.org/guides/hmr-react/) mode and starts a webpack dev server that sends hot updates to the renderer process:
 
@@ -76,7 +76,7 @@ $ yarn dev
 
 ## Download
 
-You can [download](https://github.com/particle4dev/komodo-ui-mono-repository/releases) the latest installable version of AtomicDex app for Windows, macOS and Linux.
+You can [download](https://github.com/chainmakers/chainmakers-ui-mono-repository/releases) the latest installable version of AtomicDex app for Windows, macOS and Linux.
 
 ## Documentation
 
