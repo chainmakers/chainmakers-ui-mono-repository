@@ -2510,5 +2510,47 @@ export default [
         url: 'electrum3.cipig.net:10019'
       }
     ]
-  }
+  },
+	{
+		coin: 'RICK',
+		name: 'Rick [Test]',
+    fname: 'Rick [Test]',
+		asset: 'RICK',
+		rpcport: 25435,
+		txversion: 4,
+		overwintered: 1,
+		mm2: 1,
+		servers: [
+			{
+				url: 'electrum1.cipig.net:10017'
+			},
+			{
+				url: 'electrum2.cipig.net:10017'
+			},
+			{
+				url: 'electrum3.cipig.net:10017'
+			}
+		]
+	},
+  {
+		coin: 'MORTY',
+		name: 'Morty [Test]',
+    fname: 'Morty [Test]',
+		asset: 'MORTY',
+		rpcport: 16348,
+		txversion: 4,
+		overwintered: 1,
+		mm2: 1,
+		servers: [
+			{
+				url: 'electrum1.cipig.net:10018'
+			},
+			{
+				url: 'electrum2.cipig.net:10018'
+			},
+			{
+				url: 'electrum3.cipig.net:10018'
+			}
+		]
+	}
 ];
