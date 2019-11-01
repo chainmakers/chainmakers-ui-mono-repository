@@ -250,6 +250,7 @@
     "barterdex-utilities": "file:../barterdex-utilities",
     "classnames": "^2.2.6",
     "connected-react-router": "4.5.0",
+    "crypto-icons": "file:../crypto-icons",
     "debug": "^4.1.0",
     "devtron": "^1.4.0",
     "electron-better-ipc": "^0.1.1",

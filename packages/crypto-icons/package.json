@@ -1,6 +1,18 @@
 {
   "name": "crypto-icons",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Icons for crypto currencies",
-  "author": "Hoang Nam <particle4dev@gmail.com> (particle4dev)"
+  "author": "Nam Hoang <particle4dev@gmail.com> (particle4dev)",
+  "private": true,
+  "files": [
+    "svgs"
+  ],
+  "keywords": [
+    "icons",
+    "svg",
+    "ebs",
+    "casino",
+    "gambling"
+  ],
+  "dependencies": {}
 }
