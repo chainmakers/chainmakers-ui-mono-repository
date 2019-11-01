@@ -91,25 +91,6 @@ export default [
     ]
   },
   {
-    coin: 'K64',
-    name: 'K64',
-    fname: 'Komodore64',
-    asset: 'K64',
-    txversion: 4,
-    rpcport: 12245,
-    active: 0,
-    markt_cap: 0,
-    mm2: 1,
-    servers: [
-      {
-        url: 'electrum1.komodore64.com:21245'
-      },
-      {
-        url: 'electrum2.komodore64.com:21245'
-      }
-    ]
-  },
-  {
     coin: 'CHIPS',
     name: 'chips',
     fname: 'Chips',
@@ -182,28 +163,6 @@ export default [
       },
       {
         url: 'electrum3.cipig.net:10031'
-      }
-    ]
-  },
-  {
-    coin: 'CHAIN',
-    asset: 'CHAIN',
-    name: 'chainmakers',
-    fname: 'Chainmakers',
-    txversion: 4,
-    rpcport: 15587,
-    active: 0,
-    market_cap: 0,
-    mm2: 1,
-    servers: [
-      {
-        url: 'electrum1.cipig.net:10032'
-      },
-      {
-        url: 'electrum2.cipig.net:10032'
-      },
-      {
-        url: 'electrum3.cipig.net:10032'
       }
     ]
   },
@@ -777,7 +736,7 @@ export default [
     coin: 'DEX',
     asset: 'DEX',
     name: 'DEX',
-    fname: 'InstantDEX',
+    fname: 'DEX',
     rpcport: 11890,
     active: 1,
     txversion: 4,
