@@ -17,7 +17,7 @@ interface IBuyTabContainerProps {
   // eslint-disable-next-line flowtype/no-weak-types
   classes: Object,
   // eslint-disable-next-line flowtype/no-weak-types
-  children: React.ReactElement<any>,
+  children: any,
   className?: string,
   selected?: boolean
 };

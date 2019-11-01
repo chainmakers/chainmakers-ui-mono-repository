@@ -2,8 +2,12 @@
   "name": "komodo-ui-mono-repo",
   "productName": "Komodo UI Mono Repository",
   "version": "0.13.0",
-  "private": true,
   "description": "Decentralized applications with Komodo technologies",
+  "license": "private",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "lint": "cross-env NODE_ENV=development eslint --cache --format=pretty .",
     "lint-fix": "yarn --silent lint --fix; exit 0",
@@ -41,7 +45,6 @@
     "email": "particle4dev@gmail.com",
     "url": "https://github.com/particle4dev"
   },
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/particle4dev/komodo-ui-mono-repository/issues"
   },
