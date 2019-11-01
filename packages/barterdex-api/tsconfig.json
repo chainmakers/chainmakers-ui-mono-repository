@@ -1,13 +1,15 @@
 {
   "extends": "../../configs/tsconfig.base.json",
   "compilerOptions": {
+    "moduleResolution": "node",
     "rootDir": "src",
     "outDir": "dist",
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "strictNullChecks": false,
     "noUnusedParameters": true,
-    "lib": ["es2015", "dom"]
+    "lib": ["es2015", "dom"],
+    "target": "es6"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["src/**/__tests__/**/*", "src/**/__mocks__/**/*"]

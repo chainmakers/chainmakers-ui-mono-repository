@@ -23,17 +23,21 @@
   },
   "scripts": {
     "prepare": "npm run lint && npm run build",
-    "build": "../../node_modules/.bin/tsc",
-    "lint": "../../node_modules/.bin/tslint -c \"../../configs/tslint.json\" -p tsconfig.json src/*.ts",
-    "test": "../../node_modules/.bin/tsc -p tsconfig.test.json --noEmit && ../../node_modules/.bin/jest --verbose",
-    "coverage": "../../node_modules/.bin/tsc -p tsconfig.test.json --noEmit && ../../node_modules/.bin/jest --verbose --coverage"
+    "build": "tsc",
+    "lint": "tslint -c \"../../configs/tslint.json\" -p tsconfig.json src/*.ts",
+    "test": "tsc -p tsconfig.test.json --noEmit && jest --verbose",
+    "coverage": "tsc -p tsconfig.test.json --noEmit && jest --verbose --coverage"
   },
   "bugs": {
     "url": "https://github.com/particle4dev/komodo-ui-mono-repository/issues"
   },
-  "peerDependencies": {},
   "dependencies": {
     "redux": "^4.0.1",
     "redux-saga": "^0.16.2"
+  },
+  "devDependencies": {
+    "jest": "23.6.0",
+    "tslint": "5.12.0",
+    "typescript": "3.2.2"
   }
 }

@@ -1,4 +1,5 @@
 {
+  "extends": "../../configs/tsconfig.base.json",
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist",
@@ -6,7 +7,8 @@
     "noFallthroughCasesInSwitch": true,
     "strictNullChecks": true,
     "noUnusedParameters": true,
-    "lib": ["es2015", "dom"]
+    "lib": ["es2015", "dom"],
+    "target": "es6"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["src/**/__tests__/**/*", "src/**/__mocks__/**/*"]
