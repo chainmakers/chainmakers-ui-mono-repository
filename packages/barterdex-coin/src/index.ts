@@ -233,45 +233,6 @@ export default [
     mm2: 1
   },
   // {
-  //  coin: 'BEER',
-  //  name: 'Beer',
-  //  asset: 'BEER',
-  //  txversion: 4,
-  //  rpcport: 8923,
-  //  active: 0,
-  //  market_cap: -1,
-  //  mm2: 1,
-  //  servers: [
-  //    {
-  //      url: 'electrum1.cipig.net:10022'
-  //    },
-  //    {
-  //      url: 'electrum2.cipig.net:10022'
-  //    }
-  //  ]
-  // },
-  // {
-  //  coin: 'PIZZA',
-  //  name: 'Pizza',
-  //  asset: 'PIZZA',
-  //  txversion: 4,
-  //  rpcport: 11608,
-  //  active: 0,
-  //  market_cap: -2,
-  //  mm2: 1,
-  //  servers: [
-  //    {
-  //      url: 'electrum1.cipig.net:10024'
-  //    },
-  //    {
-  //      url: 'electrum2.cipig.net:10024'
-  //    },
-  //    {
-  //      url: 'electrum3.cipig.net:10024'
-  //    }
-  //  ]
-  // },
-  // {
   //   coin: '$PAC',
   //   rpcport: 7111,
   //   pubtype: 55,
