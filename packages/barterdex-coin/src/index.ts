@@ -78,7 +78,7 @@ export default [
     fname: 'Coqui Cash',
     txversion: 4,
     rpcport: 14276,
-    active: 0,
+    active: 1,
     market_cap: 0,
     mm2: 1,
     servers: [
@@ -99,7 +99,7 @@ export default [
     p2shtype: 85,
     wiftype: 188,
     txfee: 10000,
-    active: 0,
+    active: 1,
     market_cap: 1609044,
     mm2: 1,
     servers: [
@@ -111,19 +111,30 @@ export default [
       }
     ]
   },
-  // {
-  //   coin: 'REVS',
-  //   name: 'Revs',
-  //   rpcport: 10196,
-  //   urls: [
-  //     'electrum1.cipig.net:10003',
-  //     'electrum2.cipig.net:10003',
-  //     'electrum3.cipig.net:10003'
-  //   ],
-  //   active: 0,
-  //   market_cap: 0,
-  //   mm2: 1
-  // },
+  {
+    coin: 'REVS',
+    name: 'Revs',
+    asset: 'REVS',
+    fname: 'REVS',
+    txversion: 4,
+    rpcport: 10196,
+    overwintered: 1,
+    required_confirmations: 2,
+    active: 1,
+    market_cap: 0,
+    mm2: 1,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10003'
+      },
+      {
+        url: 'electrum2.cipig.net:10003'
+      },
+      {
+        url: 'electrum3.cipig.net:10003'
+      }
+    ]
+  },
   // {
   //   coin: 'VRSC',
   //   name: 'VerusCoin',
