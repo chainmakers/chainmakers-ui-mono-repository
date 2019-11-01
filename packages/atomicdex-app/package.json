@@ -1,7 +1,7 @@
 {
   "name": "chainswap-app",
   "productName": "Chainswap Application",
-  "version": "0.23.8",
+  "version": "0.24.0",
   "private": true,
   "description": "An instant exchange built on top of BarterDEX swap",
   "homepage": "https://github.com/chainmakers/komodo-ui-mono-repository/tree/master/packages/atomicdex-app#readme",
