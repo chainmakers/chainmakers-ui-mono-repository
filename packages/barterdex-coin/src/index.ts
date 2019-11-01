@@ -2083,18 +2083,50 @@ export default [
   //   market_cap: 0,
   //   mm2: 1
   // },
-  // {
-  //   coin: 'SUPERNET',
-  //   name: 'Supernet',
-  //   asset: 'SUPERNET',
-  //   rpcport: 11341,
-  //   urls: [
-  //     'electrum1.cipig.net:10005',
-  //     'electrum2.cipig.net:10005',
-  //     'electrum3.cipig.net:10005'
-  //   ],
-  //   mm2: 1
-  // },
+  {
+    coin: 'SUPERNET',
+    name: 'Supernet',
+    fname: 'SUPERNET',
+    asset: 'SUPERNET',
+    txversion: 4,
+    overwintered: 1,
+    required_confirmations: 2,
+    rpcport: 11341,
+    mm2: 1,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10005'
+      },
+      {
+        url: 'electrum2.cipig.net:10005'
+      },
+      {
+        url: 'electrum3.cipig.net:10005'
+      }
+    ]
+  },
+  {
+    coin: 'BET',
+    name: 'Bet',
+    fname: 'BET',
+    asset: 'BET',
+    txversion: 4,
+    overwintered: 1,
+    required_confirmations: 2,
+    rpcport: 14250,
+    mm2: 1,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10012'
+      },
+      {
+        url: 'electrum2.cipig.net:10012'
+      },
+      {
+        url: 'electrum3.cipig.net:10012'
+      }
+    ]
+  },
   // {
   //   coin: 'SWT',
   //   name: 'Swarm City',
