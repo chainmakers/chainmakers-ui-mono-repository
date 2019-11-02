@@ -43,13 +43,13 @@
     "@material-ui/core": "^3.9.0",
     "classnames": "^2.2.6",
     "debug": "^4.1.0",
-    "react": "^16.6.1",
-    "react-dom": "^16.6.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "enzyme-to-json": "^3.3.4",
-    "jest": "23.6.0",
-    "tslint": "5.12.0",
-    "typescript": "3.2.2"
+    "jest": "24.9.0",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1",
+    "tslint": "5.20.0",
+    "typescript": "3.6.4"
   }
 }
