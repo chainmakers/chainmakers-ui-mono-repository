@@ -3,7 +3,6 @@
   "version": "0.25.0",
   "description": "Barterdex API for Node",
   "author": "Hoang Nam <particle4dev@gmail.com> (particle4dev)",
-  "homepage": "https://github.com/particle4dev/komodo-ui-mono-repository/tree/master/packages/barterdex-api#readme",
   "license": "ISC",
   "main": "dist/index.js",
   "module": "./dist/index.js",
@@ -16,52 +15,24 @@
   "files": [
     "dist"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/particle4dev/komodo-ui-mono-repository.git"
-  },
   "scripts": {
     "prepare": "npm run lint && npm run build",
     "build": "tsc",
     "lint": "tslint -c \"../../configs/tslint.json\" -p tsconfig.json src/*.ts",
     "test": "tsc -p tsconfig.test.json --noEmit && jest",
     "coverage": "tsc -p tsconfig.test.json --noEmit && jest --verbose --coverage",
-    "clean": "rm -rf coverage/* && rm -rf dist/*"
-  },
-  "bugs": {
-    "url": "https://github.com/particle4dev/komodo-ui-mono-repository/issues"
+    "clean": "rimraf coverage/* dist/*"
   },
   "dependencies": {
     "axios": "^0.19.0"
   },
   "devDependencies": {
-    "@types/classnames": "^2.2.7",
-    "@types/enzyme": "^3.1.15",
-    "@types/enzyme-adapter-react-16": "^1.0.3",
-    "@types/jest": "^23.3.13",
+    "@types/jest": "^24.0.21",
     "@types/node": "^10.12.18",
-    "@types/react": "^16.7.20",
-    "@types/react-dom": "^16.0.11",
-    "eslint": "^5.12.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^3.3.0",
-    "eslint-formatter-pretty": "^2.0.0",
-    "eslint-plugin-compat": "^2.6.3",
-    "eslint-plugin-flowtype": "^3.2.1",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jest": "^22.1.2",
-    "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-react": "^7.12.3",
     "jest": "24.9.0",
-    "lerna": "^3.6.0",
     "nock": "^10.0.6",
+    "rimraf": "^3.0.0",
     "tslint": "5.20.0",
-    "tslint-config-airbnb": "^5.11.1",
-    "tslint-config-prettier": "^1.17.0",
-    "typescript": "3.6.4",
-    "webpack": "^4.28.1",
-    "webpack-merge": "^4.2.1",
-    "yarn": "^1.13.0"
+    "typescript": "3.6.4"
   }
 }
