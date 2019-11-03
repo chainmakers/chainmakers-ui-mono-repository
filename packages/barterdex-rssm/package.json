@@ -26,7 +26,8 @@
     "build": "tsc",
     "lint": "tslint -c \"../../configs/tslint.json\" -p tsconfig.json src/*.ts",
     "test": "tsc -p tsconfig.test.json --noEmit && jest --verbose",
-    "coverage": "tsc -p tsconfig.test.json --noEmit && jest --verbose --coverage"
+    "coverage": "tsc -p tsconfig.test.json --noEmit && jest --verbose --coverage",
+    "clean": "rimraf coverage/* dist/*"
   },
   "bugs": {
     "url": "https://github.com/particle4dev/komodo-ui-mono-repository/issues"
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "jest": "24.9.0",
+    "rimraf": "^3.0.0",
     "tslint": "5.20.0",
     "typescript": "3.6.4"
   }
