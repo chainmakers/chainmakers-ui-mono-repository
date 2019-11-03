@@ -1210,7 +1210,7 @@
         "signature": "244a953de7908be2f4fd8843326d9eccfc8a1d9dc847e28150fd0b41af26982f"
       },
       "./src/buybutton.tsx": {
-        "version": "ae6325c0a63947b1ca9b93776bafbf55361cacadbd47e8c44891ea95ccca3e70",
+        "version": "dfca4eb94bb748e7787bc794a36385b0e6ef400fa116d308509fb1101812f3e9",
         "signature": "9edaff6d0b914c30fb2c612196f39e9407d8abc71422eeddb2c08728e29eb322"
       },
       "./src/index.ts": {
@@ -1249,10 +1249,6 @@
         "version": "8b6748f9e15ad7bac494dc3cd3b13ba0a8be195aca97f7c10a96b1c74a956f32",
         "signature": "8b6748f9e15ad7bac494dc3cd3b13ba0a8be195aca97f7c10a96b1c74a956f32"
       },
-      "../../node_modules/@types/events/index.d.ts": {
-        "version": "400db42c3a46984118bff14260d60cec580057dc1ab4c2d7310beb643e4f5935",
-        "signature": "400db42c3a46984118bff14260d60cec580057dc1ab4c2d7310beb643e4f5935"
-      },
       "../../node_modules/@types/node/globals.d.ts": {
         "version": "6cf62fbc792aa81fa62f99dab5cc692c5315ecd5da09dd35f1ccc82778c4d5bc",
         "signature": "6cf62fbc792aa81fa62f99dab5cc692c5315ecd5da09dd35f1ccc82778c4d5bc"
@@ -1268,6 +1264,10 @@
       "../../node_modules/@types/node/buffer.d.ts": {
         "version": "61215c1a376bbe8f51cab4cc4ddbf3746387015113c37a84d981d4738c21b878",
         "signature": "61215c1a376bbe8f51cab4cc4ddbf3746387015113c37a84d981d4738c21b878"
+      },
+      "../../node_modules/@types/events/index.d.ts": {
+        "version": "400db42c3a46984118bff14260d60cec580057dc1ab4c2d7310beb643e4f5935",
+        "signature": "400db42c3a46984118bff14260d60cec580057dc1ab4c2d7310beb643e4f5935"
       },
       "../../node_modules/@types/node/child_process.d.ts": {
         "version": "163b9cd8ff3c8f1d4a7fd110099bb5d606a389c58233562516d70ac2d7e0ec7c",
@@ -1432,6 +1432,18 @@
       "../../node_modules/@types/node/ts3.2/index.d.ts": {
         "version": "7c7dabe6de2f88a1b4a4d9a15479c2a99b6f5864b434b9d960fc312ba9498c0a",
         "signature": "7c7dabe6de2f88a1b4a4d9a15479c2a99b6f5864b434b9d960fc312ba9498c0a"
+      },
+      "../../node_modules/@types/cheerio/index.d.ts": {
+        "version": "5b92b2f6901b4e84e6196ac4d8574ecba2ccd956f7bdf80800f384e7b4e15d38",
+        "signature": "5b92b2f6901b4e84e6196ac4d8574ecba2ccd956f7bdf80800f384e7b4e15d38"
+      },
+      "../../node_modules/@types/enzyme/index.d.ts": {
+        "version": "9cd33e36675347a8b258153318fab413265df852b7358da172ac852a67b0b9a1",
+        "signature": "9cd33e36675347a8b258153318fab413265df852b7358da172ac852a67b0b9a1"
+      },
+      "../../node_modules/@types/enzyme-adapter-react-16/index.d.ts": {
+        "version": "1597218a3a638314075c49bade831acd5f423c2886abedafc2418cbcf5a584f2",
+        "signature": "1597218a3a638314075c49bade831acd5f423c2886abedafc2418cbcf5a584f2"
       },
       "../../node_modules/@types/minimatch/index.d.ts": {
         "version": "1d1e6bd176eee5970968423d7e215bfd66828b6db8d54d17afec05a831322633",
@@ -4279,12 +4291,6 @@
         "../../node_modules/@types/node/util.d.ts",
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/events/index.d.ts": [
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "../../node_modules/@types/node/globals.d.ts": [
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -4304,6 +4310,12 @@
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../../node_modules/@types/node/buffer.d.ts": [
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../node_modules/@types/events/index.d.ts": [
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
         "../../node_modules/@types/node/util.d.ts",
@@ -4641,6 +4653,28 @@
         "../../node_modules/@types/node/ts3.2/globals.d.ts",
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/util.d.ts"
+      ],
+      "../../node_modules/@types/cheerio/index.d.ts": [
+        "../../node_modules/@types/node/ts3.2/index.d.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../node_modules/@types/enzyme/index.d.ts": [
+        "../../node_modules/@types/react/index.d.ts",
+        "../../node_modules/@types/cheerio/index.d.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../node_modules/@types/enzyme-adapter-react-16/index.d.ts": [
+        "../../node_modules/@types/enzyme/index.d.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../../node_modules/@types/minimatch/index.d.ts": [
         "../../node_modules/@types/node/fs.d.ts",
@@ -5040,6 +5074,19 @@
         "../../node_modules/csstype/index.d.ts",
         "../../node_modules/@types/prop-types/index.d.ts",
         "../../node_modules/@types/react/global.d.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../node_modules/@types/classnames/types.d.ts": [
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../node_modules/@types/classnames/index.d.ts": [
+        "../../node_modules/@types/classnames/types.d.ts",
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
         "../../node_modules/@types/node/util.d.ts",
@@ -7512,12 +7559,6 @@
         "../../node_modules/@types/node/util.d.ts",
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/events/index.d.ts": [
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "../../node_modules/@types/node/globals.d.ts": [
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -7537,6 +7578,12 @@
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../../node_modules/@types/node/buffer.d.ts": [
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../node_modules/@types/events/index.d.ts": [
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
         "../../node_modules/@types/node/util.d.ts",
@@ -8075,14 +8122,23 @@
         "../../node_modules/@types/node/util.d.ts",
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/classnames/types.d.ts": [
+      "../../node_modules/@types/cheerio/index.d.ts": [
+        "../../node_modules/@types/node/ts3.2/index.d.ts",
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
         "../../node_modules/@types/node/util.d.ts",
         "../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/classnames/index.d.ts": [
-        "../../node_modules/@types/classnames/types.d.ts",
+      "../../node_modules/@types/enzyme/index.d.ts": [
+        "../../node_modules/@types/react/index.d.ts",
+        "../../node_modules/@types/cheerio/index.d.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../node_modules/@types/enzyme-adapter-react-16/index.d.ts": [
+        "../../node_modules/@types/enzyme/index.d.ts",
         "../../node_modules/@types/node/fs.d.ts",
         "../../node_modules/@types/node/ts3.2/fs.d.ts",
         "../../node_modules/@types/node/util.d.ts",
@@ -8119,10 +8175,14 @@
       "../../node_modules/typescript/lib/lib.es2018.regexp.d.ts",
       "../../node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "../../node_modules/typescript/lib/lib.esnext.bigint.d.ts",
+      "./src/buybutton.tsx",
+      "../../node_modules/@types/cheerio/index.d.ts",
       "../../node_modules/@types/react/global.d.ts",
       "../../node_modules/csstype/index.d.ts",
       "../../node_modules/@types/prop-types/index.d.ts",
       "../../node_modules/@types/react/index.d.ts",
+      "../../node_modules/@types/classnames/types.d.ts",
+      "../../node_modules/@types/classnames/index.d.ts",
       "../../node_modules/jss/src/index.d.ts",
       "./node_modules/@material-ui/core/styles/creategenerateclassname.d.ts",
       "./node_modules/@material-ui/core/styles/createbreakpoints.d.ts",
@@ -8390,17 +8450,20 @@
       "./node_modules/@material-ui/core/styles/createstyles.d.ts",
       "./node_modules/@material-ui/core/styles/withtheme.d.ts",
       "./node_modules/@material-ui/core/styles/index.d.ts",
+      "./src/index.ts",
+      "./src/tabs/tabcontainer.tsx",
+      "./src/tabs/index.ts",
       "../../node_modules/@babel/types/lib/index.d.ts",
       "../../node_modules/@types/babel__generator/index.d.ts",
       "../../node_modules/@types/babel__traverse/index.d.ts",
       "../../node_modules/@babel/parser/typings/babel-parser.d.ts",
       "../../node_modules/@types/babel__template/index.d.ts",
       "../../node_modules/@types/babel__core/index.d.ts",
-      "../../node_modules/@types/events/index.d.ts",
       "../../node_modules/@types/node/globals.d.ts",
       "../../node_modules/@types/node/assert.d.ts",
       "../../node_modules/@types/node/async_hooks.d.ts",
       "../../node_modules/@types/node/buffer.d.ts",
+      "../../node_modules/@types/events/index.d.ts",
       "../../node_modules/@types/node/child_process.d.ts",
       "../../node_modules/@types/node/cluster.d.ts",
       "../../node_modules/@types/node/console.d.ts",
@@ -8442,6 +8505,8 @@
       "../../node_modules/@types/node/ts3.2/util.d.ts",
       "../../node_modules/@types/node/ts3.2/globals.d.ts",
       "../../node_modules/@types/node/ts3.2/index.d.ts",
+      "../../node_modules/@types/enzyme/index.d.ts",
+      "../../node_modules/@types/enzyme-adapter-react-16/index.d.ts",
       "../../node_modules/@types/minimatch/index.d.ts",
       "../../node_modules/@types/glob/index.d.ts",
       "../../node_modules/@types/istanbul-lib-coverage/index.d.ts",
@@ -8469,13 +8534,7 @@
       "../../node_modules/@types/vfile-message/index.d.ts",
       "../../node_modules/@types/vfile/index.d.ts",
       "../../node_modules/@types/yargs-parser/index.d.ts",
-      "../../node_modules/@types/yargs/index.d.ts",
-      "../../node_modules/@types/classnames/types.d.ts",
-      "../../node_modules/@types/classnames/index.d.ts",
-      "./src/tabs/tabcontainer.tsx",
-      "./src/buybutton.tsx",
-      "./src/index.ts",
-      "./src/tabs/index.ts"
+      "../../node_modules/@types/yargs/index.d.ts"
     ]
   },
   "version": "3.6.4"

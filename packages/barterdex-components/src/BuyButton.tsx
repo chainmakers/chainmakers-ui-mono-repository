@@ -8,7 +8,7 @@ const debug = require('debug')('atomicapp:components:BuyButton');
 const styles = () => ({
   buyButton: {
     boxShadow: 'none',
-    width: '50%',
+    // width: '50%',
     borderRadius: 4,
     padding: '25px 35px'
   }

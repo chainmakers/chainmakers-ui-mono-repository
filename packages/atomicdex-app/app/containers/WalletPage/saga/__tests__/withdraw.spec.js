@@ -4,19 +4,19 @@ import { runSaga } from 'redux-saga';
 import api from 'utils/barterdex-api';
 import loadWithdrawProcess, { generateMessage } from '../withdraw';
 import data from '../../../__tests__/app-state.json';
+import withdraw from '../../../__tests__/withdraw.json';
+import sendRawTransaction from '../../../__tests__/send_raw_transaction.json';
 
 const TEST_URL = 'http://127.0.0.1:7783';
 const TIME_OUT = 30 * 1000;
 
 describe('containers/WalletPage/saga/loadWithdrawProcess', () => {
-  const coin = 'KMD';
-  const address = 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu';
+  const payload = {
+    amount: withdraw.total_amount,
+    address: withdraw.from[0],
+    coin: withdraw.coin
+  };
   const userpass = 'userpass';
-  const amount = 0.1;
-  const payload = { amount, address, coin };
-  // eslint-disable-next-line camelcase
-  const tx_hash =
-    '0b024ea6997e16387c0931de9f203d534c6b2b8500e4bda2df51a36b52a3ef33';
 
   api.setUserpass(userpass);
   it(
@@ -30,20 +30,10 @@ describe('containers/WalletPage/saga/loadWithdrawProcess', () => {
           .reply(200, (uri, body, cb) => {
             const { method } = JSON.parse(body);
             if (method === 'withdraw') {
-              cb(null, {
-                tx_hex: 'RAW_TX_HERE',
-                from: 'R9o9xTocqr6CeEDGDH6mEYpwLoMz6jNjMW',
-                to: 'R9o9xTocqr6CeEDGDH6mEYpwLoMz6jNjMW',
-                amount: 10.0,
-                fee_details: {
-                  amount: 0.00001
-                }
-              });
+              cb(null, withdraw);
             }
             if (method === 'send_raw_transaction') {
-              cb(null, {
-                tx_hash
-              });
+              cb(null, sendRawTransaction);
             }
             return cb(new Error('unexpected api'));
           });
@@ -71,14 +61,14 @@ describe('containers/WalletPage/saga/loadWithdrawProcess', () => {
         expect(dispatched).toEqual([
           {
             payload: JSON.stringify({
-              message: generateMessage(tx_hash, coin)
+              message: generateMessage(sendRawTransaction.tx_hash, withdraw.coin)
             }),
             type: 'atomicapp/BuyPage/SNACKBARS_OPEN'
           },
           {
             payload: {
               address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
-              amount: 0.10001,
+              amount: 1.88264532,
               coin: 'KMD'
             },
             type: 'atomicapp/App/LOAD_WITHDRAW_SUCCESS'
@@ -86,7 +76,7 @@ describe('containers/WalletPage/saga/loadWithdrawProcess', () => {
           {
             payload: {
               address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
-              amount: 0.10001,
+              amount: 1.88264532,
               coin: 'KMD'
             },
             type: 'atomicapp/WalletPage/WITHDRAW_LOAD_SUCCESS'
@@ -102,6 +92,7 @@ describe('containers/WalletPage/saga/loadWithdrawProcess', () => {
     },
     TIME_OUT
   );
+
   it(
     'should throw error when handle loadWithdrawProcess',
     async done => {
@@ -113,7 +104,7 @@ describe('containers/WalletPage/saga/loadWithdrawProcess', () => {
           .reply(200, (uri, body, cb) => {
             const b = JSON.parse(body);
             expect(b).toEqual({
-              amount: 0.10001,
+              amount: 1.88264532,
               coin: 'KMD',
               method: 'withdraw',
               queueid: 0,
@@ -148,7 +139,7 @@ describe('containers/WalletPage/saga/loadWithdrawProcess', () => {
                 action: 'atomicapp/WalletPage/WITHDRAW_LOAD',
                 params: {
                   address: 'RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu',
-                  amount: 0.10001,
+                  amount: 1.88264532,
                   coin: 'KMD'
                 }
               },
