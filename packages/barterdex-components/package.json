@@ -2,8 +2,7 @@
   "name": "barterdex-components",
   "version": "0.1.0",
   "description": "> TODO: description",
-  "author": "Hoang Nam <particle4dev@gmail.com> (particle4dev)",
-  "homepage": "https://github.com/particle4dev/komodo-ui-mono-repository/tree/master/packages/barterdex-components#readme",
+  "author": "Nam Hoang<particle4dev@gmail.com> (particle4dev)",
   "license": "ISC",
   "main": "dist/index.js",
   "module": "./dist/index.js",
@@ -17,20 +16,13 @@
   "files": [
     "dist"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/particle4dev/komodo-ui-mono-repository.git"
-  },
   "scripts": {
     "prepare": "npm run lint && npm run build",
     "build": "tsc",
     "lint": "tslint -c \"../../configs/tslint.json\" -p tsconfig.json src/*.ts",
     "test": "tsc -p tsconfig.test.json --noEmit && jest --verbose",
     "coverage": "tsc -p tsconfig.test.json --noEmit && jest --verbose --coverage",
-    "clean": "rm -rf coverage/* && rm -rf dist/*"
-  },
-  "bugs": {
-    "url": "https://github.com/particle4dev/komodo-ui-mono-repository/issues"
+    "clean": "rimraf coverage/* dist/*"
   },
   "peerDependencies": {
     "@material-ui/core": "^3.9.0",
@@ -41,14 +33,17 @@
   },
   "devDependencies": {
     "@material-ui/core": "^3.9.0",
+    "@types/classnames": "^2.2.9",
+    "@types/enzyme": "^3.10.3",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
     "classnames": "^2.2.6",
     "debug": "^4.1.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
-    "enzyme-to-json": "^3.3.4",
     "jest": "24.9.0",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
+    "rimraf": "^3.0.0",
     "tslint": "5.20.0",
     "typescript": "3.6.4"
   }

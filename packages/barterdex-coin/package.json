@@ -2,8 +2,7 @@
   "name": "barterdex-coin",
   "version": "0.10.0",
   "description": "Electrum config for Marketmaker",
-  "author": "Hoang Nam <particle4dev@gmail.com> (particle4dev)",
-  "homepage": "https://github.com/chainmakers/komodo-ui-mono-repository/tree/master/packages/barterdex-coin#readme",
+  "author": "Nam Hoang<particle4dev@gmail.com> (particle4dev)",
   "license": "ISC",
   "main": "dist/index.js",
   "module": "./dist/index.js",
@@ -16,23 +15,17 @@
   "files": [
     "dist"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chainmakers/komodo-ui-mono-repository.git"
-  },
   "scripts": {
     "prepare": "npm run lint && npm run build",
     "build": "tsc",
     "lint": "tslint -c \"../../configs/tslint.json\" -p tsconfig.json src/*.ts",
     "test": "tsc -p tsconfig.test.json --noEmit && jest",
     "coverage": "tsc -p tsconfig.test.json --noEmit && jest --verbose --coverage",
-    "clean": "rm -rf coverage/* && rm -rf dist/*"
-  },
-  "bugs": {
-    "url": "https://github.com/chainmakers/komodo-ui-mono-repository/issues"
+    "clean": "rimraf coverage/* dist/*"
   },
   "devDependencies": {
     "jest": "24.9.0",
+    "rimraf": "^3.0.0",
     "tslint": "5.20.0",
     "typescript": "3.6.4"
   }

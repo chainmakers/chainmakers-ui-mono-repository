@@ -14,14 +14,14 @@ const styles = () => ({
   }
 });
 
-interface IBuyButtonProps {
-  classes: Object,
-  children: React.ReactNode,
-  readonly onClick?: (event: React.MouseEvent<HTMLDivElement>) => void
-  readonly className?: string
-};
+// interface IBuyButtonProps {
+//   classes: Object,
+//   children: React.ReactNode,
+//   readonly onClick?: (event: React.MouseEvent<HTMLDivElement>) => void
+//   readonly className?: string
+// };
 
-class BuyButton extends React.PureComponent<IBuyButtonProps> {
+class BuyButton extends React.PureComponent<any> {
   static displayName = 'BuyButton';
 
   static defaultProps = {
