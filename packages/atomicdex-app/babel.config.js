@@ -15,7 +15,7 @@ module.exports = api => {
         {
           targets: { electron: require('electron/package.json').version },
           useBuiltIns: 'usage',
-          corejs: '3'
+          corejs: '2'
         }
       ],
       require('@babel/preset-flow'),

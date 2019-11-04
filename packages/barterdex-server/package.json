@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "debug": "^4.1.1",
-    "split2": "^3.1.0"
+    "split2": "^3.1.0",
+    "core-js": "2.5.7"
   },
   "devDependencies": {
     "jest": "24.9.0",

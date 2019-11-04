@@ -6,7 +6,16 @@
     "noFallthroughCasesInSwitch": true,
     "strictNullChecks": false,
     "noUnusedParameters": true,
-    "lib": ["es2015", "dom"]
+    "lib": ["es2015", "dom"],
+
+    "target": "es5",
+    "module": "es2015",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "stripInternal": true,
+    "declaration": true,
+    "moduleResolution": "node"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["src/**/__tests__/**/*", "src/**/__mocks__/**/*"]

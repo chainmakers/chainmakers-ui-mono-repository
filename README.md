@@ -23,6 +23,8 @@
 
 - [packages/chainswap-app](packages/atomicdex-app)
 
+<!-- 
 - [packages/dico-app](packages/dico-app)
 
 - [packages/dice-app](packages/dice-app)
+-->

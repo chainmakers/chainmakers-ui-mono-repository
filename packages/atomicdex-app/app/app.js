@@ -3,7 +3,6 @@
 // window.sourceMapSupport will exist in the browser once preload.js runs.
 
 // window.sourceMapSupport.install();
-
 import { setup } from './utils/config';
 
 (async () => {
