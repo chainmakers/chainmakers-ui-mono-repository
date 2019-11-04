@@ -19,7 +19,6 @@ export function getFromIPCFactory() {
 
 export async function setup() {
   if (config) return config;
-
   config = Object.assign(configManager(), getFromIPCFactory());
   const c = await ipc.callMain('config:get');
   config.set(c);

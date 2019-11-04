@@ -8,20 +8,20 @@ const debug = require('debug')('atomicapp:components:BuyButton');
 const styles = () => ({
   buyButton: {
     boxShadow: 'none',
-    width: '50%',
+    // width: '50%',
     borderRadius: 4,
     padding: '25px 35px'
   }
 });
 
-interface IBuyButtonProps {
-  classes: Object,
-  children: React.ReactNode,
-  readonly onClick?: (event: React.MouseEvent<HTMLDivElement>) => void
-  readonly className?: string
-};
+// interface IBuyButtonProps {
+//   classes: Object,
+//   children: React.ReactNode,
+//   readonly onClick?: (event: React.MouseEvent<HTMLDivElement>) => void
+//   readonly className?: string
+// };
 
-class BuyButton extends React.PureComponent<IBuyButtonProps> {
+class BuyButton extends React.PureComponent<any> {
   static displayName = 'BuyButton';
 
   static defaultProps = {

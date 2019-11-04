@@ -46,5 +46,3 @@ const client = Client({
 });
 
 ```
-
-  

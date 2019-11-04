@@ -2,8 +2,7 @@
   "name": "barterdex-utilities",
   "version": "0.19.0",
   "description": "Utilities for working with Komodo UI Mono Repository",
-  "author": "Hoang Nam <particle4dev@gmail.com> (particle4dev)",
-  "homepage": "https://github.com/chainmakers/komodo-ui-mono-repository/tree/master/packages/barterdex-utilities#readme",
+  "author": "Nam Hoang <particle4dev@gmail.com> (particle4dev)",
   "license": "ISC",
   "main": "dist/index.js",
   "module": "./dist/index.js",
@@ -17,23 +16,23 @@
   "files": [
     "dist"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chainmakers/komodo-ui-mono-repository.git"
-  },
   "scripts": {
     "prepare": "npm run lint && npm run build",
-    "build": "../../node_modules/.bin/tsc",
-    "lint": "../../node_modules/.bin/tslint -c \"../../configs/tslint.json\" -p tsconfig.json src/*.ts",
-    "test": "../../node_modules/.bin/tsc -p tsconfig.test.json --noEmit && ../../node_modules/.bin/jest",
-    "coverage": "../../node_modules/.bin/tsc -p tsconfig.test.json --noEmit && ../../node_modules/.bin/jest --verbose --coverage",
-    "clean": "rm -rf coverage/* && rm -rf dist/*"
-  },
-  "bugs": {
-    "url": "https://github.com/chainmakers/komodo-ui-mono-repository/issues"
+    "build": "tsc",
+    "lint": "tslint -c \"../../configs/tslint.json\" -p tsconfig.json src/*.ts",
+    "test": "tsc -p tsconfig.test.json --noEmit && jest",
+    "coverage": "tsc -p tsconfig.test.json --noEmit && jest --verbose --coverage",
+    "clean": "rimraf coverage/* dist/*"
   },
   "dependencies": {
     "bigi": "^1.4.2",
-    "bitgo-utxo-lib": "^1.5.0"
+    "bitgo-utxo-lib": "^1.5.0",
+    "core-js": "2.5.7"
+  },
+  "devDependencies": {
+    "jest": "24.9.0",
+    "rimraf": "^3.0.0",
+    "tslint": "5.20.0",
+    "typescript": "3.2.2"
   }
 }

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/LogoutDialog/actions/agreeLogoutDialog should agreeLogoutDialog should create agreeLogoutDialog action 1`] = `
+Object {
+  "type": "kmdice/LogoutDialog/AGREE_LOGOUT_DIALOG",
+}
+`;
+
+exports[`containers/LogoutDialog/actions/cancelLogoutDialog should cancelLogoutDialog should create cancelLogoutDialog action 1`] = `
+Object {
+  "type": "kmdice/LogoutDialog/CANCEL_LOGOUT_DIALOG",
+}
+`;
+
+exports[`containers/LogoutDialog/actions/showLogoutDialog should showLogoutDialog should create showLogoutDialog action 1`] = `
+Object {
+  "type": "kmdice/LogoutDialog/SHOW_LOGOUT_DIALOG",
+}
+`;

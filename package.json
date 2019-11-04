@@ -2,110 +2,39 @@
   "name": "komodo-ui-mono-repo",
   "productName": "Komodo UI Mono Repository",
   "version": "0.13.0",
-  "private": true,
   "description": "Decentralized applications with Komodo technologies",
+  "license": "private",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "lint": "cross-env NODE_ENV=development eslint --cache --format=pretty .",
-    "lint-fix": "yarn --silent lint --fix; exit 0",
+    "clean": "lerna clean",
+    "mono-clean": "lerna run clean",
     "mono-test": "lerna run test",
     "mono-prepare": "lerna run prepare",
     "mono-coverage": "lerna run coverage",
     "update-authors": "./bin/update-authors"
-  },
-  "lint-staged": {
-    "*.{js,jsx}": [
-      "cross-env NODE_ENV=development eslint --cache --format=pretty",
-      "prettier --ignore-path .eslintignore --single-quote --write",
-      "git add"
-    ],
-    "{*.json,.{babelrc,eslintrc,prettierrc,stylelintrc}}": [
-      "prettier --ignore-path .eslintignore --parser json --write",
-      "git add"
-    ],
-    "*.{css,scss}": [
-      "stylelint --ignore-path .eslintignore --syntax scss --fix",
-      "prettier --ignore-path .eslintignore --single-quote --write",
-      "git add"
-    ],
-    "*.{yml,md}": [
-      "prettier --ignore-path .eslintignore --single-quote --write",
-      "git add"
-    ]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/particle4dev/komodo-ui-mono-repository.git"
   },
   "author": {
-    "name": "Hoang Nam",
+    "name": "Nam Hoang",
     "email": "particle4dev@gmail.com",
     "url": "https://github.com/particle4dev"
   },
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/particle4dev/komodo-ui-mono-repository/issues"
   },
   "homepage": "https://github.com/particle4dev/komodo-ui-mono-repository#readme",
   "devDependencies": {
-    "@babel/core": "^7.1.5",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
-    "@babel/plugin-proposal-decorators": "^7.1.2",
-    "@babel/plugin-proposal-do-expressions": "^7.0.0",
-    "@babel/plugin-proposal-export-default-from": "^7.0.0",
-    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
-    "@babel/plugin-proposal-function-bind": "^7.0.0",
-    "@babel/plugin-proposal-function-sent": "^7.1.0",
-    "@babel/plugin-proposal-json-strings": "^7.0.0",
-    "@babel/plugin-proposal-logical-assignment-operators": "^7.0.0",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
-    "@babel/plugin-proposal-numeric-separator": "^7.0.0",
-    "@babel/plugin-proposal-optional-chaining": "^7.0.0",
-    "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
-    "@babel/plugin-proposal-throw-expressions": "^7.0.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
-    "@babel/plugin-syntax-import-meta": "^7.0.0",
-    "@babel/plugin-transform-react-constant-elements": "^7.0.0",
-    "@babel/plugin-transform-react-inline-elements": "^7.0.0",
-    "@babel/preset-env": "^7.1.5",
-    "@babel/preset-flow": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/register": "^7.0.0",
-    "@types/classnames": "^2.2.7",
-    "@types/enzyme": "^3.1.15",
-    "@types/enzyme-adapter-react-16": "^1.0.3",
-    "@types/jest": "^23.3.13",
-    "@types/node": "^10.12.18",
-    "@types/react": "^16.7.20",
-    "@types/react-dom": "^16.0.11",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "^8.2.6",
-    "babel-jest": "^23.6.0",
-    "babel-loader": "^8.0.4",
-    "babel-plugin-dev-expression": "^0.2.1",
-    "babel-plugin-inline-react-svg": "^1.0.1",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
-    "electron-builder": "20.39.0",
-    "eslint": "^5.12.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^3.3.0",
-    "eslint-formatter-pretty": "^2.0.0",
-    "eslint-import-resolver-webpack": "^0.10.1",
-    "eslint-plugin-compat": "^2.6.3",
-    "eslint-plugin-flowtype": "^3.2.1",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jest": "^22.1.2",
-    "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-react": "^7.12.3",
-    "eslint-plugin-testcafe": "^0.2.1",
-    "jest": "^23.6.0",
     "lerna": "^3.6.0",
     "ts-jest": "^23.10.5",
-    "tslint": "^5.12.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.17.0",
     "tslint-react": "^3.6.0",
-    "typescript": "^3.2.2",
     "webpack": "^4.28.1",
     "webpack-merge": "^4.2.1",
     "yarn": "^1.13.0"

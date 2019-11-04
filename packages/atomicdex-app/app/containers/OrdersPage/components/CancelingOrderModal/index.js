@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
-import { floor } from 'barterdex-utilities';
+import { clipboardCopy, floor } from 'barterdex-utilities';
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -14,9 +13,12 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
 import CloudOff from '@material-ui/icons/CloudOff';
-import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
-import CoinSelectable from '../../../../components/CoinSelectable';
-import getCoinMemoize from '../../../../components/CryptoIcons';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import { openSnackbars } from '../../../Snackbars/actions';
+// import getCoinMemoize from '../../../../components/CryptoIcons';
 import { closeCancelingOrderModal, cancelNewOrder } from '../../actions';
 import {
   makeSelectCancelingOrderModalOpen,
@@ -29,29 +31,6 @@ const debug = require('debug')(
 
 // const styles = theme => ({
 const styles = () => ({
-  amountform__switchBtn: {
-    position: 'absolute',
-    textAlign: 'center',
-    // top: '20%',
-    top: 90,
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    fontSize: 25,
-    width: 100
-  },
-
-  amountform__itemCenter: {
-    textAlign: 'center',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-    // border: '1px solid red'
-  },
-
-  swapform_button: {
-    margin: '0 auto'
-  },
-
   swapform__emptystate: {
     textAlign: 'center'
   },
@@ -67,6 +46,8 @@ type ICancelingOrderModalProps = {
   dispatchCloseCancelingOrderModal: Function,
   // eslint-disable-next-line flowtype/no-weak-types
   dispatchCancelNewOrder: Function,
+  // eslint-disable-next-line flowtype/no-weak-types
+  dispatchOpenSnackbars: Function,
   // eslint-disable-next-line flowtype/no-weak-types
   classes: Object,
   open: boolean
@@ -98,6 +79,15 @@ class CancelingOrderModal extends React.PureComponent<
     });
   };
 
+  copyUUIDToClipboard = async (evt: SyntheticInputEvent<>) => {
+    evt.stopPropagation();
+    const { order, dispatchOpenSnackbars } = this.props;
+    const uuid = order.get('uuid');
+    clipboardCopy(uuid);
+    dispatchOpenSnackbars('Copied');
+    evt.target.focus();
+  };
+
   renderNotFound = () => {
     const { classes } = this.props;
     return (
@@ -113,35 +103,44 @@ class CancelingOrderModal extends React.PureComponent<
   renderSwapInformation = () => {
     const { classes, order } = this.props;
     return (
-      <Grid container spacing={0}>
-        <Grid item xs={5} className={classes.amountform__itemCenter}>
-          <CoinSelectable
-            className={classes.swapform_button}
-            icon={getCoinMemoize(order.get('rel'))}
-            title={order.get('rel')}
-            subTitle={
-              <span className={classes.swapDetail__success}>
-                {floor(order.get('price'), 8)} {order.get('rel')}
-              </span>
-            }
-          />
-        </Grid>
-        <Grid item xs={2} className={classes.amountform__itemCenter}>
-          <SwapHorizIcon />
-        </Grid>
-        <Grid item xs={5} className={classes.amountform__itemCenter}>
-          <CoinSelectable
-            className={classes.swapform_button}
-            icon={getCoinMemoize(order.get('base'))}
-            title={order.get('base')}
-            subTitle={
-              <span className={classes.swapDetail__danger}>
-                1 {order.get('base')}
-              </span>
-            }
-          />
-        </Grid>
-      </Grid>
+      <List component="nav" aria-label="main mailbox folders">
+        <ListItem button onClick={this.copyUUIDToClipboard}>
+          <ListItemIcon>
+            UUID
+          </ListItemIcon>
+          <ListItemText primary={order.get('uuid')} />
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            @
+          </ListItemIcon>
+          <ListItemText primary={order.get('address')} />
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            BASE
+          </ListItemIcon>
+          <ListItemText primary={<>
+            {order.get('base')}
+          </>} />
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            REL
+          </ListItemIcon>
+          <ListItemText primary={<>
+            {order.get('rel')}
+          </>} />
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            PRICE
+          </ListItemIcon>
+          <ListItemText primary={<>
+            {floor(order.get('price'), 8)}
+          </>} />
+        </ListItem>
+      </List>
     );
   };
 
@@ -158,9 +157,8 @@ class CancelingOrderModal extends React.PureComponent<
         <DialogTitle id="alert-dialog-title">Cancel your order</DialogTitle>
         <DialogContent>
           <Typography variant="subtitle1" gutterBottom>
-            Do you want to cancel your order? Here's the details:
+            Do you want to cancel your order?
           </Typography>
-          <br />
           {!order && this.renderNotFound()}
           {order && this.renderSwapInformation()}
         </DialogContent>
@@ -203,7 +201,9 @@ export function mapDispatchToProps(dispatch: Dispatch<Object>) {
     dispatchCloseCancelingOrderModal: () =>
       dispatch(closeCancelingOrderModal()),
     dispatchCancelNewOrder: (option: { id: string, uuid: string }) =>
-      dispatch(cancelNewOrder(option))
+      dispatch(cancelNewOrder(option)),
+    dispatchOpenSnackbars: (message: string) =>
+      dispatch(openSnackbars(message)),
   };
 }
 

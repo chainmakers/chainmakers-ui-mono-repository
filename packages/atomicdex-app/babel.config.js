@@ -13,9 +13,13 @@ module.exports = api => {
       [
         require('@babel/preset-env'),
         {
-          targets: { electron: require('electron/package.json').version },
+          targets: {
+            electron: require('electron/package.json').version
+          },
+          // modules: false,
           useBuiltIns: 'usage',
-          corejs: '2'
+          modules: "cjs",
+          corejs: 2
         }
       ],
       require('@babel/preset-flow'),

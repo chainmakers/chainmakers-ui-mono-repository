@@ -10,6 +10,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import api from 'utils/barterdex-api';
 import { closeMM2Dialog } from '../actions';
 import { useSettingsContext } from '../reducer';
 import { selectMM2State, selectMM2Version } from '../selectors';
@@ -26,6 +27,7 @@ function MM2Dialog() {
   const [state, dispatch] = useSettingsContext();
 
   const [logText, setLogText] = React.useState('');
+  const [userpass, setUserpass] = React.useState('');
 
   const onClickCloseMM2Dialog = (evt: SyntheticInputEvent<*>) => {
     evt.preventDefault();
@@ -37,8 +39,14 @@ function MM2Dialog() {
     setLogText(lt);
   }
 
+  async function getUserpass() {
+    const userpass = api.getUserpass();
+    setUserpass(userpass);
+  }
+
   React.useEffect(() => {
     getLogs();
+    getUserpass();
   }, []);
 
   async function onClickOpenFullLog() {
@@ -64,6 +72,9 @@ function MM2Dialog() {
             <ListItemSecondaryAction>
               {selectMM2Version(state)}
             </ListItemSecondaryAction>
+          </ListItem>
+          <ListItem disableGutters>
+            <ListItemText primary="Userpass" secondary={userpass}/>
           </ListItem>
           <ListItem disableGutters>
             <ListItemText primary="Logs" />

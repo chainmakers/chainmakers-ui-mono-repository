@@ -1,5 +1,4 @@
 {
-  "extends": "../../configs/tsconfig.base.json",
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist",
@@ -7,6 +6,7 @@
     "noFallthroughCasesInSwitch": true,
     "strictNullChecks": false,
     "noUnusedParameters": true,
+    "module": "commonjs",
     "lib": ["es2015", "dom"]
   },
   "include": ["src/**/*.ts"],

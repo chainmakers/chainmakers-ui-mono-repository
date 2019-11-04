@@ -7,6 +7,7 @@
     "noFallthroughCasesInSwitch": true,
     "strictNullChecks": false,
     "noUnusedParameters": true,
+    "module": "commonjs",
     "lib": ["es2015", "dom"]
   },
   "include": ["src/**/*.ts"],

@@ -62,7 +62,7 @@ const styles = theme => ({
     lineHeight: 1.6,
     letterSpacing: '0.0075em',
     '&:before': {
-      borderBottom: 'none !important',
+      // borderBottom: 'none !important',
       bottom: -12
     },
     '&:after': {

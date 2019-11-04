@@ -36,7 +36,8 @@ export function generateMessage(txHash, coin) {
 export default function* loadWithdrawProcess({ payload }) {
   debug(`withdraw ${payload.coin} coin`);
   try {
-    const { amount, address, coin } = payload;
+    let { amount, address, coin } = payload;
+    amount = parseFloat(amount);
     const sendparams = {
       coin,
       to: address,
@@ -58,7 +59,7 @@ export default function* loadWithdrawProcess({ payload }) {
     debug(`tx_hash = ${tx_hash}`);
 
     // eslint-disable-next-line no-param-reassign
-    payload.amount += fee_details.amount;
+    payload.amount = amount + parseFloat(fee_details.amount);
 
     yield put(openSnackbars(generateMessage(tx_hash, coin)));
     yield put(loadWithdrawBalanceSuccess(payload));

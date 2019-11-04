@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/DicePage/actions/insertKmdiceBetting should insertKmdiceBetting should create insertKmdiceBetting action 1`] = `
+Object {
+  "payload": Object {
+    "amount": 0.1,
+    "id": 1,
+    "numberToBet": 23,
+    "time": 1995-12-16T20:24:00.000Z,
+  },
+  "type": "kmdice/DicePage/KMDICE_BETTING_INSERT",
+}
+`;
+
+exports[`containers/DicePage/actions/startKmdiceBetting should startKmdiceBetting should create startKmdiceBetting action 1`] = `
+Object {
+  "payload": Object {
+    "amount": 0.1,
+    "numberToBet": 23,
+  },
+  "type": "kmdice/DicePage/KMDICE_BETTING_START",
+}
+`;
+
+exports[`containers/DicePage/actions/startKmdiceBettingError should startKmdiceBettingError should create startKmdiceBettingError action 1`] = `
+Object {
+  "payload": Object {
+    "context": Object {
+      "action": "rpc:call",
+      "params": Array [],
+    },
+    "message": "no message",
+    "ok": "failed",
+    "type": "komodod",
+  },
+  "type": "kmdice/DicePage/KMDICE_BETTING_START_ERROR",
+}
+`;
+
+exports[`containers/DicePage/actions/startKmdiceBettingSuccess should startKmdiceBettingSuccess should create startKmdiceBettingSuccess action 1`] = `
+Object {
+  "payload": Object {
+    "bettxid": "bettxid",
+    "id": 1,
+    "status": "PENDING",
+  },
+  "type": "kmdice/DicePage/KMDICE_BETTING_START_SUCCESS",
+}
+`;
+
+exports[`containers/DicePage/actions/syncKmdiceBetting should syncKmdiceBetting should create syncKmdiceBetting action 1`] = `
+Object {
+  "payload": Object {
+    "bettxid": "bettxid",
+    "id": 1,
+  },
+  "type": "kmdice/DicePage/KMDICE_BETTING_SYNC",
+}
+`;
