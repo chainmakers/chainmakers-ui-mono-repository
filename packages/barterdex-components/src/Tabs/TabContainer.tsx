@@ -13,16 +13,16 @@ const styles = () => ({
 
 const debug = require('debug')('atomicapp:components:Tabs:TabContainer');
 
-interface IBuyTabContainerProps {
-  // eslint-disable-next-line flowtype/no-weak-types
-  classes: Object,
-  // eslint-disable-next-line flowtype/no-weak-types
-  children: React.ReactElement<any>,
-  className?: string,
-  selected?: boolean
-};
+// interface IBuyTabContainerProps {
+//   // eslint-disable-next-line flowtype/no-weak-types
+//   classes: Object,
+//   // eslint-disable-next-line flowtype/no-weak-types
+//   children: any,
+//   className?: string,
+//   selected?: boolean
+// };
 
-export class TabContainer extends React.PureComponent<IBuyTabContainerProps> {
+export class TabContainer extends React.PureComponent<any> {
 
   static displayName = 'TabContainer';
 

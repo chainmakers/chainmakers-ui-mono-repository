@@ -1,5 +1,4 @@
 // @flow
-// import path from 'path';
 import config from '../config';
 import type { ErrorRPCType } from './schema';
 

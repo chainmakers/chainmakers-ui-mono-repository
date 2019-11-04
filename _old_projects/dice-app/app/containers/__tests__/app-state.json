@@ -1,0 +1,213 @@
+{
+  "route": {
+    "location": {
+      "pathname": "/buy",
+      "search": "",
+      "hash": ""
+    },
+    "action": "PUSH"
+  },
+  "snackbars": {
+    "open": false,
+    "message": "",
+    "timeout": 6000
+  },
+  "global": {
+    "loading": false,
+    "error": false,
+    "currentUser": {
+      "result": "success",
+      "userpass": "no_hehe_userpass",
+      "mypubkey": "no_hehe_mypubkey",
+      "pubsecp": "no_hehe_pubsecp",
+      "KMD": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
+      "BTC": "1HD77JGnkyqtj3ESgqjG18aJkb41aknPyv",
+      "NXT": "NXT-5ZEZ-RC2J-RW2V-E49ZA",
+      "coins": [
+        {
+          "txfee": 20000,
+          "rpc": "127.0.0.1:8332",
+          "height": -1,
+          "smartaddress": "1HD77JGnkyqtj3ESgqjG18aJkb41aknPyv",
+          "wiftype": 128,
+          "coin": "BTC",
+          "p2shtype": 5,
+          "status": "inactive",
+          "pubtype": 0,
+          "installed": false,
+          "balance": 0
+        },
+        {
+          "zcredits": 0,
+          "zdebits": {
+            "swaps": [],
+            "pendingswaps": 0
+          },
+          "txfee": 1000,
+          "rpc": "127.0.0.1:7771",
+          "height": 0,
+          "smartaddress": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
+          "wiftype": 188,
+          "KMDvalue": 0,
+          "coin": "KMD",
+          "p2shtype": 85,
+          "status": "inactive",
+          "pubtype": 60,
+          "installed": true,
+          "balance": 0
+        },
+        {
+          "txfee": 1000,
+          "rpc": "127.0.0.1:10306",
+          "height": -1,
+          "smartaddress": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
+          "wiftype": 188,
+          "coin": "EQL",
+          "p2shtype": 85,
+          "status": "inactive",
+          "pubtype": 60,
+          "installed": false,
+          "balance": 0
+        },
+        {
+          "txfee": 100000,
+          "rpc": "127.0.0.1:9332",
+          "height": -1,
+          "smartaddress": "LbS4NWacqe5wyqvbryiZH9e4xoRHk9WNUJ",
+          "wiftype": 176,
+          "coin": "LTC",
+          "p2shtype": 5,
+          "status": "inactive",
+          "pubtype": 48,
+          "installed": false,
+          "balance": 0
+        },
+        {
+          "txfee": 1000,
+          "rpc": "127.0.0.1:11116",
+          "height": -1,
+          "smartaddress": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
+          "wiftype": 188,
+          "coin": "PIZZA",
+          "p2shtype": 85,
+          "status": "inactive",
+          "pubtype": 60,
+          "installed": false,
+          "balance": 0
+        },
+        {
+          "txfee": 1000,
+          "rpc": "127.0.0.1:8923",
+          "height": -1,
+          "smartaddress": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
+          "wiftype": 188,
+          "coin": "BEER",
+          "p2shtype": 85,
+          "status": "inactive",
+          "pubtype": 60,
+          "installed": false,
+          "balance": 0
+        },
+        {
+          "txfee": 1000,
+          "rpc": "127.0.0.1:14276",
+          "height": -1,
+          "smartaddress": "RRVJBpA5MoeTo3beA1iP6euWWrWcJdJtXu",
+          "wiftype": 188,
+          "coin": "COQUI",
+          "p2shtype": 85,
+          "status": "inactive",
+          "pubtype": 60,
+          "installed": false,
+          "balance": 0
+        }
+      ]
+    },
+    "marketcap": {
+      "EQL": {
+        "id": 2,
+        "name": "Equaliser",
+        "symbol": "EQL",
+        "marketcap": 0
+      },
+      "KMD": {
+        "id": 0,
+        "name": "Komodo",
+        "symbol": "KMD",
+        "marketcap": 107340275
+      },
+      "CHIPS": {
+        "id": 7,
+        "name": "Chips",
+        "symbol": "CHIPS",
+        "marketcap": 1609044
+      },
+      "PIZZA": {
+        "id": 4,
+        "name": "Pizza",
+        "symbol": "PIZZA",
+        "marketcap": 0
+      },
+      "VRSC": {
+        "id": 8,
+        "name": "VerusCoin",
+        "symbol": "VRSC",
+        "marketcap": 1609044
+      },
+      "BEER": {
+        "id": 5,
+        "name": "Beer",
+        "symbol": "BEER",
+        "marketcap": 0
+      },
+      "BTC": {
+        "id": 1,
+        "name": "Bitcoin",
+        "symbol": "BTC",
+        "marketcap": 97822306639
+      },
+      "COQUI": {
+        "id": 6,
+        "name": "Coqui Cash",
+        "symbol": "COQUI",
+        "marketcap": 0
+      },
+      "LTC": {
+        "id": 3,
+        "name": "Litecoin",
+        "symbol": "LTC",
+        "marketcap": 2578993869
+      }
+    },
+    "komodod": {
+      "state": "kmdice/App/KOMODOD_STATE_STARTED",
+      "pubkey": null
+    },
+    "blockchainInfo": {
+      "blocks": 123,
+      "longestchain": 123,
+      "balance": 10.123
+    }
+  },
+  "loginDialog": {
+    "show": false
+  },
+  "logoutDialog": {
+    "show": false
+  },
+  "language": {
+    "locale": "en"
+  },
+  "websocket": {
+    "isStartWebsocket": true
+  },
+  "login": {},
+  "dice": {
+    "betHistory": {
+      "entities": {},
+      "errors": {},
+      "lists": [],
+      "loading": false
+    }
+  }
+}

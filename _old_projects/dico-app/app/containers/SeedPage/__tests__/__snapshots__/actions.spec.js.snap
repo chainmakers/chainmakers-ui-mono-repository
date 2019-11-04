@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/SeedPage/actions/closeWifExpansion should closeWifExpansion should closeWifExpansion action 1`] = `
+Object {
+  "type": "dicoapp/SeedPage/CLOSE_WIF_EXPANSION",
+}
+`;
+
+exports[`containers/SeedPage/actions/generatePassphrase should generatePassphrase should generatePassphrase action 1`] = `
+Object {
+  "payload": Object {
+    "passphrase": "passphrase",
+  },
+  "type": "dicoapp/SeedPage/GENERATE_PASSPHRASE",
+}
+`;
+
+exports[`containers/SeedPage/actions/generateWif should generateWif should generateWif action 1`] = `
+Object {
+  "payload": Object {
+    "wif": "wif",
+  },
+  "type": "dicoapp/SeedPage/GENERATE_WIF",
+}
+`;
+
+exports[`containers/SeedPage/actions/openWifExpansion should openWifExpansion should generateWif action 1`] = `
+Object {
+  "type": "dicoapp/SeedPage/OPEN_WIF_EXPANSION",
+}
+`;

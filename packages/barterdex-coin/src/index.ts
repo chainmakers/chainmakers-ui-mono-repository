@@ -78,7 +78,7 @@ export default [
     fname: 'Coqui Cash',
     txversion: 4,
     rpcport: 14276,
-    active: 0,
+    active: 1,
     market_cap: 0,
     mm2: 1,
     servers: [
@@ -91,25 +91,6 @@ export default [
     ]
   },
   {
-    coin: 'K64',
-    name: 'K64',
-    fname: 'Komodore64',
-    asset: 'K64',
-    txversion: 4,
-    rpcport: 12245,
-    active: 0,
-    markt_cap: 0,
-    mm2: 1,
-    servers: [
-      {
-        url: 'electrum1.komodore64.com:21245'
-      },
-      {
-        url: 'electrum2.komodore64.com:21245'
-      }
-    ]
-  },
-  {
     coin: 'CHIPS',
     name: 'chips',
     fname: 'Chips',
@@ -118,7 +99,7 @@ export default [
     p2shtype: 85,
     wiftype: 188,
     txfee: 10000,
-    active: 0,
+    active: 1,
     market_cap: 1609044,
     mm2: 1,
     servers: [
@@ -130,19 +111,30 @@ export default [
       }
     ]
   },
-  // {
-  //   coin: 'REVS',
-  //   name: 'Revs',
-  //   rpcport: 10196,
-  //   urls: [
-  //     'electrum1.cipig.net:10003',
-  //     'electrum2.cipig.net:10003',
-  //     'electrum3.cipig.net:10003'
-  //   ],
-  //   active: 0,
-  //   market_cap: 0,
-  //   mm2: 1
-  // },
+  {
+    coin: 'REVS',
+    name: 'Revs',
+    asset: 'REVS',
+    fname: 'REVS',
+    txversion: 4,
+    rpcport: 10196,
+    overwintered: 1,
+    required_confirmations: 2,
+    active: 1,
+    market_cap: 0,
+    mm2: 1,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10003'
+      },
+      {
+        url: 'electrum2.cipig.net:10003'
+      },
+      {
+        url: 'electrum3.cipig.net:10003'
+      }
+    ]
+  },
   // {
   //   coin: 'VRSC',
   //   name: 'VerusCoin',
@@ -182,28 +174,6 @@ export default [
       },
       {
         url: 'electrum3.cipig.net:10031'
-      }
-    ]
-  },
-  {
-    coin: 'CHAIN',
-    asset: 'CHAIN',
-    name: 'chainmakers',
-    fname: 'Chainmakers',
-    txversion: 4,
-    rpcport: 15587,
-    active: 0,
-    market_cap: 0,
-    mm2: 1,
-    servers: [
-      {
-        url: 'electrum1.cipig.net:10032'
-      },
-      {
-        url: 'electrum2.cipig.net:10032'
-      },
-      {
-        url: 'electrum3.cipig.net:10032'
       }
     ]
   },
@@ -273,45 +243,6 @@ export default [
     market_cap: 289458275,
     mm2: 1
   },
-  // {
-  //  coin: 'BEER',
-  //  name: 'Beer',
-  //  asset: 'BEER',
-  //  txversion: 4,
-  //  rpcport: 8923,
-  //  active: 0,
-  //  market_cap: -1,
-  //  mm2: 1,
-  //  servers: [
-  //    {
-  //      url: 'electrum1.cipig.net:10022'
-  //    },
-  //    {
-  //      url: 'electrum2.cipig.net:10022'
-  //    }
-  //  ]
-  // },
-  // {
-  //  coin: 'PIZZA',
-  //  name: 'Pizza',
-  //  asset: 'PIZZA',
-  //  txversion: 4,
-  //  rpcport: 11608,
-  //  active: 0,
-  //  market_cap: -2,
-  //  mm2: 1,
-  //  servers: [
-  //    {
-  //      url: 'electrum1.cipig.net:10024'
-  //    },
-  //    {
-  //      url: 'electrum2.cipig.net:10024'
-  //    },
-  //    {
-  //      url: 'electrum3.cipig.net:10024'
-  //    }
-  //  ]
-  // },
   // {
   //   coin: '$PAC',
   //   rpcport: 7111,
@@ -777,7 +708,7 @@ export default [
     coin: 'DEX',
     asset: 'DEX',
     name: 'DEX',
-    fname: 'InstantDEX',
+    fname: 'DEX',
     rpcport: 11890,
     active: 1,
     txversion: 4,
@@ -2152,18 +2083,50 @@ export default [
   //   market_cap: 0,
   //   mm2: 1
   // },
-  // {
-  //   coin: 'SUPERNET',
-  //   name: 'Supernet',
-  //   asset: 'SUPERNET',
-  //   rpcport: 11341,
-  //   urls: [
-  //     'electrum1.cipig.net:10005',
-  //     'electrum2.cipig.net:10005',
-  //     'electrum3.cipig.net:10005'
-  //   ],
-  //   mm2: 1
-  // },
+  {
+    coin: 'SUPERNET',
+    name: 'Supernet',
+    fname: 'SUPERNET',
+    asset: 'SUPERNET',
+    txversion: 4,
+    overwintered: 1,
+    required_confirmations: 2,
+    rpcport: 11341,
+    mm2: 1,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10005'
+      },
+      {
+        url: 'electrum2.cipig.net:10005'
+      },
+      {
+        url: 'electrum3.cipig.net:10005'
+      }
+    ]
+  },
+  {
+    coin: 'BET',
+    name: 'Bet',
+    fname: 'BET',
+    asset: 'BET',
+    txversion: 4,
+    overwintered: 1,
+    required_confirmations: 2,
+    rpcport: 14250,
+    mm2: 1,
+    servers: [
+      {
+        url: 'electrum1.cipig.net:10012'
+      },
+      {
+        url: 'electrum2.cipig.net:10012'
+      },
+      {
+        url: 'electrum3.cipig.net:10012'
+      }
+    ]
+  },
   // {
   //   coin: 'SWT',
   //   name: 'Swarm City',
@@ -2510,5 +2473,47 @@ export default [
         url: 'electrum3.cipig.net:10019'
       }
     ]
-  }
+  },
+	{
+		coin: 'RICK',
+		name: 'Rick [Test]',
+    fname: 'Rick [Test]',
+		asset: 'RICK',
+		rpcport: 25435,
+		txversion: 4,
+		overwintered: 1,
+		mm2: 1,
+		servers: [
+			{
+				url: 'electrum1.cipig.net:10017'
+			},
+			{
+				url: 'electrum2.cipig.net:10017'
+			},
+			{
+				url: 'electrum3.cipig.net:10017'
+			}
+		]
+	},
+  {
+		coin: 'MORTY',
+		name: 'Morty [Test]',
+    fname: 'Morty [Test]',
+		asset: 'MORTY',
+		rpcport: 16348,
+		txversion: 4,
+		overwintered: 1,
+		mm2: 1,
+		servers: [
+			{
+				url: 'electrum1.cipig.net:10018'
+			},
+			{
+				url: 'electrum2.cipig.net:10018'
+			},
+			{
+				url: 'electrum3.cipig.net:10018'
+			}
+		]
+	}
 ];

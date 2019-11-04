@@ -1,9 +1,8 @@
 {
   "name": "barterdex-coin",
-  "version": "0.8.0",
+  "version": "0.10.0",
   "description": "Electrum config for Marketmaker",
-  "author": "Hoang Nam <particle4dev@gmail.com> (particle4dev)",
-  "homepage": "https://github.com/chainmakers/komodo-ui-mono-repository/tree/master/packages/barterdex-coin#readme",
+  "author": "Nam Hoang<particle4dev@gmail.com> (particle4dev)",
   "license": "ISC",
   "main": "dist/index.js",
   "module": "./dist/index.js",
@@ -16,19 +15,18 @@
   "files": [
     "dist"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chainmakers/komodo-ui-mono-repository.git"
-  },
   "scripts": {
     "prepare": "npm run lint && npm run build",
-    "build": "../../node_modules/.bin/tsc",
-    "lint": "../../node_modules/.bin/tslint -c \"../../configs/tslint.json\" -p tsconfig.json src/*.ts",
-    "test": "../../node_modules/.bin/tsc -p tsconfig.test.json --noEmit && ../../node_modules/.bin/jest",
-    "coverage": "../../node_modules/.bin/tsc -p tsconfig.test.json --noEmit && ../../node_modules/.bin/jest --verbose --coverage",
-    "clean": "rm -rf coverage/* && rm -rf dist/*"
+    "build": "tsc",
+    "lint": "tslint -c \"../../configs/tslint.json\" -p tsconfig.json src/*.ts",
+    "test": "tsc -p tsconfig.test.json --noEmit && jest",
+    "coverage": "tsc -p tsconfig.test.json --noEmit && jest --verbose --coverage",
+    "clean": "rimraf coverage/* dist/*"
   },
-  "bugs": {
-    "url": "https://github.com/chainmakers/komodo-ui-mono-repository/issues"
+  "devDependencies": {
+    "jest": "24.9.0",
+    "rimraf": "^3.0.0",
+    "tslint": "5.20.0",
+    "typescript": "3.6.4"
   }
 }
