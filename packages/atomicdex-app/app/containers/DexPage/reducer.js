@@ -43,6 +43,8 @@ import {
 
 // The initial state of the App
 export const initialState = fromJS({
+  loadedDataFromDB: false,
+
   prices: {
     loading: false,
     error: false,

@@ -10,7 +10,6 @@ export function open(id: string) {
   db = level(`${config.get('paths.userDataDir')}/${id}`, {
     valueEncoding: 'json'
   });
-  window.db = db;
   return db;
 }
 
@@ -26,4 +25,3 @@ export function close() {
 export function get() {
   return db;
 }
-// /Users/lehoang/Library/Application\ Support/Electron/atomicapp
